@@ -1,0 +1,35 @@
+{
+  "name": "bulls-cows-skills",
+  "owner": {
+    "name": "Yakima",
+    "email": "yakima.public@gmail.com"
+  },
+  "metadata": {
+    "description": "bulls-cows skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "git-skills",
+      "description": "Git workflow skills for commit creation and linting",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/git-commit",
+        "./skills/lint",
+        "./skills/lint-and-commit"
+      ]
+    },
+    {
+      "name": "development-skills",
+      "description": "Development utilities for skill creation and documentation",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/frontend-design",
+        "./skills/skill-creator",
+        "./skills/update-ai-docs"
+      ]
+    }
+  ]
+}
