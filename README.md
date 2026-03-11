@@ -2,11 +2,11 @@
 
 实用的 AI 技能集合。
 
-## 技能清单
+## 技能清单（本仓库内部维护）
 
-### [frontend-design](./skills/frontend-design/SKILL.md)
+### [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)
 - 描述：创建独特的生产级前端界面，具备卓越设计质量。当用户需要构建网页组件、页面、应用或界面时使用（如网站、落地页、仪表板、React 组件、HTML/CSS 布局，或美化任何 Web UI）。生成富有创意、精致打磨的代码和 UI 设计，摆脱千篇一律的 AI 审美。
-- 出处：此技能根据 [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 技能汉化未来。
+- 出处：此技能根据 [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 技能汉化未来。根据国内的常用技术栈和审美风格进行调整。
 
 ### [git-commit](./skills/git-commit/SKILL.md)
 - 描述：帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，或者说类似"提交这些更改"、"commit 代码"、"保存到 git"等内容时使用此技能。此技能会分析代码变更、理解对话上下文中的改动意图，生成符合传统格式（type(scope): description）的中文提交信息，并智能选择需要暂存的文件。即使用户只是简单地说"提交"或"commit"，也应该使用此技能来确保提交信息的质量。
@@ -24,6 +24,9 @@
 ### [update-ai-docs](./skills/update-ai-docs/SKILL.md)
 - 描述：总结编码过程中的最佳实践经验并更新到项目文档中，供 AI 参考，避免再犯类似错误。
 
+## 技能清单（来自外部仓库，只进行同步）
+
+略。
 
 ## 使用方式
 
