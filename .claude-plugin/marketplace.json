@@ -24,32 +24,52 @@
     {
       "name": "git-commit",
       "description": "帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，或者说类似\"提交这些更改\"、\"commit 代码\"、\"保存到 git\"等内容时使用此技能。此技能会分析代码变更、理解对话上下文中的改动意图，生成符合传统格式（type(scope): description）的中文提交信息，并智能选择需要暂存的文件。即使用户只是简单地说\"提交\"或\"commit\"，也应该使用此技能来确保提交信息的质量。",
-      "source": "./skills/git-commit",
-      "strict": false
+      "author": {
+        "name": "Yakima",
+        "email": "yakima.public@gmail.com"
+      },
+      "source": "./plugins/git-commit",
+      "category": "development"
     },
     {
       "name": "lint",
       "description": "执行代码质量检查，包括 Node 版本验证和 lint 检查。",
-      "source": "./skills/lint",
-      "strict": false
+      "author": {
+        "name": "Yakima",
+        "email": "yakima.public@gmail.com"
+      },
+      "source": "./plugins/lint",
+      "category": "development"
     },
     {
       "name": "lint-and-commit",
       "description": "自动执行代码质量检查后提交代码的组合技能。当用户想要在提交前确保代码质量时使用，比如说\"检查代码并提交\"、\"提交前先检查\"、\"lint 并提交\"、\"先检查再 commit\"、\"代码检查后提交\"等。此技能会先执行完整的 lint 检查（包括 Node 版本验证），如果发现错误会尝试自动修复，然后再执行规范的 git 提交流程。",
-      "source": "./skills/lint-and-commit",
-      "strict": false
+      "author": {
+        "name": "Yakima",
+        "email": "yakima.public@gmail.com"
+      },
+      "source": "./plugins/lint-and-commit",
+      "category": "development"
     },
     {
       "name": "skill-creator",
       "description": "创建新技能、修改和改进现有技能，并衡量技能性能。用于：从头创建技能、编辑或优化现有技能、运行评估测试技能、进行方差分析的性能基准测试，或优化技能描述以提高触发准确性。",
-      "source": "./skills/skill-creator",
-      "strict": false
+      "author": {
+        "name": "Yakima",
+        "email": "yakima.public@gmail.com"
+      },
+      "source": "./plugins/skill-creator",
+      "category": "development"
     },
     {
       "name": "update-ai-docs",
       "description": "总结编码过程中的最佳实践经验并更新到项目文档中，供 AI 参考，避免再犯类似错误。",
-      "source": "./skills/update-ai-docs",
-      "strict": false
+      "author": {
+        "name": "Yakima",
+        "email": "yakima.public@gmail.com"
+      },
+      "source": "./plugins/update-ai-docs",
+      "category": "development"
     },
     {
       "name": "greptile",
