@@ -1,5 +1,5 @@
 ---
-name: frontend-design-cn-cn
+name: frontend-design-cn
 description: 创建独特的生产级前端界面，具备卓越设计质量。当用户需要构建网页组件、页面、应用或界面时使用（如网站、落地页、仪表板、React 组件、HTML/CSS 布局，或美化任何 Web UI）。生成富有创意、精致打磨的代码和 UI 设计，摆脱千篇一律的 AI 审美。
 license: Complete terms in LICENSE.txt
 ---
