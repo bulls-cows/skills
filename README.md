@@ -2,6 +2,29 @@
 
 实用的 AI 技能集合。
 
+## 技能清单
+
+### [frontend-design](./skills/frontend-design/SKILL.md)
+- 描述：创建独特的生产级前端界面，具备卓越设计质量。当用户需要构建网页组件、页面、应用或界面时使用（如网站、落地页、仪表板、React 组件、HTML/CSS 布局，或美化任何 Web UI）。生成富有创意、精致打磨的代码和 UI 设计，摆脱千篇一律的 AI 审美。
+- 出处：此技能根据 [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 技能汉化未来。
+
+### [git-commit](./skills/git-commit/SKILL.md)
+- 描述：帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，或者说类似"提交这些更改"、"commit 代码"、"保存到 git"等内容时使用此技能。此技能会分析代码变更、理解对话上下文中的改动意图，生成符合传统格式（type(scope): description）的中文提交信息，并智能选择需要暂存的文件。即使用户只是简单地说"提交"或"commit"，也应该使用此技能来确保提交信息的质量。
+
+### [lint](./skills/lint/SKILL.md)
+- 描述：执行代码质量检查，包括 Node 版本验证和 lint 检查。
+
+### [lint-and-commit](./skills/lint-and-commit/SKILL.md)
+- 描述：自动执行代码质量检查后提交代码的组合技能。当用户想要在提交前确保代码质量时使用，比如说"检查代码并提交"、"提交前先检查"、"lint 并提交"、"先检查再 commit"、"代码检查后提交"等。此技能会先执行完整的 lint 检查（包括 Node 版本验证），如果发现错误会尝试自动修复，然后再执行规范的 git 提交流程。
+
+### [skill-creator](./skills/skill-creator/SKILL.md)
+- 描述：创建新技能、修改和改进现有技能，并衡量技能性能。用于：从头创建技能、编辑或优化现有技能、运行评估测试技能、进行方差分析的性能基准测试，或优化技能描述以提高触发准确性。
+- 出处：此技能由 [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) 汉化而来，补上了 markdown 文档 YAML 头部的书写规范。
+
+### [update-ai-docs](./skills/update-ai-docs/SKILL.md)
+- 描述：总结编码过程中的最佳实践经验并更新到项目文档中，供 AI 参考，避免再犯类似错误。
+
+
 ## 使用方式
 
 ### 在 claude code 中使用
@@ -13,7 +36,6 @@
 5. 选中 `Marketplaces` 列表里的名为 `bulls-cows-skills` 的插件市场，并回车。
 6. 从列表里选中需要安装的插件，并回车。
 7. 重启终端或者 `claude code` 衍生插件，通过 `/<技能名>`（如 `/frontend-design`）就可以召唤技能了！
-
 
 ## 协议
 
