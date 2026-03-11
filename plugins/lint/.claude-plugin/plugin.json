@@ -1,0 +1,8 @@
+{
+  "name": "lint",
+  "description": "Run linting on code to check for issues and enforce code quality",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

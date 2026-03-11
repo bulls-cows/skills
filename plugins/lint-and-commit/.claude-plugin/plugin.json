@@ -1,0 +1,8 @@
+{
+  "name": "lint-and-commit",
+  "description": "Run linting and create well-formatted commits with conventional commit messages",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}
