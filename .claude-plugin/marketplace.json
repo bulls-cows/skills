@@ -11,324 +11,34 @@
   },
   "plugins": [
     {
-      "name": "frontend-design-cn",
-      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics.",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/frontend-design-cn",
-      "category": "development",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/frontend-design"
+      "name": "design-skills",
+      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/frontend-design-cn"
+      ]
     },
     {
-      "name": "git-commit",
-      "description": "帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，或者说类似\"提交这些更改\"、\"commit 代码\"、\"保存到 git\"等内容时使用此技能。此技能会分析代码变更、理解对话上下文中的改动意图，生成符合传统格式（type(scope): description）的中文提交信息，并智能选择需要暂存的文件。即使用户只是简单地说\"提交\"或\"commit\"，也应该使用此技能来确保提交信息的质量。",
-      "author": {
-        "name": "Yakima",
-        "email": "yakima.public@gmail.com"
-      },
-      "source": "./plugins/git-commit",
-      "category": "development"
+      "name": "develop-skills",
+      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/lint",
+        "./skills/git-commit",
+        "./skills/lint-and-commit"
+      ]
     },
     {
-      "name": "lint",
-      "description": "执行代码质量检查，包括 Node 版本验证和 lint 检查。",
-      "author": {
-        "name": "Yakima",
-        "email": "yakima.public@gmail.com"
-      },
-      "source": "./plugins/lint",
-      "category": "development"
-    },
-    {
-      "name": "lint-and-commit",
-      "description": "自动执行代码质量检查后提交代码的组合技能。当用户想要在提交前确保代码质量时使用，比如说\"检查代码并提交\"、\"提交前先检查\"、\"lint 并提交\"、\"先检查再 commit\"、\"代码检查后提交\"等。此技能会先执行完整的 lint 检查（包括 Node 版本验证），如果发现错误会尝试自动修复，然后再执行规范的 git 提交流程。",
-      "author": {
-        "name": "Yakima",
-        "email": "yakima.public@gmail.com"
-      },
-      "source": "./plugins/lint-and-commit",
-      "category": "development"
-    },
-    {
-      "name": "skill-creator",
-      "description": "创建新技能、修改和改进现有技能，并衡量技能性能。用于：从头创建技能、编辑或优化现有技能、运行评估测试技能、进行方差分析的性能基准测试，或优化技能描述以提高触发准确性。",
-      "author": {
-        "name": "Yakima",
-        "email": "yakima.public@gmail.com"
-      },
-      "source": "./plugins/skill-creator",
-      "category": "development"
-    },
-    {
-      "name": "update-ai-docs",
-      "description": "总结编码过程中的最佳实践经验并更新到项目文档中，供 AI 参考，避免再犯类似错误。",
-      "author": {
-        "name": "Yakima",
-        "email": "yakima.public@gmail.com"
-      },
-      "source": "./plugins/update-ai-docs",
-      "category": "development"
-    },
-    {
-      "name": "greptile",
-      "description": "AI-powered codebase search and understanding. Query your repositories using natural language to find relevant code, understand dependencies, and get contextual answers about your codebase architecture.",
-      "category": "development",
-      "source": "./external_plugins/greptile",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/greptile"
-    },
-    {
-      "name": "serena",
-      "description": "Semantic code analysis MCP server providing intelligent code understanding, refactoring suggestions, and codebase navigation through language server protocol integration.",
-      "category": "development",
-      "source": "./external_plugins/serena",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/serena",
-      "tags": ["community-managed"]
-    },
-    {
-      "name": "playwright",
-      "description": "Browser automation and end-to-end testing MCP server by Microsoft. Enables Claude to interact with web pages, take screenshots, fill forms, click elements, and perform automated browser testing workflows.",
-      "category": "testing",
-      "source": "./external_plugins/playwright",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/playwright"
-    },
-    {
-      "name": "github",
-      "description": "Official GitHub MCP server for repository management. Create issues, manage pull requests, review code, search repositories, and interact with GitHub's full API directly from Claude Code.",
-      "category": "productivity",
-      "source": "./external_plugins/github",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/github"
-    },
-    {
-      "name": "supabase",
-      "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
-      "category": "database",
-      "source": "./external_plugins/supabase",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/supabase"
-    },
-    {
-      "name": "atlassian",
-      "description": "Connect to Atlassian products including Jira and Confluence. Search and create issues, access documentation, manage sprints, and integrate your development workflow with Atlassian's collaboration tools.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/atlassian/atlassian-mcp-server.git"
-      },
-      "homepage": "https://github.com/atlassian/atlassian-mcp-server"
-    },
-    {
-      "name": "laravel-boost",
-      "description": "Laravel development toolkit MCP server. Provides intelligent assistance for Laravel applications including Artisan commands, Eloquent queries, routing, migrations, and framework-specific code generation.",
-      "category": "development",
-      "source": "./external_plugins/laravel-boost",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/laravel-boost"
-    },
-    {
-      "name": "figma",
-      "description": "Figma design platform integration. Access design files, extract component information, read design tokens, and translate designs into code. Bridge the gap between design and development workflows.",
-      "category": "design",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/figma/mcp-server-guide.git"
-      },
-      "homepage": "https://github.com/figma/mcp-server-guide"
-    },
-    {
-      "name": "asana",
-      "description": "Asana project management integration. Create and manage tasks, search projects, update assignments, track progress, and integrate your development workflow with Asana's work management platform.",
-      "category": "productivity",
-      "source": "./external_plugins/asana",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/asana"
-    },
-    {
-      "name": "linear",
-      "description": "Linear issue tracking integration. Create issues, manage projects, update statuses, search across workspaces, and streamline your software development workflow with Linear's modern issue tracker.",
-      "category": "productivity",
-      "source": "./external_plugins/linear",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/linear"
-    },
-    {
-      "name": "Notion",
-      "description": "Notion workspace integration. Search pages, create and update documents, manage databases, and access your team's knowledge base directly from Claude Code for seamless documentation workflows.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/makenotion/claude-code-notion-plugin.git"
-      },
-      "homepage": "https://github.com/makenotion/claude-code-notion-plugin"
-    },
-    {
-      "name": "gitlab",
-      "description": "GitLab DevOps platform integration. Manage repositories, merge requests, CI/CD pipelines, issues, and wikis. Full access to GitLab's comprehensive DevOps lifecycle tools.",
-      "category": "productivity",
-      "source": "./external_plugins/gitlab",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/gitlab"
-    },
-    {
-      "name": "sentry",
-      "description": "Sentry error monitoring integration. Access error reports, analyze stack traces, search issues by fingerprint, and debug production errors directly from your development environment.",
-      "category": "monitoring",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/getsentry/sentry-for-claude.git"
-      },
-      "homepage": "https://github.com/getsentry/sentry-for-claude/tree/main"
-    },
-    {
-      "name": "slack",
-      "description": "Slack workspace integration. Search messages, access channels, read threads, and stay connected with your team's communications while coding. Find relevant discussions and context quickly.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/slackapi/slack-mcp-plugin.git"
-      },
-      "homepage": "https://github.com/slackapi/slack-mcp-plugin/tree/main"
-    },
-    {
-      "name": "vercel",
-      "description": "Vercel deployment platform integration. Manage deployments, check build status, access logs, configure domains, and control your frontend infrastructure directly from Claude Code.",
-      "category": "deployment",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/vercel/vercel-deploy-claude-code-plugin.git"
-      },
-      "homepage": "https://github.com/vercel/vercel-deploy-claude-code-plugin"
-    },
-    {
-      "name": "stripe",
-      "description": "Stripe development plugin for Claude",
-      "category": "development",
-      "source": "./external_plugins/stripe",
-      "homepage": "https://github.com/stripe/ai/tree/main/providers/claude/plugin"
-    },
-    {
-      "name": "firebase",
-      "description": "Google Firebase MCP integration. Manage Firestore databases, authentication, cloud functions, hosting, and storage. Build and manage your Firebase backend directly from your development workflow.",
-      "category": "database",
-      "source": "./external_plugins/firebase",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/firebase"
-    },
-    {
-      "name": "context7",
-      "description": "Upstash Context7 MCP server for up-to-date documentation lookup. Pull version-specific documentation and code examples directly from source repositories into your LLM context.",
-      "category": "development",
-      "source": "./external_plugins/context7",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/external_plugins/context7",
-      "tags": ["community-managed"]
-    },
-    {
-      "name": "pinecone",
-      "description": "Pinecone vector database integration. Streamline your Pinecone development with powerful tools for managing vector indexes, querying data, and rapid prototyping. Use slash commands like /quickstart to generate AGENTS.md files and initialize Python projects and /query to quickly explore indexes. Access the Pinecone MCP server for creating, describing, upserting and querying indexes with Claude. Perfect for developers building semantic search, RAG applications, recommendation systems, and other vector-based applications with Pinecone.",
-      "category": "database",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/pinecone-io/pinecone-claude-code-plugin.git"
-      },
-      "homepage": "https://github.com/pinecone-io/pinecone-claude-code-plugin"
-    },
-    {
-      "name": "huggingface-skills",
-      "description": "Build, train, evaluate, and use open source AI models, datasets, and spaces.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/huggingface/skills.git"
-      },
-      "homepage": "https://github.com/huggingface/skills.git"
-    },
-    {
-      "name": "circleback",
-      "description": "Circleback conversational context integration. Search and access meetings, emails, calendar events, and more.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/circlebackai/claude-code-plugin.git"
-      },
-      "homepage": "https://github.com/circlebackai/claude-code-plugin.git"
-    },
-    {
-      "name": "superpowers",
-      "description": "Superpowers teaches Claude brainstorming, subagent driven development with built in code review, systematic debugging, and red/green TDD. Additionally, it teaches Claude how to author and test new skills.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/obra/superpowers.git"
-      },
-      "homepage": "https://github.com/obra/superpowers.git"
-    },
-    {
-      "name": "posthog",
-      "description": "Connect Claude Code to your PostHog analytics platform. Query insights, manage feature flags, run A/B experiments, track errors, and analyze LLM costs all through natural language. The plugin provides 10 slash commands for common workflows and full access to PostHog's MCP tools. Ask questions like \"What are my top errors?\" or \"Create a feature flag for 50% of users\" and Claude handles the API calls. Supports OAuth authentication, EU and US cloud regions, and self-hosted instances.",
-      "category": "monitoring",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/PostHog/posthog-for-claude.git"
-      },
-      "homepage": "https://github.com/PostHog/posthog-for-claude.git"
-    },
-    {
-      "name": "coderabbit",
-      "description": "Your code review partner. CodeRabbit provides external validation using a specialized AI architecture and 40+ integrated static analyzers—offering a different perspective that catches bugs, security vulnerabilities, logic errors, and edge cases. Context-aware analysis via AST parsing and codegraph relationships. Automatically incorporates CLAUDE.md and project coding guidelines into reviews. Useful after writing or modifying code, before commits, when implementing complex or security-sensitive logic, or when a second opinion would increase confidence in the changes. Returns specific findings with suggested fixes that can be applied immediately. Free to use.",
-      "category": "productivity",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/coderabbitai/claude-plugin.git"
-      },
-      "homepage": "https://github.com/coderabbitai/claude-plugin.git"
-    },
-    {
-      "name": "sonatype-guide",
-      "description": "Sonatype Guide MCP server for software supply chain intelligence and dependency security. Analyze dependencies for vulnerabilities, get secure version recommendations, and check component quality metrics.",
-      "category": "security",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
-      },
-      "homepage": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
-    },
-    {
-      "name": "firecrawl",
-      "description": "Web scraping and crawling powered by Firecrawl. Turn any website into clean, LLM-ready markdown or structured data. Scrape single pages, crawl entire sites, search the web, and extract structured information. Includes an AI agent for autonomous multi-source data gathering - just describe what you need and it finds, navigates, and extracts automatically.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/firecrawl/firecrawl-claude-plugin.git"
-      },
-      "homepage": "https://github.com/firecrawl/firecrawl-claude-plugin.git"
-    },
-    {
-      "name": "qodo-skills",
-      "description": "Qodo Skills provides a curated library of reusable AI agent capabilities that extend Claude's functionality for software development workflows. Each skill is designed to integrate seamlessly into your development process, enabling tasks like code quality checks, automated testing, security scanning, and compliance validation. Skills operate across your entire SDLC—from IDE to CI/CD—ensuring consistent standards and catching issues early.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/qodo-ai/qodo-skills.git",
-        "sha": "623eb4ed4364d8111f9a9132a791d7497d814b6a"
-      },
-      "homepage": "https://github.com/qodo-ai/qodo-skills.git"
-    },
-    {
-      "name": "semgrep",
-      "description": "Semgrep catches security vulnerabilities in real-time and guides Claude to write secure code from the start.",
-      "category": "security",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/semgrep/mcp-marketplace.git",
-        "path": "plugin"
-      },
-      "homepage": "https://github.com/semgrep/mcp-marketplace.git"
-    },
-    {
-      "name": "postman",
-      "description": "Full API lifecycle management for Claude Code. Sync collections, generate client code, discover APIs, run tests, create mocks, publish docs, and audit security. Powered by the Postman MCP Server.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
-        "sha": "0714280351c1a137e79aad465a66730511ffbd57"
-      },
-      "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
+      "name": "ai-skills",
+      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/skill-creator",
+        "./skills/update-ai-docs"
+      ]
     }
   ]
 }

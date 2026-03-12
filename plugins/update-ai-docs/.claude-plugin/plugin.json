@@ -1,8 +1,0 @@
-{
-  "name": "update-ai-docs",
-  "description": "Update AI documentation with latest changes and improvements",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}
