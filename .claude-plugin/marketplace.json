@@ -1,5 +1,5 @@
 {
-  "name": "bulls-cows-skills",
+  "name": "open-skills",
   "owner": {
     "name": "Yakima",
     "email": "yakima.public@gmail.com"
@@ -10,31 +10,15 @@
   },
   "plugins": [
     {
-      "name": "design-skills",
-      "description": "前端设计技能集合,用于创建独特的生产级前端界面和网页组件,具备卓越的设计质量和创意美学",
+      "name": "open-skills",
+      "description": "开源技能集合,提供前端设计、开发工作流和 AI 辅助开发的全方位支持。包括创建独特的生产级前端界面、代码质量检查、规范化 Git 提交、自动化检查后提交流程、创建和优化自定义技能以及维护项目最佳实践文档",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/frontend-design-cn"
-      ]
-    },
-    {
-      "name": "develop-skills",
-      "description": "开发工作流技能集合,包括代码质量检查、规范化 Git 提交和自动化代码检查后提交的组合流程",
-      "source": "./",
-      "strict": false,
-      "skills": [
+        "./skills/frontend-design-cn",
         "./skills/lint",
         "./skills/git-commit",
-        "./skills/lint-and-commit"
-      ]
-    },
-    {
-      "name": "ai-skills",
-      "description": "AI 辅助开发技能集合,用于创建和优化自定义技能、总结最佳实践并维护项目开发文档",
-      "source": "./",
-      "strict": false,
-      "skills": [
+        "./skills/lint-and-commit",
         "./skills/skill-creator",
         "./skills/update-ai-docs"
       ]
