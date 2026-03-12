@@ -2,6 +2,9 @@
 
 本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。
 
+- 国际仓库[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
+- 国内仓库[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
+
 ## 技能清单（本仓库内部维护）
 
 ### [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)
