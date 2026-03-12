@@ -1,7 +1,0 @@
-{
-  "enabledPlugins": {
-    "ai-skills@bulls-cows-skills": true,
-    "design-skills@bulls-cows-skills": true,
-    "develop-skills@bulls-cows-skills": true
-  }
-}
