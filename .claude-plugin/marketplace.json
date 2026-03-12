@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "design-skills",
-      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "description": "前端设计技能集合,用于创建独特的生产级前端界面和网页组件,具备卓越的设计质量和创意美学",
       "source": "./",
       "strict": false,
       "skills": [
@@ -20,7 +20,7 @@
     },
     {
       "name": "develop-skills",
-      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "description": "开发工作流技能集合,包括代码质量检查、规范化 Git 提交和自动化代码检查后提交的组合流程",
       "source": "./",
       "strict": false,
       "skills": [
@@ -31,7 +31,7 @@
     },
     {
       "name": "ai-skills",
-      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "description": "AI 辅助开发技能集合,用于创建和优化自定义技能、总结最佳实践并维护项目开发文档",
       "source": "./",
       "strict": false,
       "skills": [
