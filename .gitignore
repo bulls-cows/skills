@@ -141,3 +141,4 @@ vite.config.ts.timestamp-*
 # editor
 .idea/
 .trae/documents/
+nul
