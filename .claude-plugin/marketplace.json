@@ -17,12 +17,12 @@
       "skills": [
         "./skills/commit",
         "./skills/create-rule",
+        "./skills/create-skill",
         "./skills/frontend-design-cn",
         "./skills/init",
         "./skills/lint",
         "./skills/lint-and-commit",
         "./skills/plan",
-        "./skills/skill-creator",
         "./skills/spec"
       ]
     }

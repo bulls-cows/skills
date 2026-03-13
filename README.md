@@ -11,12 +11,12 @@
 
 - [commit](./skills/commit/SKILL.md)：帮助用户创建规范的 Git 提交
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新项目规则文档
+- [create-skill](./skills/create-skill/SKILL.md)：创建规范的 Claude Skill
 - [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)：创建独特的生产级前端界面
 - [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码
 - [plan](./skills/plan/SKILL.md)：Plan-first execution mode that requires user confirmation
-- [skill-creator](./skills/skill-creator/SKILL.md)：创建新技能、修改和改进现有技能
 - [spec](./skills/spec/SKILL.md)：Specification-first development mode that requires detailed documentation
 
 ## 使用方式
