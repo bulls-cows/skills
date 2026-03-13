@@ -11,13 +11,12 @@
 - [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新规则文档，并更新 AGENTS.md 中的引用关系
 - [create-skill](./skills/create-skill/SKILL.md)：创建或更新规范的 Claude Skill
-- [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)：创建独特的生产级前端界面，具备卓越设计质量
+- [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
 - [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查，包括 Node 版本验证和 lint 检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能
 - [plan](./skills/plan/SKILL.md)：Plan-first execution mode that requires user confirmation
 - [spec](./skills/spec/SKILL.md)：Specification-first development mode that requires detailed documentation
-- [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
 
 ## 使用方式
 

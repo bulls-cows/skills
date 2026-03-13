@@ -19,13 +19,12 @@
         "./skills/create-readme",
         "./skills/create-rule",
         "./skills/create-skill",
-        "./skills/frontend-design-cn",
+        "./skills/design-ui",
         "./skills/init",
         "./skills/lint",
         "./skills/lint-and-commit",
         "./skills/plan",
-        "./skills/spec",
-        "./skills/design-ui"
+        "./skills/spec"
       ]
     }
   ]
