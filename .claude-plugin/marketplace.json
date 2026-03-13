@@ -24,7 +24,8 @@
         "./skills/lint",
         "./skills/lint-and-commit",
         "./skills/plan",
-        "./skills/spec"
+        "./skills/spec",
+        "./skills/design-ui"
       ]
     }
   ]

@@ -17,6 +17,7 @@
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能
 - [plan](./skills/plan/SKILL.md)：Plan-first execution mode that requires user confirmation
 - [spec](./skills/spec/SKILL.md)：Specification-first development mode that requires detailed documentation
+- [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
 
 ## 使用方式
 
