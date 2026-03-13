@@ -1,121 +1,28 @@
 # AGENTS.md
 
-本文件为 AI 代理（如 Claude Code、Gemini CLI 等）提供项目架构和工作指南。
+## Scope
+- 本仓库默认语言: Markdown, JSON
+- 允许修改目录: skills/, .claude-plugin/, README.md, AGENTS.md, LICENSE.txt
+- 禁止修改目录: 无
 
-## 项目概述
+## Quality Gate
+- 改动后必须执行:
+  - 验证 SKILL.md 格式（YAML 头部 + Markdown 正文）
+  - 验证 marketplace.json 的 JSON 格式以及其中的 skills 清单是否符合项目根目录下 skills 目录里的实际情况，以及是否按字母顺序排序
+  - 检验项目根目录下 README.md 中的技能列表是否符合项目根目录下 skills 目录里的实际情况，以及是否按字母顺序排序
+  - 验证技能路径是否正确
+  - 修复上述验证过程中发现的错误
 
-这是一个 Claude Code 技能市场仓库，维护了一系列可复用的技能（skills），用于增强 AI 代理在特定场景下的能力。
+## Delivery Format
+- 修改后先说明修改原因和影响范围
+- 所有文件引用都要带路径和行号
+- 对于技能变更，说明变更后对用户的影响
 
-技能分为三大类：
-- **设计技能**（design-skills）：前端界面设计相关
-- **开发技能**（develop-skills）：代码质量检查和 Git 提交相关
-- **AI 技能**（ai-skills）：技能创建和文档更新相关
+## Project Structure
 
-## 架构要点
-
-### 1. 技能市场配置
-
-**核心文件**：`.claude-plugin/marketplace.json`
-
-该文件定义了技能市场的元信息和插件分组：
-- `name`: 技能市场名称（`bulls-cows-skills`）
-- `plugins`: 插件分组列表，每个插件包含一组相关技能
-
-插件配置说明：
-- `name`: 插件名称（如 `design-skills`、`develop-skills`）
-- `description`: 插件描述
-- `skills`: 技能路径列表（相对路径，指向各技能的目录）
-- `strict`: 是否严格模式（默认为 `false`）
-
-### 2. 技能结构
-
-**目录组织**：`skills/<skill-name>/`
-
-每个技能目录的标准结构：
-```
-skills/
-├── <skill-name>/
-│   ├── SKILL.md          # 技能定义文件（必需）
-│   ├── LICENSE.txt       # 许可证文件（可选）
-│   └── evals/            # 评估测试（可选）
-```
-
-**SKILL.md 文件格式**：
-- **YAML 头部**（frontmatter）：定义技能元数据
-  - `name`: 技能名称（用于命令调用，如 `/git-commit`）
-  - `description`: 技能描述（触发条件说明，决定何时使用该技能）
-  - `icon`: 图标（可选）
-  - `examples`: 使用示例（可选）
-- **Markdown 正文**：详细的技能使用说明和工作流程
-
-### 3. 技能命名和描述规范
-
-**关键原则**：
-- `description` 字段是技能触发的关键，应清晰描述**何时使用**该技能
-- 包含用户可能说的触发词/短语（如"提交代码"、"commit"、"检查代码"）
-- 用中文描述，符合国内开发者习惯
-
-**示例**：
-```yaml
----
-name: git-commit
-description: >
-  帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，
-  或者说类似"提交这些更改"、"commit 代码"、"保存到 git"等内容时使用此技能。
----
-```
-
-### 4. 技能开发指南
-
-**添加新技能**：
-1. 在 `skills/` 下创建新目录
-2. 编写 `SKILL.md` 文件，包含完整的 YAML 头部和工作流程说明
-3. 在 `.claude-plugin/marketplace.json` 中添加技能路径到相应插件分组
-4. （可选）添加 `evals/` 目录用于测试
-
-**更新现有技能**：
-- 直接修改对应的 `SKILL.md` 文件
-- 如需移动技能分组，更新 `marketplace.json` 中的路径
-
-**技能编写最佳实践**：
-- 使用清晰的步骤分解（如"步骤 1"、"步骤 2"）
-- 提供具体的命令示例
-- 说明不同情况的处理方式（如错误处理）
-- 用中文编写，符合国内技术文档风格
-
-### 5. Git 工作流
-
-本仓库遵循规范的 Git 提交格式：
-- 使用传统格式：`type(scope): description`
-- 常见类型：`feat`（新功能）、`fix`（修复）、`docs`（文档）、`refactor`（重构）、`chore`（杂项）
-- 提交信息使用中文
-
-**推荐使用 `/git-commit` 技能**来自动生成规范的提交信息。
-
-## 常见任务
-
-### 创建新技能
-使用 `/skill-creator` 技能，它会引导完成技能创建流程。
-
-### 更新 AI 文档
-使用 `/update-ai-docs` 技能，总结最佳实践并更新到本文件或其他 AI 文档中。
-
-### 代码质量检查
-使用 `/lint` 技能进行代码质量检查（如果项目包含 Node.js 代码）。
-
-### 检查并提交
-使用 `/lint-and-commit` 技能，先检查代码质量，再创建规范提交。
-
-## 项目特点
-
-1. **无构建系统**：本项目是纯文档/配置仓库，不包含需要编译的代码
-2. **双仓库维护**：同时维护国际仓库（GitHub）和国内仓库（Gitee）
-3. **技能汉化**：部分技能从 Anthropic 官方仓库汉化而来，并针对国内环境调整
-4. **插件化设计**：技能按功能分组为独立插件，用户可按需安装
-
-## 注意事项
-
-- 所有技能描述和工作流程使用中文
-- 保持技能的独立性，避免技能间的强耦合
-- 新增技能时同步更新 README.md 中的技能清单
-- 遵循 MIT 开源协议
+- skills/: 所有技能的根目录
+- .claude-plugin/: 插件市场配置目录
+  - marketplace.json: 技能市场配置文件，定义插件和技能分组
+- README.md: 项目说明文档
+- AGENTS.md: 本文件，AI 代理的项目规范说明文档
+- LICENSE.txt: 开源许可证文件

@@ -15,12 +15,15 @@
       "source": "./",
       "strict": false,
       "skills": [
+        "./skills/create-rule",
         "./skills/frontend-design-cn",
-        "./skills/lint",
         "./skills/git-commit",
+        "./skills/init",
+        "./skills/lint",
         "./skills/lint-and-commit",
+        "./skills/plan",
         "./skills/skill-creator",
-        "./skills/update-ai-docs"
+        "./skills/spec"
       ]
     }
   ]
