@@ -128,7 +128,11 @@ description: >
 
 ### 5. 创建目录结构
 
-在项目根目录的 `.codex/skills/` 或 `skills/` 下创建：
+技能目录规则：
+- 如果用户指定了目录，则在用户指定目录下生成技能
+- 如果用户未指定目录，则在 `.agents/skills` 目录下生成（没有该目录则创建）
+
+目录结构示例：
 
 ```
 skill-name/
@@ -221,7 +225,9 @@ description: >
 
 1. 在项目的 README.md 中添加技能说明
 2. 如果使用 marketplace.json，添加技能配置
-3. 确认技能在 `.codex/skills/` 或 `skills/` 目录下
+3. 确认技能目录位置：
+   - 如果用户指定了目录，在用户指定目录下
+   - 如果用户未指定目录，在 `.agents/skills` 目录下
 
 ## 常见坑
 
