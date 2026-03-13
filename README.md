@@ -9,18 +9,15 @@
 
 ### 技能列表
 
+- [create-rule](./skills/create-rule/SKILL.md)：创建或更新项目规则文档
 - [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)：创建独特的生产级前端界面
 - [git-commit](./skills/git-commit/SKILL.md)：帮助用户创建规范的 Git 提交
+- [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码
 - [plan](./skills/plan/SKILL.md)：Plan-first execution mode that requires user confirmation
 - [skill-creator](./skills/skill-creator/SKILL.md)：创建新技能、修改和改进现有技能
 - [spec](./skills/spec/SKILL.md)：Specification-first development mode that requires detailed documentation
-- [update-ai-docs](./skills/update-ai-docs/SKILL.md)：总结编码过程中的最佳实践经验
-
-## 技能清单（来自外部仓库，只进行同步）
-
-略。
 
 ## 使用方式
 
