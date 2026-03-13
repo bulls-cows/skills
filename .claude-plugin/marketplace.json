@@ -16,6 +16,7 @@
       "strict": false,
       "skills": [
         "./skills/commit",
+        "./skills/create-readme",
         "./skills/create-rule",
         "./skills/create-skill",
         "./skills/frontend-design-cn",

@@ -10,6 +10,7 @@
 ### 技能列表
 
 - [commit](./skills/commit/SKILL.md)：帮助用户创建规范的 Git 提交
+- [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新项目规则文档
 - [create-skill](./skills/create-skill/SKILL.md)：创建规范的 Claude Skill
 - [frontend-design-cn](./skills/frontend-design-cn/SKILL.md)：创建独特的生产级前端界面
