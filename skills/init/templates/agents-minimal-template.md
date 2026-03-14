@@ -1,16 +1,19 @@
 # AGENTS.md
 
 ## Scope
+
 - 本仓库默认语言: TypeScript
 - 允许修改目录: src/, tests/, docs/
 - 禁止修改目录: infra/prod/, secrets/
 
 ## Quality Gate
+
 - 改动后必须执行:
   - npm run lint
   - npm test
 
 ## Delivery Format
+
 - 先给风险摘要，再给修改点，再给测试结果
 - 所有文件引用都要带路径和行号
 

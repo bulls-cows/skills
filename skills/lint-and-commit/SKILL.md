@@ -92,14 +92,14 @@ git log --oneline -5
 
 - 环境变量文件（.env, .env.local 等）
 - 凭证文件（credentials.json, secrets.\* 等）
-- 私钥文件（_.key, _.pem 等）
+- 私钥文件（_.key,_.pem 等）
 - 大型二进制文件
 - node_modules 或其他依赖目录
 
 **应该忽略的文件：**
 
 - 构建产物（dist/, build/ 等，除非明确需要）
-- 临时文件（_.tmp, _.swp 等）
+- 临时文件（_.tmp,_.swp 等）
 
 如果发现需要警告的文件，明确告知用户并询问是否应该包含。
 
