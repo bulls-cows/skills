@@ -5,7 +5,7 @@
   "main": "README.md",
   "type": "module",
   "scripts": {
-    "lint": "node ./build/lint.mts && tsc --noEmit"
+    "lint": "node ./build/lint.mts && markdownlint --fix \"**/*.md\" && tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/bulls-cows/skills#readme",
   "devDependencies": {
     "@types/node": "22.19.15",
+    "markdownlint-cli": "0.10.0",
     "typescript": "5.9.3"
   }
 }
