@@ -23,8 +23,8 @@
         "./skills/init",
         "./skills/lint",
         "./skills/lint-and-commit",
-        "./skills/read-pdf",
         "./skills/plan",
+        "./skills/read-pdf",
         "./skills/spec"
       ]
     }
