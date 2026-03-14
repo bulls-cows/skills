@@ -1,0 +1,20 @@
+{
+  "name": "skills",
+  "version": "1.0.0",
+  "description": "本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bulls-cows/skills.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bulls-cows/skills/issues"
+  },
+  "homepage": "https://github.com/bulls-cows/skills#readme"
+}
