@@ -35,10 +35,14 @@ Skill 是"可按需加载的任务说明书"，用于复用复杂流程。关键
 
 ### 2. 确定技能目标
 
-- **创建新技能**：使用小写、短横线分隔的命名方式，例如：
-  - `pr-risk-check`
-  - `migration-guardian`
-  - `payment-idempotent`
+- **创建新技能**：使用小写、短横线分隔的命名方式，遵循以下原则：
+  - **名词使用单数形式**：如 `create-skill` 而非 `create-skills`
+  - **优先动宾结构**：如 `create-skill`、`read-pdf`、`lint-code` 而非 `skills-creator`、`pdf-reader`
+
+  示例：
+  - `create-rule`
+  - `read-pdf`
+  - `lint-and-commit`
 
 - **更新现有技能**：直接使用现有技能目录
 
@@ -189,59 +193,62 @@ skill-name/
 
 ### 6. 示例模板
 
-#### PR 风险审查 Skill
+#### 创建规则 Skill
 
 ```markdown
 ---
-name: pr-risk-check
+name: create-rule
 description: >
-  审查 PR 的逻辑正确性、安全风险、测试覆盖缺口。仅用于 review。
+  创建或更新 Agent 规则文件。用于：用户想要为特定代理定义行为规则、约束条件、输出格式要求等。
 ---
 
 ## When to use
-- 用户要求 review、risk-check、回归风险分析
+- 用户提到"创建规则"、"添加规则"
+- 用户想要定义 Agent 的行为约束
+- 用户想要规范 Agent 的输出格式
 
 ## Don't use when
-- 用户要求直接实现新功能
+- 用户只是想创建普通文档
+- 用户想要创建 Skill 文件
 
 ## Steps
-1. 阅读改动文件与调用链
-2. 识别逻辑回归、安全边界、并发问题
-3. 检查测试是否覆盖关键路径
-4. 按严重级别输出
+1. 确定规则名称和目标 Agent
+2. 定义规则内容和约束
+3. 创建或更新 .agents/rules/ 目录下的规则文件
+4. 验证规则格式正确性
 
 ## Output contract
-- Critical/High/Medium/Low
-- 每条包含: 位置、触发条件、后果、修复建议
+- 规则文件路径
+- 规则内容摘要
 ```
 
-#### 数据库迁移守护 Skill
+#### PDF 读取 Skill
 
 ```markdown
 ---
-name: migration-guardian
+name: read-pdf
 description: >
-  审核数据库迁移的兼容性与回滚策略，避免线上不可逆变更。
+  读取 PDF 文件内容。用于：用户想要提取 PDF 文档中的文本、图片、表格等内容。
 ---
 
 ## When to use
-- 用户要求审查数据库迁移
-- 涉及 schema 变更的 review
+- 用户提到"读取 PDF"、"解析 PDF"
+- 用户需要从 PDF 文件中提取信息
 
 ## Don't use when
-- 普通 code review
-- 查询数据库结构
+- 用户读取的是非 PDF 文件
+- 用户只是想查看 PDF 文件列表
 
 ## Steps
-1. 检查是否有向后兼容窗口
-2. 检查读写路径是否双写/双读
-3. 检查是否提供回滚脚本
-4. 生成上线前检查清单
+1. 确认 PDF 文件路径
+2. 使用 PDF 解析工具提取内容
+3. 结构化输出文本、图片、表格等信息
 
 ## Output contract
-- 兼容性分析
-- 回滚策略评估
-- 上线检查清单
+- 文件路径
+- 文本内容
+- 图片列表（如有）
+- 表格数据（如有）
 ```
 
 ### 7. 多 Skill 协作
@@ -249,13 +256,13 @@ description: >
 多个 skill 可以组合使用：
 
 ```markdown
-需求: 支付重构上线
+需求: 代码检查后提交
 
 使用技能:
-- migration-guardian（迁移风险）
-- pr-risk-check（代码风险）
+- lint（代码质量检查）
+- commit（创建规范提交）
 
-合并结论后输出
+先执行 lint 检查，通过后再执行 commit
 ```
 
 ### 8. 验收清单
