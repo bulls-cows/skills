@@ -5,13 +5,13 @@
     "email": "yakima.public@gmail.com"
   },
   "metadata": {
-    "description": "skills from bulls-cows",
+    "description": "本仓库内部维护了一些好用的AI技能。",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "open-skills",
-      "description": "开源技能集合,提供前端设计、开发工作流和 AI 辅助开发的全方位支持。包括创建独特的生产级前端界面、代码质量检查、规范化 Git 提交、自动化检查后提交流程、创建和优化自定义技能以及维护项目最佳实践文档",
+      "description": "本仓库内部维护了一些好用的AI技能。",
       "source": "./",
       "strict": false,
       "skills": [

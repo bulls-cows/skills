@@ -1,10 +1,11 @@
 {
-  "name": "skills",
+  "name": "open-skills",
   "version": "1.0.0",
-  "description": "本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。",
-  "main": "index.js",
+  "description": "本仓库内部维护了一些好用的AI技能。",
+  "main": "README.md",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "node ./build/lint.mts"
   },
   "repository": {
     "type": "git",
