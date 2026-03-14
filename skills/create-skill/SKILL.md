@@ -152,6 +152,30 @@ description: >
 
 **更新现有技能**：直接在现有目录中修改 SKILL.md 文件
 
+#### 目录结构规范
+
+一个完整的技能可以包含以下结构：
+
+```text
+skill-name/
+├── SKILL.md               # （必须）智能体的核心指令
+├── examples/              # （可选）输入/输出示例
+│   ├── input.md
+│   └── output.md
+├── templates/             # （可选）可复用的模板
+│   └── template-name.md
+└── resources/             # （可选）参考文件、运行脚本或素材
+    └── reference.md
+```
+
+**何时使用各目录：**
+
+| 目录 | 使用场景 |
+|------|----------|
+| `examples/` | 技能使用方式不直观，需要示例说明 |
+| `templates/` | 需要生成特定格式的文件，或模板超过 20 行 |
+| `resources/` | 需要参考文档、脚本或素材文件 |
+
 #### 基础目录结构
 
 ```text
@@ -200,63 +224,39 @@ skill-name/
 
 ### 6. 示例模板
 
-#### 创建规则 Skill
+本技能提供了以下模板文件，位于 `templates/` 目录：
+
+| 模板文件 | 用途 |
+|----------|------|
+| `templates/skill-template.md` | 基础技能模板 |
+| `templates/rule-skill-template.md` | 规则类技能模板 |
+| `templates/pdf-skill-template.md` | PDF 读取类技能模板 |
+
+创建技能时，根据技能类型参考对应的模板文件。
+
+#### 基础技能结构示例
 
 ```markdown
 ---
-name: create-rule
+name: skill-name
 description: >
-  创建或更新 Agent 规则文件。用于：用户想要为特定代理定义行为规则、约束条件、输出格式要求等。
+  精确描述技能做什么以及何时使用。
 ---
 
 ## When to use
-- 用户提到"创建规则"、"添加规则"
-- 用户想要定义 Agent 的行为约束
-- 用户想要规范 Agent 的输出格式
+- 触发条件
 
 ## Don't use when
-- 用户只是想创建普通文档
-- 用户想要创建 Skill 文件
+- 不触发条件
 
 ## Steps
-1. 确定规则名称和目标 Agent
-2. 定义规则内容和约束
-3. 创建或更新 .agents/rules/ 目录下的规则文件
-4. 验证规则格式正确性
+1. 执行步骤
 
 ## Output contract
-- 规则文件路径
-- 规则内容摘要
+- 输出格式
 ```
 
-#### PDF 读取 Skill
-
-```markdown
----
-name: read-pdf
-description: >
-  读取 PDF 文件内容。用于：用户想要提取 PDF 文档中的文本、图片、表格等内容。
----
-
-## When to use
-- 用户提到"读取 PDF"、"解析 PDF"
-- 用户需要从 PDF 文件中提取信息
-
-## Don't use when
-- 用户读取的是非 PDF 文件
-- 用户只是想查看 PDF 文件列表
-
-## Steps
-1. 确认 PDF 文件路径
-2. 使用 PDF 解析工具提取内容
-3. 结构化输出文本、图片、表格等信息
-
-## Output contract
-- 文件路径
-- 文本内容
-- 图片列表（如有）
-- 表格数据（如有）
-```
+更多完整示例请参考 `templates/` 目录下的模板文件。
 
 ### 7. 多 Skill 协作
 
@@ -281,7 +281,9 @@ description: >
 3. 同一任务重复运行，输出结构稳定
 4. Skill 能单独被显式调用
 5. YAML 格式正确（使用多行字符串语法处理长 description）
-6. 如果有长模板内容，已提取到 templates/ 目录
+6. 如果有长模板内容，已提取到 `templates/` 目录
+7. 如果技能使用方式不直观，已添加 `examples/` 目录
+8. 如果有参考文档需求，已添加 `resources/` 目录
 
 **更新技能后**，检查：
 
@@ -290,6 +292,7 @@ description: >
 3. Steps 步骤仍然完整可执行
 4. Output contract 仍然清晰定义
 5. YAML 格式正确
+6. 如有模板文件，检查是否需要同步更新
 
 ### 9. 更新项目配置
 
@@ -353,3 +356,16 @@ description: >
 ```text
 Use the pr-risk-check skill to review this branch against main.
 ```
+
+## 相关资源
+
+本技能包含以下辅助资源：
+
+| 路径 | 说明 |
+|------|------|
+| `examples/input.md` | 输入示例，展示用户如何请求创建技能 |
+| `examples/output.md` | 输出示例，展示创建技能后的预期结果 |
+| `templates/skill-template.md` | 基础技能模板 |
+| `templates/rule-skill-template.md` | 规则类技能模板 |
+| `templates/pdf-skill-template.md` | PDF 读取类技能模板 |
+| `resources/skill-best-practices.md` | 技能编写最佳实践参考 |
