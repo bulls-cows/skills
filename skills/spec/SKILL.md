@@ -1,92 +1,92 @@
 ---
 name: "spec"
-description: "Specification-first development mode. Invoke when user enters /spec command or needs detailed specs before coding."
+description: "规格优先开发模式。当用户输入 /spec 命令或需要在编码前制定详细规格说明时调用。"
 ---
 
-# Spec Mode
+# 规格模式
 
-Specification-first development mode that requires detailed documentation before implementation.
+规格优先开发模式，要求在实施前完成详细文档编写。
 
-## Trigger
+## 触发条件
 
-User enters `/spec` command in the chat.
+用户在聊天中输入 `/spec` 命令。
 
-## Core Rules
+## 核心规则
 
-### 1. Spec First
+### 1. 规格优先
 
-Before user confirms the specs:
-- **DO NOT** make any edits (except spec files)
-- **DO NOT** run any non-readonly tools
-- **DO NOT** make any changes to the system
+在用户确认规格之前：
+- **禁止**进行任何编辑（规格文件除外）
+- **禁止**运行任何非只读工具
+- **禁止**对系统进行任何更改
 
-### 2. Required Spec Files
+### 2. 必需的规格文件
 
-Create three specification files:
+创建三个规格说明文件：
 
-1. **spec.md** - Main specification document
-   - Feature overview
-   - Requirements (functional & non-functional)
-   - Technical design
-   - API specifications
-   - Data models
+1. **spec.md** - 主规格文档
+   - 功能概述
+   - 需求（功能性与非功能性）
+   - 技术设计
+   - API 规格
+   - 数据模型
 
-2. **tasks.md** - Task breakdown
-   - Ordered list of implementation tasks
-   - Dependencies between tasks
-   - Estimated complexity
-   - Acceptance criteria
+2. **tasks.md** - 任务分解
+   - 有序的实施任务列表
+   - 任务间依赖关系
+   - 预估复杂度
+   - 验收标准
 
-3. **checklist.md** - Verification checklist
-   - Pre-implementation checks
-   - Implementation checkpoints
-   - Post-implementation validation
-   - Quality gates
+3. **checklist.md** - 验证清单
+   - 实施前检查项
+   - 实施中检查点
+   - 实施后验证
+   - 质量门禁
 
-### 3. User Confirmation
+### 3. 用户确认
 
-1. Complete all three spec files
-2. Use NotifyUser to notify user for review
-3. Wait for user approval
+1. 完成全部三个规格文件
+2. 使用 NotifyUser 通知用户审核
+3. 等待用户批准
 
-### 4. After Spec Confirmed
+### 4. 规格确认后
 
-- Immediately begin execution according to the spec
-- Only terminate when all specs are completed and verified
+- 立即按照规格开始执行
+- 仅在所有规格完成并验证后终止
 
-### 5. If Spec Rejected
+### 5. 规格被拒绝时
 
-- Continue editing and optimizing specifications
-- Address user feedback
-- Notify user again for approval
+- 继续编辑和优化规格说明
+- 回应用户反馈
+- 再次通知用户等待批准
 
-## Spec File Locations
+## 规格文件位置
 
-Spec files should be created in an appropriate location based on the feature:
-- Feature-specific: `apps/{app}/specs/{feature}/`
-- Cross-cutting: `docs/specs/{feature}/`
-- System-wide: `specs/{feature}/`
+规格文件应根据功能创建在适当位置：
+- 功能特定：`apps/{应用}/specs/{功能}/`
+- 跨模块：`docs/specs/{功能}/`
+- 系统级：`specs/{功能}/`
 
-## Example Usage
+## 使用示例
 
 ```
-User: /spec
-User: Create a real-time notification system
+用户: /spec
+用户: 创建实时通知系统
 
 AI:
-1. Analyzes existing system architecture
-2. Creates spec.md with requirements and design
-3. Creates tasks.md with implementation breakdown
-4. Creates checklist.md with verification steps
-5. Notifies user for review
-6. Upon approval, implements according to specs
+1. 分析现有系统架构
+2. 创建 spec.md 包含需求和设计
+3. 创建 tasks.md 包含实施分解
+4. 创建 checklist.md 包含验证步骤
+5. 通知用户审核
+6. 获得批准后，按规格实施
 ```
 
-## Difference from /plan
+## 与 /plan 的区别
 
-| Aspect | /spec | /plan |
-|--------|-------|-------|
-| Output | spec.md + tasks.md + checklist.md | Plan file |
-| Focus | Detailed specification | Execution steps |
-| Use case | Complex features needing detailed specs | Tasks needing clear execution order |
-| Documentation | Comprehensive | Concise |
+| 方面 | /spec | /plan |
+|------|-------|-------|
+| 输出 | spec.md + tasks.md + checklist.md | 计划文件 |
+| 重点 | 详细规格说明 | 执行步骤 |
+| 适用场景 | 需要详细规格的复杂功能 | 需要明确执行顺序的任务 |
+| 文档程度 | 全面详尽 | 简洁精炼 |

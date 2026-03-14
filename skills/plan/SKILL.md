@@ -1,69 +1,69 @@
 ---
 name: "plan"
-description: "Plan-first execution mode. Invoke when user enters /plan command or wants to plan before implementing changes."
+description: "计划优先执行模式。当用户输入 /plan 命令或希望在实施变更前先制定计划时调用。"
 ---
 
-# Plan Mode
+# 计划模式
 
-Plan-first execution mode that requires user confirmation before making any changes.
+计划优先执行模式，要求在做出任何变更前必须获得用户确认。
 
-## Trigger
+## 触发条件
 
-User enters `/plan` command in the chat.
+用户在聊天中输入 `/plan` 命令。
 
-## Core Rules
+## 核心规则
 
-### 1. Plan First
+### 1. 计划优先
 
-Before user confirms the plan:
-- **DO NOT** make any edits (except the plan file)
-- **DO NOT** run any non-readonly tools
-- **DO NOT** make any changes to the system
+在用户确认计划之前：
+- **禁止**进行任何编辑（计划文件除外）
+- **禁止**运行任何非只读工具
+- **禁止**对系统进行任何更改
 
-### 2. User Confirmation
+### 2. 用户确认
 
-1. Write the plan to the plan file
-2. Call NotifyUser to indicate planning is complete
-3. Wait for user approval
+1. 将计划写入计划文件
+2. 调用 NotifyUser 表示计划制定完成
+3. 等待用户批准
 
-### 3. After Plan Accepted
+### 3. 计划通过后
 
-- Start implementing immediately
-- Update/create todo list without further confirmation
-- Only terminate when the plan is fully completed
+- 立即开始实施
+- 无需再次确认，直接更新/创建待办事项列表
+- 仅在计划完全完成时终止
 
-### 4. If Plan Rejected
+### 4. 计划被拒绝时
 
-- **Still cannot make any edits**
-- Optimize/refine the plan based on user feedback
-- Call NotifyUser again with the new plan
+- **仍然禁止进行任何编辑**
+- 根据用户反馈优化/完善计划
+- 再次调用 NotifyUser 提供新计划
 
-## Plan File Structure
+## 计划文件结构
 
-The plan should include:
-1. **Objective**: Clear statement of what will be accomplished
-2. **Approach**: High-level strategy
-3. **Steps**: Ordered list of implementation steps
-4. **Files Affected**: List of files that will be modified
-5. **Risks**: Potential issues and mitigation strategies
+计划应包含：
+1. **目标**：明确说明将要完成的内容
+2. **方法**：高层策略
+3. **步骤**：有序的实施步骤列表
+4. **涉及文件**：将要修改的文件列表
+5. **风险**：潜在问题及应对策略
 
-## Example Usage
+## 使用示例
 
 ```
-User: /plan
-User: Add user authentication with JWT tokens
+用户: /plan
+用户: 添加基于 JWT 令牌的用户认证
 
 AI:
-1. Analyzes existing authentication code
-2. Creates plan file with implementation steps
-3. Notifies user for approval
-4. Upon approval, implements the plan step by step
+1. 分析现有认证代码
+2. 创建包含实施步骤的计划文件
+3. 通知用户等待批准
+4. 获得批准后，逐步实施计划
 ```
 
-## Difference from /spec
+## 与 /spec 的区别
 
-| Aspect | /plan | /spec |
-|--------|-------|-------|
-| Output | Plan file | spec.md + tasks.md + checklist.md |
-| Focus | Execution steps | Detailed specification |
-| Use case | Tasks needing clear execution order | Complex features needing detailed specs |
+| 方面 | /plan | /spec |
+|------|-------|-------|
+| 输出 | 计划文件 | spec.md + tasks.md + checklist.md |
+| 重点 | 执行步骤 | 详细规格说明 |
+| 适用场景 | 需要明确执行顺序的任务 | 需要详细规格的复杂功能 |
