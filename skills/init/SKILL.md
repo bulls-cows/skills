@@ -26,15 +26,15 @@ examples:
 
 - 提示用户：
 
-  ```
-  项目根目录下没有找到 AGENTS.md 文件，正在为您创建...
+```text
+项目根目录下没有找到 AGENTS.md 文件，正在为您创建...
 
-  AGENTS.md 将包含以下核心内容（根据实际项目调整）：
-  - Scope: 仓库范围、允许/禁止修改的目录
-  - Quality Gate: 质量门禁要求（如 lint、test）
-  - Delivery Format: 交付格式规范
-  - Project Structure: 项目结构说明（精炼，4级以内）
-  ```
+AGENTS.md 将包含以下核心内容（根据实际项目调整）：
+- Scope: 仓库范围、允许/禁止修改的目录
+- Quality Gate: 质量门禁要求（如 lint、test）
+- Delivery Format: 交付格式规范
+- Project Structure: 项目结构说明（精炼，4级以内）
+```
 
 - 参考 `templates/agents-minimal-template.md` 的结构创建基础 AGENTS.md
 - 询问用户是否需要根据项目特点调整内容
@@ -110,7 +110,7 @@ examples:
 
 显示生成的内容摘要：
 
-```
+```text
 ✓ 已生成/更新 AGENTS.md
 ✓ 包含以下章节：
   - Scope

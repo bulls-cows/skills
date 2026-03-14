@@ -154,7 +154,7 @@ description: >
 
 #### 基础目录结构
 
-```
+```text
 skill-name/
 └── SKILL.md
 ```
@@ -163,7 +163,7 @@ skill-name/
 
 当技能需要生成文件或包含较长的示例模板时，应使用独立的模板文件：
 
-```
+```text
 skill-name/
 ├── SKILL.md
 └── templates/
@@ -342,7 +342,7 @@ description: >
 
 当用户请求匹配 skill 的 description 时自动触发：
 
-```
+```text
 请审查这个 PR 的风险
 ```
 
@@ -350,4 +350,6 @@ description: >
 
 当需要强制触发时：
 
-```Use the pr-risk-check skill to review this branch against main.```
+```text
+Use the pr-risk-check skill to review this branch against main.
+```
