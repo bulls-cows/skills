@@ -19,7 +19,27 @@
 - [read-pdf](./skills/read-pdf/SKILL.md)：读取并解析PDF文件内容，提取文本、表格和结构化信息
 - [spec](./skills/spec/SKILL.md)：规格优先开发模式，要求在实施前完成详细文档编写
 
-## 使用方式
+## 规则列表
+
+- [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：AgentM 前端 Vue2 项目开发规范，包含代码风格、组件规范、API 规范等
+
+### 配置自定义规则
+
+#### Claude Code
+
+请自行检索 Claude Code 配置自定义规则的方法。
+
+#### OpenCode
+
+在项目根目录创建 `Opencode.json`，添加以下配置：
+
+```json
+{
+  "instructions": ["AGENTS.md", ".opencode/rules/frontend-rules-vue2/RULE.md"]
+}
+```
+
+规则文件存放于 `.opencode/rules/` 目录下。
 
 ### 在 `claude code` 中使用
 
@@ -35,6 +55,9 @@
 ## 项目结构
 
 - `skills/`：所有技能的根目录
+- `rules/`：自定义规则目录
+- `.opencode/`：OpenCode 配置文件目录
+  - `rules/`：规则定义文件（需在 Opencode.json 中配置）
 - `.claude-plugin/`：插件市场配置目录
   - `marketplace.json`：技能市场配置文件，定义插件和技能分组
 - `README.md`：项目说明文档
