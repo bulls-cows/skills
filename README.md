@@ -56,19 +56,21 @@
 
 执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
 
-- [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
-- [create-rule](./skills/create-rule/SKILL.md)：创建或更新规则文档，并更新 AGENTS.md 中的引用关系
-- [create-skill](./skills/create-skill/SKILL.md)：创建或更新规范的 Claude Skill
-- [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
-- [frontend-commit](./skills/frontend-commit/SKILL.md)：前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作
-- [frontend-review](./skills/frontend-review/SKILL.md)：前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践
-- [frontend-weekly-report](./skills/frontend-weekly-report/SKILL.md)：自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报
-- [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
-- [lint](./skills/lint/SKILL.md)：执行代码质量检查，包括 Node 版本验证和 lint 检查
-- [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能
-- [mode-plan](./skills/mode-plan/SKILL.md)：计划优先执行模式，要求在做出任何变更前必须获得用户确认
-- [mode-spec](./skills/mode-spec/SKILL.md)：规格优先开发模式，要求在实施前完成详细文档编写
-- [read-pdf](./skills/read-pdf/SKILL.md)：读取并解析 PDF 文件内容，提取文本、表格和结构化信息
+| 技能 | 说明 | 安装命令 |
+| ---- | ---- | -------- |
+| create-readme | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill create-readme` |
+| create-rule | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill create-rule` |
+| create-skill | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill create-skill` |
+| design-ui | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill design-ui` |
+| frontend-commit | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill frontend-commit` |
+| frontend-review | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill frontend-review` |
+| frontend-weekly-report | 自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报 | `npx skills add bulls-cows/skills --skill frontend-weekly-report` |
+| init | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill init` |
+| lint | 执行代码质量检查，包括 Node 版本验证和 lint 检查 | `npx skills add bulls-cows/skills --skill lint` |
+| lint-and-commit | 自动执行代码质量检查后提交代码的组合技能 | `npx skills add bulls-cows/skills --skill lint-and-commit` |
+| mode-plan | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill mode-plan` |
+| mode-spec | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill mode-spec` |
+| read-pdf | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill read-pdf` |
 
 ### 推荐外部技能
 
