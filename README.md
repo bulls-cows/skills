@@ -2,7 +2,7 @@
 
 > ⚠️ **重点提示**：
 >
-> 1. **frontend-review** 和 **frontend-commit** 技能已内置目录限制，请根据你的项目结构调整 `SKILL.md` 中的 `src/` 允许目录（`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 等）
+> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能已内置目录限制，请根据你的项目结构调整 `SKILL.md` 中的 `src/` 允许目录（`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 等）
 > 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
 
 本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。
@@ -58,19 +58,20 @@
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| create-readme | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill create-readme` |
-| create-rule | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill create-rule` |
-| create-skill | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill create-skill` |
-| design-ui | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill design-ui` |
-| frontend-commit | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill frontend-commit` |
-| frontend-review | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill frontend-review` |
-| frontend-weekly-report | 自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报 | `npx skills add bulls-cows/skills --skill frontend-weekly-report` |
-| init | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill init` |
-| lint | 执行代码质量检查，包括 Node 版本验证和 lint 检查 | `npx skills add bulls-cows/skills --skill lint` |
-| lint-and-commit | 自动执行代码质量检查后提交代码的组合技能 | `npx skills add bulls-cows/skills --skill lint-and-commit` |
-| mode-plan | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill mode-plan` |
-| mode-spec | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill mode-spec` |
-| read-pdf | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill read-pdf` |
+| yy-commit | Git 代码提交助手，生成规范的提交信息并执行提交操作 | `npx skills add bulls-cows/skills --skill yy-commit` |
+| yy-create-readme | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill yy-create-readme` |
+| yy-create-rule | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
+| yy-create-skill | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
+| yy-design-ui | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill yy-design-ui` |
+| yy-frontend-commit | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill yy-frontend-commit` |
+| yy-frontend-review | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill yy-frontend-review` |
+| yy-frontend-weekly-report | 自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报 | `npx skills add bulls-cows/skills --skill yy-frontend-weekly-report` |
+| yy-init | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
+| yy-lint | 执行代码质量检查，包括 Node 版本验证和 lint 检查 | `npx skills add bulls-cows/skills --skill yy-lint` |
+| yy-lint-and-commit | 自动执行代码质量检查后提交代码的组合技能 | `npx skills add bulls-cows/skills --skill yy-lint-and-commit` |
+| yy-mode-plan | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
+| yy-mode-spec | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
+| yy-read-pdf | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill yy-read-pdf` |
 
 ### 推荐外部技能
 
