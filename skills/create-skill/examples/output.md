@@ -4,18 +4,18 @@
 
 ## 示例 1：简单技能输出
 
-### 创建结果
+### 示例 1 - 创建结果
 
 已成功创建技能 `format-code`。
 
-### 目录结构
+### 示例 1 - 目录结构
 
 ```text
 .agents/skills/format-code/
 └── SKILL.md
 ```
 
-### SKILL.md 内容
+### 示例 1 - SKILL.md 内容
 
 ```markdown
 ---
@@ -50,11 +50,11 @@ description: >
 
 ## 示例 2：带模板的技能输出
 
-### 创建结果
+### 示例 2 - 创建结果
 
 已成功创建技能 `generate-readme`。
 
-### 目录结构
+### 示例 2 - 目录结构
 
 ```text
 .agents/skills/generate-readme/
@@ -63,7 +63,7 @@ description: >
     └── readme-template.md
 ```
 
-### SKILL.md 内容
+### 示例 2 - SKILL.md 内容
 
 ```markdown
 ---
@@ -126,13 +126,11 @@ description: >
 
 ---
 
-## 示例 4：复杂技能输出
-
-### 创建结果
+## 示例 4 - 创建结果
 
 已成功创建技能 `api-test`。
 
-### 目录结构
+### 示例 4 - 目录结构
 
 ```text
 .agents/skills/api-test/
@@ -144,7 +142,7 @@ description: >
     └── test-report-template.md
 ```
 
-### SKILL.md 内容
+### 示例 4 - SKILL.md 内容
 
 ```markdown
 ---
