@@ -67,9 +67,9 @@
 - [create-skill](./skills/create-skill/SKILL.md)：创建或更新规范的 Claude Skill
 - [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
 - [frontend-commit](./skills/frontend-commit/SKILL.md)：前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作
-- [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 - [frontend-review](./skills/frontend-review/SKILL.md)：前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践
 - [frontend-weekly-report](./skills/frontend-weekly-report/SKILL.md)：自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报
+- [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查，包括 Node 版本验证和 lint 检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能
 - [plan](./skills/plan/SKILL.md)：计划优先执行模式，要求在做出任何变更前必须获得用户确认
