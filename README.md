@@ -82,7 +82,7 @@
 | web-design-guidelines | 色彩、字体、间距、响应式、组件规范、设计系统输出 | `npx skills add vercel-labs/agent-skills --skill web-design-guidelines` |
 | ui-ux-pro-max | 高保真界面设计、用户体验流程、交互原型、可用性优化 | `npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max` |
 | canvas-design | 基于 Canvas 实现可视化、图表、动画、海报生成、交互式图形 | `npx skills add anthropics/skills --skill canvas-design` |
-| vue-skills | Vue3 前端开发全套技术能力 | （暂无外部仓库） |
+| vue-best-practices | Vue3 前端开发全套技术能力 | `npx skills add hyf0/vue-skills --skill vue-best-practices` |
 | vercel-react-best-practices | Vercel 官方 React/Next.js 最佳实践 | `npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices` |
 | vercel-composition-patterns | Vercel 官方 React 组件组合模式 | `npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns` |
 
