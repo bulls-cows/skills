@@ -50,11 +50,11 @@
 
 ## Skills 技能
 
-安装技能推荐使用 `npx skills add` 命令安装。关于 `skills` 命令的更多具体使用方法，请查看 [vercel-labs/skills](https://github.com/vercel-labs/skills)的文档。
+推荐使用 `npx skills add` 命令安装技能。关于 `skills` 命令的详细说明，请查看 [官方文档](https://github.com/vercel-labs/skills) 。
 
 ### 本仓库技能
 
-可以使用命令 `npx skills add bulls-cows/skills` 安装以下技能。
+执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
 
 - [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新规则文档，并更新 AGENTS.md 中的引用关系
@@ -78,42 +78,42 @@
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| frontend-design | 网页 / 移动端界面设计、布局、样式、交互逻辑、前端视觉方案 | `npx skills add https://github.com/anthropics/skills --skill frontend-design` |
-| web-design-guidelines | 色彩、字体、间距、响应式、组件规范、设计系统输出 | `npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines` |
-| ui-ux-pro-max | 高保真界面设计、用户体验流程、交互原型、可用性优化 | `npx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max` |
-| canvas-design | 基于 Canvas 实现可视化、图表、动画、海报生成、交互式图形 | `npx skills add https://github.com/anthropics/skills --skill canvas-design` |
+| frontend-design | 网页 / 移动端界面设计、布局、样式、交互逻辑、前端视觉方案 | `npx skills add anthropics/skills --skill frontend-design` |
+| web-design-guidelines | 色彩、字体、间距、响应式、组件规范、设计系统输出 | `npx skills add vercel-labs/agent-skills --skill web-design-guidelines` |
+| ui-ux-pro-max | 高保真界面设计、用户体验流程、交互原型、可用性优化 | `npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max` |
+| canvas-design | 基于 Canvas 实现可视化、图表、动画、海报生成、交互式图形 | `npx skills add anthropics/skills --skill canvas-design` |
 | vue-skills | Vue3 前端开发全套技术能力 | （暂无外部仓库） |
-| vercel-react-best-practices | Vercel 官方 React/Next.js 最佳实践 | `npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices` |
-| vercel-composition-patterns | Vercel 官方 React 组件组合模式 | `npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns` |
+| vercel-react-best-practices | Vercel 官方 React/Next.js 最佳实践 | `npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices` |
+| vercel-composition-patterns | Vercel 官方 React 组件组合模式 | `npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns` |
 
 #### 浏览器与自动化
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| agent-browser | 自动模拟浏览器行为、网页抓取、页面交互、自动化测试 | `npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser` |
+| agent-browser | 自动模拟浏览器行为、网页抓取、页面交互、自动化测试 | `npx skills add vercel-labs/agent-browser --skill agent-browser` |
 
 #### 网站分析
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| audit-website | 对网站做整体检测：性能、SEO、安全、兼容性、加载速度、错误排查 | `npx skills add https://github.com/squirrelscan/skills --skill audit-website` |
-| seo-audit | 关键词、标题、描述、外链、收录、排名、流量优化分析 | `npx skills add https://github.com/coreyhaines31/marketingskills --skill seo-audit` |
+| audit-website | 对网站做整体检测：性能、SEO、安全、兼容性、加载速度、错误排查 | `npx skills add squirrelscan/skills --skill audit-website` |
+| seo-audit | 关键词、标题、描述、外链、收录、排名、流量优化分析 | `npx skills add coreyhaines31/marketingskills --skill seo-audit` |
 
 #### 营销与内容
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| copywriting | 自动生成营销文案、广告语、推文、标题、短视频文案、宣传稿 | `npx skills add https://github.com/coreyhaines31/marketingskills --skill copywriting` |
-| social-content | 小红书、抖音、微博、朋友圈等平台文案 / 脚本 / 选题 | `npx skills add https://github.com/coreyhaines31/marketingskills --skill social-content` |
+| copywriting | 自动生成营销文案、广告语、推文、标题、短视频文案、宣传稿 | `npx skills add coreyhaines31/marketingskills --skill copywriting` |
+| social-content | 小红书、抖音、微博、朋友圈等平台文案 / 脚本 / 选题 | `npx skills add coreyhaines31/marketingskills --skill social-content` |
 
 #### 工具与效率
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
-| find-skills | 根据需求自动匹配、推荐合适的技能、工具、能力模块 | `npx skills add https://github.com/vercel-labs/skills --skill find-skills` |
-| skill-creator | 自定义生成新技能、配置流程、搭建专属工具 / 能力 | `npx skills add https://github.com/anthropics/skills --skill skill-creator` |
-| planning-with-files | 结合文档 / 文件做项目规划、排期、流程设计、方案输出 | `npx skills add https://github.com/othmanadi/planning-with-files --skill planning-with-files` |
-| superpowers | 整合多项高级能力：多任务、复杂推理、跨领域处理、增强版输出 | `npx skills add https://github.com/obra/superpowers --skill brainstorming` |
+| find-skills | 根据需求自动匹配、推荐合适的技能、工具、能力模块 | `npx skills add vercel-labs/skills --skill find-skills` |
+| skill-creator | 自定义生成新技能、配置流程、搭建专属工具 / 能力 | `npx skills add anthropics/skills --skill skill-creator` |
+| planning-with-files | 结合文档 / 文件做项目规划、排期、流程设计、方案输出 | `npx skills add othmanadi/planning-with-files --skill planning-with-files` |
+| superpowers | 整合多项高级能力：多任务、复杂推理、跨领域处理、增强版输出 | `npx skills add obra/superpowers --skill brainstorming` |
 
 ## 协议
 
