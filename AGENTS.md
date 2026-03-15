@@ -42,7 +42,7 @@ npm run lint
 
 ## 项目结构
 
-```
+```text
 frontend-skills-group/
 ├── .claude-plugin/           # 插件市场配置
 │   └── marketplace.json      # 技能市场配置（自动生成）
@@ -158,18 +158,15 @@ examples:
 - 使用中文描述（本仓库主要使用中文）
 - 包含语言标签的代码示例：
 
-  ```markdown
   ```bash
   npm run lint
-  ```
-
   ```
 
 ### 4. 目录结构约定
 
 每个技能遵循以下结构：
 
-```
+```text
 skill-name/
 ├── SKILL.md                    # 技能定义（必需）
 ├── references/                 # 参考文档（可选）
@@ -229,7 +226,7 @@ skill-name/
 
 提交更改时，遵循以下格式：
 
-```
+```text
 type(scope): 描述
 ```
 
@@ -247,7 +244,7 @@ type(scope): 描述
 
 **示例：**
 
-```
+```text
 feat(create-skill): 添加评估功能
 fix(lint): 修复 Node 版本检查逻辑
 docs(readme): 更新插件安装说明
