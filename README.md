@@ -74,9 +74,9 @@
 - [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查，包括 Node 版本验证和 lint 检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能
-- [plan](./skills/plan/SKILL.md)：计划优先执行模式，要求在做出任何变更前必须获得用户确认
+- [mode-plan](./skills/mode-plan/SKILL.md)：计划优先执行模式，要求在做出任何变更前必须获得用户确认
+- [mode-spec](./skills/mode-spec/SKILL.md)：规格优先开发模式，要求在实施前完成详细文档编写
 - [read-pdf](./skills/read-pdf/SKILL.md)：读取并解析 PDF 文件内容，提取文本、表格和结构化信息
-- [spec](./skills/spec/SKILL.md)：规格优先开发模式，要求在实施前完成详细文档编写
 
 ### 推荐外部技能
 

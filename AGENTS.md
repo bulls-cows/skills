@@ -64,9 +64,9 @@ frontend-skills-group/
 │   ├── init/                # 项目初始化
 │   ├── lint/                # 代码质量检查
 │   ├── lint-and-commit/     # 检查 + 提交
-│   ├── plan/                # 任务规划
-│   ├── read-pdf/            # PDF 读取
-│   └── spec/                # 规范文档
+│   ├── mode-plan/           # 计划模式
+│   ├── mode-spec/           # 规格模式
+│   └── read-pdf/            # PDF 读取
 ├── README.md                 # 项目说明
 ├── AGENTS.md                 # 本文件
 └── LICENSE.txt              # 许可证

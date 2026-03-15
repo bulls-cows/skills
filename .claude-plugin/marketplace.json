@@ -26,9 +26,9 @@
         "./skills/init",
         "./skills/lint",
         "./skills/lint-and-commit",
-        "./skills/plan",
-        "./skills/read-pdf",
-        "./skills/spec"
+        "./skills/mode-plan",
+        "./skills/mode-spec",
+        "./skills/read-pdf"
       ]
     }
   ]
