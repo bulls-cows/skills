@@ -1,5 +1,5 @@
 ---
-name: "mode-plan"
+name: yy-mode-plan
 description: "计划优先执行模式。当用户输入 /mode-plan 命令或希望在实施变更前先制定计划时调用。"
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: create-rule
+name: yy-create-rule
 description: 创建或更新规则文档，并更新 AGENTS.md 中的引用关系
 icon: 📝
 parameters:

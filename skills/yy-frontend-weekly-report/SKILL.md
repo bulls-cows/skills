@@ -1,5 +1,5 @@
 ---
-name: frontend-weekly-report
+name: yy-frontend-weekly-report
 description: >
   写周报技能。当用户说"写周报"、"生成周报"、"本周工作周报"、"汇总本周工作"时触发。
   自动读取本周 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，输出结构化周报。

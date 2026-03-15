@@ -1,5 +1,5 @@
 ---
-name: frontend-commit
+name: yy-frontend-commit
 description: >
   前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作。
   支持智能文件选择、冲突检测、多改动分离等功能。注意：禁止执行 push 操作。

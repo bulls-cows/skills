@@ -15,20 +15,20 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/commit",
-        "./skills/create-readme",
-        "./skills/create-rule",
-        "./skills/create-skill",
-        "./skills/design-ui",
-        "./skills/frontend-commit",
-        "./skills/frontend-review",
-        "./skills/frontend-weekly-report",
-        "./skills/init",
-        "./skills/lint",
-        "./skills/lint-and-commit",
-        "./skills/mode-plan",
-        "./skills/mode-spec",
-        "./skills/read-pdf"
+        "./skills/yy-commit",
+        "./skills/yy-create-readme",
+        "./skills/yy-create-rule",
+        "./skills/yy-create-skill",
+        "./skills/yy-design-ui",
+        "./skills/yy-frontend-commit",
+        "./skills/yy-frontend-review",
+        "./skills/yy-frontend-weekly-report",
+        "./skills/yy-init",
+        "./skills/yy-lint",
+        "./skills/yy-lint-and-commit",
+        "./skills/yy-mode-plan",
+        "./skills/yy-mode-spec",
+        "./skills/yy-read-pdf"
       ]
     }
   ]

@@ -1,5 +1,5 @@
 ---
-name: lint
+name: yy-lint
 description: 执行代码质量检查，包括 Node 版本验证和 lint 检查
 icon: 🔍
 examples:

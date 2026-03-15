@@ -1,5 +1,5 @@
 ---
-name: "mode-spec"
+name: yy-mode-spec
 description: "规格优先开发模式。当用户输入 /mode-spec 命令或需要在编码前制定详细规格说明时调用。"
 ---
 

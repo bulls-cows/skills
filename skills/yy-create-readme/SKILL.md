@@ -1,5 +1,5 @@
 ---
-name: create-readme
+name: yy-create-readme
 description: >
   创建或更新项目根目录下的 README.md 文件。自动分析项目结构，
   生成专业、清晰的 README 文档，包含项目描述、技术栈、安装使用、特性等核心内容。

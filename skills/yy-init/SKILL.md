@@ -1,5 +1,5 @@
 ---
-name: init
+name: yy-init
 description: 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 icon: 🚀
 examples:

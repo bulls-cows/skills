@@ -1,5 +1,5 @@
 ---
-name: frontend-review
+name: yy-frontend-review
 description: >
   前端代码审核助手，审核 src 目录下改动的文件是否有 bug。
   支持语法错误、逻辑错误、安全漏洞和最佳实践检查。
