@@ -65,7 +65,7 @@ frontend-skills-group/
 │   ├── yy-frontend-review/     # 前端代码审核
 │   ├── yy-frontend-weekly-report/ # 前端周报
 │   ├── yy-init/                # 项目初始化
-│   ├── yy-lint/                # 代码质量检查
+│   ├── yy-review/              # 代码质量检查
 │   ├── yy-lint-and-commit/     # 检查 + 提交
 │   ├── yy-mode-plan/           # 计划模式
 │   ├── yy-mode-spec/           # 规格模式
@@ -292,7 +292,7 @@ trim_trailing_whitespace = true
 
 ## 关键参考
 
-- `skills/yy-lint/SKILL.md` - 代码质量检查工作流
+- `skills/yy-review/SKILL.md` - 代码质量检查工作流
 - `skills/yy-commit/SKILL.md` - Git 提交约定
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/lint.mts` - lint 入口脚本

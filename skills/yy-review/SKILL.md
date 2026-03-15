@@ -1,9 +1,9 @@
 ---
-name: yy-lint
+name: yy-review
 description: 执行代码质量检查，包括 Node 版本验证和 lint 检查
 icon: 🔍
 examples:
-  - /lint
+  - /review
 ---
 
 # Lint Check
@@ -19,7 +19,7 @@ examples:
 
 ## 使用方式
 
-直接调用 `/lint` 即可执行代码质量检查。
+直接调用 `/review` 即可执行代码质量检查。
 
 ## 工作流程
 
@@ -27,7 +27,7 @@ examples:
 
 1. 读取项目根目录下的 `.nvmrc` 文件，获取要求的 Node.js 版本
 2. 执行 `node --version` 命令获取当前 Node.js 版本
-3. 比较当前版本是否不小于 `.nvmrc` 中记录的版本
+3. 比较当前版本是否不小于 `.nvmrcrc` 中记录的版本
 
 **情况 1：当前版本小于 `.nvmrc` 中的要求版本**
 

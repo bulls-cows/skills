@@ -67,7 +67,7 @@
 | yy-frontend-review | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill yy-frontend-review` |
 | yy-frontend-weekly-report | 自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报 | `npx skills add bulls-cows/skills --skill yy-frontend-weekly-report` |
 | yy-init | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
-| yy-lint | 执行代码质量检查，包括 Node 版本验证和 lint 检查 | `npx skills add bulls-cows/skills --skill yy-lint` |
+| yy-review | 执行代码质量检查，包括 Node 版本验证和 lint 检查 | `npx skills add bulls-cows/skills --skill yy-review` |
 | yy-lint-and-commit | 自动执行代码质量检查后提交代码的组合技能 | `npx skills add bulls-cows/skills --skill yy-lint-and-commit` |
 | yy-mode-plan | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
 | yy-mode-spec | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
