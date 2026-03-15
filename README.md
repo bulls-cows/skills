@@ -1,7 +1,7 @@
 # bulls-cows/skills
 
 > ⚠️ **重点提示**：
-> 
+>
 > 1. **frontend-review** 和 **frontend-commit** 技能已内置目录限制，请根据你的项目结构调整 `SKILL.md` 中的 `src/` 允许目录（`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 等）
 > 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
 
@@ -22,19 +22,7 @@
 - `AGENTS.md`：AI 代理的项目规范说明文档
 - `LICENSE.txt`：开源许可证文件
 
-## 使用说明
-
-### 在 Claude Code 中使用
-
-1. 先在终端执行 `claude` 进入 `claude code` 交互模式
-2. 输入 `/plugin` 命令并回车
-3. 通过方向键切换到 `Marketplaces` tab 下
-4. 首次添加仓库，需要选中 `+ Add Marketplace`，并回车，然后输入 `bulls-cows/skills` 再次回车
-5. 选中 `Marketplaces` 列表里的名为 `open-skills` 的插件市场，并回车
-6. 从列表里选中需要安装的插件，并回车
-7. 重启终端或者 `claude code` 衍生插件，通过 `/<技能名>`（如 `/commit`）就可以召唤技能了！
-
-## Rules
+## Rules 规则
 
 ### 规则列表
 
@@ -60,9 +48,13 @@
 
 规则文件存放于 `.opencode/rules/` 目录下。
 
-## Skills
+## Skills 技能
+
+安装技能推荐使用 `npx skills add` 命令安装。关于 `skills` 命令的更多具体使用方法，请查看 [vercel-labs/skills](https://github.com/vercel-labs/skills)的文档。
 
 ### 本仓库技能
+
+可以使用命令 `npx skills add bulls-cows/skills` 安装以下技能。
 
 - [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新规则文档，并更新 AGENTS.md 中的引用关系
@@ -80,7 +72,7 @@
 
 ### 推荐外部技能
 
-以下技能来自外部仓库，使用 `npx skills add` 命令安装：
+以下技能来自外部仓库。
 
 #### 前端开发
 
