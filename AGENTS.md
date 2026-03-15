@@ -130,7 +130,7 @@ examples:
   name: skill-name
   description: 这是一个很长的描述，超过了...
   ```
-  
+
   ```yaml
   # 正确 - 使用 > 或 | 表示多行
   name: skill-name
@@ -158,9 +158,11 @@ examples:
 - 使用中文描述（本仓库主要使用中文）
 - 包含语言标签的代码示例：
 
-  ```bash
-  npm run lint
-  ```
+````markdown
+```bash
+npm run lint
+```
+````
 
 ### 4. 目录结构约定
 
