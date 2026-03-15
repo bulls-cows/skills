@@ -1,5 +1,10 @@
 # bulls-cows/skills
 
+> ⚠️ **重点提示**：
+> 
+> 1. **frontend-review** 和 **frontend-commit** 技能已内置目录限制，请根据你的项目结构调整 `SKILL.md` 中的 `src/` 允许目录（`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 等）
+> 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
+
 本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。
 
 - GitHub 仓库：[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
@@ -57,12 +62,13 @@
 
 ### 本仓库技能
 
-- [commit](./skills/commit/SKILL.md)：帮助用户创建规范的 Git 提交
 - [create-readme](./skills/create-readme/SKILL.md)：创建或更新项目根目录下的 README.md 文件
 - [create-rule](./skills/create-rule/SKILL.md)：创建或更新规则文档，并更新 AGENTS.md 中的引用关系
 - [create-skill](./skills/create-skill/SKILL.md)：创建或更新规范的 Claude Skill
 - [design-ui](./skills/design-ui/SKILL.md)：创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格
+- [frontend-commit](./skills/frontend-commit/SKILL.md)：前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作
 - [init](./skills/init/SKILL.md)：初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
+- [frontend-review](./skills/frontend-review/SKILL.md)：前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践
 - [frontend-weekly-report](./skills/frontend-weekly-report/SKILL.md)：自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报
 - [lint](./skills/lint/SKILL.md)：执行代码质量检查，包括 Node 版本验证和 lint 检查
 - [lint-and-commit](./skills/lint-and-commit/SKILL.md)：自动执行代码质量检查后提交代码的组合技能

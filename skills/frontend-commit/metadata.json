@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "date": "March 2026",
+  "author": "wengdongyang",
+  "organization": "DMS-Admin",
+  "abstract": "前端代码提交助手，归纳 src 目录下改动的文件，并生成规范的提交信息",
+  "references": [
+    "https://www.conventionalcommits.org/"
+  ],
+  "tags": ["frontend", "git-commit", "commit-message"]
+}

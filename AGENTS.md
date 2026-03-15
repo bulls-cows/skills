@@ -122,7 +122,9 @@ examples:
 ```
 
 **关键规则：**
+
 - **禁止**将长描述放在键的同一行：
+
   ```yaml
   # 错误 - 导致 YAML 解析错误
   name: skill-name
@@ -155,10 +157,12 @@ examples:
 - 使用祈使语气："做 X"而非"你应该做 X"
 - 使用中文描述（本仓库主要使用中文）
 - 包含语言标签的代码示例：
+
   ```markdown
   ```bash
   npm run lint
   ```
+
   ```
 
 ### 4. 目录结构约定
@@ -205,6 +209,7 @@ skill-name/
 - 类使用 **PascalCase**
 - 建议为公共 API 添加类型提示
 - 示例：
+
   ```typescript
   function aggregateBenchmark(workspace: string, skillName: string): Record<string, unknown> {
       const results: Record<string, unknown> = {};
@@ -229,6 +234,7 @@ type(scope): 描述
 ```
 
 **类型：**
+
 - `feat` - 新功能
 - `fix` - Bug 修复
 - `docs` - 文档更新
@@ -240,6 +246,7 @@ type(scope): 描述
 - `revert` - 回滚
 
 **示例：**
+
 ```
 feat(create-skill): 添加评估功能
 fix(lint): 修复 Node 版本检查逻辑
