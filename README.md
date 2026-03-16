@@ -2,7 +2,7 @@
 
 > ⚠️ **重点提示**：
 >
-> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能的目录范围定义在 `config/frontend-file-scope.json`，默认允许 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`，请根据项目需要调整
+> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能的目录范围定义在各自 SKILL.md 的 metadata.allowed_directories，默认允许 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`，请根据项目需要调整
 > 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
 
 本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。

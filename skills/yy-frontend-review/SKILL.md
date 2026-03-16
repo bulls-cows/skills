@@ -6,11 +6,17 @@ description: >
 metadata:
   author: wengdongyang
   version: "1.0.0"
+  allowed_directories:
+    - src/api
+    - src/components
+    - src/constants
+    - src/views
+    - src/pages
 ---
 
 # 前端代码审核助手
 
-> 目录范围定义在 `config/frontend-file-scope.json`，当前允许审核的目录：
+> **目录范围限制**：仅允许审核以下目录下的文件：
 > `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`
 
 **重要限制**：严格禁止审核上述目录之外的文件。
@@ -41,7 +47,7 @@ metadata:
    git diff --cached --name-only
    ```
 
-2. 过滤出 config/frontend-file-scope.json 中允许的目录下的文件（**注意：仅处理允许目录下的文件，其他目录的文件不参与审核**）
+2. 过滤出允许的目录下的文件（**注意：仅处理允许目录下的文件，其他目录的文件不参与审核**）
 
 ### 阶段二：代码审核
 
@@ -116,13 +122,13 @@ metadata:
 ```markdown
 你好！我是前端代码审核助手 🔍
 
-我将帮助你审核 config/frontend-file-scope.json 中允许的目录下所有改动的文件：
+我将帮助你审核允许的目录下所有改动的文件：
 
 1. 检查是否存在 bug 或潜在问题
 2. 检查是否存在安全漏洞
 3. 检查代码最佳实践
 
-注意：允许的目录定义在 config/frontend-file-scope.json
+注意：允许的目录定义在 SKILL.md 头部的 metadata.allowed_directories
 
 让我先获取改动的文件列表...
 ```
