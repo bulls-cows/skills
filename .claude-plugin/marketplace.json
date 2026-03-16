@@ -1,8 +1,7 @@
 {
   "name": "open-skills",
   "owner": {
-    "name": "Yakima",
-    "email": "yakima.public@gmail.com"
+    "name": "bulls-cows"
   },
   "metadata": {
     "description": "本仓库内部维护了一些好用的AI技能。",

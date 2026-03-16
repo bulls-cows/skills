@@ -11,8 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/bulls-cows/skills.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "open-skills",
+    "ai",
+    "skills",
+    "bulls-cows",
+    "bulls-cows/skills"
+  ],
+  "author": "bulls-cows",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/bulls-cows/skills/issues"

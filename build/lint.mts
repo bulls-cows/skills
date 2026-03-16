@@ -26,7 +26,10 @@ marketplaceJson.metadata.version = packageJson.version;
 marketplaceJson.metadata.description = packageJson.description;
 marketplaceJson.plugins[0].description = packageJson.description;
 
-// 4. 读取 skills 目录，过滤空目录并按字母顺序排序
+// 4. 同步 author
+marketplaceJson.owner.name = packageJson.author;
+
+// 5. 读取 skills 目录，过滤空目录并按字母顺序排序
 const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
   .filter(dirent => dirent.isDirectory())
   .map(dirent => dirent.name)
