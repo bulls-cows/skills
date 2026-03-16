@@ -73,6 +73,7 @@
 | yy-mode-plan | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
 | yy-mode-spec | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
 | yy-read-pdf | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill yy-read-pdf` |
+| yy-refresh | 刷新 AI 对代码的理解，对比所有改动文件并重新解析关键代码 | `npx skills add bulls-cows/skills --skill yy-refresh` |
 
 ### 推荐外部技能
 
