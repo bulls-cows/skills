@@ -4,13 +4,13 @@
     "name": "bulls-cows"
   },
   "metadata": {
-    "description": "本仓库内部维护了一些好用的AI技能。",
+    "description": "本仓库维护了一些实用的规则和AI技能。",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "open-skills",
-      "description": "本仓库内部维护了一些好用的AI技能。",
+      "description": "本仓库维护了一些实用的规则和AI技能。",
       "source": "./",
       "strict": false,
       "skills": [

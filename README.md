@@ -3,9 +3,8 @@
 > ⚠️ **重点提示**：
 >
 > 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能的目录范围定义在各自 SKILL.md 的 metadata.allowed_directories，默认允许 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`，请根据项目需要调整
-> 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
 
-本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。
+本仓库维护了一些实用的规则和AI技能。
 
 - GitHub 仓库：[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
 - Gitee 仓库：[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
@@ -33,6 +32,8 @@
 - [rules/frontend-file-scope-limit](./rules/frontend-file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
 
 ### 配置自定义规则
+
+规则文件需要手动配置才能生效。
 
 #### Claude Code
 

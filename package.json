@@ -1,7 +1,7 @@
 {
   "name": "open-skills",
   "version": "1.0.0",
-  "description": "本仓库内部维护了一些好用的AI技能。",
+  "description": "本仓库维护了一些实用的规则和AI技能。",
   "main": "README.md",
   "type": "module",
   "scripts": {
