@@ -1,26 +1,13 @@
 # bulls-cows/skills
 
-> ⚠️ **重点提示**：
->
-> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能的目录范围定义在各自 SKILL.md 的 metadata.allowed_directories，默认允许 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`，请根据项目需要调整
+<div align="center">
+  <img width="200" src="./logo.svg" alt="牛气腾腾的logo" />
+</div>
 
-本仓库维护了一些实用的规则和AI技能。
+> 本仓库维护了一些实用的规则和AI技能。
 
 - GitHub 仓库：[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
 - Gitee 仓库：[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
-
-## 项目结构
-
-- `skills/`：所有技能的根目录
-- `rules/`：自定义规则目录
-- `config/`：配置文件目录
-- `.opencode/`：OpenCode 配置文件目录
-  - `rules/`：规则定义文件（需在 Opencode.json 中配置）
-- `.claude-plugin/`：插件市场配置目录
-  - `marketplace.json`：技能市场配置文件，定义插件和技能分组
-- `README.md`：项目说明文档
-- `AGENTS.md`：AI 代理的项目规范说明文档
-- `LICENSE.txt`：开源许可证文件
 
 ## Rules 规则
 

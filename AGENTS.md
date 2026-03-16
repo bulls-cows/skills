@@ -16,12 +16,6 @@
 npm run lint
 ```
 
-该命令会依次执行：
-
-1. `node ./build/lint.mts` - 同步 marketplace.json（自动更新 skills 列表、版本、描述）
-2. `markdownlint "**/*.md" --fix` - Markdown 格式检查和自动修复
-3. `tsc --noEmit` - TypeScript 类型检查
-
 **检查项:**
 
 - 验证 SKILL.md 格式（YAML 头部 + Markdown 正文）
@@ -43,44 +37,7 @@ npm run lint
 
 ## 项目结构
 
-```text
-frontend-skills-group/
-├── .claude-plugin/           # 插件市场配置
-│   └── marketplace.json      # 技能市场配置（自动生成）
-├── .editorconfig             # 编辑器配置
-├── .gitignore
-├── .nvmrc                    # Node 版本要求 (v22.18.0)
-├── .markdownlint.json        # Markdown lint 配置
-├── .npmrc
-├── build/                    # 构建脚本
-│   └── lint.mts              # lint 入口脚本
-├── config/                   # 配置文件（已被删除）
-├── package.json              # npm 项目配置
-├── tsconfig.json             # TypeScript 配置
-├── skills/                   # 技能目录（14个技能）
-│   ├── yy-commit/              # Git 提交辅助
-│   ├── yy-create-readme/       # README 创建
-│   ├── yy-create-rule/        # 规则创建
-│   ├── yy-create-skill/       # 技能创建
-│   ├── yy-design-ui/           # UI 设计
-│   ├── yy-frontend-commit/    # 前端代码提交
-│   ├── yy-frontend-review/    # 前端代码审核
-│   ├── yy-frontend-weekly-report/ # 前端周报
-│   ├── yy-init/               # 项目初始化
-│   ├── yy-lint-and-commit/    # 检查 + 提交
-│   ├── yy-mode-plan/          # 计划模式
-│   ├── yy-mode-spec/          # 规格模式
-│   ├── yy-review/             # 代码质量检查
-│   └── yy-read-pdf/           # PDF 读取
-├── rules/                     # 规则目录
-│   ├── frontend-file-scope-limit/  # 文件范围限制规则
-│   ├── frontend-rules-react/  # React 开发规范
-│   ├── frontend-rules-vue2/   # Vue2 开发规范
-│   └── frontend-rules-vue3/   # Vue3 开发规范
-├── README.md                  # 项目说明
-├── AGENTS.md                  # 本文件
-└── LICENSE.txt                # 许可证
-```
+参考 [项目结构](./docs/STRUCTURE.md)
 
 ---
 
