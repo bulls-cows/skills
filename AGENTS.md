@@ -193,47 +193,11 @@ skill-name/
 
 ### 8. Git 提交约定
 
-提交更改时，遵循以下格式：
-
-```text
-type(scope): 描述
-```
-
-**类型：**
-
-- `feat` - 新功能
-- `fix` - Bug 修复
-- `docs` - 文档更新
-- `style` - 格式调整（不影响功能）
-- `refactor` - 重构
-- `perf` - 性能优化
-- `test` - 测试相关
-- `chore` - 构建/工具/依赖相关
-- `revert` - 回滚
-
-**示例：**
-
-```text
-feat(create-skill): 添加评估功能
-fix(lint): 修复 Node 版本检查逻辑
-docs(readme): 更新插件安装说明
-```
+提交更改时，参考 [该文档](./skills/yy-commit/SKILL.md)
 
 ### 9. 编辑器配置
 
-项目使用以下编辑器配置（见 `.editorconfig`）：
-
-```editorconfig
-root = true
-
-[*]
-charset = utf-8
-indent_style = space
-indent_size = 2
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
-```
+编写内容时，需遵循 [.editorconfig](./.editorconfig)
 
 ---
 
