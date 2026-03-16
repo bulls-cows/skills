@@ -1,5 +1,5 @@
 {
-  "$schema": "./file-scope.schema.json",
+  "$schema": "./frontend-file-scope.schema.json",
   "description": "前端技能文件范围配置，定义技能处理的目录范围",
   "allowed_directories": [
     "src/api",

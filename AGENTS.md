@@ -54,7 +54,7 @@ frontend-skills-group/
 ├── build/                    # 构建脚本
 │   └── lint.mts              # lint 入口脚本
 ├── config/                   # 配置文件
-│   └── file-scope.json       # 文件范围配置
+│   └── frontend-file-scope.json  # 文件范围配置
 ├── package.json              # npm 项目配置
 ├── tsconfig.json             # TypeScript 配置
 ├── skills/                   # 技能目录（14个技能）
@@ -304,5 +304,5 @@ trim_trailing_whitespace = true
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
-- `config/file-scope.json` - 文件范围配置
+- `config/frontend-file-scope.json` - 文件范围配置
 - `rules/frontend-file-scope-limit/RULE.md` - 文件修改范围限制规则
