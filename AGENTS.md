@@ -3,7 +3,7 @@
 ## Scope
 
 - 本仓库默认语言: Markdown, JSON
-- 允许修改目录: skills/, .claude-plugin/, README.md, AGENTS.md, LICENSE.txt
+- 允许修改目录: skills/, rules/, config/, .claude-plugin/, README.md, AGENTS.md, LICENSE.txt
 - 禁止修改目录: 无
 
 ---
@@ -53,26 +53,33 @@ frontend-skills-group/
 ├── .npmrc
 ├── build/                    # 构建脚本
 │   └── lint.mts              # lint 入口脚本
+├── config/                   # 配置文件
+│   └── file-scope.json       # 文件范围配置
 ├── package.json              # npm 项目配置
 ├── tsconfig.json             # TypeScript 配置
-├── skills/                   # 技能目录（11个技能）
+├── skills/                   # 技能目录（14个技能）
 │   ├── yy-commit/              # Git 提交辅助
 │   ├── yy-create-readme/       # README 创建
 │   ├── yy-create-rule/        # 规则创建
 │   ├── yy-create-skill/       # 技能创建
 │   ├── yy-design-ui/           # UI 设计
 │   ├── yy-frontend-commit/    # 前端代码提交
-│   ├── yy-frontend-review/     # 前端代码审核
+│   ├── yy-frontend-review/    # 前端代码审核
 │   ├── yy-frontend-weekly-report/ # 前端周报
-│   ├── yy-init/                # 项目初始化
-│   ├── yy-review/              # 代码质量检查
-│   ├── yy-lint-and-commit/     # 检查 + 提交
-│   ├── yy-mode-plan/           # 计划模式
-│   ├── yy-mode-spec/           # 规格模式
-│   └── yy-read-pdf/            # PDF 读取
-├── README.md                 # 项目说明
-├── AGENTS.md                 # 本文件
-└── LICENSE.txt              # 许可证
+│   ├── yy-init/               # 项目初始化
+│   ├── yy-lint-and-commit/    # 检查 + 提交
+│   ├── yy-mode-plan/          # 计划模式
+│   ├── yy-mode-spec/          # 规格模式
+│   ├── yy-review/             # 代码质量检查
+│   └── yy-read-pdf/           # PDF 读取
+├── rules/                     # 规则目录
+│   ├── frontend-file-scope-limit/  # 文件范围限制规则
+│   ├── frontend-rules-react/  # React 开发规范
+│   ├── frontend-rules-vue2/   # Vue2 开发规范
+│   └── frontend-rules-vue3/   # Vue3 开发规范
+├── README.md                  # 项目说明
+├── AGENTS.md                  # 本文件
+└── LICENSE.txt                # 许可证
 ```
 
 ---
@@ -297,3 +304,5 @@ trim_trailing_whitespace = true
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
+- `config/file-scope.json` - 文件范围配置
+- `rules/frontend-file-scope-limit/RULE.md` - 文件修改范围限制规则

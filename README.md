@@ -2,7 +2,7 @@
 
 > ⚠️ **重点提示**：
 >
-> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能已内置目录限制，请根据你的项目结构调整 `SKILL.md` 中的 `src/` 允许目录（`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 等）
+> 1. **yy-frontend-review** 和 **yy-frontend-commit** 技能的目录范围定义在 `config/file-scope.json`，默认允许 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`，请根据项目需要调整
 > 2. 本仓库的规则文件需要手动配置才能生效，详见 [配置自定义规则](#配置自定义规则)
 
 本仓库内部维护了一些好用的技能，并同步了外部社区的一些实用技能。
@@ -14,6 +14,7 @@
 
 - `skills/`：所有技能的根目录
 - `rules/`：自定义规则目录
+- `config/`：配置文件目录
 - `.opencode/`：OpenCode 配置文件目录
   - `rules/`：规则定义文件（需在 Opencode.json 中配置）
 - `.claude-plugin/`：插件市场配置目录
@@ -29,6 +30,7 @@
 - [rules/frontend-rules-react](./rules/frontend-rules-react/RULE.md)：AgentM 前端 React 项目开发规范，包含代码风格、组件规范、Hooks 规范等
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：AgentM 前端 Vue2 项目开发规范，包含代码风格、组件规范、API 规范等
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：AgentM 前端 Vue3 项目开发规范，包含代码风格、组件规范、Composition API 规范等
+- [rules/frontend-file-scope-limit](./rules/frontend-file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
 
 ### 配置自定义规则
 
