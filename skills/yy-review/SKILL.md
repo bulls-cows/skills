@@ -4,7 +4,7 @@ description: >
   执行代码审核，包括语法错误、逻辑错误、安全漏洞和最佳实践检查。
 icon: 🔍
 examples:
-  - /review
+  - /yy-review
 ---
 
 # 代码审核助手
@@ -18,7 +18,7 @@ examples:
 
 ## 使用方式
 
-直接调用 `/review` 即可执行代码审核。
+直接调用 `/yy-review` 即可执行代码审核。
 
 ## 工作流程
 

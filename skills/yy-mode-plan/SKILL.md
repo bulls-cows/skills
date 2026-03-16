@@ -1,6 +1,6 @@
 ---
 name: yy-mode-plan
-description: "计划优先执行模式。当用户输入 /mode-plan 命令或希望在实施变更前先制定计划时调用。"
+description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或希望在实施变更前先制定计划时调用。"
 ---
 
 # 计划模式
@@ -9,7 +9,7 @@ description: "计划优先执行模式。当用户输入 /mode-plan 命令或希
 
 ## 触发条件
 
-用户在聊天中输入 `/mode-plan` 命令。
+用户在聊天中输入 `/yy-mode-plan` 命令。
 
 ## 核心规则
 
@@ -52,7 +52,7 @@ description: "计划优先执行模式。当用户输入 /mode-plan 命令或希
 ## 使用示例
 
 ```text
-用户: /mode-plan
+用户: /yy-mode-plan
 用户: 添加基于 JWT 令牌的用户认证
 
 AI:
@@ -62,10 +62,10 @@ AI:
 4. 获得批准后，逐步实施计划
 ```
 
-## 与 /mode-spec 的区别
+## 与 /yy-mode-spec 的区别
 
-| 方面 | /mode-plan | /mode-spec |
-|------|-----------|------------|
-| 输出 | 计划文件 | spec.md + tasks.md + checklist.md |
-| 重点 | 执行步骤 | 详细规格说明 |
-| 适用场景 | 需要明确执行顺序的任务 | 需要详细规格的复杂功能 |
+| 方面 | /yy-mode-plan | /yy-mode-spec                     |
+|------|---------------|-----------------------------------|
+| 输出 | 计划文件          | spec.md + tasks.md + checklist.md |
+| 重点 | 执行步骤          | 详细规格说明                            |
+| 适用场景 | 需要明确执行顺序的任务   | 需要详细规格的复杂功能                       |

@@ -110,7 +110,7 @@ metadata:
 准备提交代码...
 ```
 
-然后使用 skill 工具调用 `frontend-commit`。
+然后使用 skill 工具调用 `yy-frontend-commit`。
 
 ## 工具使用
 

@@ -5,7 +5,7 @@ description: >
   并尝试自动修复错误。
 icon: 🔧
 examples:
-  - /lint
+  - /yy-lint
 ---
 
 # Lint 检查助手
@@ -22,7 +22,7 @@ examples:
 
 ## 使用方式
 
-直接调用 `/lint` 即可执行 lint 检查。
+直接调用 `/yy-lint` 即可执行 lint 检查。
 
 ## 工作流程
 

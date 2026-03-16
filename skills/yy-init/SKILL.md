@@ -3,7 +3,7 @@ name: yy-init
 description: 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构
 icon: 🚀
 examples:
-  - /init
+  - /yy-init
 ---
 
 # Init AGENTS.md
@@ -14,7 +14,7 @@ examples:
 
 用户可以通过以下方式调用这个技能：
 
-- `/init` - 初始化或更新 AGENTS.md 文档
+- `/yy-init` - 初始化或更新 AGENTS.md 文档
 
 ## 工作流程
 
