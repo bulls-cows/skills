@@ -6,10 +6,9 @@ description: >
 metadata:
   author: wengdongyang
   version: "1.0.0"
-  organization: DMS-Admin
 ---
 
-# 前端代码审核助手 (CNC Frontend Review)
+# 前端代码审核助手
 
 **重要限制**：此技能仅审核 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 目录下的文件。严格禁止审核其他目录的文件。
 

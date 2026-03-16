@@ -2,7 +2,6 @@
   "version": "1.0.0",
   "date": "March 2026",
   "author": "wengdongyang",
-  "organization": "DMS-Admin",
   "abstract": "前端代码审核助手，审核 src 目录下改动的文件是否有 bug，并使用 prettier 格式化代码",
   "references": [
     "https://prettier.io/",

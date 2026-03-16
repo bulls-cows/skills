@@ -6,7 +6,6 @@ description: >
 metadata:
   author: wengdongyang
   version: '1.1.0'
-  organization: DMS-Admin
 ---
 
 # 前端代码提交助手
