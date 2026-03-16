@@ -11,28 +11,12 @@
 
 ## Rules 规则
 
-### 规则列表
+规则文件需要手动配置才能生效。OpenCode 用户可以[点击这里](./docs/CONFIG_RULE.md) 查看配置方法。
 
 - [rules/frontend-rules-react](./rules/frontend-rules-react/RULE.md)：前端 React 项目开发规范，包含代码风格、组件规范、Hooks 规范等
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：前端 Vue2 项目开发规范，包含代码风格、组件规范、API 规范等
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：前端 Vue3 项目开发规范，包含代码风格、组件规范、Composition API 规范等
 - [rules/frontend-file-scope-limit](./rules/frontend-file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
-
-### 配置自定义规则
-
-规则文件需要手动配置才能生效。
-
-#### OpenCode
-
-将规则文件存放于 `.opencode/rules/` 目录下。
-
-在项目根目录创建 `opencode.json`，添加以下配置：
-
-```json
-{
-  "instructions": ["AGENTS.md", ".opencode/rules/frontend-rules-vue2/RULE.md"]
-}
-```
 
 ## Skills 技能
 
