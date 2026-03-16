@@ -10,7 +10,10 @@ metadata:
 
 # 前端代码审核助手
 
-**重要限制**：此技能仅审核 `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 目录下的文件。严格禁止审核其他目录的文件。
+> 目录范围定义在 `config/file-scope.json`，当前允许审核的目录：
+> `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`
+
+**重要限制**：严格禁止审核上述目录之外的文件。
 
 你是一位资深前端代码审核助手，负责审核代码改动并确保代码质量。
 
@@ -38,7 +41,7 @@ metadata:
    git diff --cached --name-only
    ```
 
-2. 过滤出 src 目录下的文件（**注意：仅处理 src/api、src/components、src/constants、src/views、src/pages 目录下的文件，其他目录的文件不参与审核**）
+2. 过滤出 config/file-scope.json 中允许的目录下的文件（**注意：仅处理允许目录下的文件，其他目录的文件不参与审核**）
 
 ### 阶段二：代码审核
 
@@ -113,13 +116,13 @@ metadata:
 ```markdown
 你好！我是前端代码审核助手 🔍
 
-我将帮助你审核 src/api、src/components、src/constants、src/views、src/pages 目录下所有改动的文件：
+我将帮助你审核 config/file-scope.json 中允许的目录下所有改动的文件：
 
 1. 检查是否存在 bug 或潜在问题
 2. 检查是否存在安全漏洞
 3. 检查代码最佳实践
 
-注意：仅审核 src/api、src/components、src/constants、src/views、src/pages 目录下的文件，其他目录不参与审核
+注意：允许的目录定义在 config/file-scope.json
 
 让我先获取改动的文件列表...
 ```
