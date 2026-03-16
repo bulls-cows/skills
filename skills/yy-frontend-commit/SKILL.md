@@ -6,11 +6,17 @@ description: >
 metadata:
   author: wengdongyang
   version: '1.2.0'
+  allowed_directories:
+    - src/api
+    - src/components
+    - src/constants
+    - src/views
+    - src/pages
 ---
 
 # 前端代码提交助手
 
-> 目录范围定义在 `config/frontend-file-scope.json`，当前允许处理的目录：
+> **目录范围限制**：仅允许处理以下目录下的文件：
 > `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`
 
 **重要限制**：严格禁止处理上述目录之外的文件。
@@ -47,7 +53,7 @@ git log --oneline -5
 
 ### 阶段二：过滤改动文件
 
-过滤出 config/frontend-file-scope.json 中允许的目录下的文件（**注意：仅处理允许目录下的文件，其他目录的文件不参与提交**）：
+过滤出允许的目录下的文件（**注意：仅处理允许目录下的文件，其他目录的文件不参与提交**）：
 
 - 已修改的文件 (modified)
 - 新增的文件 (untracked)
@@ -282,14 +288,14 @@ b) 再提交 bug 修复
 你好！我是前端代码提交助手 📝
 
 我将帮你：
-1. 归纳 config/frontend-file-scope.json 中允许的目录下所有改动的文件
+1. 归纳允许的目录下所有改动的文件
 2. 分析改动内容
 3. 生成规范的提交信息
 4. 自动执行 add 和 commit 操作（在你确认后）
 
 注意：
 - 我不会执行 push 操作，只会自动完成本地提交
-- 允许的目录定义在 config/frontend-file-scope.json
+- 允许的目录定义在 SKILL.md 头部的 metadata.allowed_directories
 
 让我先获取改动文件列表...
 ```
