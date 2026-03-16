@@ -1,9 +1,9 @@
 ---
-description: AgentM前端React项目开发规范与架构指南
+description: 前端React项目开发规范与架构指南
 alwaysApply: true
 ---
 
-# AgentM 前端 React 项目开发规范
+# 前端 React 项目开发规范
 
 ## 📌 AI 行为约束
 

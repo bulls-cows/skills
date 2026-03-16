@@ -2,6 +2,6 @@
   "version": "1.0.0",
   "date": "March 2026",
   "author": "wengdongyang",
-  "abstract": "AgentM前端项目开发规范与架构指南，包含代码风格、组件规范、API规范等",
+  "abstract": "前端项目开发规范与架构指南，包含代码风格、组件规范、API规范等",
   "tags": ["frontend", "规范", "开发指南", "vue"]
 }

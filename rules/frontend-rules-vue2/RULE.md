@@ -1,9 +1,9 @@
 ---
-description: AgentM前端项目开发规范与架构指南
+description: 前端项目开发规范与架构指南
 alwaysApply: true
 ---
 
-# AgentM 前端项目开发规范
+# 前端项目开发规范
 
 ## 📌 AI 行为约束
 
