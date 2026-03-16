@@ -7,9 +7,9 @@ parameters:
     description: 要创建或更新的规则内容
     required: true
 examples:
-  - /create-rule Vue组件中不要直接修改 props，要通过 emit 事件
-  - /create-rule 发现代码重复≥2次时应该立即封装成组件
-  - /create-rule iOS WebView 中 position:fixed 在软键盘弹起时会失效
+  - /yy-create-rule Vue组件中不要直接修改 props，要通过 emit 事件
+  - /yy-create-rule 发现代码重复≥2次时应该立即封装成组件
+  - /yy-create-rule iOS WebView 中 position:fixed 在软键盘弹起时会失效
 ---
 
 # Create Rule
@@ -25,7 +25,7 @@ examples:
 
 用户可以通过以下方式调用这个技能：
 
-- `/create-rule <规则内容>` - 创建或更新指定的规则内容
+- `/yy-create-rule <规则内容>` - 创建或更新指定的规则内容
 
 ## 工作流程
 
@@ -144,21 +144,21 @@ examples:
 ## 示例场景
 
 **场景1：创建新的规则文档**
-用户说："/create-rule Vue组件中不要直接修改 props，要通过 emit 事件"
+用户说："/yy-create-rule Vue组件中不要直接修改 props，要通过 emit 事件"
 → 检查规则目录是否存在
 → 查找现有规则文档，没有找到合适的
 → 创建新文档 `规则目录/vue组件规范.md`
 → 在 AGENTS.md 中添加引用
 
 **场景2：追加到现有规则文档**
-用户说："/create-rule 所有 API 错误都要用统一的错误处理器，不能自己 catch 后静默忽略"
+用户说："/yy-create-rule 所有 API 错误都要用统一的错误处理器，不能自己 catch 后静默忽略"
 → 检查规则目录
 → 找到 `规则目录/api调用最佳实践.md`
 → 在该文档中追加新内容
 → 不需要修改 AGENTS.md
 
 **场景3：记录 bug 修复经验**
-用户说："/create-rule iOS WebView 中 position:fixed 在软键盘弹起时会失效"
+用户说："/yy-create-rule iOS WebView 中 position:fixed 在软键盘弹起时会失效"
 → 检查规则目录
 → 没有找到合适的现有文档
 → 创建新文档 `规则目录/移动端兼容性问题.md`
