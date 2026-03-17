@@ -19,10 +19,8 @@ npm run lint
 **检查项:**
 
 - 验证 SKILL.md 格式（YAML 头部 + Markdown 正文）
-- 验证 marketplace.json 的 JSON 格式
 - 验证 skills 列表是否按字母顺序排序
 - 验证 README.md 中的技能列表与 skills/ 目录实际内容一致
-- 验证 marketplace.json 中的 skills 路径是否正确
 - 修复上述验证过程中发现的错误
 
 ---
