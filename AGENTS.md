@@ -3,7 +3,7 @@
 ## Scope
 
 - 本仓库默认语言: Markdown, JSON
-- 允许修改目录: skills/, rules/, config/, .claude-plugin/, README.md, AGENTS.md, LICENSE.txt
+- 允许修改目录: .claude-plugin/, build/, docs/, rules/, skills/, AGENTS.md, README.md
 - 禁止修改目录: 无
 
 ---
