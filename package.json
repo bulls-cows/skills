@@ -5,7 +5,8 @@
   "main": "README.md",
   "type": "module",
   "scripts": {
-    "lint": "node --run lint:markdown && node --run check:type && node --run sync:marketplace",
+    "lint": "node --run check:skill && node --run lint:markdown && node --run check:type && node --run sync:marketplace",
+    "check:skill": "node ./build/check-skill.mts",
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts"
