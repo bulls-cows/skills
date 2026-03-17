@@ -24,7 +24,7 @@
 
 ### 本仓库技能
 
-执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
+执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。如果你使用 Claude Code，可以[通过插件市场安装这些技能](./docs/CLAUDE_CODE_SKILL.md)。
 
 #### 通用技能
 
