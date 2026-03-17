@@ -62,6 +62,71 @@ AI:
 4. 获得批准后，逐步实施计划
 ```
 
+## Output contract
+
+### 计划文件格式
+
+创建的计划文件应包含以下结构：
+
+```markdown
+# [功能名称] 实施计划
+
+## 目标
+[明确说明将要完成的内容]
+
+## 方法
+[高层策略说明]
+
+## 步骤
+1. [步骤1 - 具体描述]
+2. [步骤2 - 具体描述]
+3. [步骤3 - 具体描述]
+
+## 涉及文件
+| 文件路径 | 操作类型 | 说明 |
+|---------|---------|------|
+| src/auth/api.ts | 修改 | 添加 JWT 验证逻辑 |
+| src/utils/token.ts | 新增 | Token 生成工具 |
+
+## 风险与应对
+| 风险 | 可能性 | 影响 | 应对策略 |
+|------|--------|------|----------|
+| Token 过期处理 | 中 | 中 | 添加 refresh token 机制 |
+| 并发请求 | 低 | 高 | 添加请求队列 |
+```
+
+### 输出示例
+
+```markdown
+## 计划已制定完成
+
+### 目标
+为应用添加基于 JWT 令牌的用户认证功能
+
+### 方法
+1. 使用 jsonwebtoken 库生成和验证 Token
+2. 设计 Token 存储策略（httpOnly Cookie）
+3. 实现登录/登出/刷新 Token 接口
+
+### 实施步骤
+1. 安装 jsonwebtoken 依赖
+2. 创建 Token 工具类（生成、验证、刷新）
+3. 添加登录 API 接口
+4. 添加 Token 验证中间件
+5. 配置 Cookie 存储策略
+
+### 涉及文件
+- src/utils/jwt.ts（新增）
+- src/middleware/auth.ts（新增）
+- src/api/auth.ts（修改）
+
+### 风险
+- Token 泄露风险 → 使用 httpOnly Cookie 存储
+- Token 过期 → 实现 refresh token 机制
+
+请确认计划是否可以执行。
+```
+
 ## 与 /yy-mode-spec 的区别
 
 | 方面 | /yy-mode-plan | /yy-mode-spec                     |
