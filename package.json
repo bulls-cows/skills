@@ -5,7 +5,10 @@
   "main": "README.md",
   "type": "module",
   "scripts": {
-    "lint": "node ./build/lint.mts && markdownlint \"**/*.md\" --fix --ignore node_modules && tsc --noEmit"
+    "lint": "node --run lint:markdown && node --run check:type && node --run sync:marketplace",
+    "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
+    "check:type": "tsc --noEmit",
+    "sync:marketplace": "node ./build/sync-marketplace.mts"
   },
   "repository": {
     "type": "git",
