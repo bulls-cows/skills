@@ -15,7 +15,7 @@
 
 ### 通用规则
 
-- [rules/frontend-file-scope-limit](./rules/frontend-file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
+- [rules/file-scope-limit](./rules/file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
 
 ### 特定规则
 

@@ -216,4 +216,4 @@ skill-name/
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
-- `rules/frontend-file-scope-limit/RULE.md` - 文件修改范围限制规则
+- `rules/file-scope-limit/RULE.md` - 文件修改范围限制规则
