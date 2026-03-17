@@ -147,3 +147,7 @@ nul
 
 # 三方参考
 skills-marketplace/
+
+# 本地调试文件
+skills-lock.json
+.agents/skills/
