@@ -11,7 +11,7 @@
 
 ## Rules 规则
 
-规则文件需要手动配置才能生效。OpenCode 用户可以[点击这里](./docs/CONFIG_RULE.md) 查看配置方法。
+[点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
 ### 通用规则
 
