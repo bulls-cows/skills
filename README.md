@@ -32,11 +32,11 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 ## Skills 技能
 
-### 本地开发
+提示：
 
-**如果你是技能开发者，请查看 [本地开发调试技能指南](./docs/DEVELOP.md)。**
-
-推荐使用 `npx skills add` 命令安装技能。关于 `skills` 命令的详细说明，请查看 [官方文档](https://github.com/vercel-labs/skills) 。
+- **如果你是技能开发者，请查看 [本地开发调试技能指南](./docs/DEVELOP.md)。**
+- 推荐使用 `npx skills add` 命令安装技能。关于 `skills` 命令的详细说明，请查看 [官方文档](https://github.com/vercel-labs/skills)
+- 该网站收录了大量的技能，可以搜索查找：[The Agent Skills Directory](https://skills.sh/)
 
 ### 本仓库技能
 
