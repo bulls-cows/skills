@@ -212,12 +212,6 @@ skill-name/
 
 ---
 
-## Cursor/Copilot 规则
-
-本仓库不存在 Cursor 规则（`.cursor/rules/` 或 `.cursorrules`）或 Copilot 规则（`.github/copilot-instructions.md`）。
-
----
-
 ## 关键参考
 
 - `skills/yy-review/SKILL.md` - 代码质量检查工作流
