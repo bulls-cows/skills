@@ -1,3 +1,4 @@
 {
-  "instructions": ["AGENTS.md", "./rules/file-scope-limit/RULE.md"]
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md", "./docs/STRUCTURE.md", "./rules/file-scope-limit/RULE.md"]
 }

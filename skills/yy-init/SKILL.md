@@ -6,7 +6,7 @@ examples:
   - /yy-init
 ---
 
-# Init AGENTS.md
+# yy-init
 
 这个技能用于初始化或更新项目的 AGENTS.md 文档，确保 AI 助手能够理解项目的规范、范围和结构。
 

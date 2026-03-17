@@ -14,7 +14,7 @@ metadata:
     - src/pages
 ---
 
-# 前端代码审核助手
+# yy-frontend-review
 
 > **目录范围限制**：仅允许审核以下目录下的文件：
 > `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`

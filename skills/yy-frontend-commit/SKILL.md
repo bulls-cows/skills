@@ -14,7 +14,7 @@ metadata:
     - src/pages
 ---
 
-# 前端代码提交助手
+# yy-frontend-commit
 
 > **目录范围限制**：仅允许处理以下目录下的文件：
 > `src/api`、`src/components`、`src/constants`、`src/views`、`src/pages`

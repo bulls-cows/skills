@@ -6,7 +6,7 @@ description: >
   适用于需要快速生成周报的开发人员。
 ---
 
-# 写周报技能
+# yy-frontend-weekly-report
 
 ## 概述
 

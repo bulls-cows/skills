@@ -10,7 +10,7 @@ examples:
   - 更新 README.md
 ---
 
-# Create README
+# yy-create-readme
 
 创建或更新项目根目录下的 README.md 文件，帮助用户展示项目的核心价值。
 

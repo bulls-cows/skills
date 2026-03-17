@@ -8,7 +8,7 @@ examples:
   - /yy-lint
 ---
 
-# Lint 检查助手
+# yy-lint
 
 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误。
 

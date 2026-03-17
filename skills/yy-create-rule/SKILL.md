@@ -12,7 +12,7 @@ examples:
   - /yy-create-rule iOS WebView 中 position:fixed 在软键盘弹起时会失效
 ---
 
-# Create Rule
+# yy-create-rule
 
 这个技能用于创建或更新规则文档，并更新 AGENTS.md 中的引用关系，确保 AI 助手能够理解项目的具体规范和最佳实践。
 

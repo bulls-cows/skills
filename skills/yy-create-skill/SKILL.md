@@ -4,7 +4,7 @@ description: >
   创建或更新 Skill（技能）。用于：用户想要创建新技能、更新现有技能、需要把某个工作流程标准化为技能、想把某个功能打包成可复用的技能。
 ---
 
-# Create Skill
+# yy-create-skill
 
 帮助用户创建或更新规范的 Skill。
 

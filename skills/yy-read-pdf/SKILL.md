@@ -4,7 +4,7 @@ description: >
   读取并解析PDF文件内容，提取文本、表格和结构化信息。用于：用户需要读取PDF文件、提取PDF内容、分析PDF文档结构。
 ---
 
-# Read PDF
+# yy-read-pdf
 
 帮助用户读取和解析PDF文件内容。
 

@@ -3,7 +3,7 @@ name: yy-mode-spec
 description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或需要在编码前制定详细规格说明时调用。"
 ---
 
-# 规格模式
+# yy-mode-spec
 
 规格优先开发模式，要求在实施前完成详细文档编写。
 
