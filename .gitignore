@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 .trae/skills/
 .trae/specs/
 nul
+
+# 三方参考
+skill-marketplace/
