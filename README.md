@@ -1,7 +1,7 @@
 # bulls-cows/skills
 
 <div align="center">
-  <img width="200" src="./logo.svg" alt="牛气腾腾的logo" />
+  <img width="200" src="https://cdn.verysites.com/verysites/static/img/logo.svg" alt="牛气腾腾的logo" />
 </div>
 
 > 本仓库维护了一些实用的规则和AI技能。
