@@ -66,11 +66,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 **注意**：以下技能对目录结构有特定要求：
 
-- `src/api`
-- `src/components`
-- `src/constants`
-- `src/views`
-- `src/pages`
+- 项目需要包含：`src/api`、`src/components`、`src/constants`、`src/views`、`src/pages` 目录
 
 代码提交和审核时会自动聚焦于上述目录下的源代码文件，**其他目录的文件不会被处理**。
 
@@ -81,7 +77,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 ### 推荐外部技能
 
-本节内容已移至 [推荐外部技能](./docs/RECOMMEND_SKILLS.md)。
+详见 [推荐外部技能](./docs/RECOMMEND_SKILLS.md)。
 
 ## 协议
 
