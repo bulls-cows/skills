@@ -55,7 +55,17 @@ alwaysApply: true
 ### 事件类函数
 
 - 必须采用 `on` + `事件名` 格式
-- 推荐使用小驼峰命名
+- 采用小驼峰命名（camelCase）
+
+### 组件命名
+
+| 类型     | 格式                  | 示例           |
+| -------- | --------------------- | -------------- |
+| 文件名   | 多个单词 + PascalCase | `UserList.vue` |
+| 组件名   | PascalCase            | `UserList`     |
+| 使用     | PascalCase            | `<UserList />` |
+| props    | 小驼峰（camelCase）  | `userName`     |
+| emit 事件 | 小驼峰（camelCase）  | `userChange`   |
 
 ### 常量命名
 
@@ -64,14 +74,6 @@ alwaysApply: true
 ---
 
 ## 三、组件规范
-
-### 组件命名
-
-| 类型   | 格式                  | 示例           |
-| ------ | --------------------- | -------------- |
-| 文件名 | 多个单词 + PascalCase | `UserList.vue` |
-| 组件名 | PascalCase            | `UserList`     |
-| 使用   | PascalCase            | `<UserList />` |
 
 ### 组件传参要求
 
