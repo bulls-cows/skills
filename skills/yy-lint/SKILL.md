@@ -2,42 +2,70 @@
 name: yy-lint
 description: >
   执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查
-  并尝试自动修复错误。
+  并尝试自动修复错误。支持自定义命令。
 icon: 🔧
 examples:
   - /yy-lint
+  - /yy-lint npm run eslint:fix
+  - /yy-lint npm run type-check
 ---
 
 # yy-lint
 
-执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误。
+执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误。支持自定义命令。
 
 ## 功能特性
 
-- 检查 `package.json` 中是否存在 `lint:fix` 或 `lint` 脚本
-- 优先使用 `npm run lint:fix` 命令，其次使用 `npm run lint`
+- 支持自定义命令：优先使用用户明确指定的命令
+- 自动检测 `package.json` 中的 `lint:fix` 或 `lint` 脚本
+- 命令优先级：用户指定命令 > `lint:fix` > `lint`
 - 验证 Node.js 版本是否满足项目 `.nvmrc` 要求
 - 执行 lint 进行代码风格和类型检查
 - 尝试自动修复 lint 错误
 
 ## 使用方式
 
-直接调用 `/yy-lint` 即可执行 lint 检查。
+### 默认方式
+
+直接调用 `/yy-lint`，自动检测并执行 `lint:fix` 或 `lint` 命令。
+
+### 指定命令
+
+调用 `/yy-lint <command>`，使用指定的命令执行：
+
+- `/yy-lint npm run eslint:fix`
+- `/yy-lint npm run type-check`
+- `/yy-lint pnpm run lint`
 
 ## 工作流程
 
-### 阶段一：检查 lint 脚本可用性
+### 阶段一：确定要执行的命令
 
-1. 检查项目根目录下是否存在 `package.json` 文件
-2. 如果存在，读取 `package.json` 中的 `scripts` 字段
+**优先级顺序（从高到低）：**
+
+1. 用户明确指定的命令
+2. `package.json` 中的 `lint:fix` 脚本
+3. `package.json` 中的 `lint` 脚本
+
+**执行逻辑：**
+
+1. 检查用户是否提供了自定义命令参数
+   - 如果有，直接使用该命令，跳过步骤 2-3，进入阶段二
+2. 检查项目根目录下是否存在 `package.json` 文件
+   - 如果存在，读取 `package.json` 中的 `scripts` 字段
 3. 检查是否定义了 `lint:fix` 或 `lint` 命令（优先 `lint:fix`）
 
-**情况 1：package.json 不存在或无 lint 相关脚本**
+**情况 1：用户指定了自定义命令**
+
+- 使用用户指定的命令
+- 进入阶段二
+
+**情况 2：package.json 不存在或无 lint 相关脚本**
 
 - 显示提示信息，跳过 lint 检查
 - 结束执行
 
-**情况 2：存在 lint 相关脚本**
+**情况 3：存在 lint 相关脚本**
 
 - 记录要执行的命令（`npm run lint:fix` 或 `npm run lint`）
 - 进入阶段二
@@ -62,16 +90,16 @@ examples:
 - 显示警告信息（包含当前版本和要求版本）
 - 跳过 lint 检查，结束执行
 
-### 阶段三：执行 lint 检查
+### 阶段三：执行命令检查
 
-执行阶段一确定的命令（`npm run lint:fix` 或 `npm run lint`）检测代码风格和 TypeScript 类型。
+执行阶段一确定的命令（可能是用户指定的自定义命令或自动检测到的 lint 命令）。
 
-**情况 1：lint 通过，无错误**
+**情况 1：命令执行成功，无错误**
 
 - 显示成功消息
 - 结束执行
 
-**情况 2：lint 发现错误**
+**情况 2：命令执行发现错误**
 
 - 显示错误信息
 - 尝试自动修复错误
@@ -103,7 +131,19 @@ examples:
 
 ## 输出示例
 
-### 成功示例
+### 使用自定义命令成功示例
+
+```text
+🔧 执行 Lint 检查...
+
+使用用户指定的命令: npm run eslint:fix
+✓ Node.js 版本满足要求 (v22.18.0 >= v22.18.0)
+
+执行 lint 检查...
+✓ npm run eslint:fix 执行成功，代码质量检查通过！
+```
+
+### 成功示例（自动检测）
 
 ```text
 🔧 执行 Lint 检查...
