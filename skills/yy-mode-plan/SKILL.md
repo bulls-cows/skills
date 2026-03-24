@@ -57,6 +57,7 @@ description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或
    - 按以下优先级顺序检查项目根目录：
      - `.agents`
      - `.claude`
+     - `.opencode`
      - `.trae`
    - 找到第一个存在的目录即停止检测
 
@@ -96,7 +97,7 @@ description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或
 用户: 添加基于 JWT 令牌的用户认证
 
 AI:
-1. 检测项目根目录下的工具目录（.agents > .claude > .trae）
+1. 检测项目根目录下的工具目录（.agents > .claude > .opencode > .trae）
 2. 假设检测到 .claude 目录
 3. 在 .claude/plans/用户认证系统.md 创建计划文件
 4. 创建包含实施步骤的计划文件

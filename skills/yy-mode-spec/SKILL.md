@@ -77,6 +77,7 @@ description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或
    - 按以下优先级顺序检查项目根目录：
      - `.agents`
      - `.claude`
+     - `.opencode`
      - `.trae`
    - 找到第一个存在的目录即停止检测
 
@@ -109,7 +110,7 @@ description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或
 用户: 创建实时通知系统
 
 AI:
-1. 检测项目根目录下的工具目录（.agents > .claude > .trae）
+1. 检测项目根目录下的工具目录（.agents > .claude > .opencode > .trae）
 2. 假设检测到 .claude 目录
 3. 在 .claude/specs/实时通知系统/ 创建规格文件
 4. 创建 spec.md 包含需求和设计
