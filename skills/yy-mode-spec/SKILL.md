@@ -63,25 +63,74 @@ description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或
 
 ## 规格文件位置
 
-规格文件应根据功能创建在适当位置：
+规格文件将按照以下规则创建：
 
-- 功能特定：`apps/{应用}/specs/{功能}/`
-- 跨模块：`docs/specs/{功能}/`
-- 系统级：`specs/{功能}/`
+### 目录选择优先级
+
+1. **用户手动指定**（最高优先级）
+   - 用户可指定工具目录和需求目录
+   - 格式：`--tool-dir <目录> --requirement-dir <目录>`
+
+2. **自动检测**
+   - 按以下优先级顺序检查项目根目录：
+     - `.agents`
+     - `.claude`
+     - `.trae`
+   - 找到第一个存在的目录即停止检测
+
+3. **无匹配目录**
+   - 提示用户指定目录或创建
+
+### 目录结构
+
+``` text
+{项目根目录}/
+└── {工具目录}/          # 如 .claude
+    └── specs/            # 固定的 specs 目录
+        └── {需求目录}/   # 基于用户意图生成，如 "实时通知系统"
+            ├── spec.md
+            ├── tasks.md
+            └── checklist.md
+```
+
+### 路径示例
+
+- 自动检测：`.claude/specs/实时通知系统/spec.md`
+- 用户指定：`.agents/specs/用户管理/spec.md`
 
 ## 使用示例
+
+### 示例 1：自动检测目录
 
 ```text
 用户: /yy-mode-spec
 用户: 创建实时通知系统
 
 AI:
-1. 分析现有系统架构
-2. 创建 spec.md 包含需求和设计
-3. 创建 tasks.md 包含实施分解
-4. 创建 checklist.md 包含验证步骤
-5. 通知用户审核
-6. 获得批准后，按规格实施
+1. 检测项目根目录下的工具目录（.agents > .claude > .trae）
+2. 假设检测到 .claude 目录
+3. 在 .claude/specs/实时通知系统/ 创建规格文件
+4. 创建 spec.md 包含需求和设计
+5. 创建 tasks.md 包含实施分解
+6. 创建 checklist.md 包含验证步骤
+7. 通知用户审核
+8. **获得批准后**，按规格实施
+```
+
+### 示例 2：手动指定目录
+
+```text
+用户: /yy-mode-spec --tool-dir .agents --requirement-dir 用户管理
+用户: 创建用户认证系统
+
+AI:
+1. 使用用户指定的工具目录 .agents
+2. 在 .agents/specs/用户管理/ 创建规格文件
+3. 创建 spec.md 包含需求和设计
+4. 创建 tasks.md 包含实施分解
+5. 创建 checklist.md 包含验证步骤
+6. 通知用户审核
+7. 获得批准后，按规格实施
 ```
 
 ## Output contract
@@ -191,9 +240,9 @@ interface User {
 ## 规格已制定完成
 
 已创建以下规格文件：
-1. docs/specs/real-time-notification/spec.md - 主规格文档
-2. docs/specs/real-time-notification/tasks.md - 任务分解（4个任务）
-3. docs/specs/real-time-notification/checklist.md - 验证清单
+1. .claude/specs/实时通知系统/spec.md - 主规格文档
+2. .claude/specs/实时通知系统/tasks.md - 任务分解（4个任务）
+3. .claude/specs/实时通知系统/checklist.md - 验证清单
 
 请审核规格文档，确认后我将开始实施。
 ```
