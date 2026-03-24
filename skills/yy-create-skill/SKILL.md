@@ -369,3 +369,4 @@ Use the pr-risk-check skill to review this branch against main.
 | `templates/rule-skill-template.md` | 规则类技能模板 |
 | `templates/pdf-skill-template.md` | PDF 读取类技能模板 |
 | `resources/skill-best-practices.md` | 技能编写最佳实践参考 |
+| `resources/skill-comparison.md` | 各平台 Skill 规范对比分析（agentskills.io / Claude Code / Trae / OpenCode） |
