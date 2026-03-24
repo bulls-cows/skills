@@ -28,7 +28,8 @@
         "./skills/yy-mode-spec",
         "./skills/yy-read-pdf",
         "./skills/yy-refresh",
-        "./skills/yy-review"
+        "./skills/yy-review",
+        "./skills/yy-run-skills"
       ]
     }
   ]
