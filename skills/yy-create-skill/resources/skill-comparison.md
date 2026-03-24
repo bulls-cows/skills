@@ -15,7 +15,7 @@
 
 ## 二、最小有效结构（各平台通用）
 
-```
+```text
 skill-name/
 └── SKILL.md
 ```
@@ -37,7 +37,7 @@ Markdown 格式的指令内容...
 
 ### 目录结构
 
-```
+```text
 skill-name/
 ├── SKILL.md        # 必须
 ├── scripts/        # 可执行代码
@@ -117,7 +117,7 @@ Changed files: !`gh pr diff --name-only`
 
 **多级存储路径**（优先级从高到低）：
 
-```
+```text
 Enterprise  → 管理员配置
 Personal    → ~/.claude/skills/<name>/SKILL.md
 Project     → .claude/skills/<name>/SKILL.md
@@ -185,7 +185,7 @@ description: 说明做什么及何时触发（关键词影响自动触发率）
 
 ### 多路径发现（优先级从高到低）
 
-```
+```text
 .opencode/skills/<name>/SKILL.md           # 项目专属
 ~/.config/opencode/skills/<name>/SKILL.md  # 全局
 .claude/skills/<name>/SKILL.md             # Claude 兼容路径
