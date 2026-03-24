@@ -341,21 +341,8 @@ description: >
 
 ## 技能触发方式
 
-### 自动触发
-
-当用户请求匹配 skill 的 description 时自动触发：
-
-```text
-请审查这个 PR 的风险
-```
-
-### 显式调用
-
-当需要强制触发时：
-
-```text
-Use the pr-risk-check skill to review this branch against main.
-```
+- 自动触发：当用户要执行的操作与技能的 description 内容相匹配时自动触发，如：`请审查这个 PR 的风险`。
+- 显式调用：当用户主动提及技能名称时触发，如：`使用 pr-risk-check 技能来审查当前分支相对于 main 分支的差异。`。
 
 ## 相关资源
 
