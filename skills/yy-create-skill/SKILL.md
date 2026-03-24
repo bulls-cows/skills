@@ -361,12 +361,10 @@ Use the pr-risk-check skill to review this branch against main.
 
 本技能包含以下辅助资源：
 
-| 路径 | 说明 |
-|------|------|
-| `examples/input.md` | 输入示例，展示用户如何请求创建技能 |
-| `examples/output.md` | 输出示例，展示创建技能后的预期结果 |
-| `templates/skill-template.md` | 基础技能模板 |
-| `templates/rule-skill-template.md` | 规则类技能模板 |
-| `templates/pdf-skill-template.md` | PDF 读取类技能模板 |
-| `resources/skill-best-practices.md` | 技能编写最佳实践参考 |
-| `resources/skill-comparison.md` | 各平台 Skill 规范对比分析（agentskills.io / Claude Code / Trae / OpenCode） |
+- `examples/input.md`：输入示例，展示用户如何请求创建技能
+- `examples/output.md`：输出示例，展示创建技能后的预期结果
+- `templates/skill-template.md`：基础技能模板
+- `templates/rule-skill-template.md`：规则类技能模板
+- `templates/pdf-skill-template.md`：PDF 读取类技能模板
+- `resources/skill-best-practices.md`：技能编写最佳实践参考
+- `resources/skill-comparison.md`：各平台 Skill 规范对比分析
