@@ -91,16 +91,18 @@ description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或
 {项目根目录}/
 └── {工具目录}/          # 如 .claude
     └── specs/            # 固定的 specs 目录
-        └── {需求目录}/   # 基于用户意图生成，如 "实时通知系统"
+        └── {时间戳}_{需求目录}/   # 时间戳格式：YYYYMMDD_HHMMSS；需求目录基于用户输入生成，如 "20260324_153045_实时通知系统"
             ├── spec.md
             ├── tasks.md
             └── checklist.md
 ```
 
+时间戳前缀（精确到秒）确保目录按创建时间升序排列，最新规格始终位于目录末尾，便于查找。
+
 ### 路径示例
 
-- 自动检测：`.claude/specs/实时通知系统/spec.md`
-- 用户指定：`.agents/specs/用户管理/spec.md`
+- 自动检测：`.claude/specs/20260324_153045_实时通知系统/spec.md`
+- 用户指定：`.agents/specs/20260324_153045_用户管理/spec.md`
 
 ## 使用示例
 
@@ -113,7 +115,7 @@ description: "规格优先开发模式。当用户输入 /yy-mode-spec 命令或
 AI:
 1. 检测项目根目录下的工具目录（.agents > .claude > .opencode > .trae）
 2. 假设检测到 .claude 目录
-3. 在 .claude/specs/实时通知系统/ 创建规格文件
+3. 在 .claude/specs/20260324_153045_实时通知系统/ 创建规格文件
 4. 创建 spec.md 包含需求和设计
 5. 创建 tasks.md 包含实施分解
 6. 创建 checklist.md 包含验证步骤
@@ -129,7 +131,7 @@ AI:
 
 AI:
 1. 使用用户指定的工具目录 .agents
-2. 在 .agents/specs/用户管理/ 创建规格文件
+2. 在 .agents/specs/20260324_153045_用户管理/ 创建规格文件
 3. 创建 spec.md 包含需求和设计
 4. 创建 tasks.md 包含实施分解
 5. 创建 checklist.md 包含验证步骤
@@ -244,9 +246,9 @@ interface User {
 ## 规格已制定完成
 
 已创建以下规格文件：
-1. .claude/specs/实时通知系统/spec.md - 主规格文档
-2. .claude/specs/实时通知系统/tasks.md - 任务分解（4个任务）
-3. .claude/specs/实时通知系统/checklist.md - 验证清单
+1. .claude/specs/20260324_153045_实时通知系统/spec.md - 主规格文档
+2. .claude/specs/20260324_153045_实时通知系统/tasks.md - 任务分解（4个任务）
+3. .claude/specs/20260324_153045_实时通知系统/checklist.md - 验证清单
 
 请审核规格文档，确认是否执行。
 ```
