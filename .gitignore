@@ -152,3 +152,5 @@ skills-marketplace/
 skills-lock.json
 .agents/skills/
 .agents/specs/
+
+.claude/
