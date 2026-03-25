@@ -34,12 +34,10 @@ description: >
 
 ## 命名规范
 
-| 类型 | 格式 | 示例 |
-|------|------|------|
-| 技能目录 | kebab-case | `create-skill/` |
-| 技能名称 | kebab-case，动宾结构，名词单数 | `create-rule`、`read-pdf` |
-| 脚本文件 | snake_case | `lint.mts` |
-| 参考文档 | kebab-case | `references/schemas.md` |
+- 技能目录：kebab-case（如 `create-skill/`）
+- 技能名称：kebab-case，动宾结构，名词单数（如 `create-rule`、`read-pdf`）
+- 脚本文件：snake_case（如 `lint.mts`）
+- 参考文档：kebab-case（如 `references/schemas.md`）
 
 ## 编写原则
 
