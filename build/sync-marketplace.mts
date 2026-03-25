@@ -45,8 +45,28 @@ const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
   })
   .sort();
 
-const skillsList = skillNames.map(name => `./skills/${name}`);
+const skillsList = skillNames.map(name => `./${name}`);
 marketplaceJson.plugins[0].skills = skillsList;
+
+// 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
+const skillsInternalDir = path.join(projectRoot, 'skills-internal');
+const internalSkillNames = fs.readdirSync(skillsInternalDir, { withFileTypes: true })
+  .filter(dirent => dirent.isDirectory())
+  .map(dirent => dirent.name)
+  .filter(name => {
+    const skillPath = path.join(skillsInternalDir, name);
+    const files = fs.readdirSync(skillPath);
+    if (files.length === 0) {
+      fs.rmdirSync(skillPath);
+      console.log(`✓ 已删除空目录: ${name}`);
+      return false;
+    }
+    return true;
+  })
+  .sort();
+
+const internalSkillsList = internalSkillNames.map(name => `./${name}`);
+marketplaceJson.plugins[1].skills = internalSkillsList;
 
 // 写入 marketplace.json
 fs.writeFileSync(

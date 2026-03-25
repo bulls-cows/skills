@@ -153,3 +153,5 @@ skills-lock.json
 .agents/specs/
 
 .claude/
+.agents/
+.opencode/

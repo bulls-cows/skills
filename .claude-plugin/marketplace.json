@@ -11,25 +11,34 @@
     {
       "name": "open-skills",
       "description": "本仓库维护了一些实用的规则和AI技能。",
-      "source": "./",
+      "source": "./skills",
       "strict": false,
       "skills": [
-        "./skills/yy-commit",
-        "./skills/yy-create-readme",
-        "./skills/yy-create-rule",
-        "./skills/yy-create-skill",
-        "./skills/yy-design-ui",
-        "./skills/yy-frontend-commit",
-        "./skills/yy-frontend-review",
-        "./skills/yy-frontend-weekly-report",
-        "./skills/yy-init",
-        "./skills/yy-lint",
-        "./skills/yy-mode-plan",
-        "./skills/yy-mode-spec",
-        "./skills/yy-read-pdf",
-        "./skills/yy-refresh",
-        "./skills/yy-review",
-        "./skills/yy-run-skills"
+        "./yy-commit",
+        "./yy-create-readme",
+        "./yy-create-rule",
+        "./yy-create-skill",
+        "./yy-design-ui",
+        "./yy-frontend-commit",
+        "./yy-frontend-review",
+        "./yy-frontend-weekly-report",
+        "./yy-init",
+        "./yy-lint",
+        "./yy-mode-plan",
+        "./yy-mode-spec",
+        "./yy-read-pdf",
+        "./yy-refresh",
+        "./yy-review",
+        "./yy-run-skills"
+      ]
+    },
+    {
+      "name": "internal-skills",
+      "description": "本仓库维护了一些内部技能，一般是用来维护当前仓库内容用的。",
+      "source": "./skills-internal",
+      "strict": false,
+      "skills": [
+        "./yy-check-skills-consistency"
       ]
     }
   ]
