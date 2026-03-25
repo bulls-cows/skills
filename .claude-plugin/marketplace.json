@@ -19,9 +19,6 @@
         "./skills/yy-create-rule",
         "./skills/yy-create-skill",
         "./skills/yy-design-ui",
-        "./skills/yy-frontend-commit",
-        "./skills/yy-frontend-review",
-        "./skills/yy-frontend-weekly-report",
         "./skills/yy-init",
         "./skills/yy-lint",
         "./skills/yy-mode-plan",
@@ -38,22 +35,9 @@
       "source": "./",
       "strict": true,
       "skills": [
-        "./skills/yy-commit",
-        "./skills/yy-create-readme",
-        "./skills/yy-create-rule",
-        "./skills/yy-create-skill",
-        "./skills/yy-design-ui",
         "./skills/yy-frontend-commit",
         "./skills/yy-frontend-review",
-        "./skills/yy-frontend-weekly-report",
-        "./skills/yy-init",
-        "./skills/yy-lint",
-        "./skills/yy-mode-plan",
-        "./skills/yy-mode-spec",
-        "./skills/yy-read-pdf",
-        "./skills/yy-refresh",
-        "./skills/yy-review",
-        "./skills/yy-run-skills"
+        "./skills/yy-frontend-weekly-report"
       ]
     },
     {

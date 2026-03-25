@@ -45,9 +45,18 @@ const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
   .sort();
 
 const skillsList = skillNames.map(name => `./skills/${name}`);
+
+const frontendSkillsList = skillsList.filter(skill => skill.includes('frontend'));
+const nonFrontendSkillsList = skillsList.filter(skill => !skill.includes('frontend'));
+
 const openSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'open-skills');
 if (openSkillsPlugin) {
-  openSkillsPlugin.skills = skillsList;
+  openSkillsPlugin.skills = nonFrontendSkillsList;
+}
+
+const frontendSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'frontend-skills');
+if (frontendSkillsPlugin) {
+  frontendSkillsPlugin.skills = frontendSkillsList;
 }
 
 // 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
