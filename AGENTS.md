@@ -12,9 +12,8 @@
 
 **改动后必须执行:**
 
-```bash
-npm run lint
-```
+- 执行 `npm run lint` 检测代码和文档。
+- 执行技能 [@.agents/skills/yy-check-skills-consistency/SKILL.md](./.agents/skills/yy-check-skills-consistency/SKILL.md)。
 
 **检查项:**
 
