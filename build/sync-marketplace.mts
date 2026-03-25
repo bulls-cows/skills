@@ -24,7 +24,6 @@ marketplaceJson.metadata.version = packageJson.version;
 
 // 3. 同步 description
 marketplaceJson.metadata.description = packageJson.description;
-marketplaceJson.plugins[0].description = packageJson.description;
 
 // 4. 同步 author
 marketplaceJson.owner.name = packageJson.author;
@@ -46,7 +45,10 @@ const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
   .sort();
 
 const skillsList = skillNames.map(name => `./skills/${name}`);
-marketplaceJson.plugins[0].skills = skillsList;
+const openSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'open-skills');
+if (openSkillsPlugin) {
+  openSkillsPlugin.skills = skillsList;
+}
 
 // 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
 const skillsInternalDir = path.join(projectRoot, 'skills-internal');
@@ -66,7 +68,10 @@ const internalSkillNames = fs.readdirSync(skillsInternalDir, { withFileTypes: tr
   .sort();
 
 const internalSkillsList = internalSkillNames.map(name => `./skills-internal/${name}`);
-marketplaceJson.plugins[1].skills = internalSkillsList;
+const internalSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'internal-skills');
+if (internalSkillsPlugin) {
+  internalSkillsPlugin.skills = internalSkillsList;
+}
 
 // 写入 marketplace.json
 fs.writeFileSync(
