@@ -45,7 +45,7 @@ const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
   })
   .sort();
 
-const skillsList = skillNames.map(name => `./${name}`);
+const skillsList = skillNames.map(name => `./skills/${name}`);
 marketplaceJson.plugins[0].skills = skillsList;
 
 // 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
@@ -65,7 +65,7 @@ const internalSkillNames = fs.readdirSync(skillsInternalDir, { withFileTypes: tr
   })
   .sort();
 
-const internalSkillsList = internalSkillNames.map(name => `./${name}`);
+const internalSkillsList = internalSkillNames.map(name => `./skills-internal/${name}`);
 marketplaceJson.plugins[1].skills = internalSkillsList;
 
 // 写入 marketplace.json
