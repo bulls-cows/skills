@@ -102,7 +102,12 @@ git log --oneline -5
 **Scope（范围）- 可选：**
 
 - 受影响的模块、组件或功能区域
-- 例如：`auth`、`editor`、`api`、`ui`
+- **优先使用具体的组件/模块名称，而不是泛化的类型名称**
+  - ✅ `DialogInstallationOptions`（具体组件名）
+  - ❌ `dialog`（泛化类型）
+  - ✅ `useAuth`（具体 composable 名）
+  - ❌ `hooks`（泛化类型）
+- 例如：`auth`、`DialogConfirmClose`、`useDialogConfirmClose`
 
 **Description（描述）：**
 
@@ -182,6 +187,15 @@ feat(auth): 添加 JWT 用户认证功能
 
 是否确认提交？
 ```
+
+**处理用户反馈：**
+
+如果用户反馈"scope 太宽泛"、"描述不够具体"等意见：
+
+- 认真听取用户反馈
+- 根据反馈调整提交信息
+- 再次展示并询问确认
+- 重复此过程直到用户满意并确认提交
 
 ### 6. 执行提交
 
