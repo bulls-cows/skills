@@ -1,3 +1,5 @@
+# 输出示例
+
 已新建 `handoff.md`：
 
 - `D:/project/.claude/specs/20260326_120000_some-task/handoff.md`
