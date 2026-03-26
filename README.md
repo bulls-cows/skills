@@ -53,6 +53,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-create-skill](./skills/yy-create-skill/SKILL.md) | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md) | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill yy-design-ui` |
 | [yy-frontend-weekly-report](./skills/yy-frontend-weekly-report/SKILL.md) | 自动读取 git 提交记录，按功能开发、代码优化、问题修复等分类归纳，生成结构化周报 | `npx skills add bulls-cows/skills --skill yy-frontend-weekly-report` |
+| [yy-handoff](./skills/yy-handoff/SKILL.md) | 创建或更新项目交接文档 handoff.md，用于跨对话、跨会话、跨项目续接任务 | `npx skills add bulls-cows/skills --skill yy-handoff` |
 | [yy-init](./skills/yy-init/SKILL.md) | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
 | [yy-lint](./skills/yy-lint/SKILL.md) | 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误 | `npx skills add bulls-cows/skills --skill yy-lint` |
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md) | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
