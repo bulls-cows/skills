@@ -9,7 +9,10 @@
     "check:skill": "node ./build/check-skill.mts",
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
-    "sync:marketplace": "node ./build/sync-marketplace.mts"
+    "sync:marketplace": "node ./build/sync-marketplace.mts",
+    "install:global": "npx skills add ./ -g -a claude-code -y",
+    "uninstall:global": "npx skills remove --all -g -y",
+    "update:global": "npx skills update -g"
   },
   "repository": {
     "type": "git",
