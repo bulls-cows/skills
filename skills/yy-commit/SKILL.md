@@ -201,26 +201,12 @@ feat(auth): 添加 JWT 用户认证功能
 
 用户确认后，按顺序执行：
 
-**重要提示**：在提交时，你必须动态填写当前使用的 AI 模型名称，而不是硬编码。根据你的系统提示中的模型信息，填写真实的模型名称。
-
-例如：
-
-- 如果你是 Claude Sonnet 4.5，使用 "Claude Sonnet 4.5"
-- 如果你是 Claude Opus 4.6，使用 "Claude Opus 4.6"
-- 如果你是其他模型，使用对应的名称
-
 ```bash
 # 1. 暂存选定的文件（一次一个或使用 git add -A 如果全部暂存）
 git add <file1> <file2> ...
 
-# 2. 创建提交（使用 HEREDOC 确保格式正确）
-# 注意：将 <当前 AI 模型名称> 替换为你实际使用的模型名称
-git commit -m "$(cat <<'EOF'
-<提交信息>
-
-Committed using model: <当前 AI 模型名称>
-EOF
-)"
+# 2. 创建提交
+git commit -m "<提交信息>"
 
 # 3. 确认提交成功
 git status
