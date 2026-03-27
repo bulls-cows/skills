@@ -52,6 +52,13 @@ Skill 是"可按需加载的任务说明书"，用于复用复杂流程。关键
 
 SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
+其中 `description` 只用于给 AI 判断是否触发技能：
+
+- 只写技能用途和触发场景
+- 保持简短，避免堆叠步骤、规则、例外和实现细节
+- 具体约束写在正文，如 Steps、When to use、Don't use when、Output contract
+- 如果 `description` 已经开始解释“怎么做”，通常说明写宽了
+
 ### 4. 创建/更新目录结构
 
 **创建新技能**的目录规则：
@@ -98,11 +105,12 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 **更新技能后**，检查：
 
 1. 更新后的 description 仍然准确反映技能用途
-2. When to use 和 Don't use when 仍然明确
-3. Steps 步骤仍然完整可执行
-4. Output contract 仍然清晰定义
-5. YAML 格式正确
-6. 如有参考文件，检查是否需要同步更新
+2. description 只保留触发判断所需信息，没有混入执行细节
+3. When to use 和 Don't use when 仍然明确
+4. Steps 步骤仍然完整可执行
+5. Output contract 仍然清晰定义
+6. YAML 格式正确
+7. 如有参考文件，检查是否需要同步更新
 
 ## 常见坑
 
