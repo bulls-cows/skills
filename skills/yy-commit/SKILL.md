@@ -1,7 +1,6 @@
 ---
 name: yy-commit
-description: >
-  帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit，或者说类似"提交代码"、"提交这些更改"、"commit 代码"、"保存到 git"、"提交"、"commit"等内容时使用此技能。此技能会分析代码变更、理解对话上下文中的改动意图，生成符合传统格式（type(scope): description）的中文提交信息，并智能选择需要暂存的文件。即使用户只是简单地说"提交"或"commit"，也应该使用此技能来确保提交信息的质量。
+description: 帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit时使用。
 ---
 
 # yy-commit
@@ -85,7 +84,13 @@ git log --oneline -5
 
 ### 4. 生成提交信息
 
-提交信息必须遵循传统格式：`type(scope): description`
+默认情况下，提交信息必须遵循 Conventional Commits 规范：`type(scope): description`
+
+参考链接：
+
+- <https://www.conventionalcommits.org/en/v1.0.0/>
+
+如果用户项目根目录下的 `AGENTS.md`、README 或其他明确规则中定义了不同的 Git 提交规范，则以用户项目自己的约定为准。只有在没有额外约束时，才使用 Conventional Commits 规范生成提交信息。
 
 **Type（类型）：**
 
