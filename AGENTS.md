@@ -63,3 +63,8 @@
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
 - `rules/file-scope-limit/RULE.md` - 文件修改范围限制规则
+
+## 需要遵守的规则
+
+- [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
+- [@rules/text/RULE.md](./rules/text/RULE.md)
