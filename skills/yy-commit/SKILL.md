@@ -212,10 +212,6 @@ git add <file1> <file2> ...
 
 # 2. 创建提交
 git commit -m "<提交信息>"
-
-# 3. 确认提交成功
-git status
-git log -1
 ```
 
 ## 特殊情况处理
