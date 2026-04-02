@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "为 React 组件自动生成规范注释，包括 JSX 区、脚本区（props/state/hooks）的结构化注释。"
+}
