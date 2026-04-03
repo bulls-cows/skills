@@ -37,7 +37,10 @@
       "strict": true,
       "skills": [
         "./skills/yy-frontend-commit",
+        "./skills/yy-frontend-react-doc",
         "./skills/yy-frontend-review",
+        "./skills/yy-frontend-vue2-doc",
+        "./skills/yy-frontend-vue3-doc",
         "./skills/yy-frontend-weekly-report"
       ]
     },
