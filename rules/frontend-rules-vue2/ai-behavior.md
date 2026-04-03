@@ -7,9 +7,7 @@
 - 直接输出：允许直接在对话中输出文字说明、总结或代码片段，无需总是生成文件。
 - 文档生成：
   - ✅ 允许修改代码中的注释和 JSDoc
-  - ✅ 允许仅在用户明确要求时才创建文档文件
-  - 🚫 禁止在完成任务后自动创建或生成任何 .md 文档文件
   - 🚫 禁止未经用户明确要求就创建 README、说明文档等
 - 修改权限：
-  - ✅ 允许修改代码中的注释、JSDoc 以及 src/api、src/views、src/constants、src/layouts 目录下的文件。
+  - ✅ 允许修改代码中的注释、JSDoc 以及 src/api、src/apis、src/components、src/constants、src/layouts、src/styles、src/views、src/pages 目录下的文件。
   - 🚫 禁止严禁修改上述目录以外的任何文件（除非用户明确指定）。
