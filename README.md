@@ -47,6 +47,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
+| [yy-comment](./skills/yy-comment/SKILL.md) | 为代码添加注释，可为整个文件或指定函数添加 JSDoc 注释和内部逻辑注释 | `npx skills add bulls-cows/skills --skill yy-comment` |
 | [yy-commit](./skills/yy-commit/SKILL.md) | Git 代码提交助手，生成规范的提交信息并执行提交操作 | `npx skills add bulls-cows/skills --skill yy-commit` |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md) | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill yy-create-readme` |
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md) | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
@@ -74,7 +75,10 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | 技能 | 说明 | 安装命令 |
 | ---- | ---- | -------- |
 | [yy-frontend-commit](./skills/yy-frontend-commit/SKILL.md) | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill yy-frontend-commit` |
+| [yy-frontend-react-doc](./skills/yy-frontend-react-doc/SKILL.md) | 为 React 组件自动生成规范注释，解析组件结构、props、state、生命周期等并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-react-doc` |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md) | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill yy-frontend-review` |
+| [yy-frontend-vue2-doc](./skills/yy-frontend-vue2-doc/SKILL.md) | 为 Vue 2 单文件组件自动生成规范注释，解析模板区、脚本区、样式区并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-doc` |
+| [yy-frontend-vue3-doc](./skills/yy-frontend-vue3-doc/SKILL.md) | 为 Vue 3 单文件组件自动生成规范注释，解析模板区、脚本区、样式区并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-doc` |
 
 ### 推荐外部技能
 
