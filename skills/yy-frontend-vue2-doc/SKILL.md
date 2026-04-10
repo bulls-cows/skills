@@ -25,13 +25,13 @@ icon: 📝
 
 **注释策略**：
 
-| 场景 | 注释格式 | 示例 |
-|------|----------|------|
-| 根节点 | `<!-- 组件名称 -->` | `<!-- UserCard -->` |
-| 循环节点 | `<!-- 循环: 描述 -->` | `<!-- 循环: 用户列表 -->` |
-| 条件分支 | `<!-- 条件: 描述 -->` | `<!-- 条件: 有数据时 -->` |
-| 关键区块 | `<!-- 区块名称 -->` | `<!-- 操作按钮组 -->` |
-| 插槽节点 | `<!-- 插槽: name -->` | `<!-- 插槽: default -->` |
+| 场景     | 注释格式                  | 示例                            |
+| -------- | ------------------------- | ------------------------------- |
+| 根节点   | `<!-- 组件名称 -->`       | `<!-- UserCard -->`             |
+| 循环节点 | `<!-- 循环: 描述 -->`     | `<!-- 循环: 用户列表 -->`       |
+| 条件分支 | `<!-- 条件: 描述 -->`     | `<!-- 条件: 有数据时 -->`       |
+| 关键区块 | `<!-- 区块名称 -->`       | `<!-- 操作按钮组 -->`           |
+| 插槽节点 | `<!-- 插槽: name -->`     | `<!-- 插槽: default -->`        |
 | 动态组件 | `<!-- 动态组件: 描述 -->` | `<!-- 动态组件: 标签页内容 -->` |
 
 **示例**：
@@ -64,14 +64,18 @@ icon: 📝
 
 **注释策略**：
 
-| 内容 | 注释格式 | 示例 |
-|------|----------|------|
-| props | `// prop: 描述` | `// prop: 用户对象` |
-| data | `// data: 描述` | `// data: 表单字段` |
-| computed | `// computed: 描述` | `// computed: 是否全选` |
-| methods | `// methods: 描述`（单行）或 JSDoc（关键方法） | `// methods: 提交表单` |
-| 生命周期 | `// lifecycle: 阶段` | `// lifecycle: mounted` |
-| 组件引入 | `// component: 组件名` | `// component: UserCard` |
+| 内容     | 注释格式                                       | 示例                              |
+| -------- | ---------------------------------------------- | --------------------------------- |
+| 组件名称 | `// name: 组件名`                              | `// name: UserCard`               |
+| props    | `// prop名: 描述`                              | `// user: 用户信息`               |
+| data     | `// 属性名: 描述`                              | `// searchQuery: 搜索查询参数`    |
+| computed | `// computed: 描述`                            | `// computed: 是否全选`           |
+| watch    | `// watch: 描述`（关键监听器使用 JSDoc）       | `// watch: 监听用户输入`          |
+| methods  | `// methods: 描述`（单行）或 JSDoc（关键方法） | `// methods: 提交表单`            |
+| 生命周期 | `// lifecycle: 阶段`                           | `// lifecycle: mounted`           |
+| 组件引入 | `// component: 组件名`                         | `// component: UserCard`          |
+| provide  | `// 提供的键名: 描述`                          | `// appConfig: 全局配置`          |
+| inject   | `// 注入的键名: 描述`                          | `// parentData: 父组件提供的数据` |
 
 **JSDoc 格式（关键方法必填）**：
 
@@ -89,30 +93,62 @@ icon: 📝
 ```javascript
 <script>
 export default {
-  // prop: 用户对象
+  name: 'UserCard',
+  // 组件属性
+  provide() {
+    // appConfig: 全局配置
+    return {
+      appConfig: this.config
+    }
+  },
+
+  inject: {
+    // parentData: 父组件提供的数据
+    parentData: {
+      default: {}
+    }
+  },
+
   props: {
+    // user: 用户信息
     user: {
       type: Object,
       required: true
     }
   },
 
-  // data: 表单字段
   data() {
     return {
-      username: '',
-      email: ''
+      // 搜索查询参数
+      searchQuery: {
+        username: '', // 用户名
+        email: '' // 邮箱
+      }
     }
   },
 
-  // computed: 是否全选
   computed: {
+    // computed: 是否全选
     isSelected() {
       return this.selectedItems.length === this.totalItems
     }
   },
 
-  // lifecycle: mounted
+  watch: {
+    /**
+     * 监听用户输入变化
+     * @description 监听用户名输入变化
+     * @param {string} newVal - 新值
+     * @param {string} oldVal - 旧值
+     */
+    searchQuery: {
+      handler(newVal, oldVal) {
+        // 处理搜索关键词变化
+      },
+      immediate: true
+    }
+  },
+
   mounted() {
     this.fetchData()
   },
@@ -140,11 +176,16 @@ export default {
 
 **注释策略**：
 
-| 场景 | 注释格式 | 示例 |
-|------|----------|------|
-| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
-| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
-| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
+| 场景     | 注释格式              | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
+
+**样式作用域**：
+
+- `scoped`：样式仅作用于当前组件，自动生成唯一属性选择器，注释规范不变
+- 非 `scoped`：样式可能影响全局，注释时需标注 `/* 全局 */`
 
 **示例**：
 
@@ -173,7 +214,7 @@ export default {
 ### 阶段一：解析结构
 
 1. 识别 `<template>` 区块，解析节点层级
-2. 识别 `<script>` 区块，解析 `props`、`data`、`computed`、`methods`、生命周期钩子
+2. 识别 `<script>` 区块，解析 `provide`、`inject`、`props`、`data`、`computed`、`watch`、`methods`、生命周期钩子
 3. 识别 `<style>` 区块，解析选择器层级
 
 ### 阶段二：识别关键节点
@@ -188,9 +229,13 @@ export default {
 
 **脚本区需标注**：
 
+- 组件名称
+- 所有 `provide` 提供
+- 所有 `inject` 注入
 - 所有 `props` 定义
 - 所有 `data` 返回值
 - 所有 `computed` 计算属性
+- 所有 `watch` 监听器
 - 所有 `methods` 方法
 - 生命周期钩子（`created`、`mounted`、`updated`、`destroyed`）
 
@@ -203,6 +248,67 @@ export default {
 ### 阶段三：生成注释
 
 按照上述规范，在对应位置添加注释。
+
+**操作示例**：
+
+```javascript
+// 输入：未注释的代码片段
+data() {
+  return {
+    searchQuery: {
+      username: '',
+      email: ''
+    }
+  }
+}
+
+// 输出：添加注释后
+data() {
+  return {
+    // searchQuery: 搜索查询参数
+    searchQuery: {
+      username: '', // 用户名
+      email: '' // 邮箱
+    }
+  }
+}
+```
+
+```javascript
+// 输入：未注释的 watch
+watch: {
+  searchQuery(newVal, oldVal) {
+    this.fetchResults()
+  }
+}
+
+// 输出：添加注释后
+watch: {
+  /**
+   * 监听搜索关键词变化
+   * @description 监听用户名输入变化
+   * @param {string} newVal - 新值
+   * @param {string} oldVal - 旧值
+   */
+  searchQuery(newVal, oldVal) {
+    this.fetchResults()
+  }
+}
+```
+
+```html
+// 输入：未注释的模板节点
+<div v-for="item in items" :key="item.id">
+  <span v-if="item.visible">{{ item.name }}</span>
+</div>
+
+// 输出：添加注释后
+<!-- 循环: 数据列表 -->
+<div v-for="item in items" :key="item.id">
+  <!-- 条件: 可见项 -->
+  <span v-if="item.visible">{{ item.name }}</span>
+</div>
+```
 
 **关键原则**：
 
@@ -223,9 +329,7 @@ export default {
 ```vue
 <template>
   <!-- 组件名 -->
-  <div>
-    ...
-  </div>
+  <div>...</div>
 </template>
 
 <script>
@@ -246,3 +350,4 @@ export default {
 2. **不添加空注释**：没有关键内容的区块不强制添加注释
 3. **保持简洁**：注释言简意赅，不废话
 4. **Vue 2 语法**：确保使用 Vue 2 语法（`v-model`、生命周期等）
+5. **TypeScript 支持**：使用 `lang="ts"` 时，JSDoc 类型注释可省略，TypeScript 类型由编译器检查
