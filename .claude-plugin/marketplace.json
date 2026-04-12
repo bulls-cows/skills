@@ -28,7 +28,8 @@
         "./skills/yy-read-pdf",
         "./skills/yy-refresh",
         "./skills/yy-review",
-        "./skills/yy-run-skills"
+        "./skills/yy-run-skills",
+        "./skills/yy-wx-to-markdown"
       ]
     },
     {
