@@ -63,6 +63,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-refresh](./skills/yy-refresh/SKILL.md) | 刷新 AI 对代码的理解，对比所有改动文件并重新解析关键代码 | `npx skills add bulls-cows/skills --skill yy-refresh` |
 | [yy-review](./skills/yy-review/SKILL.md) | 执行代码审核，包括语法错误、逻辑错误、安全漏洞和最佳实践检查 | `npx skills add bulls-cows/skills --skill yy-review` |
 | [yy-run-skills](./skills/yy-run-skills/SKILL.md) | 串行执行多个技能。当用户需要按顺序执行多个技能时使用。技能名称之间支持使用空格、英文逗号(,)、中文逗号(,)、中文顿号(、)作为分隔符 | `npx skills add bulls-cows/skills --skill yy-run-skills` |
+| [yy-wx-to-markdown](./skills/yy-wx-to-markdown/SKILL.md) | 将微信公众号文章转换为 Markdown 格式 | `npx skills add bulls-cows/skills --skill yy-wx-to-markdown` |
 
 #### 特定技能
 
