@@ -10,10 +10,7 @@
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts",
-    "install-remote:global": "npx skills add bulls-cows/skills -g -y -a claude-code -a codex -a opencode -a trae-cn",
-    "install:global": "npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn",
-    "uninstall:global": "npx skills remove --all -g -y",
-    "update:global": "npx skills update -g"
+    "install:skill": "npx skills remove --all -g -y && npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn"
   },
   "repository": {
     "type": "git",
