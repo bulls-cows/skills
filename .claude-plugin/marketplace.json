@@ -25,6 +25,7 @@
         "./skills/yy-lint",
         "./skills/yy-mode-plan",
         "./skills/yy-mode-spec",
+        "./skills/yy-post-to-wx",
         "./skills/yy-read-pdf",
         "./skills/yy-refresh",
         "./skills/yy-review",
