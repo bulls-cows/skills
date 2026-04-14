@@ -49,6 +49,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | ---- | ---- | -------- |
 | [yy-comment](./skills/yy-comment/SKILL.md) | 为代码添加注释，可为整个文件或指定函数添加 JSDoc 注释和内部逻辑注释 | `npx skills add bulls-cows/skills --skill yy-comment` |
 | [yy-commit](./skills/yy-commit/SKILL.md) | Git 代码提交助手，生成规范的提交信息并执行提交操作 | `npx skills add bulls-cows/skills --skill yy-commit` |
+| [yy-create-report](./skills/yy-create-report/SKILL.md) | 将指定时间范围内当前 Git 账号的提交记录整理合并生成工作报告 | `npx skills add bulls-cows/skills --skill yy-create-report` |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md) | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill yy-create-readme` |
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md) | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
 | [yy-create-skill](./skills/yy-create-skill/SKILL.md) | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
