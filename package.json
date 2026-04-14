@@ -10,7 +10,7 @@
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts",
-    "install:skill": "npx skills remove --all -g -y && npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn"
+    "install:skill": "npx skills remove --all -g -y && npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn -a codebuddy"
   },
   "repository": {
     "type": "git",
