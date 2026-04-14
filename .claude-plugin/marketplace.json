@@ -17,6 +17,7 @@
         "./skills/yy-comment",
         "./skills/yy-commit",
         "./skills/yy-create-readme",
+        "./skills/yy-create-report",
         "./skills/yy-create-rule",
         "./skills/yy-create-skill",
         "./skills/yy-design-ui",
