@@ -121,6 +121,26 @@ bun skills/yy-post-to-wx/scripts/main.ts ./article.md --no-cite
 - 公众号已开通开发者权限
 - 服务器 IP 已添加到 API 白名单
 
+## 依赖安装
+
+### 使用 Bun（推荐）
+
+首次运行时，Bun 会自动安装依赖：
+
+```bash
+bun skills/yy-post-to-wx/scripts/main.ts <file>
+```
+
+### 使用 Node.js
+
+需要手动安装依赖：
+
+```bash
+cd skills/yy-post-to-wx/scripts
+npm install
+cd ../../..
+```
+
 ## 环境检查
 
 首次使用前建议运行环境检查：
