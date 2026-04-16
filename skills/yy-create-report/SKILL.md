@@ -119,6 +119,7 @@ git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=
 | 字段 | 类型 | 说明 |
 |------|------|------|
 | 工作报告标题 | string | 包含日期范围 |
+| MR建议标题 | string | 用简短的话描述核心工作内容，适合作为提交MR时的标题 |
 | 功能开发 | array | 功能开发类提交列表 |
 | 代码优化 | array | 代码优化类提交列表 |
 | 问题修复 | array | 问题修复类提交列表 |
@@ -132,6 +133,8 @@ git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=
 
 ```markdown
 ## 本周工作报告（2024-01-15 ~ 2024-01-19）
+
+**MR建议标题：** 实现用户登录、个人中心及消息通知功能
 
 ### 一、功能开发
 1. **用户登录功能** - 实现基于 JWT 的用户认证，支持 Token 刷新
@@ -166,6 +169,8 @@ git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=
 
 ```markdown
 ## 本周工作报告（2024-01-15 ~ 2024-01-19）
+
+**MR建议标题：** 无提交记录
 
 本周暂无提交记录。
 
