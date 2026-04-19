@@ -68,3 +68,7 @@
 
 - [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [@rules/text/RULE.md](./rules/text/RULE.md)
+
+## 路径格式规范
+
+- 使用正斜杠作为路径分隔符，路径包含空格时使用引号包裹，以确保跨平台兼容性和正确解析
