@@ -83,6 +83,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-frontend-react-doc](./skills/yy-frontend-react-doc/SKILL.md) | 为 React 组件自动生成规范注释，解析组件结构、props、state、生命周期等并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-react-doc` |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md) | 前端代码审核助手，检查代码语法、逻辑、安全漏洞和最佳实践 | `npx skills add bulls-cows/skills --skill yy-frontend-review` |
 | [yy-frontend-vue2-doc](./skills/yy-frontend-vue2-doc/SKILL.md) | 为 Vue 2 单文件组件自动生成规范注释，解析模板区、脚本区、样式区并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-doc` |
+| [yy-frontend-vue2-review](./skills/yy-frontend-vue2-review/SKILL.md) | Vue2 前端代码审核助手，基于 Vue2 开发规范检查组件规范、代码风格、逻辑错误和安全漏洞 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-review` |
 | [yy-frontend-vue3-doc](./skills/yy-frontend-vue3-doc/SKILL.md) | 为 Vue 3 单文件组件自动生成规范注释，解析模板区、脚本区、样式区并添加结构化注释 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-doc` |
 
 ### 推荐外部技能
