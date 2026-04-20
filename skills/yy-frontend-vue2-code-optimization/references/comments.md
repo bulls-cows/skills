@@ -71,20 +71,7 @@
 export default {
   name: 'UserCard',
 
-  // 组件属性
-  provide() {
-    // appConfig: 全局配置
-    return {
-      appConfig: this.config
-    }
-  },
-
-  inject: {
-    // parentData: 父组件提供的数据
-    parentData: {
-      default: {}
-    }
-  },
+  components: {},
 
   props: {
     // user: 用户信息
@@ -126,10 +113,6 @@ export default {
     }
   },
 
-  mounted() {
-    this.fetchData()
-  },
-
   methods: {
     // methods: 提交表单
     submitForm() {
@@ -144,6 +127,10 @@ export default {
     async fetchData() {
       // ...
     }
+  },
+
+  mounted() {
+    this.fetchData()
   }
 }
 </script>

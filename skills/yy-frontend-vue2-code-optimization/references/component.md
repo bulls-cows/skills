@@ -17,7 +17,7 @@
 
 ```javascript
 export default {
-  name: "ComponentName",
+  name: 'ComponentName',
   components: {},
   props: {},
   data() {
@@ -87,7 +87,7 @@ export default {
 const { code, data, msg } = await apiXXX();
 if (code === 0) {
   // 处理成功逻辑
-  this.$message.success(msg || "操作成功");
+  this.$message.success(msg || '操作成功');
 } else {
   this.$message.error(msg);
 }
@@ -96,9 +96,9 @@ if (code === 0) {
 ## 组件对外 emit 事件顺序
 
 ```javascript
-emit("input", 数据);
-emit("其它事件", 数据);
-emit("change/click", 数据);
+this.$emit('input', 数据);
+this.$emit('其它事件', 数据);
+this.$emit('change/click', 数据);
 ```
 
 ## 方法职责单一化

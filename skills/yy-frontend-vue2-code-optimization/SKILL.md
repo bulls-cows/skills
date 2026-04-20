@@ -1,13 +1,15 @@
 ---
-name: yy-frontend-code-optimization-vue2
+name: yy-frontend-vue2-code-optimization
 description: >
-  针对 Vue2 页面组件，通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，
+  针对 Vue2 页面组件的代码优化技能。通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，
   提升代码可读性与团队协作效率，降低维护与交接成本。
-  仅在用户提供 .vue 文件或明确要求优化 Vue2 页面代码时触发。
+  当用户提供 .vue 文件要求优化、要求规范化 Vue2 组件代码、整理或重构现有页面组件结构、
+  Code Review 时优化组件可读性、或提到"优化组件""规范代码""整理代码"等意图时触发。
+  不用于生成新组件、修改业务逻辑或生成提交信息。
 icon: ⚡
 ---
 
-# yy-frontend-code-optimization-vue2
+# yy-frontend-vue2-code-optimization
 
 ## When to use
 

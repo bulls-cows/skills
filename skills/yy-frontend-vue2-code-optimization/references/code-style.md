@@ -14,7 +14,7 @@
 
 代码文件顶部的 import 必须按以下顺序排列，组间空一行：
 
-1. 外部依赖 (dayjs, lodash, antd 等第三方库)
+1. 外部依赖 (dayjs, lodash, element-ui 等第三方库)
 2. 全局 API (@src/api/...)
 3. 全局工具 (@src/utils/...)
 4. 相对工具 (./utils/...)
@@ -27,27 +27,33 @@
 **示例**：
 
 ```javascript
-// 1. node_modules
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+// 1. 外部依赖
+import dayjs from 'dayjs';
+import { debounce } from 'lodash';
 
-// 2. apis
-import { apiGetUserInfo } from "@src/api/user";
+// 2. 全局 API
+import { apiGetUserInfo } from '@src/api/user';
 
-// 3. utils
-import { formatDate } from "@src/utils/date";
-import { formatFileSize } from "./utils/format";
+// 3. 全局工具
+import { formatDate } from '@src/utils/date';
 
-// 4. stores
-import store from "@src/store";
+// 4. 相对工具
+import { formatFileSize } from './utils/format';
 
-// 5. constants
-import { APP_CONFIG } from "@src/constants";
-import { MAX_RETRY_COUNT } from "./constants";
+// 5. 全局 Store
+import store from '@src/store';
 
-// 6. components
-import { NavbarLogo } from "@src/components";
-import NavbarLogo2 from "./NavbarLogo2.vue";
+// 6. 全局配置
+import { APP_CONFIG } from '@src/constants';
+
+// 7. 相对配置
+import { MAX_RETRY_COUNT } from './constants';
+
+// 8. 全局组件
+import { NavbarLogo } from '@src/components';
+
+// 9. 相对组件
+import NavbarLogo2 from './NavbarLogo2.vue';
 ```
 
 ## 性能优化
