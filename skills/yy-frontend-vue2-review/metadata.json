@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "Vue2 前端代码审核助手，仅在存在 Vue2 项目目录结构（src/api、src/views、src/constants）时触发。 审核 src 目录下改动的文件，检查 Vue2 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践。 不用于 React 或 Vue3 项目审核。"
+}
