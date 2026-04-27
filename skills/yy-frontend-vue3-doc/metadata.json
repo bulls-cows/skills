@@ -1,6 +1,0 @@
-{
-  "version": "1.0.0",
-  "date": "April 2026",
-  "author": "wengdongyang",
-  "abstract": "为 Vue 3 单文件组件自动生成规范注释，包括模板区、脚本区、样式区的结构化注释。"
-}
