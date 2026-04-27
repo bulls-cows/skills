@@ -1,7 +1,7 @@
 ---
 name: yy-frontend-vue2-review
 description: >
-  Vue2 前端代码审核助手，仅在存在 src 目录时触发。
+  Vue2 前端代码审核助手，仅在存在 Vue2 项目目录结构（src/api、src/views、src/constants）时触发。
   审核 src 目录下改动的文件，检查 Vue2 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践。
   不用于 React 或 Vue3 项目审核。
 metadata:
@@ -41,10 +41,6 @@ metadata:
 4. **禁止修改 props**：不允许直接修改组件的 props
 
 ### 🟢 推荐项
-
-1. **函数 try/catch**：推荐使用 try/catch 包裹函数内容，catch 中使用 `console.warn` 打印错误
-2. **异步写法**：尽可能使用 async/await，少用 `.then()` 链式写法
-3. **弹窗确认**：使用 `const isConfirm = await this.$modal.confirm(...); if (!isConfirm) { return; }` 模式
 
 ### 🟡 不推荐项
 
