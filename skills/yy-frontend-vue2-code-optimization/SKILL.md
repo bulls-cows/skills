@@ -77,8 +77,14 @@ icon: ⚡
 
 - 脚本结构固定顺序：name → components → props → data → computed → watch → methods → 生命周期
 - 代码风格：2 空格缩进、单引号、必须分号、120 字符行宽
-- 网络请求必须 async/await + try/catch
+- 网络请求必须 async/await + try/catch/finally
+- 统一响应处理：`const { code, data, msg } = await apiXXX(); if (code === 0) { 成功 } else { this.$message.error(msg) }`
 - 样式使用 BEM 规范 + scoped
+- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 等有意义名称
+- **Vue 元素特性顺序**：is → v-for → v-if/v-else-if/v-else → v-show → id → props/attrs → v-on → v-html/v-text
+- **组件传参要求**：命名必须 camelCase，必须明确参数类型，必须添加参数含义注释
+- **方法内部逻辑顺序**：初始化方法 → 网络请求 → 事件处理 → 特殊计算
+- **emit 事件顺序**：`this.$emit('input', 数据)` → `this.$emit('其它事件', 数据)` → `this.$emit('change/click', 数据)`
 - 一个方法只做一件事，超过 50 行考虑拆分
 
 ## 工作流程
@@ -116,7 +122,12 @@ icon: ⚡
    - **脚本结构顺序**：name → components → props → data → computed → watch → methods → 生命周期
    - **命名规范**：API 函数、事件函数、常量、组件文件名
    - **代码风格**：2 空格缩进、单引号、必须分号、120 字符行宽、导入顺序
-   - **网络请求规范**：async/await + try/catch
+   - **Vue 元素特性顺序**：is → v-for → v-if → v-show → id → props/attrs → v-on → v-html/v-text
+   - **网络请求规范**：async/await + try/catch/finally，统一响应处理模式
+   - **computed 规范**：try/catch 包裹，命名使用 is / has / visible 等
+   - **组件传参要求**：命名 camelCase、明确类型、添加含义注释
+   - **emit 事件规范**：使用命名白名单，遵循 input → 其它 → change/click 顺序
+   - **方法内部逻辑顺序**：初始化 → 网络请求 → 事件处理 → 特殊计算
    - **样式规范**：BEM 命名 + scoped
    - **注释规范**：简洁中文注释，JSDoc 不超过 5 行
 3. 直接输出优化后的完整 Vue SFC 代码
