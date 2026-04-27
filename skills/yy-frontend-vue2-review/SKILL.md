@@ -57,8 +57,14 @@ metadata:
 
 - 脚本结构固定顺序：name → components → props → data → computed → watch → methods → 生命周期
 - 代码风格：2 空格缩进、单引号、必须分号、120 字符行宽
-- 网络请求必须 async/await + try/catch
+- 网络请求必须 async/await + try/catch/finally
+- 统一响应处理：`const { code, data, msg } = await apiXXX(); if (code === 0) { 成功 } else { this.$message.error(msg) }`
 - 样式使用 BEM 规范 + scoped
+- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 等有意义名称
+- **Vue 元素特性顺序**：is → v-for → v-if/v-else-if/v-else → v-show → id → props/attrs → v-on → v-html/v-text
+- **组件传参要求**：命名必须 camelCase，必须明确参数类型，必须添加含义注释
+- **方法内部逻辑顺序**：初始化方法 → 网络请求 → 事件处理 → 特殊计算
+- **emit 事件顺序**：`this.$emit('input', 数据)` → `this.$emit('其它事件', 数据)` → `this.$emit('change/click', 数据)`
 - **注释相关问题默认忽略，不进行检查**
 
 ## 用户选项
@@ -91,14 +97,15 @@ metadata:
 
 对于每个改动的文件，按以下维度进行检查（详细规范见 references 目录）：
 
-1. **Vue2 组件规范** — 脚本结构顺序、元素特性顺序、Props 规范、emit 事件、生命周期 emit 限制
-2. **代码风格** — 缩进、引号、分号、导入顺序、Prettier 配置合规
+1. **Vue2 组件规范** — 脚本结构顺序、元素特性顺序、Props 规范（命名 camelCase/类型明确/注释含义）、emit 事件（命名白名单 + input→其它→change/click 顺序）、生命周期 emit 限制
+2. **代码风格** — 缩进、引号、分号、导入顺序、Prettier 配置合规、等于运算符例外
 3. **命名规范** — API 函数、事件函数、常量、组件文件名
-4. **逻辑错误** — 空指针引用、数组越界、data/computed 使用、方法顺序
-5. **网络请求规范** — async/await、try/catch、数据解构、统一响应处理
-6. **安全漏洞** — XSS 风险、敏感信息泄露、硬编码敏感信息
-7. **最佳实践** — 调试代码、scoped 样式、BEM 规范、try/catch 推荐
-8. **绝对禁止项** — 见上方禁止项列表
+4. **逻辑错误** — 空指针引用、数组越界、data/computed 使用、方法内部逻辑顺序
+5. **网络请求规范** — async/await、try/catch/finally、数据解构、统一响应处理模式
+6. **computed 规范** — try/catch 包裹、命名使用 is / has / visible 等有意义名称
+7. **安全漏洞** — XSS 风险、敏感信息泄露、硬编码敏感信息
+8. **最佳实践** — 调试代码、scoped 样式、BEM 规范、函数 try/catch 推荐
+9. **绝对禁止项** — 见上方禁止项列表
 
 ### 阶段三：输出审核结果
 
@@ -246,8 +253,8 @@ metadata:
 
 详细规范见 references 目录，审核时按需查阅：
 
-- [Vue2 组件规范](./references/component.md)：脚本结构顺序、元素特性顺序、Props 规范、emit 事件、生命周期限制
-- [代码风格](./references/code-style.md)：基础格式规则、导入顺序、Prettier 配置
+- [Vue2 组件规范](./references/component.md)：脚本结构顺序、元素特性顺序、Props 规范、emit 事件（白名单 + 顺序）、生命周期限制、computed 规范、方法内部逻辑顺序
+- [代码风格](./references/code-style.md)：基础格式规则、导入顺序、Prettier 配置、等于运算符例外
 - [命名规范](./references/naming.md)：API 函数、事件函数、常量、组件命名
-- [逻辑与请求规范](./references/logic-and-request.md)：data/computed 使用、方法顺序、网络请求规范
+- [逻辑与请求规范](./references/logic-and-request.md)：data/computed 使用、方法顺序、网络请求规范（try/catch/finally + 统一响应处理）
 - [最佳实践与安全](./references/best-practice.md)：安全漏洞检查、调试代码、BEM 样式、try/catch 推荐
