@@ -93,6 +93,14 @@ if (code === 0) {
 }
 ```
 
+## 组件对外 emit 事件名称白名单（强制）
+
+事件名必须使用以下白名单中的名称，避免自定义事件名导致理解混乱：
+
+- 交互类：`change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add`
+- 弹窗类：`open`, `close`, `show`, `hide`
+- 操作类：`cancel`, `confirm`, `ok`, `editSuccess`, `error`
+
 ## 组件对外 emit 事件顺序
 
 ```javascript
@@ -100,6 +108,17 @@ this.$emit('input', 数据);
 this.$emit('其它事件', 数据);
 this.$emit('change/click', 数据);
 ```
+
+## 组件规范
+
+- **基础组件**：禁止在生命周期相关函数中主动向外 emit 事件
+- **业务型组件**：允许但不推荐在生命周期相关函数中主动向外 emit 事件
+
+## 组件传参要求
+
+- **命名**：必须使用 camelCase
+- **类型**：必须明确指定参数类型
+- **注释**：必须添加注释说明参数含义
 
 ## 方法职责单一化
 
