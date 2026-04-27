@@ -10,7 +10,6 @@
 
 - **函数 try/catch**：推荐使用 try/catch 包裹函数内容，包括 computed、methods 等，catch 中使用 console.warn 打印错误
 - **异步写法**：尽可能使用 async/await，少用 .then() 链式写法
-- **弹窗确认**：弹窗确认后执行操作，使用 const isConfirm = await this.$modal.confirm(...); if (!isConfirm) { return; } 模式
 
 ## 三、🟡 不推荐项（尽量避免）
 

@@ -100,9 +100,4 @@ emit("其它事件", 数据);
 emit("change/click", 数据);
 ```
 
-## 弹窗交互模式
 
-```javascript
-const isConfirm = await this.$modal.confirm("确定执行吗？");
-if (!isConfirm) return;
-```
