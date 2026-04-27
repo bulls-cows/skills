@@ -53,7 +53,6 @@ icon: ⚡
 
 1. **函数 try/catch**：推荐使用 try/catch 包裹函数内容，catch 中使用 `console.warn` 打印错误
 2. **异步写法**：尽可能使用 async/await，少用 `.then()` 链式写法
-3. **弹窗确认**：使用 `const isConfirm = await this.$modal.confirm(...); if (!isConfirm) { return; }` 模式
 
 ### 🟡 不推荐项
 

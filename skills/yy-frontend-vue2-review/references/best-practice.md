@@ -12,7 +12,6 @@
 - 是否有未使用的变量和导入（ESLint 已关闭检查，需手动清理）
 - 组件是否使用 scoped 样式
 - 样式是否遵循 BEM 规范
-- 弹窗确认是否使用 `const isConfirm = await this.$modal.confirm(...); if (!isConfirm) { return; }` 模式
 - 是否有多层 try/catch 嵌套（不推荐）
 - 函数 try/catch：推荐使用 try/catch 包裹函数内容，包括 computed、methods 等，catch 中使用 console.warn 打印错误
 
