@@ -14,7 +14,7 @@
 ## computed 规范
 
 - 使用 try/catch 包裹
-- 命名使用 is / has / visible 或其它有意义的名称
+- 命名使用 `is` / `has` / `visible` 或其它有意义的名称
 
 ## 方法内部逻辑顺序
 

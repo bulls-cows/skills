@@ -60,7 +60,7 @@ metadata:
 - 网络请求必须 async/await + try/catch/finally
 - 统一响应处理：`const { code, data, msg } = await apiXXX(); if (code === 0) { 成功 } else { this.$message.error(msg) }`
 - 样式使用 BEM 规范 + scoped
-- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 等有意义名称
+- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 或其它有意义的名称
 - **Vue 元素特性顺序**：is → v-for → v-if/v-else-if/v-else → v-show → id → props/attrs → v-on → v-html/v-text
 - **组件传参要求**：命名必须 camelCase，必须明确参数类型，必须添加含义注释
 - **方法内部逻辑顺序**：初始化方法 → 网络请求 → 事件处理 → 特殊计算
@@ -102,7 +102,7 @@ metadata:
 3. **命名规范** — API 函数、事件函数、常量、组件文件名
 4. **逻辑错误** — 空指针引用、数组越界、data/computed 使用、方法内部逻辑顺序
 5. **网络请求规范** — async/await、try/catch/finally、数据解构、统一响应处理模式
-6. **computed 规范** — try/catch 包裹、命名使用 is / has / visible 等有意义名称
+6. **computed 规范** — try/catch 包裹、命名使用有意义名称
 7. **安全漏洞** — XSS 风险、敏感信息泄露、硬编码敏感信息
 8. **最佳实践** — 调试代码、scoped 样式、BEM 规范、函数 try/catch 推荐
 9. **绝对禁止项** — 见上方禁止项列表

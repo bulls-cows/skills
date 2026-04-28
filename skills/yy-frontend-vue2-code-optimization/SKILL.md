@@ -24,13 +24,13 @@ icon: ⚡
 
 ## 支持优化的文件类型
 
-| 扩展名 | 优化内容 |
-|--------|----------|
-| `.vue` | Vue2 单文件组件完整优化（模板、脚本、样式） |
-| `.js` | JavaScript 文件优化（代码风格、导入排序、命名规范、注释） |
-| `.css` | CSS 样式优化（BEM 命名、格式、注释） |
-| `.scss` | SCSS 样式优化（BEM 命名、格式、注释） |
-| `.less` | Less 样式优化（BEM 命名、格式、注释） |
+| 扩展名  | 优化内容                                                  |
+| ------- | --------------------------------------------------------- |
+| `.vue`  | Vue2 单文件组件完整优化（模板、脚本、样式）               |
+| `.js`   | JavaScript 文件优化（代码风格、导入排序、命名规范、注释） |
+| `.css`  | CSS 样式优化（BEM 命名、格式、注释）                      |
+| `.scss` | SCSS 样式优化（BEM 命名、格式、注释）                     |
+| `.less` | Less 样式优化（BEM 命名、格式、注释）                     |
 
 ## Don't use when
 
@@ -80,7 +80,7 @@ icon: ⚡
 - 网络请求必须 async/await + try/catch/finally
 - 统一响应处理：`const { code, data, msg } = await apiXXX(); if (code === 0) { 成功 } else { this.$message.error(msg) }`
 - 样式使用 BEM 规范 + scoped
-- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 等有意义名称
+- **computed 规范**：必须使用 try/catch 包裹，命名使用 `is` / `has` / `visible` 或其它有意义的名称
 - **Vue 元素特性顺序**：is → v-for → v-if/v-else-if/v-else → v-show → id → props/attrs → v-on → v-html/v-text
 - **组件传参要求**：命名必须 camelCase，必须明确参数类型，必须添加参数含义注释
 - **方法内部逻辑顺序**：初始化方法 → 网络请求 → 事件处理 → 特殊计算
@@ -125,7 +125,7 @@ icon: ⚡
    - **代码风格**：2 空格缩进、单引号、必须分号、120 字符行宽、导入顺序
    - **Vue 元素特性顺序**：is → v-for → v-if → v-show → id → props/attrs → v-on → v-html/v-text
    - **网络请求规范**：async/await + try/catch/finally，统一响应处理模式
-   - **computed 规范**：try/catch 包裹，命名使用 is / has / visible 等
+   - **computed 规范**：try/catch 包裹，命名使用 `is` / `has` / `visible` 或其它有意义的名称
    - **组件传参要求**：命名 camelCase、明确类型、添加含义注释
    - **emit 事件规范**：使用命名白名单，遵循 input → 其它 → change/click 顺序
    - **方法内部逻辑顺序**：初始化 → 网络请求 → 事件处理 → 特殊计算
@@ -135,20 +135,20 @@ icon: ⚡
 
 #### `.js` 文件优化
 
- 1. 读取文件完整内容
- 2. 按 references 目录中的规范，检查并优化以下方面：
+1.  读取文件完整内容
+2.  按 references 目录中的规范，检查并优化以下方面：
     - **代码风格**：2 空格缩进、单引号、必须分号、120 字符行宽
     - **导入顺序**：node_modules (第三方库) → apis → utils → 相对 utils → store → constants → 相对 constants → components → 相对组件。组间空一行，同一组内按字母顺序排列
     - **命名规范**：API 函数、事件函数、常量、变量名
     - **函数规范**：async/await + try/catch 网络请求
     - **注释规范**：简洁中文注释，JSDoc 不超过 5 行
- 3. 直接输出优化后的完整 JavaScript 代码
+3.  直接输出优化后的完整 JavaScript 代码
 
 #### `.css`/`.scss`/`.less` 文件优化
 
 1. 读取文件完整内容
 2. 按 references 目录中的规范，检查并优化以下方面：
-   - **BEM 命名规范**：块__元素--修饰符，全小写、横线连接
+   - **BEM 命名规范**：块\_\_元素--修饰符，全小写、横线连接
    - **代码格式**：2 空格缩进、统一换行
    - **注释规范**：模块分组 `/* 模块名称 */`、子模块 `/* 模块 > 子模块 */`
    - **作用域标注**：全局样式需标注 `/* 全局 */`
@@ -169,7 +169,7 @@ icon: ⚡
 
 1. [优化项1描述]
 2. [优化项2描述]
-...
+   ...
 
 [优化后的完整代码]
 ```

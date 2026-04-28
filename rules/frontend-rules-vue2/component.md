@@ -52,7 +52,7 @@ export default {
 ## computed 规范
 
 - 使用 try/catch 包裹
-- 命名使用 is / has / visible 或其它有意义的名称
+- 命名使用 `is` / `has` / `visible` 或其它有意义的名称
 
 ## 方法内部逻辑顺序
 
@@ -99,5 +99,3 @@ emit("input", 数据);
 emit("其它事件", 数据);
 emit("change/click", 数据);
 ```
-
-

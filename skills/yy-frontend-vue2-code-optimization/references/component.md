@@ -17,7 +17,7 @@
 
 ```javascript
 export default {
-  name: 'ComponentName',
+  name: "ComponentName",
   components: {},
   props: {},
   data() {
@@ -43,9 +43,9 @@ export default {
  * @description 关键数据来源
  */
 export default {
-  name: 'UserList',
+  name: "UserList",
   // ...
-}
+};
 ```
 
 ## Vue 元素特性顺序
@@ -67,7 +67,7 @@ export default {
 ## computed 规范
 
 - 使用 try/catch 包裹
-- 命名使用 is / has / visible 或其它有意义的名称
+- 命名使用 `is` / `has` / `visible` 或其它有意义的名称
 
 ## 方法内部逻辑顺序
 
@@ -87,7 +87,7 @@ export default {
 const { code, data, msg } = await apiXXX();
 if (code === 0) {
   // 处理成功逻辑
-  this.$message.success(msg || '操作成功');
+  this.$message.success(msg || "操作成功");
 } else {
   this.$message.error(msg);
 }
@@ -104,9 +104,9 @@ if (code === 0) {
 ## 组件对外 emit 事件顺序
 
 ```javascript
-this.$emit('input', 数据);
-this.$emit('其它事件', 数据);
-this.$emit('change/click', 数据);
+this.$emit("input", 数据);
+this.$emit("其它事件", 数据);
+this.$emit("change/click", 数据);
 ```
 
 ## 组件规范
@@ -135,8 +135,8 @@ this.$emit('change/click', 数据);
 
 ## 复杂页面拆分建议
 
-| 模块 | 处理方式 |
-| ---- | -------- |
-| 弹窗 | 拆分为独立组件 |
+| 模块 | 处理方式                |
+| ---- | ----------------------- |
+| 弹窗 | 拆分为独立组件          |
 | 表格 | 表格组件 + 业务逻辑分离 |
 | 表单 | 表单组件 + 校验逻辑分离 |
