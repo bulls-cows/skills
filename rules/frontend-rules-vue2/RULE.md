@@ -1,16 +1,36 @@
 ---
-description: 前端项目开发规范与架构指南
+description: Vue2 前端项目开发规范与架构指南
 alwaysApply: true
 ---
 
-# 前端项目开发规范
+# Vue2 前端项目开发规范
 
-本规则已拆分为以下子模块，各模块独立维护：
+本规则已拆分为以下子模块，各模块独立维护，按需引用：
 
-- @rules/frontend-rules-vue2/ai-behavior.md — AI 行为与交互约束
-- @rules/frontend-rules-vue2/prohibitions.md — 绝对禁止项 / 推荐项 / 不推荐项 / 注意事项
-- @rules/frontend-rules-vue2/code-style.md — 代码风格与格式化
-- @rules/frontend-rules-vue2/naming.md — 架构与命名规范
-- @rules/frontend-rules-vue2/component.md — Vue2 组件开发规范
-- @rules/frontend-rules-vue2/vue-rules.md — Vue 基础规则
-- @rules/frontend-rules-vue2/css-performance.md — CSS 与性能规范
+- [@rules/frontend-rules-vue2/references/ai-behavior.md](./references/ai-behavior.md) — AI 行为与交互约束
+- [@rules/frontend-rules-vue2/references/code-style.md](./references/code-style.md) — 代码风格与格式化
+- [@rules/frontend-rules-vue2/references/naming.md](./references/naming.md) — 架构与命名规范
+- [@rules/frontend-rules-vue2/references/component-dev.md](./references/component-dev.md) — Vue2 组件开发规范
+- [@rules/frontend-rules-vue2/references/data-flow.md](./references/data-flow.md) — 数据流与状态管理
+- [@rules/frontend-rules-vue2/references/api-security.md](./references/api-security.md) — 网络请求与安全
+- [@rules/frontend-rules-vue2/references/css-performance.md](./references/css-performance.md) — CSS 与性能优化
+- [@rules/frontend-rules-vue2/references/constraints.md](./references/constraints.md) — 约束清单速查
+
+## 适用范围
+
+- 所有 `src` 目录下的 `.vue`、`.js`、`.css`、`.scss`、`.less` 文件
+- 目录约束：仅允许操作 `src` 目录下的文件
+- 适用于 Vue2 单文件组件的模板区、脚本区、样式区
+
+## 快速导航
+
+| 模块 | 核心内容 |
+|------|----------|
+| AI 行为 | 修改权限、文档生成约束、直接输出规则 |
+| 代码风格 | Prettier 配置、9 组导入顺序、格式化执行 |
+| 命名规范 | 文件/组件命名、API/事件/常量、Props/Emit、布尔值、provide/inject |
+| 组件开发 | 脚本结构、JSDoc、元素顺序、注释规范、方法职责、页面拆分 |
+| 数据流 | data/computed、响应式陷阱、$nextTick、watch、Vuex、eventBus |
+| 网络请求 | async/await、错误处理、统一响应、安全规范、路由守卫 |
+| CSS 与性能 | BEM 命名、样式作用域、性能优化、响应式适配、自定义指令 |
+| 约束清单 | 10 项禁止、4 项推荐、2 项不推荐、注意事项 |
