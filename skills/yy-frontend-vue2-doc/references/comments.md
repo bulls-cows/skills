@@ -97,7 +97,7 @@
 - JSDoc 总行数不超过 5 行
 - `@param` 和 `@returns` 类型使用简写（`String`、`Number`、`Boolean`、`Object`、`Array`、`Function`）
 
-### 示例
+### 完整示例
 
 ```javascript
 <script>
