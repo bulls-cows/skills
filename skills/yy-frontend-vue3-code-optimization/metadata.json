@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "针对 Vue3 页面组件、JavaScript/TypeScript 和 CSS 文件的代码优化技能。默认对 git 改动的 .vue、.js、.ts、.css、.scss、.less 文件执行优化；如果用户明确指定文件或文件夹，则对指定范围执行优化。通过统一 <script setup> 组合式 API 结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，提升代码可读性与团队协作效率。不用于生成新组件、修改业务逻辑或生成提交信息。"
+}

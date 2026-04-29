@@ -1,4 +1,6 @@
 {
-  "name": "yy-frontend-vue3-review",
-  "description": "Vue3 前端代码审核助手，基于 Vue3 开发规范检查 <script setup> 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践"
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "Vue3 前端代码审核助手，基于 Vue3 开发规范检查 <script setup> 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践。仅审核 src 目录下的改动文件，不用于 React 或 Vue2 项目审核。"
 }
