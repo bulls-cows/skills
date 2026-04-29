@@ -31,7 +31,7 @@
 | API 函数 | api + Method + URLPath（小驼峰） | `apiGetUserInfo` |
 | 事件函数 | on + EventName（小驼峰） | `onClickSubmit` |
 | 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT` |
-| Props / emit / 组件传参 | camelCase，类型明确，必须注释 |
+| Props / emit / 组件传参 | camelCase，类型明确，必须注释 | `userId` |
 | 布尔值 | `isXX` / `hasXX` / `showXX` | `isVisible` |
 | 组件文件名 | 多个单词 + PascalCase | `UserList.vue` |
 
