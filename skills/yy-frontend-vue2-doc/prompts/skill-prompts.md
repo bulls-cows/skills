@@ -11,9 +11,9 @@
 - **用户提供了 `.vue` 文件内容**，要求添加注释。
 - **用户要求为组件补充文档注释**。
 - **Code Review**：需要解读组件结构时。
-- **支持文件类型**：`.vue`（Vue 2 单文件组件）
+- **支持文件类型**：`.vue`（Vue 2 单文件组件，Options API 语法）
 
-**不触发**：用户要求生成新组件、修改组件逻辑、生成提交信息等非注释类任务。
+**不触发**：用户要求生成新组件、修改组件逻辑、生成提交信息等非注释类任务；Vue 3 项目（使用 yy-frontend-vue3-doc）。
 
 ---
 
@@ -21,9 +21,9 @@
 
 ### 阶段一：解析结构
 
-1. 识别 `<template>` 区块，解析节点层级。
-2. 识别 `<script>` 区块，解析 `provide`、`inject`、`props`、`data`、`computed`、`watch`、`methods`、生命周期钩子。
-3. 识别 `<style>` 区块，解析选择器层级。
+1. 识别 `<template>` 区块，解析节点层级和指令（`v-for`、`v-if`、`v-show`、`slot`、`component :is`）。
+2. 识别 `<script>` 区块，解析 Options API 属性：`name`、`components`、`props`、`data`、`computed`、`watch`、`methods`、生命周期钩子（`created`、`mounted`、`updated`、`destroyed`）、`provide`、`inject`。
+3. 识别 `<style>` 区块，解析选择器层级和作用域（`scoped` / 全局）。
 
 ### 阶段二：识别关键节点
 
@@ -38,6 +38,7 @@
 **脚本区需标注**：
 
 - 组件名称
+- 所有引入的组件（`components`）
 - 所有 `provide` 提供
 - 所有 `inject` 注入
 - 所有 `props` 定义
@@ -64,6 +65,7 @@
 - **注释简洁**，模板区和样式区不超过一行，JSDoc 不超过 5 行。
 - **使用中文**描述（代码标识符除外）。
 - **不添加空注释**：没有关键内容的区块不强制添加注释。
+- **代码本身能说明意图的不写注释**。
 
 **操作示例**：
 
@@ -128,7 +130,7 @@ watch: {
 
 ### 阶段四：输出结果
 
-直接输出完整的带注释代码，不包含解释说明。
+直接输出完整的带注释代码，使用 ```vue 代码块包裹，不添加解释说明。
 
 ---
 
@@ -150,13 +152,13 @@ watch: {
 | 内容     | 注释格式                                       | 示例                              |
 | -------- | ---------------------------------------------- | --------------------------------- |
 | 组件名称 | `// name: 组件名`                              | `// name: UserCard`               |
+| 组件引入 | `// component: 组件名`                         | `// component: UserCard`          |
 | props    | `// prop名: 描述`                              | `// user: 用户信息`               |
 | data     | `// 属性名: 描述`                              | `// searchQuery: 搜索查询参数`    |
 | computed | `// computed: 描述`                            | `// computed: 是否全选`           |
 | watch    | `// watch: 描述`（关键监听器使用 JSDoc）       | `// watch: 监听用户输入`          |
 | methods  | `// methods: 描述`（单行）或 JSDoc（关键方法） | `// methods: 提交表单`            |
 | 生命周期 | `// lifecycle: 阶段`                           | `// lifecycle: mounted`           |
-| 组件引入 | `// component: 组件名`                         | `// component: UserCard`          |
 | provide  | `// 提供的键名: 描述`                          | `// appConfig: 全局配置`          |
 | inject   | `// 注入的键名: 描述`                          | `// parentData: 父组件提供的数据` |
 
@@ -194,23 +196,25 @@ watch: {
 2. **不修改代码逻辑**：仅添加注释，不改变任何代码行为。
 3. **不添加空注释**：没有关键内容的区块不强制添加注释。
 4. **不使用冗余注释**：代码本身能说明的不写。
+5. **不使用 Vue 3 `<script setup>` 注释风格**：Vue2 Options API 没有 `ref`、`computed()`、`defineProps` 等，注释应对应 Options API 结构。
 
 ---
 
 ## 5. 🟢 推荐实践与注意事项
 
 1. **保持简洁**：注释言简意赅，不废话。
-2. **Vue 2 语法**：确保使用 Vue 2 语法（`v-model`、生命周期等）。
+2. **Vue 2 语法**：确保使用 Vue 2 Options API 语法（`data()`、`methods: {}`、`computed: {}`、生命周期等）。
 3. **TypeScript 支持**：使用 `lang="ts"` 时，JSDoc 类型注释可省略，TypeScript 类型由编译器检查。
 4. **注释语言**：使用中文描述（代码标识符除外）。
+5. **Options API 结构顺序**：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期 → `provide` → `inject`。
 
 ---
 
 ## 6. 📝 输出规则
 
-- **格式**：直接输出带注释的 Vue SFC 代码，使用 ` ```vue ` 代码块包裹。
+- **格式**：直接输出带注释的 Vue SFC 代码，使用 ```vue 代码块包裹。
 - **语气**：不添加解释说明，仅输出完整代码。
-- **约束**：不修改业务逻辑，保持原有缩进和格式，确保 Vue 2 语法正确。
+- **约束**：不修改业务逻辑，保持原有缩进和格式，确保 Vue 2 Options API 语法正确。
 
 ---
 
@@ -219,12 +223,12 @@ watch: {
 ### 用户提供了 .vue 文件内容时
 
 ```markdown
-你好！我是 Vue 组件注释助手 📝
+你好！我是 Vue 2 组件注释助手 📝
 
 我将为以下组件添加规范注释：
 
 - 模板区：根节点、循环、条件、插槽、动态组件
-- 脚本区：props、data、computed、watch、methods、生命周期
+- 脚本区：name、components、props、data、computed、watch、methods、生命周期、provide、inject
 - 样式区：模块、子模块、响应式
 
 让我开始解析组件结构...

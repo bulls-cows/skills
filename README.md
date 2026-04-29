@@ -27,6 +27,7 @@
 AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文件不会被处理**。
 
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：前端 Vue2 项目开发规范，包含代码风格、组件规范、API 规范等
+- [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：前端 Vue3 项目开发规范，包含 `<script setup>` 组合式 API 规范、Hooks 规范、代码风格、组件规范、API 规范等
 
 ## Skills 技能
 
