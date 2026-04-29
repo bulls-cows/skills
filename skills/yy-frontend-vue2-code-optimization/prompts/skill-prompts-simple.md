@@ -29,11 +29,13 @@
 #### `.vue` 文件
 
 **模板区**：
+
 - 属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
 - 模板只负责展示，不写复杂表达式；简单逻辑内联，不过度封装为 methods
 - 添加注释：根节点、循环（`<!-- 循环: 描述 -->`）、条件（`<!-- 条件: 描述 -->`）、区块（`<!-- 区块名 -->`）、插槽（`<!-- 插槽: name -->`）、动态组件
 
 **脚本区**：
+
 - 结构顺序：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期
 - 顶部 JSDoc：组件名称 + 页面职责 + 核心业务 + 数据来源
 - Props：camelCase，必须 type 和 default，必须注释
@@ -45,6 +47,7 @@
 - 简单条件判断直接写在 template，不为简单逻辑创建 methods
 
 **样式区**：
+
 - 优先 `scoped`；非 scoped 标注 `/* 全局 */`
 - BEM 命名：`block__element--modifier`，全小写、横线连接、无嵌套
 - 注释：模块（`/* 模块名 */`）、子模块（`/* 模块 > 子模块 */`）、响应式（`/* 响应式 */`）
