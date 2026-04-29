@@ -6,6 +6,11 @@ description: >
   统一代码结构、BEM 样式、语义化命名与关键注释，提升可读性与协作效率。
   不生成新组件、不修改业务逻辑。
   触发场景：用户要求优化代码、规范代码结构、统一命名、优化 Vue2 组件、整理代码风格。
+icon: ⚡
+examples:
+  - 帮我优化所有改动的 Vue2 文件
+  - 优化 src/views/order/index.vue 组件
+  - 把这段 Vue2 代码按规范优化一下
 ---
 
 # yy-frontend-vue2-code-optimization
