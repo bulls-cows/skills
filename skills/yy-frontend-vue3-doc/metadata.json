@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "为 Vue 3 单文件组件（SFC）自动生成规范注释。 解析模板区、脚本区（<script setup>）、样式区，添加结构化注释。 仅在用户提供 .vue 文件内容或明确要求为组件添加注释时触发。"
+}
