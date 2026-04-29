@@ -4,8 +4,11 @@ description: >
   为 Vue 3 单文件组件（.vue）自动生成规范注释。
   解析 <template>、<script setup>、<style> 三大区块，按约定格式添加结构化注释，不修改任何代码逻辑。
   触发场景：用户要求添加注释、为 Vue3 组件补充文档注释、解读 <script setup> 组件结构。
+icon: 📖
+examples:
+  - 为所有改动的 Vue3 组件添加规范注释
+  - 给这个 Vue3 组件补充结构化注释
 ---
-
 # yy-frontend-vue3-doc
 
 为 Vue 3 `<script setup>` 单文件组件自动生成规范注释。
