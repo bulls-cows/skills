@@ -27,6 +27,16 @@ description: >
 2. 按照固定结构整理解析结果：角色、核心任务、执行逻辑&步骤、输出规则
 3. 将所有内容合并成一段流畅、专业、可直接使用的完整系统提示词
 4. 严格遵循用户要求的输出结构，不添加任何多余解释
+5. 在技能对应的目录中创建 `prompts/skill-prompts.md` 文件（若 `prompts/` 目录不存在则先创建），将逆向解析得到的**完整系统提示词**写入该文件，供后续直接调用
+
+### Steps 详细说明
+
+**步骤 5 - 生成 prompts 文件：**
+
+- 文件路径：`<技能目录>/prompts/skill-prompts.md`
+- 示例：解析 `skills/yy-comment/SKILL.md` → 生成 `skills/yy-comment/prompts/skill-prompts.md`
+- 文件内容：仅包含 `## 完整系统提示词（可直接复制）` 部分的最终合并结果
+- 若该技能位于仓库外部（用户提供的外部技能文件），则跳过此步骤
 
 ## Output contract
 
