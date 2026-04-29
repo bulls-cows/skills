@@ -1,0 +1,4 @@
+{
+  "name": "yy-frontend-vue3-review",
+  "description": "Vue3 前端代码审核助手，基于 Vue3 开发规范检查 <script setup> 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践"
+}
