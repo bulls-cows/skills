@@ -56,6 +56,32 @@
 
 **模板层轻量化**：模板只负责展示，不写复杂表达式与逻辑
 
+**示例**：
+
+```html
+<template>
+  <!-- UserCard -->
+  <div class="user-card">
+    <!-- 用户信息区 -->
+    <div class="user-card__info">
+      <img :src="avatar" alt="avatar" />
+      <span>{{ username }}</span>
+    </div>
+
+    <!-- 条件: 有权限时显示操作按钮 -->
+    <div v-if="hasPermission" class="user-card__actions">
+      <!-- 循环: 操作按钮列表 -->
+      <button v-for="action in actions" :key="action.id">
+        {{ action.label }}
+      </button>
+    </div>
+
+    <!-- 插槽: 默认内容 -->
+    <slot name="default"></slot>
+  </div>
+</template>
+```
+
 ##### `<script>` 脚本区
 
 - **结构顺序**：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期（`mounted`, `destroyed` 等）。
@@ -85,7 +111,7 @@
    */
   ```
 
-- **Props 规范**：
+- **Props 规范**：命名必须 camelCase，必须明确指定参数类型，必须声明 type 和 default，必须添加注释说明参数含义。
 
   ```javascript
   props: {
@@ -104,7 +130,7 @@
 
 - **逻辑规范**：
   - `computed` 必须用 `try/catch` 包裹，命名用 `is`/`has`/`visible`。
-  - 方法排序：`init...()` → `async getListData()` → `async onClick...()` → `computed...()`。
+  - 方法排序：`init...()` → `async getListData()` / `async postFormData()` → `async onClick...()` / `async onChange...()` → `computed...()`。
   - 单个方法超过 50 行必须拆分，重复逻辑抽离为公共方法。
   - **不要过度封装**：简单的条件判断或表达式直接写在 template 中，不要为简单逻辑额外创建 methods 方法。
 
@@ -143,6 +169,76 @@
 | 复杂判断     | 行内注释说明条件       |
 | 特殊业务逻辑 | JSDoc 说明为什么这么做 |
 | 兼容处理     | 行内注释说明兼容逻辑   |
+
+**示例**：
+
+```javascript
+export default {
+  name: 'UserCard',
+
+  components: {},
+
+  props: {
+    // user: 用户信息
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      // searchQuery: 搜索查询参数
+      searchQuery: {
+        username: '', // 用户名
+        email: '' // 邮箱
+      }
+    }
+  },
+
+  computed: {
+    // computed: 是否全选
+    isSelected() {
+      return this.selectedItems.length === this.totalItems
+    }
+  },
+
+  watch: {
+    /**
+     * 监听用户输入变化
+     * @description 监听用户名输入变化
+     * @param {string} newVal - 新值
+     * @param {string} oldVal - 旧值
+     */
+    searchQuery: {
+      handler(newVal, oldVal) {
+        // 处理搜索关键词变化
+      },
+      immediate: true
+    }
+  },
+
+  methods: {
+    // methods: 提交表单
+    submitForm() {
+      // ...
+    },
+
+    /**
+     * 获取用户列表
+     * @description 从 API 获取用户数据并更新状态
+     * @returns {Promise<void>}
+     */
+    async fetchData() {
+      // ...
+    }
+  },
+
+  mounted() {
+    this.fetchData()
+  }
+}
+```
 
 ##### `<style>` 样式区
 
@@ -250,7 +346,7 @@
 - **行宽**：120 字符。**尾随逗号**：多行对象/数组末尾必须加逗号。
 - **箭头函数**：单参数省略括号，如 `item => item.id`。
 - **对象括号**：保持空格，如 `{ foo: bar }`。
-- **等于运算符**：使用 `==` 而非 `===` 不属于问题，允许保留原有写法。
+- **等于运算符**：优先推荐使用 `==`，优化时若将 `===` 改为 `==`，必须在输出结果中单独列出该项变更，提醒用户手动确认。
 
 ### 命名与模块化
 
@@ -288,7 +384,7 @@
   ```
 
 - **禁止项**：不使用冗余/无用注释（代码本身能说明的不写）。
-- **注释语言**：使用中文描述，行内注释不超过一行。
+- **注释语言**：使用中文描述，行内注释不超过一行，JSDoc 不超过 5 行。
 
 ### CSS/BEM 规范
 
