@@ -4,8 +4,11 @@ description: >
   审核 Vue3 项目 src 目录下代码改动，覆盖 10 大维度：组件规范、代码风格、命名、Hooks、逻辑、网络请求、computed、安全、最佳实践、绝对禁止项。
   仅支持 <script setup> 组合式 API，不支持 React/Vue2。
   触发场景：代码合并前审核、提交前质量检查、Code Review Vue3 代码、检查 Hooks 规范。
+icon: 🔍
+examples:
+  - 审核所有改动的 Vue3 代码
+  - 检查 src/views/ 下 Vue3 组件的代码质量
 ---
-
 # yy-frontend-vue3-review
 
 Vue3 前端代码审核助手。审核 `src` 目录下改动文件，基于 Vue3 开发规范逐项检查。

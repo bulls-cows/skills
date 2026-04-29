@@ -42,7 +42,7 @@
 
 ## Emit 事件顺序
 
-```
+```js
 emit('input', 数据) → emit('其它事件', 数据) → emit('change/click', 数据)
 ```
 
