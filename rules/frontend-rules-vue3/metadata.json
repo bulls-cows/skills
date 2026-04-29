@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "date": "April 2026",
+  "author": "wengdongyang",
+  "abstract": "Vue3 前端项目开发规范与架构指南，包含 <script setup> 组合式 API 规范、Hooks 规范、代码风格、组件规范、API规范等",
+  "tags": ["frontend", "规范", "开发指南", "vue3", "composition-api"]
+}
