@@ -29,11 +29,13 @@
 #### `.vue` 文件
 
 **模板区**：
+
 - 属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
 - 模板只负责展示，不写复杂表达式；简单逻辑内联，不过度封装为函数
 - 添加注释：根节点、循环、条件、区块、插槽、动态组件
 
 **脚本区**（必须 `<script setup>`）：
+
 - 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref/reactive` → `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
 - 顶部 JSDoc：组件名称 + 页面职责 + 核心业务 + 数据来源
 - Props：`defineProps` + TypeScript 类型注解，camelCase，必须注释
@@ -46,6 +48,7 @@
 - ref 访问必须 `.value`
 
 **Hooks 规范**：
+
 - 命名：`useXxx`，文件存放在 `@src/hooks/`
 - 返回值：`toRefs` 解构后返回对象，禁止直接返回 reactive
 - 可复用逻辑超过 30 行或跨 2+ 组件使用时，必须抽离为 Hook
@@ -53,6 +56,7 @@
 - 导入顺序：全局 Hooks 在相对工具之后、Store 之前；相对 Hooks 在 Hooks 之后
 
 **样式区**：
+
 - 优先 `scoped`；非 scoped 标注 `/* 全局 */`
 - BEM 命名：`block__element--modifier`，全小写、横线连接、无嵌套
 - 注释：模块、子模块、响应式
