@@ -1,12 +1,11 @@
 ---
 name: yy-frontend-vue3-code-optimization
 description: >
-  针对 Vue3 页面组件、JS/TS 和 CSS 文件的代码优化技能。
-  默认对 git 改动的 .vue、.js、.ts、.css、.scss、.less 文件执行优化；
-  也可对指定文件或文件夹范围执行优化。
-  通过统一 <script setup> 组合式 API 结构、语义化命名、BEM 样式规范、
-  逻辑分层、关键注释等手段，提升代码可读性与团队协作效率。
-  不用于生成新组件、修改业务逻辑或生成提交信息。
+  针对 Vue3 项目的 .vue、.js、.ts、.css、.scss、.less 文件执行代码优化。
+  默认对 git 变动文件执行优化，也可按用户指定范围执行。
+  统一 <script setup> 组合式 API 结构、BEM 样式、语义化命名与关键注释，提升可读性与协作效率。
+  不生成新组件、不修改业务逻辑。
+  触发场景：用户要求优化 Vue3 代码、规范 <script setup> 结构、统一命名、整理代码风格、抽离 Hooks。
 metadata:
   author: wengdongyang
   version: "1.0.0"

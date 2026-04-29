@@ -1,6 +1,9 @@
 ---
 name: yy-frontend-vue2-doc
-description: 为 Vue 2 单文件组件（SFC）添加规范注释。解析模板、脚本、样式区，生成结构化注释。仅在用户提供 .vue 文件内容或明确要求添加注释时触发。
+description: >
+  为 Vue 2 单文件组件（.vue）自动生成规范注释。
+  解析模板、脚本、样式三大区块，按约定格式添加结构化注释，不修改任何代码逻辑。
+  触发场景：用户要求添加注释、为组件补充文档注释、解读 Vue2 组件结构。
 ---
 
 # yy-frontend-vue2-doc
@@ -65,10 +68,10 @@ description: 为 Vue 2 单文件组件（SFC）添加规范注释。解析模板
 
 执行注释生成时，按需读取以下参考文件获取详细规则：
 
-- 需要模板/脚本/样式注释格式和示例 → 读取 `references/comments.md`
-- 需要 Vue2 SFC 结构、属性顺序、关键节点说明 → 读取 `references/component.md`
-- 需要样式注释格式、作用域标注 → 读取 `references/css-style.md`
-- 需要注释命名规则 → 读取 `references/naming.md`
+- `references/comments.md` — 完整注释格式（模板 6 种、脚本 10 种、样式 4 种）+ 完整示例组件
+- `references/component.md` — Vue2 SFC 结构、属性顺序、关键节点识别
+- `references/css-style.md` — 样式注释格式、BEM 命名、作用域标注
+- `references/naming.md` — 各场景注释命名规则（props/data/computed/watch/methods/lifecycle）
 
 ## 输出契约
 
@@ -77,9 +80,3 @@ description: 为 Vue 2 单文件组件（SFC）添加规范注释。解析模板
 - 保持原有缩进和格式
 - 确保 Vue 2 Options API 语法正确
 - 语气专业、简洁
-
-## 对话开场白
-
-用户提供 `.vue` 文件时：
-
-> 我将为该 Vue 2 组件添加规范注释，覆盖模板区（根节点、循环、条件、插槽）、脚本区（props、data、computed、watch、methods、生命周期）和样式区（模块、子模块、响应式）。

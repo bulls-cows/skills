@@ -1,6 +1,11 @@
 ---
 name: yy-frontend-vue2-code-optimization
-description: 优化 Vue2 项目中的 .vue、.js、.css、.scss、.less 文件。自动检测 git 变动文件，或按用户指定范围执行优化。统一代码结构、BEM 样式、语义化命名与关键注释，提升可读性与协作效率。不生成新组件、不修改业务逻辑。
+description: >
+  针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化。
+  默认对 git 变动文件执行优化，也可按用户指定范围执行。
+  统一代码结构、BEM 样式、语义化命名与关键注释，提升可读性与协作效率。
+  不生成新组件、不修改业务逻辑。
+  触发场景：用户要求优化代码、规范代码结构、统一命名、优化 Vue2 组件、整理代码风格。
 ---
 
 # yy-frontend-vue2-code-optimization
@@ -45,11 +50,11 @@ description: 优化 Vue2 项目中的 .vue、.js、.css、.scss、.less 文件�
 
 在执行优化前，根据需要读取以下参考文件获取详细规则：
 
-- 需要 Vue2 组件结构、props、computed、methods、emit 等规则 → 读取 `references/component.md`
-- 需要代码风格、导入顺序、引号/分号/缩进等规则 → 读取 `references/code-style.md`
-- 需要注释规范（JSDoc、模板注释、脚本注释） → 读取 `references/comments.md`
-- 需要命名约定（API 函数、事件函数、布尔值命名等） → 读取 `references/naming.md`
-- 需要 CSS/BEM 命名和样式规则 → 读取 `references/css-style.md`
+- 需要 Vue2 组件结构、props、computed、methods、emit、模板属性顺序等规则 → 读取 `references/component.md`
+- 需要代码风格、导入顺序（9 组）、引号/分号/缩进/行宽/尾随逗号等规则 → 读取 `references/code-style.md`
+- 需要注释规范（JSDoc、模板注释、脚本注释、关键注释场景） → 读取 `references/comments.md`
+- 需要命名约定（API 函数、事件函数、布尔值命名、模块拆分建议） → 读取 `references/naming.md`
+- 需要 CSS/BEM 命名和样式格式规则 → 读取 `references/css-style.md`
 
 ### 步骤三：逐文件优化
 
@@ -98,34 +103,12 @@ description: 优化 Vue2 项目中的 .vue、.js、.css、.scss、.less 文件�
 - 确保 Vue 2 语法正确（`v-model`、生命周期等）
 - 语气专业、客观、简洁
 
-## 对话开场白
+## 参考文档
 
-### 用户未指定文件时
+> 渐进式披露：以下文件按需读取，根据文件类型和优化需要打开。
 
-```markdown
-你好！我是前端代码优化助手。
-
-我将帮你优化当前所有改动的文件（支持 .vue、.js、.css、.scss、.less）：
-
-1. **Vue 组件**：统一代码结构、规范命名、优化代码风格、规范网络请求、统一样式规范
-2. **JavaScript**：统一导入顺序、规范命名、优化代码风格、添加关键注释
-3. **CSS/样式**：BEM 命名规范、统一格式、添加模块注释
-
-让我先获取改动的文件列表...
-```
-
-### 用户指定了文件或文件夹时
-
-```markdown
-你好！我是前端代码优化助手。
-
-我将帮你优化指定范围内的文件（支持 .vue、.js、.css、.scss、.less）：
-
-- 目标范围：[用户指定的文件/文件夹]
-
-1. **Vue 组件**：统一代码结构、规范命名、优化代码风格、规范网络请求、统一样式规范
-2. **JavaScript**：统一导入顺序、规范命名、优化代码风格、添加关键注释
-3. **CSS/样式**：BEM 命名规范、统一格式、添加模块注释
-
-让我开始优化...
-```
+- `references/component.md` — Vue2 组件结构顺序、Props 规范、computed 规则、方法排序、网络请求模式、Emit 规范、模板属性顺序
+- `references/code-style.md` — 缩进/引号/分号/行宽/尾随逗号、9 组导入顺序、Prettier 配置、`==` 规则
+- `references/comments.md` — JSDoc 格式、模板/脚本注释格式、关键注释场景
+- `references/naming.md` — API/事件/常量/组件/Props 命名、布尔值前缀、模块拆分建议
+- `references/css-style.md` — BEM 命名定义、代码格式、样式注释格式、作用域标注

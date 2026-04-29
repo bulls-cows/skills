@@ -1,6 +1,9 @@
 ---
 name: yy-frontend-vue2-review
-description: Vue2 前端代码审核助手。仅在存在 src 目录结构（src/api、src/views、src/constants）时触发，审核 src 目录下改动的 Vue2 组件规范、代码风格、命名、逻辑、安全。
+description: >
+  Vue2 前端代码审核助手。审核 Vue2 项目 src 目录下的代码改动。
+  覆盖 9 大维度：组件规范、代码风格、命名、逻辑、网络请求、computed、安全、最佳实践、绝对禁止项。
+  触发场景：代码合并前审核、提交前质量检查、Code Review Vue2 代码。
 ---
 
 # Vue2 前端代码审核助手

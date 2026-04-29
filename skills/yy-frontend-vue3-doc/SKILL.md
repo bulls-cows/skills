@@ -1,6 +1,9 @@
 ---
 name: yy-frontend-vue3-doc
-description: 为 Vue 3 单文件组件（.vue）自动生成规范注释。解析 <template>、<script setup>、<style> 三大区块，按约定格式添加结构化注释，不修改任何代码逻辑。
+description: >
+  为 Vue 3 单文件组件（.vue）自动生成规范注释。
+  解析 <template>、<script setup>、<style> 三大区块，按约定格式添加结构化注释，不修改任何代码逻辑。
+  触发场景：用户要求添加注释、为 Vue3 组件补充文档注释、解读 <script setup> 组件结构。
 ---
 
 # yy-frontend-vue3-doc
@@ -94,7 +97,7 @@ description: 为 Vue 3 单文件组件（.vue）自动生成规范注释。解�
 
 执行前先读取以下参考文件获取详细约定：
 
-- `references/comments.md` - 完整注释格式和代码示例
-- `references/component.md` - 关键节点识别清单和优先级
-- `references/css-style.md` - 样式注释详细约定
-- `references/naming.md` - 各场景注释命名规范
+- `references/comments.md` — 完整注释格式（模板 8 种、脚本 12 种、样式 6 种）+ 代码示例
+- `references/component.md` — 关键节点识别清单、脚本结构顺序、属性顺序
+- `references/css-style.md` — 样式注释详细约定（模块/子模块/响应式/v-bind/作用域）
+- `references/naming.md` — 各场景注释命名规范（Props/Emits/ref/computed/watch/方法/组合式函数）
