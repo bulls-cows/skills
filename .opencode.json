@@ -1,4 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md", "./docs/STRUCTURE.md", "./rules/file-scope-limit/RULE.md", "./rules/markdown/RULE.md", "./rules/text/RULE.md"]
+  "instructions": [
+    "AGENTS.md",
+    "你是一个智能助手。请始终使用简体中文进行解释和回答。",
+    "./docs/STRUCTURE.md",
+    "./rules/file-scope-limit/RULE.md",
+    "./rules/markdown/RULE.md",
+    "./rules/text/RULE.md"
+  ]
 }
