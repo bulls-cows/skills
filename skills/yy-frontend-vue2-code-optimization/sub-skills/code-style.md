@@ -71,6 +71,8 @@ import NavbarLogo2 from "./NavbarLogo2.vue";
 
 `name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期。
 
+**生命周期标准顺序**：`beforeCreate` → `created` → `beforeMount` → `mounted` → `beforeUpdate` → `updated` → `activated` → `deactivated` → `beforeDestroy` → `destroyed`
+
 ```javascript
 export default {
   name: "Comp",
@@ -82,7 +84,15 @@ export default {
   computed: {},
   watch: {},
   methods: {},
+  beforeCreate() {},
+  created() {},
+  beforeMount() {},
   mounted() {},
+  beforeUpdate() {},
+  updated() {},
+  activated() {},
+  deactivated() {},
+  beforeDestroy() {},
   destroyed() {},
 };
 ```
