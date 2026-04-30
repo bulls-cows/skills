@@ -23,6 +23,8 @@ description: >
 
 # yy-frontend-vue3-code-optimization
 
+**版本**：v1.1.0
+
 针对 Vue3 页面组件、JavaScript/TypeScript 和 CSS/SCSS/Less 文件的代码优化技能。通过统一 `<script setup>` 组合式 API 结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，显著提升代码可读性与团队协作效率，降低维护与交接成本。
 
 **核心原则**：不主动生成新组件（组件拆分建议需用户确认后再执行）。涉及业务变更必须先确认。这样做的目的是保持原有功能不变，同时提供架构优化选项。
@@ -100,17 +102,27 @@ description: >
 
 ## 详细优化规则
 
+### 子技能与参考资料分工
+
+| 目录 | 用途 | 说明 |
+|------|------|------|
+| **sub-skills/** | 执行规范 | 操作步骤、风险说明、代码示例、变更预览格式 |
+| **references/** | 参考资料 | 最佳实践、命名规范、完整模板、理论说明 |
+
+---
+
 ### 1. 🔍 业务逻辑梳理（🟢零风险 · 仅 .vue）
 
 分析组件职责、数据流和交互关系，生成结构化业务说明插入到 `<script setup>` 顶部。
 
-> 📖 详细规范：[sub-skills/business-logic.md](./sub-skills/business-logic.md)
+> 📖 执行规范：[sub-skills/business-logic.md](./sub-skills/business-logic.md)
 
 ### 2. 📝 文档与注释增强（🟢零风险 · 只增不改）
 
 为模板、脚本、样式添加结构化注释，提升代码可读性。
 
-> 📖 详细规范：[sub-skills/comments.md](./sub-skills/comments.md)
+> 📖 执行规范：[sub-skills/comments.md](./sub-skills/comments.md)
+> 📖 参考资料：[references/comments.md](./references/comments.md)
 
 ### 3. 🧹 代码风格与格式清洗（🟡中风险）
 
@@ -127,28 +139,35 @@ description: >
 
 Prettier 格式化后，手动执行导入排序(11组)、`<script setup>`结构排序、模板属性排序、方法内部顺序整理。
 
-> 📖 详细规范：[sub-skills/code-style.md](./sub-skills/code-style.md)
+> 📖 执行规范：[sub-skills/code-style.md](./sub-skills/code-style.md)
+> 📖 参考资料：[references/code-style.md](./references/code-style.md)
 
 ### 4. 🎨 CSS/BEM 架构规范（🟡中风险）
 
 将类名转为 BEM 格式，确保 scoped 样式同步。
 
-> 📖 详细规范：[sub-skills/css-style.md](./sub-skills/css-style.md)
+> 📖 执行规范：[sub-skills/css-style.md](./sub-skills/css-style.md)
+> 📖 参考资料：[references/css-style.md](./references/css-style.md)
 
 ### 5. 🔤 语义化命名重构（🟡中风险）
 
 API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名。跨文件引用需确认。
 
-> 📖 详细规范：[sub-skills/naming.md](./sub-skills/naming.md)
+> 📖 执行规范：[sub-skills/naming.md](./sub-skills/naming.md)
+> 📖 参考资料：[references/naming.md](./references/naming.md)
 
 ### 6. ⚡ 逻辑深度优化（🔴高风险 · 逐项确认）
 
 相等运算符转换、async/await 转换、computed 优先、Hooks 抽离、Props/Emits 增强、逻辑拆分。
 
-> 📖 详细规范：[sub-skills/optimization.md](./sub-skills/optimization.md)
->
-> - [T01 业务逻辑梳理](./sub-skills/business-logic.md) | [T02 代码风格](./sub-skills/code-style.md) | [T03 注释增强](./sub-skills/comments.md)
-> - [T04 CSS/BEM 规范](./sub-skills/css-style.md) | [T05 命名规范](./sub-skills/naming.md) | [T06 逻辑深度优化](./sub-skills/optimization.md)
+> 📖 执行规范：[sub-skills/optimization.md](./sub-skills/optimization.md)
+> 📖 参考资料：[references/hooks.md](./references/hooks.md)、[references/component.md](./references/component.md)
+
+---
+
+**子技能速查表**：
+- [T01 业务逻辑梳理](./sub-skills/business-logic.md) | [T02 代码风格](./sub-skills/code-style.md) | [T03 注释增强](./sub-skills/comments.md)
+- [T04 CSS/BEM 规范](./sub-skills/css-style.md) | [T05 命名规范](./sub-skills/naming.md) | [T06 逻辑深度优化](./sub-skills/optimization.md)
 
 ---
 
@@ -207,35 +226,94 @@ API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名。跨�
 
 ## 输出契约
 
-### 输出格式
+### 输出格式示例
 
 ```markdown
-## 优化结果汇总
+## ⚡ 优化结果汇总
 
-- 📁 处理文件：X 个
-- ✅ 执行任务：Y 个
-- ⏭️  跳过任务：Z 个
-- ⚠️  警告提醒：W 个
+- 📁 处理文件：2 个
+- ✅ 执行任务：4 个
+- ⏳  待确认任务：3 个（中风险 T02 T04 T05）
+- ⏭️  跳过任务：0 个
+- ⚠️  警告提醒：1 个
 
 ---
 
-### [filename]
+### src/views/UserCard.vue
 
-**执行任务**：T01, T03, ...
+**执行任务**：T01 业务逻辑梳理, T03 注释增强
 
 **变更摘要**：
-- ✅ [变更项 1 描述]
-- ✅ [变更项 2 描述]
+- ✅ 在 `<script setup>` 顶部添加组件业务说明 JSDoc
+- ✅ 模板添加区块注释、条件分支注释
+- ✅ 样式添加模块注释
 
 **变更对比（关键变更）**：
 ```diff
-- // 旧代码
-+ // 新代码
+  <script setup lang="ts">
++ /**
++  * 改动时间: 2026-04-30
++  * 改动内容: 生成首次业务逻辑说明
++  *
++  * ---
++  *
++  * UserCard
++  * @description 用户卡片组件，负责展示用户基本信息和统计数据
++  *
++  * 数据来源:
++  * - props: userId (用户ID，必填)
++  * - API: apiGetUserInfo 接口获取用户详细信息
++  * - ref: userInfo, loading
++  *
++  * 交互关系:
++  * - 接收 props: userId
++  * - emit 事件: onEdit, onDelete
++  */
++
+  import { ref, onMounted } from 'vue'
 ```
 
-[变更后的完整代码]
-
+**变更后的完整代码**：
 ```vue
+<template>
+  <!-- UserCard -->
+  <div class="user-card">
+    <!-- 头部区域 -->
+    <div class="user-card__header">
+      <img :src="avatar" class="user-card__avatar" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+/**
+ * 改动时间: 2026-04-30
+ * 改动内容: 生成首次业务逻辑说明
+ *
+ * ...
+ */
+// ... 完整代码
+</script>
+
+<style scoped lang="scss">
+/* 用户卡片容器 */
+.user-card {
+  /* ... */
+}
+</style>
+```
+
+---
+
+### ⏳ 待确认任务（需您确认后执行）
+
+| 任务 ID | 名称 | 风险等级 | 说明 |
+|---------|------|----------|------|
+| T02 | 代码风格与格式清洗 | 🟡 中风险 | 导入排序、Prettier 格式化、模板属性排序 |
+| T04 | CSS/BEM 架构规范 | 🟡 中风险 | 类名转为 block__element--modifier 格式 |
+| T06 | Hooks 抽离 | 🔴 高风险 | 将表格逻辑抽离为 useTable Hook |
+
+> 请回复「全部执行」或「执行 T02 T04」以继续。
 
 ### 输出原则
 
