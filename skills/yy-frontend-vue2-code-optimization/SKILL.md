@@ -17,7 +17,7 @@ examples:
 
 针对 Vue2 页面组件、JavaScript 和 CSS/SCSS/Less 文件的代码优化技能。通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，显著提升代码可读性与团队协作效率，降低维护与交接成本。
 
-**边界**：不生成新组件，不修改业务逻辑。涉及业务变更必须先确认。涉及业务变更必须先确认。
+**边界**：不生成新组件，不修改业务逻辑。涉及业务变更必须先确认。
 
 ## 何时使用
 
@@ -66,20 +66,23 @@ examples:
 
 ### 步骤三：用户确认
 
-- **零风险任务**：默认勾选，可取消
-- **低风险/中风险任务**：默认勾选，但需提示风险，可取消
-- **高风险任务**：默认未勾选，必须逐项确认后执行
-- 交互指令：`全部执行`、`全部跳过`、`确认`、`执行 T01 T03` 等
+| 风险等级     | 默认状态  | 说明                                            |
+| ------------ | --------- | ----------------------------------------------- |
+| 🟢 零风险    | ✅ 勾选   | 业务逻辑梳理、代码风格清洗、文档注释            |
+| 🟡 低/中风险 | ❌ 未勾选 | CSS/BEM 重构、语义化命名，需提示风险            |
+| 🔴 高风险    | ❌ 未勾选 | async/await 转换、computed 迁移等，必须逐项确认 |
+
+交互指令：`全部执行`、`全部跳过`、`确认`、`执行 T01 T03` 等。
 
 ### 步骤四：调度执行
 
 按用户确认的 ID 逐项应用对应规则（按需查阅 [参考文档](#参考文档)）：
 
-| 文件类型 | 执行顺序 | 查阅参考 |
-|----------|---------|----------|
-| `.vue` | 业务逻辑梳理 → 代码风格清洗 → 文档注释 → CSS/BEM → 语义化命名 → 逻辑优化（确认后） | `references/business-logic.md`、`references/code-style.md`、`references/comments.md`、`references/css-style.md`、`references/naming.md`、`references/optimization.md` |
-| `.js` | 代码风格清洗 → 文档注释 → 语义化命名 → 逻辑优化（确认后） | `references/code-style.md`、`references/comments.md`、`references/naming.md`、`references/optimization.md` |
-| `.css`/`.scss`/`.less` | 代码风格清洗 → CSS/BEM 架构规范 | `references/code-style.md`、`references/css-style.md` |
+| 文件类型           | 执行顺序                                                                       | 查阅参考 |
+| ------------------ | ------------------------------------------------------------------------------ | -------- |
+| `.vue`             | 业务逻辑梳理 → 代码风格 → 注释增强 → CSS/BEM → 语义化命名 → 逻辑优化（确认后） | `references/business-logic.md`、`references/code-style.md`、`references/comments.md`、`references/css-style.md`、`references/naming.md`、`references/optimization.md` |
+| `.js`              | 代码风格 → 注释增强 → 语义化命名 → 逻辑优化（确认后）                          | `references/code-style.md`、`references/comments.md`、`references/naming.md`、`references/optimization.md` |
+| `.css`/`.scss`/`.less` | 代码风格 → CSS/BEM 规范                                                   | `references/code-style.md`、`references/css-style.md` |
 
 未确认的任务跳过，不产生任何改动。
 
@@ -115,19 +118,24 @@ examples:
 
 ## 禁止规则
 
-| 规则                          | 说明                 |
-| ----------------------------- | -------------------- |
-| 禁止连续解构                  | 如 `...data.data`    |
-| 禁止父组件修改子组件数据      | 通过 props 通信      |
-| 禁止多次修改 data 属性类型    | 后端给什么值用什么值 |
-| 禁止直接修改 props            |                      |
-| 禁止使用 mixins               |                      |
-| 禁止多层 try/catch 嵌套       |                      |
-| 禁止无意义命名                | 如 `data1`、`temp2`  |
-| 基础组件生命周期禁止主动 emit |                      |
-| 简单逻辑不封装为 method       | 直接写内联表达式     |
-| 绝不修改业务逻辑              |                      |
-| 绝不生成新组件                |                      |
+| 规则                                              | 说明                 |
+| ------------------------------------------------- | -------------------- |
+| 禁止连续解构                                      | 如 `...data.data`    |
+| 禁止父组件修改子组件数据                          | 通过 props 通信      |
+| 禁止多次修改 data 属性类型                        | 后端给什么值用什么值 |
+| 禁止直接修改 props / 使用 mixins / 多层 try/catch |                      |
+| 禁止无意义命名                                    | 如 `data1`、`temp2`  |
+| 基础组件生命周期禁止主动 emit                     |                      |
+| 简单逻辑不封装为 method                           | 直接写内联表达式     |
+| 绝不修改业务逻辑 / 生成新组件                     |                      |
+
+## 推荐实践
+
+1. 函数用 try/catch 包裹，catch 中 `console.warn` 打印
+2. 尽可能使用 async/await
+3. 除与后端交互数据外，尽量使用 computed
+4. v-html 需防范 XSS 风险
+5. 组件拆分建议：弹窗→独立；表格→表格组件 + 逻辑分离；表单→表单组件 + 校验分离
 
 ## 输出契约
 
