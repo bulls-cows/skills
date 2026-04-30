@@ -3,18 +3,21 @@ name: yy-frontend-vue2-code-optimization
 description: >
   针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化、风格整理、规范重构。
   触发场景：用户要求优化 Vue2 代码、Code Review 时代码审查、统一 BEM 命名规范、
-  整理导入顺序、格式化代码结构、语义化命名重构、异步代码优化、注释增强。
+  整理导入顺序、格式化代码结构、语义化命名重构、异步代码优化（.then() → async/await）、注释增强。
   默认对 git 变动文件执行优化，也可按用户指定范围执行。
   风险分级执行：零风险优化自动执行，中/高风险需用户确认。
   绝不修改业务逻辑，涉及业务变更必须先确认。
   Vue3 项目请使用 yy-frontend-vue3-code-optimization。
+  当用户提到以下任何内容时，务必使用此技能：.vue 文件整理、代码规范化、组件注释添加、样式重构、
+  Vue2 项目清理、BEM 重构、导入排序、命名规范调整、async/await 转换、Vue Options API 优化、
+  Props 增强、Emit 标准化、计算属性迁移、组件职责梳理、代码交接准备、可读性提升。
 ---
 
 # yy-frontend-vue2-code-optimization
 
 针对 Vue2 页面组件、JavaScript 和 CSS/SCSS/Less 文件的代码优化技能。通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，显著提升代码可读性与团队协作效率，降低维护与交接成本。
 
-**核心原则**：不生成新组件，不修改业务逻辑。涉及业务变更必须先确认。
+**核心原则**：不生成新组件，不修改业务逻辑。涉及业务变更必须先确认。这样做的目的是保持原有功能不变，只改进代码的可读性和可维护性。
 
 ## 触发场景
 
@@ -50,8 +53,8 @@ description: >
 | T01     | `.vue`                        | 业务逻辑梳理（生成组件说明 JSDoc）                               | 🟢 零风险    |
 | T02     | `.vue` `.js`                  | 代码风格与格式清洗（缩进、引号、排序、模板排序）                 | 🟡 中风险    |
 | T03     | `.vue` `.js`                  | 文档与注释增强（JSDoc、模板注释、样式注释）                      | 🟢 零风险    |
-| T04     | `.vue` `.css` `.scss` `.less` | CSS/BEM 架构规范（类名转为 BEM 格式）                            | 🟡 低/中风险 |
-| T05     | `.vue` `.js`                  | 语义化命名重构（API/事件重命名、常量规范）                       | 🟡 低/中风险 |
+| T04     | `.vue` `.css` `.scss` `.less` | CSS/BEM 架构规范（类名转为 BEM 格式）                            | 🟡 中风险    |
+| T05     | `.vue` `.js`                  | 语义化命名重构（API/事件重命名、常量规范）                       | 🟡 中风险    |
 | T06     | `.vue` `.js`                  | 逻辑深度优化（`.then()` → async/await、computed 优先、逻辑拆分） | 🔴 高风险    |
 
 ### 步骤三：用户确认与调度执行
@@ -59,7 +62,7 @@ description: >
 | 风险等级     | 默认状态    | 交互说明                                                                        |
 | ------------ | ----------- | ------------------------------------------------------------------------------- |
 | 🟢 零风险    | ✅ 自动勾选 | 业务逻辑梳理、文档注释增强。自动执行                                            |
-| 🟡 低/中风险 | ❌ 需确认   | 代码风格清洗（含 `==`/`===` 转换）、CSS/BEM 重构、语义化命名重构。需提示风险    |
+| 🟡 中风险    | ❌ 需确认   | 代码风格清洗（含 `==`/`===` 转换，优先使用 `===`）、CSS/BEM 重构、语义化命名重构。需提示风险    |
 | 🔴 高风险    | ❌ 逐项确认 | async/await 转换、computed 迁移、逻辑拆分。展示风险提示和变更预览，确认后再执行 |
 
 **交互指令**：`全部执行`、`全部跳过`、`确认`、`执行 T01 T03` 等。
@@ -76,7 +79,7 @@ description: >
 
 ### 1. 🔍 业务逻辑梳理（🟢零风险 · 仅 .vue）
 
-**目标**：分析组件职责、数据流和交互关系，生成结构化业务说明插入到 `<script>` 顶部。
+**目标**：分析组件职责、数据流和交互关系，生成结构化业务说明插入到 `<script>` 顶部。这样做让团队成员快速理解组件用途，降低维护成本。
 
 **分析维度**：
 
@@ -90,19 +93,27 @@ description: >
 ```javascript
 /**
  * 改动时间: 2026-04-30
- * 改动内容: 生成首次业务逻辑说明 / 优化 computed 优先策略
+ * 改动内容: 生成首次业务逻辑说明
  *
  * ---
  *
- * 组件名称
- * @description 组件职责简述 / 核心业务流程
+ * UserListPage
+ * @description 用户列表管理页面，负责数据查询、列表展示、批量操作
+ * @description 核心业务流程: init → 请求用户列表 → computed 派生分页数据
  *
  * 数据来源:
- * - props: ...
- * - API: ...
- * - data: ...
+ * - props: pageSize (分页大小，默认 20)
+ * - API: apiGetUserList 接口获取用户列表数据
+ * - data: searchQuery (查询条件)、tableData (列表数据)、loading (加载状态)
+ *
+ * 交互关系:
+ * - 接收 props: pageSize, defaultActiveTab
+ * - emit 事件: onUserSelect, onChangePage
+ * - 依赖组件: <DataTable />, <SearchBar />, <Pagination />
  */
 ```
+
+> 📖 完整示例与多次改动记录：[references/business-logic.md](./references/business-logic.md)
 
 ### 2. 📝 文档与注释增强（🟢零风险 · 只增不改）
 
@@ -114,13 +125,12 @@ description: >
 
 ### 3. 🧹 代码风格与格式清洗（🟡低/中风险）
 
-- **Prettier 格式化**：优先使用项目根目录的 `.prettierrc` 配置文件。若不存在，则参考 `assets/.prettierrc.json` 的配置执行（该文件仅供 AI 参考，不直接执行）。
-- **导入顺序（9 组，组间空一行，组内字母排序）**：外部依赖 → 全局 API → 全局工具 → 相对工具 → 全局 Store → 全局配置 → 相对配置 → 全局组件 → 相对组件。
-- **Vue 选项顺序**：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期。
-- **方法内部顺序**：`init...()` → `async getListData()` / `async postFormData()` → 事件 → computed 派生。
-- **模板属性排序**：`is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`。
-- **模板职责**：只负责展示，不写复杂表达式；简单逻辑可内联，不为简单逻辑额外创建 methods。
-- **`==` vs `===`**：优先使用 `==` 进行相等比较。**注意：在 `==` 和 `===` 之间的任何转换都属于逻辑变更，必须明确提醒用户单独确认。**
+- **Prettier 格式化**：优先执行 `npx prettier --write <target-file>`。若失败（Prettier 未安装），则参考 `assets/.prettierrc.json` 的配置规则手动格式化（该文件仅供 AI 参考，不直接执行）。使用项目自有配置可以保持与团队规范一致。
+- **导入顺序（9 组，组间空一行，组内字母排序）**：外部依赖 → 全局 API → 全局工具 → 相对工具 → 全局 Store → 全局配置 → 相对配置 → 全局组件 → 相对组件。分组让开发者快速定位依赖来源。
+- **Vue 选项顺序**：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期。与 Vue 官方推荐顺序一致，降低认知负担。
+- **模板属性排序**：`is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`。按指令优先级排序，方便快速理解模板逻辑。
+- **模板职责**：只负责展示，不写复杂表达式；简单逻辑可内联，不为简单逻辑额外创建 methods。模板过重会降低可读性。
+- **`==` vs `===`**：优先使用 `===` 进行相等比较。这是现代 JS/ESLint 的标准实践。若项目中存在大量 `==` 且需要转为 `===`，**这属于逻辑变更，必须明确提醒用户单独确认**，因为类型 coercion 行为不同。
 
 ### 4. 🎨 CSS/BEM 架构规范（🟡低/中风险）
 
@@ -156,10 +166,10 @@ description: >
 - **Props 增强**：明确 `type` 和 `default`，添加参数注释。
 - **性能优化**：懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化（webp、懒加载）、computed 替代 watch。
 
-> 📖 参考文档（渐进式披露）：[references/](./references/) 目录
+> 📖 子技能规范（执行时按需读取）：[sub-skills/](./sub-skills/) 目录
 >
-> - [业务逻辑梳理](./references/business-logic.md) | [代码风格](./references/code-style.md) | [注释增强](./references/comments.md)
-> - [CSS/BEM 规范](./references/css-style.md) | [命名规范](./references/naming.md) | [逻辑深度优化](./references/optimization.md)
+> - [T01 业务逻辑梳理](./sub-skills/business-logic.md) | [T02 代码风格](./sub-skills/code-style.md) | [T03 注释增强](./sub-skills/comments.md)
+> - [T04 CSS/BEM 规范](./sub-skills/css-style.md) | [T05 命名规范](./sub-skills/naming.md) | [T06 逻辑深度优化](./sub-skills/optimization.md)
 
 ---
 

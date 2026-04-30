@@ -55,7 +55,6 @@
 | computed | `// computed: 描述`    | `// computed: 是否全选`           |
 | watch    | `// watch: 描述`       | `// watch: 监听用户输入`          |
 | methods  | `// methods: 描述`     | `// methods: 提交表单`            |
-| 组件引入 | `// component: 组件名` | `// component: UserCard`          |
 | provide  | `// 提供的键名: 描述`  | `// appConfig: 全局配置`          |
 | inject   | `// 注入的键名: 描述`  | `// parentData: 父组件提供的数据` |
 

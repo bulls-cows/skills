@@ -28,11 +28,13 @@ if (code === 0) {
 ## 计算属性优先
 
 - 将非副作用的逻辑从 `methods` 迁移至 `computed`
-- 命名统一用 `is/has/visible` 前缀，必须 `try/catch` 包裹
+- 命名统一用 `is/has/visible` 前缀
+
+> **注意**：computed 是同步 getter 函数，**不应使用 try/catch**。如果逻辑需要异步或错误处理，保留在 methods 中。
 
 ### 风险：计算属性优先
 
-响应式求值时机不同；带副作用的逻辑不能转为 computed；`try/catch` 在 computed 中行为与 methods 不同。
+响应式求值时机不同；带副作用的逻辑（如 API 请求、DOM 操作）不能转为 computed。
 
 ## 逻辑抽离与拆分
 

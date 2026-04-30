@@ -6,21 +6,26 @@
 
 ### 第一步：调用 Prettier 格式化
 
-**必须首先执行**：使用项目 `assets/.prettierrc.json` 配置，调用 Prettier 对目标文件进行基础格式化。
+优先使用项目自有的 Prettier 配置进行格式化。执行步骤如下：
 
-命令示例：
+1. **尝试执行 Prettier 命令**：
 
-```bash
-npx prettier --config assets/.prettierrc.json --write <target-file>
-```
+   ```bash
+   npx prettier --write <target-file>
+   ```
 
-Prettier 将自动处理以下规则：
+2. **处理执行结果**：
+   - **成功**：Prettier 按项目自有配置完成格式化，继续第二步。
+   - **失败**（命令不存在或未安装）：参考技能目录下 `assets/.prettierrc.json` 的配置规则，手动对文件代码进行格式化。
 
-- **缩进**：2 空格（`tabWidth: 2`）
-- **引号**：JS 单 `'`（`singleQuote: true`），HTML 双 `"`
-- **标点**：强制分号（`semi: true`），尾随逗号（`trailingComma: "all"`），箭头函数单参数无括号（`arrowParens: "avoid"`）
-- **行宽**：单行最大字符数 **100**（`printWidth: 100`）
-- **其他**：对象花括号保持空格（`bracketSpacing: true`），不强制属性独占一行（`singleAttributePerLine: false`）
+   `assets/.prettierrc.json` 配置说明（仅作为 fallback 参考）：
+   - **缩进**：2 空格（`tabWidth: 2`）
+   - **引号**：JS 单 `'`（`singleQuote: true`），HTML 双 `"`
+   - **标点**：强制分号（`semi: true`），尾随逗号（`trailingComma: "all"`），箭头函数单参数无括号（`arrowParens: "avoid"`）
+   - **行宽**：单行最大字符数 **120**（`printWidth: 120`）（与 `assets/.prettierrc.json` 一致）
+   - **其他**：对象花括号保持空格（`bracketSpacing: true`），不强制属性独占一行（`singleAttributePerLine: false`）
+
+> **注意**：该文件是给 AI 看的配置参考，不是直接执行的配置文件。优先信任项目自身的 Prettier 配置。
 
 ### 第二步：手动结构调整
 
@@ -30,7 +35,7 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 ### 运算符调整
 
-优先使用 `==` 进行相等比较。
+优先使用 `===` 进行相等比较，这是现代 JS/ESLint 的标准实践。
 **注意**：在 `==` 和 `===` 之间的任何转换都属于逻辑变更，必须明确提醒用户单独确认。
 
 ### 导入顺序（9 组）
@@ -108,4 +113,4 @@ export default {
 - 隐藏控制包含 `v-show` 和 `v-cloak`
 - 属性分组包含 `props` 和 `attrs`
 
-**v-slot 风格**：必须使用动态风格（如 `v-slot:[name]`），**禁止静态默认插槽写法**。
+**v-slot 风格**：优先使用 `v-slot:name` 或 `#name` 简写语法。避免已废弃的 `slot="name"` 写法。
