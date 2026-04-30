@@ -2,6 +2,25 @@
 
 **定位**：🔴 高风险。涉及运行时行为改变，**必须经过任务调度器确认后执行**。
 
+## 相等运算符转换
+
+### 核心原则
+
+**绝对不主动变更 `==` 和 `===`**，保持代码原有写法。即使有接口响应 code 字段，也必须先列入高风险任务清单，用户明确确认后才执行转换。
+
+### 例外情况（需确认后执行）
+
+- **接口响应的 `code` 字段比较**：建议统一使用 `===`（如 `code === 0`），因为后端返回的 code 通常是数字类型。但此转换仍属于高风险，必须展示给用户确认后才执行
+
+### 风险：相等运算符转换
+
+任何 `==` ↔ `===` 之间的转换都属于**逻辑变更**，可能改变代码的实际行为：
+
+- `==` 会进行类型转换，`===` 不会
+- `null == undefined` 为 true，但 `null === undefined` 为 false
+- `0 == ''` 为 true，但 `0 === ''` 为 false
+- 转换前必须逐项确认，展示变更预览
+
 ## 异步与网络请求
 
 ### 目标结构
@@ -20,6 +39,37 @@ if (code === 0) {
 - `.then()` 链式调用转为 `async/await`
 - 统一响应模式 `{code, data, msg}` 解构处理
 - 错误处理使用 `try/catch + console.warn`
+
+### 变更预览格式规范
+
+展示给用户确认时，**必须使用 diff 格式展示变更前后对比**，示例：
+
+```diff
+- // 优化前：Promise 链式调用
+- fetchData() {
+-   this.isLoading = true
+-   getUserInfo(this.userId).then(res => {
+-     if (res.code == 200) { /* 数据处理 */ }
+-     this.isLoading = false
+-   }).catch(err => {
+-     console.error(err)
+-     this.isLoading = false
+-   })
+- }
+
++ // 优化后：Async/Await + try/catch/finally
++ async fetchData() {
++   this.isLoading = true
++   try {
++     const res = await getUserInfo(this.userId)
++     if (res.code === 200) { /* 数据处理 */ }
++   } catch (err) {
++     console.warn(err)
++   } finally {
++     this.isLoading = false  // 只需写一次
++   }
++ }
+```
 
 ### 风险：异步与网络请求
 
@@ -88,6 +138,7 @@ if (code === 0) {
 - **防抖节流**：频繁触发的事件（搜索、滚动、resize）使用防抖/节流
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
 - **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制
+- **⚠️ 组件拆分**：弹窗→独立组件、表格→表格组件 + 业务逻辑分离、表单→表单组件 + 校验分离。**这属于架构调整，须用户确认后执行，不会自动创建新文件**
 
 ## 其他优化
 
@@ -96,3 +147,5 @@ if (code === 0) {
 - 禁止连续解构 (如 `...data.data`)
 - 禁止父组件直接修改子组件数据
 - 禁止多次修改 data 属性类型（后端给什么值用什么值，可新增属性但不允许修改原始数据类型）
+
+> 📖 更多禁止规则见主技能文档 [SKILL.md](../SKILL.md) 的「禁止规则」章节。

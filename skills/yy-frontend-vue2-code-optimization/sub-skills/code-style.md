@@ -1,6 +1,16 @@
 # 代码风格与格式清洗
 
-**定位**：🟡 中风险。不自动勾选，需用户确认。涉及代码格式化和结构整理，其中 `==` 与 `===` 转换可能影响语义。
+**定位**：🟡 中风险。涉及代码格式化和结构整理。
+
+## ⚠️ 风险说明（执行前必须展示给用户）
+
+| 风险项 | 影响范围 | 说明 |
+|--------|----------|------|
+| **Git Diff 膨胀** | 全文件 | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
+| **合并冲突** | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突 |
+| **格式不一致** | 团队协作 | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异 |
+
+> **建议**：在执行格式化前，确保当前分支是干净的，且没有待合并的代码。
 
 ## 格式化执行步骤
 
@@ -32,11 +42,6 @@
 Prettier 无法处理代码结构排序和运算符调整。格式化后，需手动执行以下**结构与顺序整理**规则：
 
 ## 结构与顺序整理
-
-### 运算符调整
-
-优先使用 `===` 进行相等比较，这是现代 JS/ESLint 的标准实践。
-**注意**：在 `==` 和 `===` 之间的任何转换都属于逻辑变更，必须明确提醒用户单独确认。
 
 ### 导入顺序（9 组）
 
@@ -76,6 +81,8 @@ import NavbarLogo2 from "./NavbarLogo2.vue";
 
 `name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期。
 
+**生命周期标准顺序**：`beforeCreate` → `created` → `beforeMount` → `mounted` → `beforeUpdate` → `updated` → `activated` → `deactivated` → `beforeDestroy` → `destroyed`
+
 ```javascript
 export default {
   name: "Comp",
@@ -87,7 +94,15 @@ export default {
   computed: {},
   watch: {},
   methods: {},
+  beforeCreate() {},
+  created() {},
+  beforeMount() {},
   mounted() {},
+  beforeUpdate() {},
+  updated() {},
+  activated() {},
+  deactivated() {},
+  beforeDestroy() {},
   destroyed() {},
 };
 ```
