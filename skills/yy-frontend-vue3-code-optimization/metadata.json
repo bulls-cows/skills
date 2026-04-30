@@ -2,5 +2,5 @@
   "version": "1.0.0",
   "date": "April 2026",
   "author": "wengdongyang",
-  "abstract": "针对 Vue3 页面组件、JavaScript/TypeScript 和 CSS 文件的代码优化技能。默认对 git 改动的 .vue、.js、.ts、.css、.scss、.less 文件执行优化；如果用户明确指定文件或文件夹，则对指定范围执行优化。通过统一 <script setup> 组合式 API 结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，提升代码可读性与团队协作效率。不用于生成新组件、修改业务逻辑或生成提交信息。"
+  "abstract": "**Vue3 前端代码标准化与优化专用技能，只要用户提到以下任何内容，必须立即使用此技能：** - 优化、整理、清理 Vue3 组件 / .vue 文件 - Code Review、代码审查、代码规范化 - BEM 命名规范、样式重构、CSS/SCSS/Less 整理 - 导入排序、代码格式化、结构调整 - 语义化命名、变量/函数重命名 - 异步代码优化、Promise 转 async/await - 注释增强、JSDoc 添加、代码交接准备 - Hooks 抽离、组合式 API 优化、`<script setup>` 结构规范 - 组件职责梳理、可读性提升、维护性改进 **核心特性：** - 支持 .vue、.js、.ts、.css、.scss、.less 文件 - 默认自动优化当前 git 变动文件，也可指定文件/文件夹 - 严格风险分级：🟢 零风险自动执行，🟡 中风险 / 🔴 高风险必须用户确认后执行 - **绝不修改业务逻辑**，架构类变更必须先确认后执行 - Vue2 项目请使用 yy-frontend-vue2-code-optimization 技能 - 兼容 Node.js 环境，无需额外依赖"
 }
