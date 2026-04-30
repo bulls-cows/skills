@@ -1,0 +1,104 @@
+{
+  "skill_name": "yy-frontend-vue2-code-optimization",
+  "version": "1.1.0",
+  "evals": [
+    {
+      "id": 1,
+      "name": "Vue2 组件完整优化",
+      "prompt": "优化这个 Vue2 组件：test-UserCard.vue",
+      "expected_output": "生成任务清单并执行零风险优化，包含代码风格清洗、注释增强、导入排序",
+      "assertions": [
+        {
+          "name": "生成任务清单",
+          "description": "扫描文件后生成带风险等级的任务表",
+          "type": "qualitative"
+        },
+        {
+          "name": "执行零风险优化",
+          "description": "执行代码风格清洗、注释增强",
+          "type": "qualitative"
+        },
+        {
+          "name": "导入顺序正确",
+          "description": "导入按9组排序，组间空一行",
+          "type": "code_check",
+          "file": "test-UserCard.vue"
+        }
+      ],
+      "files": ["test-UserCard.vue"]
+    },
+    {
+      "id": 2,
+      "name": "JavaScript 文件优化",
+      "prompt": "优化这个 JS 文件：test-utils.js",
+      "expected_output": "优化导入顺序、代码风格、命名规范、注释增强",
+      "assertions": [
+        {
+          "name": "导入排序",
+          "description": "导入按规范排序",
+          "type": "qualitative"
+        },
+        {
+          "name": "命名规范",
+          "description": "常量命名规范检查",
+          "type": "code_check",
+          "file": "test-utils.js"
+        }
+      ],
+      "files": ["test-utils.js"]
+    },
+    {
+      "id": 3,
+      "name": "SCSS 样式 BEM 优化",
+      "prompt": "优化这个 SCSS 文件，统一 BEM 命名规范：test-styles.scss",
+      "expected_output": "将嵌套类名转换为 BEM 格式",
+      "assertions": [
+        {
+          "name": "BEM 转换",
+          "description": "类名转换为 block__element--modifier 格式",
+          "type": "qualitative"
+        },
+        {
+          "name": "样式注释",
+          "description": "添加样式模块注释",
+          "type": "code_check",
+          "file": "test-styles.scss"
+        }
+      ],
+      "files": ["test-styles.scss"]
+    },
+    {
+      "id": 4,
+      "name": "Git 变动文件优化",
+      "prompt": "优化当前 git 变动的文件",
+      "expected_output": "扫描 git diff 获取变动文件列表",
+      "assertions": [
+        {
+          "name": "Git 命令调用",
+          "description": "正确调用 git diff 命令",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "风险分级确认",
+      "prompt": "优化 test-UserCard.vue，把 .then() 改成 async/await",
+      "expected_output": "识别为高风险任务，需用户确认后执行",
+      "assertions": [
+        {
+          "name": "高风险识别",
+          "description": "正确识别 async/await 转换为高风险",
+          "type": "qualitative"
+        },
+        {
+          "name": "用户确认",
+          "description": "提示用户确认后执行",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["test-UserCard.vue"]
+    }
+  ]
+}

@@ -1,6 +1,25 @@
 {
-  "version": "1.0.0",
+  "name": "yy-frontend-vue2-code-optimization",
+  "version": "1.1.0",
   "date": "April 2026",
   "author": "wengdongyang",
-  "abstract": "针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化。 默认对 git 变动文件执行优化，也可按用户指定范围执行。 统一代码结构、BEM 样式规范、语义化命名、逻辑分层和关键注释，提升可读性与协作效率。 不生成新组件、不修改业务逻辑，涉及业务变更必须先确认。 触发场景：用户要求优化 Vue2 代码、规范命名、整理代码风格、统一导入顺序、BEM 样式重构。"
+  "category": "code-quality",
+  "framework": "vue2",
+  "languages": ["vue", "javascript", "css", "scss", "less"],
+  "abstract": "针对 Vue2 项目的代码优化技能。支持 .vue/.js/.css/.scss/.less 文件，包含代码风格清洗、BEM 样式规范、语义化命名、注释增强、异步优化。风险分级执行，零风险自动执行，中/高风险需用户确认，绝不修改业务逻辑。",
+  "risk_levels": ["zero-risk", "low-risk", "medium-risk", "high-risk"],
+  "features": [
+    "code-style-formatting",
+    "import-sorting",
+    "bem-naming",
+    "semantic-naming",
+    "jsdoc-comments",
+    "async-await-transform",
+    "computed-first",
+    "business-logic-analysis"
+  ],
+  "compatibility": {
+    "vue": "2.x",
+    "vue3": "use yy-frontend-vue3-code-optimization"
+  }
 }
