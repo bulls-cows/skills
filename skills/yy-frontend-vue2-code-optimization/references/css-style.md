@@ -4,26 +4,93 @@
 
 ## BEM 转换规范
 
-- **块**：独立模块，直接命名（如 `card`、`form`）
-- **元素**：块内部子元素，用 `__` 连接（如 `card__title`、`form__input`）
-- **修饰符**：状态/样式变体，用 `--` 连接（如 `card--dark`、`card__title--large`）
-- **命名规则**：全小写、横线连接、无嵌套、类名唯一不冲突
+- **块（Block）**：独立模块，直接命名（如 `card`、`form`）
+- **元素（Element）**：块内部子元素，用 `__` 连接（如 `card__title`、`form__input`）
+- **修饰符（Modifier）**：状态/样式变体，用 `--` 连接（如 `card--dark`、`card__title--large`）
+- **命名规则**：全小写、横线连接、语义清晰、类名唯一不冲突
 
-### BEM 示例
+## 嵌套结构规范
+
+### SCSS 嵌套（推荐 `&` 引用）
 
 ```scss
+// ✅ 正确：使用 & 引用父选择器，嵌套层级 ≤ 2
 .user-card {
   padding: 16px;
+
+  // 元素嵌套在块内
   .user-card__header {
     font-weight: bold;
+
+    // 修饰符嵌套在元素内
+    &.user-card__header--active {
+      color: #1890ff;
+    }
+  }
+
+  .user-card__body { /* ... */ }
+}
+```
+
+### LESS 嵌套（推荐 `&` 引用）
+
+```less
+// ✅ 正确：利用 & 语法构建 BEM，与 SCSS 类似
+.user-card {
+  padding: 16px;
+
+  &__header {
+    font-weight: bold;
+
     &--active {
       color: #1890ff;
+    }
+  }
+
+  &__body { /* ... */ }
+}
+```
+
+> **说明**：LESS 的 `&` 语法更简洁，但编译后与 SCSS 输出等价。推荐 LESS 中使用 `&__element` 简化写法，SCSS 中使用 `&` 或类名嵌套。
+
+### 禁止嵌套场景
+
+```scss
+// ❌ 禁止：嵌套层级过深（> 3 层）
+.user-card {
+  .user-card__header {
+    .user-card__title {
+      .user-card__title-text { /* 禁止 */ }
+    }
+  }
+}
+
+// ❌ 禁止：元素类型选择器嵌套（降低特异性）
+.user-card {
+  .user-card__header {
+    img { ... }  // 应改用类名
+    span { ... }
+  }
+}
+
+// ❌ 禁止：使用后代选择器嵌套（降低性能）
+.user-card {
+  .some-class {
+    ul {
+      li { ... }  // 应展平为独立类
     }
   }
 }
 ```
 
+### 推荐结构
+
+- **嵌套最大深度**：2 层（块 → 元素 → 修饰符）
+- **修饰符**：与块/元素同级，或使用 `&` 引用
+- **媒体查询**：可嵌套在对应块/元素内部
+
 ## 样式结构与作用域
 
-- **样式结构**：全小写，横线连接，禁止嵌套过深，无嵌套选择器
-- **作用域检查**：优先 `scoped`，非 scoped 需标注 `/* 全局 */`，确保不污染全局
+- **全小写，横线连接**，类名唯一不冲突
+- **scoped 优先**：Vue 组件必须使用 `<style scoped>`
+- **全局样式标注**：非 scoped 需在顶部标注 `/* 全局 */`
