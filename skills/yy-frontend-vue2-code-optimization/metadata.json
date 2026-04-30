@@ -1,6 +1,35 @@
 {
-  "version": "1.0.0",
+  "name": "yy-frontend-vue2-code-optimization",
+  "version": "1.2.0",
   "date": "April 2026",
   "author": "wengdongyang",
-  "abstract": "针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化、风格整理、规范重构。 触发场景：用户要求优化 Vue2 代码、Code Review 时代码审查、统一 BEM 命名规范、 整理导入顺序、格式化代码结构、语义化命名重构、异步代码优化、注释增强。 默认对 git 变动文件执行优化，也可按用户指定范围执行。 风险分级执行：零风险优化自动执行，中/高风险需用户确认。 绝不修改业务逻辑，涉及业务变更必须先确认。 Vue3 项目请使用 yy-frontend-vue3-code-optimization。"
+  "abstract": "针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化、风格整理、规范重构。 触发场景：用户要求优化 Vue2 代码、Code Review 时代码审查、统一 BEM 命名规范、 整理导入顺序、格式化代码结构、语义化命名重构、异步代码优化、注释增强。 默认对 git 变动文件执行优化，也可按用户指定范围执行。 风险分级执行：零风险优化自动执行，中/高风险需用户确认。 绝不修改业务逻辑，涉及业务变更必须先确认。 Vue3 项目请使用 yy-frontend-vue3-code-optimization。",
+  "category": "frontend",
+  "tags": [
+    "vue2",
+    "code-optimization",
+    "code-style",
+    "bem",
+    "lint",
+    "refactor",
+    "comments",
+    "naming-conventions"
+  ],
+  "compatibility": {
+    "vue_version": "2.x",
+    "file_types": [".vue", ".js", ".css", ".scss", ".less"],
+    "required_dirs": ["src/api", "src/views", "src/constants"],
+    "required_assets": ["assets/.prettierrc.json"]
+  },
+  "features": [
+    "任务调度器（风险分级确认）",
+    "业务逻辑梳理与注释",
+    "代码风格与格式清洗",
+    "文档与注释增强",
+    "CSS/BEM 架构规范",
+    "语义化命名重构",
+    "异步逻辑深度优化",
+    "Git 变动文件自动检测",
+    "渐进式参考文档披露"
+  ]
 }

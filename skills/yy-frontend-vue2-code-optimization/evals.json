@@ -1,12 +1,12 @@
 {
   "skill_name": "yy-frontend-vue2-code-optimization",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "evals": [
     {
       "id": 1,
       "name": "Vue2 组件完整优化",
       "prompt": "优化这个 Vue2 组件：test-UserCard.vue",
-      "expected_output": "生成任务清单并执行零风险优化，包含代码风格清洗、注释增强、导入排序",
+      "expected_output": "生成任务清单，执行零风险优化（业务逻辑梳理、注释增强），中风险需确认",
       "assertions": [
         {
           "name": "生成任务清单",
@@ -14,13 +14,13 @@
           "type": "qualitative"
         },
         {
-          "name": "执行零风险优化",
-          "description": "执行代码风格清洗、注释增强",
+          "name": "零风险自动勾选",
+          "description": "业务逻辑梳理和注释增强自动勾选",
           "type": "qualitative"
         },
         {
           "name": "导入顺序正确",
-          "description": "导入按9组排序，组间空一行",
+          "description": "导入按9组排序，组间空一行，属于中风险需确认",
           "type": "code_check",
           "file": "test-UserCard.vue"
         }
@@ -31,11 +31,11 @@
       "id": 2,
       "name": "JavaScript 文件优化",
       "prompt": "优化这个 JS 文件：test-utils.js",
-      "expected_output": "优化导入顺序、代码风格、命名规范、注释增强",
+      "expected_output": "优化导入顺序（中风险需确认）、代码风格、命名规范、注释增强（零风险）",
       "assertions": [
         {
-          "name": "导入排序",
-          "description": "导入按规范排序",
+          "name": "风险分级正确",
+          "description": "代码风格标记为中风险，注释增强为零风险",
           "type": "qualitative"
         },
         {
@@ -49,9 +49,9 @@
     },
     {
       "id": 3,
-      "name": "SCSS 样式 BEM 优化",
+      "name": "SCSS 样式 BEM 重构",
       "prompt": "优化这个 SCSS 文件，统一 BEM 命名规范：test-styles.scss",
-      "expected_output": "将嵌套类名转换为 BEM 格式",
+      "expected_output": "将嵌套类名转换为 BEM 格式，scoped 样式需同步修改模板 class",
       "assertions": [
         {
           "name": "BEM 转换",
@@ -69,13 +69,18 @@
     },
     {
       "id": 4,
-      "name": "Git 变动文件优化",
+      "name": "Git 变动文件优化（默认）",
       "prompt": "优化当前 git 变动的文件",
-      "expected_output": "扫描 git diff 获取变动文件列表",
+      "expected_output": "通过 git diff 获取变动文件列表，生成任务清单",
       "assertions": [
         {
           "name": "Git 命令调用",
-          "description": "正确调用 git diff 命令",
+          "description": "正确调用 git diff --name-only 和 git diff --cached --name-only",
+          "type": "qualitative"
+        },
+        {
+          "name": "文件过滤",
+          "description": "仅过滤 .vue、.js、.css、.scss、.less 文件",
           "type": "qualitative"
         }
       ],
@@ -83,22 +88,79 @@
     },
     {
       "id": 5,
-      "name": "风险分级确认",
+      "name": "高风险 async/await 转换",
       "prompt": "优化 test-UserCard.vue，把 .then() 改成 async/await",
-      "expected_output": "识别为高风险任务，需用户确认后执行",
+      "expected_output": "识别为高风险任务，展示变更预览和风险说明，必须用户确认后执行",
       "assertions": [
         {
           "name": "高风险识别",
-          "description": "正确识别 async/await 转换为高风险",
+          "description": "正确识别 async/await 转换为高风险（🔴）",
           "type": "qualitative"
         },
         {
-          "name": "用户确认",
-          "description": "提示用户确认后执行",
+          "name": "用户确认流程",
+          "description": "提示用户确认后再执行，不自动执行",
           "type": "qualitative"
         }
       ],
       "files": ["test-UserCard.vue"]
+    },
+    {
+      "id": 6,
+      "name": "== 与 === 转换边界",
+      "prompt": "优化这个文件，把 === 改成 ==",
+      "expected_output": "识别为逻辑变更，必须单独提醒用户确认",
+      "assertions": [
+        {
+          "name": "逻辑变更识别",
+          "description": "明确指出 == 与 === 转换属于逻辑变更",
+          "type": "qualitative"
+        },
+        {
+          "name": "用户确认要求",
+          "description": "必须单独确认，不自动执行",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "name": "跨文件命名重构",
+      "prompt": "把 getUserInfo 函数重命名为 fetchUserProfile",
+      "expected_output": "提示跨文件引用影响范围，需用户确认后执行",
+      "assertions": [
+        {
+          "name": "影响范围提示",
+          "description": "列出所有引用该符号的文件",
+          "type": "qualitative"
+        },
+        {
+          "name": "用户确认",
+          "description": "确认后再执行跨文件重构",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "name": "无匹配文件场景",
+      "prompt": "优化当前改动的文件",
+      "expected_output": "若无支持的扩展名文件，提示并终止",
+      "assertions": [
+        {
+          "name": "友好提示",
+          "description": "回复「当前没有需要优化的改动文件（支持 .vue、.js、.css、.scss、.less）。你可以指定文件或文件夹让我优化。」",
+          "type": "qualitative"
+        },
+        {
+          "name": "终止执行",
+          "description": "不继续执行任何操作",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
     }
   ]
 }
