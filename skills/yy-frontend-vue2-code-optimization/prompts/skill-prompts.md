@@ -75,6 +75,7 @@
 **参考文档**：`references/business-logic.md`
 
 **核心规则**：
+
 - 读取文件内容，分析组件职责、数据流向、交互关系、核心业务流程
 - 在 `<script>` 标签顶部生成结构化业务说明 JSDoc
 - **每次改动必须填写「改动时间」和「改动内容」**
@@ -91,6 +92,7 @@
 - 导入按 9 组排序，组间空一行，组内按字母排序
 - Vue 选项按 `name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期 排序
 - 模板属性按 `is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot` 排序
+- **模板职责**：只负责展示，不写复杂表达式；简单逻辑可内联，不要过度封装为 methods
 - **== vs === 转换属于逻辑变更，必须单独确认**
 
 ---
@@ -100,6 +102,7 @@
 **参考文档**：`references/comments.md`
 
 **核心规则**：
+
 - 模板区：根节点、循环、条件、区块、插槽、动态组件添加注释
 - 脚本区：关键方法添加 JSDoc（≤5 行），props/data/computed/watch/methods 添加行内注释（≤1 行）
 - 样式区：模块分组、子模块、响应式区块添加注释
@@ -112,6 +115,7 @@
 **参考文档**：`references/css-style.md`
 
 **核心规则**：
+
 - 块：独立模块直接命名（`card`、`form`）
 - 元素：块内子元素用 `__` 连接（`card__title`）
 - 修饰符：状态变体用 `--` 连接（`card--dark`、`card__title--large`）
@@ -125,6 +129,7 @@
 **参考文档**：`references/naming.md`
 
 **核心规则**：
+
 - API 函数：`api + Method + URLPath`（小驼峰）→ `apiGetUserInfo`
 - 事件函数：`on + EventName`（小驼峰）→ `onClickSubmit`
 - 常量：全大写 + 下划线 → `MAX_RETRY_COUNT`
@@ -145,6 +150,7 @@
 - 非副作用的逻辑从 `methods` 迁移至 `computed`，命名用 `is/has/visible` 前缀
 - 超过 50 行的方法拆分为子方法，重复 ≥2 次的逻辑提取为公共函数
 - Emit 标准化（白名单 17 种），Props 增强（明确 type 和 default）
+- 性能优化：懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化、computed 优先
 - **必须逐项确认后执行，提示风险**
 
 ---

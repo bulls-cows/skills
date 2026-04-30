@@ -82,7 +82,7 @@ examples:
 | `references/comments.md` | 模板注释（6种）、脚本注释（10种）、样式注释（3种）、JSDoc 格式 | 注释增强 |
 | `references/naming.md` | API/事件函数命名规范、常量/Props/组件命名、布尔值前缀 | 命名重构 |
 | `references/css-style.md` | BEM 命名定义、代码格式、样式注释、作用域标注 | 样式优化 |
-| `references/optimization.md` | async/await 转换、computed 优先、逻辑拆分、Emit 白名单、Props 增强 | 逻辑深度优化 |
+| `references/optimization.md` | async/await 转换、computed 优先、逻辑拆分、Emit 白名单、Props 增强、性能优化 | 逻辑深度优化 |
 | `references/business-logic.md` | 业务逻辑梳理规范（分析维度、输出格式、多次改动示例） | Vue 组件业务说明 |
 
 ## 边界条件与注意事项
