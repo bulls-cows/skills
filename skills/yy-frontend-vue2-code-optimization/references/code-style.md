@@ -82,6 +82,7 @@ export default {
 `is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`
 
 **注意**:
+
 - `v-text` 与 `v-html` 同位
 - 条件分支完整序列为 `v-if` → `v-else-if` → `v-else`
 - 隐藏控制包含 `v-show` 和 `v-cloak`

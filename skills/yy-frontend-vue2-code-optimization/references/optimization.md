@@ -21,7 +21,7 @@ if (code === 0) {
 - 统一响应模式 `{code, data, msg}` 解构处理
 - 错误处理使用 `try/catch + console.warn`
 
-### 风险点
+### 风险：异步与网络请求
 
 原代码可能使用不同响应结构；原有错误处理可能不同；`async/await` 改变执行时机。
 
@@ -30,7 +30,7 @@ if (code === 0) {
 - 将非副作用的逻辑从 `methods` 迁移至 `computed`
 - 命名统一用 `is/has/visible` 前缀，必须 `try/catch` 包裹
 
-### 风险点
+### 风险：计算属性优先
 
 响应式求值时机不同；带副作用的逻辑不能转为 computed；`try/catch` 在 computed 中行为与 methods 不同。
 
@@ -40,7 +40,7 @@ if (code === 0) {
 - 重复 ≥2 次的逻辑提取为公共函数
 - 简单条件判断直接内联到 template，不额外创建 method
 
-### 风险点
+### 风险：逻辑抽离与拆分
 
 拆分后可能引入作用域/this 指向问题；内联表达式改变执行时机。
 
@@ -58,7 +58,7 @@ if (code === 0) {
 
 `input` → 其它 → `change/click`
 
-### 风险点
+### 风险：Emit 标准化
 
 父组件监听的自定义事件名可能不在白名单中，改名或替换会导致父组件监听失效。
 
@@ -74,7 +74,7 @@ if (code === 0) {
 - 必须明确指定 `type` 和 `default`
 - 必须添加注释说明参数含义
 
-### 风险点
+### 风险：Props 增强
 
 缺少 `default` 值可能导致 props 为 `undefined` 时运行报错；新增 type 声明可能触发类型异常。
 
