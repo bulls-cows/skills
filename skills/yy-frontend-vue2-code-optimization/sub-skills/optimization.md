@@ -39,6 +39,37 @@ if (code === 0) {
 - 统一响应模式 `{code, data, msg}` 解构处理
 - 错误处理使用 `try/catch + console.warn`
 
+### 变更预览格式规范
+
+展示给用户确认时，**必须使用 diff 格式展示变更前后对比**，示例：
+
+```diff
+- // 优化前：Promise 链式调用
+- fetchData() {
+-   this.isLoading = true
+-   getUserInfo(this.userId).then(res => {
+-     if (res.code == 200) { /* 数据处理 */ }
+-     this.isLoading = false
+-   }).catch(err => {
+-     console.error(err)
+-     this.isLoading = false
+-   })
+- }
+
++ // 优化后：Async/Await + try/catch/finally
++ async fetchData() {
++   this.isLoading = true
++   try {
++     const res = await getUserInfo(this.userId)
++     if (res.code === 200) { /* 数据处理 */ }
++   } catch (err) {
++     console.warn(err)
++   } finally {
++     this.isLoading = false  // 只需写一次
++   }
++ }
+```
+
 ### 风险：异步与网络请求
 
 原代码可能使用不同响应结构；原有错误处理可能不同；`async/await` 改变执行时机。

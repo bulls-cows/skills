@@ -1,6 +1,6 @@
 {
   "name": "yy-frontend-vue2-code-optimization",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "date": "April 2026",
   "author": "wengdongyang",
   "abstract": "Vue2 前端代码优化技能。覆盖代码风格、BEM 样式规范、语义化命名、注释增强、异步逻辑优化 6 大模块，严格风险分级执行，零风险自动运行，中高风险需用户确认后执行。",
