@@ -34,8 +34,8 @@
 | 风险等级 | 默认状态 | 说明 |
 |---------|---------|------|
 | 🟢 零风险 | ✅ 勾选 | 业务逻辑梳理、文档注释增强 |
-| 🟡 中风险 | ❌ 未勾选 | 代码风格清洗（含 `==`/`===` 转换，优先使用 `===`）、CSS/BEM 重构、语义化命名重构，需提示风险 |
-| 🔴 高风险 | ❌ 未勾选 | async/await 转换、computed 迁移、逻辑拆分，必须逐项确认 |
+| 🟡 中风险 | ❌ 未勾选 | 代码风格清洗、CSS/BEM 重构、语义化命名重构，需提示风险 |
+| 🔴 高风险 | ❌ 未勾选 | `==`/`===` 转换（不主动变更，保持原有写法；接口响应 `code` 例外使用 `===`）、async/await 转换、computed 迁移、逻辑拆分，必须逐项确认 |
 
 **交互指令**：`全部执行`、`全部跳过`、`确认`、`执行 T01 T03` 等。
 
@@ -76,8 +76,7 @@
 
 ### 2.1 🔍 业务逻辑梳理（🟢零风险 · 仅 .vue）
 
-**详见**：`SKILL.md` → `### 1. 🔍 业务逻辑梳理（🟢零风险 · 仅 .vue）`
-**子技能规范**：`sub-skills/business-logic.md`
+**详见**：`[sub-skills/business-logic.md](../sub-skills/business-logic.md)`
 
 **核心规则**：
 
@@ -87,21 +86,20 @@
 
 ### 2.2 🧹 代码风格与格式清洗（🟡中风险）
 
-**详见**：`SKILL.md` → `### 3. 🧹 代码风格与格式清洗（🟡低/中风险）`
-**子技能规范**：`sub-skills/code-style.md`
+**详见**：`[sub-skills/code-style.md](../sub-skills/code-style.md)`
 
 **核心规则**：
 
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 `assets/.prettierrc.json` 规则手动格式化（仅供参考，不直接执行）
 - 导入按 9 组排序，组间空一行，组内字母排序
 - Vue 选项顺序：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期
+- 方法内部顺序：`init...()` → `async getListData()` / `async postFormData()` → `async onClick...()` / `async onChange...()` → `computed...()`
 - 模板属性顺序：`is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`
-- **`==` 与 `===` 之间的转换属于逻辑变更，必须明确提醒用户单独确认**（优先使用 `===` 进行相等比较）
+- **`==` 与 `===` 之间的转换属于逻辑变更，已归入🔴高风险，不主动变更，保持原有写法；仅接口响应 `code` 例外使用 `===`，必须明确提醒用户单独确认**
 
 ### 2.3 📝 文档与注释增强（🟢零风险）
 
-**详见**：`SKILL.md` → `### 2. 📝 文档与注释增强（🟢零风险 · 只增不改）`
-**子技能规范**：`sub-skills/comments.md`
+**详见**：`[sub-skills/comments.md](../sub-skills/comments.md)`
 
 **核心规则**：
 
@@ -112,8 +110,7 @@
 
 ### 2.4 🎨 CSS/BEM 架构规范（🟡低/中风险）
 
-**详见**：`SKILL.md` → `### 4. 🎨 CSS/BEM 架构规范（🟡低/中风险）`
-**子技能规范**：`sub-skills/css-style.md`
+**详见**：`[sub-skills/css-style.md](../sub-skills/css-style.md)`
 
 **核心规则**：
 
@@ -125,8 +122,7 @@
 
 ### 2.5 🔤 语义化命名重构（🟡低/中风险）
 
-**详见**：`SKILL.md` → `### 5. 🔤 语义化命名重构（🟡低/中风险）`
-**子技能规范**：`sub-skills/naming.md`
+**详见**：`[sub-skills/naming.md](../sub-skills/naming.md)`
 
 **核心规则**：
 
@@ -139,8 +135,7 @@
 
 ### 2.6 ⚡ 逻辑深度优化（🔴高风险 · 必须确认）
 
-**详见**：`SKILL.md` → `### 6. ⚡ 逻辑深度优化（🔴高风险 · 逐项确认）`
-**子技能规范**：`sub-skills/optimization.md`
+**详见**：`[sub-skills/optimization.md](../sub-skills/optimization.md)`
 
 **核心规则**：
 
@@ -164,7 +159,8 @@
 | 禁止使用 mixins | |
 | 禁止多层 try/catch 嵌套 | |
 | 禁止无意义命名 | 如 `data1`、`temp2` |
-| 绝不修改业务逻辑 / 生成新组件 | |
+| 绝不修改业务逻辑 | 组件拆分须用户确认 |
+| 不生成新组件 | |
 
 ### 推荐实践
 
