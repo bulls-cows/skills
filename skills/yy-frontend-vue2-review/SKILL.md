@@ -73,14 +73,14 @@ icon: 🔍
 
 | 维度 ID | 检查内容 | 严重程度 | 参考文件 |
 |---------|----------|----------|----------|
-| D01 | Vue2 组件规范（脚本结构、元素特性顺序、props、emit、生命周期） | 🟡 中等 | `references/component.md` |
+| D01 | Vue2 组件规范（脚本结构、元素特性顺序、props、emit、生命周期emit限制、v-slot语法、模块化原则） | 🟡 中等 | `references/component.md` |
 | D02 | 代码风格（缩进、引号、分号、尾随逗号、箭头函数、9 组导入顺序） | 🟢 轻微 | `references/code-style.md` |
 | D03 | 命名规范（API 函数、事件函数、常量、props、组件名、emit 事件） | 🟡 中等 | `references/naming.md` |
 | D04 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序） | 🔴 严重 | `references/logic-and-request.md` |
-| D05 | 网络请求规范（async/await + try/catch、统一响应模式） | 🟡 中等 | `references/logic-and-request.md` |
+| D05 | 网络请求规范（async/await + try/catch、统一响应模式、函数try/catch） | 🟡 中等 | `references/logic-and-request.md` + `references/best-practice.md` |
 | D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 | `references/logic-and-request.md` |
 | D07 | 安全漏洞（XSS、敏感信息泄露） | 🔴 严重 | `references/best-practice.md` |
-| D08 | 最佳实践（调试代码清理、BEM + scoped、未使用变量） | 🟢 轻微 | `references/best-practice.md` |
+| D08 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、Props解构） | 🟢 轻微 | `references/best-practice.md` |
 | D09 | 绝对禁止项（连续解构、修改子组件数据、修改 data 类型、修改 props） | 🔴 严重 | `references/best-practice.md` |
 
 ### 步骤三：逐维度审核
