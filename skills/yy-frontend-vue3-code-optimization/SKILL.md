@@ -166,6 +166,7 @@ API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名。跨�
 ---
 
 **子技能速查表**：
+
 - [T01 业务逻辑梳理](./sub-skills/business-logic.md) | [T02 代码风格](./sub-skills/code-style.md) | [T03 注释增强](./sub-skills/comments.md)
 - [T04 CSS/BEM 规范](./sub-skills/css-style.md) | [T05 命名规范](./sub-skills/naming.md) | [T06 逻辑深度优化](./sub-skills/optimization.md)
 
@@ -274,6 +275,7 @@ API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名。跨�
 ```
 
 **变更后的完整代码**：
+
 ```vue
 <template>
   <!-- UserCard -->
