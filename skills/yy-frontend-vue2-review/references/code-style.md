@@ -32,6 +32,7 @@ const obj = {
 - 多参数或无参数时保留括号
 
 **示例**：
+
 ```js
 items.map(item => item.id)          // ✅ 单参数省略括号
 items.map((item, index) => item.id)  // ✅ 多参数保留括号
@@ -68,6 +69,7 @@ const obj = {foo: bar}    // ❌
 | 9 | 相对组件 | `import StatusBadge from './StatusBadge.vue'` |
 
 **示例**：
+
 ```js
 // 1. 外部依赖
 import Vue from 'vue'

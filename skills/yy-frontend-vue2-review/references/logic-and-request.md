@@ -14,6 +14,7 @@
 - 使用可选链 `?.` 或短路 `&&` 进行安全访问
 
 **错误示例**：
+
 ```js
 // ❌ 空指针风险
 const userName = this.user.info.name
@@ -23,6 +24,7 @@ const firstItem = this.list[0].name
 ```
 
 **正确示例**：
+
 ```js
 // ✅ 安全访问
 const userName = this.user?.info?.name
@@ -42,6 +44,7 @@ const userName = this.user && this.user.info && this.user.info.name
 - 使用 `arr[index]` 时确保 `index >= 0 && index < arr.length`
 
 **错误示例**：
+
 ```js
 // ❌ 数组越界风险
 const firstItem = this.list[0]
@@ -49,6 +52,7 @@ const lastItem = this.list[this.list.length - 1]
 ```
 
 **正确示例**：
+
 ```js
 // ✅ 边界检查
 const firstItem = this.list.length > 0 ? this.list[0] : null
@@ -66,6 +70,7 @@ const lastItem = this.list.length > 0 ? this.list[this.list.length - 1] : null
 - 布尔表达式无冗余或矛盾
 
 **错误示例**：
+
 ```js
 // ❌ 遗漏边界情况
 if (this.status === 1) {
@@ -77,6 +82,7 @@ if (this.status === 1) {
 ```
 
 **正确示例**：
+
 ```js
 // ✅ 完整覆盖
 if (this.status === 1) {
@@ -110,6 +116,7 @@ if (this.status === 1) {
 **严重程度**：🟡 中等
 
 **标准模式**：
+
 ```js
 async function fetchData() {
   try {
@@ -139,6 +146,7 @@ async function fetchData() {
 - 使用 `async/await` 替代 `.then()` 链式调用来降低嵌套深度
 
 **错误示例**：
+
 ```js
 // ❌ 多层嵌套
 async function badExample() {
@@ -168,6 +176,7 @@ if (code === 0) {
 ```
 
 **规范说明**：
+
 - `code === 0` 表示成功，调用 `this.$message.success()`
 - 非零 `code` 表示失败，调用 `this.$message.error()`
 - `msg` 为空时使用默认文案

@@ -28,6 +28,7 @@
 - **结尾**：接口路径的小驼峰形式
 
 **示例**：
+
 ```js
 // ✅ 正确
 apiGetUserInfo()
@@ -49,6 +50,7 @@ api_get_user()     // 下划线命名
 - 用于 `@click="onClickHandler"` 等模板事件绑定场景
 
 **示例**：
+
 ```js
 // ✅ 正确
 onClickSubmit()
@@ -70,6 +72,7 @@ clickBtn()         // 语义不清晰
 - 定义在常量文件中的不可变值
 
 **示例**：
+
 ```js
 // ✅ 正确
 const MAX_RETRY_COUNT = 3
@@ -89,6 +92,7 @@ const MaxRetryCount = 3  // 大驼峰
 - 模板中自动转换为 kebab-case
 
 **示例**：
+
 ```js
 // ✅ 正确 JavaScript 侧
 props: {
@@ -116,6 +120,7 @@ props: {
 - 避免单单词文件名（如 `User.vue` → 改为 `UserCard.vue`）
 
 **示例**：
+
 ```vue
 <!-- ✅ 正确 -->
 <UserList />
@@ -135,11 +140,13 @@ props: {
 - 应在 emit 白名单范围内或为其合理派生
 
 **白名单**：
+
 - 交互类：`change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add`
 - 弹窗类：`open`、`close`、`show`、`hide`
 - 操作类：`cancel`、`confirm`、`ok`、`editSuccess`、`error`
 
 **示例**：
+
 ```js
 // ✅ 正确
 this.$emit('userChange', newData)

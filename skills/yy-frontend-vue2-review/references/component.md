@@ -19,6 +19,7 @@ Vue2 组件的 `export default` 内部必须严格遵循以下顺序：
 `beforeCreate` → `created` → `beforeMount` → `mounted` → `beforeUpdate` → `updated` → `activated` → `deactivated` → `beforeDestroy` → `destroyed`
 
 **示例**：
+
 ```javascript
 export default {
   name: 'UserCard',
@@ -60,6 +61,7 @@ export default {
 8. `v-html` / `v-text`
 
 **示例**：
+
 ```vue
 <template>
   <UserCard
@@ -77,17 +79,21 @@ export default {
 ## 3. Props 规范
 
 ### 命名规范
+
 - 使用 camelCase 命名（JavaScript 侧）
 - 模板中自动转换为 kebab-case
 
 ### 类型要求
+
 - 类型必须明确指定：`String`、`Number`、`Boolean`、`Array`、`Object`、`Function`
 - 推荐提供默认值（非 required 时）
 
 ### 注释要求
+
 - 必须添加含义注释说明用途
 
 **示例**：
+
 ```javascript
 props: {
   // 用户 ID，必填
@@ -113,9 +119,11 @@ props: {
 ## 4. Emit 事件规范
 
 ### 顺序
+
 `input` → 其它自定义事件 → `change` / `click` 等交互事件。
 
 ### 白名单
+
 Emit 事件名必须在以下白名单范围内或为其合理派生：
 
 | 类别 | 白名单事件 |
@@ -125,6 +133,7 @@ Emit 事件名必须在以下白名单范围内或为其合理派生：
 | **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
 
 ### 生命周期 emit 限制
+
 - **基础组件**：禁止在生命周期钩子中 emit 事件
 - **业务组件**：允许但不推荐在生命周期中 emit
 
@@ -135,6 +144,7 @@ Emit 事件名必须在以下白名单范围内或为其合理派生：
 使用动态风格（`#` 或 `v-slot:`），避免废弃语法。
 
 **正确示例**：
+
 ```vue
 <template #header>
   <h1>标题</h1>
@@ -146,6 +156,7 @@ Emit 事件名必须在以下白名单范围内或为其合理派生：
 ```
 
 **错误示例**：
+
 ```vue
 <template slot="header">
   <!-- 已废弃 -->
@@ -169,6 +180,7 @@ Emit 事件名必须在以下白名单范围内或为其合理派生：
 - 避免在 `data` 中存储可推导的值
 
 **正确示例**：
+
 ```javascript
 // 可推导的值使用 computed
 computed: {
@@ -179,6 +191,7 @@ computed: {
 ```
 
 **错误示例**：
+
 ```javascript
 // 可推导的值不应放在 data 中
 data() {

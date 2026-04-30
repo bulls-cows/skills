@@ -12,6 +12,7 @@
 - **例外**：`catch` 块中的 `console.warn` 不视为问题，允许保留用于错误日志
 
 **错误示例**：
+
 ```js
 // ❌ 提交前应清理
 console.log('用户数据:', user)
@@ -20,6 +21,7 @@ alert('调试')
 ```
 
 **正确示例**：
+
 ```js
 // ✅ catch 块中的 console.warn 允许
 try {
@@ -44,6 +46,7 @@ try {
 - **Modifier（修饰符）**：状态或样式变体，用 `--` 连接，如 `.card--dark`、`.btn--disabled`
 
 **示例**：
+
 ```scss
 .user-card {              // Block
   &__header { }           // Element
@@ -60,6 +63,7 @@ try {
 - 需要穿透子组件样式时使用 `::v-deep`（Vue2 语法）
 
 **示例**：
+
 ```vue
 <style scoped lang="scss">
 .parent {
@@ -118,12 +122,14 @@ try {
 - **禁止**直接将用户输入通过 `v-html` 渲染
 
 **错误示例**：
+
 ```vue
 <!-- ❌ XSS 风险 -->
 <div v-html="userInput"></div>
 ```
 
 **正确示例**：
+
 ```vue
 <!-- ✅ 经过过滤或来自可信来源 -->
 <div v-html="sanitizedContent"></div>
@@ -140,6 +146,7 @@ try {
 - 禁止在前端代码中暴露后端内部接口地址（非公开 API）
 
 **错误示例**：
+
 ```js
 // ❌ 硬编码敏感信息
 const API_KEY = 'secret-12345'
@@ -160,6 +167,7 @@ const PASSWORD = 'admin123'
 | 直接修改 props | 禁止直接修改组件 props，应使用 data 或 computed 中转 | 违反单向数据流原则，导致父组件状态意外变更 |
 
 **错误示例**：
+
 ```js
 // ❌ 连续解构
 const { user: { info: { name } } } = this.data.data
