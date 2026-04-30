@@ -4,20 +4,21 @@ description: >
   针对 Vue2 项目的 .vue、.js、.css、.scss、.less 文件执行代码优化、风格整理、规范重构。
   触发场景：用户要求优化 Vue2 代码、Code Review 时代码审查、统一 BEM 命名规范、
   整理导入顺序、格式化代码结构、语义化命名重构、异步代码优化（.then() → async/await）、注释增强。
-  默认对 git 变动文件执行优化，也可按用户指定范围执行。
+  默认对 git 变动文件执行优化，还可按用户指定范围执行。
   风险分级执行：零风险优化自动执行，中/高风险需用户确认。
-  绝不修改业务逻辑，涉及业务变更必须先确认。
+  绝不修改业务逻辑，涉及业务变更须先确认。
   Vue3 项目请使用 yy-frontend-vue3-code-optimization。
   当用户提到以下任何内容时，务必使用此技能：.vue 文件整理、代码规范化、组件注释添加、样式重构、
   Vue2 项目清理、BEM 重构、导入排序、命名规范调整、async/await 转换、Vue Options API 优化、
   Props 增强、Emit 标准化、计算属性迁移、组件职责梳理、代码交接准备、可读性提升。
+  兼容 Node.js 环境，无需额外依赖。
 ---
 
 # yy-frontend-vue2-code-optimization
 
 针对 Vue2 页面组件、JavaScript 和 CSS/SCSS/Less 文件的代码优化技能。通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，显著提升代码可读性与团队协作效率，降低维护与交接成本。
 
-**核心原则**：不生成新组件，不修改业务逻辑。涉及业务变更必须先确认。这样做的目的是保持原有功能不变，只改进代码的可读性和可维护性。
+**核心原则**：不主动生成新组件（组件拆分建议需用户确认后再执行）。涉及业务变更必须先确认。这样做的目的是保持原有功能不变，同时提供架构优化选项。
 
 ## 触发场景
 
@@ -62,8 +63,8 @@ description: >
 | 风险等级     | 默认状态    | 交互说明                                                                        |
 | ------------ | ----------- | ------------------------------------------------------------------------------- |
 | 🟢 零风险    | ✅ 自动勾选 | 业务逻辑梳理、文档注释增强。自动执行                                            |
-| 🟡 中风险    | ❌ 需确认   | 代码风格清洗（含 `==`/`===` 转换，优先使用 `===`）、CSS/BEM 重构、语义化命名重构。需提示风险    |
-| 🔴 高风险    | ❌ 逐项确认 | async/await 转换、computed 迁移、逻辑拆分。展示风险提示和变更预览，确认后再执行 |
+| 🟡 中风险    | ❌ 需确认   | 代码风格清洗（格式化、导入排序、Vue选项排序）、CSS/BEM 重构、语义化命名重构。需提示风险    |
+| 🔴 高风险    | ❌ 逐项确认 | `==`→`===` 转换、async/await 转换、computed 迁移、逻辑拆分、组件拆分建议。展示风险提示和变更预览，确认后再执行 |
 
 **交互指令**：`全部执行`、`全部跳过`、`确认`、`执行 T01 T03` 等。
 
@@ -79,94 +80,39 @@ description: >
 
 ### 1. 🔍 业务逻辑梳理（🟢零风险 · 仅 .vue）
 
-**目标**：分析组件职责、数据流和交互关系，生成结构化业务说明插入到 `<script>` 顶部。这样做让团队成员快速理解组件用途，降低维护成本。
+分析组件职责、数据流和交互关系，生成结构化业务说明插入到 `<script>` 顶部。
 
-**分析维度**：
-
-- **组件职责**：页面级/弹窗级/表单级/独立模块级？
-- **数据流向**：props 传入、API 请求、Store 注入、emit 传出。
-- **交互关系**：父→子 props，子→父 emit，依赖组件。
-- **核心业务流程**：关键方法的执行时序。
-
-**输出格式**（每次改动必须包含改动时间和改动内容，倒序排列）：
-
-```javascript
-/**
- * 改动时间: 2026-04-30
- * 改动内容: 生成首次业务逻辑说明
- *
- * ---
- *
- * UserListPage
- * @description 用户列表管理页面，负责数据查询、列表展示、批量操作
- * @description 核心业务流程: init → 请求用户列表 → computed 派生分页数据
- *
- * 数据来源:
- * - props: pageSize (分页大小，默认 20)
- * - API: apiGetUserList 接口获取用户列表数据
- * - data: searchQuery (查询条件)、tableData (列表数据)、loading (加载状态)
- *
- * 交互关系:
- * - 接收 props: pageSize, defaultActiveTab
- * - emit 事件: onUserSelect, onChangePage
- * - 依赖组件: <DataTable />, <SearchBar />, <Pagination />
- */
-```
-
-> 📖 完整示例与多次改动记录：[references/business-logic.md](./references/business-logic.md)
+> 📖 详细规范：[sub-skills/business-logic.md](./sub-skills/business-logic.md)
 
 ### 2. 📝 文档与注释增强（🟢零风险 · 只增不改）
 
-- **模板注释**：根节点 `<!-- 组件名 -->`、循环、条件、关键区块、插槽、动态组件添加注释。
-- **脚本注释**：
-  - 关键方法添加 JSDoc（≤5 行），包含参数、返回值、简述。
-  - Props/Data/Computed/Watch 等添加单行注释（如 `// userId: 用户ID`）。
-- **样式注释**：模块 `/* 模块名 */`，子模块 `/* 模块 > 子模块 */`，响应式 `/* 响应式 */`。
+为模板、脚本、样式添加结构化注释，提升代码可读性。
 
-### 3. 🧹 代码风格与格式清洗（🟡低/中风险）
+> 📖 详细规范：[sub-skills/comments.md](./sub-skills/comments.md)
 
-- **Prettier 格式化**：优先执行 `npx prettier --write <target-file>`。若失败（Prettier 未安装），则参考 `assets/.prettierrc.json` 的配置规则手动格式化（该文件仅供 AI 参考，不直接执行）。使用项目自有配置可以保持与团队规范一致。
-- **导入顺序（9 组，组间空一行，组内字母排序）**：外部依赖 → 全局 API → 全局工具 → 相对工具 → 全局 Store → 全局配置 → 相对配置 → 全局组件 → 相对组件。分组让开发者快速定位依赖来源。
-- **Vue 选项顺序**：`name` → `components` → `props` → `data` → `computed` → `watch` → `methods` → 生命周期。与 Vue 官方推荐顺序一致，降低认知负担。
-- **模板属性排序**：`is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`。按指令优先级排序，方便快速理解模板逻辑。
-- **模板职责**：只负责展示，不写复杂表达式；简单逻辑可内联，不为简单逻辑额外创建 methods。模板过重会降低可读性。
-- **`==` vs `===`**：优先使用 `===` 进行相等比较。这是现代 JS/ESLint 的标准实践。若项目中存在大量 `==` 且需要转为 `===`，**这属于逻辑变更，必须明确提醒用户单独确认**，因为类型 coercion 行为不同。
+### 3. 🧹 代码风格与格式清洗（🟡中风险）
 
-### 4. 🎨 CSS/BEM 架构规范（🟡低/中风险）
+Prettier 格式化、导入排序、Vue 选项排序、模板属性排序。
 
-- **BEM 转换规范**：块（`card`）→ 元素（`card__title`）→ 修饰符（`card--dark`）。
-- **规则**：全小写、横线连接、类名唯一不冲突。
-- **嵌套深度**：最大 2 层（块 → 元素 → 修饰符）。修饰符与块/元素同级，或使用 `&` 引用。
-- **Scoped 优先**：Vue 组件必须使用 `<style scoped>`。
-- **⚠️ scoped 样式同步**：进行 BEM 重构时，必须同步修改模板中的 `class` 属性，确保样式与模板一致。
+> 📖 详细规范：[sub-skills/code-style.md](./sub-skills/code-style.md)
 
-### 5. 🔤 语义化命名重构（🟡低/中风险）
+### 4. 🎨 CSS/BEM 架构规范（🟡中风险）
 
-| 类型     | 规范                              | 示例                             |
-| -------- | --------------------------------- | -------------------------------- |
-| API 函数 | `api + Method + URLPath` (小驼峰) | `apiGetUserInfo`                 |
-| 事件函数 | `on + EventName` (小驼峰)         | `onClickSubmit`, `onChangeInput` |
-| 常量     | 全大写 + 下划线                   | `MAX_RETRY_COUNT`                |
-| Props    | camelCase                         | `userName`, `isLoading`          |
-| 组件名   | PascalCase                        | `<UserList />`                   |
-| 布尔值   | `isXX` / `hasXX` / `showXX` 前缀  | `isLoading`, `hasPermission`     |
+将类名转为 BEM 格式，确保 scoped 样式同步。
 
-- **跨文件引用**：语义化命名重构涉及跨文件引用时，需提示用户影响范围并取得确认后再执行。
-- 严禁 `data1`、`temp2` 等无意义命名。
+> 📖 详细规范：[sub-skills/css-style.md](./sub-skills/css-style.md)
+
+### 5. 🔤 语义化命名重构（🟡中风险）
+
+API/事件重命名、常量规范、布尔值前缀规范。跨文件引用需确认。
+
+> 📖 详细规范：[sub-skills/naming.md](./sub-skills/naming.md)
 
 ### 6. ⚡ 逻辑深度优化（🔴高风险 · 逐项确认）
 
-- **异步优化**：`.then()` 链式转为 `async/await`，使用 `try/catch + console.warn`；统一响应模式 `{code, data, msg}` 解构。
-- **Computed 优先**：非副作用逻辑从 `methods` 迁移至 `computed`，命名 `is/has` 前缀。
-- **逻辑拆分**：超过 50 行的方法拆分，重复 ≥2 次逻辑提取为公共函数；简单条件内联到模板。
-- **Emit 标准化（仅限白名单）**：
-  - 交互类: `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add`
-  - 弹窗类: `open`, `close`, `show`, `hide`
-  - 操作类: `cancel`, `confirm`, `ok`, `editSuccess`, `error`
-- **Props 增强**：明确 `type` 和 `default`，添加参数注释。
-- **性能优化**：懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化（webp、懒加载）、computed 替代 watch。
+async/await 转换、computed 优先、逻辑拆分、Emit 白名单、Props 增强。
 
-> 📖 子技能规范（执行时按需读取）：[sub-skills/](./sub-skills/) 目录
+> 📖 详细规范：[sub-skills/optimization.md](./sub-skills/optimization.md)
 >
 > - [T01 业务逻辑梳理](./sub-skills/business-logic.md) | [T02 代码风格](./sub-skills/code-style.md) | [T03 注释增强](./sub-skills/comments.md)
 > - [T04 CSS/BEM 规范](./sub-skills/css-style.md) | [T05 命名规范](./sub-skills/naming.md) | [T06 逻辑深度优化](./sub-skills/optimization.md)
@@ -184,22 +130,22 @@ description: >
 | 禁止使用 mixins               |                     |
 | 禁止多层 try/catch 嵌套       |                     |
 | 禁止无意义命名                | 如 `data1`、`temp2` |
-| 绝不修改业务逻辑 / 生成新组件 |                     |
+| 绝不修改业务逻辑              | 组件拆分须先确认    |
 
 ### ✅ 推荐实践
 
 1. **错误处理**：函数用 try/catch 包裹，catch 中用 `console.warn` 打印
 2. **异步优化**：尽可能使用 async/await
 3. **计算优先**：除与后端交互的数据外，其余尽量使用 computed
-4. **组件拆分**：弹窗→独立组件；表格→表格组件 + 业务逻辑分离；表单→表单组件 + 校验分离
+4. **⚠️ 组件拆分**：弹窗→独立组件、表格→表格组件 + 业务逻辑分离、表单→表单组件 + 校验分离。**这属于架构调整，须用户确认后执行**
 
 ---
 
 ## 边界条件与注意事项
 
-- **业务逻辑保护**：绝不修改业务逻辑、生成新组件或变更功能行为
-- **风险分级**：🟢零风险自动勾选，🟡低/中风险和🔴高风险必须用户确认后执行
-- **运算符转换**：`==` 与 `===` 之间的任何转换属于逻辑变更，必须单独提醒用户确认，绝不自动执行
+- **业务逻辑保护**：绝不修改业务逻辑或变更功能行为；组件拆分属于架构调整，必须确认后执行
+- **风险分级**：🟢零风险自动执行，🟡中风险和🔴高风险必须用户确认后执行
+- **运算符转换**：`==` 与 `===` 之间的任何转换属于逻辑变更（归入🔴高风险），必须单独提醒用户确认，绝不自动执行
 - **回滚机制**：建议用户使用 git 管理变更，优化前提醒用户先提交当前状态，以便随时回滚
 - **大型文件**：超过 1000 行的文件建议分批优化，避免单次变更过大
 
