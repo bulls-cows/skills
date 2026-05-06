@@ -5,9 +5,10 @@
   "main": "README.md",
   "type": "module",
   "scripts": {
-    "lint": "node --run check:skill && node --run lint:markdown && node --run check:type && node --run sync:marketplace",
+    "lint": "node --run check:skill && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace",
     "check:skill": "node ./build/check-skill.mts",
     "lint:markdown": "markdownlint \"**/*.md\" --fix --ignore node_modules --ignore \"**/node_modules/**\"",
+    "lint:lf": "node ./build/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts",
     "install:skill": "npx skills remove --all -g -y && npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn -a codebuddy"
