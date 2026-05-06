@@ -191,6 +191,16 @@ interface User {
 
 - [依赖项列表]
 
+## 5. 代码示例（可选）
+
+核心逻辑片段、关键函数签名、数据结构定义等：
+
+```typescript
+// 示例：核心函数签名
+async function login(username: string, password: string): Promise<Token>;
+async function validateToken(token: string): Promise<User>;
+```
+
 ### 2. tasks.md - 任务分解
 
 ```markdown
