@@ -14,7 +14,7 @@ Skill 是"可按需加载的任务说明书"，用于复用复杂流程。关键
 
 1. **自动发现**：会被自动发现，只在相关时加载，避免上下文膨胀
 2. **精确触发**：description 要精确，避免误触发
-3. **明确边界**：必须有 When to use 和 Don't use when
+3. **明确边界**：必须有使用场景（触发条件和不应触发场景）
 4. **固定输出**：输出格式要固定，便于自动化评测
 
 ## 创建/更新流程
@@ -32,7 +32,7 @@ Skill 是"可按需加载的任务说明书"，用于复用复杂流程。关键
 
 对于**更新现有技能**，先读取现有 SKILL.md 内容，然后询问：
 
-1. 想要更新技能的哪些部分？（description、When to use、Steps、Output contract 等）
+1. 想要更新技能的哪些部分？（描述、使用场景、指令、输出约定等）
 2. 更新后的预期行为是什么？
 
 ### 2. 确定技能目录
@@ -58,8 +58,8 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
 - 只写技能用途和触发场景
 - 保持简短，避免堆叠步骤、规则、例外和实现细节
-- 具体约束写在正文，如 Steps、When to use、Don't use when、Output contract
-- 如果 `description` 已经开始解释“怎么做”，通常说明写宽了
+- 具体约束写在正文，如使用场景、指令、输出约定
+- 如果 `description` 已经开始解释”怎么做”，通常说明写宽了
 
 ### 4. 创建/更新目录结构
 
@@ -72,7 +72,13 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
 #### 目录结构规范
 
-请参考 [@resources/skill-specification-comparison.md](resources/skill-specification-comparison.md)
+```text
+skill-name/
+├── SKILL.md           # 必须
+├── examples/          # 可选：输入/输出示例
+├── templates/         # 可选：模板文件
+└── resources/         # 可选：参考文档、脚本
+```
 
 ### 5. 多 Skill 协作
 
@@ -92,12 +98,12 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
 **创建技能后**，检查：
 
-1. 每个 Skill 都有明确边界与负例（Don't use when）
-2. Description 精确，不会误触发
+1. 每个 Skill 都有明确边界与负例（使用场景中列出不应触发的情况）
+2. description 精确，不会误触发
 3. 同一任务重复运行，输出结构稳定
 4. Skill 能单独被显式调用
 5. YAML 格式正确（使用多行字符串语法处理长 description）
-6. 如果有参考文档需求，已添加 `references/` 目录
+6. 如果有参考文档需求，已添加 `resources/` 目录
 7. 文件命名符合规范（kebab-case）
 8. 使用中文描述
 9. 代码示例包含语言标签
@@ -108,16 +114,16 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
 1. 更新后的 description 仍然准确反映技能用途
 2. description 只保留触发判断所需信息，没有混入执行细节
-3. When to use 和 Don't use when 仍然明确
-4. Steps 步骤仍然完整可执行
-5. Output contract 仍然清晰定义
+3. 使用场景仍然明确（触发条件和不应触发场景）
+4. 指令步骤仍然完整可执行
+5. 输出约定仍然清晰定义
 6. YAML 格式正确
 7. 如有参考文件，检查是否需要同步更新
 
 ## 常见坑
 
 1. **写成"知识百科"**：Skill 文档必须包含执行步骤，不能只是知识文档
-2. **缺少负例**：没有 Don't use when，导致误触发
+2. **缺少负例**：没有在使用场景中列出不应触发的情况，导致误触发
 3. **输出格式不固定**：结果不可自动评测
 4. **Description 过宽**：会在不相关的任务中被触发
 5. **YAML 语法错误**：长 description 需要使用多行字符串语法
@@ -140,4 +146,3 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
 - `resources/skill-best-practices.md`：技能编写最佳实践参考
-- `resources/skill-specification-comparison.md`：各平台 Skill 规范对比分析
