@@ -1,4 +1,4 @@
-# 语义化命名重构
+# T05 🔤 语义化命名重构（🟡 中风险）
 
 **定位**：🟡 中风险。涉及标识符的全局替换，需确保引用查找的准确性。
 
@@ -36,7 +36,7 @@
 | --------------- | ----------------------- | --------------------------------- |
 | 表格逻辑 Hook   | `use + 功能名`          | `useTable`                        |
 | 表单逻辑 Hook   | `use + 功能名`          | `useSearchForm`                   |
-| 请求逻辑 Hook   | `use + 功能名 + Fetch`  | `useUserFetch`                    |
+| 请求逻辑 Hook   | `use + 功能名 + Fetch` | `useUserFetch`                    |
 | 通用逻辑 Hook   | `use + 功能名`          | `useLocalStorage`                 |
 
 ```typescript
@@ -65,7 +65,7 @@ type IUserInfo = {
 
 interface ITableConfig {
   columns: ITableColumn[];
-}
+};
 
 // ❌ 错误：类型命名缺少 I 前缀
 type UserInfo = { ... };  // 应为 IUserInfo
@@ -79,7 +79,7 @@ interface TableConfig { ... };  // 应为 ITableConfig
 - 严禁类型命名使用小驼峰（应为 PascalCase）
 - 严禁类型命名缺少 `I` 前缀（`type IUserInfo`、`interface IUser`）
 
-> 📖 更多禁止规则见主技能文档 [SKILL.md](../SKILL.md) 的「禁止规则」章节。
+> 📖 更多禁止规则见主技能文档 SKILL.md 的「禁止规则」章节。
 
 ## 跨文件引用处理
 

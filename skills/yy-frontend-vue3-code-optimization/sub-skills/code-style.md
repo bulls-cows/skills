@@ -1,4 +1,4 @@
-# 代码风格与格式清洗
+# T02 🧹 代码风格与格式清洗（🟡 中风险）
 
 **定位**：🟡 中风险。涉及代码格式化和结构整理。适用于 `.vue`、`.js`、`.jsx`、`.ts`、`.tsx`、`.css`、`.scss`、`.less` 文件。
 
@@ -205,7 +205,7 @@ defineExpose({
 
 - **禁止 `any`**：使用 `unknown` 或具体类型
 - **类型命名**：必须使用 `I` 前缀（如 `IUserInfo`、`ITableColumn`）
-- **props 类型**：使用 `defineProps<{ ... }>()` 或 `withDefaults(defineProps<{ ... }>(), { ... })`
+- **props 类型**：使用 `defineProps<{ ... }>` 或 `withDefaults(defineProps<{ ... }>(), { ... })`
 - **emit 类型**：使用 `defineEmits<{ (e: "event", payload: Type): void }>()`
 - **ref 类型**：使用 `ref<Type>(initialValue)` 或 `ref<Type | null>(null)`
 - **reactive 类型**：使用 `reactive<{ ... }>({ ... })` 或接口定义
@@ -224,7 +224,7 @@ const userList = ref<any>([]);  // 禁止
 const data: any = {};  // 禁止
 ```
 
-## TSX/JSX 组件结构规范
+## JSX/TSX 组件结构规范
 
 ### TSX 组件标准结构
 
@@ -297,7 +297,6 @@ export default defineComponent({
 ### JSX 组件规范（Vue 风格）
 
 > 提示：Vue3 项目推荐优先使用 `.vue` 单文件组件配合 `<script setup>`。仅在需要动态渲染或复杂 render 逻辑时才使用 TSX/JSX。对于简单的 JSX 组件，建议迁移回 `.vue` 格式。
-
 
 ```jsx
 // UserCard.vue（推荐：.vue 单文件组件）
