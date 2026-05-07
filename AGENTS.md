@@ -39,7 +39,7 @@
 
 ## 编辑器配置
 
-编写内容时，需遵循 [.editorconfig](./.editorconfig)
+编写内容时，需遵循 [@.editorconfig](./.editorconfig)
 
 ---
 
