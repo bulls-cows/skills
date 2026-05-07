@@ -1,5 +1,7 @@
 # 命名规范
 
+对应审核维度 D03（🟡 中等），用于命名规范审核。
+
 ## 命名约定表
 
 | 类型 | 规范 | 示例 |
@@ -10,21 +12,14 @@
 | 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT`, `APP_CONFIG` |
 | Props | 小驼峰 | `userName`, `isLoading` |
 | 组件名 | PascalCase | `<UserList />` |
-| 组件文件名 | 多个单词 + PascalCase | `UserList.vue` |
+| 组件文件名 | 多单词 + PascalCase | `UserList.vue` |
 | emit 事件 | 小驼峰 | `userChange` |
 | Hooks | `use` + 功能名 | `useTable`, `useSearchForm` |
-| 布尔值 | `isXX` / `hasXX` / `showXX` | `isLoading`, `hasPermission`, `showModal` |
+| 布尔值 | `isXX` / `hasXX` / `showXX` | `isLoading`, `hasPermission` |
 
-## Emit 事件白名单
+## 命名注意事项
 
-### 交互类
-
-`change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add`
-
-### 弹窗类
-
-`open`, `close`, `show`, `hide`
-
-### 操作类
-
-`cancel`, `confirm`, `ok`, `editSuccess`, `error`
+- 禁止使用无意义命名（如 `data1`、`temp2` 等）
+- 组件文件名必须使用多单词 PascalCase
+- 布尔值前缀必须明确（is/has/show）
+- 组件命名必须使用 PascalCase
