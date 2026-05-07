@@ -78,7 +78,7 @@ import NavbarLogo2 from "./NavbarLogo2.vue";
 
 // 10. Hooks
 import { useTable } from "@src/hooks/useTable";
-import { useSearchForm } from "./hooks/useSearchForm";
+import { useSearchForm } from "./useSearchForm";
 
 // 11. 类型定义（仅 TypeScript/TSX）
 import type { IUserInfo } from "@src/types/user";

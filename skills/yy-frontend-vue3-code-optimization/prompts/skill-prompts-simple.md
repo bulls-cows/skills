@@ -77,7 +77,7 @@
 
 **Hooks 规范**：
 
-- 命名：`useXxx`，文件存放在 `@src/hooks/`
+- 命名：`useXxx`，全局 Hooks 文件存放在 `@src/hooks/`，局部 Hooks 直接在组件同级目录新建文件（如 `./useLocalTable.ts`），无需 `hooks/` 子目录
 - 返回值：`toRefs` 解构后返回对象，**禁止直接返回 reactive 对象**
 - 可复用逻辑超过 30 行或跨 2+ 组件使用时，必须抽离为 Hook
 - 禁止将 Hooks 挂载到响应式数据上
@@ -179,7 +179,7 @@
 3. 除后端交互和定时器外，一律尽可能使用 `computed`
 4. `v-html` 必须防范 XSS
 5. 响应式数据：优先 `ref`，**尽可能少用 `reactive`**（仅在复杂对象场景下使用）
-6. Hooks：可复用逻辑抽离到 `useXxx`，放在 `@src/hooks/`
+6. Hooks：可复用逻辑抽离到 `useXxx`，全局放在 `@src/hooks/`，局部直接在组件同级目录新建文件
 7. 未使用变量需自行清理
 8. 组件拆分：弹窗→独立组件，表格→表格+业务分离，表单→表单+校验分离
 9. 性能：路由和大组件使用 `defineAsyncComponent`，合理使用 `<KeepAlive>`

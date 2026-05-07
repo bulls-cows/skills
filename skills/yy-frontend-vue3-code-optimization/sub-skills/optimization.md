@@ -99,11 +99,11 @@ const userList = computed(async () => {  // 禁止
 
 ## 函数写法偏好（🟡 中风险）
 
-### 核心原则
+### 箭头函数优先
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-### 转换规则
+### 声明方式对照
 
 | 原写法 | 推荐写法 |
 |--------|---------|
@@ -152,7 +152,7 @@ const handleSubmit = async () => {
 ### Hooks 存放位置
 
 - **全局 Hooks**：`@src/hooks/`（如 `useTable.ts`、`useRequest.ts`）
-- **局部 Hooks**：组件目录下 `hooks/`（如 `./hooks/useLocalTable.ts`）
+- **局部 Hooks**：**直接在组件同级目录新建文件**（如 `./useLocalTable.ts`），无需额外 `hooks/` 子目录
 
 ### Hooks 结构规范
 
