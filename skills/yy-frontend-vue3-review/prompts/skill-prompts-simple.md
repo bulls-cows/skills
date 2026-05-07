@@ -26,14 +26,14 @@
 
 | 维度 | 检查要点 |
 | ---- | -------- |
-| Vue3 组件 | 必须 `<script setup>`、禁止 `this`、脚本顺序（imports→defineProps→defineEmits→Hooks→ref/reactive→computed→watch→方法→生命周期→defineExpose）、元素特性顺序、Props（TS 类型/camelCase/注释）、Emit 顺序、生命周期 emit 限制、v-slot 动态风格、组件命名 PascalCase、ref/computed 使用、禁止 mixins、不要过度封装 |
+| Vue3 组件 | 必须 `<script setup>`、禁止 `this`、脚本顺序（imports→defineProps→defineEmits→Hooks→ref/reactive→computed→watch→方法→生命周期→defineExpose）、元素特性顺序、Props（TS 类型/camelCase/注释）、Emit 顺序、生命周期 emit 限制、v-slot 动态风格、组件命名 PascalCase、**优先 ref 少用 reactive**、ref/computed 使用、禁止 mixins、不要过度封装 |
 | 代码风格 | 2空格、单引号、分号、120行宽、尾随逗号、箭头函数单参数无括号、11组导入顺序、`==` 不视为问题、注释问题不检查 |
 | 命名规范 | API函数（api+Method+URLPath）、事件函数（on+EventName）、变量/方法（小驼峰）、常量（全大写+下划线）、Hooks（use+功能名）、布尔值（isXX/hasXX/showXX） |
 | 逻辑错误 | 空指针、数组越界、逻辑判断错误、方法内部顺序（init→网络请求→事件处理→特殊计算）、ref 必须 `.value` |
 | 网络请求 | `async/await + try/catch/finally`、禁止多层 try/catch、禁止连续解构、统一响应模式 `{ code, data, msg }` + `code === 0` 判断 |
 | computed | 必须 try/catch、有意义命名 |
 | 安全漏洞 | `v-html` XSS 风险、敏感信息硬编码 |
-| 最佳实践 | 清理调试代码、BEM+scoped、未使用变量、函数 try/catch、Hooks（>30行或跨2+组件必须抽离、返回对象/toRefs、禁止挂载到响应式数据）、组件拆分（弹窗独立、表格分离）、defineExpose、defineAsyncComponent 懒加载 |
+| 最佳实践 | 清理调试代码、BEM+scoped、未使用变量、函数 try/catch、Hooks（>30行或跨2+组件必须抽离、返回对象/toRefs、**禁止直接返回 reactive**、禁止挂载到响应式数据）、组件拆分（弹窗独立、表格分离）、defineExpose、defineAsyncComponent 懒加载、**优先 ref 少用 reactive** |
 | 绝对禁止 | 连续解构、父改子数据、修改 ref/reactive 类型、直接修改 props、`<script setup>` 用 this、Options API、mixins、多层 try/catch |
 
 ### 阶段三：输出审核结果
@@ -118,9 +118,10 @@ if (code === 0) {
 ### Hooks 规范
 
 - 命名：`useXxx`，存放 `@src/hooks/`
-- 返回：`toRefs` 解构后返回对象，禁止直接返回 reactive
+- 返回：`toRefs` 解构后返回对象，**禁止直接返回 reactive**
 - 抽离条件：可复用逻辑 >30 行或跨 2+ 组件
 - 禁止挂载到响应式数据
+- **尽可能少用 reactive，优先使用 ref**
 
 ---
 
@@ -145,7 +146,7 @@ if (code === 0) {
 2. 尽可能 async/await，少用 `.then()`
 3. 除后端交互和定时器外，一律使用 `computed`
 4. `v-html` 防范 XSS
-5. 响应式数据：优先 `ref`，复杂对象用 `reactive`
+5. 响应式数据：优先 `ref`，**尽可能少用 `reactive`**
 6. Hooks：可复用逻辑抽离到 `useXxx`
 7. 未使用变量自行清理
 8. 注释问题默认忽略
