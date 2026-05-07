@@ -81,8 +81,8 @@ import { useTable } from "@src/hooks/useTable";
 import { useSearchForm } from "./hooks/useSearchForm";
 
 // 11. 类型定义（仅 TypeScript/TSX）
-import type { UserInfo } from "@src/types/user";
-import type { TableColumn } from "./types";
+import type { IUserInfo } from "@src/types/user";
+import type { ITableColumn } from "./types";
 ```
 
 ### `<script setup>` 结构顺序
@@ -94,7 +94,7 @@ import type { TableColumn } from "./types";
 // 1. imports（按 11 组排序）
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";
-import type { UserInfo } from "@src/types/user";
+import type { IUserInfo } from "@src/types/user";
 
 // 2. defineProps
 const props = defineProps<{
@@ -104,7 +104,7 @@ const props = defineProps<{
 
 // 3. defineEmits
 const emit = defineEmits<{
-  (e: "select", user: UserInfo): void;
+  (e: "select", user: IUserInfo): void;
   (e: "change", page: number): void;
 }>();
 
@@ -170,6 +170,18 @@ defineExpose({
 
 `init...()` → `async getListData()` / `async postFormData()` → `onClick...()` / `onChange...()` → `computed...()`
 
+### 函数写法偏好
+
+**优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
+
+| 原写法 | 推荐写法 |
+|--------|---------|
+| `function fetchData() {}` | `const fetchData = () => {}` |
+| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| `async function submitForm() {}` | `const submitForm = async () => {}` |
+
+> ⚠️ 该转换属于**代码风格统一**，需在 T02 任务中提示用户确认后执行。
+
 ### 模板属性排序
 
 `is` → `v-for` → `v-if` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`
@@ -192,6 +204,7 @@ defineExpose({
 ## TypeScript/TSX 类型注解规范
 
 - **禁止 `any`**：使用 `unknown` 或具体类型
+- **类型命名**：必须使用 `I` 前缀（如 `IUserInfo`、`ITableColumn`）
 - **props 类型**：使用 `defineProps<{ ... }>()` 或 `withDefaults(defineProps<{ ... }>(), { ... })`
 - **emit 类型**：使用 `defineEmits<{ (e: "event", payload: Type): void }>()`
 - **ref 类型**：使用 `ref<Type>(initialValue)` 或 `ref<Type | null>(null)`
@@ -199,7 +212,7 @@ defineExpose({
 
 ```typescript
 // ✅ 正确：明确类型
-const userList = ref<UserInfo[]>([]);
+const userList = ref<IUserInfo[]>([]);
 const selectedId = ref<string | null>(null);
 const formData = reactive<{ username: string; email: string }>({
   username: "",
@@ -219,7 +232,7 @@ const data: any = {};  // 禁止
 // UserCard.tsx
 import { defineComponent, ref, computed } from "vue";
 import type { PropType } from "vue";
-import type { UserInfo } from "@/types/user";
+import type { IUserInfo } from "@/types/user";
 
 /**
  * UserCard 组件
@@ -231,7 +244,7 @@ export default defineComponent({
   props: {
     // user: 用户信息对象
     user: {
-      type: Object as PropType<UserInfo>,
+      type: Object as PropType<IUserInfo>,
       required: true,
     },
     // isLoading: 加载状态
@@ -281,49 +294,59 @@ export default defineComponent({
 7. setup 函数
 8. 返回渲染函数
 
-### JSX 组件规范（React 风格）
+### JSX 组件规范（Vue 风格）
+
+> 提示：Vue3 项目推荐优先使用 `.vue` 单文件组件配合 `<script setup>`。仅在需要动态渲染或复杂 render 逻辑时才使用 TSX/JSX。对于简单的 JSX 组件，建议迁移回 `.vue` 格式。
+
 
 ```jsx
-// UserCard.jsx
-import { useState, useMemo } from "react";
+// UserCard.vue（推荐：.vue 单文件组件）
+<script setup>
+import { ref, computed } from "vue";
 
 /**
  * UserCard 组件
  * @description 用户卡片组件，显示用户基本信息
  */
-const UserCard = ({ user, isLoading = false, onSelect, onChange }) => {
-  // state: 是否激活
-  const [isActive, setIsActive] = useState(false);
+const props = defineProps({
+  user: { type: Object, required: true },
+  isLoading: { type: Boolean, default: false },
+});
 
-  // computed: 显示名称
-  const displayName = useMemo(() => user?.name || "未知用户", [user]);
+const emit = defineEmits(["select", "change"]);
 
-  // 方法: 处理点击
-  const handleClick = () => {
-    onSelect?.(user);
-    setIsActive(!isActive);
-  };
+// state: 是否激活
+const isActive = ref(false);
 
-  return (
-    <div className="user-card">
-      <div className="user-card__header">
-        <span>{displayName}</span>
-      </div>
-      <div className="user-card__body">
-        <button onClick={handleClick}>选择用户</button>
-      </div>
-    </div>
-  );
+// computed: 显示名称
+const displayName = computed(() => props.user?.name || "未知用户");
+
+// 方法: 处理点击
+const handleClick = () => {
+  emit("select", props.user);
+  isActive.value = !isActive.value;
 };
+</script>
 
-export default UserCard;
+<template>
+  <div class="user-card">
+    <div class="user-card__header">
+      <span>{{ displayName }}</span>
+    </div>
+    <div class="user-card__body">
+      <button @click="handleClick">选择用户</button>
+    </div>
+  </div>
+</template>
 ```
 
 ### JSX 组件结构顺序
 
-1. imports
-2. 组件定义
-3. hooks（useState, useMemo, useEffect 等）
-4. 方法
-5. 返回 JSX
-6. export
+1. imports（按 11 组排序）
+2. 类型定义
+3. defineComponent
+4. name
+5. props（带 TypeScript 类型）
+6. emits
+7. setup 函数（包含：状态定义、计算属性、方法）
+8. 返回渲染函数

@@ -128,18 +128,18 @@ const props = withDefaults(
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";
-import type { UserInfo } from "@src/types/user";
+import type { IUserInfo } from "@src/types/user";
 
 // Props 定义
 const props = defineProps<{
   // user: 用户信息
-  user: UserInfo;
+  user: IUserInfo;
 }>();
 
 // Emits 定义
 const emit = defineEmits<{
   // select: 选中用户
-  (e: "select", user: UserInfo): void;
+  (e: "select", user: IUserInfo): void;
 }>();
 
 // ref: 搜索查询参数
@@ -236,7 +236,7 @@ onMounted(() => {
  * 用户信息类型
  * @description 包含用户基本信息和状态
  */
-interface UserInfo {
+interface IUserInfo {
   id: string;
   username: string;
   email: string;
@@ -247,7 +247,7 @@ interface UserInfo {
  * 表格列配置类型
  * @description 定义表格列的显示配置
  */
-type TableColumn = {
+type ITableColumn = {
   key: string;
   title: string;
   width?: number;

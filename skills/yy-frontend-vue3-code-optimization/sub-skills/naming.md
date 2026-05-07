@@ -52,23 +52,24 @@ const { tableData } = tableHook();  // 禁止
 
 | 类型     | 规范        | 示例               |
 | -------- | ----------- | ------------------ |
-| 类型别名 | PascalCase  | `UserInfo`, `TableConfig` |
-| 接口     | PascalCase  | `IUser`, `ITable`（可选 I 前缀） |
+| 类型别名 | `I` + PascalCase | `IUserInfo`, `ITableConfig` |
+| 接口     | `I` + PascalCase | `IUser`, `ITable` |
 | 泛型参数 | 单字母大写  | `T`, `K`, `V`      |
 
 ```typescript
-// ✅ 正确：类型命名
-type UserInfo = {
+// ✅ 正确：类型命名以 I 为前缀
+type IUserInfo = {
   id: string;
   name: string;
 };
 
-interface TableConfig {
-  columns: TableColumn[];
+interface ITableConfig {
+  columns: ITableColumn[];
 }
 
-// ❌ 错误：类型命名不规范
-type userInfo = { ... };  // 应为 UserInfo
+// ❌ 错误：类型命名缺少 I 前缀
+type UserInfo = { ... };  // 应为 IUserInfo
+interface TableConfig { ... };  // 应为 ITableConfig
 ```
 
 ## 禁止项
@@ -76,6 +77,7 @@ type userInfo = { ... };  // 应为 UserInfo
 - 严禁 `data1`、`temp2` 等无意义命名
 - 严禁 Hooks 不以 `use` 开头
 - 严禁类型命名使用小驼峰（应为 PascalCase）
+- 严禁类型命名缺少 `I` 前缀（`type IUserInfo`、`interface IUser`）
 
 > 📖 更多禁止规则见主技能文档 [SKILL.md](../SKILL.md) 的「禁止规则」章节。
 

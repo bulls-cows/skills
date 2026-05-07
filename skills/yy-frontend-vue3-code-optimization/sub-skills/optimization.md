@@ -97,6 +97,50 @@ const userList = computed(async () => {  // 禁止
 
 响应式求值时机不同；带副作用的逻辑（如 API 请求、DOM 操作）不能转为 computed。
 
+## 函数写法偏好（🟡 中风险）
+
+### 核心原则
+
+**优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
+
+### 转换规则
+
+| 原写法 | 推荐写法 |
+|--------|---------|
+| `function fetchData() {}` | `const fetchData = () => {}` |
+| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| `async function submitForm() {}` | `const submitForm = async () => {}` |
+
+### 示例
+
+```typescript
+// ❌ 错误：function 声明（不推荐）
+function fetchData() {
+  // ...
+}
+
+const handleClick = function() {
+  // ...
+}
+
+// ✅ 正确：箭头函数（推荐）
+const fetchData = () => {
+  // ...
+};
+
+const handleSubmit = async () => {
+  // ...
+};
+```
+
+### 注意事项
+
+- 该转换会改变 `this` 指向，但在 Vue3 `<script setup>` 中几乎不存在 `this` 依赖，因此可安全转换
+- 函数名保持原有语义不变，仅改变声明形式
+- 属于**代码风格统一**行为，需用户确认后执行
+
+---
+
 ## Hooks 抽离
 
 ### 抽离条件
@@ -115,13 +159,13 @@ const userList = computed(async () => {  // 禁止
 ```typescript
 // hooks/useTable.ts
 import { ref, computed } from "vue";
-import type { TableColumn } from "@/types/table";
+import type { ITableColumn } from "@/types/table";
 
 /**
  * 表格逻辑 Hook
  * @description 提供表格数据管理、排序、分页等功能
  */
-export function useTable<T = any>(initialColumns?: TableColumn[]) {
+export function useTable<T = any>(initialColumns?: ITableColumn[]) {
   // ref: 表格数据
   const tableData = ref<T[]>([]);
   
@@ -174,7 +218,7 @@ import { useTable } from "@/hooks/useTable";
 import { apiGetUserList } from "@/api/user";
 
 // 使用 Hook
-const { tableData, loading, fetchData } = useTable<UserInfo>();
+const { tableData, loading, fetchData } = useTable<IUserInfo>();
 
 onMounted(() => {
   fetchData(() => apiGetUserList({ page: 1 }));
@@ -356,7 +400,7 @@ const props = defineProps<{
 // ✅ 正确：使用 TypeScript 类型定义 Emits
 const emit = defineEmits<{
   // select: 选中用户事件
-  (e: "select", user: UserInfo): void;
+  (e: "select", user: IUserInfo): void;
   // change: 页面变化事件
   (e: "change", page: number): void;
 }>();
