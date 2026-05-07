@@ -118,7 +118,7 @@ if (code === 0) {
 
 ## 3. 🟢 推荐实践
 
-1. **函数 try/catch**：推荐包裹 computed、methods 等，catch 中 `console.warn` 打印错误
+1. **函数 try/catch**：推荐包裹 computed、函数等，catch 中 `console.warn` 打印错误
 2. **异步写法**：尽可能使用 async/await，少用 `.then()` 链式
 3. **计算优先**：除后端交互和定时器外，一律使用 `computed`
 4. **v-html**：可使用，但必须防范 XSS 风险

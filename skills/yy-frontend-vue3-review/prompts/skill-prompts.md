@@ -190,7 +190,7 @@
 - **调试代码**：清理 `console.log`/`debugger` 等调试代码（catch 块中的 `console.warn` 不视为问题）。
 - **样式规范**：BEM 命名 + `scoped` 作用域（非 scoped 需标注 `/* 全局 */`）。
 - **未使用变量**：需自行清理（ESLint 已关闭检查）。
-- **函数 try/catch**：推荐包裹 computed、methods 等，catch 中使用 `console.warn` 打印错误。
+- **函数 try/catch**：推荐包裹 computed、函数等，catch 中使用 `console.warn` 打印错误。
 - **Hooks 规范**：
   - 可复用逻辑超过 30 行或跨 2+ 组件时，必须抽离为 Hook。
   - 全局 Hooks 存放在 `@src/hooks/`，局部 Hooks 直接在组件同级目录新建（如 `./useLocalTable.ts`）。
