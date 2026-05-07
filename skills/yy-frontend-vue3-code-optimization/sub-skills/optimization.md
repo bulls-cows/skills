@@ -1,4 +1,4 @@
-# 逻辑深度优化
+# T06 ⚡ 逻辑深度优化（🔴 高风险 · 必须确认）
 
 **定位**：🔴 高风险。涉及运行时行为改变，**必须经过任务调度器确认后执行**。
 
@@ -323,14 +323,14 @@ export const useForm = () => {
 -   username: '',
 -   email: '',
 - });
-- 
+-
 - formData.username = 'test';
 - formData.email = 'test@example.com';
 
 + // 优化后：使用 ref
 + const username = ref('');
 + const email = ref('');
-+ 
++
 + username.value = 'test';
 + email.value = 'test@example.com';
 ```
@@ -440,15 +440,3 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
 - **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制
 - **ref/reactive 选择**：简单值用 `ref`，复杂对象用 `reactive`
-- **⚠️ 组件拆分**：弹窗→独立组件、表格→表格组件 + 业务逻辑分离、表单→表单组件 + 校验分离。**这属于架构调整，须用户确认后执行，不会自动创建新文件**
-
-## 其他优化
-
-- `v-html` 必须防范 XSS，避免直接操作未过滤的字符串
-- 禁止直接修改 `props` 数据（使用 `props.xxx` 只读访问）
-- 禁止连续解构 (如 `...data.data`)
-- 禁止父组件直接修改子组件数据
-- 禁止多次修改 ref/reactive 属性类型（后端给什么值用什么值，可新增属性但不允许修改原始数据类型）
-- **ref 访问必须使用 `.value`**
-
-> 📖 更多禁止规则见主技能文档 [SKILL.md](../SKILL.md) 的「禁止规则」章节。
