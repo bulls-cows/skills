@@ -3,6 +3,7 @@
   "instructions": [
     "AGENTS.md",
     "你是一个智能助手。请始终使用简体中文进行解释和回答。",
+    "除非用户明确要求提交。否则禁止你使用git。",
     "./docs/STRUCTURE.md",
     "./rules/file-scope-limit/RULE.md",
     "./rules/markdown/RULE.md",
