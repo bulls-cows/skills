@@ -52,6 +52,8 @@ Skill 是"可按需加载的任务说明书"，用于复用复杂流程。关键
 
 SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
+**交互设计原则**：减少不必要的交互轮次，默认采用最常见策略。详见 `resources/skill-best-practices.md` 中的"交互设计原则"章节。
+
 其中 `description` 只用于给 AI 判断是否触发技能：
 
 - 只写技能用途和触发场景
