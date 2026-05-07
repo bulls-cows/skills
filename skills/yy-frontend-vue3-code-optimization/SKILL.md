@@ -68,7 +68,7 @@ description: >
 | T03     | `.vue` `.js` `.jsx` `.ts` `.tsx` | 文档与注释增强    | 添加 JSDoc、模板注释、样式注释                                           | 🟢 零风险    |
 | T04     | `.vue` `.css` `.scss` `.less` | CSS/BEM 架构规范   | 类名转为 `block__element--modifier` 格式                                  | 🟡 中风险    |
 | T05     | `.vue` `.js` `.jsx` `.ts` `.tsx` | 语义化命名重构    | `isXX` 前缀替换、API 函数重命名、常量命名规范、Hooks 命名规范           | 🟡 中风险    |
-| T06     | `.vue` `.js` `.jsx` `.ts` `.tsx` | 逻辑深度优化      | `==`/`===` 转换（不主动变更，保持原有写法；接口响应 `code` 例外使用 `===`）、`.then()` → `async/await`、computed 优先、Hooks 抽离、Props/Emits 增强 | 🔴 高风险    |
+| T06     | `.vue` `.js` `.jsx` `.ts` `.tsx` | 逻辑深度优化      | `==`/`===` 转换（不主动变更，保持原有写法；接口响应 `code` 例外使用 `===`）、`.then()` → `async/await`、computed 优先、Hooks 抽离、**reactive 转 ref（尽可能少用 reactive）**、Props/Emits 增强 | 🔴 高风险    |
 
 > 注意：根据文件类型，任务可能不同。例如 `.js`/`.jsx`/`.ts`/`.tsx` 文件没有业务逻辑梳理和 CSS/BEM 任务；`.css/.scss/.less` 文件仅有 T02 代码风格和 T04 CSS/BEM 任务。
 
@@ -78,7 +78,7 @@ description: >
 | ------------ | ----------- | ------------------------------------------------------------------------------- |
 | 🟢 零风险    | ✅ 自动勾选 | 业务逻辑梳理、文档注释增强。**立即自动执行**，无需等待用户确认                          |
 | 🟡 中风险    | ❌ 需确认   | 代码风格清洗（格式化、导入排序、`<script setup>`结构排序）、CSS/BEM 重构、语义化命名重构。**必须用户明确确认后才能执行**，需提示风险    |
-| 🔴 高风险    | ❌ 逐项确认 | `==`/`===` 转换（不主动变更，保持原有写法；接口响应 `code` 例外使用 `===`）、async/await 转换、computed 迁移、Hooks 抽离、Props/Emits 变更。**必须逐项确认并展示变更预览**，确认后再执行 |
+| 🔴 高风险    | ❌ 逐项确认 | `==`/`===` 转换（不主动变更，保持原有写法；接口响应 `code` 例外使用 `===`）、async/await 转换、computed 迁移、Hooks 抽离、**reactive 转 ref**、Props/Emits 变更。**必须逐项确认并展示变更预览**，确认后再执行 |
 
 **⚠️ 强制执行规则（必须严格遵守，违反即视为技能失效）：**
 
@@ -149,7 +149,7 @@ API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名规范�
 
 ### 6. ⚡ 逻辑深度优化（🔴高风险 · 逐项确认）
 
-相等运算符转换、async/await 转换、computed 优先、Hooks 抽离、Props 增强、Emits 标准化。
+相等运算符转换、async/await 转换、computed 优先、Hooks 抽离、**reactive 转 ref（尽可能少用 reactive）**、Props 增强、Emits 标准化。
 
 > 📖 详细规范：[sub-skills/optimization.md](./sub-skills/optimization.md)
 >
@@ -188,6 +188,7 @@ API/事件重命名、常量规范、布尔值前缀规范、Hooks 命名规范�
 5. **⚠️ 组件拆分**：弹窗→独立组件、表格→表格组件 + 业务逻辑分离、表单→表单组件 + 校验分离。**这属于架构调整，须用户确认后执行，不会自动创建新文件**
 6. **TypeScript 类型**：参数、返回值、变量必须明确类型
 7. **ref 访问**：必须使用 `.value`
+8. **响应式数据**：优先使用 `ref`，**尽可能少用 `reactive`**（仅在复杂对象场景下使用）
 
 ---
 

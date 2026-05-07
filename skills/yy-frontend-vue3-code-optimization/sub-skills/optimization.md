@@ -128,12 +128,10 @@ export function useTable<T = any>(initialColumns?: TableColumn[]) {
   // ref: 加载状态
   const loading = ref(false);
   
-  // ref: 分页信息
-  const pagination = reactive({
-    page: 1,
-    pageSize: 20,
-    total: 0,
-  });
+  // ref: 分页信息（优先使用 ref，尽可能少用 reactive）
+  const page = ref(1);
+  const pageSize = ref(20);
+  const total = ref(0);
   
   // computed: 是否有数据
   const hasData = computed(() => tableData.value.length > 0);
@@ -147,7 +145,7 @@ export function useTable<T = any>(initialColumns?: TableColumn[]) {
     try {
       const { data, total } = await fetchFn();
       tableData.value = data;
-      pagination.total = total;
+      total.value = total;
     } catch (err) {
       console.warn(err);
     } finally {
@@ -155,11 +153,13 @@ export function useTable<T = any>(initialColumns?: TableColumn[]) {
     }
   };
   
-  // 返回公共接口
+// 返回公共接口（禁止直接返回 reactive 对象）
   return {
     tableData,
     loading,
-    pagination,
+    page,
+    pageSize,
+    total,
     hasData,
     fetchData,
   };
@@ -185,6 +185,111 @@ onMounted(() => {
 ### 风险：Hooks 抽离
 
 抽离后可能引入作用域问题；依赖关系需要重新梳理；父组件传递 props 需调整。
+
+## Reactive 转 Ref（尽可能少用 Reactive）
+
+### Reactive 转 Ref 原则
+
+**优先使用 `ref`，尽可能少用 `reactive`**。仅在以下场景考虑使用 `reactive`：
+
+- **复杂对象结构**：需要管理多层嵌套的对象数据
+- **批量属性更新**：需要一次性更新多个相关属性
+- **对象解构场景**：需要解构后仍保持响应式（配合 `toRefs`）
+
+### 转换规则
+
+| 场景 | 原写法（reactive） | 推荐写法（ref） |
+|------|---------------------|-----------------|
+| 简单状态 | `const state = reactive({ count: 0 })` | `const count = ref(0)` |
+| 对象数据 | `const user = reactive({ name: '', age: 0 })` | `const userName = ref('')`<br>`const userAge = ref(0)` |
+| 数组数据 | `const list = reactive([])` | `const list = ref([])` |
+| 分页信息 | `const pagination = reactive({ page: 1, size: 20 })` | `const page = ref(1)`<br>`const pageSize = ref(20)` |
+
+### 转换示例
+
+**优化前（使用 reactive）**：
+
+```typescript
+// ❌ 不推荐：使用 reactive
+const formData = reactive({
+  username: '',
+  email: '',
+  phone: '',
+});
+
+const pagination = reactive({
+  page: 1,
+  pageSize: 20,
+  total: 0,
+});
+```
+
+**优化后（使用 ref）**：
+
+```typescript
+// ✅ 推荐：使用 ref
+const username = ref('');
+const email = ref('');
+const phone = ref('');
+
+const page = ref(1);
+const pageSize = ref(20);
+const total = ref(0);
+```
+
+### Hooks 中的规范
+
+**禁止直接返回 reactive 对象**，必须使用 `toRefs` 解构后返回：
+
+```typescript
+// ❌ 错误：直接返回 reactive
+export function useForm() {
+  const form = reactive({ name: '', age: 0 });
+  return { form };  // 禁止
+}
+
+// ✅ 正确：使用 toRefs 解构后返回
+export function useForm() {
+  const name = ref('');
+  const age = ref(0);
+  return { name, age };
+}
+
+// ✅ 正确：如果必须用 reactive，使用 toRefs
+export function useForm() {
+  const form = reactive({ name: '', age: 0 });
+  return toRefs(form);  // 允许
+}
+```
+
+### 风险：Reactive 转 Ref
+
+- **解构丢失响应式**：reactive 解构后会丢失响应式，需要配合 `toRefs`
+- **访问方式变更**：ref 需要 `.value` 访问，reactive 直接访问属性
+- **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
+- **批量更新影响**：reactive 的批量属性更新更简洁，ref 需要逐个更新
+
+### 变更预览格式
+
+展示给用户确认时，**必须使用 diff 格式展示变更前后对比**，示例：
+
+```diff
+- // 优化前：使用 reactive
+- const formData = reactive({
+-   username: '',
+-   email: '',
+- });
+- 
+- formData.username = 'test';
+- formData.email = 'test@example.com';
+
++ // 优化后：使用 ref
++ const username = ref('');
++ const email = ref('');
++ 
++ username.value = 'test';
++ email.value = 'test@example.com';
+```
 
 ## Props 增强
 

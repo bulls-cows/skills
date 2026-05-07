@@ -27,7 +27,7 @@
 | T03 | 注释增强 | 🟢 零风险 | 模板/脚本/样式注释，只增不改 |
 | T04 | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改 |
 | T05 | 语义化命名 | 🟡 中风险 | API/事件/常量/Hooks 命名规范 |
-| T06 | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、Props/Emits增强 |
+| T06 | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
 
 ### 执行规则
 
@@ -64,7 +64,7 @@
 
 **脚本区**（必须 `<script setup>`）：
 
-- 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref/reactive` → `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
+- 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref`（**尽可能少用 reactive**）→ `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
 - 顶部 JSDoc：组件名称 + 页面职责 + 核心业务 + 数据来源
 - Props：`defineProps` + TypeScript 类型注解，camelCase，必须注释
 - Emits：`defineEmits` 定义，顺序 `input` → `其它` → `change/click`；基础组件生命周期禁止 emit
@@ -78,10 +78,11 @@
 **Hooks 规范**：
 
 - 命名：`useXxx`，文件存放在 `@src/hooks/`
-- 返回值：`toRefs` 解构后返回对象，禁止直接返回 reactive
+- 返回值：`toRefs` 解构后返回对象，**禁止直接返回 reactive 对象**
 - 可复用逻辑超过 30 行或跨 2+ 组件使用时，必须抽离为 Hook
 - 禁止将 Hooks 挂载到响应式数据上
 - 导入顺序：全局 Hooks 在相对工具之后、Store 之前；相对 Hooks 在 Hooks 之后
+- **尽可能少用 reactive，优先使用 ref**
 
 **样式区**：
 
@@ -177,7 +178,7 @@
 2. 尽可能使用 async/await，少用 `.then()` 链式
 3. 除后端交互和定时器外，一律尽可能使用 `computed`
 4. `v-html` 必须防范 XSS
-5. 响应式数据：优先 `ref`，复杂对象用 `reactive`
+5. 响应式数据：优先 `ref`，**尽可能少用 `reactive`**（仅在复杂对象场景下使用）
 6. Hooks：可复用逻辑抽离到 `useXxx`，放在 `@src/hooks/`
 7. 未使用变量需自行清理
 8. 组件拆分：弹窗→独立组件，表格→表格+业务分离，表单→表单+校验分离
