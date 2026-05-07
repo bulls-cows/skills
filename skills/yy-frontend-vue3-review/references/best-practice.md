@@ -30,7 +30,7 @@
 
 ### 函数 try/catch
 
-- 推荐包裹 computed、methods 等
+- 推荐包裹 computed、函数等
 - catch 中使用 `console.warn` 打印错误
 
 ### Hooks 规范
