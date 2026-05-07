@@ -16,12 +16,14 @@
 ### 2. 数据流向
 
 **数据来源**：
+
 - props 传入
 - API 请求
 - Store 注入（Pinia/Vuex）
 - 本地 ref/reactive 初始化
 
 **数据去向**：
+
 - emit 传递给父组件
 - 作为参数调用下一个 API
 
