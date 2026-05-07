@@ -165,7 +165,7 @@ import type { ITableColumn } from "@/types/table";
  * 表格逻辑 Hook
  * @description 提供表格数据管理、排序、分页等功能
  */
-export function useTable<T = any>(initialColumns?: ITableColumn[]) {
+export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
   // ref: 表格数据
   const tableData = ref<T[]>([]);
   
@@ -207,7 +207,7 @@ export function useTable<T = any>(initialColumns?: ITableColumn[]) {
     hasData,
     fetchData,
   };
-}
+};
 ```
 
 ### 使用示例
@@ -287,23 +287,23 @@ const total = ref(0);
 
 ```typescript
 // ❌ 错误：直接返回 reactive
-export function useForm() {
+export const useForm = () => {
   const form = reactive({ name: '', age: 0 });
   return { form };  // 禁止
-}
+};
 
 // ✅ 正确：使用 toRefs 解构后返回
-export function useForm() {
+export const useForm = () => {
   const name = ref('');
   const age = ref(0);
   return { name, age };
-}
+};
 
 // ✅ 正确：如果必须用 reactive，使用 toRefs
-export function useForm() {
+export const useForm = () => {
   const form = reactive({ name: '', age: 0 });
   return toRefs(form);  // 允许
-}
+};
 ```
 
 ### 风险：Reactive 转 Ref
