@@ -29,7 +29,7 @@ description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或
 复杂需求按以下流程：
 
 1. 将计划写入计划文件
-2. 调用 NotifyUser 表示计划制定完成
+2. 提醒用户计划已制定完成
 3. **等待用户明确确认执行**
 
 ### 3. 计划确认后
@@ -42,7 +42,7 @@ description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或
 
 - **仍然禁止进行任何编辑**
 - 根据用户反馈优化/完善计划
-- 再次调用 NotifyUser 提供新计划
+- 提醒用户新计划已制定完成
 
 ## 计划文件位置
 
@@ -90,6 +90,7 @@ description: "计划优先执行模式。当用户输入 /yy-mode-plan 命令或
 3. **步骤**：有序的实施步骤列表
 4. **涉及文件**：将要修改的文件列表
 5. **风险**：潜在问题及应对策略
+6. **代码示例**（可选）：核心逻辑片段、关键函数签名、数据结构定义等
 
 ## 使用示例
 
@@ -153,6 +154,22 @@ AI:
 |------|--------|------|----------|
 | Token 过期处理 | 中 | 中 | 添加 refresh token 机制 |
 | 并发请求 | 低 | 高 | 添加请求队列 |
+
+## 代码示例（可选）
+
+```typescript
+// Token 生成
+function generateToken(userId: string): string {
+  return jwt.sign({ userId }, SECRET_KEY, { expiresIn: '7d' });
+}
+
+// Token 验证中间件
+async function authMiddleware(req, res, next) {
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, SECRET_KEY);
+  req.user = await User.findById(decoded.userId);
+  next();
+}
 ```
 
 ## 路径格式规范
@@ -160,35 +177,3 @@ AI:
 - 在文档中提及文件路径时，优先使用相对路径，以保持跨设备下的通用性
 - 在终端中提及文件路径时，优先使用绝对路径，以方便终端/IDE 将其识别为可点击的链接
 - 使用正斜杠作为路径分隔符，路径包含空格时使用引号包裹，以确保跨平台兼容性和正确解析
-
-### 输出示例
-
-```markdown
-## 计划已制定完成
-
-### 目标
-为应用添加基于 JWT 令牌的用户认证功能
-
-### 方法
-1. 使用 jsonwebtoken 库生成和验证 Token
-2. 设计 Token 存储策略（httpOnly Cookie）
-3. 实现登录/登出/刷新 Token 接口
-
-### 实施步骤
-1. 安装 jsonwebtoken 依赖
-2. 创建 Token 工具类（生成、验证、刷新）
-3. 添加登录 API 接口
-4. 添加 Token 验证中间件
-5. 配置 Cookie 存储策略
-
-### 涉及文件
-- src/utils/jwt.ts（新增）
-- src/middleware/auth.ts（新增）
-- src/api/auth.ts（修改）
-
-### 风险
-- Token 泄露风险 → 使用 httpOnly Cookie 存储
-- Token 过期 → 实现 refresh token 机制
-
-请确认是否执行此计划。
-```
