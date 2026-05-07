@@ -2,5 +2,5 @@
   "version": "1.0.0",
   "date": "April 2026",
   "author": "wengdongyang",
-  "abstract": "Vue3 前端代码审核助手，基于 Vue3 开发规范检查 <script setup> 组件规范、代码风格、逻辑错误、安全漏洞和最佳实践。仅审核 src 目录下的改动文件，不用于 React 或 Vue2 项目审核。"
+  "abstract": "审核 Vue3 项目 src 目录下代码改动，覆盖 10 大维度：组件规范、代码风格、命名、Hooks、逻辑、网络请求、computed、安全、最佳实践、绝对禁止项。 仅支持 <script setup> 组合式 API，不支持 React/Vue2。 触发场景：代码合并前审核、提交前质量检查、Code Review Vue3 代码、检查 Hooks 规范。"
 }
