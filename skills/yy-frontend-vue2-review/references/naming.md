@@ -1,33 +1,35 @@
 # 命名规范
 
+**维度**：D04
 **严重程度**：🟡 中等
+**适用文件**：`.vue`、`.js`
+
+---
 
 ## 命名约定总表
 
 | 类型 | 规范 | 示例 |
 |------|------|------|
-| **API 函数** | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`、`apiPostLogin`、`apiDeleteUser` |
-| **事件函数** | `on` + EventName（小驼峰） | `onClickSubmit`、`onChangeInput`、`onSelectItem` |
-| **常量** | 全大写 + 下划线 | `MAX_RETRY_COUNT`、`APP_CONFIG`、`DEFAULT_PAGE_SIZE` |
-| **Props** | 小驼峰 | `userName`、`isLoading`、`pageSize` |
+| **API 函数** | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`、`apiPostLogin` |
+| **事件函数** | `on` + EventName（小驼峰） | `onClickSubmit`、`onChangeInput` |
+| **常量** | 全大写 + 下划线 | `MAX_RETRY_COUNT`、`APP_CONFIG` |
+| **Props** | 小驼峰 | `userName`、`isLoading` |
 | **组件名** | PascalCase | `<UserList />`、`<SearchForm />` |
 | **组件文件名** | 多个单词 + PascalCase | `UserList.vue`、`SearchForm.vue` |
-| **emit 事件** | 小驼峰 | `userChange`、`formSubmit`、`itemSelect` |
-| **普通方法** | 小驼峰（动词开头） | `fetchUserData`、`calculateTotal`、`validateForm` |
-| **data 属性** | 小驼峰（名词/形容词） | `userList`、`isLoading`、`formData` |
-| **computed 属性** | 小驼峰（前缀标识类型） | `isDisabled`、`hasPermission`、`formattedDate` |
+| **emit 事件** | 小驼峰 | `userChange`、`formSubmit` |
+| **普通方法** | 小驼峰（动词开头） | `fetchUserData`、`validateForm` |
+| **data 属性** | 小驼峰（名词/形容词） | `userList`、`isLoading` |
+| **computed** | 小驼峰（前缀标识类型） | `isDisabled`、`hasPermission` |
 
 ---
 
 ## 详细说明
 
-### 1. API 函数
+### API 函数
 
 - **前缀**：以 `api` 开头
 - **中间**：HTTP 方法（Get/Post/Put/Delete 等）
 - **结尾**：接口路径的小驼峰形式
-
-**示例**：
 
 ```js
 // ✅ 正确
@@ -42,14 +44,10 @@ fetchUserData()    // 缺少 api 前缀
 api_get_user()     // 下划线命名
 ```
 
----
-
-### 2. 事件函数
+### 事件函数
 
 - **前缀**：以 `on` 开头，后接事件名称
 - 用于 `@click="onClickHandler"` 等模板事件绑定场景
-
-**示例**：
 
 ```js
 // ✅ 正确
@@ -64,14 +62,10 @@ handleInput()      // 建议使用 onChangeInput
 clickBtn()         // 语义不清晰
 ```
 
----
-
-### 3. 常量
+### 常量
 
 - 全大写单词用下划线分隔
 - 定义在常量文件中的不可变值
-
-**示例**：
 
 ```js
 // ✅ 正确
@@ -84,17 +78,13 @@ const maxRetryCount = 3  // 小写
 const MaxRetryCount = 3  // 大驼峰
 ```
 
----
-
-### 4. Props
+### Props
 
 - 使用小驼峰（JavaScript 侧）
 - 模板中自动转换为 kebab-case
 
-**示例**：
-
 ```js
-// ✅ 正确 JavaScript 侧
+// ✅ 正确
 props: {
   userId: String,
   isLoading: Boolean,
@@ -103,7 +93,7 @@ props: {
 ```
 
 ```vue
-<!-- ✅ 正确模板侧（kebab-case） -->
+<!-- ✅ 正确（kebab-case） -->
 <UserCard
   :user-id="123"
   :is-loading="true"
@@ -111,15 +101,10 @@ props: {
 />
 ```
 
----
-
-### 5. 组件命名
+### 组件命名
 
 - **模板引用**：PascalCase
 - **文件名**：多个单词 + PascalCase（避免单单词）
-- 避免单单词文件名（如 `User.vue` → 改为 `UserCard.vue`）
-
-**示例**：
 
 ```vue
 <!-- ✅ 正确 -->
@@ -132,20 +117,10 @@ props: {
 <User />        // 单单词，语义不清晰
 ```
 
----
-
-### 6. emit 事件
+### emit 事件
 
 - 使用小驼峰
 - 应在 emit 白名单范围内或为其合理派生
-
-**白名单**：
-
-- 交互类：`change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add`
-- 弹窗类：`open`、`close`、`show`、`hide`
-- 操作类：`cancel`、`confirm`、`ok`、`editSuccess`、`error`
-
-**示例**：
 
 ```js
 // ✅ 正确
@@ -158,9 +133,7 @@ this.$emit('user-change')   // 横线分隔（Vue2 应使用小驼峰）
 this.$emit('onClick')        // 不要加 on 前缀
 ```
 
----
-
-### 7. computed 属性前缀
+### computed 属性前缀
 
 computed 名称应清晰表达其含义，常用前缀：
 
