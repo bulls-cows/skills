@@ -45,12 +45,9 @@ description: >
   - **名词使用单数形式**：如 `create-skill` 而非 `create-skills`
   - **优先动宾结构**：如 `create-skill`、`read-pdf`、`lint-code` 而非 `skills-creator`、`pdf-reader`
 
-  示例：
-  - `create-rule`
-  - `read-pdf`
-  - `lint-and-commit`
-
 - **更新现有技能**：直接使用现有技能目录
+
+命名规范详见 `resources/skill-best-practices.md`。
 
 ### 3. 编写 SKILL.md
 
@@ -72,56 +69,28 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - 如果用户指定了目录，则在用户指定目录下生成技能
 - 如果用户未指定目录，则在 `.agents/skills` 目录下生成（没有该目录则创建）
 
-**更新现有技能**：直接在现有目录中修改 SKILL.md 文件
+目录结构规范详见 `resources/skill-best-practices.md`。
 
-#### 目录结构规范
-
-```text
-skill-name/
-├── SKILL.md           # 必须
-├── examples/          # 可选：输入/输出示例
-├── templates/         # 可选：模板文件
-└── resources/         # 可选：参考文档、脚本
-```
-
-### 5. 多 Skill 协作
-
-多个 skill 可以组合使用：
-
-```markdown
-需求: 代码检查后提交
-
-使用技能:
-- lint（代码质量检查）
-- commit（创建规范提交）
-
-先执行 lint 检查，通过后再执行 commit
-```
-
-### 6. 验收清单
+### 5. 验收清单
 
 **创建技能后**，检查：
 
-1. 每个 Skill 都有明确边界与负例（使用场景中列出不应触发的情况）
-2. description 精确，不会误触发
-3. 同一任务重复运行，输出结构稳定
-4. Skill 能单独被显式调用
-5. YAML 格式正确（使用多行字符串语法处理长 description）
-6. 如果有参考文档需求，已添加 `resources/` 目录
-7. 文件命名符合规范（kebab-case）
-8. 使用中文描述
-9. 代码示例包含语言标签
-10. 如有脚本文件，遵循 snake_case 命名规范
-11. 如有 evals 测试用例，格式正确
+1. description 精确，不会误触发
+2. 使用场景明确（触发条件和不应触发场景）
+3. 指令步骤完整可执行，最后一步描述输出格式
+4. YAML 格式正确（使用多行字符串语法处理长 description）
+5. 文件命名符合规范（kebab-case）
+6. 使用中文描述
+7. 代码示例包含语言标签
 
 **更新技能后**，检查：
 
 1. 更新后的 description 仍然准确反映技能用途
-2. description 只保留触发判断所需信息，没有混入执行细节
-3. 使用场景仍然明确（触发条件和不应触发场景）
-4. 指令步骤仍然完整可执行，最后一步描述输出格式
-5. YAML 格式正确
-6. 如有参考文件，检查是否需要同步更新
+2. 使用场景仍然明确
+3. 指令步骤仍然完整可执行
+4. YAML 格式正确
+
+详细验收清单见 `resources/skill-best-practices.md`。
 
 ## 相关资源
 
@@ -130,4 +99,4 @@ skill-name/
 - `examples/input.md`：输入示例，展示用户如何请求创建技能
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
-- `resources/skill-best-practices.md`：技能编写最佳实践参考（包含 Skill 本质、命名规范、Description 编写、使用场景设计、常见坑等）
+- `resources/skill-best-practices.md`：技能编写最佳实践（命名规范、Description 编写、使用场景设计、交互设计原则、常见坑等）
