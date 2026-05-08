@@ -10,7 +10,7 @@ description: >
 
   **核心特性：**
   - 严格限制在 `src` 目录内审核，绝不越界
-  - 覆盖 9 大审核维度：组件规范、代码风格、命名、逻辑错误、网络请求、computed、安全、最佳实践、绝对禁止项
+  - 覆盖 9 大审核维度：代码风格、最佳实践、Vue3 组件规范、命名、网络请求、computed、逻辑错误、安全、绝对禁止项
   - 三级严重程度分级：🔴 严重 / 🟡 中等 / 🟢 轻微
   - 生成审核清单，逐维度展示审核结果
   - 自动判断审核结果：通过时自动调用 `yy-frontend-commit` 提交技能
@@ -24,7 +24,7 @@ examples:
 
 # yy-frontend-vue3-review
 
-审核 Vue3 项目中 `src` 目录下所有改动文件，检查 `<script setup>` 组合式 API 规范、组件规范、代码风格、命名规范、逻辑错误、网络请求、computed 规范、安全漏洞、最佳实践及绝对禁止项。
+审核 Vue3 项目 `src` 目录下所有改动文件，基于 Vue3 开发规范逐项检查 `<script setup>` 组合式 API、组件规范、代码风格、命名规范、逻辑错误、网络请求、computed 规范、安全漏洞、最佳实践及绝对禁止项。
 
 **核心原则：绝不审核 `src` 之外的文件，绝不使用 React 标准，绝不修改代码（除非用户明确要求修复）。**
 
@@ -46,12 +46,12 @@ examples:
 
 ## 支持审核的文件类型
 
-| 扩展名  | 审核内容 |
-| ------- | ------------------------------------------------------------- |
-| `.vue`  | Vue3 单文件组件（模板、`<script setup>`、样式） |
-| `.js`   | JavaScript 文件（代码风格、导入顺序、命名规范、逻辑错误） |
-| `.ts`   | TypeScript 文件（类型注解、代码风格、导入顺序、命名规范） |
-| `.css`  | CSS 样式（BEM 命名、格式、scoped 使用） |
+| 扩展名 | 审核内容 |
+|--------|----------|
+| `.vue` | Vue3 单文件组件（模板、`<script setup>`、样式） |
+| `.js` | JavaScript 文件（代码风格、导入顺序、命名规范、逻辑错误） |
+| `.ts` | TypeScript 文件（类型注解、代码风格、导入顺序、命名规范） |
+| `.css` | CSS 样式（BEM 命名、格式、scoped 使用） |
 | `.scss` | SCSS 样式（BEM 命名、格式、嵌套规范） |
 | `.less` | Less 样式（BEM 命名、格式、变量使用） |
 
@@ -66,7 +66,7 @@ examples:
 
    并终止。
 
-2. **用户指定**：递归收集指定文件/文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
+2. **用户指定**：递归获取指定文件或文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
 
 3. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
 
@@ -74,19 +74,19 @@ examples:
 
 ### 步骤二：生成审核清单
 
-逐维度生成 9 大维度审核清单：
+逐维度生成 9 大维度审核清单（按严重程度排序）：
 
 | 维度 ID | 检查内容 | 严重程度 | 参考文件 |
 |---------|----------|----------|----------|
-| D01 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序、生命周期 emit 限制、组件命名、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
-| D02 | 代码风格（2 空格缩进、引号规则、分号、尾随逗号、120 行宽、箭头函数、11 组导入顺序、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
-| D03 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值） | 🟡 中等 | `naming.md` |
-| D04 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 | `logic-and-request.md` |
-| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式 `{ code, data, msg }`） | 🟡 中等 | `logic-and-request.md` |
-| D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 | `logic-and-request.md` |
-| D07 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 | `best-practice.md` |
-| D08 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范） | 🟢 轻微 | `best-practice.md` |
-| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch） | 🔴 严重 | `best-practice.md` |
+| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、11 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
+| D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 | `best-practice.md` |
+| D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
+| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、禁止无意义命名） | 🟡 中等 | `naming.md` |
+| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 | `network-request.md` |
+| D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 | `computed.md` |
+| D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 | `logic-error.md` |
+| D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 | `security.md` |
+| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、无意义命名） | 🔴 严重 | `absolute-prohibitions.md` |
 
 ### 步骤三：逐维度审核
 
@@ -124,13 +124,17 @@ examples:
 
 ## 详细审核规范
 
-> **渐进式披露**：以下规范文件按需查阅，根据审核维度打开对应文件。
+> **渐进式披露**：以下 9 个规范文件按维度独立组织，审核时按需查阅对应文件。
 
-- `references/component.md` — Vue3 组件规范（`<script setup>` 语法、脚本结构、元素特性顺序、Props、Emit、生命周期、命名）
-- `references/code-style.md` — 代码风格规范（缩进、引号、分号、尾随逗号、箭头函数、导入顺序、Prettier 配置）
-- `references/naming.md` — 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值）
-- `references/logic-and-request.md` — 逻辑错误与网络请求规范（空指针、数组越界、async/await、computed、统一响应模式）
-- `references/best-practice.md` — 最佳实践与安全规范（调试代码、BEM、XSS、敏感信息、绝对禁止项、Hooks 规范、组件拆分）
+- `references/code-style.md` — D01 代码风格（缩进、引号、分号、尾随逗号、箭头函数、导入顺序、Prettier 配置）
+- `references/best-practice.md` — D02 最佳实践（调试代码、BEM+scoped、Hooks 规范、组件拆分、懒加载、KeepAlive）
+- `references/component.md` — D03 Vue3 组件规范（`<script setup>`、脚本结构、元素特性顺序、Props、Emit、v-slot、ref/computed）
+- `references/naming.md` — D04 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值）
+- `references/network-request.md` — D05 网络请求规范（async/await、try/catch/finally、统一响应模式）
+- `references/computed.md` — D06 computed 规范（try/catch 包裹、有意义命名）
+- `references/logic-error.md` — D07 逻辑错误（空指针、数组越界、方法内部顺序、ref `.value`）
+- `references/security.md` — D08 安全漏洞（XSS 风险、敏感信息泄露）
+- `references/absolute-prohibitions.md` — D09 绝对禁止项（连续解构、修改 props、this、Options API、mixins 等）
 
 ---
 
@@ -204,28 +208,3 @@ examples:
 ```
 
 不自动调用提交技能，等待用户修复后重新审核。
-
----
-
-## Emit 事件白名单
-
-| 类别 | 白名单事件 |
-|------|----------- |
-| **交互类** | `change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add` |
-| **弹窗类** | `open`、`close`、`show`、`hide` |
-| **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
-
----
-
-## 对话开场白
-
-你好！我是 Vue3 前端代码审核助手 🔍
-
-我将帮你审核指定文件或当前改动（支持 .vue、.js、.ts、.css、.scss、.less）：
-
-1. **Vue 组件**：`<script setup>` 脚本结构、元素特性顺序、Props 规范、emit 事件、生命周期限制
-2. **JavaScript/TypeScript**：导入顺序、命名规范、逻辑错误、网络请求规范、computed 规范
-3. **CSS/样式**：BEM 命名、scoped 作用域、最佳实践
-4. **安全检查**：XSS 风险、敏感信息泄露、绝对禁止项
-
-让我先获取 src 目录下的改动文件列表...
