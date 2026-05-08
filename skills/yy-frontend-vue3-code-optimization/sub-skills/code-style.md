@@ -43,6 +43,15 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 ## 结构与顺序整理
 
+### `<script setup>` name 属性
+
+**前提条件**：项目已安装 `unplugin-vue-setup-extend-plus`。
+
+- 若检测到项目 `package.json` 中包含 `unplugin-vue-setup-extend-plus` 依赖，或 `node_modules/unplugin-vue-setup-extend-plus` 目录存在，则在 `<script setup>` 标签上添加 `name="PascalCase组件名"` 属性
+- 组件名根据文件名推导：`UserCard.vue` → `name="UserCard"`，`user-list-item.vue` → `name="UserListItem"`
+- 示例：`<script setup lang="ts" name="UserCard">`
+- **未安装该插件时，不添加 name 属性**，保持原有 `<script setup>` 写法
+
 ### 导入顺序（12 组）
 
 组间空一行，组内按字母排序。**Hooks 拆分为全局/相对两组（第 5/6 组）**。
@@ -92,7 +101,7 @@ import type { ITableColumn } from "./types";
 **Vue3 组合式 API 标准结构**：
 
 ```typescript
-<script setup lang="ts">
+<script setup lang="ts" name="UserCard">
 // 1. imports（按 12 组排序）
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";

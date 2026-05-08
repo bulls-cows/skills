@@ -24,7 +24,7 @@
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序               |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
 | T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
@@ -37,10 +37,13 @@
 
 ### 执行流程
 
-1. 生成任务清单并展示
-2. **立即自动执行零风险任务**（T01, T02）
-3. 中高风险任务保持待确认状态
-4. 等待用户确认指令后执行
+1. **前置检测**：检查项目是否安装 `unplugin-vue-setup-extend-plus`（检查 `package.json` 或 `node_modules` 目录）
+   - 已安装：记录标记，优化 `.vue` 文件时在 `<script setup>` 上添加 `name="PascalCase组件名"`
+   - 未安装：不添加 `name` 属性
+2. 生成任务清单并展示
+3. **立即自动执行零风险任务**（T01, T02）
+4. 中高风险任务保持待确认状态
+5. 等待用户确认指令后执行
 
 ### 各文件类型执行顺序
 
@@ -420,7 +423,7 @@ import type { ITableColumn } from "./types";
 **Vue3 组合式 API 标准结构**：
 
 ```typescript
-<script setup lang="ts">
+<script setup lang="ts" name="UserCard">
 // 1. imports（按 12 组排序）
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";

@@ -53,7 +53,7 @@ examples:
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序                               |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
 | T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
@@ -77,11 +77,15 @@ examples:
 
 ### 执行流程
 
-1. 先生成完整的任务清单并展示给用户
-2. **立即自动执行所有零风险任务**（T01, T02），展示执行结果
-3. **中风险和高风险任务保持待确认状态**，不执行
-4. 等待用户的确认指令
-5. 按用户确认的 ID 逐项执行，每项执行后展示变更详情
+1. **前置检测**：检查项目是否安装 `unplugin-vue-setup-extend-plus`
+   - 执行 `grep -r "unplugin-vue-setup-extend-plus" package.json` 或检查 `node_modules/unplugin-vue-setup-extend-plus` 是否存在
+   - **已安装**：记录标记 `hasVueSetupExtendPlus = true`，后续优化 `.vue` 文件时在 `<script setup>` 上添加 `name="组件名"` 属性
+   - **未安装**：记录标记 `hasVueSetupExtendPlus = false`，不添加 `name` 属性
+2. 先生成完整的任务清单并展示给用户
+3. **立即自动执行所有零风险任务**（T01, T02），展示执行结果
+4. **中风险和高风险任务保持待确认状态**，不执行
+5. 等待用户的确认指令
+6. 按用户确认的 ID 逐项执行，每项执行后展示变更详情
 
 **执行顺序**：
 
@@ -140,6 +144,7 @@ examples:
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 fallback 规则手动格式化
 - 导入按 12 组排序，组间空一行，组内字母排序
 - `<script setup>` 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref`（**尽可能少用 reactive**）→ `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
+- `<script setup>` 标签：若项目已安装 `unplugin-vue-setup-extend-plus`，在 `<script setup>` 上添加 `name="PascalCase组件名"` 属性（如 `<script setup lang="ts" name="UserCard">`）
 - 方法内部顺序：`init...()` → `getListData/postFormData` → `onClick/onChange` → `computedXxx`
 - 模板属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
 - TypeScript/TSX：参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型）

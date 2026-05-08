@@ -5,6 +5,10 @@
 - **必须使用 `<script setup>` 语法**，禁止 Options API（`data()`、`methods: {}`、`mounted() {}` 等）
 - **禁止在 `<script setup>` 中使用 `this`**
 - **禁止使用 mixins**
+- **`<script setup>` name 属性**：
+  - 项目已安装 `unplugin-vue-setup-extend-plus` 时：`<script setup>` 标签必须添加 `name="PascalCase组件名"` 属性（如 `<script setup lang="ts" name="UserCard">`）
+  - 组件名根据文件名推导：`UserCard.vue` → `name="UserCard"`，`user-list-item.vue` → `name="UserListItem"`
+  - 未安装该插件时，不要求 `name` 属性
 
 ## 脚本结构顺序
 
