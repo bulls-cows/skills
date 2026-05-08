@@ -35,7 +35,7 @@
 | D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
 | D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
-| D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 |
+| D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 |
 | D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 |
 | D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 |
 | D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 |
@@ -180,8 +180,9 @@
 
 ### D06 · computed 规范（🟡 中等）
 
-- 必须使用 `try/catch` 包裹
-- 命名使用有意义名称（`isXxx`/`hasXxx`/`visibleXxx` 等）
+- **纯函数原则**：computed 应为纯函数，避免副作用（如修改响应式数据、发起网络请求）
+- **命名使用有意义名称**（`isXxx`/`hasXxx`/`visibleXxx`/`filteredXxx` 等）
+- **复杂逻辑建议 try/catch**：如果 computed 内部包含可能抛出异常的操作（如 JSON.parse），建议用 try/catch 包裹并返回安全 fallback
 
 ### D07 · 逻辑错误（🔴 严重）
 

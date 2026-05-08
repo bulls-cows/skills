@@ -1,0 +1,433 @@
+{
+  "skill_name": "yy-frontend-vue3-review",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": 1,
+      "name": "Vue3 组件完整审核",
+      "prompt": "审核这个 Vue3 组件：src/views/test-UserCard.vue",
+      "expected_output": "生成 9 大维度审核清单，逐维度审核，输出审核结果",
+      "assertions": [
+        {
+          "name": "生成审核清单",
+          "description": "生成 D01-D09 审核维度清单",
+          "type": "qualitative"
+        },
+        {
+          "name": "维度审核完整",
+          "description": "逐维度审核并标注结果",
+          "type": "qualitative"
+        },
+        {
+          "name": "严重程度正确",
+          "description": "问题按 🔴/🟡/🟢 分级",
+          "type": "qualitative"
+        },
+        {
+          "name": "输出格式规范",
+          "description": "输出格式符合 Output contract",
+          "type": "code_check",
+          "file": "output"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 2,
+      "name": "TypeScript 文件审核",
+      "prompt": "审核这个 TS 文件：src/utils/test-utils.ts",
+      "expected_output": "审核 TypeScript 文件的类型注解、代码风格、导入顺序、命名规范",
+      "assertions": [
+        {
+          "name": "类型检查",
+          "description": "检查是否使用 any 类型（应禁止）",
+          "type": "qualitative"
+        },
+        {
+          "name": "导入顺序检查",
+          "description": "检查 12 组导入顺序是否正确",
+          "type": "qualitative"
+        },
+        {
+          "name": "命名规范检查",
+          "description": "检查 API 函数、事件函数、常量命名是否符合规范",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/utils/test-utils.ts"]
+    },
+    {
+      "id": 3,
+      "name": "SCSS 样式审核",
+      "prompt": "审核这个 SCSS 文件：src/styles/test-styles.scss",
+      "expected_output": "审核 BEM 命名和 SCSS 格式规范",
+      "assertions": [
+        {
+          "name": "BEM 命名检查",
+          "description": "检查类名是否符合 block__element--modifier 格式",
+          "type": "code_check",
+          "file": "src/styles/test-styles.scss"
+        },
+        {
+          "name": "嵌套深度检查",
+          "description": "嵌套不超过 3 层",
+          "type": "qualitative"
+        },
+        {
+          "name": "严重程度标注",
+          "description": "BEM 问题标注为 🟢 轻微",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/styles/test-styles.scss"]
+    },
+    {
+      "id": 4,
+      "name": "Git 变动文件审核（默认）",
+      "prompt": "审核当前 git 变动的文件",
+      "expected_output": "通过 git diff 获取 src 目录变动文件，生成审核清单",
+      "assertions": [
+        {
+          "name": "Git 命令调用",
+          "description": "正确调用 git diff --name-only HEAD 和 git diff --cached --name-only",
+          "type": "qualitative"
+        },
+        {
+          "name": "src 目录过滤",
+          "description": "严格过滤出 src 目录下的文件",
+          "type": "qualitative"
+        },
+        {
+          "name": "目录验证",
+          "description": "检查项目是否存在 src 目录",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "严重问题检测 — 连续解构",
+      "prompt": "审核 src/views/test-UserCard.vue，这个文件有连续解构问题",
+      "expected_output": "识别为 D09 绝对禁止项，标注 🔴 严重",
+      "assertions": [
+        {
+          "name": "严重问题识别",
+          "description": "正确识别连续解构为 🔴 严重",
+          "type": "qualitative"
+        },
+        {
+          "name": "审核不通过",
+          "description": "存在严重问题时审核结果为不通过",
+          "type": "qualitative"
+        },
+        {
+          "name": "修复建议提供",
+          "description": "提供具体修复建议",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 6,
+      "name": "安全漏洞检测 — v-html XSS",
+      "prompt": "审核 src/views/test-UserCard.vue，检查 v-html 使用",
+      "expected_output": "检查 D08 安全漏洞，识别 XSS 风险",
+      "assertions": [
+        {
+          "name": "XSS 风险识别",
+          "description": "识别 v-html 未过滤为 🔴 严重",
+          "type": "qualitative"
+        },
+        {
+          "name": "安全维度审核",
+          "description": "D08 维度审核完整",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 7,
+      "name": "审核通过场景",
+      "prompt": "审核 src/views/test-UserCard.vue（无问题的文件）",
+      "expected_output": "输出审核通过报告，自动调用 yy-frontend-commit",
+      "assertions": [
+        {
+          "name": "通过判断正确",
+          "description": "无问题或仅轻微问题时判定为通过",
+          "type": "qualitative"
+        },
+        {
+          "name": "自动调用提交",
+          "description": "审核通过后自动调用 yy-frontend-commit 技能",
+          "type": "qualitative"
+        },
+        {
+          "name": "输出格式",
+          "description": "输出格式符合审核通过的 Output contract",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 8,
+      "name": "无匹配文件场景",
+      "prompt": "审核当前改动的文件",
+      "expected_output": "若无 src 目录下的变动文件，提示并终止",
+      "assertions": [
+        {
+          "name": "友好提示",
+          "description": "回复「当前 src 目录下没有需要审核的改动文件。」",
+          "type": "qualitative"
+        },
+        {
+          "name": "终止执行",
+          "description": "不继续执行审核操作",
+          "type": "qualitative"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 9,
+      "name": "Vue2 项目拒绝",
+      "prompt": "审核 src/views/Dashboard.vue（Vue2 Options API）",
+      "expected_output": "识别为 Vue2 项目，提示拒绝处理",
+      "assertions": [
+        {
+          "name": "Vue2 识别",
+          "description": "识别 `data()`、`methods: {}` 等 Options API 特征",
+          "type": "qualitative"
+        },
+        {
+          "name": "拒绝处理",
+          "description": "提示「这是 Vue2 项目，本技能仅支持 Vue3」并终止",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/Dashboard.vue"]
+    },
+    {
+      "id": 10,
+      "name": "src 目录边界验证",
+      "prompt": "审核 test/config.js（非 src 目录）",
+      "expected_output": "文件不在 src 目录，直接跳过",
+      "assertions": [
+        {
+          "name": "边界检查",
+          "description": "检查文件是否在 src 目录下",
+          "type": "qualitative"
+        },
+        {
+          "name": "跳过处理",
+          "description": "非 src 目录文件不审核",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["test/config.js"]
+    },
+    {
+      "id": 11,
+      "name": "Emit 白名单检查",
+      "prompt": "审核 src/views/test-UserCard.vue，检查 emit 事件",
+      "expected_output": "检查 emit 是否在白名单范围内",
+      "assertions": [
+        {
+          "name": "白名单验证",
+          "description": "emit 事件名必须在白名单或合理派生",
+          "type": "qualitative"
+        },
+        {
+          "name": "非白名单处理",
+          "description": "非白名单 emit 标注为 🟡 中等问题",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 12,
+      "name": "逻辑错误检测 — 空指针引用",
+      "prompt": "审核 src/views/test-UserCard.vue，检查空指针引用",
+      "expected_output": "识别 D07 逻辑错误，标注 🔴 严重",
+      "assertions": [
+        {
+          "name": "空指针识别",
+          "description": "识别未判空直接访问属性为 🔴 严重",
+          "type": "qualitative"
+        },
+        {
+          "name": "修复建议",
+          "description": "建议使用可选链 ?. 或短路 &&",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 13,
+      "name": "网络请求规范检查",
+      "prompt": "审核 src/views/test-UserCard.vue，检查 async/await + try/catch/finally 使用",
+      "expected_output": "检查 D05 网络请求规范",
+      "assertions": [
+        {
+          "name": "异步规范检查",
+          "description": "检查是否使用 async/await + try/catch/finally",
+          "type": "qualitative"
+        },
+        {
+          "name": "多层 try/catch 检查",
+          "description": "识别多层 try/catch 嵌套为问题",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 14,
+      "name": "script setup 语法检查",
+      "prompt": "审核 src/components/TestForm.vue，检查 Vue3 script setup 用法",
+      "expected_output": "检查 <script setup> 语法、defineProps、defineEmits、Hooks 使用规范",
+      "assertions": [
+        {
+          "name": " script setup 识别",
+          "description": "正确识别 <script setup> 语法",
+          "type": "qualitative"
+        },
+        {
+          "name": "defineProps 检查",
+          "description": "检查 defineProps 是否使用 TypeScript 类型定义",
+          "type": "qualitative"
+        },
+        {
+          "name": "脚本顺序检查",
+          "description": "检查脚本结构是否符合 imports → defineProps → defineEmits 顺序",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/components/TestForm.vue"]
+    },
+    {
+      "id": 15,
+      "name": "ref .value 访问检查",
+      "prompt": "审核 src/views/test-UserCard.vue，检查 ref 的 .value 访问",
+      "expected_output": "检查 ref 在 script 中是否正确使用 .value 访问",
+      "assertions": [
+        {
+          "name": ".value 检查",
+          "description": "script 中访问 ref 值必须使用 .value",
+          "type": "qualitative"
+        },
+        {
+          "name": "逻辑错误维度",
+          "description": "ref 未使用 .value 标注为 D07 逻辑错误 🔴 严重",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 16,
+      "name": "Vue3 Hook 审核",
+      "prompt": "审核 src/hooks/test-useTable.ts 这个 Vue3 Hook 文件",
+      "expected_output": "检查 Hook 返回对象、命名规范、useXxx 命名格式",
+      "assertions": [
+        {
+          "name": "Hook 命名检查",
+          "description": "Hook 名字必须 use 开头",
+          "type": "qualitative"
+        },
+        {
+          "name": "返回值检查",
+          "description": "Hook 必须返回对象（推荐 toRefs 解构），禁止直接返回 reactive 对象",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/hooks/test-useTable.ts"]
+    },
+    {
+      "id": 17,
+      "name": "TypeScript 类型检查 — any 禁止",
+      "prompt": "审核 src/utils/test-api.ts，检查 TypeScript 类型使用",
+      "expected_output": "检查是否使用了 any 类型，应使用 unknown 或具体类型",
+      "assertions": [
+        {
+          "name": "any 类型识别",
+          "description": "识别任何 any 类型使用并标注为问题",
+          "type": "qualitative"
+        },
+        {
+          "name": "类型标注检查",
+          "description": "函数参数和返回值必须有明确类型",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/utils/test-api.ts"]
+    },
+    {
+      "id": 18,
+      "name": "计算 computed 规范检查",
+      "prompt": "审核 src/views/test-UserCard.vue，检查 computed 使用",
+      "expected_output": "检查 D06 computed 规范（纯函数原则、有意义命名）",
+      "assertions": [
+        {
+          "name": "计算属性命名",
+          "description": "computed 命名应有意义（isXxx/hasXxx/visibleXxx 等）",
+          "type": "qualitative"
+        },
+        {
+          "name": "纯函数检查",
+          "description": "computed 中不应有副作用（如修改响应式数据、发起网络请求）",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/views/test-UserCard.vue"]
+    },
+    {
+      "id": 19,
+      "name": "修改 props 禁止项检查",
+      "prompt": "审核 src/components/TestForm.vue，检查是否直接修改 props",
+      "expected_output": "识别 D09 绝对禁止项：直接修改 props",
+      "assertions": [
+        {
+          "name": "props 修改识别",
+          "description": "识别直接修改 props 为 🔴 严重",
+          "type": "qualitative"
+        },
+        {
+          "name": "禁止项标注",
+          "description": "标注为 D09 绝对禁止项",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/components/TestForm.vue"]
+    },
+    {
+      "id": 20,
+      "name": "组件命名检查",
+      "prompt": "审核 src/components/test-form.vue，检查组件文件名",
+      "expected_output": "检查组件文件名是否符合多单词 + PascalCase 规范",
+      "assertions": [
+        {
+          "name": "PascalCase 检查",
+          "description": "组件文件名必须 PascalCase",
+          "type": "qualitative"
+        },
+        {
+          "name": "多单词检查",
+          "description": "组件文件名必须多单词",
+          "type": "qualitative"
+        },
+        {
+          "name": "中等严重标注",
+          "description": "组件命名问题标注为 🟡 中等",
+          "type": "qualitative"
+        }
+      ],
+      "files": ["src/components/test-form.vue"]
+    }
+  ]
+}

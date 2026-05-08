@@ -18,8 +18,12 @@ description: >
   - 仅支持 Vue3 `<script setup>` 组合式 API，不支持 React
 icon: 🔍
 examples:
-  - 审核所有改动的 Vue3 代码
-  - 检查 src/views/ 下 Vue3 组件的代码质量
+  - 帮我审核一下这次改动的 Vue3 代码，看看有没有问题
+  - 检查 src/views/ 下 Vue3 组件的代码质量，重点看组件规范和命名
+  - 这个 PR 要合并了，做一次全面代码审核，Vue3 的 script setup 部分
+  - 帮我 CR 一下 src/hooks/useTable.ts 这个 Hook 文件
+  - 审核当前 git 暂存区的 .vue 文件改动
+  - src/api/ 目录下的 ts 文件做了些改动，帮我检查代码风格
 ---
 
 # yy-frontend-vue3-review
@@ -83,7 +87,7 @@ examples:
 | D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 | `naming.md` |
 | D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 | `network-request.md` |
-| D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 | `computed.md` |
+| D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 | `computed.md` |
 | D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 | `logic-error.md` |
 | D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 | `security.md` |
 | D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 | `absolute-prohibitions.md` |
