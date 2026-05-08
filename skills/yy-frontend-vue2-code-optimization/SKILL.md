@@ -3,6 +3,8 @@ name: yy-frontend-vue2-code-optimization
 description: >
   Vue2 前端代码标准化与优化技能。用于：优化 Vue2 组件代码、代码规范化、BEM 样式重构、导入排序、语义化命名、异步代码优化、注释增强、Props 增强、组件职责梳理。
   支持 .vue(Options API)、.js、.css、.scss、.less 文件。Vue3 项目请使用 yy-frontend-vue3-code-optimization。
+  触发场景：用户提到 Vue2 优化、代码重构、规范命名、BEM 样式、导入排序、注释补充、async/await 转换、组件梳理、Options API 结构调整、代码风格统一、.vue 文件美化等。
+icon: ⚡
 ---
 
 # yy-frontend-vue2-code-optimization
@@ -81,7 +83,7 @@ description: >
 | ------------------ | ------------------------------------------- |
 | `.vue`             | T01 → T02 → T03 → T04 → T05 → T06（确认后） |
 | `.js`              | T02 → T03 → T05 → T06（确认后）             |
-| `.css/.scss/.less` | T03 → T04                                   |
+| `.css/.scss/.less`  | T03 → T04                                   |
 
 ---
 
@@ -96,6 +98,8 @@ description: >
 | **运算符转换** | `==`/`===` 保持原有写法，仅接口响应 `code` 例外使用 `===` |
 | **回滚机制** | 建议用户先提交当前状态，以便随时回滚 |
 | **大型文件** | 超过 1000 行的文件建议分批优化 |
+| **部分优化** | 用户指定仅执行某个子技能时，跳过其他任务，仅执行指定项 |
+| **已符合规范** | 扫描后无需优化的文件明确标注"无需优化" |
 
 ### T01 🔍 业务逻辑梳理（🟢 零风险 · 仅 .vue）
 

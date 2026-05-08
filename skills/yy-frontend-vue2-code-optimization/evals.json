@@ -1,6 +1,6 @@
 {
   "skill_name": "yy-frontend-vue2-code-optimization",
-  "version": "1.3.0",
+  "version": "1.7.0",
   "evals": [
     {
       "id": 1,
@@ -15,7 +15,7 @@
         },
         {
           "name": "零风险自动执行",
-          "description": "业务逻辑梳理（T01）和注释增强（T03）自动执行，无需用户确认",
+          "description": "业务逻辑梳理（T01）和注释增强（T02）自动执行，无需用户确认",
           "type": "qualitative"
         },
         {

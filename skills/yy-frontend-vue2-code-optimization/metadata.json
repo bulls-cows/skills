@@ -3,7 +3,7 @@
   "version": "1.7.0",
   "date": "April 2026",
   "author": "wengdongyang",
-  "abstract": "Vue2 前端代码标准化与优化技能。用于：优化 Vue2 组件代码、代码规范化、BEM 样式重构、导入排序、语义化命名、异步代码优化、注释增强、Props 增强、组件职责梳理。支持 .vue(Options API)、.js、.css、.scss、.less 文件。Vue3 项目请使用 yy-frontend-vue3-code-optimization。",
+  "abstract": "Vue2 前端代码标准化与优化技能。用于：优化 Vue2 组件代码、代码规范化、BEM 样式重构、导入排序、语义化命名、异步代码优化、注释增强、Props 增强、组件职责梳理。 支持 .vue(Options API)、.js、.css、.scss、.less 文件。Vue3 项目请使用 yy-frontend-vue3-code-optimization。 触发场景：用户提到 Vue2 优化、代码重构、规范命名、BEM 样式、导入排序、注释补充、async/await 转换、组件梳理、Options API 结构调整、代码风格统一、.vue 文件美化等。",
   "category": "frontend",
   "tags": [
     "vue2",
