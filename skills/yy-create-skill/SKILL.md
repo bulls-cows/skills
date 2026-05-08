@@ -101,4 +101,5 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - `examples/input.md`：输入示例，展示用户如何请求创建技能
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
-- `resources/skill-best-practices.md`：技能编写最佳实践（命名规范、Description 编写、使用场景设计、交互设计原则、常见坑等）
+- `resources/skill-writing-guide.md`：技能编写指南（命名规范、YAML 语法、章节编写原则）
+- `resources/skill-best-practices.md`：技能编写最佳实践（交互设计、常见问题、验收清单）
