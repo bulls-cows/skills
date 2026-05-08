@@ -9,5 +9,6 @@
 | 使用 this | 禁止在 `<script setup>` 中使用 `this` |
 | Options API | 禁止使用 Options API 写法（`data()`/`methods: {}`/`mounted() {}` 等） |
 | 使用 mixins | 禁止使用 mixins |
-| 多层 try/catch | 禁止多个 try/catch 嵌套 |
+| 多层 try/catch | 禁止多个 try/catch 嵌套                                              |
+| 生命周期 emit | 基础组件禁止在生命周期中 emit，业务组件允许但不推荐                    |
 | 无意义命名 | 禁止 `data1`、`temp2` 等无意义命名 |

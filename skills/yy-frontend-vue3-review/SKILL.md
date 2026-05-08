@@ -81,12 +81,12 @@ examples:
 | D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、11 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 | `best-practice.md` |
 | D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
-| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、禁止无意义命名） | 🟡 中等 | `naming.md` |
+| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 | `naming.md` |
 | D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 | `network-request.md` |
 | D06 | computed 规范（必须 try/catch、有意义命名） | 🟡 中等 | `computed.md` |
 | D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 | `logic-error.md` |
 | D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 | `security.md` |
-| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、无意义命名） | 🔴 严重 | `absolute-prohibitions.md` |
+| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 | `absolute-prohibitions.md` |
 
 ### 步骤三：逐维度审核
 
@@ -129,7 +129,7 @@ examples:
 - `references/code-style.md` — D01 代码风格（缩进、引号、分号、尾随逗号、箭头函数、导入顺序、Prettier 配置）
 - `references/best-practice.md` — D02 最佳实践（调试代码、BEM+scoped、Hooks 规范、组件拆分、懒加载、KeepAlive）
 - `references/component.md` — D03 Vue3 组件规范（`<script setup>`、脚本结构、元素特性顺序、Props、Emit、v-slot、ref/computed）
-- `references/naming.md` — D04 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值）
+- `references/naming.md` — D04 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值、TS 类型约束）
 - `references/network-request.md` — D05 网络请求规范（async/await、try/catch/finally、统一响应模式）
 - `references/computed.md` — D06 computed 规范（try/catch 包裹、有意义命名）
 - `references/logic-error.md` — D07 逻辑错误（空指针、数组越界、方法内部顺序、ref `.value`）

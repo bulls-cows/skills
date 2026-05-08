@@ -17,6 +17,7 @@
 
 ## 命名注意事项
 
+- **TypeScript 类型约束**：`.ts` / `.vue` script 中参数、返回值、变量必须明确类型，禁止使用 `any`（用 `unknown` 或具体类型）
 - **禁止无意义命名**：如 `data1`、`temp2` 等
 - 组件文件名**必须**使用多单词 PascalCase
 - 布尔值前缀必须明确（is/has/show）
