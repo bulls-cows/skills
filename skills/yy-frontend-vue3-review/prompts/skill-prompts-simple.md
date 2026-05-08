@@ -11,9 +11,12 @@
 ### 1.1 获取目标文件
 
 1. **目录验证**：检查项目是否存在 `src` 目录。不存在则回复 _"当前项目不符合 Vue3 前端代码审核的目录要求，本技能仅支持包含 src 目录的前端项目。"_ 并终止。
-2. **用户指定**：递归获取指定文件/文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
-3. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
-4. **无匹配文件**：回复「当前 src 目录下没有需要审核的改动文件。」并终止。
+2. **插件检测**：检查项目是否安装 `unplugin-vue-setup-extend-plus`
+   - **已安装**：审核 `.vue` 文件时，将 `<script setup>` 缺少 `name="PascalCase组件名"` 纳入 D03 审核
+   - **未安装**：不审核 `name` 属性
+3. **用户指定**：递归获取指定文件/文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
+4. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
+5. **无匹配文件**：回复「当前 src 目录下没有需要审核的改动文件。」并终止。
 
 ### 1.2 支持审核的文件类型
 
@@ -32,7 +35,7 @@
 |---------|----------|----------|
 | D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、12 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 |
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 |
-| D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
+| D03 | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
 | D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
 | D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 |
@@ -48,12 +51,13 @@
   - 使用 `==` 不视为问题
   - `catch` 块中的 `console.warn` 不视为问题
   - emit 事件必须在白名单范围内
+  - `<script setup>` 的 `name` 属性：仅在检测到项目安装了 `unplugin-vue-setup-extend-plus` 时才审核，未安装时不视为问题
 
 ### 1.5 自动判断
 
 | 审核结果 | 判断条件 | 后续动作 |
 |---------|---------|---------|
-| **通过** | 无问题 OR 仅轻微问题 | 输出审核通过报告，自动调用 `yy-frontend-commit` |
+| **通过** | 无问题 OR 仅轻微问题 | 输出审核通过报告 |
 | **不通过** | 存在严重或中等问题 | 输出完整审核结果和修复建议，等待用户修复后重新审核 |
 
 ---
@@ -123,6 +127,9 @@
 - **必须使用 `<script setup>` 语法**，禁止 Options API（`data()`、`methods: {}`、`mounted() {}` 等）
 - **禁止在 `<script setup>` 中使用 `this`**
 - **禁止使用 mixins**
+- **`<script setup>` name 属性**：
+  - 项目已安装 `unplugin-vue-setup-extend-plus` 时：必须添加 `name="PascalCase组件名"`（如 `<script setup lang="ts" name="UserCard">`）
+  - 未安装该插件时：不要求 `name` 属性，不视为问题
 - **脚本结构顺序**（严格遵守从上到下）：
   `imports` → `defineProps` → `defineEmits` → `Hooks(useXxx)` → `ref/reactive`（**优先 ref，尽可能少用 reactive**）→ `computed` → `watch/watchEffect` → 方法/函数 → 生命周期钩子 → `defineExpose`
 - **元素特性顺序**：
@@ -275,8 +282,6 @@
 
 所有文件符合 Vue3 前端开发规范，审核通过。
 ```
-
-→ 自动调用 `yy-frontend-commit` 技能。
 
 ### 审核不通过（存在严重或中等问题）
 

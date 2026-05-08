@@ -152,16 +152,11 @@
       "id": 7,
       "name": "审核通过场景",
       "prompt": "审核 src/views/test-UserCard.vue（无问题的文件）",
-      "expected_output": "输出审核通过报告，自动调用 yy-frontend-commit",
+      "expected_output": "输出审核通过报告",
       "assertions": [
         {
           "name": "通过判断正确",
           "description": "无问题或仅轻微问题时判定为通过",
-          "type": "qualitative"
-        },
-        {
-          "name": "自动调用提交",
-          "description": "审核通过后自动调用 yy-frontend-commit 技能",
           "type": "qualitative"
         },
         {

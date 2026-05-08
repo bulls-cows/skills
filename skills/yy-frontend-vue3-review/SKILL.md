@@ -13,7 +13,6 @@ description: >
   - 覆盖 9 大审核维度：代码风格、最佳实践、Vue3 组件规范、命名、网络请求、computed、逻辑错误、安全、绝对禁止项
   - 三级严重程度分级：🔴 严重 / 🟡 中等 / 🟢 轻微
   - 生成审核清单，逐维度展示审核结果
-  - 自动判断审核结果：通过时自动调用 `yy-frontend-commit` 提交技能
   - **绝不修改代码**（仅审核，修复需用户明确要求）
   - 仅支持 Vue3 `<script setup>` 组合式 API，不支持 React
 icon: 🔍
@@ -70,11 +69,15 @@ examples:
 
    并终止。
 
-2. **用户指定**：递归获取指定文件或文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
+2. **插件检测**：检查项目是否安装 `unplugin-vue-setup-extend-plus`（检查 `package.json` 中依赖或 `node_modules` 目录）
+   - **已安装**（`hasVueSetupExtendPlus = true`）：审核 `.vue` 文件时，将 `<script setup>` 缺少 `name="PascalCase组件名"` 属性视为 🟢 轻微问题
+   - **未安装**（`hasVueSetupExtendPlus = false`）：不审核 `name` 属性，不视为问题
 
-3. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
+3. **用户指定**：递归获取指定文件或文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
 
-4. **无匹配文件**：回复「当前 src 目录下没有需要审核的改动文件。」并终止。
+4. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
+
+5. **无匹配文件**：回复「当前 src 目录下没有需要审核的改动文件。」并终止。
 
 ### 步骤二：生成审核清单
 
@@ -84,7 +87,7 @@ examples:
 |---------|----------|----------|----------|
 | D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、12 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 | `best-practice.md` |
-| D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
+| D03 | Vue3 组件规范（`<script setup>`、name 属性（需 unplugin-vue-setup-extend-plus）、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 | `naming.md` |
 | D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 | `network-request.md` |
 | D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 | `computed.md` |
@@ -102,6 +105,7 @@ examples:
 - 使用 `==` 不视为问题
 - `catch` 块中的 `console.warn` 不视为问题
 - emit 事件必须在白名单范围内
+- `<script setup>` 的 `name` 属性：仅在检测到项目安装了 `unplugin-vue-setup-extend-plus` 时才审核，未安装时不视为问题
 
 ### 步骤四：输出审核结果
 
@@ -111,7 +115,7 @@ examples:
 
 | 审核结果 | 判断条件 | 后续动作 |
 |---------|---------|---------|
-| **通过** | 无问题 OR 仅存在「轻微」问题 | 输出审核通过报告，**自动调用 `yy-frontend-commit` 技能** |
+| **通过** | 无问题 OR 仅存在「轻微」问题 | 输出审核通过报告 |
 | **不通过** | 存在「严重」或「中等」问题 | 输出完整审核结果和修复建议，等待用户修复后重新审核 |
 
 ---
@@ -132,7 +136,7 @@ examples:
 
 - `references/code-style.md` — D01 代码风格（缩进、引号、分号、尾随逗号、箭头函数、导入顺序、Prettier 配置）
 - `references/best-practice.md` — D02 最佳实践（调试代码、BEM+scoped、Hooks 规范、组件拆分、懒加载、KeepAlive）
-- `references/component.md` — D03 Vue3 组件规范（`<script setup>`、脚本结构、元素特性顺序、Props、Emit、v-slot、ref/computed）
+- `references/component.md` — D03 Vue3 组件规范（`<script setup>`、name 属性、脚本结构、元素特性顺序、Props、Emit、v-slot、ref/computed）
 - `references/naming.md` — D04 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值、TS 类型约束）
 - `references/network-request.md` — D05 网络请求规范（async/await、try/catch/finally、统一响应模式）
 - `references/computed.md` — D06 computed 规范（try/catch 包裹、有意义命名）
@@ -171,8 +175,6 @@ examples:
 
 所有文件符合 Vue3 前端开发规范，审核通过。
 ```
-
-然后自动调用 `yy-frontend-commit` 技能。
 
 ### 审核不通过（存在严重或中等问题）
 
