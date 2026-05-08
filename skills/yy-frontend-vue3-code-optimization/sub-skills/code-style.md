@@ -43,9 +43,9 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 ## 结构与顺序整理
 
-### 导入顺序（11 组）
+### 导入顺序（12 组）
 
-组间空一行，组内按字母排序。**新增 Hooks 分组（第 10 组）**。
+组间空一行，组内按字母排序。**Hooks 拆分为全局/相对两组（第 5/6 组）**。
 
 ```typescript
 // 1. 外部依赖
@@ -61,26 +61,28 @@ import { formatDate } from "@src/utils/date";
 // 4. 相对工具
 import { formatFileSize } from "./utils/format";
 
-// 5. 全局 Store (Pinia/Vuex)
-import { useUserStore } from "@src/stores/user";
-
-// 6. 全局配置
-import { APP_CONFIG } from "@src/constants";
-
-// 7. 相对配置
-import { MAX_RETRY_COUNT } from "./constants";
-
-// 8. 全局组件
-import { NavbarLogo } from "@src/components";
-
-// 9. 相对组件
-import NavbarLogo2 from "./NavbarLogo2.vue";
-
-// 10. Hooks
+// 5. 全局 Hooks（`@src/hooks/...`）
 import { useTable } from "@src/hooks/useTable";
+
+// 6. 相对 Hooks（`./hooks/...` 或 `./useXxx`）
 import { useSearchForm } from "./useSearchForm";
 
-// 11. 类型定义（仅 TypeScript/TSX）
+// 7. 全局 Store (Pinia/Vuex)
+import { useUserStore } from "@src/stores/user";
+
+// 8. 全局配置
+import { APP_CONFIG } from "@src/constants";
+
+// 9. 相对配置
+import { MAX_RETRY_COUNT } from "./constants";
+
+// 10. 全局组件
+import { NavbarLogo } from "@src/components";
+
+// 11. 相对组件
+import NavbarLogo2 from "./NavbarLogo2.vue";
+
+// 12. 类型定义（仅 TypeScript/TSX）
 import type { IUserInfo } from "@src/types/user";
 import type { ITableColumn } from "./types";
 ```
@@ -91,7 +93,7 @@ import type { ITableColumn } from "./types";
 
 ```typescript
 <script setup lang="ts">
-// 1. imports（按 11 组排序）
+// 1. imports（按 12 组排序）
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";
 import type { IUserInfo } from "@src/types/user";
@@ -285,7 +287,7 @@ export default defineComponent({
 
 ### TSX 组件结构顺序
 
-1. imports（按 11 组排序）
+1. imports（按 12 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -341,7 +343,7 @@ const handleClick = () => {
 
 ### JSX 组件结构顺序
 
-1. imports（按 11 组排序）
+1. imports（按 12 组排序）
 2. 类型定义
 3. defineComponent
 4. name

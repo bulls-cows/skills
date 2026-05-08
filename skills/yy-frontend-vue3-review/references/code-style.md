@@ -40,7 +40,7 @@
 }
 ```
 
-## 导入顺序（11 组）
+## 导入顺序（12 组）
 
 组间空一行，组内按字母排序：
 
@@ -55,3 +55,4 @@
 9. **相对配置**（`./constants/...`）
 10. **全局组件**（`@src/components/...`）
 11. **相对组件**（`./ComponentName.vue`）
+12. **类型定义**（仅 TypeScript/TSX，`import type` / `type T = ...`，`@src/types/...` / `./types`）

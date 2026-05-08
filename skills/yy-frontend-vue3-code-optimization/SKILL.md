@@ -44,7 +44,7 @@ description: >
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(11组)、`<script setup>`结构、模板属性顺序                               |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序                               |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
 | T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
@@ -129,7 +129,7 @@ description: >
 **核心规则**：
 
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 fallback 规则手动格式化
-- 导入按 11 组排序，组间空一行，组内字母排序
+- 导入按 12 组排序，组间空一行，组内字母排序
 - `<script setup>` 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref`（**尽可能少用 reactive**）→ `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
 - 方法内部顺序：`init...()` → `getListData/postFormData` → `onClick/onChange` → `computedXxx`
 - 模板属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`

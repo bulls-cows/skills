@@ -78,7 +78,7 @@ examples:
 
 | 维度 ID | 检查内容 | 严重程度 | 参考文件 |
 |---------|----------|----------|----------|
-| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、11 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
+| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、12 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 | `best-practice.md` |
 | D03 | Vue3 组件规范（`<script setup>`、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 | `naming.md` |

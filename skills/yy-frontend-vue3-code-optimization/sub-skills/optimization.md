@@ -79,9 +79,9 @@ if (code === 0) {
 
 - 将非副作用的逻辑从方法迁移至 `computed`
 - 命名统一用 `is/has/visible` 前缀
-- **computed 是同步 getter 函数，不应使用 try/catch**
+- **computed 必须使用 `try/catch` 包裹**（纯同步无风险逻辑可豁免）
 
-> **注意**：如果逻辑需要异步或错误处理，保留在普通函数中。
+> **注意**：如果逻辑需要异步处理，保留在普通函数中。
 
 ```typescript
 // ✅ 正确：computed 用于同步派生逻辑

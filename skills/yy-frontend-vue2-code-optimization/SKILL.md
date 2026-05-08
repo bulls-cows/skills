@@ -30,7 +30,7 @@ description: >
 - 生成 git 提交信息
 - **Vue3 项目**（检测到 `<script setup>`、`defineProps` 等特征时，提示使用 yy-frontend-vue3-code-optimization）
 - 非前端代码文件
-- TypeScript 文件（`.ts`）仅支持 JSDoc 注释增强
+- TypeScript 文件（`.ts`）
 - JSX/TSX 语法文件（暂不支持）
 
 ---

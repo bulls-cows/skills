@@ -4,7 +4,7 @@
 |--------|------|
 | 连续解构 | 禁止 `...data.data` 等连续解构 |
 | 修改子组件数据 | 禁止父组件直接修改子组件数据 |
-| 修改 ref/reactive 类型 | 禁止多次修改 ref/reactive 属性类型（后端给什么值用什么值） |
+| 修改 ref/reactive 类型 | 禁止多次修改 ref/reactive 属性类型（后端给什么值用什么值）；`reactive→ref` 转换除外 |
 | 直接修改 props | 禁止直接修改 props（使用 `props.xxx` 只读访问） |
 | 使用 this | 禁止在 `<script setup>` 中使用 `this` |
 | Options API | 禁止使用 Options API 写法（`data()`/`methods: {}`/`mounted() {}` 等） |

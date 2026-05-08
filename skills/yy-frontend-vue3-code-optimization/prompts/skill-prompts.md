@@ -23,7 +23,7 @@
 | 任务 ID | 子技能       | 风险等级  | 说明                                                                             |
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
-| T02     | 代码风格清洗 | 🟡 中风险 | 导入排序(11组)、`<script setup>`结构、模板属性顺序                               |
+| T02     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序                               |
 | T03     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
@@ -112,7 +112,7 @@
 
 #### `.js` / `.jsx` / `.ts` / `.tsx` 文件
 
-- 导入顺序（11 组）：1. 外部依赖 2. 全局 API 3. 全局工具 4. 相对工具 5. 全局 Hooks 6. 相对 Hooks 7. 全局 Store 8. 全局配置 9. 相对配置 10. 全局组件 11. 相对组件（组间空一行，组内字母排序）
+- 导入顺序（12 组）：1. 外部依赖 2. 全局 API 3. 全局工具 4. 相对工具 5. 全局 Hooks 6. 相对 Hooks 7. 全局 Store 8. 全局配置 9. 相对配置 10. 全局组件 11. 相对组件（组间空一行，组内字母排序）
 - 网络请求：`async/await + try/catch`
 - TypeScript/TSX：参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型）
 - JSX/TSX：组件结构规范、Props 类型定义、事件处理规范
@@ -373,7 +373,7 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 #### 结构与顺序整理
 
-##### 导入顺序（11 组）
+##### 导入顺序（12 组）
 
 组间空一行，组内按字母排序。**新增 Hooks 分组（第 10 组）**。
 
@@ -421,7 +421,7 @@ import type { ITableColumn } from "./types";
 
 ```typescript
 <script setup lang="ts">
-// 1. imports（按 11 组排序）
+// 1. imports（按 12 组排序）
 import { ref, computed, watch, onMounted } from "vue";
 import { apiGetUserList } from "@src/api/user";
 import type { IUserInfo } from "@src/types/user";
@@ -615,7 +615,7 @@ export default defineComponent({
 
 ##### TSX 组件结构顺序
 
-1. imports（按 11 组排序）
+1. imports（按 12 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -671,7 +671,7 @@ const handleClick = () => {
 
 ##### JSX 组件结构顺序
 
-1. imports（按 11 组排序）
+1. imports（按 12 组排序）
 2. 类型定义
 3. defineComponent
 4. name
