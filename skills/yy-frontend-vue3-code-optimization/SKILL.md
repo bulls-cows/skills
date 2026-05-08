@@ -2,7 +2,16 @@
 name: yy-frontend-vue3-code-optimization
 description: >
   Vue3 前端代码标准化与优化技能。用于：优化 Vue3 `<script setup>` 组件、代码规范化、组合式 API 规范化、BEM 样式重构、导入排序、语义化命名、Hooks 规范、异步代码优化、TypeScript 类型注解、注释增强、Props/Emits 标准化、组件职责梳理。
-  支持 .vue、.js、.jsx、.ts、.tsx、.css、.scss、.less 文件。Vue2 项目请使用 yy-frontend-vue2-code-optimization。
+  触发场景：用户提到 Vue3 优化、代码重构、规范命名、BEM 样式、导入排序、注释补充、async/await 转换、Hooks 抽离、reactive 转 ref、script setup 结构、TSX/JSX 组件、TypeScript 类型注解、组件梳理、组合式 API 格式化、.vue 文件美化等。支持 .vue、.js、.jsx、.ts、.tsx、.css、.scss、.less 文件。Vue2 项目请使用 yy-frontend-vue2-code-optimization。
+icon: ⚡
+examples:
+  - 帮我优化一下这个 Vue3 组件的代码
+  - 优化当前 git 变动的 Vue3 文件
+  - 把 src/views/ 下的 vue3 组件代码规整一下，统一 script setup 结构
+  - test-UserCard.vue 这个文件需要优化，重点看 hooks 和 reactive 的使用
+  - src/hooks/ 目录下的 TS 文件需要统一导入顺序和命名规范
+  - 优化这个 TSX 组件：test-DataTable.tsx，检查类型注解
+  - 把页面的 class 统一改成 BEM 格式
 ---
 
 # yy-frontend-vue3-code-optimization
