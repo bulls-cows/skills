@@ -26,11 +26,11 @@
 | D02 | 最佳实践（调试代码清理、scoped、未使用变量、Props 解构） | 🟢 轻微 | `references/best-practice.md` |
 | D03 | Vue2 组件规范（脚本结构、元素特性顺序、Props、Emit、生命周期 emit 限制、v-slot 语法、模块化原则） | 🟡 中等 | `references/component.md` |
 | D04 | 命名规范（API 函数、事件函数、常量、Props、组件名、Emit 事件） | 🟡 中等 | `references/naming.md` |
-| D05 | 网络请求规范（async/await + try/catch/finally、统一响应模式、禁止多层嵌套） | 🟡 中等 | `references/logic-and-request.md` |
-| D06 | computed 规范（同步 getter、不使用 try/catch、有意义命名） | 🟡 中等 | `references/logic-and-request.md` |
-| D07 | 逻辑错误（空指针、数组越界、逻辑判断遗漏、方法内部顺序） | 🔴 严重 | `references/logic-and-request.md` |
-| D08 | 安全漏洞（XSS、敏感信息泄露） | 🔴 严重 | `references/best-practice.md` |
-| D09 | 绝对禁止项（连续解构、修改子组件数据、修改 data 类型、直接修改 props） | 🔴 严重 | `references/best-practice.md` |
+| D05 | 网络请求规范（async/await + try/catch/finally、统一响应模式、禁止多层嵌套） | 🟡 中等 | `references/request.md` |
+| D06 | computed 规范（同步 getter、必须使用 try/catch、有意义命名） | 🟡 中等 | `references/computed.md` |
+| D07 | 逻辑错误（空指针、数组越界、逻辑判断遗漏、方法内部顺序） | 🔴 严重 | `references/logic.md` |
+| D08 | 安全漏洞（XSS、敏感信息泄露） | 🔴 严重 | `references/security.md` |
+| D09 | 绝对禁止项（连续解构、修改子组件数据、修改 data 类型、直接修改 props） | 🔴 严重 | `references/forbidden.md` |
 
 ### 审核执行规则
 
