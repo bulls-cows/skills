@@ -77,42 +77,24 @@ description: >
 
 ## 目录结构规范
 
-### 基础结构
-
 ```text
 skill-name/
-└── SKILL.md
+├── SKILL.md          # 必需，技能主文件
+├── examples/         # 可选，示例目录
+│   ├── input.md      # 输入示例
+│   └── output.md     # 输出示例
+├── templates/        # 可选，模板目录
+│   └── example.md    # 模板文件
+└── resources/        # 可选，资源目录
+    └── reference.md  # 参考文档
 ```
 
-### 带示例的结构
+### 目录说明
 
-```text
-skill-name/
-├── SKILL.md
-└── examples/
-    ├── input.md
-    └── output.md
-```
-
-### 完整结构
-
-```text
-skill-name/
-├── SKILL.md
-├── examples/
-│   ├── input.md
-│   └── output.md
-├── templates/
-│   └── example-template.md
-└── resources/
-    └── reference.md
-```
-
-### 何时使用额外目录
-
-- `examples/`：技能使用方式不直观，需要示例说明
-- `templates/`：需要生成特定格式的文件，或模板超过 20 行
-- `resources/`：需要参考文档、脚本或素材文件
+- `SKILL.md`：**必需**，技能主文件，定义技能名称、描述、使用场景、指令
+- `examples/`：**可选**，技能使用方式不直观时提供示例说明
+- `templates/`：**可选**，需要生成特定格式文件或模板超过 20 行时使用
+- `resources/`：**可选**，需要参考文档、脚本或素材文件时使用
 
 ## 交互设计原则
 
