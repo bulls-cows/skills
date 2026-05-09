@@ -2,7 +2,7 @@
 
 本文件提供技能的基础结构模板，供创建新技能时参考。
 
-编写规范详见 `resources/skill-writing-guide.md`。
+编写规范详见 `resources/skill-guide.md`。
 
 完整示例详见 `examples/output.md`。
 

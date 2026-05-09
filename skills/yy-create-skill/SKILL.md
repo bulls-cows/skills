@@ -51,13 +51,13 @@ description: >
 
 - **更新现有技能**：直接使用现有技能目录
 
-命名规范详见 `resources/skill-best-practices.md`。
+命名规范详见 `resources/skill-guide.md`。
 
 ### 3. 编写 SKILL.md
 
 SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
-**交互设计原则**：减少不必要的交互轮次，默认采用最常见策略。详见 `resources/skill-best-practices.md` 中的"交互设计原则"章节。
+**交互设计原则**：减少不必要的交互轮次，默认采用最常见策略。详见 `resources/skill-guide.md` 中的"交互设计原则"章节。
 
 其中 `description` 只用于给 AI 判断是否触发技能：
 
@@ -73,7 +73,7 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - 如果用户指定了目录，则在用户指定目录下生成技能
 - 如果用户未指定目录，则在 `.agents/skills` 目录下生成（没有该目录则创建）
 
-目录结构规范详见 `resources/skill-best-practices.md`。
+目录结构规范详见 `resources/skill-guide.md`。
 
 ### 5. 验收清单
 
@@ -90,7 +90,7 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 9. 同一任务重复运行，输出结构稳定
 10. 技能能单独被显式调用
 
-详细验收清单见 `resources/skill-best-practices.md`。
+详细验收清单见 `resources/skill-guide.md`。
 
 ## 相关资源
 
@@ -99,5 +99,4 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - `examples/input.md`：输入示例，展示用户如何请求创建技能
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
-- `resources/skill-writing-guide.md`：技能编写指南（命名规范、YAML 语法、章节编写原则）
-- `resources/skill-best-practices.md`：技能编写最佳实践（交互设计、常见问题、验收清单）
+- `resources/skill-guide.md`：技能编写完整指南（命名规范、YAML 语法、章节编写原则、交互设计、验收清单）
