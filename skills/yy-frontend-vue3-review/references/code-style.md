@@ -40,19 +40,15 @@
 }
 ```
 
-## 导入顺序（12 组）
+## 导入顺序（7 组）
 
-组间空一行，组内按字母排序：
+组间空一行，组内按字母排序。**全局与相对导入合并为同一组**：
 
 1. **外部依赖**（vue, dayjs, lodash, element-plus 等）
-2. **全局 API**（`@src/api/...`）
-3. **全局工具**（`@src/utils/...`）
-4. **相对工具**（`./utils/...`）
-5. **全局 Hooks**（`@src/hooks/...`）
-6. **相对 Hooks**（`./hooks/...`）
-7. **全局 Store**（`@src/store/...`）
-8. **全局配置**（`@src/constants/...`）
-9. **相对配置**（`./constants/...`）
-10. **全局组件**（`@src/components/...`）
-11. **相对组件**（`./ComponentName.vue`）
-12. **类型定义**（仅 TypeScript/TSX，`import type` / `type T = ...`，`@src/types/...` / `./types`）
+2. **types**（仅 TypeScript/TSX，`import type` / `type T = ...`）
+3. **apis**（`@src/api/...`、`./api/...`）
+4. **utils**（`@src/utils/...`、`./utils/...`）
+5. **hooks**（`@src/hooks/...`、`./useXxx.ts`）
+6. **stores**（`@src/store/...`、`./store/...`）
+7. **constants**（`@src/constants/...`、`./constants/...`）
+8. **components**（`@src/components/...`、`./ComponentName.vue`）

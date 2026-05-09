@@ -33,7 +33,7 @@
 
 | 维度 ID | 检查内容 | 严重程度 |
 |---------|----------|----------|
-| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、12 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 |
+| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、7 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 |
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 |
 | D03 | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
@@ -78,18 +78,15 @@
   { "semi": true, "singleQuote": true, "trailingComma": "all", "arrowParens": "avoid", "bracketSpacing": true, "quoteProps": "as-needed" }
   ```
 
-- **导入顺序（11 组，组间空一行，组内字母排序）**：
+- **导入顺序（7 组，组间空一行，组内字母排序，全局与相对合并）**：
   1. 外部依赖（vue, dayjs, lodash, element-plus 等）
-  2. 全局 API（`@src/api/...`）
-  3. 全局工具（`@src/utils/...`）
-  4. 相对工具（`./utils/...`）
-  5. 全局 Hooks（`@src/hooks/...`）
-  6. 相对 Hooks（`./hooks/...`）
-  7. 全局 Store（`@src/store/...`）
-  8. 全局配置（`@src/constants/...`）
-  9. 相对配置（`./constants/...`）
-  10. 全局组件（`@src/components/...`）
-  11. 相对组件（`./ComponentName.vue`）
+  2. types（仅 TypeScript/TSX）
+  3. apis（`@src/api/...`、`./api/...`）
+  4. utils（`@src/utils/...`、`./utils/...`）
+  5. hooks（`@src/hooks/...`、`./useXxx.ts`）
+  6. stores（`@src/store/...`、`./store/...`）
+  7. constants（`@src/constants/...`、`./constants/...`）
+  8. components（`@src/components/...`、`./ComponentName.vue`）
 
 ### D02 · 最佳实践（🟢 轻微）
 
