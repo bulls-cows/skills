@@ -14,7 +14,11 @@
 
 严格遵守从上到下：
 
-`imports` → `defineProps` → `defineEmits` → `Hooks(useXxx)` → `ref/reactive`（**优先 ref，尽可能少用 reactive**）→ `computed` → `watch/watchEffect` → 方法/函数 → 生命周期钩子 → `defineExpose`
+`imports` → `defineProps` → `defineEmits` → `全局Hooks(useXxx)` → **业务模块（按领域分组）** → `defineExpose`
+
+**Hooks 位置**：全局共享的 Hook 放 defineEmits 后，仅单业务使用的 Hook 放对应业务模块顶部。
+
+**业务模块内部顺序**：按业务逻辑分组（如表单相关、表格相关、弹窗相关），组内自由组合 `ref/reactive`（**优先 ref，尽可能少用 reactive**）、`computed`、`watch/watchEffect`、方法/函数、生命周期钩子，不必严格按类型排序。
 
 ## 元素特性顺序
 

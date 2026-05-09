@@ -127,8 +127,10 @@
 - **`<script setup>` name 属性**：
   - 项目已安装 `unplugin-vue-setup-extend-plus` 时：必须添加 `name="PascalCase组件名"`（如 `<script setup lang="ts" name="UserCard">`）
   - 未安装该插件时：不要求 `name` 属性，不视为问题
-- **脚本结构顺序**（严格遵守从上到下）：
-  `imports` → `defineProps` → `defineEmits` → `Hooks(useXxx)` → `ref/reactive`（**优先 ref，尽可能少用 reactive**）→ `computed` → `watch/watchEffect` → 方法/函数 → 生命周期钩子 → `defineExpose`
+- **脚本结构顺序**：
+  `imports` → `defineProps` → `defineEmits` → `全局Hooks` → **业务模块（按领域分组，组内自由组合）** → `defineExpose`
+- **Hooks 位置**：全局共享的 Hook 放 defineEmits 后，仅单业务使用的 Hook 放对应业务模块顶部
+- **业务模块内部**：按业务逻辑分组，组内自由组合 `ref/reactive`、`computed`、`watch/watchEffect`、方法、生命周期钩子，不必严格按类型排序。`ref` 优先，`reactive` 仅复杂对象使用
 - **元素特性顺序**：
   `is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
 - **Props 规范**：
