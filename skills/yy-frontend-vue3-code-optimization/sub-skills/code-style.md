@@ -199,7 +199,7 @@ defineExpose({
 | `function handleClick(e) {}`     | `const handleClick = (e) => {}`     |
 | `async function submitForm() {}` | `const submitForm = async () => {}` |
 
-> ⚠️ 该转换属于**代码风格统一**，需在 T02 任务中提示用户确认后执行。
+> ⚠️ 该转换属于**代码风格统一**，需在 T03 任务中提示用户确认后执行。
 
 ### 模板属性排序
 
@@ -313,7 +313,7 @@ export default defineComponent({
 7. setup 函数
 8. 返回渲染函数
 
-### JSX 组件规范（Vue 风格）
+### `.vue` SFC 规范（推荐替代 JSX）
 
 > 提示：Vue3 项目推荐优先使用 `.vue` 单文件组件配合 `<script setup>`。仅在需要动态渲染或复杂 render 逻辑时才使用 TSX/JSX。对于简单的 JSX 组件，建议迁移回 `.vue` 格式。
 

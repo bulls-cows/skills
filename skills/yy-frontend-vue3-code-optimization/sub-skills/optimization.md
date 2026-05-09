@@ -79,9 +79,7 @@ if (code === 0) {
 
 - 将非副作用的逻辑从方法迁移至 `computed`
 - 命名统一用 `is/has/visible` 前缀
-- **computed 必须使用 `try/catch` 包裹**（纯同步无风险逻辑可豁免）
-
-> **注意**：如果逻辑需要异步处理，保留在普通函数中。
+- **computed 是纯同步 getter，不应使用 try/catch**。如果逻辑需要异步或错误处理，保留在普通函数中
 
 ```typescript
 // ✅ 正确：computed 用于同步派生逻辑
@@ -187,17 +185,17 @@ export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
   const fetchData = async (fetchFn: () => Promise<{ data: T[]; total: number }>) => {
     loading.value = true;
     try {
-      const { data, total } = await fetchFn();
+      const { data, total: resTotal } = await fetchFn();
       tableData.value = data;
-      total.value = total;
+      total.value = resTotal;
     } catch (err) {
       console.warn(err);
     } finally {
       loading.value = false;
     }
   };
-  
-// 返回公共接口（禁止直接返回 reactive 对象）
+
+  // 返回公共接口（禁止直接返回 reactive 对象）
   return {
     tableData,
     loading,
@@ -439,4 +437,4 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 - **防抖节流**：频繁触发的事件（搜索、滚动、resize）使用防抖/节流
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
 - **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制
-- **ref/reactive 选择**：简单值用 `ref`，复杂对象用 `reactive`
+- **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`
