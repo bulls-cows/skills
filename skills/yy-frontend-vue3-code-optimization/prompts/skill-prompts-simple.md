@@ -75,7 +75,8 @@
 
 **脚本区**（必须 `<script setup>`）：
 
-- 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref`（**尽可能少用 reactive**）→ `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
+- 结构顺序：`imports` → `defineProps` → `defineEmits` → `全局Hooks` → **业务模块（按领域分组，组内自由组合）** → `defineExpose`
+- **业务模块内部**：按业务逻辑分组，组内自由组合 `ref/reactive`（**优先 ref**）、`computed`、`watch`、方法、生命周期钩子
 - 顶部 JSDoc：组件名称 + 页面职责 + 核心业务 + 数据来源
 - Props：`defineProps` + TypeScript 类型注解，camelCase，必须注释
 - Emits：`defineEmits` 定义，顺序 `input` → `其它` → `change/click`；基础组件生命周期禁止 emit

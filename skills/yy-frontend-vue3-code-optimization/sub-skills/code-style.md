@@ -91,7 +91,15 @@ import NavbarLogo2 from "./NavbarLogo2.vue";
 
 ### `<script setup>` 结构顺序
 
-**Vue3 组合式 API 标准结构**：
+整体顺序遵守：
+
+`imports` → `defineProps` → `defineEmits` → `全局Hooks（多个业务共享的 useXxx）` → **业务模块（按领域分组）** → `defineExpose`
+
+**Hooks 位置**：全局共享的 Hook 放 defineEmits 后，仅单业务使用的 Hook 放对应业务模块顶部。
+
+**业务模块内部**：按业务逻辑分组（如表单相关、表格相关、弹窗相关），组内自由组合 `ref/reactive`（**优先 ref，尽可能少用 reactive**）、`computed`、`watch/watchEffect`、方法/函数、生命周期钩子，不必严格按类型排序。
+
+**Vue3 组合式 API 标准结构示例**：
 
 ```typescript
 <script setup lang="ts" name="UserCard">
@@ -114,22 +122,27 @@ const emit = defineEmits<{
   (e: "change", page: number): void;
 }>();
 
-// 4. Hooks（第三方或自定义 Hooks）
-const { tableData, loading, fetchData } = useTable();
-const { searchQuery, resetForm } = useSearchForm();
+// 4. 全局Hooks（多个业务共享的 useXxx）
+const { globalState } = useGlobalStore();
 
-// 5. ref/reactive（本地状态）
-const isActive = ref(false);
-const formData = reactive({
+// ==================== 表单模块 ====================
+// 5. 业务模块：组内自由组合 ref/computed/watch/方法/生命周期
+const formData = ref({
   username: "",
   email: "",
 });
+const isFormValid = computed(() => formData.value.username.length > 0);
 
-// 6. computed（计算属性）
-const isFormValid = computed(() => formData.username.length > 0);
+const resetForm = () => {
+  formData.value = { username: "", email: "" };
+};
+
+// ==================== 表格模块 ====================
+// 6. 业务模块：组内自由组合（含该模块专属 Hooks）
+const { tableData, loading, fetchData } = useTable();
+const total = ref(0);
 const displayUsers = computed(() => tableData.value.filter((u) => u.active));
 
-// 7. watch（侦听器）
 watch(
   () => props.userId,
   (newId) => {
@@ -137,42 +150,34 @@ watch(
   }
 );
 
-// 8. 方法（业务函数）
-const init = () => {
-  try {
-    fetchData(props.userId);
-  } catch (error) {
-    console.warn(error);
-  }
-};
-
 const handleSubmit = async () => {
   try {
-    await apiPostForm(formData);
+    await apiPostForm(formData.value);
     emit("submit");
   } catch (error) {
     console.warn(error);
   }
 };
 
-const onClickSubmit = () => {
-  try {
-    handleSubmit();
-  } catch (error) {
-    console.warn(error);
-  }
+// ==================== 弹窗模块 ====================
+const dialogVisible = ref(false);
+const dialogData = ref<IUserInfo | null>(null);
+
+const openDialog = (row: IUserInfo) => {
+  dialogData.value = row;
+  dialogVisible.value = true;
 };
 
-// 9. 生命周期钩子
+// 7. 生命周期钩子（全局级）
 onMounted(() => {
-  init();
+  fetchData(props.userId);
 });
 
 onUnmounted(() => {
   // 清理逻辑
 });
 
-// 10. defineExpose（可选，暴露给父组件）
+// 8. defineExpose（可选，暴露给父组件）
 defineExpose({
   resetForm,
   fetchData,

@@ -143,7 +143,7 @@ examples:
 
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 fallback 规则手动格式化
 - 导入按 7 组排序，组间空一行，组内字母排序
-- `<script setup>` 结构顺序：`imports` → `defineProps` → `defineEmits` → `Hooks` → `ref`（**尽可能少用 reactive**）→ `computed` → `watch` → `方法` → `生命周期` → `defineExpose`
+- `<script setup>` 结构顺序：`imports` → `defineProps` → `defineEmits` → `全局Hooks` → **业务模块（按领域分组，组内自由组合）** → `defineExpose`
 - `<script setup>` 标签：若项目已安装 `unplugin-vue-setup-extend-plus`，在 `<script setup>` 上添加 `name="PascalCase组件名"` 属性（如 `<script setup lang="ts" name="UserCard">`）
 - 方法内部顺序：`init...()` → `getListData/postFormData` → `onClick/onChange` → `computedXxx`
 - 模板属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
