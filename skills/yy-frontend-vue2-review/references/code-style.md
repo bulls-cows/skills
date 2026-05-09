@@ -54,21 +54,18 @@ const obj = {foo: bar}    // ❌
 
 ---
 
-## 导入顺序（9 组）
+## 导入顺序（6 组）
 
-`import` 语句必须按以下 9 组顺序排列，**组间空一行**，组内按字母顺序排序：
+`import` 语句必须按以下 6 组顺序排列，**组间空一行**，组内按字母顺序排序。**全局与相对导入合并为同一组**：
 
 | 组别 | 说明       | 示例                                      |
 | ---- | ---------- | ----------------------------------------- |
-| 1    | 外部依赖   | `import Vue from 'vue'`、第三方库         |
-| 2    | 全局 API   | `import { apiGetUser } from '@/api/user'` |
-| 3    | 全局工具   | `import { formatDate } from '@/utils/date'` |
-| 4    | 相对工具   | `import { fn } from './utils/format'`     |
-| 5    | 全局 Store | `import store from '@/store'`             |
-| 6    | 全局配置   | `import { APP_CONFIG } from '@/config'`   |
-| 7    | 相对配置   | `import { PAGE_SIZE } from './config'`    |
-| 8    | 全局组件   | `import UserAvatar from '@/components/UserAvatar'` |
-| 9    | 相对组件   | `import StatusBadge from './StatusBadge.vue'` |
+| 1    | 外部依赖   | `import dayjs from 'dayjs'`、第三方库     |
+| 2    | apis       | `import { apiGetUser } from '@src/api/user'` |
+| 3    | utils      | `import { formatDate } from '@src/utils'`、`from './utils/format'` |
+| 4    | stores     | `import store from '@src/store'`          |
+| 5    | constants  | `import { APP_CONFIG } from '@src/constants'`、`from './constants'` |
+| 6    | components | `import UserAvatar from '@src/components/UserAvatar'`、`from './StatusBadge.vue'` |
 
 ---
 
