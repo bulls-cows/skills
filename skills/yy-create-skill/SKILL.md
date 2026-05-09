@@ -25,7 +25,7 @@ description: >
 - 用户要求创建普通文件
 - 用户要求创建规则文件（应使用 yy-create-rule）
 
-## 创建/更新流程
+## 指令
 
 ### 1. 捕获意图
 
@@ -76,6 +76,19 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 目录结构规范详见 `resources/skill-best-practices.md`。
 
 ### 5. 验收清单
+
+创建或更新技能后，检查以下项目：
+
+1. 包含 `## 描述` 章节，用 1-2 句话说明技能核心作用
+2. description 精确，不会误触发
+3. 使用场景明确（触发条件和不应触发场景）
+4. 指令步骤完整可执行，最后一步描述输出格式
+5. YAML 格式正确（使用多行字符串语法处理长 description）
+6. 文件命名符合规范（kebab-case）
+7. 使用中文描述
+8. 代码示例包含语言标签
+9. 同一任务重复运行，输出结构稳定
+10. 技能能单独被显式调用
 
 详细验收清单见 `resources/skill-best-practices.md`。
 
