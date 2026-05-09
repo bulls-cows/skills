@@ -24,7 +24,7 @@
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(7组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
 | T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
@@ -115,7 +115,7 @@
 
 #### `.js` / `.jsx` / `.ts` / `.tsx` 文件
 
-- 导入顺序（12 组）：1. 外部依赖 2. 全局 API 3. 全局工具 4. 相对工具 5. 全局 Hooks 6. 相对 Hooks 7. 全局 Store 8. 全局配置 9. 相对配置 10. 全局组件 11. 相对组件（组间空一行，组内字母排序）
+- 导入顺序（7 组）：1. 外部依赖 2. types（仅TS/TSX） 3. apis 4. utils 5. hooks 6. stores 7. constants 8. components（全局与相对合并，组间空一行，组内字母排序）
 - 网络请求：`async/await + try/catch`
 - TypeScript/TSX：参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型）
 - JSX/TSX：组件结构规范、Props 类型定义、事件处理规范
@@ -376,46 +376,41 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 #### 结构与顺序整理
 
-##### 导入顺序（12 组）
+##### 导入顺序（7 组）
 
-组间空一行，组内按字母排序。**新增 Hooks 分组（第 10 组）**。
+组间空一行，组内按字母排序。**全局与相对导入合并为同一组**。
 
 ```typescript
-// 1. 外部依赖
+// node_modules
 import dayjs from "dayjs";
 import { debounce } from "lodash";
 
-// 2. 全局 API
+// types（仅 TypeScript/TSX）
+import type { RuleObject } from "ant-design-vue/es/form";
+import type { IUserInfo } from "@src/types/user";
+import type { ITableColumn } from "./types";
+
+// apis
 import { apiGetUserInfo } from "@src/api/user";
 
-// 3. 全局工具
-import { formatDate } from "@src/utils/date";
-
-// 4. 相对工具
+// utils
+import { formatDate } from "@src/utils";
 import { formatFileSize } from "./utils/format";
 
-// 5. 全局 Store (Pinia/Vuex)
-import { useUserStore } from "@src/stores/user";
-
-// 6. 全局配置
-import { APP_CONFIG } from "@src/constants";
-
-// 7. 相对配置
-import { MAX_RETRY_COUNT } from "./constants";
-
-// 8. 全局组件
-import { NavbarLogo } from "@src/components";
-
-// 9. 相对组件
-import NavbarLogo2 from "./NavbarLogo2.vue";
-
-// 10. Hooks
+// hooks
 import { useTable } from "@src/hooks/useTable";
 import { useSearchForm } from "./useSearchForm";
 
-// 11. 类型定义（仅 TypeScript/TSX）
-import type { IUserInfo } from "@src/types/user";
-import type { ITableColumn } from "./types";
+// stores (Pinia/Vuex)
+import { useUserStore } from "@src/stores/user";
+
+// constants
+import { APP_CONFIG } from "@src/constants";
+import { MAX_RETRY_COUNT } from "./constants";
+
+// components
+import { NavbarLogo } from "@src/components";
+import NavbarLogo2 from "./NavbarLogo2.vue";
 ```
 
 ##### `<script setup>` 结构顺序
@@ -424,10 +419,12 @@ import type { ITableColumn } from "./types";
 
 ```typescript
 <script setup lang="ts" name="UserCard">
-// 1. imports（按 12 组排序）
+// 1. imports（按 7 组排序）
 import { ref, computed, watch, onMounted } from "vue";
-import { apiGetUserList } from "@src/api/user";
+
 import type { IUserInfo } from "@src/types/user";
+
+import { apiGetUserList } from "@src/api/user";
 
 // 2. defineProps
 const props = defineProps<{
@@ -618,7 +615,7 @@ export default defineComponent({
 
 ##### TSX 组件结构顺序
 
-1. imports（按 12 组排序）
+1. imports（按 7 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -674,7 +671,7 @@ const handleClick = () => {
 
 ##### JSX 组件结构顺序
 
-1. imports（按 12 组排序）
+1. imports（按 7 组排序）
 2. 类型定义
 3. defineComponent
 4. name

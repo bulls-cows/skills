@@ -4,11 +4,11 @@
 
 ## ⚠️ 风险说明（执行前必须展示给用户）
 
-| 风险项 | 影响范围 | 说明 |
-|--------|----------|------|
-| **Git Diff 膨胀** | 全文件 | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
-| **合并冲突** | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突 |
-| **格式不一致** | 团队协作 | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异 |
+| 风险项            | 影响范围     | 说明                                                                              |
+| ----------------- | ------------ | --------------------------------------------------------------------------------- |
+| **Git Diff 膨胀** | 全文件       | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
+| **合并冲突**      | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突                                      |
+| **格式不一致**    | 团队协作     | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异                    |
 
 > **建议**：在执行格式化前，确保当前分支是干净的，且没有待合并的代码。
 
@@ -52,48 +52,41 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 - 示例：`<script setup lang="ts" name="UserCard">`
 - **未安装该插件时，不添加 name 属性**，保持原有 `<script setup>` 写法
 
-### 导入顺序（12 组）
+### 导入顺序（7 组）
 
-组间空一行，组内按字母排序。**Hooks 拆分为全局/相对两组（第 5/6 组）**。
+组间空一行，组内按字母排序。**全局与相对导入合并为同一组**。
 
 ```typescript
-// 1. 外部依赖
+// node_modules
 import dayjs from "dayjs";
 import { debounce } from "lodash";
 
-// 2. 全局 API
-import { apiGetUserInfo } from "@src/api/user";
-
-// 3. 全局工具
-import { formatDate } from "@src/utils/date";
-
-// 4. 相对工具
-import { formatFileSize } from "./utils/format";
-
-// 5. 全局 Hooks（`@src/hooks/...`）
-import { useTable } from "@src/hooks/useTable";
-
-// 6. 相对 Hooks（`./hooks/...` 或 `./useXxx`）
-import { useSearchForm } from "./useSearchForm";
-
-// 7. 全局 Store (Pinia/Vuex)
-import { useUserStore } from "@src/stores/user";
-
-// 8. 全局配置
-import { APP_CONFIG } from "@src/constants";
-
-// 9. 相对配置
-import { MAX_RETRY_COUNT } from "./constants";
-
-// 10. 全局组件
-import { NavbarLogo } from "@src/components";
-
-// 11. 相对组件
-import NavbarLogo2 from "./NavbarLogo2.vue";
-
-// 12. 类型定义（仅 TypeScript/TSX）
+// types（仅 TypeScript/TSX）
+import type { RuleObject } from "ant-design-vue/es/form";
 import type { IUserInfo } from "@src/types/user";
 import type { ITableColumn } from "./types";
+
+// apis
+import { apiGetUserInfo } from "@src/api/user";
+
+// utils
+import { formatDate } from "@src/utils";
+import { formatFileSize } from "./utils/format";
+
+// hooks
+import { useTable } from "@src/hooks/useTable";
+import { useSearchForm } from "./useSearchForm";
+
+// stores (Pinia/Vuex)
+import { useUserStore } from "@src/stores/user";
+
+// constants
+import { APP_CONFIG } from "@src/constants";
+import { MAX_RETRY_COUNT } from "./constants";
+
+// components
+import { NavbarLogo } from "@src/components";
+import NavbarLogo2 from "./NavbarLogo2.vue";
 ```
 
 ### `<script setup>` 结构顺序
@@ -102,10 +95,12 @@ import type { ITableColumn } from "./types";
 
 ```typescript
 <script setup lang="ts" name="UserCard">
-// 1. imports（按 12 组排序）
+// 1. imports（按 7 组排序）
 import { ref, computed, watch, onMounted } from "vue";
-import { apiGetUserList } from "@src/api/user";
+
 import type { IUserInfo } from "@src/types/user";
+
+import { apiGetUserList } from "@src/api/user";
 
 // 2. defineProps
 const props = defineProps<{
@@ -144,20 +139,28 @@ watch(
 
 // 8. 方法（业务函数）
 const init = () => {
-  fetchData(props.userId);
+  try {
+    fetchData(props.userId);
+  } catch (error) {
+    console.warn(error);
+  }
 };
 
 const handleSubmit = async () => {
   try {
     await apiPostForm(formData);
     emit("submit");
-  } catch (err) {
-    console.warn(err);
+  } catch (error) {
+    console.warn(error);
   }
 };
 
 const onClickSubmit = () => {
-  handleSubmit();
+  try {
+    handleSubmit();
+  } catch (error) {
+    console.warn(error);
+  }
 };
 
 // 9. 生命周期钩子
@@ -185,10 +188,10 @@ defineExpose({
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-| 原写法 | 推荐写法 |
-|--------|---------|
-| `function fetchData() {}` | `const fetchData = () => {}` |
-| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| 原写法                           | 推荐写法                            |
+| -------------------------------- | ----------------------------------- |
+| `function fetchData() {}`        | `const fetchData = () => {}`        |
+| `function handleClick(e) {}`     | `const handleClick = (e) => {}`     |
 | `async function submitForm() {}` | `const submitForm = async () => {}` |
 
 > ⚠️ 该转换属于**代码风格统一**，需在 T02 任务中提示用户确认后执行。
@@ -231,8 +234,8 @@ const formData = reactive<{ username: string; email: string }>({
 });
 
 // ❌ 错误：使用 any
-const userList = ref<any>([]);  // 禁止
-const data: any = {};  // 禁止
+const userList = ref<any>([]); // 禁止
+const data: any = {}; // 禁止
 ```
 
 ## JSX/TSX 组件结构规范
@@ -296,7 +299,7 @@ export default defineComponent({
 
 ### TSX 组件结构顺序
 
-1. imports（按 12 组排序）
+1. imports（按 7 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -352,7 +355,7 @@ const handleClick = () => {
 
 ### JSX 组件结构顺序
 
-1. imports（按 12 组排序）
+1. imports（按 7 组排序）
 2. 类型定义
 3. defineComponent
 4. name

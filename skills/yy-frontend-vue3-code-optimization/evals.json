@@ -70,8 +70,8 @@
           "type": "qualitative"
         },
         {
-          "name": "导入按 12 组排序",
-          "description": "imports 按外部依赖→全局API→全局工具→相对工具→全局Hooks→相对Hooks→全局Store→全局配置→相对配置→全局组件→相对组件分组排列",
+          "name": "导入按 7 组排序",
+          "description": "imports 按外部依赖→types→apis→utils→hooks→stores→constants→components 分组排列，全局与相对合并",
           "type": "code_check",
           "file": "test-utils.jsx"
         },
@@ -108,8 +108,8 @@
           "file": "test-hooks.ts"
         },
         {
-          "name": "导入按 12 组排序",
-          "description": "imports 按规范分组排列，包含 Hooks 分组",
+          "name": "导入按 7 组排序",
+          "description": "imports 按规范分7组排列，全局与相对合并",
           "type": "code_check",
           "file": "test-hooks.ts"
         }

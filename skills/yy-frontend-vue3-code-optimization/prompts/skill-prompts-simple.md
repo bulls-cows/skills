@@ -24,7 +24,7 @@
 | ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
 | T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改                                                     |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(12组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(7组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
 | T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
 | T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
 | T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
@@ -115,7 +115,7 @@
 
 #### `.js` / `.jsx` / `.ts` / `.tsx` 文件
 
-- 导入顺序（12 组）：1. 外部依赖 2. 全局 API 3. 全局工具 4. 相对工具 5. 全局 Hooks 6. 相对 Hooks 7. 全局 Store 8. 全局配置 9. 相对配置 10. 全局组件 11. 相对组件（组间空一行，组内字母排序）
+- 导入顺序（7 组）：1. 外部依赖 2. types（仅TS/TSX） 3. apis 4. utils 5. hooks 6. stores 7. constants 8. components（全局与相对合并，组间空一行，组内字母排序）
 - 网络请求：`async/await + try/catch`
 - TypeScript/TSX：参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型）
 - JSX/TSX：组件结构规范、Props 类型定义、事件处理规范
@@ -247,7 +247,7 @@ if (code === 0) {
 ### T03 🧹 代码风格与格式清洗（🟡 中风险）
 
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 `assets/.prettierrc.json` 规则手动格式化
-- 导入按 12 组排序，组间空一行，组内字母排序
+- 导入按 7 组排序，组间空一行，组内字母排序
 - `<script setup>` 结构顺序：imports → defineProps → defineEmits → Hooks → ref/reactive → computed → watch → 方法 → 生命周期 → defineExpose
 - 箭头函数单参数省略括号：`(item) => {}` → `item => {}`
 - 方法内部顺序：`init...()` → `getListData/postFormData` → `onClick/onChange` → `computedXxx`
