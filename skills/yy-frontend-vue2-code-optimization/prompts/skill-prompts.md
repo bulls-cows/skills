@@ -376,37 +376,35 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 #### 结构与顺序整理
 
-##### 导入顺序（9 组）
+##### 导入顺序（7 组）
 
-组间空一行，组内按字母排序。
+组间空一行，组内按字母排序。**全局与相对导入合并为同一组**。
 
 ```javascript
 // 1. 外部依赖
 import dayjs from "dayjs";
 import { debounce } from "lodash";
 
-// 2. 全局 API
+// apis
 import { apiGetUserInfo } from "@src/api/user";
 
-// 3. 全局工具
-import { formatDate } from "@src/utils/date";
-
-// 4. 相对工具
+// utils
+import { formatDate } from "@src/utils";
 import { formatFileSize } from "./utils/format";
 
-// 5. 全局 Store
+// hooks
+import { useTable } from "@src/hooks/useTable";
+import { useSearchForm } from "./useSearchForm";
+
+// stores (Pinia/Vuex)
 import store from "@src/store";
 
-// 6. 全局配置
+// constants
 import { APP_CONFIG } from "@src/constants";
-
-// 7. 相对配置
 import { MAX_RETRY_COUNT } from "./constants";
 
-// 8. 全局组件
+// components
 import { NavbarLogo } from "@src/components";
-
-// 9. 相对组件
 import NavbarLogo2 from "./NavbarLogo2.vue";
 ```
 
