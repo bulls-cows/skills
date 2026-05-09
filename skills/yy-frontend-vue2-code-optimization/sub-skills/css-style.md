@@ -68,7 +68,7 @@
 ### 禁止嵌套场景
 
 ```scss
-// ❌ 禁止：嵌套层级过深（> 3 层）
+// ❌ 禁止：嵌套层级过深（> 2 层）
 .user-card {
   .user-card__header {
     .user-card__title {
