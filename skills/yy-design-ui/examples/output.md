@@ -59,24 +59,6 @@
 - 无外部依赖
 - 响应式适配
 
-### 代码结构示例
+### 完整代码
 
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>登录</title>
-  <style>
-    /* 原生 CSS 实现 */
-  </style>
-</head>
-<body>
-  <div class="login-container">
-    <form class="login-form">
-      <!-- 表单内容 -->
-    </form>
-  </div>
-</body>
-</html>
-```
+详见 `examples/login-demo.html`。
