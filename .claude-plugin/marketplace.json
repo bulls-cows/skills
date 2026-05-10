@@ -21,7 +21,7 @@
         "./skills/yy-create-rule",
         "./skills/yy-create-skill",
         "./skills/yy-design-ui",
-        "./skills/yy-extract-traits",
+        "./skills/yy-distill",
         "./skills/yy-handoff",
         "./skills/yy-init",
         "./skills/yy-lint",
