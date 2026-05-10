@@ -53,7 +53,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md) | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
 | [yy-create-skill](./skills/yy-create-skill/SKILL.md) | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md) | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill yy-design-ui` |
-| [yy-distill](./skills/yy-distill/SKILL.md) | 从用户指定的内容中提炼开发者核心特质，生成可安全分享的性格特质画像 | `npx skills add bulls-cows/skills --skill yy-distill` |
+| [yy-distill](./skills/yy-distill/SKILL.md) | 从用户指定的内容中提炼核心特质，构建思维操作系统 | `npx skills add bulls-cows/skills --skill yy-distill` |
 | [yy-handoff](./skills/yy-handoff/SKILL.md) | 创建或更新项目交接文档 handoff.md，用于跨会话续接当前任务 | `npx skills add bulls-cows/skills --skill yy-handoff` |
 | [yy-init](./skills/yy-init/SKILL.md) | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
 | [yy-lint](./skills/yy-lint/SKILL.md) | 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误 | `npx skills add bulls-cows/skills --skill yy-lint` |
