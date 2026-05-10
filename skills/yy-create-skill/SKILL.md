@@ -71,6 +71,11 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - 具体约束写在正文，如使用场景、指令、示例
 - 如果 `description` 已经开始解释"怎么做"，通常说明写宽了
 
+**YAML frontmatter 字段约束**：
+
+- 只允许 `name` 和 `description` 两个字段
+- 禁止添加其他字段（如 `version`、`author`、`tags` 等）
+
 ### 4. 创建/更新目录结构
 
 **创建新技能**的目录规则：
@@ -88,7 +93,7 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 2. description 精确，不会误触发
 3. 使用场景明确（触发条件和不应触发场景）
 4. 指令步骤完整可执行，最后一步描述输出格式
-5. YAML 格式正确（使用多行字符串语法处理长 description）
+5. YAML frontmatter 只包含 `name` 和 `description` 字段，格式正确（使用多行字符串语法处理长 description）
 6. 文件命名符合规范（kebab-case）
 7. 使用中文描述
 8. 代码示例包含语言标签
