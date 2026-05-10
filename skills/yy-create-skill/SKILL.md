@@ -6,8 +6,6 @@ description: >
 
 # yy-create-skill
 
-帮助用户创建或更新规范的 Skill。
-
 ## 描述
 
 帮助用户创建或更新符合规范的 Skill 技能文件，包含完整的目录结构、YAML 元数据和可执行的指令步骤。
