@@ -21,64 +21,6 @@
 
 **禁止**：无意义命名（如 `data1`、`temp2`）
 
-## Props 规范
+## Props/Emit/组件通信
 
-- 必须使用 `<script setup>` 语法，禁止 Options API 写法
-- 使用 `defineProps` + TypeScript 类型注解
-- 命名必须 camelCase，必须添加注释说明参数含义
-
-```typescript
-const props = defineProps<{
-  // userId: 用户ID
-  userId: string | number;
-  // isLoading: 加载状态
-  isLoading?: boolean;
-}>();
-```
-
-## Emit 事件白名单与顺序
-
-### 事件白名单
-
-- **交互类**：`change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add`
-- **弹窗类**：`open`, `close`, `show`, `hide`
-- **操作类**：`cancel`, `confirm`, `ok`, `editSuccess`, `error`
-
-### 对外 emit 顺序
-
-```typescript
-emit("input", 数据);
-emit("其它事件", 数据);
-emit("change/click", 数据);
-```
-
-### defineEmits 定义
-
-使用 `defineEmits` 定义，必须指定事件名和参数类型：
-
-```typescript
-const emit = defineEmits<{
-  input: [value: string];
-  change: [value: string];
-  click: [id: number];
-}>();
-```
-
-## 组件传参要求
-
-- **命名**：必须使用 camelCase
-- **类型**：必须明确指定参数类型（TypeScript 类型注解）
-- **注释**：必须添加注释说明参数含义
-
-## provide / inject 规范
-
-- **使用场景**：仅用于深层组件传参（3 层以上），避免逐层传递 props
-- **兄弟组件通信**：使用 Pinia/Vuex，禁止通过 provide/inject 跨层级滥用
-- **响应式传递**：注入对象需保持响应式，使用 `provide('key', refValue)`
-
-## 禁用 $parent / $children
-
-- **禁止**通过 `$parent.$parent` 链式访问父组件数据
-- **禁止**在 `<script setup>` 中使用 `this`
-- **原因**：组件耦合度高，破坏组件独立性
-- **替代方案**：使用 props/emit 或状态管理
+详见 [interaction.md](./interaction.md)

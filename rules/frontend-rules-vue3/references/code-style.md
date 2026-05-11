@@ -48,72 +48,13 @@
 | 括号同行 | `bracketSameLine: false` | 括号不和内容同行 |
 | 散文换行 | `proseWrap: "never"` | 从不换行 |
 
-## 导入顺序（11 组，组间空一行）
+## 函数写法偏好
 
-1. 外部依赖（`vue`、`dayjs`、`lodash` 等第三方库）
-2. 全局 API（`@src/api/...`）
-3. 全局工具（`@src/utils/...`）
-4. 相对工具（`./utils/...`）
-5. 全局 Hooks（`@src/hooks/...`）
-6. 相对 Hooks（`./hooks/...`）
-7. 全局 Store（`@src/store/...`）
-8. 全局配置（`@src/constants/...`）
-9. 相对配置（`./constants/...`）
-10. 全局组件（`@src/components/...`）
-11. 相对组件（`./ComponentName.vue`）
+**优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-### 排序原则
+| 原写法 | 推荐写法 |
+|--------|---------|
+| `function fetchData() {}` | `const fetchData = () => {}` |
+| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
 
-- 全局优先 → 相对在后 → 组内按字母顺序排列
-
-### 示例
-
-```typescript
-// 1. 外部依赖
-import { ref, computed, onMounted } from 'vue';
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
-
-// 2. 全局 API
-import { apiGetUserInfo } from '@src/api/user';
-
-// 3. 全局工具
-import { formatDate } from '@src/utils/date';
-
-// 4. 相对工具
-import { formatFileSize } from './utils/format';
-
-// 5. 全局 Hooks
-import { useTable } from '@src/hooks/useTable';
-import { useSearchForm } from '@src/hooks/useSearchForm';
-
-// 6. 相对 Hooks
-import { useFormValidate } from './hooks/useFormValidate';
-
-// 7. 全局 Store
-import store from '@src/store';
-
-// 8. 全局配置
-import { APP_CONFIG } from '@src/constants';
-
-// 9. 相对配置
-import { MAX_RETRY_COUNT } from './constants';
-
-// 10. 全局组件
-import { NavbarLogo } from '@src/components';
-
-// 11. 相对组件
-import NavbarLogo2 from './NavbarLogo2.vue';
-```
-
-## 等于运算符
-
-- 优先推荐使用 `==`
-- 若将 `===` 改为 `==`，需提醒用户手动确认
-
-## 格式化执行
-
-- **工具**：Prettier
-- **时机**：
-  - 每次修改代码后必须立即格式化（IDE 保存时触发或 `npm run lint -- --fix`）
-  - Git 提交前通过 pre-commit 钩子自动执行
+> 关于导入顺序、`<script setup>` 结构顺序、模板属性顺序，详见 [order.md](./order.md)。

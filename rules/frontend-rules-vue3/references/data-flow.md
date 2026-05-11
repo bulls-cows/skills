@@ -1,41 +1,9 @@
-# 数据流与状态管理
+# 数据流与组件通信
 
-本模块定义 Vue3 Composition API 下的数据流与状态管理规范。
+本模块定义 Vue3 项目中 provide/inject、路由守卫清理与组件暴露规范。
 
-## ref/reactive 与 computed 使用原则
-
-- 优先使用 `ref`，复杂对象使用 `reactive`
-- 除后端交互数据和部分定时器外，一律尽可能使用 `computed`
-- 减少冗余 ref 属性，优先派生计算
-- ref 访问必须使用 `.value`
-
-## computed 规范
-
-- 必须使用 `try/catch` 包裹
-- 命名使用 `is` / `has` / `visible` 或有意义的名称
-
-```typescript
-// computed: 是否全选
-const isSelected = computed(() => {
-  try {
-    return selectedItems.value.length === totalItems.value;
-  } catch {
-    return false;
-  }
-});
-```
-
-## watch 规范
-
-- **深度监听**：对象/数组变化必须声明 `deep: true`
-- **立即执行**：初始化需触发时加 `immediate: true`
-- **清理资源**：定时器、事件监听在组件销毁时清理
-
-```typescript
-watch(searchQuery, (newVal, oldVal) => {
-  // 处理搜索关键词变化
-}, { immediate: true, deep: true });
-```
+> ref/reactive/computed 详见 [reactivity.md](./reactivity.md)
+> watch/watchEffect 详见 [watch.md](./watch.md)
 
 ## provide / inject 规范
 
