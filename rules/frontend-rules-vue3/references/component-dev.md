@@ -20,54 +20,7 @@
 
 ### 完整示例
 
-```typescript
-<script setup lang="ts">
-// 1. imports
-import { ref, computed, reactive, onMounted } from 'vue';
-import dayjs from 'dayjs';
-import type { IUser } from '@src/types/user';
-import { apiGetUserInfo } from '@src/api/user';
-import { useTable } from '@src/hooks/useTable';
-import UserCard from './UserCard.vue';
-
-// 2. 交互定义
-const props = defineProps<{
-  // userId: 用户ID
-  userId: string | number;
-}>();
-const emit = defineEmits<{
-  change: [value: string];
-}>();
-
-// 3. 全局 Hooks
-const { tableData, getListData } = useTable();
-
-// 4. 业务逻辑 — 按功能模块分组
-
-// --- 搜索模块 ---
-const searchQuery = ref('');
-const isSearchActive = computed(() => searchQuery.value.length > 0);
-const handleSearch = () => { /* ... */ };
-watch(searchQuery, (newVal) => { /* ... */ });
-
-// --- 表单模块 ---
-const formRef = ref();
-const form = reactive({ name: '', age: 0 });
-const onSubmit = async () => { /* ... */ };
-onMounted(() => { /* ... */ });
-
-// --- 抽屉模块 ---
-const visible = ref(false);
-const openDrawer = () => { visible.value = true; };
-const closeDrawer = () => { visible.value = false; };
-
-// 5. defineExpose
-defineExpose({
-  fetchData,
-  resetForm
-});
-</script>
-```
+详见 [order.md](./order.md#二script-setup-内部结构顺序)（包含完整的 11 组 import 分组、交互定义、Hooks、业务逻辑分组、defineExpose）
 
 ### Script 顶部 JSDoc
 
@@ -85,9 +38,7 @@ defineExpose({
 
 ### Vue 元素特性顺序
 
-详见 [directives.md](./directives.md#五模板属性顺序)
-
-HTML 元素上的属性顺序：1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on`（`@`）→ 8. `v-html/v-text` → 9. 动态 `v-slot`（`#`）
+详见 [directives.md](./directives.md#五模板属性顺序)（9 步完整顺序：`is` → `v-for` → `v-if/else` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`）。
 
 ### v-slot 风格
 
@@ -96,9 +47,7 @@ HTML 元素上的属性顺序：1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v
 
 ### 模板层轻量化
 
-详见 [performance.md](./performance.md#六模板层轻量化)
-
-模板只负责展示，不写复杂表达式与逻辑。简单逻辑可内联，不过度封装为函数。
+详见 [performance.md](./performance.md#六模板层轻量化)（模板职责分离、简单逻辑内联原则）。
 
 ### 注释规范
 
@@ -116,9 +65,7 @@ HTML 元素上的属性顺序：1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v
 
 ### defineExpose
 
-详见 [interaction.md](./interaction.md#三对外暴露-defineexpose)
-
-通过 `defineExpose` 向父组件暴露需要访问的属性或方法，父组件通过 `ref` 访问。仅暴露业务必须调用的方法，不暴露内部状态实现。teraction.md#三对外暴露-defineexpose)
+详见 [interaction.md](./interaction.md#三对外暴露-defineexpose)（明确声明、父组件访问、禁止滥用规则）。
 
 ## 相关模块引用
 

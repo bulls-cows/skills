@@ -85,31 +85,7 @@ watchEffect(() => {
 
 ## 四、watch 与 computed 选择策略
 
-**优先使用 `computed` 替代 `watch` 中的派生逻辑**，利用其缓存机制：
-
-```typescript
-// ❌ 不推荐：使用 watch 监听派生值
-watch([a, b], () => {
-  sum.value = a.value + b.value;
-});
-
-// ✅ 推荐：使用 computed 自动缓存
-const sum = computed(() => a.value + b.value);
-```
-
-### 选择指南
-
-| 场景             | 推荐方式    | 说明                                     |
-| ---------------- | ----------- | ---------------------------------------- |
-| 派生值计算       | `computed`  | 自动缓存，依赖变化时重新求值             |
-| 异步操作         | `watch`     | 如 API 请求、定时器等                    |
-| 副作用操作       | `watch`     | 如 DOM 操作、localStorage 写入等         |
-| 简单自动追踪     | `watchEffect` | 自动追踪依赖的简单副作用               |
-
-### 风险
-
-- 响应式求值时机不同
-- 带副作用的逻辑（如 API 请求、DOM 操作）不能转为 computed
+watch 中的派生逻辑应优先使用 `computed` 替代，详见 [reactivity.md](./reactivity.md#三computed-规范)（computed 优先策略、选择指南表格、风险分析）。
 
 ---
 
@@ -174,8 +150,4 @@ onBeforeUnmount(() => {
 
 ## 六、在代码组织中的位置
 
-在 `<script setup>` 的业务模块内部，按业务逻辑分组，组内通常顺序：
-
-```text
-ref/reactive → computed → 方法 → watch → 生命周期钩子
-```
+watch 在 `<script setup>` 业务模块内部的位置，详见 [order.md](./order.md#二script-setup-内部结构顺序)（组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子）。

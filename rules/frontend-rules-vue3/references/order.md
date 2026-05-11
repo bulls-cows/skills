@@ -32,14 +32,45 @@ Vue3 单文件组件内部块顺序必须保持一致：
 
 #### 完整示例
 
+> **注意**：第 4 步"业务逻辑"内部，每个功能模块应遵循 `ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子的顺序。
+
 ```typescript
 <script setup lang="ts">
-// --- 导入 ---
+// --- 导入（11 组）---
+// 1. 外部依赖
 import { ref, computed, reactive, onMounted } from 'vue';
 import dayjs from 'dayjs';
-import type { IUser } from '@src/types/user';
+
+// 2. API
 import { apiGetUserInfo } from '@src/api/user';
+
+// 3. 全局工具
+import { formatDate } from '@src/utils/date';
+
+// 4. 相对工具
+import { localHelpers } from './utils/helpers';
+
+// 5. 全局 Hooks
 import { useTable } from '@src/hooks/useTable';
+import { useSearchForm } from '@src/hooks/useSearchForm';
+
+// 6. 相对 Hooks
+import { useLocalForm } from './hooks/useLocalForm';
+
+// 7. 全局 Store
+import store from '@src/store';
+
+// 8. 全局配置
+import { APP_CONFIG } from '@src/constants';
+
+// 9. 相对配置
+import { MODULE_CONFIG } from './constants';
+
+// 10. 全局组件
+import DataTable from '@src/components/DataTable.vue';
+
+// 11. 相对组件
+import SearchBar from './SearchBar.vue';
 import UserCard from './UserCard.vue';
 
 // --- 交互定义 ---
@@ -68,16 +99,23 @@ defineExpose({ fetchData, resetForm });
 
 ---
 
-## 三、Import 分组排序（4 组）
+## 三、Import 分组排序（11 组）
 
-将 `import` 分为四组，**组间空一行，组内按字母顺序排列**：
+将 `import` 分为十一组，**组间空一行，组内按字母顺序排列**：
 
 1. **外部依赖**：`vue`, `dayjs`, `lodash` 等第三方库。
-2. **types**：`import type` 类型导入。
-3. **全局内部依赖**：`@src/...` 路径下的模块。
-4. **相对内部依赖**：`./...` 路径下的模块。
+2. **全局 API**：`@src/api/...`
+3. **全局工具**：`@src/utils/...`
+4. **相对工具**：`./utils/...`
+5. **全局 Hooks**：`@src/hooks/...`
+6. **相对 Hooks**：`./hooks/...`
+7. **全局 Store**：`@src/store/...`
+8. **全局配置**：`@src/constants/...`
+9. **相对配置**：`./constants/...`
+10. **全局组件**：`@src/components/...`
+11. **相对组件**：`./ComponentName.vue`
 
-**排序原则**：外部优先 → 内部在后 → 全局优先于相对 → 组内按字母顺序排列。
+**排序原则**：全局优先 → 相对在后 → 组内按字母顺序排列。
 
 **示例**：
 
@@ -87,24 +125,36 @@ import { ref, computed, onMounted } from 'vue';
 import dayjs from 'dayjs';
 import { debounce } from 'lodash';
 
-// 2. types
-import type { IUser } from '@src/types/user';
-import type { TableData } from './types';
-
-// 3. 全局内部依赖
+// 2. 全局 API
 import { apiGetUserInfo } from '@src/api/user';
+
+// 3. 全局工具
+import { formatDate } from '@src/utils/date';
+
+// 4. 相对工具
+import { localHelper } from './utils/helper';
+
+// 5. 全局 Hooks
 import { useTable } from '@src/hooks/useTable';
 import { useSearchForm } from '@src/hooks/useSearchForm';
-import { formatDate } from '@src/utils/date';
+
+// 6. 相对 Hooks
+import { useFormValidate } from './hooks/useFormValidate';
+
+// 7. 全局 Store
 import store from '@src/store';
+
+// 8. 全局配置
 import { APP_CONFIG } from '@src/constants';
+
+// 9. 相对配置
+import { MAX_RETRY_COUNT } from './constants';
+
+// 10. 全局组件
 import DataTable from '@src/components/DataTable.vue';
 
-// 4. 相对内部依赖
+// 11. 相对组件
 import SearchBar from './SearchBar.vue';
-import { localHelper } from './utils/helper';
-import { MAX_RETRY_COUNT } from './constants';
-import { useFormValidate } from './hooks/useFormValidate';
 ```
 
 ---
