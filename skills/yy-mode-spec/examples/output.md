@@ -2,13 +2,13 @@
 
 本文档展示制定规格后的预期输出示例。
 
-## 示例 1：规格文件输出
+## 示例 1：复杂需求输出
 
 规格文件路径：`.claude/specs/20260324_153045_用户认证系统/`
 
-### spec.md 内容示例
+### spec.md
 
-```text
+```markdown
 # 用户认证系统 规格说明书
 
 ## 1. 功能概述
@@ -41,6 +41,7 @@
 
 ### 3.2 数据模型
 
+```typescript
 interface User {
   id: string;
   username: string;
@@ -49,9 +50,9 @@ interface User {
 }
 ```
 
-### tasks.md 内容示例
+### tasks.md
 
-```text
+```markdown
 # 用户认证系统 任务分解
 
 ## 任务列表
@@ -71,9 +72,9 @@ interface User {
 | T-04 | 实现验证中间件 | T-02 | 高 | 正确拦截未授权请求 |
 ```
 
-### checklist.md 内容示例
+### checklist.md
 
-```text
+```markdown
 # 用户认证系统 验证清单
 
 ## 实施前检查
@@ -102,7 +103,7 @@ interface User {
 
 对于简单需求，可直接在对话中输出：
 
-```text
+```markdown
 ## 规格摘要
 
 ### 功能概述

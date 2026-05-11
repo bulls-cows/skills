@@ -28,8 +28,17 @@ description: >
 
 分析用户需求，判断任务复杂度：
 
-- **简单需求**：可直接在对话中输出规格内容供用户确认
-- **复杂需求**：创建规格文件
+**简单需求**（直接在对话中输出规格）：
+
+- 单文件修改或少量文件变更
+- 功能单一、逻辑清晰
+- 不涉及架构变更
+
+**复杂需求**（创建规格文件）：
+
+- 多模块、多文件变更
+- 涉及架构设计或技术选型
+- 需要多阶段实施
 
 ### 2. 编写规格
 
@@ -45,9 +54,30 @@ description: >
 
 复杂需求需创建三个规格文件：
 
-- `spec.md` - 主规格文档
-- `tasks.md` - 任务分解
-- `checklist.md` - 验证清单
+- `spec.md` - 主规格文档（参考 [templates/spec-template.md](./templates/spec-template.md)）
+- `tasks.md` - 任务分解（参考 [templates/tasks-template.md](./templates/tasks-template.md)）
+- `checklist.md` - 验证清单（参考 [templates/checklist-template.md](./templates/checklist-template.md)）
+
+#### 目录选择优先级
+
+1. **用户手动指定**（最高优先级）
+   - 格式：`--tool-dir <目录> --requirement-dir <目录>`
+2. **自动检测**：按 `.agents` > `.claude` > `.opencode` > `.trae` 顺序检测
+3. **无匹配目录**：提示用户指定或创建
+
+#### 目录结构
+
+```text
+{项目根目录}/
+└── {工具目录}/
+    └── specs/
+        └── {时间戳}_{需求目录}/
+            ├── spec.md
+            ├── tasks.md
+            └── checklist.md
+```
+
+时间戳格式：`YYYYMMDD_HHMMSS`，如 `20260324_153045_实时通知系统`。
 
 ### 4. 展示规格
 
@@ -65,29 +95,6 @@ description: >
 1. 更新/创建待办事项列表
 2. 按任务分解执行
 3. 完成后运行验证清单
-
-## 规格文件位置
-
-### 目录选择优先级
-
-1. **用户手动指定**（最高优先级）
-   - 格式：`--tool-dir <目录> --requirement-dir <目录>`
-2. **自动检测**：按 `.agents` > `.claude` > `.opencode` > `.trae` 顺序检测
-3. **无匹配目录**：提示用户指定或创建
-
-### 目录结构
-
-```text
-{项目根目录}/
-└── {工具目录}/
-    └── specs/
-        └── {时间戳}_{需求目录}/
-            ├── spec.md
-            ├── tasks.md
-            └── checklist.md
-```
-
-时间戳格式：`YYYYMMDD_HHMMSS`，如 `20260324_153045_实时通知系统`。
 
 ## 输出格式
 
