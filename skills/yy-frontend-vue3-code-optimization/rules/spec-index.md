@@ -1,6 +1,8 @@
-# Vue3 前端项目开发规范（索引）
+# Vue3 前端项目开发规范总纲（索引）
 
-> 本规则整合自 `rules/frontend-rules-vue3` 与 `skills/yy-frontend-vue3-code-optimization` 中的规范部分，按优先级重新组织。点击各条目跳转至详细规则文件。
+> 本规范整合自 `rules/frontend-rules-vue3` 与 `skills/yy-frontend-vue3-code-optimization` 中的规范部分，按优先级重新组织。点击各条目跳转至详细规则文件。
+
+**适用范围**：所有 `src` 目录下的 `.vue`、`.ts`、`.js`、`.css`、`.scss`、`.less` 文件。目录约束：仅允许操作 `src` 目录下的文件。
 
 ---
 
@@ -34,6 +36,7 @@
 | **ref/reactive/computed 原则** | [reactivity.md](./reactivity.md) | ref/reactive 选择原则、reactive 转 ref 规则、computed 规范 |
 | **watch 规范** | [watch.md](./watch.md) | watch/watchEffect 使用规范、清理机制、与 computed 选择策略 |
 | **网络请求规范** | [network.md](./network.md) | 异步处理、响应解构、错误处理、防止重复提交 |
+| **数据流与组件通信** | [data-flow.md](./data-flow.md) | provide/inject、路由守卫清理、defineExpose |
 
 ---
 
@@ -43,9 +46,14 @@
 
 | 规则 | 详见 | 说明 |
 |------|------|------|
-| **格式化与工具链** | [formatting.md](./formatting.md) | Prettier 配置、ESLint 集成 |
+| **格式化与工具链** | [code-style.md](./code-style.md) | Prettier 配置、ESLint 集成 |
 | **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **注释规范** | [comments.md](./comments.md) | 模板区、脚本区、样式区注释格式，注释保护原则 |
-| **样式命名与作用域** | [naming.md](./naming.md#六css命名bem-规范) + `spec-index.md` | BEM 规范、`scoped` 优先、全局样式标注 |
+| **样式命名与作用域** | [css.md](./css.md#bem-命名规范) | BEM 规范、`scoped` 优先、全局样式标注 |
 | **TypeScript 类型注解** | [typescript.md](./typescript.md) | 禁止 `any`，参数/返回值/变量明确类型 |
 | **性能优化** | [performance.md](./performance.md) | 组件懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
+| **约束清单** | [constraints.md](./constraints.md) | 禁止/推荐/不推荐/注意事项速查 |
+
+## AI 行为约束
+
+- **[@rules/ai-behavior.md](./ai-behavior.md)** — AI 行为与交互约束（修改权限/文档生成约束/直接输出规则）

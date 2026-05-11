@@ -8,7 +8,7 @@
 
 - **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
 - **`rules/order.md`**：SFC 块顺序、Import 分组排序、脚本内部声明顺序、模板属性顺序
-- **`rules/formatting.md`**：Prettier 配置、ESLint 集成
+- **`rules/code-style.md`**：Prettier 配置、ESLint 集成、函数写法偏好
 - **`rules/naming.md`**：文件与标识符命名规范
 - **`rules/typescript.md`**：TypeScript 类型注解要求、禁止 `any`
 - **`rules/directives.md`**：指令简写、模板属性顺序
