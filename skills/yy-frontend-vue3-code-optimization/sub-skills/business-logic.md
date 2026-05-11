@@ -6,7 +6,7 @@
 
 执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
 
-- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
 - **`rules/interaction.md`**：Props 定义规范、Emit 事件规范、组件通信方式
 - **`rules/hooks.md`**：Hooks 命名规范、返回值规范、抽离建议
 - **`rules/comments.md`**：注释保护原则、Script 顶部 JSDoc 格式

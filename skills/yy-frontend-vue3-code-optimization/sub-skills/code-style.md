@@ -6,7 +6,7 @@
 
 执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
 
-- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
 - **`rules/order.md`**：SFC 块顺序、Import 分组排序、脚本内部声明顺序、模板属性顺序
 - **`rules/formatting.md`**：Prettier 配置、ESLint 集成
 - **`rules/naming.md`**：文件与标识符命名规范
@@ -41,7 +41,7 @@
 
    `assets/.prettierrc.json` 配置说明（仅作为 fallback 参考）：
    - **缩进**：2 空格（`tabWidth: 2`）
-   - **引号**：JS/TS/JSX/TSX 单 `'`（`singleQuote: true`），HTML 双 `"`
+   - **引号**：JS/TS/JSX/TSX 单 `'`（`singleQuote: true`），Vue 模板属性双 `"`（`vueHtmlAttributes: "double"`）
    - **标点**：强制分号（`semi: true`），尾随逗号（`trailingComma: "all"`），箭头函数单参数无括号（`arrowParens: "avoid"`）
    - **行宽**：单行最大字符数 **120**（`printWidth: 120`）（与 `assets/.prettierrc.json` 一致）
    - **其他**：对象花括号保持空格（`bracketSpacing: true`），不强制属性独占一行（`singleAttributePerLine: false`）
@@ -216,29 +216,6 @@ defineExpose({
 
 **v-slot 风格**：优先使用 `v-slot:name` 或 `#name` 简写语法。避免已废弃的 `slot="name"` 写法。
 
-## TypeScript/TSX 类型注解规范
-
-- **禁止 `any`**：使用 `unknown` 或具体类型
-- **类型命名**：必须使用 `I` 前缀（如 `IUserInfo`、`ITableColumn`）
-- **props 类型**：使用 `defineProps<{ ... }>` 或 `withDefaults(defineProps<{ ... }>(), { ... })`
-- **emit 类型**：使用 `defineEmits<{ (e: 'event', payload: Type): void }>()`
-- **ref 类型**：使用 `ref<Type>(initialValue)` 或 `ref<Type | null>(null)`
-- **reactive 类型**：使用 `reactive<{ ... }>({ ... })` 或接口定义
-
-```typescript
-// ✅ 正确：明确类型
-const userList = ref<IUserInfo[]>([]);
-const selectedId = ref<string | null>(null);
-const formData = reactive<{ username: string; email: string }>({
-  username: '',
-  email: '',
-});
-
-// ❌ 错误：使用 any
-const userList = ref<any>([]); // 禁止
-const data: any = {}; // 禁止
-```
-
 ## JSX/TSX 组件结构规范
 
 ### TSX 组件标准结构
@@ -257,12 +234,10 @@ export default defineComponent({
   name: 'UserCard',
 
   props: {
-    // user: 用户信息对象
     user: {
       type: Object as PropType<IUserInfo>,
       required: true,
     },
-    // isLoading: 加载状态
     isLoading: {
       type: Boolean,
       default: false,
@@ -272,13 +247,10 @@ export default defineComponent({
   emits: ['select', 'change'],
 
   setup(props, { emit }) {
-    // ref: 是否激活
     const isActive = ref(false);
 
-    // computed: 显示名称
     const displayName = computed(() => props.user.name || '未知用户');
 
-    // 方法: 处理点击
     const handleClick = () => {
       emit('select', props.user);
       isActive.value = !isActive.value;
@@ -313,29 +285,28 @@ export default defineComponent({
 
 > 提示：Vue3 项目推荐优先使用 `.vue` 单文件组件配合 `<script setup>`。仅在需要动态渲染或复杂 render 逻辑时才使用 TSX/JSX。对于简单的 JSX 组件，建议迁移回 `.vue` 格式。
 
-```jsx
-// UserCard.vue（推荐：.vue 单文件组件）
-<script setup>
+```vue
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 
 /**
  * UserCard 组件
  * @description 用户卡片组件，显示用户基本信息
  */
-const props = defineProps({
-  user: { type: Object, required: true },
-  isLoading: { type: Boolean, default: false },
-});
+const props = defineProps<{
+  user: IUserInfo;
+  isLoading?: boolean;
+}>();
 
-const emit = defineEmits(['select', 'change']);
+const emit = defineEmits<{
+  select: [user: IUserInfo];
+  change: [];
+}>();
 
-// state: 是否激活
 const isActive = ref(false);
 
-// computed: 显示名称
 const displayName = computed(() => props.user?.name || '未知用户');
 
-// 方法: 处理点击
 const handleClick = () => {
   emit('select', props.user);
   isActive.value = !isActive.value;

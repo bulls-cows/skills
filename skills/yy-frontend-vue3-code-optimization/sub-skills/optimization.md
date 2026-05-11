@@ -6,7 +6,7 @@
 
 执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
 
-- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
 - **`rules/reactivity.md`**：ref/reactive 选择原则、computed 规范、watch 与 computed 选择策略
 - **`rules/watch.md`**：watch/watchEffect 使用规范、清理机制、与 computed 选择策略
 - **`rules/network.md`**：异步处理、响应解构、错误处理、防重复提交
@@ -142,6 +142,8 @@ const handleSubmit = async () => {
 ## Hooks 抽离
 
 ### 抽离条件
+
+满足以下**任一条件**即可抽离：
 
 - **可复用逻辑超过 30 行**
 - **跨 2+ 组件使用相同逻辑**
@@ -287,13 +289,14 @@ const props = defineProps<{
 
 ## Emits 标准化
 
-### Emits 白名单（仅限以下 17 种事件）
+### Emits 白名单（仅限以下 19 种事件）
 
-| 类别   | 白名单事件                                                               |
+| 类别             | 白名单事件                                                               |
 | ------ | ------------------------------------------------------------------------ |
-| 交互类 | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
-| 弹窗类 | `open`, `close`, `show`, `hide`                                          |
-| 操作类 | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
+| **v-model 更新** | `update:modelValue` (标准), `update:value` (AntD 风格)                   |
+| **交互类** | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
+| **弹窗类** | `open`, `close`, `show`, `hide`                                          |
+| **操作类** | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
 
 ### TypeScript Emits 定义规范
 
@@ -312,7 +315,11 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 
 ### Emit 顺序
 
-`input` → 其它 → `change/click`
+对外触发事件建议遵循以下优先级：
+
+1. `update:modelValue` / `update:value` (绑定值更新)
+2. 其他业务事件
+3. `change` / `click` (交互反馈)
 
 ### 风险：Emits 标准化
 

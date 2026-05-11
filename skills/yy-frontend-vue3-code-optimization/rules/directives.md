@@ -46,5 +46,4 @@ HTML 元素上的属性顺序应保持统一：
 
 ## 六、v-model 写法
 
-- **Vue 3 标准**：使用 `modelValue` 配合 `emit('update:modelValue')`。
-- **Ant Design Vue 风格**：使用 `value` 配合 `emit('update:value')`（即 `v-model:value`）。
+详见 [interaction.md](./interaction.md#2-v-model-写法)（Vue 3 标准、Ant Design Vue 风格）。

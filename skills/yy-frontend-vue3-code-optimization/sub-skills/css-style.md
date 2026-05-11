@@ -6,7 +6,7 @@
 
 执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
 
-- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
 - **`rules/naming.md`**：CSS BEM 命名规范（块/元素/修饰符）
 
 ## BEM 转换规范
