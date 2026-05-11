@@ -77,19 +77,7 @@ if (code === 0) {
 
 ## 计算属性优先
 
-- 将非副作用的逻辑从方法迁移至 `computed`
-- 命名统一用 `is/has/visible` 前缀
-- **computed 是纯同步 getter，不应使用 try/catch**。如果逻辑需要异步或错误处理，保留在普通函数中
-
-```typescript
-// ✅ 正确：computed 用于同步派生逻辑
-const isSelected = computed(() => selectedItems.value.length === totalItems.value);
-
-// ❌ 错误：computed 中使用异步逻辑
-const userList = computed(async () => {  // 禁止
-  return await apiGetUserList();
-});
-```
+**详见 `rules/reactivity.md`**（涵盖 computed 核心原则、正确/错误示例、computed 优先策略）。
 
 ### 风险：计算属性优先
 
@@ -230,108 +218,11 @@ onMounted(() => {
 
 ## Reactive 转 Ref（尽可能少用 Reactive）
 
-### Reactive 转 Ref 原则
-
-**优先使用 `ref`，尽可能少用 `reactive`**。仅在以下场景考虑使用 `reactive`：
-
-- **复杂对象结构**：需要管理多层嵌套的对象数据
-- **批量属性更新**：需要一次性更新多个相关属性
-- **对象解构场景**：需要解构后仍保持响应式（配合 `toRefs`）
-
-### 转换规则
-
-| 场景 | 原写法（reactive） | 推荐写法（ref） |
-|------|---------------------|-----------------|
-| 简单状态 | `const state = reactive({ count: 0 })` | `const count = ref(0)` |
-| 对象数据 | `const user = reactive({ name: '', age: 0 })` | `const userName = ref('')`<br>`const userAge = ref(0)` |
-| 数组数据 | `const list = reactive([])` | `const list = ref([])` |
-| 分页信息 | `const pagination = reactive({ page: 1, size: 20 })` | `const page = ref(1)`<br>`const pageSize = ref(20)` |
-
-### 转换示例
-
-**优化前（使用 reactive）**：
-
-```typescript
-// ❌ 不推荐：使用 reactive
-const formData = reactive({
-  username: '',
-  email: '',
-  phone: '',
-});
-
-const pagination = reactive({
-  page: 1,
-  pageSize: 20,
-  total: 0,
-});
-```
-
-**优化后（使用 ref）**：
-
-```typescript
-// ✅ 推荐：使用 ref
-const username = ref('');
-const email = ref('');
-const phone = ref('');
-
-const page = ref(1);
-const pageSize = ref(20);
-const total = ref(0);
-```
-
-### Hooks 中的规范
-
-**禁止直接返回 reactive 对象**，必须使用 `toRefs` 解构后返回：
-
-```typescript
-// ❌ 错误：直接返回 reactive
-export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return { form };  // 禁止
-};
-
-// ✅ 正确：使用 toRefs 解构后返回
-export const useForm = () => {
-  const name = ref('');
-  const age = ref(0);
-  return { name, age };
-};
-
-// ✅ 正确：如果必须用 reactive，使用 toRefs
-export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return toRefs(form);  // 允许
-};
-```
+**详见 `rules/reactivity.md`**（涵盖 reactive 转 ref 原则、转换规则、转换示例、Hooks 中的规范、变更预览格式）。
 
 ### 风险：Reactive 转 Ref
 
-- **解构丢失响应式**：reactive 解构后会丢失响应式，需要配合 `toRefs`
-- **访问方式变更**：ref 需要 `.value` 访问，reactive 直接访问属性
-- **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
-- **批量更新影响**：reactive 的批量属性更新更简洁，ref 需要逐个更新
-
-### 变更预览格式
-
-展示给用户确认时，**必须使用 diff 格式展示变更前后对比**，示例：
-
-```diff
-- // 优化前：使用 reactive
-- const formData = reactive({
--   username: '',
--   email: '',
-- });
--
-- formData.username = 'test';
-- formData.email = 'test@example.com';
-
-+ // 优化后：使用 ref
-+ const username = ref('');
-+ const email = ref('');
-+
-+ username.value = 'test';
-+ email.value = 'test@example.com';
-```
+详见 `rules/reactivity.md` 中的转换风险说明。
 
 ## Props 增强
 
@@ -436,5 +327,5 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 - **虚拟滚动**：长列表使用虚拟滚动组件减少 DOM 节点
 - **防抖节流**：频繁触发的事件（搜索、滚动、resize）使用防抖/节流
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
-- **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制
-- **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`
+- **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制（详见 `rules/reactivity.md`）
+- **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`（详见 `rules/reactivity.md`）
