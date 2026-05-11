@@ -36,6 +36,7 @@
 | **ref/reactive/computed 原则** | [reactivity.md](./reactivity.md) | ref/reactive 选择原则、reactive 转 ref 规则、computed 规范 |
 | **watch 规范** | [watch.md](./watch.md) | watch/watchEffect 使用规范、清理机制、与 computed 选择策略 |
 | **网络请求规范** | [network.md](./network.md) | 异步处理、响应解构、错误处理、防止重复提交 |
+| **数据流与组件通信** | [data-flow.md](./data-flow.md) | provide/inject、路由守卫清理、defineExpose |
 
 ---
 
@@ -51,3 +52,8 @@
 | **样式命名与作用域** | [css.md](./css.md#bem-命名规范) | BEM 规范、`scoped` 优先、全局样式标注 |
 | **TypeScript 类型注解** | [typescript.md](./typescript.md) | 禁止 `any`，参数/返回值/变量明确类型 |
 | **性能优化** | [performance.md](./performance.md) | 组件懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
+| **约束清单** | [constraints.md](./constraints.md) | 禁止/推荐/不推荐/注意事项速查 |
+
+## AI 行为约束
+
+- **[@rules/ai-behavior.md](./ai-behavior.md)** — AI 行为与交互约束（修改权限/文档生成约束/直接输出规则）

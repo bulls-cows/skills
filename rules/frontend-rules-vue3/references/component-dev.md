@@ -14,9 +14,9 @@
 
 详见 [order.md](./order.md#二script-setup-内部结构顺序)
 
-`<script setup>` 内部内容必须按以下顺序排列：
+`<script setup>` 内部内容必须按以下宏观顺序排列：
 
-1. `imports` → 2. `defineProps` / `defineEmits` → 3. Hooks (useXxx) → 4. 业务逻辑（按功能模块分组，组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子） → 5. `defineExpose`
+1. `imports` → 2. `defineProps` / `defineEmits` → 3. Hooks (useXxx) → 4. 业务逻辑（按功能模块分组，组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子）→ 5. `defineExpose`
 
 ### 完整示例
 
@@ -69,11 +69,25 @@ defineExpose({
 </script>
 ```
 
+### Script 顶部 JSDoc
+
+详见 [comments.md](./comments.md#二脚本区注释)
+
+```typescript
+/**
+ * 组件名称
+ * @description 页面职责说明
+ * @description 核心业务流程简述
+ * @description 关键数据来源
+ */
+<script setup lang="ts">
+```
+
 ### Vue 元素特性顺序
 
 详见 [directives.md](./directives.md#五模板属性顺序)
 
-1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on` → 8. `v-html/v-text`（动态 `v-slot`）
+1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on`（`@`）→ 8. `v-html/v-text` → 9. 动态 `v-slot`（`#`）
 
 ### v-slot 风格
 
@@ -101,7 +115,7 @@ defineExpose({
 
 ### defineExpose
 
-详见 [interaction.md](./interaction.md#五defineexpose)
+详见 [interaction.md](./interaction.md#三对外暴露-defineexpose)
 
 ## 相关模块引用
 

@@ -1,79 +1,119 @@
-# watch/watchEffect 监听规范
+# Vue3 侦听器规范（watch/watchEffect）
 
-本模块定义 Vue3 `watch` 和 `watchEffect` 的使用规范。
+本规范涵盖 `watch`、`watchEffect` 的使用场景、配置选项、清理机制及与 `computed` 的选择策略。
 
-## 一、watch 与 computed 选择策略
+---
 
-| 场景 | 推荐方式 | 原因 |
-|------|----------|------|
-| 派生计算（无副作用） | `computed` | 自动缓存，仅在依赖变化时重新计算 |
-| 副作用操作（API 请求、DOM 操作） | `watch` | 需要执行异步或外部副作用 |
-| 响应式数据同步到非响应式变量 | `watch` | 需要显式监听变化 |
+## 一、基本规则
 
-**原则**：能用 `computed` 解决的不用 `watch`。
+- **深度监听**：对象/数组变化必须声明 `deep: true`
+- **立即执行**：初始化需触发时加 `immediate: true`
+- **清理资源**：定时器、事件监听在组件销毁时清理
+
+---
 
 ## 二、watch 使用规范
 
-### 2.1 深度监听
-
-对象/数组变化必须声明 `deep: true`：
+### 基本结构
 
 ```typescript
-watch(searchQuery, (newVal, oldVal) => {
-  // 处理搜索关键词变化
-}, { deep: true });
+// 监听单个 ref
+watch(count, (newVal, oldVal) => {
+  console.log('count changed:', newVal, oldVal);
+});
+
+// 监听多个 ref
+watch([a, b], ([newA, newB], [oldA, oldB]) => {
+  console.log('a or b changed');
+});
+
+// 监听 reactive 对象的某个属性
+const state = reactive({ user: { name: '' } });
+watch(() => state.user.name, (newVal, oldVal) => {
+  console.log('name changed:', newVal);
+});
 ```
 
-### 2.2 立即执行
-
-初始化需触发时加 `immediate: true`：
+### 配置选项
 
 ```typescript
-watch(searchQuery, (newVal, oldVal) => {
-  // 处理搜索关键词变化
-}, { immediate: true });
+watch(
+  source,
+  (newVal, oldVal) => {
+    // 处理变化
+  },
+  {
+    deep: true,        // 深度监听（对象/数组必须声明）
+    immediate: true,   // 立即执行（初始化需触发时添加）
+    flush: 'post',     // 刷新时机（默认 'pre'，DOM 更新前）
+  }
+);
 ```
 
-### 2.3 清理资源
+### 注释规范
 
-定时器、事件监听器必须在组件销毁时清理：
+watch 必须按注释规范标注（详见 `comments.md`）：
 
 ```typescript
-watch(source, (newVal) => {
-  const timer = setTimeout(() => { /* ... */ }, 1000);
-
-  // 返回清理函数
-  return () => clearTimeout(timer);
-});
-
-// 或使用生命周期钩子
-import { onBeforeUnmount } from 'vue';
-
-let timer: ReturnType<typeof setTimeout>;
-watch(source, () => {
-  timer = setTimeout(() => { /* ... */ }, 1000);
-});
-
-onBeforeUnmount(() => {
-  clearTimeout(timer);
+// watch: 监听用户输入变化
+watch(searchQuery, (newVal) => {
+  fetchSuggestions(newVal);
 });
 ```
+
+---
 
 ## 三、watchEffect 使用规范
 
-- `watchEffect` 自动追踪所有响应式依赖，无需显式指定监听源
-- 适用于简单副作用场景
-- 同样需要返回清理函数
+`watchEffect` 自动追踪依赖，适合简单副作用场景：
 
 ```typescript
+// ✅ 正确：简单副作用
 watchEffect(() => {
-  const id = props.userId;
-  // 自动追踪 userId 变化
-  apiGetUserInfo(id).then(/* ... */);
+  document.title = `欢迎, ${userName.value}`;
+});
+
+// ❌ 不推荐：复杂逻辑或多依赖
+watchEffect(() => {
+  if (isLoading.value) return;
+  if (!userData.value) return;
+  // 过多逻辑应拆分为 watch 或普通函数
 });
 ```
 
-## 四、watch 与 watchEffect 对比
+---
+
+## 四、watch 与 computed 选择策略
+
+**优先使用 `computed` 替代 `watch` 中的派生逻辑**，利用其缓存机制：
+
+```typescript
+// ❌ 不推荐：使用 watch 监听派生值
+watch([a, b], () => {
+  sum.value = a.value + b.value;
+});
+
+// ✅ 推荐：使用 computed 自动缓存
+const sum = computed(() => a.value + b.value);
+```
+
+### 选择指南
+
+| 场景             | 推荐方式    | 说明                                     |
+| ---------------- | ----------- | ---------------------------------------- |
+| 派生值计算       | `computed`  | 自动缓存，依赖变化时重新求值             |
+| 异步操作         | `watch`     | 如 API 请求、定时器等                    |
+| 副作用操作       | `watch`     | 如 DOM 操作、localStorage 写入等         |
+| 简单自动追踪     | `watchEffect` | 自动追踪依赖的简单副作用               |
+
+### 风险
+
+- 响应式求值时机不同
+- 带副作用的逻辑（如 API 请求、DOM 操作）不能转为 computed
+
+---
+
+### watch vs watchEffect 对比
 
 | 特性 | watch | watchEffect |
 |------|-------|-------------|
@@ -83,3 +123,59 @@ watchEffect(() => {
 | 适用场景 | 精确控制监听源 | 简单副作用 |
 
 **推荐**：优先使用 `watch`，需要自动追踪时使用 `watchEffect`。
+
+---
+
+## 五、清理资源
+
+### 定时器清理
+
+```typescript
+const timer = ref<number | null>(null);
+
+watch(startPolling, (isActive) => {
+  if (isActive) {
+    timer.value = setInterval(() => {
+      fetchData();
+    }, 5000);
+  } else {
+    if (timer.value) {
+      clearInterval(timer.value);
+      timer.value = null;
+    }
+  }
+});
+
+// 组件销毁时清理
+onBeforeUnmount(() => {
+  if (timer.value) {
+    clearInterval(timer.value);
+  }
+});
+```
+
+### 事件监听清理
+
+```typescript
+watch(isListening, (isActive) => {
+  if (isActive) {
+    window.addEventListener('resize', handleResize);
+  } else {
+    window.removeEventListener('resize', handleResize);
+  }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
+});
+```
+
+---
+
+## 六、在代码组织中的位置
+
+在 `<script setup>` 的业务模块内部，按业务逻辑分组，组内通常顺序：
+
+```text
+ref/reactive → computed → 方法 → watch → 生命周期钩子
+```

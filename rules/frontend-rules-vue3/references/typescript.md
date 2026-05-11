@@ -1,89 +1,184 @@
-# TypeScript 类型注解规范
+# Vue3 TypeScript 规范
 
-本模块定义 Vue3 项目中的 TypeScript 类型注解要求。
+本规范定义 TypeScript 在 Vue3 项目中的类型使用约定。
 
-## 一、核心原则
+---
 
-- **禁止使用 `any` 类型**
-- 参数、返回值、变量必须明确类型注解
-- 优先使用 `interface` 或 `type` 定义复杂类型
+## 一、类型注解要求
 
-## 二、变量与函数类型
+- **参数**：函数参数必须明确类型
+- **返回值**：函数返回值必须明确类型
+- **变量**：变量声明必须明确类型
+- **模板 `ref`**：组件模板引用必须指定元素类型，如 `const formRef = ref<HTMLFormElement | null>(null)`
 
-### 2.1 变量类型注解
+## 二、禁止使用 `any`
+
+**禁止**使用 `any` 类型，应使用以下替代：
+
+- `unknown`：用于类型不确定的场景
+- `Record<string, unknown>`：用于动态键值对对象
+- 具体类型/接口：定义准确的数据结构
 
 ```typescript
-// ✅ 正确：明确类型
-const userName: string = '';
-const userId: number = 0;
-const isVisible: boolean = false;
-const userList: Array<{ id: number; name: string }> = [];
+// ✅ 正确
+const data: unknown = JSON.parse(raw);
+const userInfo: IUserInfo = { id: '1', name: 'test' };
 
-// ❌ 错误：使用 any
-const data: any = {};
+// ❌ 错误
+const data: any = JSON.parse(raw);  // 禁止
 ```
 
-### 2.2 函数类型注解
+---
+
+## 三、组件 Props 类型定义
+
+### `defineProps<T>()` 泛型定义
+
+**必须**使用 TypeScript 泛型定义 Props，而非运行时对象形式：
 
 ```typescript
-// ✅ 正确：参数和返回值都有类型
-const formatUser = (user: User): string => {
-  return `${user.name} (${user.email})`;
-};
-
-// 箭头函数优先
-const handleClick = (id: number): void => {
-  // 处理点击事件
-};
-```
-
-## 三、Props 类型
-
-必须使用 `defineProps` + TypeScript 泛型语法：
-
-```typescript
+// ✅ 正确：泛型定义
 const props = defineProps<{
-  // userId: 用户ID
-  userId: string | number;
-  // isLoading: 加载状态
-  isLoading?: boolean;
+  userId: string | number; // userId: 用户ID
+  isLoading?: boolean; // isLoading: 加载状态，默认 false
+  maxItems?: number; // maxItems: 最大条目数，默认 10
 }>();
+
+// ❌ 错误：运行时对象形式（不推荐）
+const props = defineProps({
+  userId: { type: [String, Number], required: true },
+});
 ```
 
-## 四、Emits 类型
+### `withDefaults()` 设置默认值
 
-必须使用 `defineEmits` 指定事件名和参数类型：
+**必须**使用 `withDefaults()` 为可选 Props 设置默认值：
 
 ```typescript
+// ✅ 正确
+const props = withDefaults(defineProps<{
+  title?: string;
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+}>(), {
+  title: '默认标题',
+  size: 'medium',
+  disabled: false,
+});
+```
+
+### v-model 兼容模式
+
+- **Vue 3 标准**：使用 `modelValue` 配合 `emit('update:modelValue')`
+- **Ant Design Vue 风格**：使用 `value` 配合 `emit('update:value')`（即 `v-model:value`）
+
+详见 [interaction.md](./interaction.md)（Props 定义规范、v-model 写法）。
+
+---
+
+## 四、响应式类型标注
+
+### `ref<T>()` 类型标注
+
+```typescript
+// ✅ 正确：显式标注类型
+const userName = ref<string>('');
+const userList = ref<IUserInfo[]>([]);
+const isLoading = ref<boolean>(false);
+const selectedUser = ref<IUserInfo | null>(null);
+
+// 可选：类型推断（当初始值已明确时）
+const count = ref(0);  // 推断为 Ref<number>
+
+// ❌ 不推荐：无初始值时未标注类型
+const data = ref();  // 推断为 Ref<undefined>，应明确类型
+```
+
+### `reactive<T>()` 类型标注
+
+```typescript
+// ✅ 正确：显式标注类型
+const state = reactive<{
+  name: string;
+  age: number;
+  roles: string[];
+}>({
+  name: '',
+  age: 0,
+  roles: [],
+});
+```
+
+### `computed<T>()` 类型标注
+
+```typescript
+// ✅ 正确：类型推断自动推导
+const isDisabled = computed(() => props.disabled || isLoading.value);
+
+// ✅ 正确：需要显式标注复杂类型时
+const items = computed<IListItem[]>(() => {
+  return rawData.value.map(item => ({
+    id: item.id,
+    label: item.name,
+  }));
+});
+```
+
+---
+
+## 五、Emits 类型定义
+
+**必须**使用 TypeScript 泛型定义 emits：
+
+```typescript
+// ✅ 正确：泛型定义
 const emit = defineEmits<{
-  input: [value: string];
-  change: [value: string];
-  click: [id: number];
+  'update:modelValue': [value: string];
+  'update:value': [value: string];
+  change: [id: number, action: string];
+  confirm: [];
 }>();
+
+// ❌ 错误：运行时对象形式
+const emit = defineEmits(['update:modelValue', 'change', 'confirm']);
 ```
 
-## 五、Hooks 返回类型
+---
 
-组合式函数应明确返回类型：
+## 六、Hooks 返回值类型
+
+**必须**为 Hooks 返回值声明类型接口：
 
 ```typescript
-export const useTable = () => {
-  const tableData = ref<User[]>([]);
+// ✅ 正确：声明返回值类型
+interface IUseTableReturn {
+  tableData: Ref<IUserInfo[]>;
+  loading: Ref<boolean>;
+  fetchList: () => Promise<void>;
+}
+
+export const useTable = (): IUseTableReturn => {
+  const tableData = ref<IUserInfo[]>([]);
   const loading = ref(false);
 
-  const getListData = async (): Promise<void> => {
-    // ...
-  };
+  const fetchList = async () => { /* ... */ };
 
-  return {
-    tableData,
-    loading,
-    getListData
-  };
+  return { tableData, loading, fetchList };
 };
 ```
 
-## 六、类型导入
+---
+
+## 七、`.d.ts` 类型文件组织
+
+- **全局类型**：放在 `src/types/` 目录下（如 `src/types/user.d.ts`）
+- **组件私有类型**：放在组件同级目录或 SFC 内 `export type`
+- **全局注入**：在 `src/types/index.d.ts` 中统一导出，便于项目全局引用
+- **命名规范**：类型别名和接口以 `I` 前缀 + PascalCase（详见 [naming.md](./naming.md)）
+
+---
+
+## 八、类型导入
 
 使用 `import type` 导入纯类型，减少运行时依赖：
 
@@ -91,3 +186,9 @@ export const useTable = () => {
 import type { User, TableData } from '@src/types';
 import { ref, computed } from 'vue';
 ```
+
+**规则**：
+
+- 仅用于类型导入时使用 `import type`
+- 值和类型同时导入时分开写（`import type` 和 `import` 分两行）
+
