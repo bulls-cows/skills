@@ -50,4 +50,4 @@
 ## 自定义指令
 
 - **指令清理**：`unmounted` 钩子中必须清理事件监听器和定时器
-- 详见 [performance.md](./performance.md)
+- 详见 [performance.md](./performance.md#四自定义指令)

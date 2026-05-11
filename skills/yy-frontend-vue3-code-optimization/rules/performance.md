@@ -93,3 +93,43 @@ const handleScroll = throttle(() => {
 <!-- 原生懒加载 -->
 <img loading="lazy" src="image.webp" alt="" />
 ```
+
+---
+
+## 六、模板层轻量化
+
+- 模板只负责展示，不写复杂表达式与逻辑
+- 简单逻辑可内联，不过度封装为函数
+- 避免在模板中执行昂贵计算，优先使用 `computed`
+
+---
+
+## 七、响应式性能
+
+- 优先使用 `computed` 派生状态，减少 `watch` 滥用
+- 大型数据列表考虑使用 `shallowRef` 减少深层响应式开销
+- 避免在 `watch` 中执行同步 DOM 操作
+
+---
+
+## 八、自定义指令清理
+
+- **指令清理**：`unmounted` 钩子中必须清理事件监听器和定时器
+
+```typescript
+app.directive('focus', {
+  mounted(el) {
+    el.focus();
+  },
+  unmounted(el) {
+    // 清理逻辑
+  }
+});
+```
+
+---
+
+## 九、路由守卫清理
+
+- `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗
+- 全局守卫统一处理登录校验、权限控制

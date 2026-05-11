@@ -114,5 +114,11 @@ defineExpose({
 - **provide/inject**：仅用于 3 层以上深层组件传参，避免逐层传递 props。
 - **兄弟组件通信**：使用 Pinia/Vuex，禁止通过 provide/inject 跨层级滥用。
 - **响应式传递**：使用 `provide('key', refValue)` 保持响应式。
-- **禁用 `$parent/$children`**：禁止链式访问父组件数据，破坏组件独立性。
 - **谨慎使用全局变量或状态**：避免造成难以追踪的副作用。
+
+### 2. 禁用 `$parent` / `$children`
+
+- **禁止**通过 `$parent.$parent` 链式访问父组件数据。
+- **禁止**在 `<script setup>` 中使用 `this`。
+- **原因**：组件耦合度高，破坏组件独立性。
+- **替代方案**：使用 props/emit 或状态管理。

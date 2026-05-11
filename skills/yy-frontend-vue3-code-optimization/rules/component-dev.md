@@ -12,11 +12,62 @@
 
 ### 脚本结构顺序
 
-详见 [order.md](./order.md#三script-setup-内部结构顺序)
+详见 [order.md](./order.md#二script-setup-内部结构顺序)
 
-`<script setup>` 内部内容必须按以下顺序排列：
+`<script setup>` 内部内容必须按以下宏观顺序排列：
 
-1. `imports` → 2. `defineProps` → 3. `defineEmits` → 4. Hooks (useXxx) → 5. `ref`/`reactive` 响应式数据 → 6. `computed` → 7. `watch`/`watchEffect` → 8. 方法/函数 → 9. 生命周期钩子 → 10. `defineExpose`
+1. `imports` → 2. `defineProps` / `defineEmits` → 3. Hooks (useXxx) → 4. 业务逻辑（按功能模块分组，组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子）→ 5. `defineExpose`
+
+### 完整示例
+
+```typescript
+<script setup lang="ts">
+// 1. imports
+import { ref, computed, reactive, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import type { IUser } from '@src/types/user';
+import { apiGetUserInfo } from '@src/api/user';
+import { useTable } from '@src/hooks/useTable';
+import UserCard from './UserCard.vue';
+
+// 2. 交互定义
+const props = defineProps<{
+  // userId: 用户ID
+  userId: string | number;
+}>();
+const emit = defineEmits<{
+  change: [value: string];
+}>();
+
+// 3. 全局 Hooks
+const { tableData, getListData } = useTable();
+
+// 4. 业务逻辑 — 按功能模块分组
+
+// --- 搜索模块 ---
+const searchQuery = ref('');
+const isSearchActive = computed(() => searchQuery.value.length > 0);
+const handleSearch = () => { /* ... */ };
+watch(searchQuery, (newVal) => { /* ... */ });
+
+// --- 表单模块 ---
+const formRef = ref();
+const form = reactive({ name: '', age: 0 });
+const onSubmit = async () => { /* ... */ };
+onMounted(() => { /* ... */ });
+
+// --- 抽屉模块 ---
+const visible = ref(false);
+const openDrawer = () => { visible.value = true; };
+const closeDrawer = () => { visible.value = false; };
+
+// 5. defineExpose
+defineExpose({
+  fetchData,
+  resetForm
+});
+</script>
+```
 
 ### Script 顶部 JSDoc
 
@@ -36,7 +87,7 @@
 
 详见 [directives.md](./directives.md#五模板属性顺序)
 
-1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on` → 8. `v-html/v-text`（动态 `v-slot`）
+1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on`（`@`）→ 8. `v-html/v-text` → 9. 动态 `v-slot`（`#`）
 
 ### v-slot 风格
 
@@ -71,7 +122,7 @@
 | 内容 | 详见 |
 |------|------|
 | Props 定义 | [interaction.md](./interaction.md#一props-定义规范) |
-| Emit 事件 | [interaction.md](./interaction.md#二emit-事件规范) |
+| Emit 事件 | [interaction.md](./interaction.md#二emit-事件白名单与顺序) |
 | 组件通信 | [interaction.md](./interaction.md#四组件间通信) |
 | 响应式状态 | [reactivity.md](./reactivity.md) |
 | watch 监听 | [watch.md](./watch.md) |

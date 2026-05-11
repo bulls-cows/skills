@@ -131,9 +131,25 @@ export const useForm = () => {
 
 ### 核心原则
 
-- 将非副作用的逻辑从方法迁移至 `computed`
-- 命名统一用 `is/has/visible` 前缀或有意义的名称
-- **computed 是纯同步 getter，不应使用 try/catch**。如果逻辑需要异步或错误处理，保留在普通函数中
+- 除后端交互数据和部分定时器外，**一律尽可能使用 `computed`**
+- 减少冗余 ref 属性，优先派生计算
+- 命名使用 `is` / `has` / `visible` 或有意义的名称
+- **computed 是纯同步 getter**，不应处理异步逻辑或副作用
+
+### 防御性 try/catch 包裹
+
+对于可能因边界情况抛出错误的计算逻辑，建议包裹 try/catch：
+
+```typescript
+// computed: 是否全选
+const isSelected = computed(() => {
+  try {
+    return selectedItems.value.length === totalItems.value;
+  } catch {
+    return false;
+  }
+});
+```
 
 ### 正确示例
 

@@ -113,6 +113,19 @@ const sum = computed(() => a.value + b.value);
 
 ---
 
+### watch vs watchEffect 对比
+
+| 特性 | watch | watchEffect |
+|------|-------|-------------|
+| 依赖声明 | 显式指定 | 自动追踪 |
+| 新旧值 | 可获取 `(newVal, oldVal)` | 不可获取 |
+| 惰性执行 | 默认惰性，可 `immediate: true` | 立即执行 |
+| 适用场景 | 精确控制监听源 | 简单副作用 |
+
+**推荐**：优先使用 `watch`，需要自动追踪时使用 `watchEffect`。
+
+---
+
 ## 五、清理资源
 
 ### 定时器清理

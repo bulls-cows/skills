@@ -176,3 +176,19 @@ export const useTable = (): IUseTableReturn => {
 - **全局注入**：在 `src/types/index.d.ts` 中统一导出，便于项目全局引用
 - **命名规范**：类型别名和接口以 `I` 前缀 + PascalCase（详见 [naming.md](./naming.md)）
 
+---
+
+## 八、类型导入
+
+使用 `import type` 导入纯类型，减少运行时依赖：
+
+```typescript
+import type { User, TableData } from '@src/types';
+import { ref, computed } from 'vue';
+```
+
+**规则**：
+
+- 仅用于类型导入时使用 `import type`
+- 值和类型同时导入时分开写（`import type` 和 `import` 分两行）
+
