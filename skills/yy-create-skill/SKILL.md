@@ -6,7 +6,16 @@ description: >
 
 # yy-create-skill
 
-帮助用户创建或更新规范的 Skill。
+## 描述
+
+帮助用户创建或更新符合规范的 Skill 技能文件，包含完整的目录结构、YAML 元数据和可执行的指令步骤。
+
+Skill 本质上是"可按需加载的任务说明书"，用于复用复杂流程。关键特点：
+
+1. **自动发现**：会被自动发现，只在相关时加载，避免上下文膨胀
+2. **精确触发**：description 要精确，避免误触发
+3. **明确边界**：必须有使用场景（触发条件和不应触发场景）
+4. **指令清晰**：步骤明确，最后一步描述输出格式
 
 ## 使用场景
 
@@ -21,7 +30,7 @@ description: >
 - 用户要求创建普通文件
 - 用户要求创建规则文件（应使用 yy-create-rule）
 
-## 创建/更新流程
+## 指令
 
 ### 1. 捕获意图
 
@@ -36,7 +45,7 @@ description: >
 
 对于**更新现有技能**，先读取现有 SKILL.md 内容，然后询问：
 
-1. 想要更新技能的哪些部分？（描述、使用场景、指令、示例等）
+1. 想要更新技能的哪些部分？（描述、使用场景、指令等）
 2. 更新后的预期行为是什么？
 
 ### 2. 确定技能目录
@@ -47,13 +56,13 @@ description: >
 
 - **更新现有技能**：直接使用现有技能目录
 
-命名规范详见 `resources/skill-best-practices.md`。
+命名规范详见 `resources/skill-guide.md`。
 
 ### 3. 编写 SKILL.md
 
 SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 
-**交互设计原则**：减少不必要的交互轮次，默认采用最常见策略。详见 `resources/skill-best-practices.md` 中的"交互设计原则"章节。
+**交互设计原则**：减少不必要的交互轮次，默认采用最常见策略。详见 `resources/skill-guide.md` 中的"交互设计原则"章节。
 
 其中 `description` 只用于给 AI 判断是否触发技能：
 
@@ -62,6 +71,11 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - 具体约束写在正文，如使用场景、指令、示例
 - 如果 `description` 已经开始解释"怎么做"，通常说明写宽了
 
+**YAML frontmatter 字段约束**：
+
+- 只允许 `name` 和 `description` 两个字段
+- 禁止添加其他字段（如 `version`、`author`、`tags` 等）
+
 ### 4. 创建/更新目录结构
 
 **创建新技能**的目录规则：
@@ -69,30 +83,24 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - 如果用户指定了目录，则在用户指定目录下生成技能
 - 如果用户未指定目录，则在 `.agents/skills` 目录下生成（没有该目录则创建）
 
-目录结构规范详见 `resources/skill-best-practices.md`。
+目录结构规范详见 `resources/skill-guide.md`。
 
 ### 5. 验收清单
 
-**创建技能后**，检查：
+创建或更新技能后，检查以下项目：
 
 1. 包含 `## 描述` 章节，用 1-2 句话说明技能核心作用
 2. description 精确，不会误触发
 3. 使用场景明确（触发条件和不应触发场景）
 4. 指令步骤完整可执行，最后一步描述输出格式
-5. YAML 格式正确（使用多行字符串语法处理长 description）
+5. YAML frontmatter 只包含 `name` 和 `description` 字段，格式正确（使用多行字符串语法处理长 description）
 6. 文件命名符合规范（kebab-case）
 7. 使用中文描述
 8. 代码示例包含语言标签
+9. 同一任务重复运行，输出结构稳定
+10. 技能能单独被显式调用
 
-**更新技能后**，检查：
-
-1. `## 描述` 章节仍然准确反映技能用途
-2. 更新后的 description 仍然准确反映技能用途
-3. 使用场景仍然明确
-4. 指令步骤仍然完整可执行
-5. YAML 格式正确
-
-详细验收清单见 `resources/skill-best-practices.md`。
+详细验收清单见 `resources/skill-guide.md`。
 
 ## 相关资源
 
@@ -101,5 +109,4 @@ SKILL.md 的编写原则和模板请参考 `templates/skill-template.md`。
 - `examples/input.md`：输入示例，展示用户如何请求创建技能
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
-- `resources/skill-writing-guide.md`：技能编写指南（命名规范、YAML 语法、章节编写原则）
-- `resources/skill-best-practices.md`：技能编写最佳实践（交互设计、常见问题、验收清单）
+- `resources/skill-guide.md`：技能编写完整指南（命名规范、YAML 语法、章节编写原则、交互设计、验收清单）
