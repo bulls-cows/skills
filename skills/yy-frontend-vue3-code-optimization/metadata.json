@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "date": "May 2026",
   "author": "wengdongyang",
-  "abstract": "Vue3 前端代码标准化与优化技能。用于：优化 Vue3 `<script setup>` 组件、代码规范化、组合式 API 规范化、BEM 样式重构、导入排序、语义化命名、Hooks 规范、异步代码优化、TypeScript 类型注解、注释增强、Props/Emits 标准化、组件职责梳理。 触发场景：用户提到 Vue3 优化、代码重构、规范命名、BEM 样式、导入排序、注释补充、async/await 转换、Hooks 抽离、reactive 转 ref、script setup 结构、TSX/JSX 组件、TypeScript 类型注解、组件梳理、组合式 API 格式化、.vue 文件美化等。支持 .vue、.js、.jsx、.ts、.tsx、.css、.scss、.less 文件。Vue2 项目请使用 yy-frontend-vue2-code-optimization。",
+  "abstract": "Vue3 前端代码标准化与优化技能。优化 `<script setup>` 组件、组合式 API、BEM 样式、语义化命名、Hooks 规范、异步代码、TypeScript 类型、注释增强、Props/Emits、组件职责梳理。 触发场景：Vue3 优化/重构/规范化/BEM 样式/导入排序/注释补充/async 转换/Hooks 抽离/reactive 转 ref/TSX 组件/类型注解。支持 .vue .js .jsx .ts .tsx .css .scss .less。Vue2 用 yy-frontend-vue2-code-optimization。",
   "category": "frontend",
   "tags": [
     "vue3",

@@ -63,9 +63,14 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 - 示例：`<script setup lang="ts" name="UserCard">`
   - **未安装该插件时，不添加 name 属性**，保持原有 `<script setup>` 写法
 
-### 导入顺序（4 组）
+### 导入顺序
 
-组间空一行，组内按字母排序。分为：外部依赖（vue、dayjs 等）、types（`import type`）、全局内部依赖（@src/...）、相对内部依赖（./...）。
+`import` 分为**4 组**，**组间空一行，组内按字母顺序排列**：
+
+1. 外部依赖（vue、dayjs、lodash 等）
+2. types（`import type` 类型导入）
+3. 全局内部依赖（`@src/...`）
+4. 相对内部依赖（`./...`、`../...`）
 
 ```typescript
 // 外部依赖

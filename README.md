@@ -80,7 +80,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-frontend-commit](./skills/yy-frontend-commit/SKILL.md) | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill yy-frontend-commit` |
 | [yy-frontend-vue2-code-optimization](./skills/yy-frontend-vue2-code-optimization/SKILL.md) | 针对 Vue2 页面组件，通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，提升代码可读性与可维护性 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-code-optimization` |
 | [yy-frontend-vue2-review](./skills/yy-frontend-vue2-review/SKILL.md) | Vue2 前端代码审核助手，基于 Vue2 开发规范检查组件规范、代码风格、逻辑错误和安全漏洞 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-review` |
-| [yy-frontend-vue3-code-optimization](./skills/yy-frontend-vue3-code-optimization/SKILL.md) | 针对 Vue3 页面组件，统一 `<script setup>` 结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，提升可读性与可维护性 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-code-optimization` |
+| [yy-frontend-vue3-code-optimization](./skills/yy-frontend-vue3-code-optimization/SKILL.md) | Vue3 前端代码标准化与优化技能，优化 `<script setup>` 组件、组合式 API、BEM 样式、语义化命名、Hooks 规范、TypeScript 类型、注释增强 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-code-optimization` |
 | [yy-frontend-vue3-review](./skills/yy-frontend-vue3-review/SKILL.md) | Vue3 前端代码审核助手，基于 Vue3 开发规范检查 `<script setup>` 组件规范、代码风格、逻辑错误和安全漏洞 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-review` |
 
 ### 推荐外部技能
