@@ -16,17 +16,7 @@
 
 ### AI 行为准则
 
-详见 [ai-behavior.md](../references/ai-behavior.md)
-
-- **直接输出**：允许在对话中直接输出文字说明、总结或代码片段，无需总是生成文件
-- **文档生成**：
-  - ✅ 允许修改代码中的注释和 JSDoc
-  - 🚫 禁止未经用户明确要求就创建 README、说明文档等
-
-### 修改权限
-
-- ✅ 允许修改：代码中的注释、JSDoc，以及 `src` 目录下的文件
-- 🚫 禁止修改：`src` 目录之外的任何文件（除非用户明确指定）
+详见 [ai-behavior.md](../references/ai-behavior.md)（修改权限/文档生成/直接输出规则）
 
 ---
 
@@ -35,8 +25,6 @@
 ### 2.1 Prettier 格式化
 
 详见 [code-style.md](../references/code-style.md)
-
-必须遵循 `.prettierrc.json` 配置，使用 Prettier 进行代码格式化。
 
 ### 2.2 导入顺序（11 组，组间空一行）
 
@@ -58,23 +46,11 @@
 
 ### 2.3 命名规范
 
-详见 [naming.md](../references/naming.md)
-
-| 类型 | 规范 | 示例 |
-|------|------|------|
-| API 函数 | api + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | on + EventName（小驼峰） | `onClickSubmit`, `onChangeInput` |
-| 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT`, `APP_CONFIG` |
-| Props | camelCase | `userName`, `isLoading` |
-| emit 事件 | camelCase | `userChange` |
-| 布尔值 | `isXX` / `hasXX` / `showXX` 前缀 | `isVisible`, `hasPermission` |
-| Hooks | `use` + 功能名 | `useTable`, `useSearchForm` |
-
-**禁止**：无意义命名（如 `data1`、`temp2`）
+详见 [naming.md](../references/naming.md)（API/事件/常量/Props/Emit/布尔值/Hooks 命名规则）
 
 ### 2.4 函数写法偏好
 
-**优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
+详见 [code-style.md](../references/code-style.md#函数写法偏好)（优先箭头函数）
 
 ---
 
@@ -92,9 +68,12 @@
 
 详见 [order.md](../references/order.md#二script-setup-内部结构顺序)
 
-`<script setup>` 内部内容必须按以下顺序排列：
+`<script setup>` 内部内容必须按以下 **宏观 5 步顺序** 排列：
 
-1. `imports` → 2. `defineProps` → 3. `defineEmits` → 4. Hooks (useXxx) → 5. `ref`/`reactive` 响应式数据 → 6. `computed` → 7. `watch`/`watchEffect` → 8. 方法/函数 → 9. 生命周期钩子 → 10. `defineExpose`
+1. `imports` → 2. `defineProps` / `defineEmits`（交互定义）→ 3. 全局 Hooks (useXxx) → 4. 业务逻辑（按功能模块分组）→ 5. `defineExpose`
+
+**第 4 步「业务逻辑」内部，按功能模块分组（如搜索模块、表单模块），每个模块内部顺序：**
+`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子
 
 ### 3.3 Props 规范
 
@@ -243,7 +222,7 @@ if (code === 0) {
 
 ### 7.3 defineExpose
 
-详见 [interaction.md](../references/interaction.md#五defineexpose)
+详见 [interaction.md](../references/interaction.md#三对外暴露-defineexpose)
 
 ### 7.4 路由守卫清理
 
