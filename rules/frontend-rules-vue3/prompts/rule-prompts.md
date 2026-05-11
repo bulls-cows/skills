@@ -40,12 +40,22 @@
 
 ```json
 {
-  "semi": true, "tabWidth": 2, "printWidth": 120, "singleQuote": true,
-  "endOfLine": "auto", "proseWrap": "never", "trailingComma": "all",
-  "arrowParens": "avoid", "jsxSingleQuote": true, "bracketSpacing": true,
-  "bracketSameLine": false, "quoteProps": "as-needed",
-  "singleAttributePerLine": false, "vueIndentScriptAndStyle": false,
-  "htmlWhitespaceSensitivity": "strict", "vueHtmlAttributes": "double"
+  "semi": true,
+  "tabWidth": 2,
+  "printWidth": 120,
+  "singleQuote": true,
+  "endOfLine": "auto",
+  "proseWrap": "never",
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "quoteProps": "as-needed",
+  "singleAttributePerLine": false,
+  "vueIndentScriptAndStyle": false,
+  "htmlWhitespaceSensitivity": "strict",
+  "vueHtmlAttributes": "double"
 }
 ```
 
@@ -89,63 +99,67 @@ import SearchBar from "./SearchBar.vue";
 
 #### 文件与组件
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
-| 组件文件名 | 多单词 + PascalCase | `UserList.vue` |
-| 目录命名 | kebab-case | `src/components/user-profile/` |
-| 组件使用 | PascalCase | `<UserCard />` |
+| 类型       | 规范                | 示例                           |
+| ---------- | ------------------- | ------------------------------ |
+| 组件文件名 | 多单词 + PascalCase | `UserList.vue`                 |
+| 目录命名   | kebab-case          | `src/components/user-profile/` |
+| 组件使用   | PascalCase          | `<UserCard />`                 |
 
 **注意**：组件名必须使用多个单词，避免与 HTML 原生元素冲突。
 
 #### 函数命名
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
+| 类型     | 规范                     | 示例                             |
+| -------- | ------------------------ | -------------------------------- |
 | API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | `on` + EventName | `onClickSubmit`, `onChangeInput` |
+| 事件函数 | `on` + EventName         | `onClickSubmit`, `onChangeInput` |
 
 #### 变量与常量
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
-| 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT`, `APP_CONFIG` |
-| Props | camelCase | `userName`, `isLoading` |
-| emit 事件 | camelCase | `userChange` |
-| 布尔值 | `isXX` / `hasXX` / `showXX` | `isVisible`, `hasPermission` |
-| 变量/方法 | 有意义的驼峰命名 | 禁止 `data1`, `temp2` |
+| 类型      | 规范                        | 示例                            |
+| --------- | --------------------------- | ------------------------------- |
+| 常量      | 全大写 + 下划线             | `MAX_RETRY_COUNT`, `APP_CONFIG` |
+| Props     | camelCase                   | `userName`, `isLoading`         |
+| emit 事件 | camelCase                   | `userChange`                    |
+| 布尔值    | `isXX` / `hasXX` / `showXX` | `isVisible`, `hasPermission`    |
+| 变量/方法 | 有意义的驼峰命名            | 禁止 `data1`, `temp2`           |
 
 #### 组合式 API 命名
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
-| ref | camelCase | `isLoading`, `userName` |
-| reactive | camelCase | `formData`, `dataSource` |
-| computed | camelCase | `isSelected`, `totalPage` |
-| Hooks | `use` + 功能名 | `useTable`, `useSearchForm` |
+| 类型     | 规范           | 示例                        |
+| -------- | -------------- | --------------------------- |
+| ref      | camelCase      | `isLoading`, `userName`     |
+| reactive | camelCase      | `formData`, `dataSource`    |
+| computed | camelCase      | `isSelected`, `totalPage`   |
+| Hooks    | `use` + 功能名 | `useTable`, `useSearchForm` |
 
 #### TypeScript 类型命名
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
+| 类型     | 规范             | 示例                        |
+| -------- | ---------------- | --------------------------- |
 | 类型别名 | `I` + PascalCase | `IUserInfo`, `ITableConfig` |
-| 接口 | `I` + PascalCase | `IUser`, `ITable` |
-| 泛型参数 | 单字母大写 | `T`, `K`, `V` |
+| 接口     | `I` + PascalCase | `IUser`, `ITable`           |
+| 泛型参数 | 单字母大写       | `T`, `K`, `V`               |
 
 #### CSS 命名（BEM 规范）
 
-| 类型 | 说明 | 示例 |
-| ---- | ---- | ---- |
-| Block（块） | 独立组件/模块 | `.card`, `.form` |
-| Element（元素） | 块内部子元素 | `.card__title`, `.form__input` |
+| 类型               | 说明          | 示例                                 |
+| ------------------ | ------------- | ------------------------------------ |
+| Block（块）        | 独立组件/模块 | `.card`, `.form`                     |
+| Element（元素）    | 块内部子元素  | `.card__title`, `.form__input`       |
 | Modifier（修饰符） | 状态/样式变体 | `.card--dark`, `.card__title--large` |
 
 **规则**：全小写、横线连接、类名唯一，禁止使用 `_`。
 
 ```scss
-.card { }                          // 块
-.card__title { }                   // 元素
-.card--dark { }                    // 修饰符
-.card__title--large { }            // 元素修饰符
+.card {
+} // 块
+.card__title {
+} // 元素
+.card--dark {
+} // 修饰符
+.card__title--large {
+} // 元素修饰符
 ```
 
 ---
@@ -208,9 +222,9 @@ Vue 单文件组件内部块顺序：`<template>` → `<script setup>` → `<sty
 ```typescript
 const props = withDefaults(
   defineProps<{
-    title?: string;       // title: 标题
+    title?: string; // title: 标题
     userId: string | number; // userId: 用户ID
-    isLoading?: boolean;  // isLoading: 加载状态
+    isLoading?: boolean; // isLoading: 加载状态
   }>(),
   {
     title: "默认标题",
@@ -231,16 +245,16 @@ const props = withDefaults(
 
 ```typescript
 const props = defineProps<{
-  modelValue?: string;       // modelValue: v-model 默认绑定值 (Vue 3 标准)
-  value?: string;            // value: v-model:value 绑定值 (Ant Design Vue 风格)
-  userId: number;            // userId: 用户ID
-  isLoading?: boolean;       // isLoading: 加载状态
+  modelValue?: string; // modelValue: v-model 默认绑定值 (Vue 3 标准)
+  value?: string; // value: v-model:value 绑定值 (Ant Design Vue 风格)
+  userId: number; // userId: 用户ID
+  isLoading?: boolean; // isLoading: 加载状态
 }>();
 
 // ✅ emit
 const emit = defineEmits<{
-  'update:modelValue': [value: string];
-  'update:value': [value: string];
+  "update:modelValue": [value: string];
+  "update:value": [value: string];
 }>();
 ```
 
@@ -248,12 +262,12 @@ const emit = defineEmits<{
 
 仅允许以下语义化事件名：
 
-| 类别 | 事件名 |
-| ---- | ------- |
-| **v-model 更新** | `update:modelValue`, `update:value` |
-| **交互类** | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
-| **弹窗类** | `open`, `close`, `show`, `hide` |
-| **操作类** | `cancel`, `confirm`, `ok`, `editSuccess`, `error` |
+| 类别             | 事件名                                                                   |
+| ---------------- | ------------------------------------------------------------------------ |
+| **v-model 更新** | `update:modelValue`, `update:value`                                      |
+| **交互类**       | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
+| **弹窗类**       | `open`, `close`, `show`, `hide`                                          |
+| **操作类**       | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
 
 **触发优先级**：v-model 更新 → 业务事件 → `change`/`click`
 
@@ -272,8 +286,12 @@ const emit = defineEmits<{
 - 仅暴露父组件业务必须的方法（如 `validate`、`open`），不暴露内部状态
 
 ```typescript
-const validate = async () => { /* ... */ };
-const resetForm = () => { /* ... */ };
+const validate = async () => {
+  /* ... */
+};
+const resetForm = () => {
+  /* ... */
+};
 defineExpose({ validate, resetForm });
 ```
 
@@ -334,27 +352,27 @@ HTML 元素上的属性顺序：
 
 ### 4.1 模板区注释
 
-| 场景 | 格式 | 示例 |
-|------|------|------|
-| 根节点 | `<!-- 组件名称 -->` | `<!-- UserCard -->` |
+| 场景     | 格式                  | 示例                      |
+| -------- | --------------------- | ------------------------- |
+| 根节点   | `<!-- 组件名称 -->`   | `<!-- UserCard -->`       |
 | 循环节点 | `<!-- 循环: 描述 -->` | `<!-- 循环: 用户列表 -->` |
 | 条件分支 | `<!-- 条件: 描述 -->` | `<!-- 条件: 有数据时 -->` |
-| 关键区块 | `<!-- 区块名称 -->` | `<!-- 操作按钮组 -->` |
-| 插槽节点 | `<!-- 插槽: name -->` | `<!-- 插槽: default -->` |
+| 关键区块 | `<!-- 区块名称 -->`   | `<!-- 操作按钮组 -->`     |
+| 插槽节点 | `<!-- 插槽: name -->` | `<!-- 插槽: default -->`  |
 
 ### 4.2 脚本区注释
 
-| 内容 | 格式 | 示例 |
-|------|------|------|
-| Script 顶部 | JSDoc（`@description`） | 页面职责说明、核心业务流程、关键数据来源 |
-| props | `// prop名: 描述` | `// user: 用户信息` |
-| ref/reactive | `// 属性名: 描述` | `// searchQuery: 搜索查询参数` |
-| computed | `// computed: 描述` | `// computed: 是否全选` |
-| watch | `// watch: 描述` | `// watch: 监听用户输入` |
-| 函数 | `// methods: 描述` | `// methods: 提交表单` |
-| 组件引入 | `// component: 组件名` | `// component: UserCard` |
-| Hooks 引入 | `// hook: Hook名` | `// hook: useTable` |
-| provide | `// 提供的键名: 描述` | `// appConfig: 全局配置` |
+| 内容         | 格式                    | 示例                                     |
+| ------------ | ----------------------- | ---------------------------------------- |
+| Script 顶部  | JSDoc（`@description`） | 页面职责说明、核心业务流程、关键数据来源 |
+| props        | `// prop名: 描述`       | `// user: 用户信息`                      |
+| ref/reactive | `// 属性名: 描述`       | `// searchQuery: 搜索查询参数`           |
+| computed     | `// computed: 描述`     | `// computed: 是否全选`                  |
+| watch        | `// watch: 描述`        | `// watch: 监听用户输入`                 |
+| 函数         | `// methods: 描述`      | `// methods: 提交表单`                   |
+| 组件引入     | `// component: 组件名`  | `// component: UserCard`                 |
+| Hooks 引入   | `// hook: Hook名`       | `// hook: useTable`                      |
+| provide      | `// 提供的键名: 描述`   | `// appConfig: 全局配置`                 |
 
 #### Script 顶部 JSDoc 示例
 
@@ -377,12 +395,12 @@ HTML 元素上的属性顺序：
 
 ### 4.3 样式区注释
 
-| 场景 | 格式 | 示例 |
-|------|------|------|
-| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
-| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
-| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
-| 全局样式 | `/* 全局 */` | 非 scoped 标注 |
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
+| 全局样式 | `/* 全局 */`          | 非 scoped 标注          |
 
 ### 4.4 注释保护原则
 
@@ -404,12 +422,6 @@ HTML 元素上的属性顺序：
 - 预处理器：Sass/SCSS、Less
 - 格式化：csscomb + prettier
 - 全局样式：`src/styles/`
-
-### 响应式适配
-
-- 使用媒体查询 `@media` 适配不同屏幕
-- 移动端优先：先写移动端，再通过媒体查询增强 PC 端
-- 单位选择：宽度用 `px` 或 `rem`，字号用 `px`
 
 ### 样式作用域
 
@@ -458,7 +470,7 @@ if (code === 0) {
 try {
   await apiGetData();
 } catch (error) {
-  console.warn(error);  // catch 中 console.warn 即可
+  console.warn(error); // catch 中 console.warn 即可
 }
 ```
 
@@ -625,7 +637,7 @@ const submitForm = async () => {
 - **v-html XSS**：必须用 DOMPurify 过滤 HTML
 
 ```typescript
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 ```
 
@@ -649,25 +661,25 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 **优先使用 `ref`，尽可能少用 `reactive`**。
 
-| 场景 | 推荐方式 | 说明 |
-| ---- | -------- | ---- |
-| 简单状态 | `ref` | 单个值（如 `const count = ref(0)`） |
-| 对象数据 | `ref` | 拆分为独立 ref |
-| 数组数据 | `ref` | 直接使用 `ref([])` |
-| 分页请求参数 | `ref` | `pagination = ref({ page, limit })` 组合 ref |
-| 分页总数 | `ref` | `total` 独立 ref |
-| 复杂对象 | `reactive` | 多层嵌套对象数据 |
-| 批量更新 | `reactive` | 一次性更新多个相关属性 |
-| 对象解构 | `reactive` + `toRefs` | 解构后仍保持响应式 |
+| 场景         | 推荐方式              | 说明                                         |
+| ------------ | --------------------- | -------------------------------------------- |
+| 简单状态     | `ref`                 | 单个值（如 `const count = ref(0)`）          |
+| 对象数据     | `ref`                 | 拆分为独立 ref                               |
+| 数组数据     | `ref`                 | 直接使用 `ref([])`                           |
+| 分页请求参数 | `ref`                 | `pagination = ref({ page, limit })` 组合 ref |
+| 分页总数     | `ref`                 | `total` 独立 ref                             |
+| 复杂对象     | `reactive`            | 多层嵌套对象数据                             |
+| 批量更新     | `reactive`            | 一次性更新多个相关属性                       |
+| 对象解构     | `reactive` + `toRefs` | 解构后仍保持响应式                           |
 
 ### 7.2 Reactive 转 Ref 规则
 
-| 场景 | 原写法（reactive） | 推荐写法（ref） |
-| ---- | ------------------ | --------------- |
-| 简单状态 | `const state = reactive({ count: 0 })` | `const count = ref(0)` |
-| 对象数据 | `const user = reactive({ name: '', age: 0 })` | `const userName = ref('')` / `const userAge = ref(0)` |
-| 数组数据 | `const list = reactive([])` | `const list = ref([])` |
-| 分页参数 | `const pagination = reactive({ page: 1, limit: 20 })` | `const pagination = ref({ page: 1, limit: 20 })` |
+| 场景     | 原写法（reactive）                                    | 推荐写法（ref）                                       |
+| -------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| 简单状态 | `const state = reactive({ count: 0 })`                | `const count = ref(0)`                                |
+| 对象数据 | `const user = reactive({ name: '', age: 0 })`         | `const userName = ref('')` / `const userAge = ref(0)` |
+| 数组数据 | `const list = reactive([])`                           | `const list = ref([])`                                |
+| 分页参数 | `const pagination = reactive({ page: 1, limit: 20 })` | `const pagination = ref({ page: 1, limit: 20 })`      |
 
 ### 7.3 computed 规范
 
@@ -700,10 +712,10 @@ watch(
     // 处理变化
   },
   {
-    deep: true,         // 对象/数组必须声明
-    immediate: true,    // 初始化需触发时添加
-    flush: 'post',      // 刷新时机（默认 'pre'）
-  }
+    deep: true, // 对象/数组必须声明
+    immediate: true, // 初始化需触发时添加
+    flush: "post", // 刷新时机（默认 'pre'）
+  },
 );
 ```
 
@@ -711,12 +723,12 @@ watch(
 
 #### watch vs watchEffect
 
-| 特性 | watch | watchEffect |
-| ---- | ----- | ----------- |
-| 依赖声明 | 显式指定 | 自动追踪 |
-| 新旧值 | 可获取 `(newVal, oldVal)` | 不可获取 |
-| 惰性执行 | 默认惰性，可 `immediate: true` | 立即执行 |
-| 适用场景 | 精确控制监听源 | 简单副作用 |
+| 特性     | watch                          | watchEffect |
+| -------- | ------------------------------ | ----------- |
+| 依赖声明 | 显式指定                       | 自动追踪    |
+| 新旧值   | 可获取 `(newVal, oldVal)`      | 不可获取    |
+| 惰性执行 | 默认惰性，可 `immediate: true` | 立即执行    |
+| 适用场景 | 精确控制监听源                 | 简单副作用  |
 
 **推荐**：优先使用 `watch`，需要自动追踪时使用 `watchEffect`。
 
@@ -726,8 +738,10 @@ watch(
 
 ```typescript
 onBeforeUnmount(() => {
-  if (timer.value) { clearInterval(timer.value); }
-  window.removeEventListener('resize', handleResize);
+  if (timer.value) {
+    clearInterval(timer.value);
+  }
+  window.removeEventListener("resize", handleResize);
 });
 ```
 
@@ -741,10 +755,16 @@ const isLoading = ref<boolean>(false);
 const selectedUser = ref<IUserInfo | null>(null);
 
 // ✅ reactive<T>() 显式标注
-const state = reactive<{ name: string; age: number; roles: string[] }>({ name: "", age: 0, roles: [] });
+const state = reactive<{ name: string; age: number; roles: string[] }>({
+  name: "",
+  age: 0,
+  roles: [],
+});
 
 // ✅ computed<T>() 复杂类型显式标注
-const items = computed<IListItem[]>(() => rawData.value.map(item => ({ id: item.id, label: item.name })));
+const items = computed<IListItem[]>(() =>
+  rawData.value.map((item) => ({ id: item.id, label: item.name })),
+);
 ```
 
 ---
@@ -919,8 +939,8 @@ const emit = defineEmits(["update:modelValue", "change"]);
 - 混合导入时，`import type` 与值导入分开
 
 ```typescript
-import type { IUser } from './types';
-import { userApi } from './api';
+import type { IUser } from "./types";
+import { userApi } from "./api";
 ```
 
 ### 9.5 禁止 `@ts-ignore` / `@ts-expect-error`
@@ -931,25 +951,29 @@ import { userApi } from './api';
 
 ## 10. 🔥 性能优化
 
-| 优化项 | 说明 |
-|--------|------|
-| 组件懒加载 | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载 |
-| KeepAlive | 合理使用 `<KeepAlive>` 缓存不常更新组件；通过 `include`/`exclude` 精确控制缓存范围 |
-| 虚拟滚动 | 长列表（100+ 项）使用虚拟滚动组件，避免 DOM 过多 |
-| 防抖节流 | 搜索框输入（防抖）、滚动事件（节流）、窗口 resize（节流）、按钮点击（防抖/锁） |
-| 图片优化 | WebP 优先、使用合适尺寸、非首屏延迟加载（`loading="lazy"`） |
-| 响应式性能 | 优先使用 `computed` 派生状态；大型数据列表考虑 `shallowRef`；避免在 `watch` 中执行同步 DOM 操作 |
-| 路由守卫 | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制 |
-| 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器 |
+| 优化项         | 说明                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
+| KeepAlive      | 合理使用 `<KeepAlive>` 缓存不常更新组件；通过 `include`/`exclude` 精确控制缓存范围              |
+| 虚拟滚动       | 长列表（100+ 项）使用虚拟滚动组件，避免 DOM 过多                                                |
+| 防抖节流       | 搜索框输入（防抖）、滚动事件（节流）、窗口 resize（节流）、按钮点击（防抖/锁）                  |
+| 图片优化       | WebP 优先、使用合适尺寸、非首屏延迟加载（`loading="lazy"`）                                     |
+| 响应式性能     | 优先使用 `computed` 派生状态；大型数据列表考虑 `shallowRef`；避免在 `watch` 中执行同步 DOM 操作 |
+| 路由守卫       | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制   |
+| 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器                                                    |
 
 ### 防抖 / 节流示例
 
 ```typescript
-import { debounce } from 'lodash-es';
-const handleSearch = debounce((query: string) => { fetchSearchResults(query); }, 300);
+import { debounce } from "lodash-es";
+const handleSearch = debounce((query: string) => {
+  fetchSearchResults(query);
+}, 300);
 
-import { throttle } from 'lodash-es';
-const handleScroll = throttle(() => { updateScrollPosition(); }, 100);
+import { throttle } from "lodash-es";
+const handleScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
 ```
 
 ---
@@ -958,35 +982,35 @@ const handleScroll = throttle(() => { updateScrollPosition(); }, 100);
 
 ### 🔴 绝对禁止项（必须遵守）
 
-| # | 禁止项 | 说明 |
-|---|--------|------|
-| 1 | 连续数据解构 | 禁止 `...data.data` |
-| 2 | 父组件修改子组件数据 | 禁止直接修改子组件内部状态 |
-| 3 | 修改 ref/reactive 类型 | 后端给什么类型用什么 |
-| 4 | 修改 props | 禁止直接修改，只读访问 `props.xxx` |
-| 5 | 使用 mixins | 使用 Hooks/组合式函数替代 |
-| 6 | 无意义命名 | 禁止 `data1`, `temp2` |
-| 7 | 使用 this | 禁止在 `<script setup>` 中使用 `this` |
-| 8 | Options API | 禁止使用 `data()`, `methods: {}`, `mounted() {}` 等 |
-| 9 | v-for 与 v-if 同元素 | 禁止同一元素同时使用 |
-| 10 | index 作为 key | 必须用唯一 ID |
+| #   | 禁止项                 | 说明                                                |
+| --- | ---------------------- | --------------------------------------------------- |
+| 1   | 连续数据解构           | 禁止 `...data.data`                                 |
+| 2   | 父组件修改子组件数据   | 禁止直接修改子组件内部状态                          |
+| 3   | 修改 ref/reactive 类型 | 后端给什么类型用什么                                |
+| 4   | 修改 props             | 禁止直接修改，只读访问 `props.xxx`                  |
+| 5   | 使用 mixins            | 使用 Hooks/组合式函数替代                           |
+| 6   | 无意义命名             | 禁止 `data1`, `temp2`                               |
+| 7   | 使用 this              | 禁止在 `<script setup>` 中使用 `this`               |
+| 8   | Options API            | 禁止使用 `data()`, `methods: {}`, `mounted() {}` 等 |
+| 9   | v-for 与 v-if 同元素   | 禁止同一元素同时使用                                |
+| 10  | index 作为 key         | 必须用唯一 ID                                       |
 
 ### 🟢 推荐项（建议统一）
 
-| # | 推荐项 | 说明 |
-|---|--------|------|
-| 1 | 函数 try/catch | 包裹函数内容，`catch` 中使用 `console.warn` |
-| 2 | async/await | 少用 `.then()` 链式 |
-| 3 | computed 优先 | 能用 computed 解决的不用 ref/reactive |
-| 4 | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true` |
-| 5 | Hooks 抽离 | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
+| #   | 推荐项              | 说明                                            |
+| --- | ------------------- | ----------------------------------------------- |
+| 1   | 函数 try/catch      | 包裹函数内容，`catch` 中使用 `console.warn`     |
+| 2   | async/await         | 少用 `.then()` 链式                             |
+| 3   | computed 优先       | 能用 computed 解决的不用 ref/reactive           |
+| 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`      |
+| 5   | Hooks 抽离          | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
 
 ### 🟡 不推荐项（尽量避免）
 
-| # | 不推荐项 | 说明 |
-|---|----------|------|
-| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
-| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
+| #   | 不推荐项            | 说明                            |
+| --- | ------------------- | ------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
 
 ### ⚠️ 注意事项
 
