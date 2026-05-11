@@ -31,11 +31,12 @@ import { ref, toRefs } from "vue";
 export const useTable = () => {
   // 分页请求参数（组合使用）
   const pagination = ref({ page: 1, limit: 20 });
-  // 分页总数（响应数据，独立管理）
+  // 加载状态
   const loading = ref(false);
-
+  // 表格数据源
   const dataSource = ref<any[]>([]);
-  const total = ref(0); // 总条数
+  // 总条数（响应数据，独立管理）
+  const total = ref(0);
 
   const getDataSourceTotal = async () => {
     loading.value = true;
@@ -58,12 +59,10 @@ export const useTable = () => {
   };
 
   return {
-    pagination,
-
     loading,
     dataSource,
     total,
-
+    pagination,
     getDataSourceTotal,
   };
 };
@@ -82,9 +81,11 @@ import { ref } from "vue";
 export const useTable = () => {
   // 分页请求参数（组合使用）
   const pagination = ref({ page: 1, limit: 20 });
-  // 分页总数（响应数据，独立管理）
-  const total = ref(0);
+  // 加载状态（useRequest 自动管理）
+  // 表格数据源
   const dataSource = ref<any[]>([]);
+  // 总条数（响应数据，独立管理）
+  const total = ref(0);
 
   // 分页查询成功回调
   const onGetListSuccess = ({ code, data, msg }: IApiResponse) => {
@@ -108,10 +109,10 @@ export const useTable = () => {
   );
 
   return {
-    dataSource,
     loading,
-    pagination,
+    dataSource,
     total,
+    pagination,
     getDataSourceTotal,
   };
 };

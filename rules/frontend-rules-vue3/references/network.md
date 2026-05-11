@@ -16,170 +16,12 @@
 
 ---
 
-### ✅ 已安装 `useRequest` 时使用如下写法
-
-#### 自动执行（页面初始化自动请求）
-
-```typescript
-import { useRequest } from "ahooks-vue"; // 或 'vue-hooks-plus'
-import { ref } from "vue";
-
-const pagination = ref({ page: 1, limit: 20 });
-const total = ref(0); // 总记录数（响应数据）
-const dataSource = ref<any[]>([]);
-
-const onListSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    dataSource.value = data ?? [];
-  } else {
-    console.warn(msg);
-  }
-};
-
-const { loading } = useRequest(() => apiGetList(pagination.value), {
-  onSuccess: onListSuccess,
-  onError: (error) => {
-    console.warn(error);
-  },
-});
-```
-
-#### 手动执行（按钮点击/表单提交等场景）
-
-```typescript
-import { useRequest } from "ahooks-vue";
-
-const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    console.log("登录成功");
-    // 处理 token、跳转等
-  } else {
-    console.warn(msg);
-  }
-};
-
-// login Hook（manual 模式，手动触发）
-const { loading, run: runLogin } = useRequest(
-  () => apiPostLogin(loginForm.value),
-  {
-    manual: true,
-    onSuccess: onLoginSuccess,
-    onError: () => {
-      console.warn("网络异常，请重试");
-    },
-  },
-);
-
-// 在事件处理函数中调用
-const handleSubmit = async () => {
-  await runLogin();
-};
-```
-
-#### 带参数（分页场景）
-
-```typescript
-import { useRequest } from "ahooks-vue";
-import { ref } from "vue";
-
-const pagination = ref({ page: 1, limit: 20 });
-
-const total = ref(0); // 总记录数（响应数据）
-const dataSource = ref<any[]>([]);
-
-const onListSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    dataSource.value = data.list ?? [];
-    total.value = data.total ?? 0;
-  } else {
-    console.warn(msg);
-  }
-};
-
-const { loading, run: getList } = useRequest(
-  (params) => apiGetList(Object.assign({}, pagination.value, params)),
-  {
-    manual: true,
-    onSuccess: onListSuccess,
-    onError: (error) => {
-      console.warn(error);
-    },
-  },
-);
-```
-
----
-
-### ⚙️ 未安装 `useRequest` 时使用如下写法
-
-#### 自动执行（页面初始化自动请求）
-
-```typescript
-const loading = ref(false);
-const dataSource = ref<IUserInfo[]>([]);
-
-const fetchData = async () => {
-  loading.value = true;
-  try {
-    const { code, data, msg } = await apiGetList({ page: 1, limit: 20 });
-    if (code === 0) {
-      dataSource.value = data ?? [];
-    } else {
-      console.warn(msg);
-    }
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  fetchData();
-});
-```
-
-#### 手动执行（按钮点击/表单提交等场景）
-
-```typescript
-const loading = ref(false);
-
-const handleSubmit = async () => {
-  if (loading.value) return; // 防重复提交
-
-  loading.value = true;
-  try {
-    const { code, msg } = await apiSubmit(formData.value);
-    if (code === 0) {
-      console.log("提交成功");
-    } else {
-      console.warn(msg);
-    }
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loading.value = false;
-  }
-};
-```
-
----
-
 ## 二、异步处理
 
 ### 基本原则
 
 - **必须使用 `async/await`**，禁止 `.then()` 链式调用
 - 统一使用 `try/catch/finally` 结构（未使用 `useRequest` 时）
-
-### 必须处理的状态
-
-手动发起网络请求时，**只需管理 `loading` 和数据 `ref`**，不需要 `error` ref：
-
-```typescript
-const dataSource = ref<IUserInfo[]>([]);
-const loading = ref(false);
-```
 
 ### 目标结构
 
@@ -221,57 +63,6 @@ if (code === 0) {
 +     isLoading.value = false  // 只需写一次
 +   }
 + }
-```
-
-#### 自动执行（页面初始化自动请求）
-
-```typescript
-const dataSource = ref<IUserInfo[]>([]);
-const loading = ref(false);
-
-const fetchData = async () => {
-  loading.value = true;
-  try {
-    const { code, data, msg } = await apiGetList({ page: 1, limit: 20 });
-    if (code === 0) {
-      dataSource.value = data ?? [];
-    } else {
-      console.warn(msg);
-    }
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loading.value = false;
-  }
-};
-
-onMounted(() => {
-  fetchData();
-});
-```
-
-#### 手动执行（按钮点击/表单提交等场景）
-
-```typescript
-const loading = ref(false);
-
-const handleSubmit = async () => {
-  if (loading.value) return; // 防重复提交
-
-  loading.value = true;
-  try {
-    const { code, msg } = await apiSubmit(formData.value);
-    if (code === 0) {
-      console.log("提交成功");
-    } else {
-      console.warn(msg);
-    }
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loading.value = false;
-  }
-};
 ```
 
 ---
@@ -319,7 +110,7 @@ if (code === 0) {
 
 ---
 
-## 三、错误处理
+## 四、错误处理
 
 ### 禁止空 `catch`
 
@@ -356,7 +147,106 @@ if (code === 0) {
 
 ---
 
-## 四、防止重复提交
+## 五、请求写法示例
+
+### ✅ 已安装 `useRequest` 时
+
+#### 手动执行（按钮点击/表单提交等场景）
+
+```typescript
+import { useRequest } from "ahooks-vue";
+
+const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    console.log("登录成功");
+    // 处理 token、跳转等
+  } else {
+    console.warn(msg);
+  }
+};
+
+// login Hook（manual 模式，手动触发）
+const { loading, run: runLogin } = useRequest(
+  () => apiPostLogin(loginForm.value),
+  {
+    manual: true,
+    onSuccess: onLoginSuccess,
+    onError: () => {
+      console.warn("网络异常，请重试");
+    },
+  },
+);
+
+// 在事件处理函数中调用
+const handleSubmit = async () => {
+  await runLogin();
+};
+```
+
+#### 带参数（分页场景）
+
+```typescript
+import { useRequest } from "ahooks-vue";
+import { ref } from "vue";
+
+const pagination = ref({ page: 1, limit: 20 });
+const total = ref(0);
+const dataSource = ref<any[]>([]);
+
+const onListSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    dataSource.value = data.list ?? [];
+    total.value = data.total ?? 0;
+  } else {
+    console.warn(msg);
+  }
+};
+
+const { loading, run: getList } = useRequest(
+  (params) => apiGetList(Object.assign({}, pagination.value, params)),
+  {
+    manual: true,
+    onSuccess: onListSuccess,
+    onError: (error) => {
+      console.warn(error);
+    },
+  },
+);
+```
+
+---
+
+### ⚙️ 未安装 `useRequest` 时
+
+#### 手动执行（按钮点击/表单提交等场景）
+
+```typescript
+import { ref } from "vue";
+
+const loading = ref(false);
+
+const handleSubmit = async () => {
+  if (loading.value) return; // 防重复提交
+
+  loading.value = true;
+  try {
+    const { code, msg } = await apiSubmit(formData.value);
+    if (code === 0) {
+      console.log("提交成功");
+    } else {
+      console.warn(msg);
+    }
+  } catch (error) {
+    console.warn(error);
+  } finally {
+    loading.value = false;
+  }
+};
+```
+
+---
+
+## 六、防止重复提交
 
 - 对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，或使用互斥锁，防止用户重复点击
 
@@ -367,11 +257,7 @@ if (code === 0) {
 ```typescript
 import { useRequest } from "ahooks-vue";
 
-const {
-  loading,
-  loading: loading,
-  run,
-} = useRequest(() => apiSubmit(formData.value), {
+const { loading, run } = useRequest(() => apiSubmit(formData.value), {
   manual: true,
   onSuccess: (res) => {
     if (res.code === 0) {
@@ -390,9 +276,11 @@ const handleSubmit = async () => {
 };
 ```
 
-### 互斥锁方式（未安装 useRequest）
+### 互斥锁方式（未安装 `useRequest`）
 
 ```typescript
+import { ref } from "vue";
+
 const loading = ref(false);
 
 const handleSubmit = async () => {
@@ -402,7 +290,7 @@ const handleSubmit = async () => {
   try {
     const { code, msg } = await apiSubmit(formData.value);
     if (code === 0) {
-      // 提交成功
+      console.log("提交成功");
     } else {
       console.warn(msg);
     }
@@ -414,38 +302,16 @@ const handleSubmit = async () => {
 };
 ```
 
-### loading 状态关联按钮禁用（未安装 useRequest）
-
-```typescript
-const loading = ref(false);
-
-const handleSubmit = async () => {
-  if (loading.value) return; // 互斥锁
-
-  loading.value = true;
-  try {
-    const { code, msg } = await apiSubmit(formData.value);
-    if (code === 0) {
-      // 提交成功
-    } else {
-      console.warn(msg);
-    }
-  } catch (error) {
-    console.warn(error);
-  } finally {
-    loading.value = false;
-  }
-};
-```
-
-### loading 状态关联按钮禁用
+### 模板中关联按钮禁用
 
 ```vue
 <template>
   <button :disabled="loading" @click="handleSubmit">提交</button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref } from "vue";
+
 const loading = ref(false);
 
 const handleSubmit = async () => {
@@ -470,7 +336,7 @@ const handleSubmit = async () => {
 
 ---
 
-## 五、等于运算符
+## 七、等于运算符
 
 - 优先推荐使用 `===`
 - 若将 `==` 改为 `===`，需提醒用户手动确认
@@ -478,7 +344,7 @@ const handleSubmit = async () => {
 
 ---
 
-## 六、安全规范
+## 八、安全规范
 
 | 安全项       | 规范                                              |
 | ------------ | ------------------------------------------------- |
@@ -488,7 +354,7 @@ const handleSubmit = async () => {
 
 ---
 
-## 七、风险提示
+## 九、风险提示
 
 - 原代码可能使用不同响应结构
 - 原有错误处理可能不同
