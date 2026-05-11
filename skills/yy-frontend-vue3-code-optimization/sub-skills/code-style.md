@@ -2,6 +2,17 @@
 
 **定位**：🟡 中风险。涉及代码格式化和结构整理。适用于 `.vue`、`.js`、`.jsx`、`.ts`、`.tsx`、`.css`、`.scss`、`.less` 文件。
 
+## 相关规则
+
+执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
+
+- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/order.md`**：SFC 块顺序、Import 分组排序、脚本内部声明顺序、模板属性顺序
+- **`rules/formatting.md`**：Prettier 配置、ESLint 集成
+- **`rules/naming.md`**：文件与标识符命名规范
+- **`rules/typescript.md`**：TypeScript 类型注解要求、禁止 `any`
+- **`rules/directives.md`**：指令简写、模板属性顺序
+
 ## ⚠️ 风险说明（执行前必须展示给用户）
 
 | 风险项            | 影响范围     | 说明                                                                              |
@@ -50,43 +61,27 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 - 若检测到项目 `package.json` 中包含 `unplugin-vue-setup-extend-plus` 依赖，或 `node_modules/unplugin-vue-setup-extend-plus` 目录存在，则在 `<script setup>` 标签上添加 `name="PascalCase组件名"` 属性
 - 组件名根据文件名推导：`UserCard.vue` → `name="UserCard"`，`user-list-item.vue` → `name="UserListItem"`
 - 示例：`<script setup lang="ts" name="UserCard">`
-- **未安装该插件时，不添加 name 属性**，保持原有 `<script setup>` 写法
+  - **未安装该插件时，不添加 name 属性**，保持原有 `<script setup>` 写法
 
-### 导入顺序（7 组）
+### 导入顺序（4 组）
 
-组间空一行，组内按字母排序。**全局与相对导入合并为同一组**。
+组间空一行，组内按字母排序。分为：外部依赖（vue、dayjs 等）、types（`import type`）、全局内部依赖（@src/...）、相对内部依赖（./...）。
 
 ```typescript
-// node_modules
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+// 外部依赖
+import dayjs from 'dayjs';
+import { debounce } from 'lodash';
 
-// types（仅 TypeScript/TSX）
-import type { RuleObject } from "ant-design-vue/es/form";
-import type { IUserInfo } from "@src/types/user";
-import type { ITableColumn } from "./types";
+// types
+import type { IUserInfo } from '@src/types/user';
 
-// apis
-import { apiGetUserInfo } from "@src/api/user";
+// 全局内部依赖
+import { apiGetUserInfo } from '@src/api/user';
+import { formatDate } from '@src/utils';
 
-// utils
-import { formatDate } from "@src/utils";
-import { formatFileSize } from "./utils/format";
-
-// hooks
-import { useTable } from "@src/hooks/useTable";
-import { useSearchForm } from "./useSearchForm";
-
-// stores (Pinia/Vuex)
-import { useUserStore } from "@src/stores/user";
-
-// constants
-import { APP_CONFIG } from "@src/constants";
-import { MAX_RETRY_COUNT } from "./constants";
-
-// components
-import { NavbarLogo } from "@src/components";
-import NavbarLogo2 from "./NavbarLogo2.vue";
+// 相对内部依赖
+import { MAX_RETRY_COUNT } from './constants';
+import { formatFileSize } from './utils/format';
 ```
 
 ### `<script setup>` 结构顺序
@@ -103,12 +98,12 @@ import NavbarLogo2 from "./NavbarLogo2.vue";
 
 ```typescript
 <script setup lang="ts" name="UserCard">
-// 1. imports（按 7 组排序）
-import { ref, computed, watch, onMounted } from "vue";
+// 1. imports（按 4 组排序）
+import { ref, computed, watch, onMounted } from 'vue';
 
-import type { IUserInfo } from "@src/types/user";
+import type { IUserInfo } from '@src/types/user';
 
-import { apiGetUserList } from "@src/api/user";
+import { apiGetUserList } from '@src/api/user';
 
 // 2. defineProps
 const props = defineProps<{
@@ -118,8 +113,8 @@ const props = defineProps<{
 
 // 3. defineEmits
 const emit = defineEmits<{
-  (e: "select", user: IUserInfo): void;
-  (e: "change", page: number): void;
+  (e: 'select', user: IUserInfo): void;
+  (e: 'change', page: number): void;
 }>();
 
 // 4. 全局Hooks（多个业务共享的 useXxx）
@@ -128,13 +123,13 @@ const { globalState } = useGlobalStore();
 // ==================== 表单模块 ====================
 // 5. 业务模块：组内自由组合 ref/computed/watch/方法/生命周期
 const formData = ref({
-  username: "",
-  email: "",
+  username: '',
+  email: '',
 });
 const isFormValid = computed(() => formData.value.username.length > 0);
 
 const resetForm = () => {
-  formData.value = { username: "", email: "" };
+  formData.value = { username: '', email: '' };
 };
 
 // ==================== 表格模块 ====================
@@ -147,14 +142,15 @@ watch(
   () => props.userId,
   (newId) => {
     fetchData(newId);
-  }
+  },
 );
 
 const handleSubmit = async () => {
   try {
     await apiPostForm(formData.value);
-    emit("submit");
-  } catch (error) {
+    emit('submit');
+  }
+  catch (error) {
     console.warn(error);
   }
 };
@@ -225,7 +221,7 @@ defineExpose({
 - **禁止 `any`**：使用 `unknown` 或具体类型
 - **类型命名**：必须使用 `I` 前缀（如 `IUserInfo`、`ITableColumn`）
 - **props 类型**：使用 `defineProps<{ ... }>` 或 `withDefaults(defineProps<{ ... }>(), { ... })`
-- **emit 类型**：使用 `defineEmits<{ (e: "event", payload: Type): void }>()`
+- **emit 类型**：使用 `defineEmits<{ (e: 'event', payload: Type): void }>()`
 - **ref 类型**：使用 `ref<Type>(initialValue)` 或 `ref<Type | null>(null)`
 - **reactive 类型**：使用 `reactive<{ ... }>({ ... })` 或接口定义
 
@@ -234,8 +230,8 @@ defineExpose({
 const userList = ref<IUserInfo[]>([]);
 const selectedId = ref<string | null>(null);
 const formData = reactive<{ username: string; email: string }>({
-  username: "",
-  email: "",
+  username: '',
+  email: '',
 });
 
 // ❌ 错误：使用 any
@@ -249,16 +245,16 @@ const data: any = {}; // 禁止
 
 ```tsx
 // UserCard.tsx
-import { defineComponent, ref, computed } from "vue";
-import type { PropType } from "vue";
-import type { IUserInfo } from "@/types/user";
+import { defineComponent, ref, computed } from 'vue';
+import type { PropType } from 'vue';
+import type { IUserInfo } from '@src/types/user';
 
 /**
  * UserCard 组件
  * @description 用户卡片组件，显示用户基本信息
  */
 export default defineComponent({
-  name: "UserCard",
+  name: 'UserCard',
 
   props: {
     // user: 用户信息对象
@@ -273,18 +269,18 @@ export default defineComponent({
     },
   },
 
-  emits: ["select", "change"],
+  emits: ['select', 'change'],
 
   setup(props, { emit }) {
     // ref: 是否激活
     const isActive = ref(false);
 
     // computed: 显示名称
-    const displayName = computed(() => props.user.name || "未知用户");
+    const displayName = computed(() => props.user.name || '未知用户');
 
     // 方法: 处理点击
     const handleClick = () => {
-      emit("select", props.user);
+      emit('select', props.user);
       isActive.value = !isActive.value;
     };
 
@@ -304,7 +300,7 @@ export default defineComponent({
 
 ### TSX 组件结构顺序
 
-1. imports（按 7 组排序）
+1. imports（按 3 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -320,7 +316,7 @@ export default defineComponent({
 ```jsx
 // UserCard.vue（推荐：.vue 单文件组件）
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue';
 
 /**
  * UserCard 组件
@@ -331,17 +327,17 @@ const props = defineProps({
   isLoading: { type: Boolean, default: false },
 });
 
-const emit = defineEmits(["select", "change"]);
+const emit = defineEmits(['select', 'change']);
 
 // state: 是否激活
 const isActive = ref(false);
 
 // computed: 显示名称
-const displayName = computed(() => props.user?.name || "未知用户");
+const displayName = computed(() => props.user?.name || '未知用户');
 
 // 方法: 处理点击
 const handleClick = () => {
-  emit("select", props.user);
+  emit('select', props.user);
   isActive.value = !isActive.value;
 };
 </script>
@@ -360,7 +356,7 @@ const handleClick = () => {
 
 ### JSX 组件结构顺序
 
-1. imports（按 7 组排序）
+1. imports（按 3 组排序）
 2. 类型定义
 3. defineComponent
 4. name

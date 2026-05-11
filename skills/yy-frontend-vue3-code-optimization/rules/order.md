@@ -13,17 +13,20 @@
 
 ## 二、Import 导入顺序
 
-将 `import` 分为三组，**组间空一行，组内按字母顺序排列**：
+将 `import` 分为四组，**组间空一行，组内按字母顺序排列**：
 
 1. **外部依赖**：`vue`, `dayjs`, `lodash` 等第三方库。
-2. **全局内部依赖**：`@src/...` 路径下的模块。
-3. **相对内部依赖**：`./...` 路径下的模块。
+2. **types**：`import type` 类型导入。
+3. **全局内部依赖**：`@src/...` 路径下的模块。
+4. **相对内部依赖**：`./...` 路径下的模块。
 
 **示例**：
 
 ```typescript
 import { ref, computed } from 'vue';
 import dayjs from 'dayjs';
+
+import type { IUser } from '@src/types/user';
 
 import { apiGetUser } from '@src/api/user';
 import { formatDate } from '@src/utils/date';

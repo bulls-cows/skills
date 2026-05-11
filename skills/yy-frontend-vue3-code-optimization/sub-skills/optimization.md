@@ -2,6 +2,18 @@
 
 **定位**：🔴 高风险。涉及运行时行为改变，**必须经过任务调度器确认后执行**。
 
+## 相关规则
+
+执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
+
+- **`rules/rules.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/reactivity.md`**：ref/reactive 选择原则、computed 规范、watch 与 computed 选择策略
+- **`rules/watch.md`**：watch/watchEffect 使用规范、清理机制、与 computed 选择策略
+- **`rules/network.md`**：异步处理、响应解构、错误处理、防重复提交
+- **`rules/hooks.md`**：Hooks 命名、返回值、使用方式、抽离建议
+- **`rules/performance.md`**：组件懒加载、KeepAlive 缓存、虚拟滚动、防抖节流、图片优化
+- **`rules/interaction.md`**：Props 定义规范、Emit 事件白名单、defineExpose
+
 ## 相等运算符转换
 
 ### 核心原则
@@ -327,5 +339,4 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 - **虚拟滚动**：长列表使用虚拟滚动组件减少 DOM 节点
 - **防抖节流**：频繁触发的事件（搜索、滚动、resize）使用防抖/节流
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
-- **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制（详见 `rules/reactivity.md`）
 - **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`（详见 `rules/reactivity.md`）
