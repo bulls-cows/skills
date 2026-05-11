@@ -19,45 +19,100 @@
 
 ### 标准模板
 
+#### 未安装 `useRequest` 时（手动管理状态）
+
 ```typescript
-import { ref, toRefs } from 'vue';
+import { ref, toRefs } from "vue";
 
 /**
  * 表格数据管理
  * @description 封装表格数据获取、分页、加载状态等逻辑
  */
 export const useTable = () => {
-  const tableData = ref<any[]>([]);
+  // 分页请求参数（组合使用）
+  const pagination = ref({ page: 1, limit: 20 });
+  // 分页总数（响应数据，独立管理）
   const loading = ref(false);
-  const pagination = ref({
-    currentPage: 1, // 当前页码
-    pageSize: 20,   // 每页条数
-    total: 0        // 总条数
-  });
 
-  const getListData = async () => {
+  const dataSource = ref<any[]>([]);
+  const total = ref(0); // 总条数
+
+  const getDataSourceTotal = async () => {
     loading.value = true;
     try {
       const { code, data, msg } = await apiGetList({
-        page: pagination.value.currentPage,
-        size: pagination.value.pageSize
+        page: pagination.value.page,
+        limit: pagination.value.limit,
       });
       if (code === 0) {
-        tableData.value = data.list;
-        pagination.value.total = data.total;
+        dataSource.value = data.list;
+        total.value = data.total;
       } else {
         console.warn(msg);
       }
-    } catch (err) {
-      console.warn('getListData error:', err);
+    } catch (error) {
+      console.warn("getDataSourceTotal error:", error);
     } finally {
       loading.value = false;
     }
   };
 
   return {
-    ...toRefs({ tableData, loading, pagination }),
-    getListData
+    pagination,
+
+    loading,
+    dataSource,
+    total,
+
+    getDataSourceTotal,
+  };
+};
+```
+
+#### 已安装 `useRequest` 时（自动管理状态）
+
+```typescript
+import { useRequest } from "ahooks-vue"; // 或 'vue-hooks-plus'
+import { ref } from "vue";
+
+/**
+ * 表格数据管理
+ * @description 封装表格数据获取、分页、加载状态等逻辑
+ */
+export const useTable = () => {
+  // 分页请求参数（组合使用）
+  const pagination = ref({ page: 1, limit: 20 });
+  // 分页总数（响应数据，独立管理）
+  const total = ref(0);
+  const dataSource = ref<any[]>([]);
+
+  // 分页查询成功回调
+  const onGetListSuccess = ({ code, data, msg }: IApiResponse) => {
+    if (code === 0) {
+      dataSource.value = data.list ?? [];
+      total.value = data.total;
+    } else {
+      console.warn(msg);
+    }
+  };
+
+  const { loading, run: getDataSourceTotal } = useRequest(
+    (params) => apiGetList(Object.assign({}, pagination.value, params)),
+    {
+      manual: true,
+      onSuccess: onGetListSuccess,
+      onError: (error) => {
+        console.warn("getDataSourceTotal error:", error);
+      },
+    },
+  );
+
+  return {
+    dataSource,
+    loading,
+    pagination,
+    total,
+    getDataSourceTotal,
   };
 };
 ```
@@ -79,25 +134,23 @@ export const useTable = () => {
 
 可复用逻辑超过 30 行或跨 2 个以上组件使用时，必须抽离为 Hook。
 
-| 场景 | 处理方式 |
-|------|----------|
-| 表格数据 + 分页 + 加载 | `useTable` |
-| 搜索表单 + 重置 + 查询 | `useSearchForm` |
-| 表单校验逻辑 | `useFormValidate` |
-| 弹窗开关 + 状态 | `useDialog` |
-| 文件上传逻辑 | `useUpload` |
-| 权限判断 | `usePermission` |
+| 场景                   | 处理方式          |
+| ---------------------- | ----------------- |
+| 表格数据 + 分页 + 加载 | `useTable`        |
+| 搜索表单 + 重置 + 查询 | `useSearchForm`   |
+| 表单校验逻辑           | `useFormValidate` |
+| 弹窗开关 + 状态        | `useDialog`       |
+| 文件上传逻辑           | `useUpload`       |
+| 权限判断               | `usePermission`   |
 
 ---
 
 ## 五、Hook 内部注释规范
 
-| 内容 | 注释格式 | 示例 |
-|------|----------|------|
-| Hook 整体 | JSDoc + `@description` | `/** 表格数据管理 @description ... */` |
-| 内部 ref | `// 属性名: 描述` | `// tableData: 表格数据列表` |
-| 内部方法 | JSDoc 或 `// methods: 描述` | `// methods: 获取表格数据` |
+| 内容      | 注释格式                    | 示例                                   |
+| --------- | --------------------------- | -------------------------------------- |
+| Hook 整体 | JSDoc + `@description`      | `/** 表格数据管理 @description ... */` |
+| 内部 ref  | `// 属性名: 描述`           | `// dataSource: 表格数据列表`          |
+| 内部方法  | JSDoc 或 `// methods: 描述` | `// methods: 获取表格数据`             |
 
 ---
-
-

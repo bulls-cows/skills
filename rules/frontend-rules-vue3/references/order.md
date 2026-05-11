@@ -66,7 +66,7 @@ const emit = defineEmits<{ change: [value: string] }>();
 
 // --- Hooks ---
 // hook: useTable
-const { dataSource, getListData } = useTable();
+const { dataSource, getDataSourceTotal } = useTable();
 
 // --- 业务逻辑：搜索模块 ---
 const searchQuery = ref<string>('');
@@ -83,7 +83,7 @@ const onSubmit = async () => { /* ... */ };
 onMounted(() => { /* ... */ });
 
 // --- 对外暴露 ---
-defineExpose({ validateForm, resetForm, getListData });
+defineExpose({ validateForm, resetForm, getDataSourceTotal });
 </script>
 ```
 
