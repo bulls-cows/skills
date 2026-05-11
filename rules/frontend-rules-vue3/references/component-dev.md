@@ -1,154 +1,116 @@
 # Vue3 组件开发规范
 
-## `<script setup>` 要求
+本模块整合 Vue3 组件开发的核心规范，通过引用其他模块避免重复。
+
+## 核心要求
+
+### `<script setup>` 要求
 
 - **必须使用** `<script setup>` 语法
 - **禁止**使用 Options API 写法（如 `data()`、`methods: {}`、`mounted() {}` 等）
 - **禁止**在 `<script setup>` 中使用 `this`
 
-## 脚本结构顺序（强制）
+### 脚本结构顺序
 
-`<script setup>` 内部内容需按以下顺序排列：
+详见 [order.md](./order.md#二script-setup-内部结构顺序)
 
-1. `imports` → 2. `defineProps` → 3. `defineEmits` → 4. Hooks (useXxx) → 5. `ref`/`reactive` 响应式数据 → 6. `computed` → 7. `watch`/`watchEffect` → 8. 方法/函数 → 9. 生命周期钩子 → 10. `defineExpose`
+`<script setup>` 内部内容必须按以下顺序排列：
+
+1. `imports` → 2. `defineProps` / `defineEmits` → 3. Hooks (useXxx) → 4. 业务逻辑（按功能模块分组，组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子） → 5. `defineExpose`
 
 ### 完整示例
 
 ```typescript
 <script setup lang="ts">
-// imports
-import { ref, computed, onMounted } from 'vue';
+// 1. imports
+import { ref, computed, reactive, onMounted } from 'vue';
+import dayjs from 'dayjs';
+import type { IUser } from '@src/types/user';
+import { apiGetUserInfo } from '@src/api/user';
+import { useTable } from '@src/hooks/useTable';
+import UserCard from './UserCard.vue';
 
-// props
+// 2. 交互定义
 const props = defineProps<{
   // userId: 用户ID
   userId: string | number;
-  // isLoading: 加载状态
-  isLoading?: boolean;
 }>();
-
-// emits
 const emit = defineEmits<{
   change: [value: string];
-  click: [id: number];
 }>();
 
-// Hooks
+// 3. 全局 Hooks
 const { tableData, getListData } = useTable();
 
-// 响应式数据
+// 4. 业务逻辑 — 按功能模块分组
+
+// --- 搜索模块 ---
 const searchQuery = ref('');
+const isSearchActive = computed(() => searchQuery.value.length > 0);
+const handleSearch = () => { /* ... */ };
+watch(searchQuery, (newVal) => { /* ... */ });
 
-// computed
-const isSelected = computed(() => { /* ... */ });
+// --- 表单模块 ---
+const formRef = ref();
+const form = reactive({ name: '', age: 0 });
+const onSubmit = async () => { /* ... */ };
+onMounted(() => { /* ... */ });
 
-// watch
-watch(searchQuery, (newVal) => { /* ... */ }, { immediate: true });
+// --- 抽屉模块 ---
+const visible = ref(false);
+const openDrawer = () => { visible.value = true; };
+const closeDrawer = () => { visible.value = false; };
 
-// 方法
-const fetchData = async () => { /* ... */ };
-
-// 生命周期
-onMounted(() => {
-  fetchData();
+// 5. defineExpose
+defineExpose({
+  fetchData,
+  resetForm
 });
 </script>
 ```
 
-## Script 顶部 JSDoc
+### Vue 元素特性顺序
 
-```typescript
-/**
- * 组件名称
- * @description 页面职责说明
- * @description 核心业务流程简述
- * @description 关键数据来源
- */
-<script setup lang="ts">
-```
-
-## Vue 元素特性顺序
+详见 [directives.md](./directives.md#五模板属性顺序)
 
 1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on` → 8. `v-html/v-text`（动态 `v-slot`）
 
-## v-slot 风格
+### v-slot 风格
 
 - 使用动态风格（如 `v-slot:[name]`）
 - 禁止静态默认插槽写法
 
-## 模板层轻量化
+### 模板层轻量化
 
 - 模板只负责展示，不写复杂表达式与逻辑
 - 简单逻辑可内联，不过度封装为函数
 
-## 注释规范
+### 注释规范
 
-### 模板区注释
+详见 [comments.md](./comments.md)
 
-| 场景 | 注释格式 | 示例 |
-|------|----------|------|
-| 根节点 | `<!-- 组件名称 -->` | `<!-- UserCard -->` |
-| 循环节点 | `<!-- 循环: 描述 -->` | `<!-- 循环: 用户列表 -->` |
-| 条件分支 | `<!-- 条件: 描述 -->` | `<!-- 条件: 有数据时 -->` |
-| 关键区块 | `<!-- 区块名称 -->` | `<!-- 操作按钮组 -->` |
-| 插槽节点 | `<!-- 插槽: name -->` | `<!-- 插槽: default -->` |
-| 动态组件 | `<!-- 动态组件: 描述 -->` | `<!-- 动态组件: 标签页内容 -->` |
+### 方法职责
 
-### 脚本区注释
+- 每个方法职责单一，函数名语义清晰
+- 方法超过 20 行考虑拆分
 
-| 内容 | 注释格式 | 示例 |
-|------|----------|------|
-| 组件名称 | `// name: 组件名` | `// name: UserCard` |
-| props | `// prop名: 描述` | `// user: 用户信息` |
-| ref/reactive | `// 属性名: 描述` | `// searchQuery: 搜索查询参数` |
-| computed | `// computed: 描述` | `// computed: 是否全选` |
-| watch | `// watch: 描述` | `// watch: 监听用户输入` |
-| 函数 | `// methods: 描述` | `// methods: 提交表单` |
-| 组件引入 | `// component: 组件名` | `// component: UserCard` |
-| Hooks 引入 | `// hook: Hook名` | `// hook: useTable` |
-| provide | `// 提供的键名: 描述` | `// appConfig: 全局配置` |
-| inject | `// 注入的键名: 描述` | `// parentData: 父组件提供的数据` |
+### 页面拆分建议
 
-### JSDoc（关键方法必填）
+- 页面组件超过 300 行时，建议拆分独立子组件
+- 按功能区块拆分：搜索表单、数据表格、分页器、操作按钮组
 
-```typescript
-/**
- * 方法名称
- * @description 方法的简要描述
- * @param {类型} 参数名 - 参数描述
- * @returns {类型} 返回值描述
- */
-```
+### defineExpose
 
-**注释要求**：中文描述；行内不超过一行；JSDoc 不超过 5 行；无冗余注释
+详见 [interaction.md](./interaction.md#五defineexpose)
 
-## 方法内部逻辑顺序
+## 相关模块引用
 
-1. 初始化方法：`const initXxx = () =>`
-2. 网络请求：`const getListData = async ()`, `const postFormData = async ()`
-3. 事件处理：`const onClickXxx = async ()`, `const onChangeXxx = async ()`
-4. 特殊计算：`const computedXxx = () =>`
-
-## 方法职责单一化
-
-- 一个方法只做一件事，超过 50 行必须拆分
-- 重复逻辑抽离为公共方法或 Hook
-- **不要过度封装**：简单条件判断直接写在 template 中
-
-## 复杂页面拆分建议
-
-| 模块 | 处理方式 |
-|------|----------|
-| 弹窗 | 拆分为独立组件 |
-| 表格 | 表格组件 + 业务逻辑分离 |
-| 表单 | 表单组件 + 校验逻辑分离 |
-
-## 组件生命周期 emit 限制
-
-- **基础组件**：禁止在生命周期函数中主动向外 emit
-- **业务型组件**：允许但不推荐
-
-## defineExpose
-
-- 明确声明对外暴露的属性和方法
-- 父组件通过 `ref` 访问子组件暴露的内容
+| 内容 | 详见 |
+|------|------|
+| Props 定义 | [interaction.md](./interaction.md#一props-定义规范) |
+| Emit 事件 | [interaction.md](./interaction.md#二emit-事件白名单与顺序) |
+| 组件通信 | [interaction.md](./interaction.md#四组件间通信) |
+| 响应式状态 | [reactivity.md](./reactivity.md) |
+| watch 监听 | [watch.md](./watch.md) |
+| Hooks 规范 | [hooks.md](./hooks.md) |
+| 导入顺序 | [order.md](./order.md) |
