@@ -2,7 +2,7 @@
 
 ## CSS 处理
 
-- 预处理器：Sass/SCSS
+- 预处理器：Sass/SCSS、Less
 - 格式化：csscomb + prettier
 - 全局样式：`src/styles/`
 
