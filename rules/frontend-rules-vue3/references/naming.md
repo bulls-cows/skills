@@ -45,25 +45,11 @@
 
 ### Hooks 命名规范
 
-**必须以 `use` 开头**，遵循 Vue3 组合式 API 约定：
+**必须以 `use` 开头**，详见 [hooks.md](./hooks.md#一命名与文件组织)（命名、文件组织、返回值、抽离建议）。
 
 | 类型 | 规范 | 示例 |
 |------|------|------|
-| 表格逻辑 Hook | `use` + 功能名 | `useTable` |
-| 表单逻辑 Hook | `use` + 功能名 | `useSearchForm` |
-| 请求逻辑 Hook | `use` + 功能名 + Fetch | `useUserFetch` |
-| 通用逻辑 Hook | `use` + 功能名 | `useLocalStorage` |
-
-```typescript
-// ✅ 正确：Hooks 命名以 use 开头
-const { tableData, loading } = useTable();
-const { searchQuery, resetForm } = useSearchForm();
-
-// ❌ 错误：不以 use 开头
-const { tableData } = tableHook();  // 禁止
-```
-
-详见 [hooks.md](./hooks.md)（返回值规范、抽离建议）。
+| Hooks | `use` + 功能名 | `useTable`, `useSearchForm`, `useUserFetch` |
 
 ## 五、TypeScript 类型命名
 

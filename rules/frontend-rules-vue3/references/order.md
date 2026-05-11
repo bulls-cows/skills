@@ -111,18 +111,10 @@ import { useFormValidate } from './hooks/useFormValidate';
 
 ## 四、模板属性顺序
 
-HTML 元素上的属性顺序应保持统一：
-
-`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → 动态 `v-slot`
+详见 [directives.md](./directives.md#五模板属性顺序)（9 步完整顺序：`is` → `v-for` → `v-if/else` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`）。
 
 ---
 
 ## 五、文件与目录命名
 
-详见 `naming.md`。
-
-| 类型 | 规范 |
-|------|------|
-| 组件文件名 | PascalCase + 多单词 (如 `UserList.vue`) |
-| 目录命名 | kebab-case (如 `src/components/user-profile/`) |
-| 组件使用 | PascalCase (如 `<UserList />`) |
+详见 [naming.md](./naming.md#一文件与组件命名)。

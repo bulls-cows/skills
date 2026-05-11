@@ -69,10 +69,7 @@ const props = withDefaults(defineProps<{
 
 ### v-model 兼容模式
 
-- **Vue 3 标准**：使用 `modelValue` 配合 `emit('update:modelValue')`
-- **Ant Design Vue 风格**：使用 `value` 配合 `emit('update:value')`（即 `v-model:value`）
-
-详见 [interaction.md](./interaction.md)（Props 定义规范、v-model 写法）。
+详见 [interaction.md](./interaction.md#12-v-model-写法)（Vue 3 标准 `modelValue` + Ant Design Vue 风格 `value` 双模式）。
 
 ---
 

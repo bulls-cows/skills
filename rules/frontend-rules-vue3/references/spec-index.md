@@ -36,7 +36,6 @@
 | **ref/reactive/computed 原则** | [reactivity.md](./reactivity.md) | ref/reactive 选择原则、reactive 转 ref 规则、computed 规范 |
 | **watch 规范** | [watch.md](./watch.md) | watch/watchEffect 使用规范、清理机制、与 computed 选择策略 |
 | **网络请求规范** | [network.md](./network.md) | 异步处理、响应解构、错误处理、防止重复提交 |
-| **数据流与组件通信** | [data-flow.md](./data-flow.md) | provide/inject、路由守卫清理、defineExpose |
 
 ---
 
@@ -46,7 +45,7 @@
 
 | 规则 | 详见 | 说明 |
 |------|------|------|
-| **格式化与工具链** | [code-style.md](./code-style.md) | Prettier 配置、ESLint 集成 |
+| **格式化与工具链** | [code-style.md](./code-style.md) | Prettier 配置、箭头函数优先 |
 | **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **注释规范** | [comments.md](./comments.md) | 模板区、脚本区、样式区注释格式，注释保护原则 |
 | **样式命名与作用域** | [css.md](./css.md#bem-命名规范) | BEM 规范、`scoped` 优先、全局样式标注 |

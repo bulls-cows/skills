@@ -25,7 +25,6 @@ alwaysApply: true
 - **[@rules/frontend-rules-vue3/references/reactivity.md](./reactivity.md)** — 响应式状态管理（ref/reactive/computed 选择与转换）
 - **[@rules/frontend-rules-vue3/references/watch.md](./references/watch.md)** — watch/watchEffect 监听规范
 - **[@rules/frontend-rules-vue3/references/network.md](./references/network.md)** — 网络请求与安全（async/await/错误处理/安全约束）
-- **[@rules/frontend-rules-vue3/references/data-flow.md](./references/data-flow.md)** — 数据流与组件通信（provide/inject/路由守卫/defineExpose）
 
 ## 风格指南（Recommended）
 
@@ -60,7 +59,6 @@ alwaysApply: true
 | 响应式 | ref 优先、reactive 转 ref、computed 规范、try/catch 包裹 |
 | 监听 | watch 深度/立即、清理资源、与 computed 选择策略 |
 | 网络请求 | async/await、统一响应解构、错误处理、安全规范 |
-| 数据流 | provide/inject、路由守卫清理、defineExpose |
 | 代码风格 | Prettier 配置、箭头函数优先 |
 | 注释 | 模板/脚本/样式注释格式、注释保护原则 |
 | CSS/BEM | BEM 命名、scoped 优先、响应式适配、自定义指令 |

@@ -70,7 +70,8 @@ export const useTable = () => {
 - Hooks 内部使用 `ref`/`reactive` 管理状态
 - 生命周期钩子（如 `onMounted`）只能在组件顶层或 `setup` 中调用
 - **禁止**在 Hooks 内部直接调用生命周期钩子（除非 Hooks 本身在组件顶层执行）。
-- 组件引入后按 **注释规范**（详见 `comments.md`）标注：`// hook: Hook名`。
+- 组件引入后按 **注释规范**（详见 [comments.md](./comments.md)）标注：`// hook: Hook名`。
+- 导入顺序详见 [order.md](./order.md#三import-分组排序4-组)。
 
 ---
 
@@ -99,29 +100,4 @@ export const useTable = () => {
 
 ---
 
-## 六、组件中 Hooks 导入顺序
 
-Hooks 归类在导入分组中，位于工具类之后、Store 之前：
-
-```typescript
-// 1. 外部依赖
-import { ref, computed, onMounted } from 'vue';
-
-// 2. 全局 API
-import { apiGetUserInfo } from '@src/api/user';
-
-// 3. 全局工具
-import { formatDate } from '@src/utils/date';
-
-// 4. 相对工具
-import { formatFileSize } from './utils/format';
-
-// 5. 全局 Hooks
-import { useTable } from '@src/hooks/useTable';
-
-// 6. 相对 Hooks
-import { useFormValidate } from './hooks/useFormValidate';
-
-// 7. 全局 Store
-import store from '@src/store';
-```

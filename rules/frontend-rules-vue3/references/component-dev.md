@@ -87,7 +87,7 @@ defineExpose({
 
 详见 [directives.md](./directives.md#五模板属性顺序)
 
-1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on`（`@`）→ 8. `v-html/v-text` → 9. 动态 `v-slot`（`#`）
+HTML 元素上的属性顺序：1. 定义（`is`）→ 2. `v-for` → 3. `v-if/v-else-if/v-else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on`（`@`）→ 8. `v-html/v-text` → 9. 动态 `v-slot`（`#`）
 
 ### v-slot 风格
 
@@ -96,8 +96,9 @@ defineExpose({
 
 ### 模板层轻量化
 
-- 模板只负责展示，不写复杂表达式与逻辑
-- 简单逻辑可内联，不过度封装为函数
+详见 [performance.md](./performance.md#六模板层轻量化)
+
+模板只负责展示，不写复杂表达式与逻辑。简单逻辑可内联，不过度封装为函数。
 
 ### 注释规范
 
@@ -116,6 +117,8 @@ defineExpose({
 ### defineExpose
 
 详见 [interaction.md](./interaction.md#三对外暴露-defineexpose)
+
+通过 `defineExpose` 向父组件暴露需要访问的属性或方法，父组件通过 `ref` 访问。仅暴露业务必须调用的方法，不暴露内部状态实现。teraction.md#三对外暴露-defineexpose)
 
 ## 相关模块引用
 
