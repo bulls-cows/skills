@@ -346,6 +346,46 @@ HTML 元素上的属性顺序：
 
 统一使用简写：`v-bind:attr` → `:attr` | `v-on:event` → `@event` | `v-slot:name` → `#name`
 
+### 3.16 v-for 与 key
+
+- 在组件上**必须**使用 `key` 属性配合 `v-for`
+- `key` 必须用**唯一 ID**，**禁止**使用 `index` 作为 key
+
+```vue
+<!-- ✅ 正确 -->
+<li v-for="item in items" :key="item.id">{{ item.name }}</li>
+<!-- ❌ 错误 -->
+<li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
+```
+
+### 3.17 v-if 与 v-for 冲突
+
+- **禁止**将 `v-if` 和 `v-for` 同时用在同一个元素上
+
+**解决方案**：
+
+- 使用 `<template>` 包裹
+- 使用 computed 预先过滤数据
+
+```vue
+<!-- ✅ 正确：template 包裹 -->
+<template v-for="item in items" :key="item.id">
+  <li v-if="item.visible">{{ item.name }}</li>
+</template>
+
+<!-- ✅ 正确：computed 过滤 -->
+<li v-for="item in visibleItems" :key="item.id">{{ item.name }}</li>
+```
+
+### 3.18 v-model 与表单元素
+
+- **input[type=number]**：使用 `.number` 修饰符自动转数字
+- **select**：单选绑定 string/number，多选绑定 array
+
+```vue
+<input v-model.number="age" type="number" />
+```
+
 ---
 
 ## 4. 📝 注释规范
@@ -1019,47 +1059,3 @@ const handleScroll = throttle(() => {
 - **等于运算符**：使用 `==` 不视为问题
 - **注释检查**：注释相关问题默认忽略
 - **不要过度封装**：简单逻辑直接写在 template 中
-
----
-
-## 12. 🎯 指令与模板规范
-
-### 12.1 v-for 与 key
-
-- 在组件上**必须**使用 `key` 属性配合 `v-for`
-- `key` 必须用**唯一 ID**，**禁止**使用 `index` 作为 key
-
-```vue
-<!-- ✅ 正确 -->
-<li v-for="item in items" :key="item.id">{{ item.name }}</li>
-<!-- ❌ 错误 -->
-<li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
-```
-
-### 12.2 v-if 与 v-for 冲突
-
-- **禁止**将 `v-if` 和 `v-for` 同时用在同一个元素上
-
-**解决方案**：
-
-- 使用 `<template>` 包裹
-- 使用 computed 预先过滤数据
-
-```vue
-<!-- ✅ 正确：template 包裹 -->
-<template v-for="item in items" :key="item.id">
-  <li v-if="item.visible">{{ item.name }}</li>
-</template>
-
-<!-- ✅ 正确：computed 过滤 -->
-<li v-for="item in visibleItems" :key="item.id">{{ item.name }}</li>
-```
-
-### 12.3 v-model 与表单元素
-
-- **input[type=number]**：使用 `.number` 修饰符自动转数字
-- **select**：单选绑定 string/number，多选绑定 array
-
-```vue
-<input v-model.number="age" type="number" />
-```

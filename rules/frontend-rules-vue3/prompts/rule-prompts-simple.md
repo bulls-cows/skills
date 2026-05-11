@@ -6,7 +6,7 @@
 
 ---
 
-## 1. 🎯 适用范围与约束
+## 1. 🎯 适用范围与 AI 约束
 
 - 仅操作 `src` 目录下的 `.vue`、`.ts`、`.js`、`.css`、`.scss`、`.less` 文件
 - 必须使用 `<script setup>`，**禁止** Options API，**禁止**在 `<script setup>` 中使用 `this`
@@ -70,24 +70,38 @@
 
 ---
 
-## 3. 🏗️ 组件规范
+## 3. 🏗️ 组件开发
 
-### 3.1 SFC 块顺序
+### 3.1 `<script setup>` 要求
 
-`<template>` → `<script setup>` → `<style scoped>`
+- **必须使用** `<script setup>` 语法
+- **禁止** Options API（`data()`, `methods: {}`, `mounted() {}`）
+- **禁止** 在 `<script setup>` 中使用 `this`
 
-### 3.2 `<script setup>` 结构（宏观 5 步）
+### 3.2 脚本结构顺序
 
-1. `imports` → 2. `defineProps`/`defineEmits` → 3. 全局 Hooks → 4. 业务逻辑（按功能模块分组） → 5. `defineExpose`
+`<script setup>` 内部按 **宏观 5 步顺序**：
+
+1. `imports` → 2. `defineProps` / `defineEmits` → 3. 全局 Hooks → 4. 业务逻辑（按功能模块分组） → 5. `defineExpose`
 
 **每个功能模块内部**：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期
 
-### 3.3 Props 定义
+### 3.3 SFC 块顺序
+
+`<template>` → `<script setup>` → `<style scoped>`
+
+### 3.4 Props 定义规范
 
 - 使用 TypeScript **泛型** + `withDefaults()` 设置默认值
 - 必须 `camelCase`，必须添加注释
+- **禁止修改 Props**（只读访问），单向数据流（父→子）
 
-### 3.4 Emit 白名单（4类）
+### 3.5 v-model 写法
+
+- **Vue 3 标准**：`modelValue` 配合 `emit('update:modelValue')`
+- **Ant Design Vue**：`value` 配合 `emit('update:value')`（即 `v-model:value`）
+
+### 3.6 Emit 事件白名单（4类）
 
 | 类别    | 事件名                                                                   |
 | ------- | ------------------------------------------------------------------------ |
@@ -98,29 +112,72 @@
 
 **触发优先级**：v-model → 业务事件 → `change`/`click`
 
-### 3.5 provide/inject
+### 3.7 对外暴露（defineExpose）
+
+- 必须**显式**通过 `defineExpose` 暴露需访问的属性/方法
+- 仅暴露父组件必须的方法（如 `validate`、`open`），不暴露内部状态
+
+### 3.8 provide/inject
 
 - **仅用于** 3层以上深层组件传参
 - 兄弟组件通信使用 Pinia/Vuex
-- **禁止** `$parent`/`$children` 访问
+- 响应式传递：`provide('key', refValue)`
 
-### 3.6 模板属性顺序
+### 3.9 禁用 $parent/$children
+
+- **禁止** `$parent.$parent` 链式访问
+- **禁止** 在 `<script setup>` 中使用 `this`
+- **替代方案**：props/emit 或状态管理
+
+### 3.10 模板属性顺序
 
 `is` → `v-for` → `v-if` → `v-show` → `id` → props/attrs → `v-on` → `v-html` → `v-slot`
 
-### 3.7 指令简写
+### 3.11 v-slot 风格
 
-`:attr`（v-bind）| `@event`（v-on）| `#name`（v-slot）
+- 使用动态风格（如 `v-slot:[name]`）
+- 禁止静态默认插槽写法
 
-### 3.8 页面拆分
+### 3.12 模板层轻量化
 
-超过 300 行建议拆分；方法超过 20 行考虑拆分。
+- 模板只负责展示，不写复杂表达式与逻辑
+- 简单逻辑可内联，不过度封装为函数
+- 避免在模板中执行昂贵计算，优先使用 `computed`
+
+### 3.13 方法职责
+
+- 单一职责，函数名语义清晰
+- 方法超过 20 行考虑拆分
+
+### 3.14 页面拆分建议
+
+- 页面组件超过 300 行建议拆分
+- 按功能区块拆分：搜索表单、数据表格、分页器、操作按钮组
+
+### 3.15 指令简写
+
+统一使用简写：`v-bind:attr` → `:attr` | `v-on:event` → `@event` | `v-slot:name` → `#name`
+
+### 3.16 v-for 与 key
+
+- 必须使用 `key`，`key` 必须用**唯一 ID**
+- **禁止**使用 `index` 作为 key
+
+### 3.17 v-if 与 v-for 冲突
+
+- **禁止** `v-if` 和 `v-for` 同一元素
+- 解决：`<template>` 包裹 或 computed 预过滤
+
+### 3.18 v-model 与表单元素
+
+- `input[type=number]`：使用 `.number` 修饰符自动转数字
+- `select`：单选绑定 string/number，多选绑定 array
 
 ---
 
 ## 4. 📝 注释规范
 
-### 4.1 模板注释
+### 4.1 模板区注释
 
 ```html
 <!-- 组件名称 -->
@@ -130,7 +187,7 @@
 <!-- 插槽: name -->
 ```
 
-### 4.2 脚本注释
+### 4.2 脚本区注释
 
 ```typescript
 // prop名: 描述
@@ -144,7 +201,16 @@
 
 **Script 顶部 JSDoc**：标注页面职责、核心业务流程、关键数据来源。每次修改需记录改动时间与内容。
 
-### 4.3 注释保护
+### 4.3 样式区注释
+
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
+| 全局样式 | `/* 全局 */`          | 非 scoped 标注          |
+
+### 4.4 注释保护原则
 
 已有注释若正确，**只增不改**。仅在 3 种情况下可修改：①注释明显错误 ②业务逻辑实质性变更 ③命名变更导致引用失效。
 
@@ -162,13 +228,15 @@
 
 **禁止使用 `_`**，全小写。
 
-### 5.2 作用域
+### 5.2 样式作用域
 
-- 优先 `scoped`；非 scoped 需标注 `/* 全局 */`
+- 优先 `scoped`
+- 非 scoped 需标注 `/* 全局 */`
 
 ### 5.3 响应式
 
-移动端优先；宽度用 `px`/`rem`，字号用 `px`。
+- 移动端优先
+- 宽度用 `px`/`rem`，字号用 `px`
 
 ---
 
@@ -181,34 +249,82 @@
 - **已安装** → 使用 `useRequest`（自动管理 loading/data）
 - **未安装** → 手动 `async/await` + `try/catch/finally`
 
-### 6.2 请求结构
+### 6.2 异步处理
+
+- **必须** `async/await`，**禁止** `.then()` 链式
+- 统一 `try/catch/finally` 结构（未使用 `useRequest` 时）
+
+### 6.3 数据处理
 
 ```typescript
 const { code, data, msg } = await apiXXX();
 if (code === 0) {
-  /* 成功 */
+  /* 成功处理数据 */
 } else {
   console.warn(msg);
 }
 ```
 
-- **必须** `async/await`，**禁止** `.then()` 链
 - **单次解构**，禁止 `...data.data` 连续解构
-- **禁止空 `catch`**，catch 中 `console.warn` 即可
+- 先判断成功（`code === 0`）再使用业务数据
 
-### 6.3 防止重复提交
+### 6.4 错误处理
 
-请求进行中通过 `loading` 状态禁用按钮，或使用互斥锁。
+- **禁止空 catch**，catch 中 `console.warn` 即可
+- 业务非成功状态码，在 `else` 中 `console.warn` 记录
 
-### 6.4 安全
+### 6.5 请求写法示例
+
+**已安装 useRequest（manual 模式）**：
+
+```typescript
+const { loading, run } = useRequest(() => apiSubmit(formData.value), {
+  manual: true,
+  onSuccess: (res) => { if (res.code === 0) { /* 成功 */ } else { console.warn(res.msg) } },
+  onError: () => { console.warn("网络异常") }
+});
+```
+
+**未安装 useRequest（手动 async/await）**：
+
+```typescript
+const loading = ref(false);
+const handleSubmit = async () => {
+  if (loading.value) return;
+  loading.value = true;
+  try {
+    const { code, msg } = await apiSubmit(formData.value);
+    if (code === 0) { /* 成功 */ } else { console.warn(msg) }
+  } catch (error) { console.warn(error) }
+  finally { loading.value = false }
+};
+```
+
+### 6.6 防止重复提交
+
+- 请求进行中必须通过 `loading` 状态禁用按钮，或使用互斥锁
+
+**useRequest 方式**（loading 自动控制）：
+
+```vue
+<button @click="run" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
+```
+
+**手动 async/await 方式**：
+
+```vue
+<button @click="handleSubmit" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
+```
+
+### 6.7 安全规范
 
 - **v-html**：必须用 `DOMPurify.sanitize()` 过滤
 - **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
 - 全局错误捕获：`app.config.errorHandler` + Sentry
 
-### 6.5 等于运算符
+### 6.8 等于运算符
 
-优先 `===`（约束清单中使用 `==` 不视为问题）；将 `==` 改为 `===` 时需提醒用户手动确认。
+- 优先 `===`（约束清单中使用 `==` 不视为问题）；将 `==` 改为 `===` 时需提醒用户手动确认
 
 ---
 
@@ -216,8 +332,8 @@ if (code === 0) {
 
 ### 7.1 核心原则
 
-- **优先 `ref`**，少用 `reactive`
-- **computed 优先**，能派生的不用 ref；computed **必须** `try/catch` 包裹
+- **优先 `ref`**，尽可能少用 `reactive`
+- **computed 优先**，能派生的不用 ref
 - **watch 中派生逻辑**优先用 `computed` 替代
 
 ### 7.2 reactive 转 ref
@@ -229,13 +345,20 @@ if (code === 0) {
 | 数组     | `const list = ref([])`                           |
 | 分页参数 | `const pagination = ref({ page: 1, limit: 20 })` |
 
-### 7.3 watch 规范
+### 7.3 computed 规范
+
+- 能用 computed 解决的不用 ref/reactive
+- computed **必须** `try/catch` 包裹
+
+### 7.4 watch 规范
 
 - 对象/数组必须声明 `deep: true`
 - 初始化需触发时加 `immediate: true`
 - 组件销毁时清理资源（定时器、事件监听）
 
-### 7.4 类型标注
+**watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
+
+### 7.5 响应式类型标注（TypeScript）
 
 ```typescript
 const userName = ref<string>("");
@@ -247,27 +370,72 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 
 ## 8. 🚀 Hooks 规范
 
+### 8.1 命名与文件组织
+
 - 必须以 `use` 开头，文件名与函数名一致
 - 存放：全局 `@src/hooks/`，局部在组件同级目录
+
+### 8.2 返回值规范
+
 - **统一返回对象**，**禁止**直接返回 `reactive` 对象
 - **禁止**将 Hooks 挂载到响应式数据上
+
+```typescript
+export const useTable = () => {
+  const loading = ref(false);
+  const dataSource = ref([]);
+  // ... 逻辑
+  return { loading, dataSource };  // ✓ 返回对象
+};
+```
+
+### 8.3 抽离建议
+
 - 可复用逻辑超过 **30 行**或跨 **2+ 组件**必须抽离
-- 禁止在 Hooks 中进行 UI 操作
-- 引入时必须标注注释：`// hook: useTable`
+- **禁止**在 Hooks 中进行 UI 操作
+- 每个 Hook 只处理一类核心逻辑
+
+### 8.4 Hooks 注释要求
+
+引入时必须使用行注释标注：
+
+```typescript
+// hook: useTable
+const { loading, dataSource } = useTable();
+// hook: useSearchForm
+const { searchParams } = useSearchForm();
+```
 
 ---
 
 ## 9. 📦 TypeScript 类型
 
+### 9.1 类型注解要求
+
 - 函数参数、返回值、变量必须明确类型
-- **禁止** `any`，使用 `unknown`、`Record<string, unknown>` 或具体接口替代
-- Emits 必须使用 TypeScript **泛型**定义
+- 模板 ref：`const formRef = ref<HTMLFormElement | null>(null)`
+
+### 9.2 禁止使用 `any`
+
+- 替代：`unknown`、`Record<string, unknown>` 或具体接口
+
+### 9.3 Emits 类型定义
+
+- 必须使用 TypeScript **泛型**定义 emits
+
+### 9.4 类型导入
+
 - 使用 `import type` 导入纯类型
-- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error`
+
+### 9.5 禁止 `@ts-ignore` / `@ts-expect-error`
+
+- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制
 
 ---
 
 ## 10. 🔥 性能优化
+
+### 10.1 优化速查
 
 | 优化项    | 说明                                      |
 | --------- | ----------------------------------------- |
@@ -279,6 +447,14 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 | 响应式    | `computed` 派生、大数据用 `shallowRef`    |
 | 路由守卫  | `beforeRouteLeave` 清理定时器             |
 | 指令清理  | `unmounted` 钩子清理事件监听和定时器      |
+
+### 10.2 防抖 / 节流示例
+
+```typescript
+import { debounce, throttle } from "lodash-es";
+const handleSearch = debounce((query: string) => { fetchSearchResults(query) }, 300);
+const handleScroll = throttle(() => { updateScrollPosition() }, 100);
+```
 
 ---
 
@@ -296,7 +472,7 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 | 6   | 无意义命名（`data1`, `temp2`）                 |
 | 7   | 在 `<script setup>` 中使用 `this`              |
 | 8   | 使用 Options API                               |
-| 9   | 同一元素同时使用 `v-if` 和 `v-for`             |
+| 9   | 同一元素同时使用 `v-if` 和 `v-for`           |
 | 10  | `index` 作为 `key`                             |
 
 ### 🟢 推荐
