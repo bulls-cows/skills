@@ -14,5 +14,6 @@
   "quoteProps": "as-needed",
   "singleAttributePerLine": false,
   "vueIndentScriptAndStyle": false,
-  "htmlWhitespaceSensitivity": "strict"
+  "htmlWhitespaceSensitivity": "strict",
+  "vueHtmlAttributes": "double"
 }
