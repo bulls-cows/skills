@@ -32,7 +32,6 @@ alwaysApply: true
 - **[@rules/frontend-rules-vue2/references/code-style.md](./references/code-style.md)** — 代码风格与 Prettier 配置
 - **[@rules/frontend-rules-vue2/references/comments.md](./references/comments.md)** — 注释规范（模板/脚本/样式/保护原则）
 - **[@rules/frontend-rules-vue2/references/css.md](./references/css.md)** — CSS 样式规范（BEM 命名/作用域/响应式适配）
-- **[@rules/frontend-rules-vue2/references/typescript.md](./references/typescript.md)** — TypeScript 类型注解规范（禁用 any，不推荐 @ts-ignore）
 - **[@rules/frontend-rules-vue2/references/performance.md](./references/performance.md)** — 性能优化规范（懒加载/KeepAlive/虚拟滚动/防抖节流）
 - **[@rules/frontend-rules-vue2/references/constraints.md](./references/constraints.md)** — 约束清单速查（禁止/推荐/不推荐/注意事项）
 
@@ -52,12 +51,11 @@ alwaysApply: true
 | 交互通信 | Props 定义、Emit 白名单、`$refs` 访问、provide/inject、禁用 `$parent` |
 | 模板指令 | v-for/key、v-if 冲突、v-html 安全、指令简写、属性顺序 |
 | 结构顺序 | 3 组 import 排序、`<script>` 内部 8 段 Options 结构 |
-| 命名规范 | 文件/组件/API/事件/常量/布尔值/TypeScript 类型/BEM |
+| 命名规范 | 文件/组件/API/事件/常量/布尔值/BEM |
 | 网络请求 | async/await、单次解构、防重复提交、安全规范、`==` 偏好 |
 | 代码风格 | Prettier 配置、箭头函数优先 |
 | 注释规范 | 模板/脚本/样式区注释格式、注释保护原则 |
 | CSS 样式 | BEM 命名、`scoped` 优先、全局样式标注 |
-| TypeScript | 禁用 `any`、参数/返回值类型标注、不推荐 `@ts-ignore` |
 | 性能优化 | 懒加载、KeepAlive、虚拟滚动、防抖节流、$set 响应式陷阱 |
 | 约束清单 | 禁止项/推荐项/注意事项速查表 |
 | AI 行为约束 | 修改权限红线、文档生成约束 |

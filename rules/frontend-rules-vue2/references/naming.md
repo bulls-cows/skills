@@ -1,6 +1,6 @@
 # Vue2 命名规范
 
-本规范涵盖组件、文件、函数、变量、常量、事件、TypeScript 类型、状态及 CSS BEM 等全部命名约定。
+本规范涵盖组件、文件、函数、变量、常量、事件、状态及 CSS BEM 等全部命名约定。
 
 ---
 
@@ -43,36 +43,14 @@
 
 ---
 
-## 四、TypeScript 类型命名
-
-| 类型 | 规范 | 示例 |
-|------|------|------|
-| 类型别名 | `I` + PascalCase | `IUserInfo`, `ITableConfig` |
-| 接口 | `I` + PascalCase | `IUser`, `ITable` |
-| 泛型参数 | 单字母大写 | `T`, `K`, `V` |
-
-```typescript
-// ✅ 正确：类型命名以 I 为前缀
-type IUserInfo = {
-  id: string;
-  name: string;
-};
-
-interface ITableConfig {
-  columns: ITableColumn[];
-}
-```
-
----
-
-## 五、事件命名
+## 四、事件命名
 
 - emit 事件名使用 camelCase：`userChange`
 - eventBus 事件名使用小驼峰：`userChange`, `formSubmit`
 
 ---
 
-## 六、CSS 命名（BEM 规范）
+## 五、CSS 命名（BEM 规范）
 
 | 类型 | 说明 | 示例 |
 |------|------|------|

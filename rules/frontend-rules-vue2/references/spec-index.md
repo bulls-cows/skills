@@ -52,7 +52,6 @@
 | **注释规范** | [comments.md](./comments.md) | 模板区、脚本区、样式区注释格式，注释保护原则 |
 | **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **样式命名与作用域** | [css.md](./css.md) | BEM 规范、`scoped` 优先、全局样式标注 |
-| **TypeScript 类型注解** | [typescript.md](./typescript.md) | 禁止 `any`，参数/返回值/变量明确类型 |
 | **性能优化** | [performance.md](./performance.md) | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
 | **约束清单** | [constraints.md](./constraints.md) | 禁止/推荐/不推荐/注意事项速查 |
 
