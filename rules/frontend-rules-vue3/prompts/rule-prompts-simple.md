@@ -53,18 +53,57 @@
 
 ### 2.3 命名速查表
 
-| 类型            | 规范                     | 示例                     |
-| --------------- | ------------------------ | ------------------------ |
-| 组件文件        | 多单词 + PascalCase      | `UserList.vue`           |
-| 目录            | kebab-case               | `user-profile/`          |
-| API 函数        | `api` + Method + URLPath | `apiGetUserInfo`         |
-| 事件函数        | `on` + EventName         | `onClickSubmit`          |
-| 常量            | 全大写 + 下划线          | `MAX_RETRY_COUNT`        |
-| Props/Emits     | camelCase                | `userName`, `userChange` |
-| 布尔值          | `isXX`/`hasXX`/`showXX`  | `isVisible`              |
-| Hooks           | `use` + 功能名           | `useTable`               |
-| TypeScript 类型 | `I` + PascalCase         | `IUserInfo`              |
-| CSS（BEM）      | 块-元素-修饰符，全小写、横线连接、无嵌套、类名唯一 | `card__title--large` |
+**文件与组件**
+
+| 类型       | 规范                | 示例                           |
+| ---------- | ------------------- | ------------------------------ |
+| 组件文件名 | 多单词 + PascalCase | `UserList.vue`                 |
+| 目录命名   | kebab-case          | `src/components/user-profile/` |
+| 组件使用   | PascalCase          | `<UserCard />`                 |
+
+**函数命名**
+
+| 类型     | 规范                | 示例                           |
+| -------- | ------------------- | ------------------------------ |
+| API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
+| 事件函数 | `on` + EventName | `onClickSubmit`, `onChangeInput` |
+
+**变量与常量**
+
+| 类型      | 规范                        | 示例                            |
+| --------- | --------------------------- | ------------------------------- |
+| 常量      | 全大写 + 下划线             | `MAX_RETRY_COUNT`, `APP_CONFIG` |
+| Props     | camelCase                   | `userName`, `isLoading`         |
+| emit 事件 | camelCase                   | `userChange`                    |
+| 布尔值    | `isXX` / `hasXX` / `showXX` | `isVisible`, `hasPermission`    |
+| 变量/方法 | 有意义的驼峰命名            | 禁止 `data1`, `temp2`           |
+
+**组合式 API 命名**
+
+| 类型     | 规范           | 示例                        |
+| -------- | -------------- | --------------------------- |
+| ref      | camelCase      | `isLoading`, `userName`     |
+| reactive | camelCase      | `formData`, `dataSource`    |
+| computed | camelCase      | `isSelected`, `totalPage`   |
+| Hooks    | `use` + 功能名 | `useTable`, `useSearchForm` |
+
+**TypeScript 类型命名**
+
+| 类型     | 规范             | 示例                        |
+| -------- | ---------------- | --------------------------- |
+| 类型别名 | `I` + PascalCase | `IUserInfo`, `ITableConfig` |
+| 接口     | `I` + PascalCase | `IUser`, `ITable`           |
+| 泛型参数 | 单字母大写       | `T`, `K`, `V`               |
+
+**CSS 命名（BEM 规范）**
+
+| 类型   | 说明          | 示例                               |
+| ------ | ------------- | ---------------------------------- |
+| 块     | 独立模块      | `card`, `form`                     |
+| 元素   | 块内部子元素  | `card__title`, `form__input`       |
+| 修饰符 | 状态/样式变体 | `card--dark`, `card__title--large` |
+
+**规则**：全小写、横线连接、无嵌套、类名唯一。
 
 ### 2.4 函数写法
 
@@ -103,7 +142,7 @@
 - **Vue 3 标准**：`modelValue` 配合 `emit('update:modelValue')`
 - **Ant Design Vue**：`value` 配合 `emit('update:value')`（即 `v-model:value`）
 
-### 3.6 Emit 事件白名单（4类）
+### 3.6 Emit 事件白名单（19种事件，分4类）
 
 | 类别    | 事件名                                                                   |
 | ------- | ------------------------------------------------------------------------ |
@@ -203,6 +242,21 @@
 ```
 
 **Script 顶部 JSDoc**：标注页面职责、核心业务流程、关键数据来源。每次修改需记录改动时间与内容。
+
+```typescript
+<script setup lang="ts">
+/**
+ * 改动时间: 2026-05-11 14:32:00
+ * 改动内容: 新增导出功能
+ *
+ * ---
+ *
+ * 组件名称
+ * @description 页面职责说明
+ * @description 核心业务流程简述
+ * @description 关键数据来源
+ */
+```
 
 ### 4.3 样式区注释
 
@@ -307,20 +361,20 @@ const handleSubmit = async () => {
 
 ---
 
-## 7. ⚡ 响应式与数据流
+## 6. ⚡ 响应式与数据流
 
-### 7.1 核心原则
+### 6.1 核心原则
 
 - **优先 `ref`**，尽可能少用 `reactive`
 - **computed 优先**，能派生的不用 ref
 - **watch 中派生逻辑**优先用 `computed` 替代
 
-### 7.2 computed 规范
+### 6.2 computed 规范
 
 - 能用 computed 解决的不用 ref/reactive
 - computed **建议** `try/catch` 包裹（对可能出错的计算逻辑必须包裹）
 
-### 7.3 watch 规范
+### 6.3 watch 规范
 
 - 对象/数组必须声明 `deep: true`
 - 初始化需触发时加 `immediate: true`
@@ -328,12 +382,12 @@ const handleSubmit = async () => {
 
 **watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
 
-### 7.4 eventBus / Pinia
+### 6.4 eventBus / Pinia
 
 - eventBus：`onUnmounted` 中清理监听
 - Pinia：模块自动 `namespaced`，action 替代 mutation
 
-### 7.5 reactive 转 ref
+### 6.5 reactive 转 ref
 
 | 场景     | ref 写法                                         |
 | -------- | ------------------------------------------------ |
@@ -344,7 +398,7 @@ const handleSubmit = async () => {
 
 **转换风险提示**：解构丢失响应式、访问方式变更（`.value`）、类型推断差异、必须使用 diff 格式展示变更。
 
-### 7.6 响应式类型标注（TypeScript）
+### 6.6 响应式类型标注（TypeScript）
 
 ```typescript
 const userName = ref<string>("");
@@ -354,9 +408,9 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 
 ---
 
-## 8. 🔥 性能优化
+## 7. 🔥 性能优化
 
-### 8.1 优化速查
+### 7.1 优化速查
 
 | 优化项    | 说明                                      |
 | --------- | ----------------------------------------- |
@@ -369,7 +423,7 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 | 路由守卫  | `beforeRouteLeave` 清理定时器             |
 | 指令清理  | `unmounted` 钩子清理事件监听和定时器      |
 
-### 8.2 防抖 / 节流示例
+### 7.2 防抖 / 节流示例
 
 ```typescript
 import { debounce, throttle } from "lodash-es";
@@ -377,14 +431,9 @@ const handleSearch = debounce((query: string) => { fetchSearchResults(query) }, 
 const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 ```
 
-### 8.3 CSS 响应式适配
-
-- 使用媒体查询 `@media` 适配不同屏幕
-- **移动端优先**：先写移动端，再通过媒体查询增强 PC 端
-
 ---
 
-## 9. 📋 约束清单
+## 8. 📋 约束清单
 
 ### 🔴 绝对禁止
 
@@ -419,39 +468,91 @@ const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 
 ---
 
-## 10. 🚀 Hooks 规范
+## 9. 🚀 Hooks 规范
 
-### 10.1 命名与文件组织
+### 9.1 命名与文件组织
 
 - 必须以 `use` 开头，文件名与函数名一致
 - 存放：全局 `@src/hooks/`，局部在组件同级目录
 
-### 10.2 返回值规范
+### 9.2 返回值规范
 
 - **统一返回对象**，**禁止**直接返回 `reactive` 对象
 - **禁止**将 Hooks 挂载到响应式数据上
 
+**标准模板（已安装 useRequest）**：
+
 ```typescript
+import { useRequest } from "ahooks-vue";
+import { ref } from "vue";
+
 export const useTable = () => {
-  const loading = ref(false);
-  const dataSource = ref([]);
-  // ... 逻辑
-  return { loading, dataSource };  // ✓ 返回对象
+  const pagination = ref({ page: 1, limit: 20 });
+  const dataSource = ref<any[]>([]);
+  const total = ref(0);
+
+  const onGetListSuccess = ({ code, data, msg }) => {
+    if (code === 0) {
+      dataSource.value = data.list ?? [];
+      total.value = data.total;
+    } else {
+      console.warn(msg);
+    }
+  };
+
+  const { loading, run: getDataSourceTotal } = useRequest(
+    (params) => apiGetList(Object.assign({}, pagination.value, params)),
+    { manual: true, onSuccess: onGetListSuccess, onError: (error) => console.warn(error) },
+  );
+
+  return { loading, dataSource, total, pagination, getDataSourceTotal };
 };
 ```
 
-### 10.3 抽离建议
+**标准模板（未安装 useRequest）**：
+
+```typescript
+import { ref } from "vue";
+
+export const useTable = () => {
+  const pagination = ref({ page: 1, limit: 20 });
+  const loading = ref(false);
+  const dataSource = ref<any[]>([]);
+  const total = ref(0);
+
+  const getDataSourceTotal = async () => {
+    loading.value = true;
+    try {
+      const { code, data, msg } = await apiGetList({ page: pagination.value.page, limit: pagination.value.limit });
+      if (code === 0) {
+        dataSource.value = data.list;
+        total.value = data.total;
+      } else {
+        console.warn(msg);
+      }
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return { loading, dataSource, total, pagination, getDataSourceTotal };
+};
+```
+
+### 9.3 抽离建议
 
 - 可复用逻辑超过 **30 行**或跨 **2+ 组件**必须抽离
 - **禁止**在 Hooks 中进行 UI 操作
 - 每个 Hook 只处理一类核心逻辑
 
-### 10.4 Hooks 使用规范
+### 9.4 Hooks 使用规范
 
 - 生命周期钩子只能在组件顶层或 Hooks 顶层调用，禁止在条件/循环中调用
 - 禁止在 Hooks 内部直接调用其他生命周期钩子
 
-### 10.5 Hooks 注释要求
+### 9.5 Hooks 注释要求
 
 引入时必须使用行注释标注：
 
@@ -464,35 +565,73 @@ const { searchParams } = useSearchForm();
 
 ---
 
-## 11. 📦 TypeScript 类型
+## 10. 📦 TypeScript 类型
 
-### 11.1 类型注解要求
+### 10.1 类型注解要求
 
 - 函数参数、返回值、变量必须明确类型
 - 模板 ref：`const formRef = ref<HTMLFormElement | null>(null)`
 
-### 11.2 禁止使用 `any`
+### 10.2 禁止使用 `any`
 
 - 替代：`unknown`、`Record<string, unknown>` 或具体接口
 
-### 11.3 Emits 类型定义
+```typescript
+// ✅ 正确
+const data: unknown = JSON.parse(raw);
+const userInfo: IUserInfo = { id: "1", name: "test" };
+
+// ❌ 错误
+const data: any = JSON.parse(raw);
+```
+
+### 10.3 Emits 类型定义
 
 - 必须使用 TypeScript **泛型**定义 emits
 
-### 11.4 Hook 返回值类型
+```typescript
+// ✅ 正确：泛型定义
+const emit = defineEmits<{
+  "update:modelValue": [value: string];
+  change: [value: string];
+}>();
+
+// ❌ 错误：运行时对象形式
+const emit = defineEmits(["update:modelValue", "change"]);
+```
+
+### 10.4 Hook 返回值类型
 
 - **必须**为 Hooks 返回值声明类型接口
 
-### 11.5 `.d.ts` 类型文件组织
+```typescript
+interface IUseTableReturn {
+  dataSource: Ref<IUserInfo[]>;
+  loading: Ref<boolean>;
+  fetchList: () => Promise<void>;
+}
+
+export const useTable = (): IUseTableReturn => {
+  // ...
+};
+```
+
+### 10.5 `.d.ts` 类型文件组织
 
 - **全局类型**：`src/types/` 目录
 - **组件私有类型**：组件同级目录或 SFC 内
 - **全局注入**：`src/types/index.d.ts` 统一导出
 
-### 11.6 类型导入
+### 10.6 类型导入
 
 - 使用 `import type` 导入纯类型
+- 混合导入时，`import type` 与值导入分开
 
-### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`
+```typescript
+import type { IUser } from "./types";
+import { userApi } from "./api";
+```
 
-- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制
+### 10.7 禁止 `@ts-ignore` / `@ts-expect-error`
+
+- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作
