@@ -51,6 +51,7 @@
 | **样式命名与作用域** | [css.md](./css.md#bem-命名规范) | BEM 规范、`scoped` 优先、全局样式标注 |
 | **TypeScript 类型注解** | [typescript.md](./typescript.md) | 禁止 `any`，参数/返回值/变量明确类型 |
 | **性能优化** | [performance.md](./performance.md) | 组件懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
+| **TypeScript 约束** | [typescript.md](./typescript.md) | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error` |
 | **约束清单** | [constraints.md](./constraints.md) | 禁止/推荐/不推荐/注意事项速查 |
 
 ## AI 行为约束

@@ -20,7 +20,7 @@
 
 ### 完整示例
 
-详见 [order.md](./order.md#二script-setup-内部结构顺序)（包含完整的 11 组 import 分组、交互定义、Hooks、业务逻辑分组、defineExpose）
+详见 [order.md](./order.md#二script-setup-内部结构顺序)（包含完整的 4 组 import 分组、交互定义、Hooks、业务逻辑分组、defineExpose）
 
 ### Script 顶部 JSDoc
 

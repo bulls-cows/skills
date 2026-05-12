@@ -127,7 +127,7 @@ export const useTable = () => {
 - 生命周期钩子（如 `onMounted`）只能在组件顶层或 `setup` 中调用
 - **禁止**在 Hooks 内部直接调用生命周期钩子（除非 Hooks 本身在组件顶层执行）。
 - 组件引入后按 **注释规范**（详见 [comments.md](./comments.md)）标注：`// hook: Hook名`。
-- 导入顺序详见 [order.md](./order.md#三import-分组排序11-组)。
+- 导入顺序详见 [order.md](./order.md#三import-分组排序4-组)。
 
 ---
 

@@ -193,3 +193,9 @@ import { ref, computed } from "vue";
 
 - 仅用于类型导入时使用 `import type`
 - 值和类型同时导入时分开写（`import type` 和 `import` 分两行）
+
+---
+
+## 九、类型压制（不推荐）
+
+**不推荐**使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。应优先通过完善类型定义解决类型问题，仅在特殊场景（如第三方库类型缺失、历史代码迁移过渡期）中使用。
