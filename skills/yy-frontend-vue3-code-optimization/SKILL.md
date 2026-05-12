@@ -1,17 +1,19 @@
 ---
 name: yy-frontend-vue3-code-optimization
 description: >
-  Vue3 前端代码标准化与优化技能。优化 `<script setup>` 组件、组合式 API、BEM 样式、语义化命名、Hooks 规范、异步代码、TypeScript 类型、注释增强、Props/Emits、组件职责梳理。
-  触发场景：Vue3 优化/重构/规范化/BEM 样式/导入排序/注释补充/async 转换/Hooks 抽离/reactive 转 ref/TSX 组件/类型注解。支持 .vue .js .jsx .ts .tsx .css .scss .less。Vue2 用 yy-frontend-vue2-code-optimization。
+  Vue3 前端代码标准化与优化。统一 script setup 结构、BEM 样式、语义化命名、Hooks 规范、async/await、TypeScript 类型、注释增强。支持 .vue .js .jsx .ts .tsx .css .scss .less。
 icon: ⚡
 examples:
-  - 帮我优化一下这个 Vue3 组件的代码
-  - 优化当前 git 变动的 Vue3 文件
-  - 把 src/views/ 下的 vue3 组件代码规整一下，统一 script setup 结构
-  - test-UserCard.vue 这个文件需要优化，重点看 hooks 和 reactive 的使用
-  - src/hooks/ 目录下的 TS 文件需要统一导入顺序和命名规范
-  - 优化这个 TSX 组件：test-DataTable.tsx，检查类型注解
-  - 把页面的 class 统一改成 BEM 格式
+  - 优化这个 Vue3 组件的代码风格
+  - 把 src/views/ 下的 Vue3 文件规范化
+  - 优化当前 git 变动的 Vue3 代码
+  - 统一 script setup 结构和导入顺序
+  - 把 CSS 类名改成 BEM 格式
+  - 优化 async/await 和 Hooks 抽离
+  - 补充 TypeScript 类型注解和注释
+  - 优化 TSX 组件代码规范
+  - Vue3 代码重构和规范化
+  - 检查 reactive 转 ref 优化
 ---
 
 # yy-frontend-vue3-code-optimization
