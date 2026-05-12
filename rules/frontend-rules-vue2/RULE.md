@@ -11,6 +11,10 @@ alwaysApply: true
 
 - **[@rules/frontend-rules-vue2/references/spec-index.md](./references/spec-index.md)** — 规范总纲（必读，按优先级分级索引所有模块）
 
+## AI 行为约束
+
+- **[@rules/frontend-rules-vue2/references/ai-behavior.md](./references/ai-behavior.md)** — AI 行为与交互约束（修改权限/文档生成约束/直接输出规则）
+
 ## 基础规范（Essential）
 
 - **[@rules/frontend-rules-vue2/references/component-dev.md](./references/component-dev.md)** — Vue2 组件开发规范（Options API 风格）
@@ -19,8 +23,8 @@ alwaysApply: true
 
 ## 强烈推荐（Strongly Recommended）
 
-- **[@rules/frontend-rules-vue2/references/order.md](./references/order.md)** — SFC 结构顺序与导入分组（3 组）
 - **[@rules/frontend-rules-vue2/references/naming.md](./references/naming.md)** — 架构与命名规范（文件/组件/API/事件/常量/BEM）
+- **[@rules/frontend-rules-vue2/references/order.md](./references/order.md)** — SFC 结构顺序与导入分组（3 组）
 - **[@rules/frontend-rules-vue2/references/network.md](./references/network.md)** — 网络请求与安全（async/await/错误处理/安全约束）
 
 ## 风格指南（Recommended）
@@ -31,10 +35,6 @@ alwaysApply: true
 - **[@rules/frontend-rules-vue2/references/typescript.md](./references/typescript.md)** — TypeScript 类型注解规范（禁用 any，不推荐 @ts-ignore）
 - **[@rules/frontend-rules-vue2/references/performance.md](./references/performance.md)** — 性能优化规范（懒加载/KeepAlive/虚拟滚动/防抖节流）
 - **[@rules/frontend-rules-vue2/references/constraints.md](./references/constraints.md)** — 约束清单速查（禁止/推荐/不推荐/注意事项）
-
-## AI 行为约束
-
-- **[@rules/frontend-rules-vue2/references/ai-behavior.md](./references/ai-behavior.md)** — AI 行为与交互约束（修改权限/文档生成约束/直接输出规则）
 
 ## 适用范围
 

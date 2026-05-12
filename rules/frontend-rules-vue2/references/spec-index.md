@@ -31,11 +31,11 @@
 
 | 规则 | 详见 | 说明 |
 |------|------|------|
+| **文件与标识符命名** | [naming.md](./naming.md) | 组件、文件、API、事件、常量、布尔值、CSS BEM 等 |
 | **SFC 块顺序与脚本结构** | [order.md](./order.md) | 模板/脚本/样式顺序、Options API 内部 8 段结构 |
 | **Import 分组** | [order.md](./order.md#二import-分组) | 3 组分组（外部/全局/相对），组内按字母 |
-| **模板属性顺序** | [directives.md](./directives.md#五模板属性顺序) | HTML 元素上属性的统一排列顺序 |
-| **文件与标识符命名** | [naming.md](./naming.md) | 组件、文件、API、事件、常量、布尔值、CSS BEM 等 |
 | **组件交互与通信** | [interaction.md](./interaction.md) | Props 定义、Emit 事件白名单、`$refs` 访问、provide/inject |
+| **模板属性顺序** | [directives.md](./directives.md#五模板属性顺序) | HTML 元素上属性的统一排列顺序 |
 | **网络请求规范** | [network.md](./network.md) | async/await、响应解构、错误处理、防重复提交 |
 
 ---
@@ -46,12 +46,11 @@
 
 | 规则 | 详见 | 说明 |
 |------|------|------|
-| **computed 优先** | `spec-index.md` | 能用 computed 解决的不用 data，减少 data 冗余 |
-| **computed try/catch** | `spec-index.md` | computed 必须 try/catch 包裹，避免计算属性报错 |
-| **watch deep/immediate** | `spec-index.md` | 按需使用 `deep: true` 和 `immediate: true` |
+| **Vue2 特有规则: computed** | `spec-index.md` | computed 优先、try/catch 包裹 |
+| **Vue2 特有规则: watch** | `spec-index.md` | 按需使用 `deep: true` 和 `immediate: true` |
 | **格式化与工具链** | [code-style.md](./code-style.md) | Prettier 配置、函数写法偏好 |
-| **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **注释规范** | [comments.md](./comments.md) | 模板区、脚本区、样式区注释格式，注释保护原则 |
+| **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **样式命名与作用域** | [css.md](./css.md) | BEM 规范、`scoped` 优先、全局样式标注 |
 | **TypeScript 类型注解** | [typescript.md](./typescript.md) | 禁止 `any`，参数/返回值/变量明确类型 |
 | **性能优化** | [performance.md](./performance.md) | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
