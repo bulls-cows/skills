@@ -106,3 +106,10 @@ HTML 元素上的属性顺序应保持统一：
 ## 六、v-model 写法
 
 详见 [interaction.md](./interaction.md#2-v-model-写法)（Vue 2 标准 `value` + `$emit('input')`）。
+
+---
+
+## 七、v-slot 风格
+
+- 使用动态风格：`v-slot:[name]` 或 `#[name]`（`name` 为动态变量）
+- **禁止静态默认插槽**写法

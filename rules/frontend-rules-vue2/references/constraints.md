@@ -23,6 +23,8 @@
 | 2 | async/await | 少用 `.then()` 链式写法 |
 | 3 | computed 优先 | 能用 computed 解决的不用 data |
 | 4 | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true` |
+| 5 | computed try/catch | 必须 try/catch 包裹，避免计算属性报错 |
+| 6 | 减少 data 冗余 | 优先 computed 派生，减少 data 属性 |
 
 ## 三、🟡 不推荐项（尽量避免）
 
@@ -39,3 +41,13 @@
 - **等于运算符**：使用 `==` 不视为问题
 - **注释检查**：注释相关问题默认忽略，不进行检查
 - **不要过度封装**：简单逻辑直接写在 template 中
+
+## 五、⚠️ Vue2 响应式陷阱
+
+Vue2 使用 `Object.defineProperty` 实现响应式，以下场景必须使用 `$set` 或替代方案：
+
+| 场景 | 错误写法 | 正确写法 |
+|------|---------|---------|
+| 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
+| 数组索引赋值 | `this.arr[i] = val` | `this.$set(this.arr, i, val)` |
+| 数组长度修改 | `this.arr.length = n` | `this.arr.splice(n)` |

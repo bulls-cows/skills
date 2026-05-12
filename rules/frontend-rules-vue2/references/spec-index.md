@@ -21,6 +21,7 @@
 | **v-html 安全** | [directives.md](./directives.md#三v-html-安全) | 必须用 DOMPurify 过滤 HTML |
 | **数据修改限制** | [interaction.md](./interaction.md#三使用限制) | 禁止修改 props、禁止父组件直接修改子组件内部状态 |
 | **禁止 $parent 链式访问** | [interaction.md](./interaction.md#五禁用-parent-and-children) | 禁止 `$parent.$parent` |
+| **Vue2 响应式陷阱** | `spec-index.md` | 新增对象属性用 `$set`、数组索引赋值用 `$set`、数组长度用 `splice` |
 
 ---
 
@@ -45,6 +46,9 @@
 
 | 规则 | 详见 | 说明 |
 |------|------|------|
+| **computed 优先** | `spec-index.md` | 能用 computed 解决的不用 data，减少 data 冗余 |
+| **computed try/catch** | `spec-index.md` | computed 必须 try/catch 包裹，避免计算属性报错 |
+| **watch deep/immediate** | `spec-index.md` | 按需使用 `deep: true` 和 `immediate: true` |
 | **格式化与工具链** | [code-style.md](./code-style.md) | Prettier 配置、函数写法偏好 |
 | **指令简写** | [directives.md](./directives.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **注释规范** | [comments.md](./comments.md) | 模板区、脚本区、样式区注释格式，注释保护原则 |
