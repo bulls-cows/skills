@@ -2,29 +2,39 @@
 
 **定位**：🟡 中风险。涉及标识符的全局替换，需确保引用查找的准确性。
 
----
+## 相关规则
 
-## 函数命名体系
+执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
 
-| 类型     | 规范                               | 示例                             |
-| -------- | ---------------------------------- | -------------------------------- |
-| API 函数 | `api + Method + URLPath`（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | `on + EventName`（小驼峰）         | `onClickSubmit`, `onChangeInput` |
+- **`rules/spec-index.md`**：Vue2 前端项目开发规范总纲（必读）
+- **`rules/naming.md`**：文件与组件命名、标识符命名、Vue2 Options API 命名、CSS BEM 命名规范
 
----
+> 详细命名规范已整理至 `rules/naming.md`，本文件仅保留 T05 任务的执行策略。
 
-## 变量与常量规范
+## 执行策略
 
-| 类型   | 规范                             | 示例                                      |
-| ------ | -------------------------------- | ----------------------------------------- |
-| 常量   | 全大写 + 下划线                  | `MAX_RETRY_COUNT`, `APP_CONFIG`           |
-| Props  | camelCase                        | `userName`, `isLoading`                   |
-| 组件名 | PascalCase                       | `<UserList />`                            |
-| 布尔值 | `isXX` / `hasXX` / `showXX` 前缀 | `isLoading`, `hasPermission`, `showModal` |
+1. **全局查找**：使用 LSP 或 AST-grep 查找所有引用，确保不遗漏任何引用点
+2. **分类替换**：按作用域范围（单文件 → 组件内 → 跨组件 → 全局 API）逐个替换
+3. **diff 预览**：展示变更前后的 diff 格式，确认无误后执行
 
----
+## 风险说明
 
-## 禁止项
+| 风险项 | 影响范围 | 说明 |
+| -------- | ---------- | ---- |
+| **引用遗漏** | 全局 | 全局搜索可能遗漏动态字符串引用（如 `this[name]`） |
+| **第三方库冲突** | 全局 | 某些标识符可能是第三方库 API 名称，不应修改 |
+| **API 路径变更** | 全局 | API 函数重命名不应改变后端请求路径 |
 
-- 严禁 `data1`、`temp2` 等无意义命名
-- 涉及跨文件引用重命名需提示用户确认
+## 变更预览格式
+
+```diff
+- const userInfo = await apiGetUserInfo(userId)
++ const userData = await apiGetUserInfo(userId)
+```
+
+## 注意事项
+
+- **仅做命名变更，不修改逻辑行为**
+- **API 函数重命名时，保持 HTTP 请求路径不变**
+- **组件名变更时，同步更新组件注册（如有）**
+- **data 属性重命名时，需检查 template、computed、watch、methods 中的引用**
