@@ -179,7 +179,7 @@ examples:
 
 ### T01 🔍 业务逻辑梳理（🟢 零风险 · 仅 .vue）
 
-**详见**：[sub-skills/business-logic.md](../sub-skills/business-logic.md)
+**详见**：[sub-skills/business-logic.md](./sub-skills/business-logic.md)
 
 **核心规则**：
 
@@ -190,7 +190,7 @@ examples:
 
 ### T02 📝 文档与注释增强（🟢 零风险）
 
-**详见**：[sub-skills/comments.md](../sub-skills/comments.md)
+**详见**：[sub-skills/comments.md](./sub-skills/comments.md)
 
 **核心规则**：
 
@@ -207,7 +207,7 @@ examples:
 
 ### T03 🧹 代码风格与格式清洗（🟡 中风险）
 
-**详见**：[sub-skills/code-style.md](../sub-skills/code-style.md)
+**详见**：[sub-skills/code-style.md](./sub-skills/code-style.md)
 
 **核心规则**：
 
@@ -221,7 +221,7 @@ examples:
 
 ### T04 🎨 CSS/BEM 架构规范（🟡 中风险）
 
-**详见**：[sub-skills/css-style.md](../sub-skills/css-style.md)
+**详见**：[sub-skills/css-style.md](./sub-skills/css-style.md)
 
 **核心规则**：
 
@@ -234,7 +234,7 @@ examples:
 
 ### T05 🔤 语义化命名重构（🟡 中风险）
 
-**详见**：[sub-skills/naming.md](../sub-skills/naming.md)
+**详见**：[sub-skills/naming.md](./sub-skills/naming.md)
 
 **核心规则**：
 
@@ -248,7 +248,7 @@ examples:
 
 ### T06 ⚡ 逻辑深度优化（🔴 高风险 · 必须确认）
 
-**详见**：[sub-skills/optimization.md](../sub-skills/optimization.md)
+**详见**：[sub-skills/optimization.md](./sub-skills/optimization.md)
 
 **核心规则**：
 

@@ -72,7 +72,7 @@ const props = withDefaults(
 
 ### v-model 兼容模式
 
-详见 [interaction.md](./interaction.md#12-v-model-写法)（Vue 3 标准 `modelValue` + Ant Design Vue 风格 `value` 双模式）。
+详见 [interaction.md](./interaction.md#2-v-model-写法)（Vue 3 标准 `modelValue` + Ant Design Vue 风格 `value` 双模式）。
 
 ---
 

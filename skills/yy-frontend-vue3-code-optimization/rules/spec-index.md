@@ -14,7 +14,7 @@
 |------|------|------|
 | **必须使用 `<script setup>`** | `spec-index.md` | 禁止使用 Options API 写法（`data()`, `methods: {}`, `mounted() {}` 等） |
 | **Props 定义规范** | [interaction.md](./interaction.md#一props-定义规范) | 类型注解、v-model 兼容、使用限制 |
-| **数据修改限制** | [interaction.md](./interaction.md#13-使用限制) | 禁止修改 props、禁止父组件直接修改子组件内部状态 |
+| **数据修改限制** | [interaction.md](./interaction.md#3-使用限制) | 禁止修改 props、禁止父组件直接修改子组件内部状态 |
 | **v-for 与 key** | [directives.md](./directives.md#一v-for-与-key) | 唯一 ID 作为 key，禁止使用 index |
 | **v-if 与 v-for 冲突** | [directives.md](./directives.md#二v-if-与-v-for-冲突) | 禁止同时使用在同一个元素上 |
 | **v-html 安全** | [directives.md](./directives.md#三v-html-安全) | 必须用 DOMPurify 过滤 HTML |
