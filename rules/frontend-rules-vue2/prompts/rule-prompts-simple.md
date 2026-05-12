@@ -107,7 +107,7 @@
 - 兄弟组件通信使用 Vuex / eventBus
 - 保持响应式传递
 
-### 3.9 禁用 $parent.$children
+### 3.9 禁用 $parent/$children
 
 - **禁止** `$parent.$children` 链式访问
 
@@ -181,8 +181,15 @@
 
 ```javascript
 /** 组件名称
- * @description 页面职责 / 核心业务流程 / 关键数据来源 */
+ * @description 页面职责 / 核心业务流程 / 关键数据来源
+ *
+ * ---
+ * 改动时间: YYYY-MM-DD HH:mm:ss
+ * 改动内容: 简述本次修改
+ */
 ```
+
+每次修改文件时追加改动记录。
 
 ### 4.3 注释保护原则
 
@@ -192,12 +199,12 @@
 
 ## 5. 📡 网络请求与安全
 
-### 6.1 异步处理
+### 5.1 异步处理
 
 - **必须** `async/await`，**禁止** `.then()` 链式调用
 - 统一 `try/catch/finally` 结构
 
-### 6.2 数据处理
+### 5.2 数据处理
 
 ```javascript
 const { code, data, msg } = await apiXXX();
@@ -211,12 +218,12 @@ if (code === 0) {
 - **单次解构**，禁止 `...data.data` 连续解构
 - 先判断成功（`code === 0`）再使用业务数据
 
-### 6.3 错误处理
+### 5.3 错误处理
 
 - **禁止空 catch**，catch 中 `console.warn` 即可
 - 业务非成功状态码，在 `else` 中 `console.warn` 记录
 
-### 6.4 请求写法示例
+### 5.4 请求写法示例
 
 ```javascript
 async handleSubmit() {
@@ -237,7 +244,7 @@ async handleSubmit() {
 },
 ```
 
-### 6.5 防止重复提交
+### 5.5 防止重复提交
 
 - 请求进行中必须通过 `loading` 状态禁用按钮
 
@@ -247,14 +254,24 @@ async handleSubmit() {
 </button>
 ```
 
-### 6.6 安全规范
+### 5.6 安全规范
 
 - **v-html**：必须用 `DOMPurify.sanitize()` 过滤
 - **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
 
-### 6.7 等于运算符
+### 5.7 等于运算符
 
 - 优先使用 `==`。若将 `===` 改为 `==`，提醒用户确认。注释问题默认忽略。
+
+---
+
+## 6. 🎨 CSS 样式规范
+
+- 预处理器：Sass/SCSS、Less
+- 默认 `<style scoped>`，非 scoped 标注 `/* 全局 */`
+- 全局样式路径：`src/styles/`
+- BEM 命名：`.block__element--modifier`（见 §2.3）
+- 响应式：`@media` 媒体查询，移动端优先
 
 ---
 
@@ -339,7 +356,7 @@ const handleScroll = throttle(() => {
 
 ### 🟢 推荐
 
-函数 try/catch（catch 中 `console.warn`） | async/await 优先 | computed 优先于 data | watch 按需使用 `deep/immediate`
+函数 try/catch（catch 中 `console.warn`） | async/await 优先 | computed 优先于 data | watch 按需使用 `deep/immediate` | computed try/catch 必须 | 减少 data 冗余
 
 ### 🟡 不推荐
 

@@ -15,10 +15,6 @@ alwaysApply: true
 
 - **[@rules/frontend-rules-vue3/references/ai-behavior.md](./references/ai-behavior.md)** — AI 行为与交互约束（修改权限/文档生成约束/直接输出规则）
 
-## 总纲索引
-
-- **[@rules/frontend-rules-vue3/references/spec-index.md](./references/spec-index.md)** — 规范总纲（必读，按优先级分级索引所有模块）
-
 ## 适用范围
 
 - 所有 `src` 目录下的 `.vue`、`.ts`、`.js`、`.css`、`.scss`、`.less` 文件

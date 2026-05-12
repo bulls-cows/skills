@@ -30,6 +30,8 @@
 - ✅ **允许修改**：代码中的注释、JSDoc；`src` 目录下的文件
 - 🚫 **禁止修改**：`src` 目录之外的任何文件（除非用户明确指定）
 
+> 完整规范总纲详见 `references/spec-index.md`，按优先级分级索引所有模块。
+
 ---
 
 ## 2. ⚙️ 编码风格与命名
@@ -105,8 +107,8 @@ import SearchBar from "./SearchBar.vue";
 
 **函数命名**
 
-| 类型 | 规范 | 示例 |
-| -------- | =================== | -------------------------------- |
+| 类型     | 规范                | 示例                           |
+| -------- | ------------------- | ------------------------------ |
 | API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
 | 事件函数 | `on` + EventName | `onClickSubmit`, `onChangeInput` |
 
@@ -300,6 +302,7 @@ defineExpose({ validate, resetForm });
 - **使用场景**：仅用于 3 层以上深层组件传参
 - **兄弟组件通信**：使用 Pinia/Vuex，禁止通过 provide/inject 跨层级滥用
 - **响应式传递**：`provide('key', refValue)` 保持响应式
+- **谨慎使用全局变量或状态**：避免造成难以追踪的副作用
 
 ### 3.9 禁用 $parent/$children
 
@@ -429,7 +432,16 @@ HTML 元素上的属性顺序：
  */
 ```
 
-### 4.3 注释保护原则
+### 4.3 样式区注释
+
+| 场景 | 格式 | 示例 |
+|------|------|------|
+| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
+| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
+| 全局样式 | 非 scoped 标注 | `/* 全局 */` |
+
+### 4.4 注释保护原则
 
 代码逻辑发生变更时，**对应注释必须同步更新**。
 已有注释若内容正确，**只增不改**。仅在 3 种情况下允许修改：
@@ -444,14 +456,14 @@ HTML 元素上的属性顺序：
 
 ## 5. 📡 网络请求与安全
 
-### 6.1 前置检查：是否使用 `useRequest`
+### 5.1 前置检查：是否使用 `useRequest`
 
 编写网络请求前，先检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`：
 
 - **已安装** → 使用 `useRequest`（自动管理 `loading`/`data`）
 - **未安装** → 使用手动 `async/await` + `try/catch/finally`
 
-### 6.2 异步处理
+### 5.2 异步处理
 
 - **必须使用 `async/await`**，禁止 `.then()` 链式调用
 - 统一使用 `try/catch/finally` 结构（未使用 `useRequest` 时）
@@ -466,12 +478,12 @@ if (code === 0) {
 }
 ```
 
-### 6.3 数据处理
+### 5.3 数据处理
 
 - **单次解构**，**禁止** `...data.data` 连续解构
 - **先判断成功后使用数据**：必须根据项目约定（如 `code === 0`）判断请求是否成功，再访问返回的业务数据
 
-### 6.4 错误处理
+### 5.4 错误处理
 
 - **禁止空 `catch`**
 - 业务侧返回的非成功状态码，在 `else` 分支中 `console.warn` 记录即可
@@ -484,7 +496,7 @@ try {
 }
 ```
 
-### 6.5 请求写法示例
+### 5.5 请求写法示例
 
 #### ✅ 已安装 `useRequest` 时
 
@@ -579,7 +591,7 @@ const handleSubmit = async () => {
 };
 ```
 
-### 6.6 防止重复提交
+### 5.6 防止重复提交
 
 - 对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，或使用互斥锁，防止用户重复点击
 
@@ -642,7 +654,7 @@ const submitForm = async () => {
 </button>
 ```
 
-### 6.7 安全规范
+### 5.7 安全规范
 
 - **v-html XSS**：必须用 DOMPurify 过滤 HTML
 
@@ -658,10 +670,15 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 - **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
 - **全局错误捕获**：配置 `app.config.errorHandler`，配合 Sentry 上报
 
-### 6.8 等于运算符
+### 5.8 等于运算符
 
-- 优先推荐使用 `===`（约束清单中使用 `==` 不视为问题）
-- 若将 `==` 改为 `===`，需提醒用户手动确认
+- 优先 `===`（约束清单中使用 `==` 不视为问题）；将 `==` 改为 `===` 时需提醒用户手动确认
+
+### 5.9 风险提示
+
+- 修改现有网络请求代码时，原代码可能使用不同的响应结构
+- 原有错误处理方式可能不同，`async/await` 会改变执行时机
+- 转换前必须展示 diff 预览并获用户确认
 
 ---
 
@@ -686,7 +703,7 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 - **优先使用 `computed` 派生状态**，减少 `ref`/`reactive` 冗余
 - 除后端交互数据和部分定时器外，**一律尽可能使用 `computed`**
-- computed **必须** `try/catch` 包裹
+- computed **建议** `try/catch` 包裹（对可能出错的计算逻辑必须包裹）
 - **watch 中的派生逻辑应优先使用 `computed` 替代**
 - 能用 computed 解决的不用 ref/reactive
 
@@ -761,6 +778,13 @@ onBeforeUnmount(() => {
 | 数组数据 | `const list = reactive([])`                           | `const list = ref([])`                                |
 | 分页参数 | `const pagination = reactive({ page: 1, limit: 20 })` | `const pagination = ref({ page: 1, limit: 20 })`      |
 
+**转换风险提示**：
+
+- **解构丢失响应式**：reactive 解构后会丢失响应式
+- **访问方式变更**：ref 需要 `.value` 访问，reactive 直接访问属性
+- **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
+- **变更格式必须使用 diff 格式展示**：展示给用户确认时，必须使用 diff 格式展示变更前后对比
+
 ### 7.6 响应式类型标注（TypeScript）
 
 ```typescript
@@ -792,8 +816,6 @@ const items = computed<IListItem[]>(() =>
 | 优化项         | 说明                                                                                            |
 | -------------- | ----------------------------------------------------------------------------------------------- |
 | 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
-| -------------- | ----------------------------------------------------------------------------------------------- |
-| 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
 | KeepAlive      | 合理使用 `<KeepAlive>` 缓存不常更新组件；通过 `include`/`exclude` 精确控制缓存范围              |
 | 虚拟滚动       | 长列表（100+ 项）使用虚拟滚动组件，避免 DOM 过多                                                |
 | 防抖节流       | 搜索框输入（防抖）、滚动事件（节流）、窗口 resize（节流）、按钮点击（防抖/锁）                  |
@@ -815,6 +837,12 @@ const handleScroll = throttle(() => {
   updateScrollPosition();
 }, 100);
 ```
+
+### 8.3 CSS 响应式适配
+
+- 使用媒体查询 `@media` 适配不同屏幕
+- **移动端优先**：先写移动端样式，再通过媒体查询增强 PC 端
+- **单位选择**：宽度用 `px` 或 `rem`，字号用 `px`
 
 ---
 
@@ -972,7 +1000,13 @@ export const useTable = () => {
 - 每个 Hooks 只处理一类核心逻辑（如数据获取、表单校验、分页管理）
 - 使用 `try/catch/finally` 结构
 
-### 10.4 Hooks 注释要求
+### 10.4 Hooks 使用规范
+
+- **生命周期钩子**（`onMounted` 等）只能在组件顶层或 Hooks 顶层调用
+- **禁止**在条件语句、循环、嵌套函数中调用生命周期钩子
+- **禁止**在 Hooks 内部直接调用其他生命周期钩子（应通过参数或回调传递）
+
+### 10.5 Hooks 注释要求
 
 引入 Hooks 时必须使用行注释标注：
 
@@ -982,6 +1016,14 @@ const { tableData, loading, pagination } = useTable();
 // hook: useSearchForm
 const { searchParams, handleReset } = useSearchForm();
 ```
+
+**Hook 内部注释格式**：
+
+| 内容 | 格式 | 示例 |
+|------|------|------|
+| Hook 整体 | JSDoc + `@description` | `/** 表格数据管理 @description ... */` |
+| 内部 ref | `// 属性名: 描述` | `// dataSource: 表格数据列表` |
+| 内部方法 | JSDoc 或 `// methods: 描述` | `// methods: 获取表格数据` |
 
 ---
 
@@ -1026,7 +1068,29 @@ const emit = defineEmits<{
 const emit = defineEmits(["update:modelValue", "change"]);
 ```
 
-### 11.4 类型导入
+### 11.4 Hook 返回值类型
+
+**必须**为 Hooks 返回值声明类型接口：
+
+```typescript
+interface IUseTableReturn {
+  dataSource: Ref<IUserInfo[]>;
+  loading: Ref<boolean>;
+  fetchList: () => Promise<void>;
+}
+
+export const useTable = (): IUseTableReturn => {
+  // ...
+};
+```
+
+### 11.5 `.d.ts` 类型文件组织
+
+- **全局类型**：放在 `src/types/` 目录下（如 `src/types/user.d.ts`）
+- **组件私有类型**：放在组件同级目录或 SFC 内 `export type`
+- **全局注入**：在 `src/types/index.d.ts` 中统一导出
+
+### 11.6 类型导入
 
 - 使用 `import type` 导入纯类型
 - 混合导入时，`import type` 与值导入分开
@@ -1036,6 +1100,6 @@ import type { IUser } from "./types";
 import { userApi } from "./api";
 ```
 
-### 11.5 禁止 `@ts-ignore` / `@ts-expect-error`
+### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`
 
 禁止使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。

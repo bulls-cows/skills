@@ -369,8 +369,14 @@ HTML 元素上的属性顺序必须遵循：
  * @description 页面职责说明
  * @description 核心业务流程简述
  * @description 关键数据来源
+ *
+ * ---
+ * 改动时间: YYYY-MM-DD HH:mm:ss
+ * 改动内容: 简述本次修改
  */
 ```
+
+每次修改文件时，在顶部 JSDoc 中追加改动时间与内容，最新记录在最上方。
 
 **JSDoc（关键方法必填）**：
 
@@ -400,12 +406,12 @@ HTML 元素上的属性顺序必须遵循：
 
 ## 5. 📡 网络请求与安全
 
-### 6.1 异步处理
+### 5.1 异步处理
 
 - **必须** `async/await`，**禁止** `.then()` 链式调用
 - 统一 `try/catch/finally` 结构
 
-### 6.2 数据处理
+### 5.2 数据处理
 
 ```javascript
 const { code, data, msg } = await apiXXX();
@@ -419,7 +425,7 @@ if (code === 0) {
 - **单次解构**，禁止 `...data.data` 连续解构
 - 先判断成功（`code === 0`）再使用业务数据
 
-### 6.3 错误处理
+### 5.3 错误处理
 
 - **禁止空 catch**，catch 中 `console.warn` 即可
 - 业务非成功状态码，在 `else` 分支中 `console.warn` 记录
@@ -432,7 +438,7 @@ try {
 }
 ```
 
-### 6.4 请求写法示例
+### 5.4 请求写法示例
 
 ```javascript
 async handleSubmit() {
@@ -453,7 +459,7 @@ async handleSubmit() {
 },
 ```
 
-### 6.5 防止重复提交
+### 5.5 防止重复提交
 
 - 对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，防止用户重复点击
 
@@ -463,14 +469,48 @@ async handleSubmit() {
 </button>
 ```
 
-### 6.6 安全规范
+### 5.6 安全规范
 
 - **v-html**：必须用 `DOMPurify.sanitize()` 过滤
 - **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
 
-### 6.7 等于运算符
+### 5.7 等于运算符
 
 - 优先推荐 `==`。若将 `===` 改为 `==`，需提醒用户手动确认。注释问题默认忽略。
+
+---
+
+## 6. 🎨 CSS 样式规范
+
+### 6.1 预处理器
+
+- 使用 **Sass/SCSS** 或 **Less** 预处理器
+- 格式化：csscomb + prettier 配合
+- 全局样式集中存放 `src/styles/`
+
+### 6.2 scoped 优先
+
+- 默认使用 `<style scoped>`，确保样式隔离在当前组件
+- 非 scoped 样式需标注原因：`/* 全局 */`
+- 优先 scoped，非必要不写全局样式
+
+### 6.3 BEM 命名
+
+- 遵循 BEM：`.block__element--modifier`，全小写
+- 详见 §2.3 CSS 命名（BEM 规范）
+
+### 6.4 响应式适配
+
+- 使用 `@media` 媒体查询适配不同屏幕
+- 移动端优先：先写移动端样式，再通过媒体查询增强 PC 端
+
+### 6.5 样式区注释
+
+| 场景     | 格式                    | 示例            |
+| -------- | ----------------------- | --------------- |
+| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
+| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`          | `/* 响应式 */`  |
 
 ---
 
@@ -564,6 +604,8 @@ const handleScroll = throttle(() => {
 | 2   | async/await         | 少用 `.then()` 链式写法                     |
 | 3   | computed 优先       | 能用 computed 解决的不用 data               |
 | 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`  |
+| 5   | computed try/catch  | 必须 try/catch 包裹，避免计算属性报错       |
+| 6   | 减少 data 冗余      | 优先 computed 派生，减少 data 属性          |
 
 ### 🟡 不推荐
 

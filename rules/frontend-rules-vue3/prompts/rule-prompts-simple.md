@@ -13,6 +13,8 @@
 - 🚫 禁止未经用户明确要求创建 README 等文档
 - 🚫 禁止修改 `src` 目录之外的文件
 
+> 完整规范总纲详见 `references/spec-index.md`，按优先级分级索引所有模块。
+
 ---
 
 ## 2. ⚙️ 编码风格与命名
@@ -122,6 +124,7 @@
 - **仅用于** 3层以上深层组件传参
 - 兄弟组件通信使用 Pinia/Vuex
 - 响应式传递：`provide('key', refValue)`
+- **谨慎使用全局变量或状态**
 
 ### 3.9 禁用 $parent/$children
 
@@ -201,7 +204,11 @@
 
 **Script 顶部 JSDoc**：标注页面职责、核心业务流程、关键数据来源。每次修改需记录改动时间与内容。
 
-### 4.3 注释保护原则
+### 4.3 样式区注释
+
+模块分组 `/* 模块名称 */` | 子模块 `/* 模块 > 子模块 */` | 响应式 `/* 响应式 */` | 全局样式标注 `/* 全局 */`
+
+### 4.4 注释保护原则
 
 已有注释若正确，**只增不改**。仅在 3 种情况下可修改：①注释明显错误 ②业务逻辑实质性变更 ③命名变更导致引用失效。
 
@@ -209,19 +216,19 @@
 
 ## 5. 📡 网络请求与安全
 
-### 6.1 前置检查
+### 5.1 前置检查
 
 先检查是否安装 `ahooks-vue` 或 `vue-hooks-plus`：
 
 - **已安装** → 使用 `useRequest`（自动管理 loading/data）
 - **未安装** → 手动 `async/await` + `try/catch/finally`
 
-### 6.2 异步处理
+### 5.2 异步处理
 
 - **必须** `async/await`，**禁止** `.then()` 链式
 - 统一 `try/catch/finally` 结构（未使用 `useRequest` 时）
 
-### 6.3 数据处理
+### 5.3 数据处理
 
 ```typescript
 const { code, data, msg } = await apiXXX();
@@ -235,12 +242,12 @@ if (code === 0) {
 - **单次解构**，禁止 `...data.data` 连续解构
 - 先判断成功（`code === 0`）再使用业务数据
 
-### 6.4 错误处理
+### 5.4 错误处理
 
 - **禁止空 catch**，catch 中 `console.warn` 即可
 - 业务非成功状态码，在 `else` 中 `console.warn` 记录
 
-### 6.5 请求写法示例
+### 5.5 请求写法示例
 
 **已安装 useRequest（manual 模式）**：
 
@@ -267,7 +274,7 @@ const handleSubmit = async () => {
 };
 ```
 
-### 6.6 防止重复提交
+### 5.6 防止重复提交
 
 - 请求进行中必须通过 `loading` 状态禁用按钮，或使用互斥锁
 
@@ -283,15 +290,20 @@ const handleSubmit = async () => {
 <button @click="handleSubmit" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
 ```
 
-### 6.7 安全规范
+### 5.7 安全规范
 
 - **v-html**：必须用 `DOMPurify.sanitize()` 过滤
 - **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
 - 全局错误捕获：`app.config.errorHandler` + Sentry
 
-### 6.8 等于运算符
+### 5.8 等于运算符
 
 - 优先 `===`（约束清单中使用 `==` 不视为问题）；将 `==` 改为 `===` 时需提醒用户手动确认
+
+### 5.9 风险提示
+
+- 修改现有网络请求代码时，原代码可能使用不同的响应结构
+- 转换前必须展示 diff 预览并获用户确认
 
 ---
 
@@ -306,7 +318,7 @@ const handleSubmit = async () => {
 ### 7.2 computed 规范
 
 - 能用 computed 解决的不用 ref/reactive
-- computed **必须** `try/catch` 包裹
+- computed **建议** `try/catch` 包裹（对可能出错的计算逻辑必须包裹）
 
 ### 7.3 watch 规范
 
@@ -329,6 +341,8 @@ const handleSubmit = async () => {
 | 对象数据 | 拆分为独立 ref                                   |
 | 数组     | `const list = ref([])`                           |
 | 分页参数 | `const pagination = ref({ page: 1, limit: 20 })` |
+
+**转换风险提示**：解构丢失响应式、访问方式变更（`.value`）、类型推断差异、必须使用 diff 格式展示变更。
 
 ### 7.6 响应式类型标注（TypeScript）
 
@@ -362,6 +376,11 @@ import { debounce, throttle } from "lodash-es";
 const handleSearch = debounce((query: string) => { fetchSearchResults(query) }, 300);
 const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 ```
+
+### 8.3 CSS 响应式适配
+
+- 使用媒体查询 `@media` 适配不同屏幕
+- **移动端优先**：先写移动端，再通过媒体查询增强 PC 端
 
 ---
 
@@ -427,7 +446,12 @@ export const useTable = () => {
 - **禁止**在 Hooks 中进行 UI 操作
 - 每个 Hook 只处理一类核心逻辑
 
-### 10.4 Hooks 注释要求
+### 10.4 Hooks 使用规范
+
+- 生命周期钩子只能在组件顶层或 Hooks 顶层调用，禁止在条件/循环中调用
+- 禁止在 Hooks 内部直接调用其他生命周期钩子
+
+### 10.5 Hooks 注释要求
 
 引入时必须使用行注释标注：
 
@@ -455,10 +479,20 @@ const { searchParams } = useSearchForm();
 
 - 必须使用 TypeScript **泛型**定义 emits
 
-### 11.4 类型导入
+### 11.4 Hook 返回值类型
+
+- **必须**为 Hooks 返回值声明类型接口
+
+### 11.5 `.d.ts` 类型文件组织
+
+- **全局类型**：`src/types/` 目录
+- **组件私有类型**：组件同级目录或 SFC 内
+- **全局注入**：`src/types/index.d.ts` 统一导出
+
+### 11.6 类型导入
 
 - 使用 `import type` 导入纯类型
 
-### 11.5 禁止 `@ts-ignore` / `@ts-expect-error`
+### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`
 
 - **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制
