@@ -34,7 +34,7 @@
 
 ## 2. ⚙️ 编码风格与命名
 
-### 2.1 Prettier 格式化规则
+### 2.1 Prettier 配置
 
 必须遵循 `.prettierrc.json` 的完整配置：
 
@@ -61,11 +61,7 @@
 
 **关键规则**：2空格缩进 | JS/TS单引号 | JSX属性单引号 | HTML属性双引号 | 分号结束 | 行宽120 | 尾随逗号 | 单参数省略括号
 
-### 2.2 函数写法偏好
-
-**优先使用 `const 函数名 = () => {}` 箭头函数写法**，避免 `function` 声明。
-
-### 2.3 Import 分组排序（4 组，组间空一行，组内按字母顺序）
+### 2.2 Import 分组（4 组，组间空一行，组内按字母顺序）
 
 1. **外部依赖**：`vue`, `dayjs`, `lodash` 等第三方库
 2. **类型导入**：所有 `import type` 导入的纯类型
@@ -95,9 +91,9 @@ import { MAX_RETRY_COUNT } from "./constants";
 import SearchBar from "./SearchBar.vue";
 ```
 
-### 2.4 命名规范
+### 2.3 命名速查表
 
-#### 文件与组件
+**文件与组件**
 
 | 类型       | 规范                | 示例                           |
 | ---------- | ------------------- | ------------------------------ |
@@ -107,14 +103,14 @@ import SearchBar from "./SearchBar.vue";
 
 **注意**：组件名必须使用多个单词，避免与 HTML 原生元素冲突。
 
-#### 函数命名
+**函数命名**
 
 | 类型     | 规范                     | 示例                             |
-| -------- | ------------------------ | -------------------------------- |
+| -------- | =================== | -------------------------------- |
 | API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
 | 事件函数 | `on` + EventName         | `onClickSubmit`, `onChangeInput` |
 
-#### 变量与常量
+**变量与常量**
 
 | 类型      | 规范                        | 示例                            |
 | --------- | --------------------------- | ------------------------------- |
@@ -124,7 +120,7 @@ import SearchBar from "./SearchBar.vue";
 | 布尔值    | `isXX` / `hasXX` / `showXX` | `isVisible`, `hasPermission`    |
 | 变量/方法 | 有意义的驼峰命名            | 禁止 `data1`, `temp2`           |
 
-#### 组合式 API 命名
+**组合式 API 命名**
 
 | 类型     | 规范           | 示例                        |
 | -------- | -------------- | --------------------------- |
@@ -133,7 +129,7 @@ import SearchBar from "./SearchBar.vue";
 | computed | camelCase      | `isSelected`, `totalPage`   |
 | Hooks    | `use` + 功能名 | `useTable`, `useSearchForm` |
 
-#### TypeScript 类型命名
+**TypeScript 类型命名**
 
 | 类型     | 规范             | 示例                        |
 | -------- | ---------------- | --------------------------- |
@@ -141,7 +137,7 @@ import SearchBar from "./SearchBar.vue";
 | 接口     | `I` + PascalCase | `IUser`, `ITable`           |
 | 泛型参数 | 单字母大写       | `T`, `K`, `V`               |
 
-#### CSS 命名（BEM 规范）
+**CSS 命名（BEM 规范）**
 
 | 类型               | 说明          | 示例                                 |
 | ------------------ | ------------- | ------------------------------------ |
@@ -161,6 +157,10 @@ import SearchBar from "./SearchBar.vue";
 .card__title--large {
 } // 元素修饰符
 ```
+
+### 2.4 函数写法
+
+**优先使用 `const 函数名 = () => {}` 箭头函数写法**，避免 `function` 声明。
 
 ---
 
@@ -379,12 +379,8 @@ HTML 元素上的属性顺序：
 
 ### 3.18 v-model 与表单元素
 
-- **input[type=number]**：使用 `.number` 修饰符自动转数字
-- **select**：单选绑定 string/number，多选绑定 array
-
-```vue
-<input v-model.number="age" type="number" />
-```
+- `input[type=number]`：使用 `.number` 修饰符自动转数字
+- `select`：单选绑定 string/number，多选绑定 array
 
 ---
 
@@ -457,18 +453,16 @@ HTML 元素上的属性顺序：
 
 ## 5. 🎨 样式与 BEM
 
-### CSS 处理
+### 5.1 BEM 命名
 
 - 预处理器：Sass/SCSS、Less
 - 格式化：csscomb + prettier
 - 全局样式：`src/styles/`
 
-### 样式作用域
+### 5.2 样式作用域
 
 - `scoped`：仅作用于当前组件（优先使用）
 - 非 `scoped`：需标注 `/* 全局 */`
-
-### BEM 命名规范（详见 2.4 CSS 命名）
 
 ---
 
@@ -697,7 +691,7 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 ## 7. ⚡ 响应式与数据流
 
-### 7.1 ref 与 reactive 选择原则
+### 7.1 核心原则
 
 **优先使用 `ref`，尽可能少用 `reactive`**。
 
@@ -712,21 +706,13 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 | 批量更新     | `reactive`            | 一次性更新多个相关属性                       |
 | 对象解构     | `reactive` + `toRefs` | 解构后仍保持响应式                           |
 
-### 7.2 Reactive 转 Ref 规则
-
-| 场景     | 原写法（reactive）                                    | 推荐写法（ref）                                       |
-| -------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| 简单状态 | `const state = reactive({ count: 0 })`                | `const count = ref(0)`                                |
-| 对象数据 | `const user = reactive({ name: '', age: 0 })`         | `const userName = ref('')` / `const userAge = ref(0)` |
-| 数组数据 | `const list = reactive([])`                           | `const list = ref([])`                                |
-| 分页参数 | `const pagination = reactive({ page: 1, limit: 20 })` | `const pagination = ref({ page: 1, limit: 20 })`      |
-
-### 7.3 computed 规范
+### 7.2 computed 规范
 
 - **优先使用 `computed` 派生状态**，减少 `ref`/`reactive` 冗余
 - 除后端交互数据和部分定时器外，**一律尽可能使用 `computed`**
-- computed 必须使用 `try/catch` 包裹
+- computed **必须** `try/catch` 包裹
 - **watch 中的派生逻辑应优先使用 `computed` 替代**
+- 能用 computed 解决的不用 ref/reactive
 
 ```typescript
 // ✅ 推荐：使用 computed
@@ -739,7 +725,7 @@ watch([total, pageSize], () => {
 });
 ```
 
-### 7.4 watch 规范
+### 7.3 watch 规范
 
 - **深度监听**：对象/数组变化必须声明 `deep: true`
 - **立即执行**：初始化需触发时加 `immediate: true`
@@ -761,7 +747,7 @@ watch(
 
 - watch 中必须标注注释（详见 4.2 脚本区注释）
 
-#### watch vs watchEffect
+**watch vs watchEffect**：
 
 | 特性     | watch                          | watchEffect |
 | -------- | ------------------------------ | ----------- |
@@ -770,9 +756,9 @@ watch(
 | 惰性执行 | 默认惰性，可 `immediate: true` | 立即执行    |
 | 适用场景 | 精确控制监听源                 | 简单副作用  |
 
-**推荐**：优先使用 `watch`，需要自动追踪时使用 `watchEffect`。
+**推荐**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时使用 `watchEffect`。
 
-#### 清理资源
+**清理资源**：
 
 组件销毁时清理定时器和事件监听：
 
@@ -785,7 +771,21 @@ onBeforeUnmount(() => {
 });
 ```
 
-### 7.5 响应式类型标注（TypeScript）
+### 7.4 eventBus / Pinia
+
+- eventBus：`onUnmounted` 中清理监听
+- Pinia：模块自动 `namespaced`，action 替代 mutation
+
+### 7.5 reactive 转 ref
+
+| 场景     | 原写法（reactive）                                    | 推荐写法（ref）                                       |
+| -------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| 简单状态 | `const state = reactive({ count: 0 })`                | `const count = ref(0)`                                |
+| 对象数据 | `const user = reactive({ name: '', age: 0 })`         | `const userName = ref('')` / `const userAge = ref(0)` |
+| 数组数据 | `const list = reactive([])`                           | `const list = ref([])`                                |
+| 分页参数 | `const pagination = reactive({ page: 1, limit: 20 })` | `const pagination = ref({ page: 1, limit: 20 })`      |
+
+### 7.6 响应式类型标注（TypeScript）
 
 ```typescript
 // ✅ ref<T>() 显式标注
@@ -809,15 +809,92 @@ const items = computed<IListItem[]>(() =>
 
 ---
 
-## 8. 🚀 Hooks 规范
+## 8. 🔥 性能优化
 
-### 8.1 命名与文件组织
+### 8.1 优化速查表
+
+| 优化项         | 说明                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
+| KeepAlive      | 合理使用 `<KeepAlive>` 缓存不常更新组件；通过 `include`/`exclude` 精确控制缓存范围              |
+| 虚拟滚动       | 长列表（100+ 项）使用虚拟滚动组件，避免 DOM 过多                                                |
+| 防抖节流       | 搜索框输入（防抖）、滚动事件（节流）、窗口 resize（节流）、按钮点击（防抖/锁）                  |
+| 图片优化       | WebP 优先、使用合适尺寸、非首屏延迟加载（`loading="lazy"`）                                     |
+| 响应式性能     | 优先使用 `computed` 派生状态；大型数据列表考虑 `shallowRef`；避免在 `watch` 中执行同步 DOM 操作 |
+| 路由守卫       | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制   |
+| 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器                                                    |
+
+### 8.2 防抖 / 节流示例
+
+```typescript
+import { debounce } from "lodash-es";
+const handleSearch = debounce((query: string) => {
+  fetchSearchResults(query);
+}, 300);
+
+import { throttle } from "lodash-es";
+const handleScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
+```
+
+---
+
+## 9. 📋 约束清单
+
+### 🔴 绝对禁止
+
+| #   | 禁止项                 | 说明                                                |
+| --- | ---------------------- | --------------------------------------------------- |
+| 1   | 连续数据解构           | 禁止 `...data.data`                                 |
+| 2   | 父组件修改子组件数据   | 禁止直接修改子组件内部状态                          |
+| 3   | 修改 ref/reactive 类型 | 后端给什么类型用什么                                |
+| 4   | 修改 props             | 禁止直接修改，只读访问 `props.xxx`                  |
+| 5   | 使用 mixins            | 使用 Hooks/组合式函数替代                           |
+| 6   | 无意义命名             | 禁止 `data1`, `temp2`                               |
+| 7   | 使用 this              | 禁止在 `<script setup>` 中使用 `this`               |
+| 8   | Options API            | 禁止使用 `data()`, `methods: {}`, `mounted() {}` 等 |
+| 9   | v-for 与 v-if 同元素   | 禁止同一元素同时使用                                |
+| 10  | index 作为 key         | 必须用唯一 ID                                       |
+
+### 🟢 推荐
+
+| #   | 推荐项              | 说明                                            |
+| --- | ------------------- | ----------------------------------------------- |
+| 1   | 函数 try/catch      | 包裹函数内容，`catch` 中使用 `console.warn`     |
+| 2   | async/await         | 少用 `.then()` 链式                             |
+| 3   | computed 优先       | 能用 computed 解决的不用 ref/reactive           |
+| 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`      |
+| 5   | Hooks 抽离          | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
+
+### 🟡 不推荐
+
+| #   | 不推荐项            | 说明                            |
+| --- | ------------------- | ------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+
+### ⚠️ 注意
+
+- **未使用变量**：ESLint 已关闭检查，需自行清理无用代码
+- **v-html**：可使用，但必须防范 XSS 风险
+- **等于运算符**：使用 `==` 不视为问题
+- **注释检查**：注释相关问题默认忽略
+- **不要过度封装**：简单逻辑直接写在 template 中
+
+---
+
+## 10. 🚀 Hooks 规范
+
+### 10.1 命名与文件组织
 
 - 必须以 `use` 开头（如 `useTable`、`useSearchForm`、`usePagination`）
 - 文件名与函数名一致
 - 存放在 `src/hooks/` 目录（全局放在 `@src/hooks/`，局部放在组件同级目录）
 
-### 8.2 返回值规范
+### 10.2 返回值规范
 
 - 统一返回对象（推荐 `toRefs` 解构后返回）
 - **禁止**直接返回 `reactive` 对象
@@ -912,14 +989,14 @@ export const useTable = () => {
 };
 ```
 
-### 8.3 抽离建议
+### 10.3 抽离建议
 
 - 可复用逻辑超过 **30 行**或跨 **2 个以上组件**使用时，**必须**抽离为 Hook
 - **禁止**在 Hooks 中进行 UI 操作
 - 每个 Hooks 只处理一类核心逻辑（如数据获取、表单校验、分页管理）
 - 使用 `try/catch/finally` 结构
 
-### 8.4 Hooks 注释要求
+### 10.4 Hooks 注释要求
 
 引入 Hooks 时必须使用行注释标注：
 
@@ -932,16 +1009,16 @@ const { searchParams, handleReset } = useSearchForm();
 
 ---
 
-## 9. 📦 TypeScript 类型
+## 11. 📦 TypeScript 类型
 
-### 9.1 类型注解要求
+### 11.1 类型注解要求
 
 - **参数**：函数参数必须明确类型
 - **返回值**：函数返回值必须明确类型
 - **变量**：变量声明必须明确类型
 - **模板 `ref`**：`const formRef = ref<HTMLFormElement | null>(null)`
 
-### 9.2 禁止使用 `any`
+### 11.2 禁止使用 `any`
 
 **禁止**使用 `any` 类型，应使用以下替代：
 
@@ -958,7 +1035,7 @@ const userInfo: IUserInfo = { id: "1", name: "test" };
 const data: any = JSON.parse(raw);
 ```
 
-### 9.3 Emits 类型定义
+### 11.3 Emits 类型定义
 
 **必须**使用 TypeScript **泛型**定义 emits：
 
@@ -973,7 +1050,7 @@ const emit = defineEmits<{
 const emit = defineEmits(["update:modelValue", "change"]);
 ```
 
-### 9.4 类型导入
+### 11.4 类型导入
 
 - 使用 `import type` 导入纯类型
 - 混合导入时，`import type` 与值导入分开
@@ -983,79 +1060,6 @@ import type { IUser } from "./types";
 import { userApi } from "./api";
 ```
 
-### 9.5 禁止 `@ts-ignore` / `@ts-expect-error`
+### 11.5 禁止 `@ts-ignore` / `@ts-expect-error`
 
 禁止使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。
-
----
-
-## 10. 🔥 性能优化
-
-| 优化项         | 说明                                                                                            |
-| -------------- | ----------------------------------------------------------------------------------------------- |
-| 组件懒加载     | 大组件使用 `defineAsyncComponent` 动态导入；路由页面使用 `() => import()` 惰性加载              |
-| KeepAlive      | 合理使用 `<KeepAlive>` 缓存不常更新组件；通过 `include`/`exclude` 精确控制缓存范围              |
-| 虚拟滚动       | 长列表（100+ 项）使用虚拟滚动组件，避免 DOM 过多                                                |
-| 防抖节流       | 搜索框输入（防抖）、滚动事件（节流）、窗口 resize（节流）、按钮点击（防抖/锁）                  |
-| 图片优化       | WebP 优先、使用合适尺寸、非首屏延迟加载（`loading="lazy"`）                                     |
-| 响应式性能     | 优先使用 `computed` 派生状态；大型数据列表考虑 `shallowRef`；避免在 `watch` 中执行同步 DOM 操作 |
-| 路由守卫       | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制   |
-| 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器                                                    |
-
-### 防抖 / 节流示例
-
-```typescript
-import { debounce } from "lodash-es";
-const handleSearch = debounce((query: string) => {
-  fetchSearchResults(query);
-}, 300);
-
-import { throttle } from "lodash-es";
-const handleScroll = throttle(() => {
-  updateScrollPosition();
-}, 100);
-```
-
----
-
-## 11. 📋 约束清单
-
-### 🔴 绝对禁止项（必须遵守）
-
-| #   | 禁止项                 | 说明                                                |
-| --- | ---------------------- | --------------------------------------------------- |
-| 1   | 连续数据解构           | 禁止 `...data.data`                                 |
-| 2   | 父组件修改子组件数据   | 禁止直接修改子组件内部状态                          |
-| 3   | 修改 ref/reactive 类型 | 后端给什么类型用什么                                |
-| 4   | 修改 props             | 禁止直接修改，只读访问 `props.xxx`                  |
-| 5   | 使用 mixins            | 使用 Hooks/组合式函数替代                           |
-| 6   | 无意义命名             | 禁止 `data1`, `temp2`                               |
-| 7   | 使用 this              | 禁止在 `<script setup>` 中使用 `this`               |
-| 8   | Options API            | 禁止使用 `data()`, `methods: {}`, `mounted() {}` 等 |
-| 9   | v-for 与 v-if 同元素   | 禁止同一元素同时使用                                |
-| 10  | index 作为 key         | 必须用唯一 ID                                       |
-
-### 🟢 推荐项（建议统一）
-
-| #   | 推荐项              | 说明                                            |
-| --- | ------------------- | ----------------------------------------------- |
-| 1   | 函数 try/catch      | 包裹函数内容，`catch` 中使用 `console.warn`     |
-| 2   | async/await         | 少用 `.then()` 链式                             |
-| 3   | computed 优先       | 能用 computed 解决的不用 ref/reactive           |
-| 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`      |
-| 5   | Hooks 抽离          | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
-
-### 🟡 不推荐项（尽量避免）
-
-| #   | 不推荐项            | 说明                            |
-| --- | ------------------- | ------------------------------- |
-| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
-| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
-
-### ⚠️ 注意事项
-
-- **未使用变量**：ESLint 已关闭检查，需自行清理无用代码
-- **v-html**：可使用，但必须防范 XSS 风险
-- **等于运算符**：使用 `==` 不视为问题
-- **注释检查**：注释相关问题默认忽略
-- **不要过度封装**：简单逻辑直接写在 template 中

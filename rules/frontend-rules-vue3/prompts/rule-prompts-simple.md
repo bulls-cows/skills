@@ -42,18 +42,14 @@
 
 **关键规则**：2空格缩进 | JS/TS单引号 | JSX属性单引号 | HTML属性双引号 | 行宽120 | 尾随逗号 | 单参数省略括号
 
-### 2.2 函数写法
-
-优先使用 `const 函数名 = () => {}` 箭头函数，避免 `function` 声明。
-
-### 2.3 Import 分组（4 组，组间空一行，组内按字母顺序）
+### 2.2 Import 分组（4 组，组间空一行，组内按字母顺序）
 
 1. **外部依赖**：`vue`, `dayjs`, `lodash` 等
 2. **类型导入**：`import type` 导入的纯类型
 3. **内部全局**：`@src/` 开头
 4. **内部相对**：`./` 或 `../` 开头
 
-### 2.4 命名速查表
+### 2.3 命名速查表
 
 | 类型            | 规范                     | 示例                     |
 | --------------- | ------------------------ | ------------------------ |
@@ -67,6 +63,10 @@
 | Hooks           | `use` + 功能名           | `useTable`               |
 | TypeScript 类型 | `I` + PascalCase         | `IUserInfo`              |
 | CSS（BEM）      | 全小写 + 双下划线/单横线 | `.card__title--large`    |
+
+### 2.4 函数写法
+
+优先使用 `const 函数名 = () => {}` 箭头函数，避免 `function` 声明。
 
 ---
 
@@ -233,11 +233,6 @@
 - 优先 `scoped`
 - 非 scoped 需标注 `/* 全局 */`
 
-### 5.3 响应式
-
-- 移动端优先
-- 宽度用 `px`/`rem`，字号用 `px`
-
 ---
 
 ## 6. 📡 网络请求与安全
@@ -336,7 +331,25 @@ const handleSubmit = async () => {
 - **computed 优先**，能派生的不用 ref
 - **watch 中派生逻辑**优先用 `computed` 替代
 
-### 7.2 reactive 转 ref
+### 7.2 computed 规范
+
+- 能用 computed 解决的不用 ref/reactive
+- computed **必须** `try/catch` 包裹
+
+### 7.3 watch 规范
+
+- 对象/数组必须声明 `deep: true`
+- 初始化需触发时加 `immediate: true`
+- 组件销毁时清理资源（定时器、事件监听）
+
+**watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
+
+### 7.4 eventBus / Pinia
+
+- eventBus：`onUnmounted` 中清理监听
+- Pinia：模块自动 `namespaced`，action 替代 mutation
+
+### 7.5 reactive 转 ref
 
 | 场景     | ref 写法                                         |
 | -------- | ------------------------------------------------ |
@@ -345,20 +358,7 @@ const handleSubmit = async () => {
 | 数组     | `const list = ref([])`                           |
 | 分页参数 | `const pagination = ref({ page: 1, limit: 20 })` |
 
-### 7.3 computed 规范
-
-- 能用 computed 解决的不用 ref/reactive
-- computed **必须** `try/catch` 包裹
-
-### 7.4 watch 规范
-
-- 对象/数组必须声明 `deep: true`
-- 初始化需触发时加 `immediate: true`
-- 组件销毁时清理资源（定时器、事件监听）
-
-**watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
-
-### 7.5 响应式类型标注（TypeScript）
+### 7.6 响应式类型标注（TypeScript）
 
 ```typescript
 const userName = ref<string>("");
@@ -368,74 +368,9 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 
 ---
 
-## 8. 🚀 Hooks 规范
+## 8. 🔥 性能优化
 
-### 8.1 命名与文件组织
-
-- 必须以 `use` 开头，文件名与函数名一致
-- 存放：全局 `@src/hooks/`，局部在组件同级目录
-
-### 8.2 返回值规范
-
-- **统一返回对象**，**禁止**直接返回 `reactive` 对象
-- **禁止**将 Hooks 挂载到响应式数据上
-
-```typescript
-export const useTable = () => {
-  const loading = ref(false);
-  const dataSource = ref([]);
-  // ... 逻辑
-  return { loading, dataSource };  // ✓ 返回对象
-};
-```
-
-### 8.3 抽离建议
-
-- 可复用逻辑超过 **30 行**或跨 **2+ 组件**必须抽离
-- **禁止**在 Hooks 中进行 UI 操作
-- 每个 Hook 只处理一类核心逻辑
-
-### 8.4 Hooks 注释要求
-
-引入时必须使用行注释标注：
-
-```typescript
-// hook: useTable
-const { loading, dataSource } = useTable();
-// hook: useSearchForm
-const { searchParams } = useSearchForm();
-```
-
----
-
-## 9. 📦 TypeScript 类型
-
-### 9.1 类型注解要求
-
-- 函数参数、返回值、变量必须明确类型
-- 模板 ref：`const formRef = ref<HTMLFormElement | null>(null)`
-
-### 9.2 禁止使用 `any`
-
-- 替代：`unknown`、`Record<string, unknown>` 或具体接口
-
-### 9.3 Emits 类型定义
-
-- 必须使用 TypeScript **泛型**定义 emits
-
-### 9.4 类型导入
-
-- 使用 `import type` 导入纯类型
-
-### 9.5 禁止 `@ts-ignore` / `@ts-expect-error`
-
-- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制
-
----
-
-## 10. 🔥 性能优化
-
-### 10.1 优化速查
+### 8.1 优化速查
 
 | 优化项    | 说明                                      |
 | --------- | ----------------------------------------- |
@@ -448,7 +383,7 @@ const { searchParams } = useSearchForm();
 | 路由守卫  | `beforeRouteLeave` 清理定时器             |
 | 指令清理  | `unmounted` 钩子清理事件监听和定时器      |
 
-### 10.2 防抖 / 节流示例
+### 8.2 防抖 / 节流示例
 
 ```typescript
 import { debounce, throttle } from "lodash-es";
@@ -458,7 +393,7 @@ const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 
 ---
 
-## 11. 📋 约束清单
+## 9. 📋 约束清单
 
 ### 🔴 绝对禁止
 
@@ -490,3 +425,68 @@ const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 - 简单逻辑直接写在 template 中，不要过度封装
 - 等于运算符使用 `==` 不视为问题
 - 注释相关问题默认忽略
+
+---
+
+## 10. 🚀 Hooks 规范
+
+### 10.1 命名与文件组织
+
+- 必须以 `use` 开头，文件名与函数名一致
+- 存放：全局 `@src/hooks/`，局部在组件同级目录
+
+### 10.2 返回值规范
+
+- **统一返回对象**，**禁止**直接返回 `reactive` 对象
+- **禁止**将 Hooks 挂载到响应式数据上
+
+```typescript
+export const useTable = () => {
+  const loading = ref(false);
+  const dataSource = ref([]);
+  // ... 逻辑
+  return { loading, dataSource };  // ✓ 返回对象
+};
+```
+
+### 10.3 抽离建议
+
+- 可复用逻辑超过 **30 行**或跨 **2+ 组件**必须抽离
+- **禁止**在 Hooks 中进行 UI 操作
+- 每个 Hook 只处理一类核心逻辑
+
+### 10.4 Hooks 注释要求
+
+引入时必须使用行注释标注：
+
+```typescript
+// hook: useTable
+const { loading, dataSource } = useTable();
+// hook: useSearchForm
+const { searchParams } = useSearchForm();
+```
+
+---
+
+## 11. 📦 TypeScript 类型
+
+### 11.1 类型注解要求
+
+- 函数参数、返回值、变量必须明确类型
+- 模板 ref：`const formRef = ref<HTMLFormElement | null>(null)`
+
+### 11.2 禁止使用 `any`
+
+- 替代：`unknown`、`Record<string, unknown>` 或具体接口
+
+### 11.3 Emits 类型定义
+
+- 必须使用 TypeScript **泛型**定义 emits
+
+### 11.4 类型导入
+
+- 使用 `import type` 导入纯类型
+
+### 11.5 禁止 `@ts-ignore` / `@ts-expect-error`
+
+- **禁止** `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制
