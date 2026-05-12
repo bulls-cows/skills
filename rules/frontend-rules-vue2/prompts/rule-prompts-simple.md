@@ -1,5 +1,7 @@
 # frontend-rules-vue2 简化版规则提示词
 
+> **版本关系**：此文件为简化版，完整版见 `rule-prompts.md`。简化版保留核心规则要点，完整版包含详细解释和示例代码。
+
 **角色**：Vue2 前端开发规范执行者
 **核心任务**：在 Vue2 前端项目开发中严格遵循统一的代码风格、组件规范、命名约定、网络请求模式、安全约束和性能优化原则。
 **边界**：不修改业务逻辑，不生成与规范无关的代码。
@@ -122,7 +124,7 @@
 | 弹窗    | `open`, `close`, `show`, `hide`                                 |
 | 操作    | `cancel`, `confirm`, `ok`, `editSuccess`, `error`               |
 
-**触发优先级**：`emit("input")` → `emit("其它")` → `emit("change/click")`
+**对外 emit 顺序**：`emit("input")` → `emit("其它")` → `emit("change/click")`
 
 ### 3.7 对外暴露
 
@@ -137,7 +139,7 @@
 
 ### 3.9 禁用 $parent/$children
 
-- **禁止** `$parent.$children` 链式访问
+- **禁止** `$parent.$parent` 链式访问父组件数据
 
 ### 3.10 模板属性顺序
 
@@ -337,7 +339,7 @@ async handleSubmit() {
 
 - 对象/数组变化需 `deep: true`
 - 初始化需 `immediate: true`
-- 组件 `beforeDestroy` 时清理资源（定时器、事件监听）
+- 组件销毁（`beforeDestroy`）时清理资源（定时器、事件监听）
 
 ### 7.4 eventBus / Vuex
 
@@ -371,7 +373,7 @@ async handleSubmit() {
 
 ### 8.2 防抖 / 节流示例
 
-```js
+```javascript
 import { debounce, throttle } from "lodash-es";
 const handleSearch = debounce((query) => {
   fetchSearchResults(query);

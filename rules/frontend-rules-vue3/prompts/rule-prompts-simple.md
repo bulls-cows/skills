@@ -1,5 +1,7 @@
 # frontend-rules-vue3 简化版规则提示词
 
+> **版本关系**：此文件为简化版，完整版见 `rule-prompts.md`。简化版保留核心规则要点，完整版包含详细解释和示例代码。
+
 **角色**：Vue3 前端开发规范执行者
 **核心任务**：在 Vue3 前端项目开发中严格遵循统一的代码风格、组件规范、命名约定、Hooks 规范、网络请求模式、安全约束和性能优化原则。
 **边界**：不修改业务逻辑，不生成与规范无关的代码。
@@ -51,6 +53,8 @@
 3. **内部全局**：`@src/` 开头
 4. **内部相对**：`./` 或 `../` 开头
 
+**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序
+
 ### 2.3 命名速查表
 
 **文件与组件**
@@ -63,10 +67,10 @@
 
 **函数命名**
 
-| 类型     | 规范                | 示例                           |
-| -------- | ------------------- | ------------------------------ |
+| 类型     | 规范                     | 示例                             |
+| -------- | ------------------------ | -------------------------------- |
 | API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | `on` + EventName | `onClickSubmit`, `onChangeInput` |
+| 事件函数 | `on` + EventName         | `onClickSubmit`, `onChangeInput` |
 
 **变量与常量**
 
@@ -208,7 +212,9 @@
 ### 3.17 v-if 与 v-for 冲突
 
 - **禁止** `v-if` 和 `v-for` 同一元素
-- 解决：`<template>` 包裹 或 computed 预过滤
+- **解决方案**：
+  - 使用 `<template>` 包裹 `v-for`，内部元素使用 `v-if`
+  - 使用 computed 预先过滤数据
 
 ### 3.18 v-model 与表单元素
 
@@ -308,8 +314,16 @@ if (code === 0) {
 ```typescript
 const { loading, run } = useRequest(() => apiSubmit(formData.value), {
   manual: true,
-  onSuccess: (res) => { if (res.code === 0) { /* 成功 */ } else { console.warn(res.msg) } },
-  onError: () => { console.warn("网络异常") }
+  onSuccess: (res) => {
+    if (res.code === 0) {
+      /* 成功 */
+    } else {
+      console.warn(res.msg);
+    }
+  },
+  onError: () => {
+    console.warn("网络异常");
+  },
 });
 ```
 
@@ -322,9 +336,16 @@ const handleSubmit = async () => {
   loading.value = true;
   try {
     const { code, msg } = await apiSubmit(formData.value);
-    if (code === 0) { /* 成功 */ } else { console.warn(msg) }
-  } catch (error) { console.warn(error) }
-  finally { loading.value = false }
+    if (code === 0) {
+      /* 成功 */
+    } else {
+      console.warn(msg);
+    }
+  } catch (error) {
+    console.warn(error);
+  } finally {
+    loading.value = false;
+  }
 };
 ```
 
@@ -335,13 +356,19 @@ const handleSubmit = async () => {
 **useRequest 方式**（loading 自动控制）：
 
 ```vue
-<button @click="run" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
+<button
+  @click="run"
+  :disabled="loading"
+>{{ loading ? '提交中...' : '提交' }}</button>
 ```
 
 **手动 async/await 方式**：
 
 ```vue
-<button @click="handleSubmit" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
+<button
+  @click="handleSubmit"
+  :disabled="loading"
+>{{ loading ? '提交中...' : '提交' }}</button>
 ```
 
 ### 5.7 安全规范
@@ -379,6 +406,13 @@ const handleSubmit = async () => {
 - 对象/数组必须声明 `deep: true`
 - 初始化需触发时加 `immediate: true`
 - 组件销毁时清理资源（定时器、事件监听）
+
+```typescript
+onBeforeUnmount(() => {
+  if (timer.value) clearInterval(timer.value);
+  window.removeEventListener("resize", handleResize);
+});
+```
 
 **watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
 
@@ -427,8 +461,12 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 
 ```typescript
 import { debounce, throttle } from "lodash-es";
-const handleSearch = debounce((query: string) => { fetchSearchResults(query) }, 300);
-const handleScroll = throttle(() => { updateScrollPosition() }, 100);
+const handleSearch = debounce((query: string) => {
+  fetchSearchResults(query);
+}, 300);
+const handleScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
 ```
 
 ---
@@ -447,7 +485,7 @@ const handleScroll = throttle(() => { updateScrollPosition() }, 100);
 | 6   | 无意义命名（`data1`, `temp2`）                 |
 | 7   | 在 `<script setup>` 中使用 `this`              |
 | 8   | 使用 Options API                               |
-| 9   | 同一元素同时使用 `v-if` 和 `v-for`           |
+| 9   | 同一元素同时使用 `v-if` 和 `v-for`             |
 | 10  | `index` 作为 `key`                             |
 
 ### 🟢 推荐
@@ -502,7 +540,11 @@ export const useTable = () => {
 
   const { loading, run: getDataSourceTotal } = useRequest(
     (params) => apiGetList(Object.assign({}, pagination.value, params)),
-    { manual: true, onSuccess: onGetListSuccess, onError: (error) => console.warn(error) },
+    {
+      manual: true,
+      onSuccess: onGetListSuccess,
+      onError: (error) => console.warn(error),
+    },
   );
 
   return { loading, dataSource, total, pagination, getDataSourceTotal };
@@ -523,7 +565,10 @@ export const useTable = () => {
   const getDataSourceTotal = async () => {
     loading.value = true;
     try {
-      const { code, data, msg } = await apiGetList({ page: pagination.value.page, limit: pagination.value.limit });
+      const { code, data, msg } = await apiGetList({
+        page: pagination.value.page,
+        limit: pagination.value.limit,
+      });
       if (code === 0) {
         dataSource.value = data.list;
         total.value = data.total;

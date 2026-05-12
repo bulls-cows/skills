@@ -1,5 +1,7 @@
 # frontend-rules-vue3 规则系统提示词
 
+> **版本关系**：此文件为完整版，简化版见 `rule-prompts-simple.md`。完整版包含详细解释和示例代码，简化版保留核心规则要点。
+
 **角色**：Vue3 前端开发规范执行者
 **核心任务**：在 Vue3 前端项目开发中严格遵循统一的代码风格、组件规范、命名约定、Hooks 规范、网络请求模式、安全约束和性能优化原则，确保所有产出代码的一致性与可维护性。
 **边界**：不修改业务逻辑，不生成与规范无关的代码，仅针对代码外观、结构、命名、注释和架构给出规范要求。
@@ -107,10 +109,10 @@ import SearchBar from "./SearchBar.vue";
 
 **函数命名**
 
-| 类型     | 规范                | 示例                           |
-| -------- | ------------------- | ------------------------------ |
+| 类型     | 规范                     | 示例                             |
+| -------- | ------------------------ | -------------------------------- |
 | API 函数 | `api` + Method + URLPath | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | `on` + EventName | `onClickSubmit`, `onChangeInput` |
+| 事件函数 | `on` + EventName         | `onClickSubmit`, `onChangeInput` |
 
 **变量与常量**
 
@@ -434,12 +436,12 @@ HTML 元素上的属性顺序：
 
 ### 4.3 样式区注释
 
-| 场景 | 格式 | 示例 |
-|------|------|------|
-| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
-| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
-| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
-| 全局样式 | 非 scoped 标注 | `/* 全局 */` |
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
+| 全局样式 | 非 scoped 标注        | `/* 全局 */`            |
 
 ### 4.4 注释保护原则
 
@@ -682,9 +684,9 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 ---
 
-## 7. ⚡ 响应式与数据流
+## 6. ⚡ 响应式与数据流
 
-### 7.1 核心原则
+### 6.1 核心原则
 
 **优先使用 `ref`，尽可能少用 `reactive`**。
 
@@ -699,7 +701,7 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 | 批量更新     | `reactive`            | 一次性更新多个相关属性                       |
 | 对象解构     | `reactive` + `toRefs` | 解构后仍保持响应式                           |
 
-### 7.2 computed 规范
+### 6.2 computed 规范
 
 - **优先使用 `computed` 派生状态**，减少 `ref`/`reactive` 冗余
 - 除后端交互数据和部分定时器外，**一律尽可能使用 `computed`**
@@ -718,7 +720,7 @@ watch([total, pageSize], () => {
 });
 ```
 
-### 7.3 watch 规范
+### 6.3 watch 规范
 
 - **深度监听**：对象/数组变化必须声明 `deep: true`
 - **立即执行**：初始化需触发时加 `immediate: true`
@@ -764,12 +766,12 @@ onBeforeUnmount(() => {
 });
 ```
 
-### 7.4 eventBus / Pinia
+### 6.4 eventBus / Pinia
 
 - eventBus：`onUnmounted` 中清理监听
 - Pinia：模块自动 `namespaced`，action 替代 mutation
 
-### 7.5 reactive 转 ref
+### 6.5 reactive 转 ref
 
 | 场景     | 原写法（reactive）                                    | 推荐写法（ref）                                       |
 | -------- | ----------------------------------------------------- | ----------------------------------------------------- |
@@ -785,7 +787,7 @@ onBeforeUnmount(() => {
 - **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
 - **变更格式必须使用 diff 格式展示**：展示给用户确认时，必须使用 diff 格式展示变更前后对比
 
-### 7.6 响应式类型标注（TypeScript）
+### 6.6 响应式类型标注（TypeScript）
 
 ```typescript
 // ✅ ref<T>() 显式标注
@@ -809,9 +811,9 @@ const items = computed<IListItem[]>(() =>
 
 ---
 
-## 8. 🔥 性能优化
+## 7. 🔥 性能优化
 
-### 8.1 优化速查表
+### 7.1 优化速查表
 
 | 优化项         | 说明                                                                                            |
 | -------------- | ----------------------------------------------------------------------------------------------- |
@@ -824,7 +826,7 @@ const items = computed<IListItem[]>(() =>
 | 路由守卫       | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制   |
 | 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器                                                    |
 
-### 8.2 防抖 / 节流示例
+### 7.2 防抖 / 节流示例
 
 ```typescript
 import { debounce } from "lodash-es";
@@ -840,7 +842,7 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 9. 📋 约束清单
+## 8. 📋 约束清单
 
 ### 🔴 绝对禁止
 
@@ -884,15 +886,15 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 10. 🚀 Hooks 规范
+## 9. 🚀 Hooks 规范
 
-### 10.1 命名与文件组织
+### 9.1 命名与文件组织
 
 - 必须以 `use` 开头（如 `useTable`、`useSearchForm`、`usePagination`）
 - 文件名与函数名一致
 - 存放在 `src/hooks/` 目录（全局放在 `@src/hooks/`，局部放在组件同级目录）
 
-### 10.2 返回值规范
+### 9.2 返回值规范
 
 - 统一返回对象（推荐 `toRefs` 解构后返回）
 - **禁止**直接返回 `reactive` 对象
@@ -987,20 +989,20 @@ export const useTable = () => {
 };
 ```
 
-### 10.3 抽离建议
+### 9.3 抽离建议
 
 - 可复用逻辑超过 **30 行**或跨 **2 个以上组件**使用时，**必须**抽离为 Hook
 - **禁止**在 Hooks 中进行 UI 操作
 - 每个 Hooks 只处理一类核心逻辑（如数据获取、表单校验、分页管理）
 - 使用 `try/catch/finally` 结构
 
-### 10.4 Hooks 使用规范
+### 9.4 Hooks 使用规范
 
 - **生命周期钩子**（`onMounted` 等）只能在组件顶层或 Hooks 顶层调用
 - **禁止**在条件语句、循环、嵌套函数中调用生命周期钩子
 - **禁止**在 Hooks 内部直接调用其他生命周期钩子（应通过参数或回调传递）
 
-### 10.5 Hooks 注释要求
+### 9.5 Hooks 注释要求
 
 引入 Hooks 时必须使用行注释标注：
 
@@ -1013,24 +1015,24 @@ const { searchParams, handleReset } = useSearchForm();
 
 **Hook 内部注释格式**：
 
-| 内容 | 格式 | 示例 |
-|------|------|------|
-| Hook 整体 | JSDoc + `@description` | `/** 表格数据管理 @description ... */` |
-| 内部 ref | `// 属性名: 描述` | `// dataSource: 表格数据列表` |
-| 内部方法 | JSDoc 或 `// methods: 描述` | `// methods: 获取表格数据` |
+| 内容      | 格式                        | 示例                                   |
+| --------- | --------------------------- | -------------------------------------- |
+| Hook 整体 | JSDoc + `@description`      | `/** 表格数据管理 @description ... */` |
+| 内部 ref  | `// 属性名: 描述`           | `// dataSource: 表格数据列表`          |
+| 内部方法  | JSDoc 或 `// methods: 描述` | `// methods: 获取表格数据`             |
 
 ---
 
-## 11. 📦 TypeScript 类型
+## 10. 📦 TypeScript 类型
 
-### 11.1 类型注解要求
+### 10.1 类型注解要求
 
 - **参数**：函数参数必须明确类型
 - **返回值**：函数返回值必须明确类型
 - **变量**：变量声明必须明确类型
 - **模板 `ref`**：`const formRef = ref<HTMLFormElement | null>(null)`
 
-### 11.2 禁止使用 `any`
+### 10.2 禁止使用 `any`
 
 **禁止**使用 `any` 类型，应使用以下替代：
 
@@ -1047,7 +1049,7 @@ const userInfo: IUserInfo = { id: "1", name: "test" };
 const data: any = JSON.parse(raw);
 ```
 
-### 11.3 Emits 类型定义
+### 10.3 Emits 类型定义
 
 **必须**使用 TypeScript **泛型**定义 emits：
 
@@ -1062,7 +1064,7 @@ const emit = defineEmits<{
 const emit = defineEmits(["update:modelValue", "change"]);
 ```
 
-### 11.4 Hook 返回值类型
+### 10.4 Hook 返回值类型
 
 **必须**为 Hooks 返回值声明类型接口：
 
@@ -1078,13 +1080,13 @@ export const useTable = (): IUseTableReturn => {
 };
 ```
 
-### 11.5 `.d.ts` 类型文件组织
+### 10.5 `.d.ts` 类型文件组织
 
 - **全局类型**：放在 `src/types/` 目录下（如 `src/types/user.d.ts`）
 - **组件私有类型**：放在组件同级目录或 SFC 内 `export type`
 - **全局注入**：在 `src/types/index.d.ts` 中统一导出
 
-### 11.6 类型导入
+### 10.6 类型导入
 
 - 使用 `import type` 导入纯类型
 - 混合导入时，`import type` 与值导入分开
@@ -1094,6 +1096,6 @@ import type { IUser } from "./types";
 import { userApi } from "./api";
 ```
 
-### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`
+### 10.7 禁止 `@ts-ignore` / `@ts-expect-error`
 
 禁止使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。
