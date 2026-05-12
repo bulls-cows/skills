@@ -29,8 +29,11 @@
   "proseWrap": "never",
   "trailingComma": "all",
   "arrowParens": "avoid",
+  "jsxSingleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": false,
+  "quoteProps": "as-needed",
+  "singleAttributePerLine": false,
   "vueIndentScriptAndStyle": false,
   "htmlWhitespaceSensitivity": "strict",
   "vueHtmlAttributes": "double"
@@ -47,16 +50,41 @@
 
 ### 2.3 命名速查表
 
-| 类型        | 规范                     | 示例                   |
-| ----------- | ------------------------ | ---------------------- |
-| 组件文件    | 多单词 + PascalCase      | `UserList.vue`         |
-| 目录        | kebab-case               | `user-profile/`        |
-| API 函数    | `api` + Method + URLPath | `apiGetUserInfo`       |
-| 事件函数    | `on` + EventName         | `onClickSubmit`        |
-| 常量        | 全大写 + 下划线          | `MAX_RETRY_COUNT`      |
-| Props/Emits | camelCase，必须注释      | `userId`, `userChange` |
-| 布尔值      | `isXX`/`hasXX`/`showXX`  | `isVisible`            |
-| CSS（BEM）  | Block.Element--Modifier，全小写、__连接元素、--连接修饰符、类名唯一 | `.card__title--large` |
+**文件与组件**
+
+| 类型     | 规范                | 示例            |
+| -------- | ------------------- | --------------- |
+| 组件文件 | 多单词 + PascalCase | `UserList.vue`  |
+| 目录     | kebab-case          | `user-profile/` |
+| 组件使用 | PascalCase          | `<UserCard />`  |
+
+**注意**：组件名必须使用多个单词，避免与 HTML 原生元素冲突。
+
+**函数命名**
+
+| 类型     | 规范                               | 示例                             |
+| -------- | ---------------------------------- | -------------------------------- |
+| API 函数 | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
+| 事件函数 | `on` + EventName（小驼峰）         | `onClickSubmit`, `onChangeInput` |
+
+**变量与常量**
+
+| 类型        | 规范                         | 示例                            |
+| ----------- | ---------------------------- | ------------------------------- |
+| 常量        | 全大写 + 下划线              | `MAX_RETRY_COUNT`, `APP_CONFIG` |
+| Props/Emits | camelCase，必须注释          | `userId`, `userChange`          |
+| 布尔值      | `isXX`/`hasXX`/`showXX` 前缀 | `isVisible`, `hasPermission`    |
+| 变量/方法   | 有意义的驼峰命名             | 禁止 `data1`, `temp2`           |
+
+**CSS 命名（BEM 规范）**
+
+| 类型               | 说明          | 示例                                 |
+| ------------------ | ------------- | ------------------------------------ |
+| Block（块）        | 独立组件/模块 | `.card`, `.form`                     |
+| Element（元素）    | 块内部子元素  | `.card__title`, `.form__input`       |
+| Modifier（修饰符） | 状态/样式变体 | `.card--dark`, `.card__title--large` |
+
+**规则**：全小写、`__` 连接元素、`--` 连接修饰符、类名唯一，禁止使用 `_`（除 `__` 外）。
 
 ---
 
@@ -261,17 +289,35 @@ async handleSubmit() {
 
 ### 5.7 等于运算符
 
-- 优先使用 `==`。若将 `===` 改为 `==`，提醒用户确认。注释问题默认忽略。
+- 优先推荐 `==`。若将 `===` 改为 `==`，需提醒用户手动确认。注释问题默认忽略。
 
 ---
 
 ## 6. 🎨 CSS 样式规范
 
-- 预处理器：Sass/SCSS、Less
-- 默认 `<style scoped>`，非 scoped 标注 `/* 全局 */`
-- 全局样式路径：`src/styles/`
-- BEM 命名：`.block__element--modifier`（见 §2.3）
-- 响应式：`@media` 媒体查询，移动端优先
+### 6.1 预处理器
+
+- 使用 **Sass/SCSS** 或 **Less** 预处理器
+- 格式化：csscomb + prettier 配合
+- 全局样式集中存放 `src/styles/`
+
+### 6.2 scoped 优先
+
+- 默认使用 `<style scoped>`，确保样式隔离在当前组件
+- 非 scoped 样式需标注原因：`/* 全局 */`
+- 优先 scoped，非必要不写全局样式
+
+### 6.3 BEM 命名
+
+- 遵循 BEM：`.block__element--modifier`，全小写
+- 详见 §2.3 CSS 命名（BEM 规范）
+
+### 6.4 样式区注释
+
+| 场景     | 格式                    | 示例            |
+| -------- | ----------------------- | --------------- |
+| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
+| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
 
 ---
 
@@ -300,11 +346,11 @@ async handleSubmit() {
 
 ### 7.5 响应式陷阱（Vue2 特有）
 
-| 场景         | 正确写法                        |
-| ------------ | ------------------------------- |
-| 新增对象属性 | `this.$set(this.obj, key, val)` |
-| 数组索引赋值 | `this.$set(this.arr, i, val)`   |
-| 数组长度修改 | `this.arr.splice(newLength)`    |
+| 场景         | 错误写法                | 正确写法                             |
+| ------------ | ----------------------- | ------------------------------------ |
+| 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
+| 数组索引赋值 | `this.arr[i] = val`     | `this.$set(this.arr, i, val)`        |
+| 数组长度修改 | `this.arr.length = n`   | `this.arr.splice(n)`                 |
 
 ---
 
@@ -319,7 +365,7 @@ async handleSubmit() {
 | 虚拟滚动  | 长列表（100+ 项）                                                 |
 | 防抖节流  | 搜索（防抖300ms）、滚动（节流100ms）                              |
 | 图片优化  | WebP 优先、`loading="lazy"`                                       |
-| 响应式    | `computed` 派生、大数据用 `Object.freeze()` 冻结                  |
+| 数据响应式 | `computed` 派生、大数据用 `Object.freeze()` 冻结                  |
 | 路由守卫  | `beforeRouteLeave` 清理定时器                                     |
 | 指令清理  | `unbind` 钩子清理事件监听和定时器                                 |
 
@@ -341,29 +387,42 @@ const handleScroll = throttle(() => {
 
 ### 🔴 绝对禁止
 
-| #   | 禁止项                             |
-| --- | ---------------------------------- |
-| 1   | 连续数据解构 `...data.data`        |
-| 2   | 父组件直接修改子组件内部状态       |
-| 3   | 修改 data 原始类型                 |
-| 4   | 修改 props（只读访问）             |
-| 5   | 使用 mixins                        |
-| 6   | 无意义命名（`data1`, `temp2`）     |
-| 7   | `$parent` 链式访问                 |
-| 8   | 同一元素同时使用 `v-if` 和 `v-for` |
-| 9   | `index` 作为 `key`                 |
-| 10  | setTimeout 替代 `$nextTick`        |
+| #   | 禁止项                             | 说明                                   |
+| --- | ---------------------------------- | -------------------------------------- |
+| 1   | 连续数据解构                       | 禁止 `...data.data`                    |
+| 2   | 父组件直接修改子组件内部状态       | 禁止直接修改子组件内部状态             |
+| 3   | 修改 data 原始类型                 | 后端给什么类型用什么，不可修改原始类型 |
+| 4   | 修改 props（只读访问）             | 不允许直接修改 props                   |
+| 5   | 使用 mixins                        | 改用组合式函数或组件组合               |
+| 6   | 无意义命名（`data1`, `temp2`）     | 变量/方法必须有意义                    |
+| 7   | `$parent` 链式访问                 | 禁止 `$parent.$parent`                 |
+| 8   | 同一元素同时使用 `v-if` 和 `v-for` | 必须分离                               |
+| 9   | `index` 作为 `key`                 | 必须用唯一 ID                          |
+| 10  | `setTimeout` 替代 `$nextTick`      | DOM 更新操作必须用 `$nextTick`         |
 
 ### 🟢 推荐
 
-函数 try/catch（catch 中 `console.warn`） | async/await 优先 | computed 优先于 data | watch 按需使用 `deep/immediate` | computed try/catch 必须 | 减少 data 冗余
+| #   | 推荐项              | 说明                                        |
+| --- | ------------------- | ------------------------------------------- |
+| 1   | 函数 try/catch      | 包裹函数内容，`catch` 中使用 `console.warn` |
+| 2   | async/await         | 少用 `.then()` 链式写法                     |
+| 3   | computed 优先       | 能用 computed 解决的不用 data               |
+| 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`  |
+| 5   | computed try/catch  | 必须 try/catch 包裹，避免计算属性报错       |
+| 6   | 减少 data 冗余      | 优先 computed 派生，减少 data 属性          |
 
 ### 🟡 不推荐
 
-多层 try/catch 嵌套 | 生命周期中 emit
+| #   | 不推荐项            | 说明                            |
+| --- | ------------------- | ------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
 
 ### ⚠️ 注意事项
 
-- 简单逻辑直接写在 template 中，不要过度封装
-- 等于运算符使用 `==` 不视为问题
-- 注释相关问题默认忽略
+- **未使用变量**：ESLint 已关闭检查，需自行清理无用代码
+- **v-html**：可使用，但必须防范 XSS 风险
+- **props 解构**：可以解构（需注意响应式丢失问题）
+- **等于运算符**：使用 `==` 不视为问题
+- **注释检查**：注释相关问题默认忽略，不进行检查
+- **不要过度封装**：简单逻辑直接写在 template 中

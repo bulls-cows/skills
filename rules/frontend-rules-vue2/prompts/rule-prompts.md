@@ -416,9 +416,9 @@ HTML 元素上的属性顺序必须遵循：
 ```javascript
 const { code, data, msg } = await apiXXX();
 if (code === 0) {
-  this.$message.success(msg || "操作成功");
+  /* 成功处理数据 */
 } else {
-  this.$message.error(msg);
+  console.warn(msg);
 }
 ```
 
@@ -447,7 +447,7 @@ async handleSubmit() {
   try {
     const { code, msg } = await apiSubmit(this.formData);
     if (code === 0) {
-      this.$message.success('操作成功');
+      /* 成功 */
     } else {
       console.warn(msg);
     }
@@ -499,18 +499,12 @@ async handleSubmit() {
 - 遵循 BEM：`.block__element--modifier`，全小写
 - 详见 §2.3 CSS 命名（BEM 规范）
 
-### 6.4 响应式适配
-
-- 使用 `@media` 媒体查询适配不同屏幕
-- 移动端优先：先写移动端样式，再通过媒体查询增强 PC 端
-
-### 6.5 样式区注释
+### 6.4 样式区注释
 
 | 场景     | 格式                    | 示例            |
 | -------- | ----------------------- | --------------- |
 | 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
 | 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
-| 响应式   | `/* 响应式 */`          | `/* 响应式 */`  |
 
 ---
 
@@ -560,7 +554,7 @@ async handleSubmit() {
 | 虚拟滚动   | 长列表（100+ 项）使用虚拟滚动，避免 DOM 过多                              |
 | 防抖节流   | 搜索（防抖300ms）、滚动（节流100ms）、resize（节流）、按钮点击（防抖/锁） |
 | 图片优化   | WebP 优先、合适尺寸、非首屏 `loading="lazy"`                              |
-| 响应式性能 | `computed` 派生、大数据 `Object.freeze()`；避免 `watch` 中同步 DOM 操作   |
+| 数据响应式 | `computed` 派生、大数据 `Object.freeze()`；避免 `watch` 中同步 DOM 操作   |
 | 路由守卫   | `beforeRouteLeave` 清理定时器、取消未完成请求、关闭弹窗                   |
 | 指令清理   | `unbind` 钩子清理事件监听和定时器                                         |
 | 过滤器     | 优先使用局部 `filters`，保持纯函数，不修改外部状态                        |
