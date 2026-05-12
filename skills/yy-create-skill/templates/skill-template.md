@@ -11,7 +11,9 @@
 ```markdown
 ---
 name: 技能名称
-description: 简要描述这个技能的功能和使用场景
+description: >
+  简要描述这个技能的功能和使用场景。
+
 ---
 
 # 技能名称

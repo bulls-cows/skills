@@ -74,8 +74,7 @@ description: >
 ---
 name: generate-readme
 description: >
-  为项目生成标准 README 文档。用于：用户需要创建或更新项目的 README 文件，
-  自动从项目配置中提取信息生成文档。
+  为项目生成标准 README 文档。用于：用户需要创建或更新项目的 README 文件时触发。
 
 ---
 
