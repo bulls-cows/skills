@@ -323,23 +323,27 @@ async handleSubmit() {
 
 ### 8.1 优化速查
 
-| 优化项    | 说明                                                    |
-| --------- | ------------------------------------------------------- |
+| 优化项    | 说明                                                              |
+| --------- | ----------------------------------------------------------------- |
 | 懒加载    | 路由 `() => import()` / `Vue.component('xx', () => import('xx'))` |
-| KeepAlive | 通过 `include`/`exclude` 精确控制                       |
-| 虚拟滚动  | 长列表（100+ 项）                                       |
-| 防抖节流  | 搜索（防抖300ms）、滚动（节流100ms）                    |
-| 图片优化  | WebP 优先、`loading="lazy"`                             |
-| 响应式    | `computed` 派生、大数据用 `Object.freeze()` 冻结        |
-| 路由守卫  | `beforeRouteLeave` 清理定时器                           |
-| 指令清理  | `unbind` 钩子清理事件监听和定时器                       |
+| KeepAlive | 通过 `include`/`exclude` 精确控制                                 |
+| 虚拟滚动  | 长列表（100+ 项）                                                 |
+| 防抖节流  | 搜索（防抖300ms）、滚动（节流100ms）                              |
+| 图片优化  | WebP 优先、`loading="lazy"`                                       |
+| 响应式    | `computed` 派生、大数据用 `Object.freeze()` 冻结                  |
+| 路由守卫  | `beforeRouteLeave` 清理定时器                                     |
+| 指令清理  | `unbind` 钩子清理事件监听和定时器                                 |
 
 ### 8.2 防抖 / 节流示例
 
 ```js
 import { debounce, throttle } from "lodash-es";
-const handleSearch = debounce((query) => { fetchSearchResults(query); }, 300);
-const handleScroll = throttle(() => { updateScrollPosition(); }, 100);
+const handleSearch = debounce((query) => {
+  fetchSearchResults(query);
+}, 300);
+const handleScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
 ```
 
 ---
@@ -369,7 +373,7 @@ const handleScroll = throttle(() => { updateScrollPosition(); }, 100);
 
 多层 try/catch 嵌套 | 生命周期中 emit
 
-### ⚠️ 注意
+### ⚠️ 注意事项
 
 - 简单逻辑直接写在 template 中，不要过度封装
 - 等于运算符使用 `==` 不视为问题
