@@ -40,15 +40,11 @@
 }
 ```
 
-## 导入顺序（7 组）
+## 导入顺序（4 组）
 
-组间空一行，组内按字母排序。**全局与相对导入合并为同一组**：
+组间空一行，组内按字母排序：
 
-1. **外部依赖**（vue, dayjs, lodash, element-plus 等）
-2. **types**（仅 TypeScript/TSX，`import type` / `type T = ...`）
-3. **apis**（`@src/api/...`、`./api/...`）
-4. **utils**（`@src/utils/...`、`./utils/...`）
-5. **hooks**（`@src/hooks/...`、`./useXxx.ts`）
-6. **stores**（`@src/store/...`、`./store/...`）
-7. **constants**（`@src/constants/...`、`./constants/...`）
-8. **components**（`@src/components/...`、`./ComponentName.vue`）
+1. **外部依赖**（node_modules：vue, dayjs, lodash, element-plus 等）
+2. **types**（类型导入，仅 TypeScript/TSX：`import type { IUserInfo } from '@src/types'`）
+3. **内部全局依赖**（@src/：api、utils、hooks、store、constants、components）
+4. **内部相对依赖**（./、../：所有相对导入）
