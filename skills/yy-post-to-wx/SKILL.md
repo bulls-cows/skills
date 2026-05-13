@@ -1,20 +1,84 @@
 ---
 name: yy-post-to-wx
-title: yy-post-to-wx
-description: 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片。
-author: OpenCode
+description: >
+  通过微信公众号 API 将本地 Markdown/HTML 文章发布到公众号草稿箱。
+  当用户需要发布文章到微信公众号、推送内容到公众号时触发。
+
 ---
-通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片。
 
-## 功能特性
+# yy-post-to-wx
 
-- ✅ 支持 Markdown、HTML、纯文本三种输入
-- ✅ 四种主题样式：default、grace、simple、modern
-- ✅ 十二种颜色预设，支持自定义颜色
-- ✅ 自动上传本地图片到微信素材库
-- ✅ 外链默认转换为底部引用
-- ✅ 配置文件支持默认作者、评论设置
-- ✅ 通过 API 直传，无需浏览器自动化
+## 描述
+
+通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱，支持多主题、多颜色预设，自动上传图片。
+
+## 使用场景
+
+- 用户需要发布文章到微信公众号
+- 用户想要将 Markdown 文件推送到公众号草稿箱
+- 用户提到"发布到公众号"、"推送到微信"、"公众号草稿"
+
+不应触发：
+
+- 用户只是询问如何配置公众号 API
+- 用户要求编辑或修改文章内容
+- 用户要求查看公众号数据统计
+
+## 指令
+
+### 1. 检查环境配置
+
+验证以下配置是否存在：
+
+- 检查 `.baoyu-skills/.env` 或 `~/.baoyu-skills/.env` 中的 `WECHAT_APP_ID` 和 `WECHAT_APP_SECRET`
+- 检查可选配置文件 `EXTEND.md`
+
+**决策分支**：
+
+- **配置完整**：进入步骤 2
+- **配置缺失**：提示用户按"配置"章节完成配置，退出执行
+
+### 2. 解析输入文件
+
+读取用户指定的输入文件：
+
+- 支持 `.md`、`.html`、`.txt` 格式
+- 从 frontmatter 提取元数据：title、author、summary、cover
+
+**决策分支**：
+
+- **文件存在且格式支持**：进入步骤 3
+- **文件不存在**：提示文件路径错误，退出执行
+- **格式不支持**：提示支持的格式列表，退出执行
+
+### 3. 确定发布参数
+
+按以下优先级确定各参数：
+
+- **主题**：命令行 `--theme` > EXTEND.md `default_theme` > `default`
+- **颜色**：命令行 `--color` > EXTEND.md `default_color` > 主题默认
+- **作者**：命令行 `--author` > frontmatter `author` > EXTEND.md `default_author`
+- **标题**：命令行 `--title` > frontmatter `title` > 文件名
+- **摘要**：命令行 `--summary` > frontmatter `summary` > 正文前 120 字
+- **封面**：命令行 `--cover` > frontmatter `cover` > 无封面
+
+### 4. 执行发布流程
+
+执行以下操作：
+
+1. 获取微信 access_token
+2. 转换 Markdown 为微信兼容 HTML，应用主题样式
+3. 上传正文中的本地图片到微信素材库，替换 URL
+4. 如指定封面，上传封面图片
+5. 调用 API 创建草稿
+
+### 5. 输出结果
+
+输出以下信息：
+
+- 草稿 media_id
+- 公众号管理链接（可在浏览器中预览和发布）
+- 发布参数摘要（主题、颜色、作者）
 
 ## 配置
 
@@ -36,7 +100,7 @@ WECHAT_APP_SECRET=your_app_secret
 
 1. 创建配置文件 `EXTEND.md`（可选）：
 
-```md
+```yaml
 default_theme: default
 default_color: blue
 default_author: 你的名字
@@ -46,26 +110,11 @@ only_fans_can_comment: 0
 
 ### 配置项说明
 
-| 配置项 | 说明 | 默认值 |
-|--------|------|--------|
-| `default_theme` | 默认主题 | `default` |
-| `default_color` | 默认颜色 | 主题默认 |
-| `default_author` | 默认作者 | 空 |
-| `need_open_comment` | 是否开启评论 | `1` |
-| `only_fans_can_comment` | 是否仅粉丝可评论 | `0` |
-
-### 主题选项
-
-- `default` - 默认主题，简洁大方
-- `grace` - 优雅风格，更大行高
-- `simple` - 极简风格，去掉边框阴影
-- `modern` - 现代风格，卡片式设计
-
-### 颜色预设
-
-`blue`, `green`, `vermilion`, `yellow`, `purple`, `sky`, `rose`, `olive`, `black`, `gray`, `pink`, `red`, `orange`
-
-也可以使用自定义 hex 颜色值，如 `#ff0000`。
+- `default_theme`：默认主题，可选 `default`、`grace`、`simple`、`modern`
+- `default_color`：默认颜色，可选 `blue`、`green`、`vermilion`、`yellow`、`purple`、`sky`、`rose`、`olive`、`black`、`gray`、`pink`、`red`、`orange` 或自定义 hex 值
+- `default_author`：默认作者
+- `need_open_comment`：是否开启评论，`1` 开启，`0` 关闭
+- `only_fans_can_comment`：是否仅粉丝可评论，`1` 是，`0` 否
 
 ## 使用方法
 
@@ -79,16 +128,14 @@ npx -y bun skills/yy-post-to-wx/scripts/main.ts <file> [options]
 
 ### 参数选项
 
-| 参数 | 说明 | 示例 |
-|------|------|------|
-| `<file>` | 输入文件路径 | `article.md` |
-| `--theme <name>` | 主题名称 | `--theme grace` |
-| `--color <color>` | 颜色名称或 hex | `--color green` |
-| `--title <title>` | 强制指定标题 | `--title "文章标题"` |
-| `--summary <text>` | 强制指定摘要 | `--summary "这是一篇文章"` |
-| `--author <name>` | 强制指定作者 | `--author 张三` |
-| `--cover <path>` | 指定封面图片 | `--cover ./cover.png` |
-| `--no-cite` | 禁用外链转底部引用 | `--no-cite` |
+- `<file>`：输入文件路径（必需）
+- `--theme <name>`：主题名称
+- `--color <color>`：颜色名称或 hex 值
+- `--title <title>`：强制指定标题
+- `--summary <text>`：强制指定摘要
+- `--author <name>`：强制指定作者
+- `--cover <path>`：指定封面图片
+- `--no-cite`：禁用外链转底部引用
 
 ### 示例
 
@@ -103,17 +150,6 @@ bun skills/yy-post-to-wx/scripts/main.ts ./post.md --author "宝玉" --cover ./i
 bun skills/yy-post-to-wx/scripts/main.ts ./article.md --no-cite
 ```
 
-## 工作流程
-
-1. **加载配置** - 从 EXTEND.md 和 .env 加载配置
-2. **处理输入** - 读取 Markdown/HTML 文件，纯文本自动保存
-3. **解析元数据** - 从 frontmatter 提取标题、作者、摘要、封面
-4. **转换格式** - Markdown 转换为微信兼容 HTML，应用主题样式
-5. **获取 Token** - 通过 API 获取 access_token
-6. **上传图片** - 上传封面和正文图片，替换 URL
-7. **创建草稿** - 调用 API 创建草稿到公众号
-8. **输出结果** - 显示 media_id 和管理链接
-
 ## 前置要求
 
 - Node.js 18+ 或 Bun
@@ -121,47 +157,14 @@ bun skills/yy-post-to-wx/scripts/main.ts ./article.md --no-cite
 - 公众号已开通开发者权限
 - 服务器 IP 已添加到 API 白名单
 
-## 依赖安装
+## 相关资源
 
-### 使用 Bun（推荐）
+本技能包含以下辅助资源：
 
-首次运行时，Bun 会自动安装依赖：
-
-```bash
-bun skills/yy-post-to-wx/scripts/main.ts <file>
-```
-
-### 使用 Node.js
-
-需要手动安装依赖：
-
-```bash
-cd skills/yy-post-to-wx/scripts
-npm install
-cd ../../..
-```
-
-## 环境检查
-
-首次使用前建议运行环境检查：
-
-```bash
-bun skills/yy-post-to-wx/scripts/check-permissions.ts
-```
-
-检查内容：
-
-- Bun 运行时
-- 环境变量配置
-- API 凭证是否存在
-
-## 依赖
-
-- `marked` - Markdown 解析
-- `front-matter` - frontmatter 解析
-
-## 限制
-
-- 不支持浏览器自动化发布（仅 API 方式）
-- 不支持多账号管理
-- 图片大小需符合微信公众号限制
+- `scripts/main.ts`：主执行脚本
+- `scripts/check-permissions.ts`：环境检查脚本
+- `scripts/config-loader.ts`：配置加载模块
+- `scripts/wechat-api.ts`：微信 API 封装
+- `scripts/md-to-wechat.ts`：Markdown 转换模块
+- `scripts/themes.ts`：主题样式定义
+- `templates/base.html`：基础 HTML 模板
