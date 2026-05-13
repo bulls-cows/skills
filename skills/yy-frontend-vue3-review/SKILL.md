@@ -1,166 +1,96 @@
 ---
 name: yy-frontend-vue3-review
 description: >
-  **Vue3 前端代码审核专用技能，只要用户提到以下任何内容，必须立即使用此技能：**
-  - 代码审核、Code Review、CR、Vue3 代码审查
-  - 提交前检查、合并前审核、PR 审核
-  - 代码质量检查、代码规范检查
-  - Git 变动代码审核、暂存区代码检查
-  - 前端代码审核、Vue3 组件审核
-
-  **核心特性：**
-  - 严格限制在 `src` 目录内审核，绝不越界
-  - 覆盖 9 大审核维度：代码风格、最佳实践、Vue3 组件规范、命名、网络请求、computed、逻辑错误、安全、绝对禁止项
-  - 三级严重程度分级：🔴 严重 / 🟡 中等 / 🟢 轻微
-  - 生成审核清单，逐维度展示审核结果
-  - **绝不修改代码**（仅审核，修复需用户明确要求）
-  - 仅支持 Vue3 `<script setup>` 组合式 API，不支持 React
-icon: 🔍
-examples:
-  - 帮我审核一下这次改动的 Vue3 代码，看看有没有问题
-  - 检查 src/views/ 下 Vue3 组件的代码质量，重点看组件规范和命名
-  - 这个 PR 要合并了，做一次全面代码审核，Vue3 的 script setup 部分
-  - 帮我 CR 一下 src/hooks/useTable.ts 这个 Hook 文件
-  - 审核当前 git 暂存区的 .vue 文件改动
-  - src/api/ 目录下的 ts 文件做了些改动，帮我检查代码风格
+  Vue3 前端代码审核助手。审核 Vue3 项目 src 目录下所有改动文件，基于 Vue3 开发规范逐项检查
+  并生成审核清单。用于：用户要求审核 Vue3 代码、代码 review、检查 Vue3 规范时触发。
 ---
 
 # yy-frontend-vue3-review
 
-审核 Vue3 项目 `src` 目录下所有改动文件，基于 Vue3 开发规范逐项检查 `<script setup>` 组合式 API、组件规范、代码风格、命名规范、逻辑错误、网络请求、computed 规范、安全漏洞、最佳实践及绝对禁止项。
+Vue3 前端代码审核助手，审核 Vue3 项目 `src` 目录下所有改动文件，基于 Vue3 开发规范逐项检查并生成审核清单。
 
-**核心原则：绝不审核 `src` 之外的文件，绝不使用 React 标准，绝不修改代码（除非用户明确要求修复）。**
+---
 
-## 触发场景
+## 适用场景
 
-- 用户明确要求审核 Vue3 前端代码
-- 代码合并前全面审核
-- 代码提交前质量检查
-- 用户指定 `src` 目录下文件或文件夹范围
-- 默认审核 `git diff` 获取的 `src` 目录下所有变动文件
+- 默认范围：`git diff --name-only HEAD` 和 `git diff --cached --name-name` 获取的 `src` 目录变动文件，合并去重后严格过滤
+- 指定范围：用户指定的 `src` 目录下文件或文件夹，递归收集支持的文件类型
+- 无匹配文件：回复「当前 src 目录下没有需要审核的改动文件。」并终止
+
+**支持的文件类型**：`.vue`（Vue3 `<script setup>` SFC）、`.js`、`.jsx`、`.ts`、`.tsx`、`.css`、`.scss`、`.less`
+
+---
 
 ## 不适用场景
 
-- React 项目
-- 项目不存在 `src` 目录
-- 审核 `src` 目录之外的文件
-- 直接修改代码自动化修复（除非用户明确要求）
-- 纯后端代码审核
-
-## 支持审核的文件类型
-
-| 扩展名 | 审核内容 |
-|--------|----------|
-| `.vue` | Vue3 单文件组件（模板、`<script setup>`、样式） |
-| `.js` | JavaScript 文件（代码风格、导入顺序、命名规范、逻辑错误） |
-| `.ts` | TypeScript 文件（类型注解、代码风格、导入顺序、命名规范） |
-| `.css` | CSS 样式（BEM 命名、格式、scoped 使用） |
-| `.scss` | SCSS 样式（BEM 命名、格式、嵌套规范） |
-| `.less` | Less 样式（BEM 命名、格式、变量使用） |
+- 生成新组件或新功能代码
+- 修改业务逻辑、变更功能行为
+- 生成 git 提交信息
+- Vue2 项目（检测到 Options API 特征时，提示使用 yy-frontend-vue2-review）
+- 非 `<script setup>` 语法的 Vue3 组件（建议使用 TSX 格式）
+- React 项目（检测到 React 导入时，拒绝处理并告知用户）
+- 非 `src` 目录下的文件
 
 ---
 
-## 执行流程
+## 审核清单与风险分级
 
-### 步骤一：确定审核目标
+### 维度清单
 
-1. **目录验证**：检查项目是否存在 `src` 目录。若不存在，回复：
-   > 当前项目不符合 Vue3 前端代码审核的目录要求，本技能仅支持包含 src 目录的前端项目。
+| 维度 ID | 检查内容 | 严重程度 |
+| ------- | -------- | -------- |
+| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、4 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 |
+| D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 |
+| D03 | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
+| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
+| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
+| D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 |
+| D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 |
+| D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 |
+| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 |
 
-   并终止。
+### 审核执行规则
 
-2. **插件检测**：检查项目是否安装 `unplugin-vue-setup-extend-plus`（检查 `package.json` 中依赖或 `node_modules` 目录）
-   - **已安装**（`hasVueSetupExtendPlus = true`）：审核 `.vue` 文件时，将 `<script setup>` 缺少 `name="PascalCase组件名"` 属性视为 🟢 轻微问题
-   - **未安装**（`hasVueSetupExtendPlus = false`）：不审核 `name` 属性，不视为问题
+- D07/D08/D09（🔴 严重）：发现即审核不通过，必须修复
+- D03/D04/D05/D06（🟡 中等）：发现则列出，审核不通过，建议修复
+- D01/D02（🟢 轻微）：发现则列出，不影响审核通过结论
 
-3. **用户指定**：递归获取指定文件或文件夹内的 `.vue`、`.js`、`.ts`、`.css`、`.scss`、`.less` 文件。
+### 各文件类型审核范围
 
-4. **未指定**：执行 `git diff --name-only HEAD` 和 `git diff --cached --name-only`，合并去重后严格过滤出 `src` 目录下的文件。
+| 文件类型 | 涉及维度 |
+| -------- | -------- |
+| `.vue` | D01, D02, D03, D04, D05, D06, D07, D08, D09 |
+| `.js/.jsx/.ts/.tsx` | D01, D03, D04, D05, D06, D07, D09 |
+| `.css/.scss/.less` | D01, D02 |
 
-5. **无匹配文件**：回复「当前 src 目录下没有需要审核的改动文件。」并终止。
+### 审核豁免
 
-### 步骤二：生成审核清单
-
-逐维度生成 9 大维度审核清单（按严重程度排序）：
-
-| 维度 ID | 检查内容 | 严重程度 | 参考文件 |
-|---------|----------|----------|----------|
-| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、4 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 | `code-style.md` |
-| D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 | `best-practice.md` |
-| D03 | Vue3 组件规范（`<script setup>`、name 属性（需 unplugin-vue-setup-extend-plus）、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 | `component.md` |
-| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 | `naming.md` |
-| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 | `network-request.md` |
-| D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 | `computed.md` |
-| D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 | `logic-error.md` |
-| D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 | `security.md` |
-| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 | `absolute-prohibitions.md` |
-
-### 步骤三：逐维度审核
-
-按 D01 → D09 顺序逐维度审核，**按需查阅 references 目录下的详细规范文件**。
-
-审核注意事项：
-
-- 注释相关问题默认忽略，不检查
-- 使用 `==` 不视为问题
-- `catch` 块中的 `console.warn` 不视为问题
-- emit 事件必须在白名单范围内
+- 注释问题不检查
+- `==` 不视为问题（保持代码原有写法，不主动报告差异）
+- `catch` 中 `console.warn` 允许保留
 - `<script setup>` 的 `name` 属性：仅在检测到项目安装了 `unplugin-vue-setup-extend-plus` 时才审核，未安装时不视为问题
 
-### 步骤四：输出审核结果
+---
 
-按文件分组、按严重程度排序（🔴 严重 → 🟡 中等 → 🟢 轻微）输出审核报告。
+## 参考文件
 
-### 步骤五：自动提交判断
+各维度详细规范请参阅 `references/` 目录下的参考文件：
 
-| 审核结果 | 判断条件 | 后续动作 |
-|---------|---------|---------|
-| **通过** | 无问题 OR 仅存在「轻微」问题 | 输出审核通过报告 |
-| **不通过** | 存在「严重」或「中等」问题 | 输出完整审核结果和修复建议，等待用户修复后重新审核 |
+- `references/code-style.md` - D01 代码风格规范
+- `references/best-practice.md` - D02 最佳实践规范
+- `references/component.md` - D03 Vue3 组件规范
+- `references/naming.md` - D04 命名规范
+- `references/network-request.md` - D05 网络请求规范
+- `references/computed.md` - D06 computed 规范
+- `references/logic-error.md` - D07 逻辑错误检查
+- `references/security.md` - D08 安全漏洞检查
+- `references/absolute-prohibitions.md` - D09 绝对禁止项
 
 ---
 
-## 严重程度分级标准
+## 输出格式
 
-| 级别 | 图标 | 说明 | 示例 |
-|------|------|------|------|
-| 严重 | 🔴 | 可能导致功能异常、安全漏洞、运行时错误 | 空指针引用、XSS 风险、连续解构、直接修改 props |
-| 中等 | 🟡 | 不符合规范但不影响运行，可能降低可维护性 | 导入顺序错误、组件结构顺序不对、命名不规范、缺少 try/catch |
-| 轻微 | 🟢 | 代码风格、格式问题，不影响功能和可维护性 | 缩进不一致、引号不统一、缺少尾随逗号 |
-
----
-
-## 详细审核规范
-
-> **渐进式披露**：以下 9 个规范文件按维度独立组织，审核时按需查阅对应文件。
-
-- `references/code-style.md` — D01 代码风格（缩进、引号、分号、尾随逗号、箭头函数、导入顺序、Prettier 配置）
-- `references/best-practice.md` — D02 最佳实践（调试代码、BEM+scoped、Hooks 规范、组件拆分、懒加载、KeepAlive）
-- `references/component.md` — D03 Vue3 组件规范（`<script setup>`、name 属性、脚本结构、元素特性顺序、Props、Emit、v-slot、ref/computed）
-- `references/naming.md` — D04 命名规范（API 函数、事件函数、常量、Props、组件名、emit 事件、Hooks、布尔值、TS 类型约束）
-- `references/network-request.md` — D05 网络请求规范（async/await、try/catch/finally、统一响应模式）
-- `references/computed.md` — D06 computed 规范（try/catch 包裹、有意义命名）
-- `references/logic-error.md` — D07 逻辑错误（空指针、数组越界、方法内部顺序、ref `.value`）
-- `references/security.md` — D08 安全漏洞（XSS 风险、敏感信息泄露）
-- `references/absolute-prohibitions.md` — D09 绝对禁止项（连续解构、修改 props、this、Options API、mixins 等）
-
----
-
-## 边界条件与注意事项
-
-| 场景 | 处理方式 |
-|------|---------|
-| **src 目录边界** | 严格只审核 `src/` 目录下的文件，其他目录文件直接跳过 |
-| **大型文件** | 超过 1000 行的文件按模块分段审核，避免上下文超限 |
-| **部分审核** | 用户指定仅审核某些维度时，其他维度跳过 |
-| **无问题文件** | 没有问题的文件也需在报告中列出，标注「✅ 无问题」 |
-| **重复问题** | 同一类问题在多个文件出现时，统计总数并提供统一修复方案 |
-
----
-
-## 输出契约
-
-### 审核通过（无问题或仅轻微）
+### 通过（无问题或仅轻微）
 
 ```markdown
 ## 🔍 审核结果：✅ 通过
@@ -169,14 +99,14 @@ examples:
 
 | 严重程度 | 数量 |
 | -------- | ---- |
-| 🔴 严重  | 0    |
-| 🟡 中等  | 0    |
-| 🟢 轻微  | N    |
+| 🔴 严重 | 0 |
+| 🟡 中等 | 0 |
+| 🟢 轻微 | N |
 
 所有文件符合 Vue3 前端开发规范，审核通过。
 ```
 
-### 审核不通过（存在严重或中等问题）
+### 不通过（严重或中等问题）
 
 ```markdown
 ## 🔍 审核结果：❌ 不通过
@@ -185,9 +115,9 @@ examples:
 
 | 严重程度 | 数量 |
 | -------- | ---- |
-| 🔴 严重  | N    |
-| 🟡 中等  | N    |
-| 🟢 轻微  | N    |
+| 🔴 严重 | N |
+| 🟡 中等 | N |
+| 🟢 轻微 | N |
 
 ### 问题详情
 
@@ -213,4 +143,50 @@ examples:
 请优先修复「严重」和「中等」问题，修复完成后可再次发起审核。
 ```
 
-不自动调用提交技能，等待用户修复后重新审核。
+---
+
+## 边界条件
+
+| 场景 | 处理方式 |
+| ---- | -------- |
+| 不修改代码 | 审核仅报告问题和修复建议，不执行任何代码修改 |
+| 非 Vue3 项目 | 识别到 Vue2（Options API）或 React 时，拒绝处理并告知用户 |
+| 无 src 目录 | 终止审核并回复目录要求不符 |
+| 仅轻微问题 | 审核通过，问题列表仍展示 |
+| 存在中/严重问题 | 审核不通过，按文件分组、按严重程度排序输出问题详情 |
+| 大型文件 | 超过 1000 行分段审核 |
+| 重复问题 | 统计总数，提供统一修复方案 |
+| 用户要求修复 | 仅在用户明确要求后才执行代码修复，否则仅保留审核结果 |
+| TypeScript | 参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型） |
+
+---
+
+## 推荐实践
+
+1. 函数 try/catch：推荐包裹 computed、函数等，catch 中 `console.warn` 打印错误
+2. 异步写法：尽可能使用 async/await，少用 `.then()` 链式
+3. 计算优先：除后端交互和定时器外，一律使用 `computed`
+4. v-html：可使用，但必须防范 XSS 风险
+5. 响应式数据：优先 `ref`，复杂对象用 `reactive`
+6. Hooks 抽离：可复用逻辑抽离到 `useXxx`，全局放在 `@src/hooks/`，局部直接在组件同级目录新建
+7. 未使用变量：需自行清理
+8. 注释问题：默认忽略，不检查
+9. 不要过度封装：简单逻辑直接写在 template，不为简单条件判断创建函数
+10. 组件懒加载：路由和大组件用 `defineAsyncComponent`
+11. KeepAlive：合理使用页面缓存
+
+---
+
+## 禁止规则
+
+1. 禁止连续解构（如 `...data.data`）
+2. 禁止父组件直接修改子组件数据
+3. 禁止多次修改 ref/reactive 属性类型
+4. 禁止直接修改 props（只读访问 `props.xxx`）
+5. 禁止在 `<script setup>` 中使用 `this`
+6. 禁止使用 Options API 写法
+7. 禁止使用 mixins
+8. 禁止多层 try/catch 嵌套
+9. 基础组件生命周期禁止主动 emit
+10. 简单逻辑不额外封装为函数
+11. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）

@@ -1,31 +1,47 @@
-# D01 · 代码风格（🟢 轻微）
+# D01 · 代码风格
+
+**严重程度**：🟢 轻微
+
+---
 
 ## 基础格式
 
-- 2 空格缩进
-- JS/TS 使用**单引号**，HTML 属性使用**双引号**
-- **必须分号**
-- 120 字符行宽
+- **缩进**：2 空格缩进
+- **引号**：JS/TS 使用单引号，HTML 属性使用双引号
+- **分号**：必须分号
+- **行宽**：120 字符行宽
+
+---
 
 ## 尾随逗号
 
-- 多行对象/数组末尾**必须加逗号**
+多行对象/数组末尾必须加逗号。
+
+---
 
 ## 箭头函数
 
-- 单参数省略括号：`item => item.id`
+单参数省略括号（`item => item.id`）。
+
+---
 
 ## 对象括号
 
-- 保持空格：`{ foo: bar }`
+保持空格（`{ foo: bar }`）。
+
+---
 
 ## 等于运算符
 
-- **优先使用 `==`**，审核时**不报告** `==` 问题
+优先使用 `==`，审核时不报告 `==` 问题。
+
+---
 
 ## 注释
 
-- 注释相关问题默认忽略，不检查
+注释相关问题默认忽略。
+
+---
 
 ## Prettier 配置
 
@@ -36,15 +52,19 @@
   "trailingComma": "all",
   "arrowParens": "avoid",
   "bracketSpacing": true,
-  "quoteProps": "as-needed"
+  "quoteProps": "as-needed",
+  "printWidth": 120,
+  "tabWidth": 2
 }
 ```
 
-## 导入顺序（4 组）
+---
 
-组间空一行，组内按字母排序：
+## 导入顺序（4 组，组间空一行，组内字母排序）
 
-1. **外部依赖**（node_modules：vue, dayjs, lodash, element-plus 等）
-2. **types**（类型导入，仅 TypeScript/TSX：`import type { IUserInfo } from '@src/types'`）
-3. **内部全局依赖**（@src/：api、utils、hooks、store、constants、components）
-4. **内部相对依赖**（./、../：所有相对导入）
+| 组别 | 说明 | 示例 |
+| ---- | ---- | ---- |
+| 1 | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'`、`import { debounce } from 'lodash'` |
+| 2 | types（类型导入，仅 TS） | `import type { IUserInfo, ITableConfig } from '@src/types'` |
+| 3 | 内部全局依赖（@src/） | `import { apiGetUser } from '@src/api/user'`、`import { formatDate } from '@src/utils'`、`import { useTable } from '@src/hooks/useTable'`、`import store from '@src/store'`、`import { APP_CONFIG } from '@src/constants'`、`import DataTable from '@src/components/DataTable'` |
+| 4 | 内部相对依赖（./、../） | `import { localHelpers } from './utils/helpers'`、`import { useLocalForm } from './hooks/useLocalForm'`、`import { MODULE_CONFIG } from './constants'`、`import SearchBar from './SearchBar.vue'` |

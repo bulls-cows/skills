@@ -6,9 +6,7 @@
 
 ---
 
-## async/await + try/catch/finally
-
-所有网络请求必须遵循此标准模式：
+## 必须使用 async/await + try/catch/finally
 
 ```js
 async function fetchData() {
@@ -30,42 +28,16 @@ async function fetchData() {
 
 ---
 
-## 禁止多层 try/catch 嵌套 🟡
+## 禁止多层 try/catch 嵌套
 
-- 异步操作需扁平化处理
-- 避免在 try 块内再嵌套 try/catch
-- 使用 `async/await` 替代 `.then()` 链式调用来降低嵌套深度
-
-**错误示例**：
-
-```js
-// ❌ 多层嵌套
-async function badExample() {
-  try {
-    try {
-      // 嵌套 try/catch
-    } catch (e) { /* ... */ }
-  } catch (error) { /* ... */ }
-}
-```
+异步操作需扁平化处理，避免多层嵌套。
 
 ---
 
-## 统一响应处理模式 🟡
+## 统一响应处理模式
 
-所有网络请求必须遵循统一响应模式：
-
-```js
-const { code, data, msg } = await apiXXX()
-if (code === 0) {
-  this.$message.success(msg || '操作成功')
-} else {
-  this.$message.error(msg)
-}
-```
-
-**规范说明**：
-
-- `code === 0` 表示成功，调用 `this.$message.success()`
-- 非零 `code` 表示失败，调用 `this.$message.error()`
-- `msg` 为空时使用默认文案
+| 响应码 | 处理方式 |
+| ------ | -------- |
+| `code === 0` | 成功，调用 `this.$message.success()` |
+| 非零 `code` | 失败，调用 `this.$message.error()` |
+| `msg` 为空 | 使用默认文案 |
