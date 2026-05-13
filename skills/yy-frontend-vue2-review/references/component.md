@@ -20,6 +20,7 @@ Vue2 组件的 `export default` 内部必须严格遵循以下顺序：
 8. 生命周期钩子
 
 **生命周期标准顺序**：
+
 `beforeCreate` → `created` → `beforeMount` → `mounted` → `beforeUpdate` → `updated` → `activated` → `deactivated` → `beforeDestroy` → `destroyed`
 
 ```javascript
@@ -49,6 +50,15 @@ export default {
 
 ---
 
+## mixins 使用检查
+
+检测到 mixins 使用时，标记为中等问题（🟡）：
+
+- 建议重构为可复用的工具函数或独立组件
+- 不强制禁止，允许用户决定是否修复
+
+---
+
 ## 模板元素特性顺序
 
 模板中元素特性必须按以下顺序排列：
@@ -61,6 +71,7 @@ export default {
 6. `props` / `attrs`
 7. `v-on`（事件监听）
 8. `v-html` / `v-text`
+9. `v-slot`
 
 **示例**：
 
@@ -124,6 +135,14 @@ props: {
 
 `input` → 其它自定义事件 → `change` / `click` 等交互事件。
 
+### 白名单
+
+| 类别 | 白名单事件 |
+| ---- | ---------- |
+| 交互类 | `change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add` |
+| 弹窗类 | `open`、`close`、`show`、`hide` |
+| 操作类 | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
+
 ### 生命周期 emit 限制
 
 - **基础组件**：禁止在生命周期钩子中 emit 事件
@@ -160,41 +179,16 @@ props: {
 ## 组件命名
 
 - **模板引用**：使用 PascalCase，如 `<UserList />`
-- 允许单个单词，但推荐多单词组合以增强语义
 - **文件名**：必须为多个单词 + PascalCase，如 `UserList.vue`
-- 避免单单词文件名（如 `User.vue` → 改为 `UserCard.vue`）
 
 ---
 
-## data / computed 使用原则
+## data/computed 使用原则
 
-- 除后端交互数据和部分定时器场景外，其它数据一律尽可能使用 `computed`
-- 避免在 `data` 中存储可推导的值
-
-**正确示例**：
-
-```javascript
-computed: {
-  isDisabled() {
-    return this.loading || !this.formValid
-  }
-}
-```
-
-**错误示例**：
-
-```javascript
-data() {
-  return {
-    isDisabled: false // ❌ 应移到 computed
-  }
-}
-```
+除后端交互和定时器外，其它尽可能使用 `computed`。
 
 ---
 
 ## 模块化原则
 
-- **单一职责**：每个组件只做一件事
-- **高内聚低耦合**：相关逻辑内聚，无关逻辑分离
-- 超过 500 行的组件应考虑拆分
+单一职责、高内聚低耦合，超过 500 行应考虑拆分。

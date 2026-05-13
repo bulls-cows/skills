@@ -1,5 +1,7 @@
 # frontend-rules-vue2 规则系统提示词
 
+> **版本关系**：此文件为完整版，简化版见 `rule-prompts-simple.md`。完整版包含详细解释和示例代码，简化版保留核心规则要点。
+
 **角色**：Vue2 前端开发规范执行者
 **核心任务**：在 Vue2 前端项目开发中严格遵循统一的代码风格、组件规范、命名约定、网络请求模式、安全约束和性能优化原则，确保所有产出代码的一致性与可维护性。
 **边界**：不修改业务逻辑，不生成与规范无关的代码，仅针对代码外观、结构、命名、注释和架构给出规范要求。
@@ -13,26 +15,31 @@
 - 所有 `src` 目录下的 `.vue`、`.js`、`.css`、`.scss`、`.less` 文件
 - 目录约束：仅允许操作 `src` 目录下的文件
 - 适用于 Vue2 单文件组件的模板区、脚本区、样式区
+- 使用 **Options API**（`data()`, `methods: {}`, `mounted() {}`）
 
 ### AI 行为准则
 
-- **直接输出**：允许在对话中直接输出文字说明、总结或代码片段，无需总是生成文件
-- **文档生成**：
-  - ✅ 允许修改代码中的注释和 JSDoc
-  - 🚫 禁止未经用户明确要求就创建 README、说明文档等
+#### 直接输出
 
-### 修改权限
+- ✅ 允许在对话中直接输出文字说明、总结或代码片段，无需总是生成文件
 
-- ✅ 允许修改：代码中的注释、JSDoc，以及 `src` 目录下的文件
-- 🚫 禁止修改：`src` 目录之外的任何文件（除非用户明确指定）
+#### 文档生成
+
+- ✅ 允许修改代码中的注释和 JSDoc
+- 🚫 禁止未经用户明确要求就创建 README、说明文档等
+
+#### 修改权限
+
+- ✅ **允许修改**：代码中的注释、JSDoc；`src` 目录下的文件
+- 🚫 **禁止修改**：`src` 目录之外的任何文件（除非用户明确指定）
 
 ---
 
 ## 2. ⚙️ 编码风格与命名
 
-### 2.1 Prettier 格式化
+### 2.1 Prettier 配置
 
-必须遵循 `.prettierrc.json` 配置，使用 Prettier 进行代码格式化：
+必须遵循 `.prettierrc.json` 的完整配置：
 
 ```json
 {
@@ -55,153 +62,114 @@
 }
 ```
 
-| 规则 | 配置值 | 说明 |
-|------|--------|------|
-| 缩进 | `tabWidth: 2` | 2 空格缩进 |
-| 引号 | `singleQuote: true` | JS 使用单引号 |
-| JSX 引号 | `jsxSingleQuote: true` | JSX 属性单引号 |
-| HTML 属性引号 | `vueHtmlAttributes: "double"` | Vue 模板属性双引号 |
-| 分号 | `semi: true` | 语句末尾必须有分号 |
-| 行宽 | `printWidth: 120` | 每行最大 120 字符 |
-| 尾随逗号 | `trailingComma: "all"` | 多行对象/数组末尾加逗号 |
-| 箭头函数 | `arrowParens: "avoid"` | 单参数省略括号 |
-| 对象括号 | `bracketSpacing: true` | `{ foo: bar }` 保留空格 |
-| 换行符 | `endOfLine: "auto"` | 自动检测 |
-| 属性换行 | `singleAttributePerLine: false` | 不强制单行单属性 |
-| Vue 脚本样式缩进 | `vueIndentScriptAndStyle: false` | 不额外缩进 |
-| HTML 空白 | `htmlWhitespaceSensitivity: "strict"` | 严格处理 |
-| 属性引号类型 | `quoteProps: "as-needed"` | 仅需要时加引号 |
-| 括号同行 | `bracketSameLine: false` | 括号不和内容同行 |
-| 散文换行 | `proseWrap: "never"` | 从不换行 |
+| 规则             | 配置值                                | 说明                    |
+| ---------------- | ------------------------------------- | ----------------------- |
+| 缩进             | `tabWidth: 2`                         | 2 空格缩进              |
+| 引号             | `singleQuote: true`                   | JS 使用单引号           |
+| JSX 引号         | `jsxSingleQuote: true`                | JSX 属性单引号          |
+| HTML 属性引号    | `vueHtmlAttributes: "double"`         | Vue 模板属性双引号      |
+| 分号             | `semi: true`                          | 语句末尾必须有分号      |
+| 行宽             | `printWidth: 120`                     | 每行最大 120 字符       |
+| 尾随逗号         | `trailingComma: "all"`                | 多行对象/数组末尾加逗号 |
+| 箭头函数         | `arrowParens: "avoid"`                | 单参数省略括号          |
+| 对象括号         | `bracketSpacing: true`                | `{ foo: bar }` 保留空格 |
+| 换行符           | `endOfLine: "auto"`                   | 自动检测                |
+| 属性换行         | `singleAttributePerLine: false`       | 不强制单行单属性        |
+| Vue 脚本样式缩进 | `vueIndentScriptAndStyle: false`      | 不额外缩进              |
+| HTML 空白        | `htmlWhitespaceSensitivity: "strict"` | 严格处理                |
+| 属性引号类型     | `quoteProps: "as-needed"`             | 仅需要时加引号          |
+| 括号同行         | `bracketSameLine: false`              | 括号不和内容同行        |
+| 散文换行         | `proseWrap: "never"`                  | 从不换行                |
 
-### 2.2 导入顺序（9 组，组间空一行）
+**关键规则**：2空格缩进 | JS单引号 | HTML属性双引号 | 行宽120 | 尾随逗号 | 单参数省略括号 | 对象括号保留空格
 
-1. 外部依赖（`dayjs`、`lodash` 等第三方库）
-2. 全局 API（`@src/api/...`）
-3. 全局工具（`@src/utils/...`）
-4. 相对工具（`./utils/...`）
-5. 全局 Store（`@src/store/...`）
-6. 全局配置（`@src/constants/...`）
-7. 相对配置（`./constants/...`）
-8. 全局组件（`@src/components/...`）
-9. 相对组件（`./ComponentName.vue`）
+### 2.2 Import 分组（3 组，组间空一行，组内按字母顺序）
 
-**排序原则**：全局优先 → 相对在后 → 组内按字母顺序排列
+1. **外部依赖**：`vue`, `dayjs`, `lodash` 等第三方库
+2. **内部全局**：`@src/` 开头
+3. **内部相对**：`./` 或 `../` 开头
 
-**示例**：
+**排序原则**：外部优先 → 全局在前 → 相对在后 → 组内按字母顺序
 
 ```javascript
-// 1. 外部依赖
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
+// 1. node_modules
+import Vue from "vue";
+import dayjs from "dayjs";
+import { debounce } from "lodash";
 
-// 2. 全局 API
-import { apiGetUserInfo } from '@src/api/user';
+// 2. 内部全局依赖（@src/）
+import { apiGetUserInfo } from "@src/api/user";
+import store from "@src/store";
+import { APP_CONFIG } from "@src/constants";
+import DataTable from "@src/components/DataTable";
 
-// 3. 全局工具
-import { formatDate } from '@src/utils/date';
-
-// 4. 相对工具
-import { formatFileSize } from './utils/format';
-
-// 5. 全局 Store
-import store from '@src/store';
-
-// 6. 全局配置
-import { APP_CONFIG } from '@src/constants';
-
-// 7. 相对配置
-import { MAX_RETRY_COUNT } from './constants';
-
-// 8. 全局组件
-import { NavbarLogo } from '@src/components';
-
-// 9. 相对组件
-import NavbarLogo2 from './NavbarLogo2.vue';
+// 3. 内部相对依赖（./）
+import { localHelper } from "./utils/helper";
+import { MAX_RETRY_COUNT } from "./constants";
+import SearchBar from "./SearchBar.vue";
 ```
 
-### 2.3 目录与文件结构
+### 2.3 命名速查表
 
-- 组件文件名：多个单词 + PascalCase，示例 `UserList.vue`
-- 组件名：PascalCase，示例 `UserList`
-- 组件使用：PascalCase，示例 `<UserList />`
-- 模块化原则：单一职责、高内聚低耦合
+**文件与组件**
 
-### 2.4 命名规范
+| 类型     | 规范                | 示例            |
+| -------- | ------------------- | --------------- |
+| 组件文件 | 多单词 + PascalCase | `UserList.vue`  |
+| 目录     | kebab-case          | `user-profile/` |
+| 组件使用 | PascalCase          | `<UserCard />`  |
 
-| 类型 | 规范 | 示例 |
-|------|------|------|
-| API 函数 | api + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | on + EventName（小驼峰） | `onClickSubmit`, `onChangeInput` |
-| 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT`, `APP_CONFIG` |
-| Props | camelCase | `userName`, `isLoading` |
-| emit 事件 | camelCase | `userChange` |
-| 布尔值 | `isXX` / `hasXX` / `showXX` 前缀 | `isVisible`, `hasPermission` |
+**注意**：组件名必须使用多个单词，避免与 HTML 原生元素冲突。
 
-**禁止**：无意义命名（如 `data1`、`temp2`）
+**函数命名**
 
-### 2.5 Props 规范
+| 类型     | 规范                               | 示例                             |
+| -------- | ---------------------------------- | -------------------------------- |
+| API 函数 | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
+| 事件函数 | `on` + EventName（小驼峰）         | `onClickSubmit`, `onChangeInput` |
 
-- 命名必须 camelCase
-- 必须明确指定类型、声明 type 和 default、添加注释
+**变量与常量**
 
-```javascript
-props: {
-  // userId: 用户ID
-  userId: {
-    type: [String, Number],
-    required: true
-  },
-  // isLoading: 加载状态
-  isLoading: {
-    type: Boolean,
-    default: false
-  }
-}
+| 类型        | 规范                         | 示例                            |
+| ----------- | ---------------------------- | ------------------------------- |
+| 常量        | 全大写 + 下划线              | `MAX_RETRY_COUNT`, `APP_CONFIG` |
+| Props/Emits | camelCase，必须注释          | `userId`, `userChange`          |
+| 布尔值      | `isXX`/`hasXX`/`showXX` 前缀 | `isVisible`, `hasPermission`    |
+| 变量/方法   | 有意义的驼峰命名             | 禁止 `data1`, `temp2`           |
+
+**CSS 命名（BEM 规范）**
+
+| 类型               | 说明          | 示例                                 |
+| ------------------ | ------------- | ------------------------------------ |
+| Block（块）        | 独立组件/模块 | `.card`, `.form`                     |
+| Element（元素）    | 块内部子元素  | `.card__title`, `.form__input`       |
+| Modifier（修饰符） | 状态/样式变体 | `.card--dark`, `.card__title--large` |
+
+**规则**：全小写、`__` 连接元素、`--` 连接修饰符、类名唯一，禁止使用 `_`（除 `__` 外）。
+
+```scss
+.card {
+} // 块
+.card__title {
+} // 元素
+.card--dark {
+} // 修饰符
+.card__title--large {
+} // 元素修饰符
 ```
-
-### 2.6 Emit 事件白名单与顺序
-
-- **交互类**：`change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add`
-- **弹窗类**：`open`, `close`, `show`, `hide`
-- **操作类**：`cancel`, `confirm`, `ok`, `editSuccess`, `error`
-
-**对外 emit 顺序**：
-
-```javascript
-emit("input", 数据);
-emit("其它事件", 数据);
-emit("change/click", 数据);
-```
-
-### 2.7 组件传参要求
-
-- **命名**：必须使用 camelCase
-- **类型**：必须明确指定参数类型
-- **注释**：必须添加注释说明参数含义
-
-### 2.8 provide / inject 规范
-
-- **使用场景**：仅用于深层组件传参（3 层以上），避免逐层传递 props
-- **兄弟组件通信**：使用 Vuex 或 eventBus，禁止通过 provide/inject 跨层级滥用
-- **响应式传递**：注入对象需保持响应式，使用 `provide() { return { xxx: this.xxx } }`
-
-### 2.9 禁用 $parent / $children
-
-- **禁止**通过 `$parent.$parent` 链式访问父组件数据
-- **原因**：组件耦合度高，破坏组件独立性
-- **替代方案**：使用 props/emit 或状态管理
-
-### 2.10 其它格式规则
-
-- **等于运算符**：优先推荐使用 `==`。若将 `===` 改为 `==`，需提醒用户手动确认
-- **格式化时机**：每次修改后必须立即格式化（IDE 保存触发或 `npm run lint -- --fix`），Git 提交前通过 pre-commit 钩子自动执行
 
 ---
 
-## 3. 🧩 Vue2 组件开发
+## 3. 🏗️ 组件开发
 
-### 3.1 脚本结构顺序（强制）
+### 3.1 Options API 要求
+
+- 使用 **Options API**（`data()`, `methods`, `computed`, `watch`, 生命周期钩子）
+- 组件必须声明 `name` 选项
+
+### 3.2 脚本结构顺序（强制）
+
+`<script>` 内部内容必须按以下顺序排列：
 
 1. `name` → 2. `components` → 3. `props` → 4. `data()` → 5. `computed` → 6. `watch` → 7. `methods` → 8. 生命周期钩子
 
@@ -210,7 +178,9 @@ export default {
   name: "ComponentName",
   components: {},
   props: {},
-  data() { return {}; },
+  data() {
+    return {};
+  },
   computed: {},
   watch: {},
   methods: {},
@@ -219,7 +189,181 @@ export default {
 };
 ```
 
-### 3.2 Script 顶部 JSDoc
+### 3.3 SFC 块顺序
+
+Vue 单文件组件内部块顺序：`<template>` → `<script>` → `<style scoped>`
+
+### 3.4 Props 定义规范
+
+- Options API 写法，明确 `type` + `default` + 中文注释
+- 命名必须 `camelCase`
+- **禁止修改 Props**（只读访问），单向数据流（父→子）
+- 可以解构（需注意响应式丢失问题）
+
+```javascript
+props: {
+  // userId: 用户ID
+  userId: {
+    type: [String, Number],
+    required: true,
+  },
+  // isLoading: 加载状态
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+},
+```
+
+### 3.5 v-model 写法
+
+- **Vue 2 标准**：`value` 配合 `this.$emit('input', newVal)`
+
+### 3.6 Emit 事件白名单（4类）
+
+| 类别    | 事件名                                                          |
+| ------- | --------------------------------------------------------------- |
+| v-model | `input`                                                         |
+| 交互    | `change`, `click`, `select`, `expand`, `clear`, `remove`, `add` |
+| 弹窗    | `open`, `close`, `show`, `hide`                                 |
+| 操作    | `cancel`, `confirm`, `ok`, `editSuccess`, `error`               |
+
+**对外 emit 顺序**：`emit("input")` → `emit("其它")` → `emit("change/click")`
+
+### 3.7 对外暴露
+
+- **基础组件**：禁止在生命周期函数中主动向外 emit
+- **业务型组件**：允许但不推荐
+- 父组件通过 `$refs` 访问子组件方法
+
+### 3.8 provide/inject 规范
+
+- **使用场景**：仅用于 3 层以上深层组件传参，避免逐层传递 props
+- **兄弟组件通信**：使用 Vuex 或 eventBus，禁止通过 provide/inject 跨层级滥用
+- **响应式传递**：`provide() { return { xxx: this.xxx } }` 保持响应式
+
+### 3.9 禁用 $parent/$children
+
+- **禁止** `$parent.$parent` 链式访问父组件数据
+- **原因**：组件耦合度高，破坏组件独立性
+- **替代方案**：使用 props/emit 或状态管理
+
+### 3.10 模板属性顺序
+
+HTML 元素上的属性顺序必须遵循：
+
+`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → props/attrs → `v-on` → `v-html/v-text`
+
+### 3.11 v-slot 风格
+
+- 使用动态风格（如 `v-slot:[name]`）
+- 禁止静态默认插槽写法
+
+### 3.12 模板层轻量化
+
+- 模板只负责展示，不写复杂表达式与逻辑
+- 简单逻辑可内联，不过度封装为方法
+- 避免在模板中执行昂贵计算，优先使用 `computed`
+
+### 3.13 方法职责
+
+- 方法内部顺序：init → 网络请求 → 事件处理 → 特殊计算
+- 一个方法只做一件事，超过 **50 行**必须拆分
+- 重复逻辑抽离为公共方法
+- **不要过度封装**：简单条件判断直接写在 template 中
+
+### 3.14 页面拆分建议
+
+- 页面组件超过 300 行建议拆分
+- 按功能区块拆分：搜索表单、数据表格、分页器、操作按钮组
+- 弹窗、表格、表单等复杂模块拆分为独立组件
+
+| 模块 | 处理方式                |
+| ---- | ----------------------- |
+| 弹窗 | 拆分为独立组件          |
+| 表格 | 表格组件 + 业务逻辑分离 |
+| 表单 | 表单组件 + 校验逻辑分离 |
+
+### 3.15 指令简写
+
+统一使用简写：`v-bind:attr` → `:attr` | `v-on:event` → `@event` | `v-slot:name` → `#name`
+
+### 3.16 v-for 与 key
+
+- 必须使用 `key`，`key` 必须用**唯一 ID**
+- **禁止**使用 `index` 作为 key
+
+```vue
+<!-- ✅ 正确 -->
+<li v-for="item in items" :key="item.id">{{ item.name }}</li>
+<!-- ❌ 错误 -->
+<li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
+```
+
+### 3.17 v-if 与 v-for 冲突
+
+- **禁止** `v-if` 和 `v-for` 同一元素
+
+**解决方案**：`<template>` 包裹 或 computed 预过滤
+
+```vue
+<!-- ✅ 正确：template 包裹 -->
+<template v-for="item in items" :key="item.id">
+  <li v-if="item.visible">{{ item.name }}</li>
+</template>
+
+<!-- ✅ 正确：computed 过滤 -->
+<li v-for="item in visibleItems" :key="item.id">{{ item.name }}</li>
+```
+
+---
+
+## 4. 📝 注释规范
+
+### 4.1 模板区注释
+
+```html
+<!-- 组件名称 -->
+<!-- 循环: 描述 -->
+<!-- 条件: 描述 -->
+<!-- 区块名称 -->
+<!-- 插槽: name -->
+```
+
+| 场景     | 注释格式                  | 示例                            |
+| -------- | ------------------------- | ------------------------------- |
+| 根节点   | `<!-- 组件名称 -->`       | `<!-- UserCard -->`             |
+| 循环节点 | `<!-- 循环: 描述 -->`     | `<!-- 循环: 用户列表 -->`       |
+| 条件分支 | `<!-- 条件: 描述 -->`     | `<!-- 条件: 有数据时 -->`       |
+| 关键区块 | `<!-- 区块名称 -->`       | `<!-- 操作按钮组 -->`           |
+| 插槽节点 | `<!-- 插槽: name -->`     | `<!-- 插槽: default -->`        |
+| 动态组件 | `<!-- 动态组件: 描述 -->` | `<!-- 动态组件: 标签页内容 -->` |
+
+### 4.2 脚本区注释
+
+```javascript
+// prop名: 描述
+// 属性名: 描述
+// computed: 描述
+// watch: 描述
+// methods: 描述
+// component: 组件名
+// provide/inject的键名: 描述
+```
+
+| 内容     | 注释格式               | 示例                              |
+| -------- | ---------------------- | --------------------------------- |
+| 组件名称 | `// name: 组件名`      | `// name: UserCard`               |
+| props    | `// prop名: 描述`      | `// user: 用户信息`               |
+| data     | `// 属性名: 描述`      | `// searchQuery: 搜索查询参数`    |
+| computed | `// computed: 描述`    | `// computed: 是否全选`           |
+| watch    | `// watch: 描述`       | `// watch: 监听用户输入`          |
+| methods  | `// methods: 描述`     | `// methods: 提交表单`            |
+| 组件引入 | `// component: 组件名` | `// component: UserCard`          |
+| provide  | `// 提供的键名: 描述`  | `// appConfig: 全局配置`          |
+| inject   | `// 注入的键名: 描述`  | `// parentData: 父组件提供的数据` |
+
+**Script 顶部 JSDoc**：
 
 ```javascript
 /**
@@ -227,49 +371,14 @@ export default {
  * @description 页面职责说明
  * @description 核心业务流程简述
  * @description 关键数据来源
+ *
+ * ---
+ * 改动时间: YYYY-MM-DD HH:mm:ss
+ * 改动内容: 简述本次修改
  */
 ```
 
-### 3.3 Vue 元素特性顺序
-
-1. 定义（`is`）→ 2. `v-for` → 3. `v-if/else-if/else` → 4. `v-show/v-cloak` → 5. `id` → 6. `props/attrs` → 7. `v-on` → 8. `v-html/v-text`
-
-### 3.4 v-slot 风格
-
-- 使用动态风格（如 `v-slot:[name]`）
-- 禁止静态默认插槽写法
-
-### 3.5 模板层轻量化
-
-- 模板只负责展示，不写复杂表达式与逻辑
-- 简单逻辑可内联，不过度封装为 methods
-
-### 3.6 注释规范
-
-**模板区注释**：
-
-| 场景 | 注释格式 | 示例 |
-|------|----------|------|
-| 根节点 | `<!-- 组件名称 -->` | `<!-- UserCard -->` |
-| 循环节点 | `<!-- 循环: 描述 -->` | `<!-- 循环: 用户列表 -->` |
-| 条件分支 | `<!-- 条件: 描述 -->` | `<!-- 条件: 有数据时 -->` |
-| 关键区块 | `<!-- 区块名称 -->` | `<!-- 操作按钮组 -->` |
-| 插槽节点 | `<!-- 插槽: name -->` | `<!-- 插槽: default -->` |
-| 动态组件 | `<!-- 动态组件: 描述 -->` | `<!-- 动态组件: 标签页内容 -->` |
-
-**脚本区注释**：
-
-| 内容 | 注释格式 | 示例 |
-|------|----------|------|
-| 组件名称 | `// name: 组件名` | `// name: UserCard` |
-| props | `// prop名: 描述` | `// user: 用户信息` |
-| data | `// 属性名: 描述` | `// searchQuery: 搜索查询参数` |
-| computed | `// computed: 描述` | `// computed: 是否全选` |
-| watch | `// watch: 描述` | `// watch: 监听用户输入` |
-| methods | `// methods: 描述` | `// methods: 提交表单` |
-| 组件引入 | `// component: 组件名` | `// component: UserCard` |
-| provide | `// 提供的键名: 描述` | `// appConfig: 全局配置` |
-| inject | `// 注入的键名: 描述` | `// parentData: 父组件提供的数据` |
+每次修改文件时，在顶部 JSDoc 中追加改动时间与内容，最新记录在最上方。
 
 **JSDoc（关键方法必填）**：
 
@@ -284,201 +393,222 @@ export default {
 
 **注释要求**：中文描述；行内不超过一行；JSDoc 不超过 5 行；无冗余注释
 
-### 3.7 组件生命周期 emit 限制
+### 4.3 注释保护原则
 
-- **基础组件**：禁止在生命周期函数中主动向外 emit
-- **业务型组件**：允许但不推荐
+代码逻辑发生变更时，**对应注释必须同步更新**。
+已有注释若正确，**只增不改**。仅在 3 种情况下可修改：
 
-### 3.8 方法内部逻辑顺序
+1. **注释明显错误**（与代码实际行为不符）
+2. **业务逻辑已发生实质性变更**（旧注释不再适用）
+3. **命名变更导致旧注释引用了不存在的标识符**
 
-1. 初始化方法：`init...()`
-2. 网络请求：`async getListData()`, `async postFormData()`
-3. 事件处理：`async onClick...()`, `async onChange...()`
-4. 特殊计算：`computed...()`
-
-### 3.9 方法职责单一化
-
-- 一个方法只做一件事，超过 50 行必须拆分
-- 重复逻辑抽离为公共方法
-- **不要过度封装**：简单条件判断直接写在 template 中
-
-### 3.10 复杂页面拆分建议
-
-| 模块 | 处理方式 |
-|------|----------|
-| 弹窗 | 拆分为独立组件 |
-| 表格 | 表格组件 + 业务逻辑分离 |
-| 表单 | 表单组件 + 校验逻辑分离 |
+> **禁止修改的常见场景**：仅因注释风格不同、表述方式有差异但含义一致、注释正确但不够详细（应追加而非覆盖）。
 
 ---
 
-## 4. 📡 数据流、请求与安全
+## 5. 📡 网络请求与安全
 
-### 4.1 网络请求规范
+### 5.1 异步处理
 
-- **异步处理**：必须使用 `async/await`
-- **错误处理**：必须 `try/catch/finally`
-- **数据解构**：单次解构，禁止 `...data.data`
-- **统一响应处理**：
+- **必须** `async/await`，**禁止** `.then()` 链式调用
+- 统一 `try/catch/finally` 结构
+
+### 5.2 数据处理
 
 ```javascript
 const { code, data, msg } = await apiXXX();
 if (code === 0) {
-  this.$message.success(msg || "操作成功");
+  /* 成功处理数据 */
 } else {
-  this.$message.error(msg);
+  console.warn(msg);
 }
 ```
 
-### 4.2 data 与 computed 使用原则
+- **单次解构**，禁止 `...data.data` 连续解构
+- 先判断成功（`code === 0`）再使用业务数据
 
-- 除后端交互数据和部分定时器外，一律尽可能使用 `computed`
+### 5.3 错误处理
+
+- **禁止空 catch**，catch 中 `console.warn` 即可
+- 业务非成功状态码，在 `else` 分支中 `console.warn` 记录
+
+```javascript
+try {
+  await apiGetData();
+} catch (error) {
+  console.warn(error);
+}
+```
+
+### 5.4 请求写法示例
+
+```javascript
+async handleSubmit() {
+  if (this.loading) return;
+  this.loading = true;
+  try {
+    const { code, msg } = await apiSubmit(this.formData);
+    if (code === 0) {
+      /* 成功 */
+    } else {
+      console.warn(msg);
+    }
+  } catch (error) {
+    console.warn(error);
+  } finally {
+    this.loading = false;
+  }
+},
+```
+
+### 5.5 防止重复提交
+
+- 对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，防止用户重复点击
+
+```vue
+<button @click="handleSubmit" :disabled="loading">
+  {{ loading ? '提交中...' : '提交' }}
+</button>
+```
+
+### 5.6 安全规范
+
+- **v-html**：必须用 `DOMPurify.sanitize()` 过滤
+- **敏感数据**：不在 URL 传 token/密码；不 `console.log` 用户凭证
+
+### 5.7 等于运算符
+
+- 优先推荐 `==`。若将 `===` 改为 `==`，需提醒用户手动确认。注释问题默认忽略。
+
+---
+
+## 6. 🎨 CSS 样式规范
+
+### 6.1 预处理器
+
+- 使用 **Sass/SCSS** 或 **Less** 预处理器
+- 格式化：csscomb + prettier 配合
+- 全局样式集中存放 `src/styles/`
+
+### 6.2 scoped 优先
+
+- 默认使用 `<style scoped>`，确保样式隔离在当前组件
+- 非 scoped 样式需标注原因：`/* 全局 */`
+- 优先 scoped，非必要不写全局样式
+
+### 6.3 BEM 命名
+
+- 遵循 BEM：`.block__element--modifier`，全小写
+- 详见 §2.3 CSS 命名（BEM 规范）
+
+### 6.4 样式区注释
+
+| 场景     | 格式                    | 示例            |
+| -------- | ----------------------- | --------------- |
+| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
+| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
+
+---
+
+## 7. ⚡ 响应式与数据流
+
+### 7.1 核心原则
+
+- **computed 优先**，除后端交互数据和定时器外，尽可能使用 `computed`
+- 能用 computed 解决的不用 data
 - 减少冗余 data 属性，优先派生计算
 
-### 4.3 computed 规范
+### 7.2 computed 规范
 
-- 必须使用 `try/catch` 包裹
-- 命名使用 `is` / `has` / `visible` 或有意义的名称
+- computed **必须** `try/catch` 包裹
+- 命名用 `is` / `has` / `visible` 或有意义的名称
 
-### 4.4 响应式陷阱
-
-| 场景 | 错误写法 | 正确写法 |
-|------|----------|----------|
-| 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
-| 数组索引赋值 | `this.arr[i] = val` | `this.$set(this.arr, i, val)` |
-| 数组长度修改 | `this.arr.length = n` | `this.arr.splice(n)` |
-
-### 4.5 $nextTick 使用时机
-
-- **场景**：DOM 更新后需操作 DOM 元素
-- **用法**：`this.$nextTick(() => { /* DOM 操作 */ })`
-- **禁止**：用 `setTimeout` 替代
-
-### 4.6 watch 规范
+### 7.3 watch 规范
 
 - **深度监听**：对象/数组变化必须声明 `deep: true`
 - **立即执行**：初始化需触发时加 `immediate: true`
-- **清理资源**：定时器、事件监听在组件销毁时清理
+- **清理资源**：定时器、事件监听在组件销毁（`beforeDestroy`）时清理
 
-### 4.7 eventBus 规范
+### 7.4 eventBus / Vuex
 
-- 必须在 `beforeDestroy` 中 `$off()` 移除监听，防止内存泄漏
-- 事件名使用小驼峰：`userChange`、`formSubmit`
+- eventBus：`beforeDestroy` 中 `$off()` 清理，事件名使用小驼峰（`userChange`、`formSubmit`）
+- Vuex：模块必须 `namespaced: true`，`mutation` 仅同步操作，异步放 `action`，`getter` 派生状态
 
-### 4.8 Vuex 模块规范
+### 7.5 响应式陷阱（Vue2 特有）
 
-- 每个模块开启 `namespaced: true`
-- `mutation` 仅做同步状态变更，禁止异步操作
-- 异步操作统一放 `action`
-- `getter` 用于派生状态
-
-### 4.9 路由守卫清理
-
-- `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗
-- 全局守卫统一处理登录校验、权限控制
-
-### 4.10 安全规范
-
-| 安全项 | 规范 |
-|--------|------|
-| v-html XSS | 使用前必须用 DOMPurify 过滤 HTML |
-| 敏感数据 | 不在 URL 传 token/密码；不 `console.log` 用户凭证 |
-| 全局错误捕获 | 配置 `Vue.config.errorHandler`，配合 Sentry 上报 |
+| 场景         | 错误写法                | 正确写法                             |
+| ------------ | ----------------------- | ------------------------------------ |
+| 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
+| 数组索引赋值 | `this.arr[i] = val`     | `this.$set(this.arr, i, val)`        |
+| 数组长度修改 | `this.arr.length = n`   | `this.arr.splice(n)`                 |
 
 ---
 
-## 5. 🎨 样式与性能优化
+## 8. 🔥 性能优化
 
-### 5.1 BEM 命名规范
+### 8.1 优化速查
 
-- **块**：独立模块（`card`、`form`）
-- **元素**：块内部子元素（`card__title`、`form__input`）
-- **修饰符**：状态/样式变体（`card--dark`、`card__title--large`）
-- **规则**：全小写、横线连接、无嵌套、类名唯一
+| 优化项     | 说明                                                                      |
+| ---------- | ------------------------------------------------------------------------- |
+| 组件懒加载 | 大组件使用动态导入 `() => import(...)`                                    |
+| KeepAlive  | 通过 `include`/`exclude` 精确控制缓存范围                                 |
+| 路由懒加载 | 所有页面路由必须 `() => import()`，禁止全量打包                           |
+| 虚拟滚动   | 长列表（100+ 项）使用虚拟滚动，避免 DOM 过多                              |
+| 防抖节流   | 搜索（防抖300ms）、滚动（节流100ms）、resize（节流）、按钮点击（防抖/锁） |
+| 图片优化   | WebP 优先、合适尺寸、非首屏 `loading="lazy"`                              |
+| 数据响应式 | `computed` 派生、大数据 `Object.freeze()`；避免 `watch` 中同步 DOM 操作   |
+| 路由守卫   | `beforeRouteLeave` 清理定时器、取消未完成请求、关闭弹窗                   |
+| 指令清理   | `unbind` 钩子清理事件监听和定时器                                         |
+| 过滤器     | 优先使用局部 `filters`，保持纯函数，不修改外部状态                        |
 
-```scss
-.user-card {
-  padding: 16px;
-  .user-card__header {
-    font-weight: bold;
-    &--active { color: #1890ff; }
-  }
-}
+### 8.2 防抖 / 节流示例
+
+```javascript
+import { debounce, throttle } from "lodash-es";
+const handleSearch = debounce((query) => {
+  fetchSearchResults(query);
+}, 300);
+const handleScroll = throttle(() => {
+  updateScrollPosition();
+}, 100);
 ```
 
-### 5.2 样式区注释与作用域
-
-| 场景 | 注释格式 | 示例 |
-|------|----------|------|
-| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
-| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
-| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
-
-- `scoped`：仅作用于当前组件
-- 非 `scoped`：需标注 `/* 全局 */`
-
-### 5.3 CSS 处理
-
-- 预处理器：Sass/SCSS
-- 格式化：csscomb + prettier
-- 全局样式：`src/styles/`
-
-### 5.4 响应式适配
-
-- 使用媒体查询 `@media` 适配不同屏幕
-- 移动端优先：先写移动端，再通过媒体查询增强 PC 端
-- 单位选择：宽度用 `px` 或 `rem`，字号用 `px`
-
-### 5.5 性能优化
-
-| 优化项 | 说明 |
-|--------|------|
-| 组件懒加载 | 大组件使用动态导入 `() => import(...)` |
-| KeepAlive | 合理使用 `<keep-alive>` 缓存不常更新组件 |
-| 虚拟滚动 | 长列表（100+ 项）使用虚拟滚动，避免 DOM 过多 |
-| 防抖节流 | 频繁触发事件（输入、滚动、resize）使用防抖/节流 |
-| 图片优化 | WebP 优先、合适尺寸、非首屏懒加载 |
-| 路由懒加载 | 所有页面路由必须 `() => import()`，禁止全量打包 |
-
-### 5.6 自定义指令与过滤器
-
-- **指令清理**：`unbind` 钩子中必须清理事件监听器和定时器
-- **过滤器**：优先使用局部 `filters`，保持纯函数，不修改外部状态
-
 ---
 
-## 6. 📋 约束清单速查
+## 9. 📋 约束清单
 
-### 🚫 绝对禁止项
+### 🔴 绝对禁止
 
-| # | 禁止项 | 说明 |
-|---|--------|------|
-| 1 | 连续数据解构 | 禁止 `...data.data` |
-| 2 | 父组件修改子组件数据 | 禁止直接修改子组件内部状态 |
-| 3 | 修改 data 类型 | 后端给什么类型用什么，不可修改原始类型 |
-| 4 | 修改 props | 不允许直接修改组件接收的 props |
-| 5 | 使用 mixins | 改用组合式函数或组件组合 |
-| 6 | 无意义命名 | 禁止 `data1`、`temp2` |
-| 7 | $parent 链式访问 | 禁止 `$parent.$parent` |
-| 8 | v-for 与 v-if 同元素 | 禁止同一元素同时使用 |
-| 9 | index 作为 key | 必须用唯一 ID |
-| 10 | setTimeout 替代 $nextTick | DOM 更新操作必须用 `$nextTick` |
+| #   | 禁止项                             | 说明                                   |
+| --- | ---------------------------------- | -------------------------------------- |
+| 1   | 连续数据解构                       | 禁止 `...data.data`                    |
+| 2   | 父组件直接修改子组件内部状态       | 禁止直接修改子组件内部状态             |
+| 3   | 修改 data 原始类型                 | 后端给什么类型用什么，不可修改原始类型 |
+| 4   | 修改 props（只读访问）             | 不允许直接修改 props                   |
+| 5   | 使用 mixins                        | 改用组合式函数或组件组合               |
+| 6   | 无意义命名（`data1`, `temp2`）     | 变量/方法必须有意义                    |
+| 7   | `$parent` 链式访问                 | 禁止 `$parent.$parent`                 |
+| 8   | 同一元素同时使用 `v-if` 和 `v-for` | 必须分离                               |
+| 9   | `index` 作为 `key`                 | 必须用唯一 ID                          |
+| 10  | `setTimeout` 替代 `$nextTick`      | DOM 更新操作必须用 `$nextTick`         |
 
-### 🟢 推荐项
+### 🟢 推荐
 
-| # | 推荐项 | 说明 |
-|---|--------|------|
-| 1 | 函数 try/catch | 包裹函数内容，`catch` 中使用 `console.warn` |
-| 2 | async/await | 少用 `.then()` 链式写法 |
-| 3 | computed 优先 | 能用 computed 解决的不用 data |
-| 4 | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true` |
+| #   | 推荐项              | 说明                                        |
+| --- | ------------------- | ------------------------------------------- |
+| 1   | 函数 try/catch      | 包裹函数内容，`catch` 中使用 `console.warn` |
+| 2   | async/await         | 少用 `.then()` 链式写法                     |
+| 3   | computed 优先       | 能用 computed 解决的不用 data               |
+| 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`  |
+| 5   | computed try/catch  | 必须 try/catch 包裹，避免计算属性报错       |
+| 6   | 减少 data 冗余      | 优先 computed 派生，减少 data 属性          |
 
-### 🟡 不推荐项
+### 🟡 不推荐
 
-| # | 不推荐项 | 说明 |
-|---|----------|------|
-| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
-| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
+| #   | 不推荐项            | 说明                            |
+| --- | ------------------- | ------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
 
 ### ⚠️ 注意事项
 
@@ -487,3 +617,4 @@ if (code === 0) {
 - **props 解构**：可以解构（需注意响应式丢失问题）
 - **等于运算符**：使用 `==` 不视为问题
 - **注释检查**：注释相关问题默认忽略，不进行检查
+- **不要过度封装**：简单逻辑直接写在 template 中

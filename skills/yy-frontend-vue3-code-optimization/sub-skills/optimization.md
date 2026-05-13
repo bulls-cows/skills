@@ -2,15 +2,31 @@
 
 **定位**：🔴 高风险。涉及运行时行为改变，**必须经过任务调度器确认后执行**。
 
+## 相关规则
+
+执行本任务前，请先阅读以下规则文件（位于 `rules/` 目录），按优先级从高到低排列：
+
+- **`rules/spec-index.md`**：Vue3 前端项目开发规范总纲（必读）
+- **`rules/reactivity.md`**：ref/reactive 选择原则、computed 规范、watch 与 computed 选择策略
+- **`rules/watch.md`**：watch/watchEffect 使用规范、清理机制、与 computed 选择策略
+- **`rules/network.md`**：异步处理、响应解构、错误处理、防重复提交
+- **`rules/hooks.md`**：Hooks 命名、返回值、使用方式、抽离建议
+- **`rules/performance.md`**：组件懒加载、KeepAlive 缓存、虚拟滚动、防抖节流、图片优化
+- **`rules/interaction.md`**：Props 定义规范、Emit 事件白名单、defineExpose
+
 ## 相等运算符转换
 
 ### 核心原则
 
-**绝对不主动变更 `==` 和 `===`**，保持代码原有写法。即使有接口响应 code 字段，也必须先列入高风险任务清单，用户明确确认后才执行转换。
+**不主动变更 `==` 和 `===`**，保持代码原有写法。
 
-### 例外情况（需确认后执行）
+### 建议转换场景（需确认后执行）
 
-- **接口响应的 `code` 字段比较**：建议统一使用 `===`（如 `code === 0`），因为后端返回的 code 通常是数字类型。但此转换仍属于高风险，必须展示给用户确认后才执行
+以下场景建议统一使用 `===`，但**仍属于中风险，必须展示给用户确认后才执行**：
+
+- **接口响应的 `code` 字段比较**：后端返回的 code 通常是数字类型，建议 `code === 0` 或 `code === 200`
+- **异步代码重构后的比较**：当 `.then()` 转为 `async/await` 时，若原代码使用 `==` 比较 `code` 字段，建议同步转为 `===`
+- **明确类型已知的比较**：如 `typeof x === 'string'`、`x === null`、`x === undefined`
 
 ### 风险：相等运算符转换
 
@@ -77,19 +93,7 @@ if (code === 0) {
 
 ## 计算属性优先
 
-- 将非副作用的逻辑从方法迁移至 `computed`
-- 命名统一用 `is/has/visible` 前缀
-- **computed 是纯同步 getter，不应使用 try/catch**。如果逻辑需要异步或错误处理，保留在普通函数中
-
-```typescript
-// ✅ 正确：computed 用于同步派生逻辑
-const isSelected = computed(() => selectedItems.value.length === totalItems.value);
-
-// ❌ 错误：computed 中使用异步逻辑
-const userList = computed(async () => {  // 禁止
-  return await apiGetUserList();
-});
-```
+**详见 `rules/reactivity.md`**（涵盖 computed 核心原则、正确/错误示例、computed 优先策略）。
 
 ### 风险：计算属性优先
 
@@ -142,6 +146,8 @@ const handleSubmit = async () => {
 ## Hooks 抽离
 
 ### 抽离条件
+
+满足以下**任一条件**即可抽离：
 
 - **可复用逻辑超过 30 行**
 - **跨 2+ 组件使用相同逻辑**
@@ -230,108 +236,11 @@ onMounted(() => {
 
 ## Reactive 转 Ref（尽可能少用 Reactive）
 
-### Reactive 转 Ref 原则
-
-**优先使用 `ref`，尽可能少用 `reactive`**。仅在以下场景考虑使用 `reactive`：
-
-- **复杂对象结构**：需要管理多层嵌套的对象数据
-- **批量属性更新**：需要一次性更新多个相关属性
-- **对象解构场景**：需要解构后仍保持响应式（配合 `toRefs`）
-
-### 转换规则
-
-| 场景 | 原写法（reactive） | 推荐写法（ref） |
-|------|---------------------|-----------------|
-| 简单状态 | `const state = reactive({ count: 0 })` | `const count = ref(0)` |
-| 对象数据 | `const user = reactive({ name: '', age: 0 })` | `const userName = ref('')`<br>`const userAge = ref(0)` |
-| 数组数据 | `const list = reactive([])` | `const list = ref([])` |
-| 分页信息 | `const pagination = reactive({ page: 1, size: 20 })` | `const page = ref(1)`<br>`const pageSize = ref(20)` |
-
-### 转换示例
-
-**优化前（使用 reactive）**：
-
-```typescript
-// ❌ 不推荐：使用 reactive
-const formData = reactive({
-  username: '',
-  email: '',
-  phone: '',
-});
-
-const pagination = reactive({
-  page: 1,
-  pageSize: 20,
-  total: 0,
-});
-```
-
-**优化后（使用 ref）**：
-
-```typescript
-// ✅ 推荐：使用 ref
-const username = ref('');
-const email = ref('');
-const phone = ref('');
-
-const page = ref(1);
-const pageSize = ref(20);
-const total = ref(0);
-```
-
-### Hooks 中的规范
-
-**禁止直接返回 reactive 对象**，必须使用 `toRefs` 解构后返回：
-
-```typescript
-// ❌ 错误：直接返回 reactive
-export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return { form };  // 禁止
-};
-
-// ✅ 正确：使用 toRefs 解构后返回
-export const useForm = () => {
-  const name = ref('');
-  const age = ref(0);
-  return { name, age };
-};
-
-// ✅ 正确：如果必须用 reactive，使用 toRefs
-export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return toRefs(form);  // 允许
-};
-```
+**详见 `rules/reactivity.md`**（涵盖 reactive 转 ref 原则、转换规则、转换示例、Hooks 中的规范、变更预览格式）。
 
 ### 风险：Reactive 转 Ref
 
-- **解构丢失响应式**：reactive 解构后会丢失响应式，需要配合 `toRefs`
-- **访问方式变更**：ref 需要 `.value` 访问，reactive 直接访问属性
-- **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
-- **批量更新影响**：reactive 的批量属性更新更简洁，ref 需要逐个更新
-
-### 变更预览格式
-
-展示给用户确认时，**必须使用 diff 格式展示变更前后对比**，示例：
-
-```diff
-- // 优化前：使用 reactive
-- const formData = reactive({
--   username: '',
--   email: '',
-- });
--
-- formData.username = 'test';
-- formData.email = 'test@example.com';
-
-+ // 优化后：使用 ref
-+ const username = ref('');
-+ const email = ref('');
-+
-+ username.value = 'test';
-+ email.value = 'test@example.com';
-```
+详见 `rules/reactivity.md` 中的转换风险说明。
 
 ## Props 增强
 
@@ -384,13 +293,14 @@ const props = defineProps<{
 
 ## Emits 标准化
 
-### Emits 白名单（仅限以下 17 种事件）
+### Emits 白名单（仅限以下 19 种事件）
 
-| 类别   | 白名单事件                                                               |
+| 类别             | 白名单事件                                                               |
 | ------ | ------------------------------------------------------------------------ |
-| 交互类 | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
-| 弹窗类 | `open`, `close`, `show`, `hide`                                          |
-| 操作类 | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
+| **v-model 更新** | `update:modelValue` (标准), `update:value` (AntD 风格)                   |
+| **交互类** | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
+| **弹窗类** | `open`, `close`, `show`, `hide`                                          |
+| **操作类** | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
 
 ### TypeScript Emits 定义规范
 
@@ -409,7 +319,11 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 
 ### Emit 顺序
 
-`input` → 其它 → `change/click`
+对外触发事件建议遵循以下优先级：
+
+1. `update:modelValue` / `update:value` (绑定值更新)
+2. 其他业务事件
+3. `change` / `click` (交互反馈)
 
 ### 风险：Emits 标准化
 
@@ -436,5 +350,4 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 - **虚拟滚动**：长列表使用虚拟滚动组件减少 DOM 节点
 - **防抖节流**：频繁触发的事件（搜索、滚动、resize）使用防抖/节流
 - **图片优化**：使用合适的图片格式（webp）和尺寸，懒加载非首屏图片
-- **computed 优先**：替代 watch 中的派生逻辑，利用缓存机制
-- **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`
+- **ref/reactive 选择**：优先 `ref`，仅复杂对象场景用 `reactive`（详见 `rules/reactivity.md`）

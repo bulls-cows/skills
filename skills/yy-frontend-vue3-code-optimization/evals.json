@@ -70,8 +70,8 @@
           "type": "qualitative"
         },
         {
-          "name": "导入按 7 组排序",
-          "description": "imports 按外部依赖→types→apis→utils→hooks→stores→constants→components 分组排列，全局与相对合并",
+          "name": "导入按 4 组排序",
+          "description": "imports 按外部依赖→types→全局内部依赖→相对内部依赖分组排列",
           "type": "code_check",
           "file": "test-utils.jsx"
         },
