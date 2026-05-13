@@ -80,8 +80,9 @@ Skill 本质上是"可按需加载的任务说明书"，用于复用复杂流程
 #### 默认策略
 
 - description 默认使用 `>` 折叠式语法（禁止行内写法）
-- 默认只生成 SKILL.md，不自动创建 examples/、templates/、resources/ 目录
+- 默认只生成 SKILL.md，不自动创建 examples/、templates/、resources/、scripts/ 目录
 - 仅在以下条件满足时才创建辅助目录：
+  - **scripts/**：技能需要可执行脚本，用户明确要求或技能功能必须通过脚本实现
   - **templates/**：需要生成的模板内容超过 20 行（计数规则：只统计实际内容行，不含空行、代码块围栏标记行 ` ``` `、YAML frontmatter 行）
   - **resources/**：需要独立的参考文档，且内容不适合放在 SKILL.md 正文
   - **examples/**：用户明确要求提供示例
@@ -165,6 +166,7 @@ description 只用于给 AI 判断是否触发技能：
 2. 使用中文描述
 3. 代码示例包含语言标签
 4. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/）
+5. 如有脚本文件，依赖配置放在 `scripts/package.json`
 
 #### 更新技能后检查项
 
@@ -191,3 +193,20 @@ description 只用于给 AI 判断是否触发技能：
 - `examples/output.md`：输出示例，展示创建技能后的预期结果
 - `templates/skill-template.md`：基础技能模板
 - `resources/skill-guide.md`：技能编写完整指南（命名规范、YAML 语法、章节编写原则、交互设计、验收清单）
+
+## 目录结构规范
+
+技能支持以下目录结构：
+
+```text
+skill-name/
+├── SKILL.md          # 必需，技能主文件
+├── scripts/          # 可选，脚本目录（可执行技能）
+│   ├── main.ts       # 主执行脚本
+│   └── package.json  # 依赖配置
+├── examples/         # 可选，示例目录
+├── templates/        # 可选，模板目录
+└── resources/        # 可选，资源目录
+```
+
+详细规范见 `resources/skill-guide.md`。

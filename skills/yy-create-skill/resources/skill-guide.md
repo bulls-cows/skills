@@ -169,6 +169,9 @@ description: >
 ```text
 skill-name/
 ├── SKILL.md          # 必需，技能主文件
+├── scripts/          # 可选，脚本目录（可执行技能）
+│   ├── main.ts       # 主执行脚本
+│   └── *.ts          # 辅助脚本
 ├── examples/         # 可选，示例目录
 │   ├── input.md      # 输入示例
 │   └── output.md     # 输出示例
@@ -181,9 +184,10 @@ skill-name/
 ### 目录说明
 
 - `SKILL.md`：**必需**，技能主文件，定义技能名称、描述、使用场景、指令
+- `scripts/`：**可选**，可执行技能需要脚本文件时使用。脚本文件遵循 kebab-case 命名规范（如 `wechat-api.ts`），依赖配置放在 `scripts/package.json`
 - `examples/`：**可选**，技能使用方式不直观时提供示例说明
 - `templates/`：**可选**，需要生成特定格式文件或模板实际内容超过 20 行时使用（计数规则：只统计实际内容行，不含空行、代码块围栏标记行、YAML frontmatter 行）
-- `resources/`：**可选**，需要参考文档、脚本或素材文件时使用
+- `resources/`：**可选**，需要参考文档或素材文件时使用
 
 ## 交互设计原则
 
@@ -368,7 +372,7 @@ skill-name/
 2. 使用中文描述
 3. 代码示例包含语言标签
 4. 如果有参考文档需求，已添加 `resources/` 目录
-5. 如有脚本文件，遵循 snake_case 命名规范
+5. 如有脚本文件，遵循 kebab-case 命名规范，依赖配置放在 `scripts/package.json`
 6. 如有 evals 测试用例，格式正确
 7. SKILL.md 包含执行步骤，不是纯知识文档
 8. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/，不含空行和代码块标记行）
