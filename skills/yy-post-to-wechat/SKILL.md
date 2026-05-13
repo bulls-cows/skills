@@ -1,12 +1,12 @@
 ---
-name: yy-post-to-wx
+name: yy-post-to-wechat
 description: >
   通过微信公众号 API 将本地 Markdown/HTML 文章发布到公众号草稿箱。
   当用户需要发布文章到微信公众号、推送内容到公众号时触发。
 
 ---
 
-# yy-post-to-wx
+# yy-post-to-wechat
 
 ## 描述
 
@@ -30,7 +30,7 @@ description: >
 
 验证以下配置是否存在：
 
-- 检查 `.baoyu-skills/.env` 或 `~/.baoyu-skills/.env` 中的 `WECHAT_APP_ID` 和 `WECHAT_APP_SECRET`
+- 检查 `.yy-skills/.env` 或 `~/.yy-skills/.env` 中的 `WECHAT_APP_ID` 和 `WECHAT_APP_SECRET`
 - 检查可选配置文件 `EXTEND.md`
 
 **决策分支**：
@@ -90,8 +90,8 @@ description: >
    - 复制 AppID 和 AppSecret
 
 2. 保存凭证到环境变量：
-   - 项目级：创建 `.baoyu-skills/.env` 文件
-   - 用户级：创建 `~/.baoyu-skills/.env` 文件
+   - 项目级：创建 `.yy-skills/.env` 文件
+   - 用户级：创建 `~/.yy-skills/.env` 文件
 
 ```env
 WECHAT_APP_ID=your_app_id
@@ -99,6 +99,8 @@ WECHAT_APP_SECRET=your_app_secret
 ```
 
 1. 创建配置文件 `EXTEND.md`（可选）：
+   - 项目级：`.yy-skills/yy-post-to-wechat/EXTEND.md`
+   - 用户级：`~/.yy-skills/yy-post-to-wechat/EXTEND.md`
 
 ```yaml
 default_theme: default
@@ -120,10 +122,10 @@ only_fans_can_comment: 0
 
 ```bash
 # 使用 Bun
-bun skills/yy-post-to-wx/scripts/main.ts <file> [options]
+bun skills/yy-post-to-wechat/scripts/main.ts <file> [options]
 
 # 使用 npx bun
-npx -y bun skills/yy-post-to-wx/scripts/main.ts <file> [options]
+npx -y bun skills/yy-post-to-wechat/scripts/main.ts <file> [options]
 ```
 
 ### 参数选项
@@ -141,13 +143,13 @@ npx -y bun skills/yy-post-to-wx/scripts/main.ts <file> [options]
 
 ```bash
 # 发布 Markdown 文件
-bun skills/yy-post-to-wx/scripts/main.ts ./my-article.md --theme default --color blue
+bun skills/yy-post-to-wechat/scripts/main.ts ./my-article.md --theme default --color blue
 
 # 指定作者和封面
-bun skills/yy-post-to-wx/scripts/main.ts ./post.md --author "宝玉" --cover ./imgs/cover.png
+bun skills/yy-post-to-wechat/scripts/main.ts ./post.md --author "宝玉" --cover ./imgs/cover.png
 
 # 禁用引用转换
-bun skills/yy-post-to-wx/scripts/main.ts ./article.md --no-cite
+bun skills/yy-post-to-wechat/scripts/main.ts ./article.md --no-cite
 ```
 
 ## 前置要求

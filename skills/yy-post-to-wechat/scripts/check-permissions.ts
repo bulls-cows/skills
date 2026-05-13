@@ -4,7 +4,7 @@ import { loadConfig, hasCredentials } from './config-loader';
 
 declare var Bun: any;
 
-console.log('🔍 yy-post-to-wx 环境检查\n');
+console.log('🔍 yy-post-to-wechat 环境检查\n');
 
 const config = loadConfig();
 let allPassed = true;
@@ -22,7 +22,7 @@ if (hasCredentials(config)) {
   console.log('  ✓ AppID 和 AppSecret 已配置');
 } else {
   console.log('  ✗ AppID 或 AppSecret 未找到');
-  console.log('    请在 .baoyu-skills/.env 或 ~/.baoyu-skills/.env 中设置:');
+  console.log('    请在 .yy-skills/.env 或 ~/.yy-skills/.env 中设置:');
   console.log('    WECHAT_APP_ID=your_app_id');
   console.log('    WECHAT_APP_SECRET=your_app_secret');
   allPassed = false;

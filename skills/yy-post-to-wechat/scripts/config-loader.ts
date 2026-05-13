@@ -31,10 +31,8 @@ function parseBoolean(value: any): boolean {
 
 function findExtendFile(): string | null {
   const pathsToTry = [
-    path.join(process.cwd(), '.baoyu-skills', 'baoyu-post-to-wechat', 'EXTEND.md'),
-    path.join(process.env.HOME || '', '.baoyu-skills', 'baoyu-post-to-wechat', 'EXTEND.md'),
-    path.join(process.cwd(), '.baoyu-skills', 'yy-post-to-wx', 'EXTEND.md'),
-    path.join(process.env.HOME || '', '.baoyu-skills', 'yy-post-to-wx', 'EXTEND.md'),
+    path.join(process.cwd(), '.yy-skills', 'yy-post-to-wechat', 'EXTEND.md'),
+    path.join(process.env.HOME || '', '.yy-skills', 'yy-post-to-wechat', 'EXTEND.md'),
   ];
 
   for (const p of pathsToTry) {
@@ -104,8 +102,8 @@ function loadFromEnv(): Partial<SkillConfig> {
 
 function loadFromEnvFile(): Partial<SkillConfig> {
   const envPaths = [
-    path.join(process.cwd(), '.baoyu-skills', '.env'),
-    path.join(process.env.HOME || '', '.baoyu-skills', '.env'),
+    path.join(process.cwd(), '.yy-skills', '.env'),
+    path.join(process.env.HOME || '', '.yy-skills', '.env'),
     path.join(process.cwd(), '.env'),
   ];
 

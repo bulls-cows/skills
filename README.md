@@ -60,7 +60,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md) | 计划优先执行模式，要求在做出任何变更前必须获得用户确认 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
 | [yy-mode-spec](./skills/yy-mode-spec/SKILL.md) | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
 | [yy-optimize](./skills/yy-optimize/SKILL.md) | 优化方案生成器，分析现状并生成多个优化方案供用户选择，确认后才执行改动 | `npx skills add bulls-cows/skills --skill yy-optimize` |
-| [yy-post-to-wx](./skills/yy-post-to-wx/SKILL.md) | 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片 | `npx skills add bulls-cows/skills --skill yy-post-to-wx` |
+| [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md) | 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片 | `npx skills add bulls-cows/skills --skill yy-post-to-wechat` |
 | [yy-read-pdf](./skills/yy-read-pdf/SKILL.md) | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill yy-read-pdf` |
 | [yy-refresh](./skills/yy-refresh/SKILL.md) | 刷新 AI 对代码的理解，对比所有改动文件并重新解析关键代码 | `npx skills add bulls-cows/skills --skill yy-refresh` |
 | [yy-review](./skills/yy-review/SKILL.md) | 执行代码审核，包括语法错误、逻辑错误、安全漏洞和最佳实践检查 | `npx skills add bulls-cows/skills --skill yy-review` |
