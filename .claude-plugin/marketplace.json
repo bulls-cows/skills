@@ -56,7 +56,8 @@
       "source": "./",
       "strict": true,
       "skills": [
-        "./skills-internal/yy-check-skills-consistency"
+        "./skills-internal/yy-check-skills-consistency",
+        "./skills-internal/yy-sync-thinking-method"
       ]
     }
   ]
