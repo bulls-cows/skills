@@ -241,6 +241,28 @@ if (code === 0) {
 - 全小写、横线连接、类名唯一
 - **scoped 样式必须同步修改模板中的 class 属性**
 
+#### CSS 布局推荐
+
+- **定位层级**：`position: relative` + `z-index: 0` 创建定位上下文
+- **padding 方向**：优先 `padding-top/left/right`，避免 `padding-bottom`
+- **margin 方向**：优先 `margin-bottom/left/right`，避免 `margin-top`
+
+**原因**：向下布局更稳定，减少 margin collapse 问题。
+
+#### CSS 兼容性指南
+
+| 属性 | 问题 | 降级方案 |
+|------|------|----------|
+| `gap` | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` Hack |
+| `100vh` | iOS Safari 地址栏偏差 | JS 动态计算或 `dvh` |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` |
+| `will-change` | 不重置占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强 |
+| `subgrid` | 支持不完善 | Grid/Flex 降级 |
+
+**实践**：[Can I use](https://caniuse.com/) 查兼容性 + Autoprefixer + `@supports`
+
 ### T05 🔤 语义化命名重构（🟡 中风险）
 
 - API 函数：`api + Method + URLPath`（`apiGetUserInfo`）

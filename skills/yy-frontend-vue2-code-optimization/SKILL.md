@@ -225,6 +225,21 @@ icon: ⚡
 - 嵌套最大深度 2 层，SCSS/LESS 使用 `&` 引用父选择器
 - **scoped 样式必须同步修改模板中的 class 属性**
 
+**布局推荐**：
+
+- 定位层级：`position: relative` + `z-index: 0` 创建独立定位上下文
+- padding/margin 方向：优先向下布局，避免 margin collapse
+
+**兼容性指南**（7 条属性需降级方案）：
+
+- `gap` → margin 负边距
+- `aspect-ratio` → padding-bottom Hack
+- `100vh` → JS 动态计算或 `dvh`
+- `inset` → 先写 `top/right/bottom/left`
+- `will-change` → 动画结束后设为 `auto`
+- `content-visibility` → 仅作性能增强
+- `subgrid` → Grid/Flex 降级
+
 ### T05 🔤 语义化命名重构（🟡 中风险）
 
 **详见**：[sub-skills/naming.md](../sub-skills/naming.md)
@@ -284,6 +299,12 @@ icon: ⚡
 8. 禁止在生命周期中直接触发业务逻辑
 9. 基础组件生命周期禁止主动 emit
 10. 简单逻辑不额外封装为函数
+
+## 🟡 不推荐项（尽量避免）
+
+1. 可选链操作符 `?.`：建议使用 lodash `get()` 替代
+2. CSS 嵌套原生写法：需经 PostCSS 编译后使用
+3. `:has()` 伪类：Safari 15.4-15.6 存渲染 Bug，谨慎使用
 
 ---
 
