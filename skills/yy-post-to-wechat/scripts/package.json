@@ -1,7 +1,11 @@
 {
-  "name": "yy-post-to-wx-scripts",
+  "name": "yy-post-to-wechat-scripts",
   "private": true,
   "type": "module",
+  "main": "src/cli.ts",
+  "engines": {
+    "node": ">=22.18.0"
+  },
   "dependencies": {
     "marked": "^12.0.0",
     "front-matter": "^4.0.2"

@@ -1,6 +1,4 @@
-export type ThemeName = 'default' | 'grace' | 'simple' | 'modern';
-
-export const colorPresets: Record<string, string> = {
+const colorPresets: Record<string, string> = {
   blue: '#576b95',
   green: '#009a61',
   vermilion: '#e67e22',

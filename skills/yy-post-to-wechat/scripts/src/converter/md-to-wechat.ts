@@ -3,31 +3,12 @@ import path from 'path';
 import { marked } from 'marked';
 import frontMatter from 'front-matter';
 
-import type { ThemeName } from './themes';
-import { getTheme, normalizeColor } from './themes';
-
-export interface ConvertOptions {
-  needCitation: boolean;
-  theme: ThemeName;
-  color: string;
-  title: string;
-}
-
-export interface ConvertResult {
-  html: string;
-  citations: Array<{ text: string; url: string }>;
-  imagePaths: string[];
-}
-
-interface Citation {
-  index: number;
-  url: string;
-}
+import { getTheme, normalizeColor } from '../themes/index.js';
 
 export function extractImagePaths(html: string, baseDir: string): string[] {
   const imgRegex = /<img[^>]+src="([^"]+)"/g;
   const paths: string[] = [];
-  let match;
+  let match: RegExpExecArray | null;
 
   while ((match = imgRegex.exec(html)) !== null) {
     const src = match[1];
@@ -49,30 +30,26 @@ export function convertMarkdownToWechat(
 ): ConvertResult {
   const citations: Citation[] = [];
   const citationMap = new Map<string, number>();
-  let citationIndex = 1;
 
   const originalRenderer = new marked.Renderer();
-
   const renderer = new marked.Renderer();
 
   if (options.needCitation) {
-    // @ts-ignore - marked 类型不匹配，我们使用兼容方式调用
-    renderer.link = (href: string, title: string | null | undefined, text: string) => {
+    // @ts-expect-error - marked v12 的 link 签名与旧版本不兼容，使用旧签名方式
+    renderer.link = function(href: string, title: string | null | undefined, text: string): string {
       if (href.startsWith('#') || href.startsWith('http://') || href.startsWith('https://')) {
-        let citationIndex: number;
+        let citationIdx: number;
         if (citationMap.has(href)) {
-          citationIndex = citationMap.get(href)!;
+          citationIdx = citationMap.get(href)!;
         } else {
-          citationIndex = citations.length + 1;
-          citations.push({ index: citationIndex, url: href });
-          citationMap.set(href, citationIndex);
+          citationIdx = citations.length + 1;
+          citations.push({ index: citationIdx, url: href });
+          citationMap.set(href, citationIdx);
         }
-        // @ts-ignore
-        const originalHtml = originalRenderer.link(href, title, text);
-        return `${originalHtml}<sup>${citationIndex}</sup>`;
+        const originalHtml = originalRenderer.link.call(originalRenderer, href, title || '', text);
+        return `${originalHtml}<sup>${citationIdx}</sup>`;
       }
-      // @ts-ignore
-      return originalRenderer.link(href, title, text);
+      return originalRenderer.link.call(originalRenderer, href, title || '', text);
     };
   }
 
@@ -91,16 +68,17 @@ export function convertMarkdownToWechat(
 
   const templatePath = path.join(
     path.dirname(path.dirname(__filename)),
+    '..',
     'templates',
     'base.html'
   );
   let template = fs.readFileSync(templatePath, 'utf-8');
 
-  template = template.replace('{{title}}', () => escapeHtml(options.title));
-  template = template.replace('{{themeCss}}', () => themeCss);
-  template = template.replace('{{primaryColor}}', () => primaryColor);
-  template = template.replace('{{content}}', () => htmlContent);
-  template = template.replace('{{citations}}', () => citationsHtml);
+  template = template.replace('{{title}}', escapeHtml(options.title));
+  template = template.replace('{{themeCss}}', themeCss);
+  template = template.replace('{{primaryColor}}', primaryColor);
+  template = template.replace('{{content}}', htmlContent);
+  template = template.replace('{{citations}}', citationsHtml);
 
   return {
     html: template,
@@ -153,7 +131,7 @@ export function extractFirstParagraph(markdown: string): string | null {
       continue;
     }
     if (!inFrontMatter && trimmed.length > 0 && !trimmed.startsWith('#')) {
-      return trimmed.trim().slice(0, 120);
+      return trimmed.slice(0, 120);
     }
   }
 

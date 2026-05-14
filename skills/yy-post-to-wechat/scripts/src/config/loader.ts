@@ -1,18 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import type { ThemeName } from './themes';
-
-export interface SkillConfig {
-  defaultTheme: ThemeName;
-  defaultColor?: string;
-  defaultAuthor?: string;
-  needOpenComment: boolean;
-  onlyFansCanComment: boolean;
-  appId?: string;
-  appSecret?: string;
-}
-
 const defaultConfig: SkillConfig = {
   defaultTheme: 'default',
   needOpenComment: true,

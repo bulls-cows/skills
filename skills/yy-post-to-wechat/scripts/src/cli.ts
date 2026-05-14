@@ -1,35 +1,20 @@
-#!/usr/bin/env bun
-
 import fs from 'fs';
 import path from 'path';
 
-import { loadConfig, SkillConfig } from './config-loader';
+import { loadConfig, hasCredentials } from './config/loader.js';
 import {
   convertMarkdownToWechat,
   parseFrontMatter,
   extractFirstTitle,
   extractFirstParagraph,
   extractImagePaths,
-  type ConvertResult,
-} from './md-to-wechat';
+} from './converter/md-to-wechat.js';
 import {
   getAccessToken,
   uploadImage,
   uploadThumbMedia,
   createDraft,
-  type Article,
-} from './wechat-api';
-import type { ThemeName } from './themes';
-
-interface CliOptions {
-  theme: ThemeName;
-  color?: string;
-  title?: string;
-  summary?: string;
-  author?: string;
-  cover?: string;
-  needCitation: boolean;
-}
+} from './api/wechat.js';
 
 function parseCliArgs(): { inputFile: string; options: CliOptions } {
   const args = process.argv.slice(2);
@@ -74,19 +59,15 @@ function parseCliArgs(): { inputFile: string; options: CliOptions } {
 
   if (!inputFile) {
     console.error('❌ 请提供输入文件路径');
-    console.error('   用法: bun main.ts <file> [options]');
-    console.error('   示例: bun main.ts article.md --theme default --color blue');
+    console.error('   用法: node . <file> [options]');
+    console.error('   示例: node . article.md --theme default --color blue');
     process.exit(1);
   }
 
   return { inputFile, options };
 }
 
-function resolveInput(inputFile: string): {
-  content: string;
-  filePath: string;
-  isHtml: boolean;
-} {
+function resolveInput(inputFile: string): InputResult {
   if (!fs.existsSync(inputFile)) {
     console.error(`❌ 文件不存在: ${inputFile}`);
     process.exit(1);
@@ -97,29 +78,12 @@ function resolveInput(inputFile: string): {
   return { content, filePath: inputFile, isHtml };
 }
 
-interface FrontMatterAttributes {
-  title?: string;
-  author?: string;
-  description?: string;
-  summary?: string;
-  cover?: string;
-  coverImage?: string;
-  featureImage?: string;
-  image?: string;
-}
-
 function resolveMetadata(
   content: string,
   cliOptions: CliOptions,
   config: SkillConfig,
   inputPath: string
-): {
-  title: string;
-  author: string;
-  digest: string;
-  coverPath: string | null;
-  markdownBody: string;
-} {
+): MetadataResult {
   const { attributes, body } = parseFrontMatter<FrontMatterAttributes>(content);
 
   let title = cliOptions.title || attributes.title || extractFirstTitle(body);
@@ -134,7 +98,7 @@ function resolveMetadata(
     digest = title;
   }
 
-  let coverPath = cliOptions.cover ||
+  let coverPath: string | null = cliOptions.cover ||
     attributes.cover ||
     attributes.coverImage ||
     attributes.featureImage ||
@@ -180,8 +144,8 @@ async function replaceImageUrls(
   return result;
 }
 
-function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 async function main() {
@@ -212,7 +176,7 @@ async function main() {
       process.exit(1);
     }
 
-    const convertResult: ConvertResult = convertMarkdownToWechat(
+    const convertResult = convertMarkdownToWechat(
       metadata.markdownBody,
       {
         needCitation: options.needCitation,

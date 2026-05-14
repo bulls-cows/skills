@@ -1,34 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-export interface WechatResponse<T> {
-  errcode?: number;
-  errmsg?: string;
-}
-
-export interface AccessTokenResponse {
-  access_token: string;
-  expires_in: number;
-}
-
-export interface UploadImageResponse extends WechatResponse<UploadImageResponse> {
-  url: string;
-}
-
-export interface CreateDraftResponse extends WechatResponse<CreateDraftResponse> {
-  media_id: string;
-}
-
-export interface Article {
-  title: string;
-  author: string;
-  digest: string;
-  content: string;
-  thumb_media_id: string;
-  need_open_comment: number;
-  only_fans_can_comment: number;
-}
-
 export async function getAccessToken(appId: string, appSecret: string): Promise<string> {
   const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`;
 

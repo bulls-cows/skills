@@ -121,11 +121,12 @@ only_fans_can_comment: 0
 ## 使用方法
 
 ```bash
-# 使用 Bun
-bun skills/yy-post-to-wechat/scripts/main.ts <file> [options]
+# 从技能根目录调用
+node skills/yy-post-to-wechat/scripts/ <file> [options]
 
-# 使用 npx bun
-npx -y bun skills/yy-post-to-wechat/scripts/main.ts <file> [options]
+# 在 scripts 目录下调用
+cd skills/yy-post-to-wechat/scripts
+node . <file> [options]
 ```
 
 ### 参数选项
@@ -143,18 +144,18 @@ npx -y bun skills/yy-post-to-wechat/scripts/main.ts <file> [options]
 
 ```bash
 # 发布 Markdown 文件
-bun skills/yy-post-to-wechat/scripts/main.ts ./my-article.md --theme default --color blue
+node skills/yy-post-to-wechat/scripts/ ./my-article.md --theme default --color blue
 
 # 指定作者和封面
-bun skills/yy-post-to-wechat/scripts/main.ts ./post.md --author "宝玉" --cover ./imgs/cover.png
+node skills/yy-post-to-wechat/scripts/ ./post.md --author "宝玉" --cover ./imgs/cover.png
 
 # 禁用引用转换
-bun skills/yy-post-to-wechat/scripts/main.ts ./article.md --no-cite
+node skills/yy-post-to-wechat/scripts/ ./article.md --no-cite
 ```
 
 ## 前置要求
 
-- Node.js 18+ 或 Bun
+- Node.js >= 22.18.0（原生支持执行 TypeScript 文件）
 - 微信公众号 AppID 和 AppSecret
 - 公众号已开通开发者权限
 - 服务器 IP 已添加到 API 白名单
@@ -163,10 +164,10 @@ bun skills/yy-post-to-wechat/scripts/main.ts ./article.md --no-cite
 
 本技能包含以下辅助资源：
 
-- `scripts/main.ts`：主执行脚本
-- `scripts/check-permissions.ts`：环境检查脚本
-- `scripts/config-loader.ts`：配置加载模块
-- `scripts/wechat-api.ts`：微信 API 封装
-- `scripts/md-to-wechat.ts`：Markdown 转换模块
-- `scripts/themes.ts`：主题样式定义
+- `scripts/src/cli.ts`：主执行脚本
+- `scripts/src/utils/check.ts`：环境检查脚本
+- `scripts/src/config/loader.ts`：配置加载模块
+- `scripts/src/api/wechat.ts`：微信 API 封装
+- `scripts/src/converter/md-to-wechat.ts`：Markdown 转换模块
+- `scripts/src/themes/index.ts`：主题样式定义
 - `templates/base.html`：基础 HTML 模板
