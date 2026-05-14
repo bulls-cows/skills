@@ -5,7 +5,8 @@
   "main": "README.md",
   "type": "module",
   "scripts": {
-    "lint": "node --run check:skill && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace",
+    "lint": "node --run check:skill && node --run lint:skills && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace",
+    "lint:skills": "cd ./skills/yy-post-to-wechat/scripts && node --run lint",
     "check:skill": "node ./build/check-skill.mts",
     "lint:markdown": "markdownlint \"**/*.md\" --fix",
     "lint:lf": "node ./build/convert-crlf-to-lf.ts --check",

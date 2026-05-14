@@ -1,9 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { marked } from 'marked';
 import frontMatter from 'front-matter';
 
 import { getTheme, normalizeColor } from '../themes/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export function extractImagePaths(html: string, baseDir: string): string[] {
   const imgRegex = /<img[^>]+src="([^"]+)"/g;
@@ -35,8 +39,11 @@ export function convertMarkdownToWechat(
   const renderer = new marked.Renderer();
 
   if (options.needCitation) {
-    // @ts-expect-error - marked v12 的 link 签名与旧版本不兼容，使用旧签名方式
-    renderer.link = function(href: string, title: string | null | undefined, text: string): string {
+    renderer.link = function (
+      href: string,
+      title: string | null | undefined,
+      text: string
+    ): string {
       if (href.startsWith('#') || href.startsWith('http://') || href.startsWith('https://')) {
         let citationIdx: number;
         if (citationMap.has(href)) {
@@ -66,12 +73,7 @@ export function convertMarkdownToWechat(
       .join('')}</ol></div>`;
   }
 
-  const templatePath = path.join(
-    path.dirname(path.dirname(__filename)),
-    '..',
-    'templates',
-    'base.html'
-  );
+  const templatePath = path.join(__dirname, '..', '..', 'templates', 'base.html');
   let template = fs.readFileSync(templatePath, 'utf-8');
 
   template = template.replace('{{title}}', escapeHtml(options.title));
@@ -88,7 +90,7 @@ export function convertMarkdownToWechat(
 }
 
 export function parseFrontMatter<T>(content: string): { attributes: T; body: string } {
-  return frontMatter<T>(content);
+  return frontMatter.default<T>(content);
 }
 
 function escapeHtml(text: string): string {

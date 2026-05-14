@@ -2,7 +2,7 @@
  * 微信公众号相关类型声明
  */
 
-interface WechatResponse<T> {
+interface WechatResponse {
   errcode?: number;
   errmsg?: string;
 }
@@ -12,11 +12,11 @@ interface AccessTokenResponse {
   expires_in: number;
 }
 
-interface UploadImageResponse extends WechatResponse<UploadImageResponse> {
+interface UploadImageResponse extends WechatResponse {
   url: string;
 }
 
-interface CreateDraftResponse extends WechatResponse<CreateDraftResponse> {
+interface CreateDraftResponse extends WechatResponse {
   media_id: string;
 }
 

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { loadConfig, hasCredentials } from './config/loader.js';
+import { loadConfig } from './config/loader.js';
 import {
   convertMarkdownToWechat,
   parseFrontMatter,
@@ -9,12 +9,7 @@ import {
   extractFirstParagraph,
   extractImagePaths,
 } from './converter/md-to-wechat.js';
-import {
-  getAccessToken,
-  uploadImage,
-  uploadThumbMedia,
-  createDraft,
-} from './api/wechat.js';
+import { getAccessToken, uploadImage, uploadThumbMedia, createDraft } from './api/wechat.js';
 
 function parseCliArgs(): { inputFile: string; options: CliOptions } {
   const args = process.argv.slice(2);
@@ -93,12 +88,17 @@ function resolveMetadata(
 
   const author = cliOptions.author || attributes.author || config.defaultAuthor || '';
 
-  let digest = cliOptions.summary || attributes.description || attributes.summary || extractFirstParagraph(body);
+  let digest =
+    cliOptions.summary ||
+    attributes.description ||
+    attributes.summary ||
+    extractFirstParagraph(body);
   if (!digest) {
     digest = title;
   }
 
-  let coverPath: string | null = cliOptions.cover ||
+  let coverPath: string | null =
+    cliOptions.cover ||
     attributes.cover ||
     attributes.coverImage ||
     attributes.featureImage ||
@@ -131,10 +131,7 @@ async function replaceImageUrls(
       const wechatUrl = await uploadImage(accessToken, localPath);
       const fileName = path.basename(localPath);
 
-      const regex = new RegExp(
-        `src=["']([^"']*${escapeRegExp(fileName)})["']`,
-        'g'
-      );
+      const regex = new RegExp(`src=["']([^"']*${escapeRegExp(fileName)})["']`, 'g');
       result = result.replace(regex, `src="${wechatUrl}"`);
     } catch (error) {
       console.warn(`⚠️  图片 ${localPath} 上传失败: ${(error as Error).message}`);
@@ -153,7 +150,8 @@ async function main() {
   const config = loadConfig();
 
   const theme = options.theme || config.defaultTheme;
-  const color = options.color || config.defaultColor || (options.theme === 'default' ? '#576b95' : undefined);
+  const color =
+    options.color || config.defaultColor || (options.theme === 'default' ? '#576b95' : undefined);
 
   if (!color) {
     console.error('❌ 请指定颜色，或在配置文件中设置 default_color');
@@ -172,7 +170,9 @@ async function main() {
     imagePaths = extractImagePaths(htmlContent, baseDir);
   } else {
     if (!metadata.coverPath) {
-      console.error('❌ 缺少封面图片，请通过 --cover 指定，或在 frontmatter 中配置，或将其放在 imgs/cover.png');
+      console.error(
+        '❌ 缺少封面图片，请通过 --cover 指定，或在 frontmatter 中配置，或将其放在 imgs/cover.png'
+      );
       process.exit(1);
     }
 

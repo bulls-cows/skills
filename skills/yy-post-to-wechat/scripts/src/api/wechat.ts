@@ -5,7 +5,7 @@ export async function getAccessToken(appId: string, appSecret: string): Promise<
   const url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${appSecret}`;
 
   const response = await fetch(url);
-  const data = await response.json() as AccessTokenResponse & WechatResponse<any>;
+  const data = (await response.json()) as AccessTokenResponse & WechatResponse;
 
   if (data.errcode) {
     throw new Error(`获取 Access Token 失败: ${data.errmsg} (code: ${data.errcode})`);
@@ -25,7 +25,6 @@ export async function uploadImage(accessToken: string, filePath: string): Promis
 
   const url = `https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=${accessToken}`;
 
-  const fileStream = fs.createReadStream(filePath);
   const formData = new FormData();
   const fileBlob = new Blob([fs.readFileSync(filePath)]);
   formData.append('media', fileBlob, path.basename(filePath));
@@ -35,7 +34,7 @@ export async function uploadImage(accessToken: string, filePath: string): Promis
     body: formData,
   });
 
-  const data = await response.json() as UploadImageResponse & WechatResponse<any>;
+  const data = (await response.json()) as UploadImageResponse & WechatResponse;
 
   if (data.errcode) {
     throw new Error(`上传图片失败: ${data.errmsg} (code: ${data.errcode})`);
@@ -64,7 +63,7 @@ export async function uploadThumbMedia(accessToken: string, filePath: string): P
     body: formData,
   });
 
-  const data = await response.json() as { media_id?: string } & WechatResponse<any>;
+  const data = (await response.json()) as { media_id?: string } & WechatResponse;
 
   if (data.errcode) {
     throw new Error(`上传封面失败: ${data.errmsg} (code: ${data.errcode})`);
@@ -77,10 +76,7 @@ export async function uploadThumbMedia(accessToken: string, filePath: string): P
   return data.media_id;
 }
 
-export async function createDraft(
-  accessToken: string,
-  article: Article
-): Promise<string> {
+export async function createDraft(accessToken: string, article: Article): Promise<string> {
   const url = `https://api.weixin.qq.com/cgi-bin/draft/add?access_token=${accessToken}`;
 
   const body = {
@@ -95,7 +91,7 @@ export async function createDraft(
     body: JSON.stringify(body),
   });
 
-  const data = await response.json() as CreateDraftResponse & WechatResponse<any>;
+  const data = (await response.json()) as CreateDraftResponse & WechatResponse;
 
   if (data.errcode) {
     throw new Error(`创建草稿失败: ${data.errmsg} (code: ${data.errcode})`);
