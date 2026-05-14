@@ -1,11 +1,11 @@
 ---
-name: yy-wx-to-markdown
+name: yy-wechat-to-markdown
 description: >
   将微信公众号文章链接转换为 Markdown 格式。
   支持提取标题、作者、正文，并生成带 frontmatter 的 Markdown 文件。
 ---
 
-# yy-wx-to-markdown
+# yy-wechat-to-markdown
 
 ## 描述
 
