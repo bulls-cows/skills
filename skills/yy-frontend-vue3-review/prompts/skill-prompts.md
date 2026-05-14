@@ -215,6 +215,40 @@
 - **修饰符**：状态/样式变体用 `--` 连接（`card--dark`、`card__title--large`）
 - 全小写、横线连接、无嵌套、类名唯一不冲突
 
+**样式区注释格式**：
+
+| 场景 | 注释格式 | 示例 |
+| ---- | -------- | ---- |
+| 模块分组 | `/* 模块名称 */` | `/* 用户卡片 */` |
+| 子模块 | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式 | `/* 响应式 */` | `/* 响应式 */` |
+
+**CSS 布局推荐**：
+
+- **定位层级**：`position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 z-index 影响外部
+- **padding 方向**：优先使用 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin 方向**：优先使用 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`（向下布局更稳定，减少 margin collapse）
+
+**CSS 兼容性指南**：
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性 | 问题 | 降级方案 |
+| ---- | ---- | -------- |
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+
+**兼容性开发实践**：
+
+- 查兼容性：[Can I Use](https://caniuse.com/) 查询属性支持情况
+- 自动前缀：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- 渐进增强：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
+
 **Hooks 速查表**：
 
 | 场景 | 建议 Hook 名 |
@@ -304,7 +338,12 @@
 
 ### D05 · 网络请求规范（🟡 中等）
 
-**必须使用**：`async/await` + `try/catch/finally`
+**前置检查**：编写网络请求前，检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`：
+
+- 已安装 → 使用 `useRequest`（自动管理 loading/data）
+- 未安装 → 使用手动 `async/await` + `try/catch/finally`
+
+**必须使用**：`async/await` + `try/catch/finally`（未安装 useRequest 时）
 
 **禁止**：多层 try/catch 嵌套，异步操作需扁平化
 
@@ -374,6 +413,8 @@ if (code === 0) {
 | 多层 try/catch | 禁止多个 try/catch 嵌套 |
 | 生命周期 emit | 基础组件禁止在生命周期中 emit，业务组件允许但不推荐 |
 | 无意义命名 | 禁止 `data1`、`temp2` 等无意义命名 |
+| v-for 与 v-if 同元素 | 禁止同一元素同时使用 v-for 和 v-if |
+| index 作为 key | v-for 必须用唯一 ID 作为 key，禁止使用 index |
 
 ---
 
@@ -409,7 +450,19 @@ if (code === 0) {
 
 ---
 
-## 9. 🚫 禁止规则
+## 9. ⚠️ 不推荐项
+
+以下内容尽量避免使用，非强制禁止：
+
+1. **多层 try/catch 嵌套**：异步操作尽量扁平化
+2. **生命周期 emit**：不推荐在生命周期中主动向外 emit
+3. **可选链操作符 `?.`**：不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代
+4. **CSS 嵌套原生写法**：不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用
+5. **`:has()` 伪类**：Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用
+
+---
+
+## 10. 🚫 禁止规则
 
 1. 禁止连续解构（如 `...data.data`）
 2. 禁止父组件直接修改子组件数据
@@ -420,12 +473,14 @@ if (code === 0) {
 7. 禁止使用 mixins
 8. 禁止多层 try/catch 嵌套
 9. 基础组件生命周期禁止主动 emit
-10. 简单逻辑不额外封装为函数
-11. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
+10. 禁止无意义命名（如 `data1`、`temp2`）
+11. 禁止 v-for 与 v-if 同时用在同一元素上
+12. 禁止使用 index 作为 v-for 的 key（必须用唯一 ID）
+13. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
 
 ---
 
-## 10. 📝 输出格式
+## 11. 📝 输出格式
 
 ### 审核清单展示
 

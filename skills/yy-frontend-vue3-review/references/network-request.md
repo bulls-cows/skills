@@ -4,9 +4,18 @@
 
 ---
 
+## 前置检查
+
+编写网络请求前，检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`：
+
+- 已安装 → 使用 `useRequest`（自动管理 loading/data）
+- 未安装 → 使用手动 `async/await` + `try/catch/finally`
+
+---
+
 ## 必须使用
 
-`async/await` + `try/catch/finally`
+`async/await` + `try/catch/finally`（未安装 useRequest 时）
 
 ---
 

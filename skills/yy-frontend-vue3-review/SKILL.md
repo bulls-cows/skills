@@ -43,11 +43,11 @@ Vue3 前端代码审核助手，审核 Vue3 项目 `src` 目录下所有改动�
 | D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 |
 | D03 | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
 | D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
-| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
+| D05 | 网络请求规范（前置检查 useRequest、async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
 | D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 |
 | D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 |
 | D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 |
-| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 |
+| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名、v-for与v-if同元素、index作为key） | 🔴 严重 |
 
 ### 审核执行规则
 
@@ -177,6 +177,18 @@ Vue3 前端代码审核助手，审核 Vue3 项目 `src` 目录下所有改动�
 
 ---
 
+## 不推荐项
+
+以下内容尽量避免使用，非强制禁止：
+
+1. 多层 try/catch 嵌套：异步操作尽量扁平化
+2. 生命周期 emit：不推荐在生命周期中主动向外 emit
+3. 可选链操作符 `?.`：不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代
+4. CSS 嵌套原生写法：不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用
+5. `:has()` 伪类：Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用
+
+---
+
 ## 禁止规则
 
 1. 禁止连续解构（如 `...data.data`）
@@ -187,6 +199,7 @@ Vue3 前端代码审核助手，审核 Vue3 项目 `src` 目录下所有改动�
 6. 禁止使用 Options API 写法
 7. 禁止使用 mixins
 8. 禁止多层 try/catch 嵌套
-9. 基础组件生命周期禁止主动 emit
-10. 简单逻辑不额外封装为函数
-11. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
+9. 禁止无意义命名（如 `data1`、`temp2`）
+10. 禁止 v-for 与 v-if 同时用在同一元素上
+11. 禁止使用 index 作为 v-for 的 key（必须用唯一 ID）
+12. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
