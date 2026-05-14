@@ -32,17 +32,17 @@
 
 ### 维度清单
 
-| 维度 ID | 检查内容 | 严重程度 |
-| ------- | -------- | -------- |
-| D01 | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、4 组导入顺序、Prettier 配置、`==` 不视为问题） | 🟢 轻微 |
-| D02 | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch） | 🟢 轻微 |
-| D03 | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等 |
-| D04 | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名） | 🟡 中等 |
-| D05 | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式） | 🟡 中等 |
-| D06 | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底） | 🟡 中等 |
-| D07 | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问） | 🔴 严重 |
-| D08 | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露） | 🔴 严重 |
-| D09 | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名） | 🔴 严重 |
+| 维度 ID | 检查内容                                                                                                                                                                                               | 严重程度 |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| D01     | 代码风格（缩进、引号、分号、尾随逗号、120 行宽、箭头函数、对象括号、4 组导入顺序、Prettier 配置、`==` 不视为问题）                                                                                     | 🟢 轻微  |
+| D02     | 最佳实践（调试代码清理、BEM + scoped、未使用变量、defineExpose、组件拆分、懒加载、KeepAlive、Hooks 规范、函数 try/catch）                                                                              | 🟢 轻微  |
+| D03     | Vue3 组件规范（`<script setup>`、name 属性、脚本结构顺序、元素特性顺序、Props TS 定义、emit 顺序/生命周期 emit 限制、组件命名、v-slot 动态风格、ref/computed 使用、模块化、禁止 mixins、不要过度封装） | 🟡 中等  |
+| D04     | 命名规范（API 函数、事件函数、变量/方法、常量、Props、组件名、文件名、emit 事件、Hooks、布尔值、TS 类型约束、禁止无意义命名）                                                                          | 🟡 中等  |
+| D05     | 网络请求规范（async/await + try/catch/finally、禁止多层 try/catch、禁止连续解构、统一响应模式）                                                                                                        | 🟡 中等  |
+| D06     | computed 规范（纯函数原则、有意义命名、复杂逻辑建议 try/catch 兜底）                                                                                                                                   | 🟡 中等  |
+| D07     | 逻辑错误（空指针、数组越界、逻辑判断、方法内部顺序、ref `.value` 访问）                                                                                                                                | 🔴 严重  |
+| D08     | 安全漏洞（v-html XSS 风险、敏感信息硬编码/泄露）                                                                                                                                                       | 🔴 严重  |
+| D09     | 绝对禁止项（连续解构、父改子数据、修改 ref/reactive 类型、修改 props、this、Options API、mixins、多层 try/catch、生命周期 emit、无意义命名）                                                           | 🔴 严重  |
 
 ### 审核执行规则
 
@@ -52,11 +52,11 @@
 
 ### 各文件类型审核范围
 
-| 文件类型 | 涉及维度 |
-| -------- | -------- |
-| `.vue` | D01, D02, D03, D04, D05, D06, D07, D08, D09 |
-| `.js/.jsx/.ts/.tsx` | D01, D03, D04, D05, D06, D07, D09 |
-| `.css/.scss/.less` | D01, D02 |
+| 文件类型            | 涉及维度                                    |
+| ------------------- | ------------------------------------------- |
+| `.vue`              | D01, D02, D03, D04, D05, D06, D07, D08, D09 |
+| `.js/.jsx/.ts/.tsx` | D01, D03, D04, D05, D06, D07, D09           |
+| `.css/.scss/.less`  | D01, D02                                    |
 
 ### 审核豁免
 
@@ -97,11 +97,11 @@
 
 ### 审核顺序
 
-| 阶段 | 维度 | 检查条件 | 优先级 |
-| ---- | ---- | -------- | ------ |
-| 阶段一 | D07, D08, D09 | 🔴 严重优先检查 | 发现即终止判定 |
-| 阶段二 | D03, D04, D05, D06 | 🟡 中等检查 | 发现则不通过 |
-| 阶段三 | D01, D02 | 🟢 轻微检查 | 发现不影响通过 |
+| 阶段   | 维度               | 检查条件        | 优先级         |
+| ------ | ------------------ | --------------- | -------------- |
+| 阶段一 | D07, D08, D09      | 🔴 严重优先检查 | 发现即终止判定 |
+| 阶段二 | D03, D04, D05, D06 | 🟡 中等检查     | 发现则不通过   |
+| 阶段三 | D01, D02           | 🟢 轻微检查     | 发现不影响通过 |
 
 ---
 
@@ -124,17 +124,26 @@
 **Prettier 配置**：
 
 ```json
-{ "semi": true, "singleQuote": true, "trailingComma": "all", "arrowParens": "avoid", "bracketSpacing": true, "quoteProps": "as-needed" }
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "quoteProps": "as-needed",
+  "printWidth": 120,
+  "tabWidth": 2
+}
 ```
 
 **导入顺序（4 组，组间空一行，组内字母排序）**：
 
-| 组别 | 说明 | 示例 |
-| ---- | ---- | ---- |
-| 1 | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'` |
-| 2 | types（类型导入，仅 TS） | `import type { IUserInfo } from '@src/types'` |
-| 3 | 内部全局依赖（@src/） | `import { apiGetUser } from '@src/api/user'`、`import { useTable } from '@src/hooks/useTable'`、`import DataTable from '@src/components/DataTable'` |
-| 4 | 内部相对依赖（./、../） | `import SearchBar from './SearchBar.vue'`、`import { useLocalForm } from './hooks/useLocalForm'` |
+| 组别 | 说明                     | 示例                                                                                                                                                |
+| ---- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'`                                                                                  |
+| 2    | types（类型导入，仅 TS） | `import type { IUserInfo } from '@src/types'`                                                                                                       |
+| 3    | 内部全局依赖（@src/）    | `import { apiGetUser } from '@src/api/user'`、`import { useTable } from '@src/hooks/useTable'`、`import DataTable from '@src/components/DataTable'` |
+| 4    | 内部相对依赖（./、../）  | `import SearchBar from './SearchBar.vue'`、`import { useLocalForm } from './hooks/useLocalForm'`                                                    |
 
 ### D02 · 最佳实践（🟢 轻微）
 
@@ -168,16 +177,44 @@
 - **修饰符**：状态/样式变体用 `--` 连接（`card--dark`、`card__title--large`）
 - 全小写、横线连接、无嵌套、类名唯一不冲突
 
+**样式区注释格式**：
+
+| 场景     | 注释格式              | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
+
+**CSS 布局推荐**：
+
+- **定位层级**：`position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 z-index 影响外部
+- **padding 方向**：优先使用 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin 方向**：优先使用 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`（向下布局更稳定）
+
+**CSS 兼容性指南**：
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
+
 **Hooks 速查表**：
 
-| 场景 | 建议 Hook 名 |
-| ---- | ------------ |
-| 表格数据 + 分页 + 加载 | `useTable` |
-| 搜索表单 + 重置 + 查询 | `useSearchForm` |
-| 表单校验逻辑 | `useFormValidate` |
-| 弹窗开关 + 状态 | `useDialog` |
-| 文件上传逻辑 | `useUpload` |
-| 权限判断 | `usePermission` |
+| 场景                   | 建议 Hook 名      |
+| ---------------------- | ----------------- |
+| 表格数据 + 分页 + 加载 | `useTable`        |
+| 搜索表单 + 重置 + 查询 | `useSearchForm`   |
+| 表单校验逻辑           | `useFormValidate` |
+| 弹窗开关 + 状态        | `useDialog`       |
+| 文件上传逻辑           | `useUpload`       |
+| 权限判断               | `usePermission`   |
 
 ### D03 · Vue3 组件规范（🟡 中等）
 
@@ -231,18 +268,18 @@
 
 ### D04 · 命名规范（🟡 中等）
 
-| 类型 | 规范 | 示例 |
-| ---- | ---- | ---- |
-| API 函数 | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
-| 事件函数 | `on` + EventName（小驼峰） | `onClickSubmit`, `onChangeInput` |
-| 变量/方法 | 小驼峰 | `fetchData`, `searchQuery` |
-| 常量 | 全大写 + 下划线 | `MAX_RETRY_COUNT`, `APP_CONFIG` |
-| Props | 小驼峰 | `userName`, `isLoading` |
-| 组件名 | PascalCase | `<UserList />` |
-| 组件文件名 | 多单词 + PascalCase | `UserList.vue` |
-| emit 事件 | 小驼峰 | `userChange` |
-| Hooks | `use` + 功能名 | `useTable`, `useSearchForm` |
-| 布尔值 | `isXX` / `hasXX` / `showXX` | `isLoading`, `hasPermission` |
+| 类型       | 规范                               | 示例                             |
+| ---------- | ---------------------------------- | -------------------------------- |
+| API 函数   | `api` + Method + URLPath（小驼峰） | `apiGetUserInfo`, `apiPostLogin` |
+| 事件函数   | `on` + EventName（小驼峰）         | `onClickSubmit`, `onChangeInput` |
+| 变量/方法  | 小驼峰                             | `fetchData`, `searchQuery`       |
+| 常量       | 全大写 + 下划线                    | `MAX_RETRY_COUNT`, `APP_CONFIG`  |
+| Props      | 小驼峰                             | `userName`, `isLoading`          |
+| 组件名     | PascalCase                         | `<UserList />`                   |
+| 组件文件名 | 多单词 + PascalCase                | `UserList.vue`                   |
+| emit 事件  | 小驼峰                             | `userChange`                     |
+| Hooks      | `use` + 功能名                     | `useTable`, `useSearchForm`      |
+| 布尔值     | `isXX` / `hasXX` / `showXX`        | `isLoading`, `hasPermission`     |
 
 **TypeScript 类型约束**：`.ts` / `.vue` script 中参数、返回值、变量必须明确类型，禁止使用 `any`（用 `unknown` 或具体类型）
 
@@ -250,7 +287,12 @@
 
 ### D05 · 网络请求规范（🟡 中等）
 
-**必须使用**：`async/await` + `try/catch/finally`
+**前置检查**：编写网络请求前，检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`：
+
+- 已安装 → 使用 `useRequest`（自动管理 loading/data）
+- 未安装 → 使用手动 `async/await` + `try/catch/finally`
+
+**必须使用**：`async/await` + `try/catch/finally`（未安装 useRequest 时）
 
 **禁止**：多层 try/catch 嵌套，异步操作需扁平化
 
@@ -300,18 +342,20 @@ if (code === 0) {
 
 ### D09 · 绝对禁止项（🔴 严重）
 
-| 禁止项 | 说明 |
-| ---- | ---- |
-| 连续解构 | 禁止 `...data.data` 等连续解构 |
-| 修改子组件数据 | 禁止父组件直接修改子组件数据 |
-| 修改 ref/reactive 类型 | 禁止多次修改 ref/reactive 属性类型（后端给什么值用什么值） |
-| 直接修改 props | 禁止直接修改 props（使用 `props.xxx` 只读访问） |
-| 使用 this | 禁止在 `<script setup>` 中使用 `this` |
-| Options API | 禁止使用 Options API 写法（`data()`/`methods: {}`/`mounted() {}` 等） |
-| 使用 mixins | 禁止使用 mixins |
-| 多层 try/catch | 禁止多个 try/catch 嵌套 |
-| 生命周期 emit | 基础组件禁止在生命周期中 emit，业务组件允许但不推荐 |
-| 无意义命名 | 禁止 `data1`、`temp2` 等无意义命名 |
+| 禁止项                 | 说明                                                                  |
+| ---------------------- | --------------------------------------------------------------------- |
+| 连续解构               | 禁止 `...data.data` 等连续解构                                        |
+| 修改子组件数据         | 禁止父组件直接修改子组件数据                                          |
+| 修改 ref/reactive 类型 | 禁止多次修改 ref/reactive 属性类型（后端给什么值用什么值）            |
+| 直接修改 props         | 禁止直接修改 props（使用 `props.xxx` 只读访问）                       |
+| 使用 this              | 禁止在 `<script setup>` 中使用 `this`                                 |
+| Options API            | 禁止使用 Options API 写法（`data()`/`methods: {}`/`mounted() {}` 等） |
+| 使用 mixins            | 禁止使用 mixins                                                       |
+| 多层 try/catch         | 禁止多个 try/catch 嵌套                                               |
+| 生命周期 emit          | 基础组件禁止在生命周期中 emit，业务组件允许但不推荐                   |
+| 无意义命名             | 禁止 `data1`、`temp2` 等无意义命名                                    |
+| v-for 与 v-if 同元素   | 禁止同一元素同时使用 v-for 和 v-if                                    |
+| index 作为 key         | v-for 必须用唯一 ID 作为 key，禁止使用 index                          |
 
 ---
 
@@ -319,36 +363,36 @@ if (code === 0) {
 
 ### Emit 事件白名单
 
-| 类别 | 白名单事件 |
-| ---- | ---------- |
+| 类别       | 白名单事件                                                               |
+| ---------- | ------------------------------------------------------------------------ |
 | **交互类** | `change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add` |
-| **弹窗类** | `open`、`close`、`show`、`hide` |
-| **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
+| **弹窗类** | `open`、`close`、`show`、`hide`                                          |
+| **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error`                        |
 
 ### 导入顺序（4 组）
 
-| 组别 | 说明 | 示例 |
-| ---- | ---- | ---- |
-| 1 | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'` |
-| 2 | types（类型导入，仅 TS） | `import type { IUserInfo } from '@src/types'` |
-| 3 | 内部全局依赖（@src/） | `import { apiGetUser } from '@src/api/user'`、`import { useTable } from '@src/hooks/useTable'`、`import DataTable from '@src/components/DataTable'` |
-| 4 | 内部相对依赖（./、../） | `import SearchBar from './SearchBar.vue'`、`import { useLocalForm } from './hooks/useLocalForm'` |
+| 组别 | 说明                     | 示例                                                                                                                                                |
+| ---- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'`                                                                                  |
+| 2    | types（类型导入，仅 TS） | `import type { IUserInfo } from '@src/types'`                                                                                                       |
+| 3    | 内部全局依赖（@src/）    | `import { apiGetUser } from '@src/api/user'`、`import { useTable } from '@src/hooks/useTable'`、`import DataTable from '@src/components/DataTable'` |
+| 4    | 内部相对依赖（./、../）  | `import SearchBar from './SearchBar.vue'`、`import { useLocalForm } from './hooks/useLocalForm'`                                                    |
 
 ---
 
 ## 7. 🛡️ 边界条件
 
-| 场景 | 处理方式 |
-| ---- | -------- |
-| **不修改代码** | 审核仅报告问题和修复建议，不执行任何代码修改 |
-| **非 Vue3 项目** | 识别到 Vue2（Options API）或 React 时，拒绝处理并告知用户 |
-| **无 src 目录** | 终止审核并回复目录要求不符 |
-| **仅轻微问题** | 审核通过，问题列表仍展示 |
-| **存在中/严重问题** | 审核不通过，按文件分组、按严重程度排序输出问题详情 |
-| **大型文件** | 超过 1000 行分段审核 |
-| **重复问题** | 统计总数，提供统一修复方案 |
-| **用户要求修复** | 仅在用户明确要求后才执行代码修复，否则仅保留审核结果 |
-| **TypeScript** | 参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型） |
+| 场景                | 处理方式                                                              |
+| ------------------- | --------------------------------------------------------------------- |
+| **不修改代码**      | 审核仅报告问题和修复建议，不执行任何代码修改                          |
+| **非 Vue3 项目**    | 识别到 Vue2（Options API）或 React 时，拒绝处理并告知用户             |
+| **无 src 目录**     | 终止审核并回复目录要求不符                                            |
+| **仅轻微问题**      | 审核通过，问题列表仍展示                                              |
+| **存在中/严重问题** | 审核不通过，按文件分组、按严重程度排序输出问题详情                    |
+| **大型文件**        | 超过 1000 行分段审核                                                  |
+| **重复问题**        | 统计总数，提供统一修复方案                                            |
+| **用户要求修复**    | 仅在用户明确要求后才执行代码修复，否则仅保留审核结果                  |
+| **TypeScript**      | 参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型） |
 
 ---
 
@@ -368,7 +412,19 @@ if (code === 0) {
 
 ---
 
-## 9. 🚫 禁止规则
+## 9. ⚠️ 不推荐项
+
+以下内容尽量避免使用，非强制禁止：
+
+1. **多层 try/catch 嵌套**：异步操作尽量扁平化
+2. **生命周期 emit**：不推荐在生命周期中主动向外 emit
+3. **可选链操作符 `?.`**：不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代
+4. **CSS 嵌套原生写法**：不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用
+5. **`:has()` 伪类**：Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用
+
+---
+
+## 10. 🚫 禁止规则
 
 1. 禁止连续解构（如 `...data.data`）
 2. 禁止父组件直接修改子组件数据
@@ -379,12 +435,14 @@ if (code === 0) {
 7. 禁止使用 mixins
 8. 禁止多层 try/catch 嵌套
 9. 基础组件生命周期禁止主动 emit
-10. 禁止无意义命名
-11. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
+10. 禁止无意义命名（如 `data1`、`temp2`）
+11. 禁止 v-for 与 v-if 同时用在同一元素上
+12. 禁止使用 index 作为 v-for 的 key（必须用唯一 ID）
+13. 禁止使用 any 类型（TypeScript 中参数、返回值、变量必须明确类型）
 
 ---
 
-## 10. 📝 输出格式
+## 11. 📝 输出格式
 
 ### 审核清单展示
 
@@ -394,9 +452,9 @@ if (code === 0) {
 - 📁 审核文件：X 个
 - ❌ 不通过 / ✅ 通过
 
-| 文件 | D01 | D02 | D03 | D04 | D05 | D06 | D07 | D08 | D09 |
-|------|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| xxx.vue | ✅ | ⚠️ | ✅ | ❌ | - | ✅ | - | ✅ | ✅ |
+| 文件    | D01 | D02 | D03 | D04 | D05 | D06 | D07 | D08 | D09 |
+| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| xxx.vue | ✅  | ⚠️  | ✅  | ❌  | -   | ✅  | -   | ✅  | ✅  |
 ```
 
 ### 🟢 通过（无问题或仅轻微）
@@ -408,25 +466,25 @@ if (code === 0) {
 
 | 严重程度 | 数量 |
 | -------- | ---- |
-| 🔴 严重 | 0 |
-| 🟡 中等 | 0 |
-| 🟢 轻微 | N |
+| 🔴 严重  | 0    |
+| 🟡 中等  | 0    |
+| 🟢 轻微  | N    |
 
 所有文件符合 Vue3 前端开发规范，审核通过。
 ```
 
 ### 🔴 不通过（严重或中等问题）
 
-```markdown
+````markdown
 ## 🔍 宏核结果：❌ 不通过
 
 ### 问题统计
 
 | 严重程度 | 数量 |
 | -------- | ---- |
-| 🔴 严重 | N |
-| 🟡 中等 | N |
-| 🟢 轻微 | N |
+| 🔴 严重  | N    |
+| 🟡 中等  | N    |
+| 🟢 轻微  | N    |
 
 ### 问题详情
 
@@ -450,7 +508,7 @@ if (code === 0) {
 ### 修复建议
 
 请优先修复「严重」和「中等」问题，修复完成后可再次发起审核。
-```
+````
 
 不通过时等待用户修复后重新审核。
 

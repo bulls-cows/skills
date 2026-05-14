@@ -185,3 +185,138 @@
   }
 }
 ```
+
+## CSS 布局推荐
+
+### 定位层级
+
+- `position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 `z-index` 影响外部元素
+
+```scss
+// ✅ 正确：创建独立定位上下文
+.modal-wrapper {
+  position: relative;
+  z-index: 0;
+
+  .modal-overlay {
+    position: absolute;
+    z-index: 10; // 不会影响外部元素
+  }
+}
+```
+
+### 外边距与内边距方向
+
+- **padding**：优先使用 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin**：优先使用 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`
+
+**原因**：向下布局更稳定，减少相邻元素的间距叠加问题（margin collapse）。
+
+```scss
+// ✅ 推荐：向下布局
+.section {
+  margin-bottom: 24px; // 与下一个元素的间距
+  padding-top: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+// ❌ 不推荐：向上布局
+.section {
+  margin-top: 24px; // 可能与上一个元素的 margin-bottom叠加
+  padding-bottom: 16px;
+}
+```
+
+## CSS 兼容性指南
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性 | 问题 | 降级方案 |
+|------|------|----------|
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+
+### 降级方案示例
+
+#### gap 降级
+
+```scss
+// ❌ 直接使用 gap（兼容性问题）
+.flex-container {
+  display: flex;
+  gap: 16px;
+}
+
+// ✅ 使用 margin 负边距降级
+.flex-container {
+  display: flex;
+  margin-left: -16px;
+  margin-top: -16px;
+
+  > * {
+    margin-left: 16px;
+    margin-top: 16px;
+  }
+}
+```
+
+#### aspect-ratio 降级
+
+```scss
+// ❌ 直接使用 aspect-ratio
+.video-box {
+  aspect-ratio: 16/9;
+}
+
+// ✅ 使用 padding-bottom Hack
+.video-box {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; // 9/16 = 56.25%
+
+  > video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+```
+
+#### 100vh 降级
+
+```scss
+// ❌ 直接使用 100vh
+.full-height {
+  height: 100vh;
+}
+
+// ✅ 使用 dvh 或 JS 动态计算
+.full-height {
+  height: 100vh;
+  height: 100dvh; // 新单位，支持动态视口高度
+}
+```
+
+### 兼容性开发实践
+
+- **查兼容性**：[Can I use](https://caniuse.com/) 查询属性支持情况
+- **自动前缀**：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- **渐进增强**：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
+
+```scss
+// ✅ 使用 @supports 渐进增强
+@supports (gap: 16px) {
+  .flex-container {
+    gap: 16px;
+    margin: 0; // 移除降级方案的 margin
+  }
+}
+```

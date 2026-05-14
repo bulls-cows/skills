@@ -18,3 +18,5 @@
 | 多层 try/catch | 禁止多个 try/catch 嵌套 |
 | 生命周期 emit | 基础组件禁止在生命周期中 emit，业务组件允许但不推荐 |
 | 无意义命名 | 禁止 `data1`、`temp2` 等无意义命名 |
+| v-for 与 v-if 同元素 | 禁止同一元素同时使用 v-for 和 v-if |
+| index 作为 key | v-for 必须用唯一 ID 作为 key，禁止使用 index |

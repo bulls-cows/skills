@@ -208,6 +208,35 @@
 - **Scoped 作用域**：组件样式必须使用 `<style scoped>`，防止样式泄漏
 - **样式穿透**：使用 `::v-deep`（Vue2 语法）
 - 嵌套不超过 3 层，全小写、横线连接
+- **CSS 嵌套原生写法不推荐**：不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用
+
+**CSS 布局推荐**：
+
+- **定位层级**：`position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 `z-index` 影响外部元素
+- **padding 方向**：优先使用 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin 方向**：优先使用 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`
+- **原因**：向下布局更稳定，减少相邻元素的间距叠加问题（margin collapse）
+
+**CSS 兼容性指南**：
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性 | 问题 | 降级方案 |
+| ---- | ---- | ---- |
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug | 谨慎在生产环境使用 |
+
+**兼容性开发实践**：
+
+- 查兼容性：[Can I use](https://caniuse.com/) 查询属性支持情况
+- 自动前缀：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- 渐进增强：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
 
 **未使用变量**：需自行清理（ESLint 已关闭检查，但审核需指出）
 
@@ -356,6 +385,8 @@ const userName = this.user.info.name
 const userName = this.user?.info?.name
 ```
 
+**⚠️ 可选链操作符不推荐**：不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代
+
 **数组越界**：
 
 - 访问数组元素前检查索引是否在有效范围内
@@ -458,6 +489,15 @@ this.props.userId = '123'
 7. 注释检查：默认忽略
 8. 组件拆分：弹窗→独立组件，表格→表格+业务分离
 9. 性能优化：路由和大组件使用动态 import，合理使用 `<keep-alive>`
+10. CSS 兼容性：`gap`、`aspect-ratio`、`100vh` 等属性需提供降级方案
+
+### 🟡 不推荐项
+
+| 项 | 说明 |
+| ---- | ---- |
+| 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| CSS 嵌套原生写法 | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
+| `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
 
 ---
 
@@ -575,7 +615,7 @@ this.props.userId = '123'
 我将帮你审核当前改动文件（支持 .vue、.js、.css、.scss、.less）：
 
 1. **Vue2 组件**：脚本结构、Props/Emit 规范、元素特性顺序
-2. **代码风格**：缩进、引号、导入顺序（9 组）
+2. **代码风格**：缩进、引号、导入顺序（3 组）
 3. **命名规范**：API、事件、常量统一命名
 4. **逻辑错误**：空指针、数组越界、遗漏分支
 5. **网络请求**：async/await、try/catch/finally、响应模式

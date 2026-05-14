@@ -1,4 +1,6 @@
-# yy-frontend-vue3-code-optimization 简化版提示词
+# yy-frontend-vue3-code-optimization 完整版提示词
+
+> **版本关系**：此文件为完整版，简化版见 `skill-prompts-simple.md`。完整版包含详细解释和示例代码，简化版保留核心规则要点。
 
 **角色**：Vue3 前端代码优化工程师
 **核心任务**：针对 Vue3 页面组件、JavaScript/TypeScript/JSX/TSX 和 CSS/SCSS/Less 文件执行代码优化。通过统一 `<script setup>` 组合式 API 结构、语义化命名、BEM 样式规范、逻辑分层和关键注释，提升代码可读性与团队协作效率。
@@ -80,20 +82,36 @@
 
 **脚本区**（必须 `<script setup>`）：
 
-- 结构顺序：`imports` → `defineProps` → `defineEmits` → `全局Hooks` → **业务模块（按领域分组，组内自由组合）** → `defineExpose`
-- **业务模块内部**：按业务逻辑分组，组内自由组合 `ref/reactive`（**优先 ref**）、`computed`、`watch`、方法、生命周期钩子
+- 结构顺序：`imports` → `defineProps` / `defineEmits` → `全局Hooks` → **业务逻辑（按功能模块分组）** → `defineExpose`
+- **业务模块内部**：按业务逻辑分组，每个模块内部顺序：`ref`/`reactive`（**优先 ref**）→ `computed` → 方法 → `watch` → 生命周期钩子
 - 顶部 JSDoc：组件名称 + 页面职责 + 核心业务 + 数据来源
 - Props：`defineProps` + TypeScript 类型注解，camelCase，必须注释
-- Emits：`defineEmits` 定义，顺序 `input` → `其它` → `change/click`；基础组件生命周期禁止 emit
+- Emits：`defineEmits` 定义，顺序 `update:modelValue/value` → 其他业务事件 → `change/click`；基础组件生命周期禁止 emit
 - 函数排序：`const initXxx` → `getListData/postFormData` → `onClickXxx/onChangeXxx` → `computedXxx`
 - computed：必须 try/catch，命名用 `is`/`has`/`visible`
-- 网络请求：`async/await + try/catch/finally` + `{ code, data, msg }` 响应模式
+- 网络请求：**前置检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`**
+  - 已安装 → 使用 `useRequest`（自动管理 `loading`/`data`）
+  - 未安装 → 使用手动 `async/await` + `try/catch/finally`
+  - 统一响应模式 `{ code, data, msg }` 解构处理
 
   ```typescript
+  // 已安装 useRequest（manual 模式）
+  const { loading, run } = useRequest(() => apiSubmit(formData.value), {
+    manual: true,
+    onSuccess: (res) => {
+      if (res.code === 0) { /* 成功 */ }
+      else { console.warn(res.msg); }
+    },
+    onError: () => { console.warn("网络异常"); },
+  });
+
+  // 未安装 useRequest（手动 async/await）
   try {
-    const res = await apiXXX();
-    if (res.code === 0) {
+    const { code, data, msg } = await apiXXX();
+    if (code === 0) {
       // 处理成功逻辑
+    } else {
+      console.warn(msg);
     }
   } catch (e) {
     console.warn("请求失败：", e);
@@ -106,11 +124,11 @@
 
 **Hooks 规范**：
 
-- 命名：`useXxx`，全局 Hooks 文件存放在 `@src/hooks/`，局部 Hooks 直接在组件同级目录新建文件（如 `./useLocalTable.ts`），无需 `hooks/` 子目录
-- 返回值：`toRefs` 解构后返回对象，**禁止直接返回 reactive 对象**
-- 可复用逻辑超过 30 行或跨 2+ 组件使用时，必须抽离为 Hook
+- 命名：必须以 `use` 开头（如 `useTable`、`useSearchForm`），全局 Hooks 文件存放在 `@src/hooks/`，局部 Hooks 直接在组件同级目录新建文件
+- 返回值：统一返回对象，**禁止直接返回 reactive 对象**
+- 可复用逻辑超过 30 行或跨 2 个以上组件使用时，必须抽离为 Hook
 - 禁止将 Hooks 挂载到响应式数据上
-- 导入顺序：全局 Hooks 在相对工具之后、Store 之前；相对 Hooks 在 Hooks 之后
+- 导入顺序详见 rules/order.md
 - **尽可能少用 reactive，优先使用 ref**
 
 **样式区**：
@@ -119,9 +137,34 @@
 - BEM 命名：`block__element--modifier`，全小写、横线连接、无嵌套
 - 注释：模块、子模块、响应式
 
+**CSS 布局推荐**：
+
+- **定位层级**：`position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 `z-index` 影响外部元素
+- **padding 方向**：优先 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin 方向**：优先 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`
+- **原因**：向下布局更稳定，减少相邻元素的间距叠加问题（margin collapse）
+
+**CSS 兼容性指南**：
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性 | 问题 | 降级方案 |
+|------|------|----------|
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 dvh 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+
+- **查兼容性**：[Can I Use](https://caniuse.com/) 查询属性支持情况
+- **自动前缀**：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- **渐进增强**：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
+
 #### `.js` / `.jsx` / `.ts` / `.tsx` 文件
 
-- 导入顺序（4 组）：1. 外部依赖 2. types 3. 全局内部依赖 4. 相对内部依赖（组间空一行，组内字母排序）
+- 导入顺序（4 组）：1. 外部依赖（node_modules）2. types（`import type` 类型导入）3. 全局内部依赖（`@src/...`）4. 相对内部依赖（`./...`、`../...`），组间空一行，组内字母排序
 - 网络请求：`async/await + try/catch`
 - TypeScript/TSX：参数、返回值、变量必须明确类型，禁止 `any`（用 `unknown` 或具体类型）
 - JSX/TSX：组件结构规范、Props 类型定义、事件处理规范
@@ -155,16 +198,29 @@
 | 常量     | 全大写 + 下划线             | `MAX_RETRY_COUNT` |
 | 组件名   | PascalCase                  | `<UserList />`    |
 | Props    | camelCase                   | `userName`        |
-| Hooks    | `use + PascalCase`          | `useTable`        |
+| Hooks    | `use` + 功能名 | `useTable`        |
 | 布尔值   | `isXX` / `hasXX` / `showXX` | `isLoading`       |
 
 _跨文件引用重命名需提示用户确认_
 
-### Emit 事件白名单
+### Emit 事件白名单（19 种）
 
-- 交互类：`change, click, select, expand, input, clear, remove, add`
-- 弹窗类：`open, close, show, hide`
-- 操作类：`cancel, confirm, ok, editSuccess, error`
+仅允许使用以下语义化事件名：
+
+| 类别             | 事件名                                                                   |
+| ---------------- | ------------------------------------------------------------------------ |
+| **v-model 更新** | `update:modelValue` (标准), `update:value` (AntD 风格)                   |
+| **交互类**       | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
+| **弹窗类**       | `open`, `close`, `show`, `hide`                                          |
+| **操作类**       | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
+
+### Emit 顺序
+
+对外触发事件建议遵循以下优先级：
+
+1. `update:modelValue` / `update:value` (绑定值更新)
+2. 其他业务事件
+3. `change` / `click` (交互反馈)
 
 ### JSDoc 格式（关键方法必填）
 
@@ -231,7 +287,29 @@ if (code === 0) {
 
 ---
 
-## 7. 子技能执行规则
+## 7. 🟡 不推荐项（尽量避免）
+
+| # | 不推荐项 | 说明 |
+|---|----------|------|
+| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
+| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
+| 3 | 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4 | CSS 嵌套原生写法 | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
+| 5 | `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+
+---
+
+## 8. ⚠️ 注意事项
+
+- **未使用变量**：ESLint 已关闭检查，需自行清理无用代码
+- **v-html**：可使用，但必须防范 XSS 风险
+- **等于运算符**：使用 `==` 不视为问题
+- **注释检查**：注释相关问题默认忽略，不进行检查
+- **不要过度封装**：简单逻辑直接写在 template 中
+
+---
+
+## 9. 子技能执行规则
 
 以下子技能按任务 ID 执行，严格按其中详细规则操作。
 
@@ -383,84 +461,97 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 #### 结构与顺序整理
 
-##### 导入顺序（7 组）
+##### 导入顺序（4 组）
 
-组间空一行，组内按字母排序。**全局与相对导入合并为同一组**。
+将 `import` 分为四组，**组间空一行，组内按字母顺序排列**：
+
+1. **node_modules（外部依赖）**：`vue`, `dayjs`, `lodash` 等第三方库。
+2. **types（类型导入）**：所有 `import type` 导入的纯类型。
+3. **内部全局依赖**：`@src/` 开头的路径（包括 API、工具、Hooks、Store、常量、组件等）。
+4. **内部相对依赖**：`./` 或 `../` 开头的相对路径（包括工具、Hooks、常量、组件等）。
+
+**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序排列
 
 ```typescript
-// node_modules
+// 1. node_modules（外部依赖）
+import { ref, computed, onMounted } from "vue";
 import dayjs from "dayjs";
 import { debounce } from "lodash";
 
-// types（仅 TypeScript/TSX）
-import type { RuleObject } from "ant-design-vue/es/form";
-import type { IUserInfo } from "@src/types/user";
-import type { ITableColumn } from "./types";
+// 2. types（类型导入）
+import type { IUserInfo } from "@src/types";
 
-// apis
+// 3. 内部全局依赖（@src/）
 import { apiGetUserInfo } from "@src/api/user";
-
-// utils
-import { formatDate } from "@src/utils";
-import { formatFileSize } from "./utils/format";
-
-// hooks
+import { formatDate } from "@src/utils/date";
 import { useTable } from "@src/hooks/useTable";
-import { useSearchForm } from "./useSearchForm";
-
-// stores (Pinia/Vuex)
-import { useUserStore } from "@src/stores/user";
-
-// constants
+import store from "@src/store";
 import { APP_CONFIG } from "@src/constants";
-import { MAX_RETRY_COUNT } from "./constants";
+import DataTable from "@src/components/DataTable.vue";
 
-// components
-import { NavbarLogo } from "@src/components";
-import NavbarLogo2 from "./NavbarLogo2.vue";
+// 4. 内部相对依赖（./）
+import { localHelper } from "./utils/helper";
+import { MAX_RETRY_COUNT } from "./constants";
+import SearchBar from "./SearchBar.vue";
 ```
 
 ##### `<script setup>` 结构顺序
 
-**Vue3 组合式 API 标准结构**：
+**Vue3 组合式 API 标准结构**（宏观 5 步顺序）：
+
+1. `imports` → 2. `defineProps` / `defineEmits` → 3. 全局 Hooks → 4. 业务逻辑（按功能模块分组）→ 5. `defineExpose`
+
+**第 4 步「业务逻辑」内部，按功能模块分组，每个模块内部顺序：**
+`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子
 
 ```typescript
 <script setup lang="ts" name="UserCard">
-// 1. imports（按 7 组排序）
-import { ref, computed, watch, onMounted } from "vue";
+// 1. imports（按 4 组排序）
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 
 import type { IUserInfo } from "@src/types/user";
 
 import { apiGetUserList } from "@src/api/user";
+import { useTable } from "@src/hooks/useTable";
 
-// 2. defineProps
+// 2. defineProps / defineEmits（交互定义）
 const props = defineProps<{
   userId: string;
   pageSize?: number;
 }>();
 
-// 3. defineEmits
 const emit = defineEmits<{
   (e: "select", user: IUserInfo): void;
   (e: "change", page: number): void;
 }>();
 
-// 4. Hooks（第三方或自定义 Hooks）
+// 3. 全局 Hooks（多个业务共享的 useXxx）
 const { tableData, loading, fetchData } = useTable();
-const { searchQuery, resetForm } = useSearchForm();
 
-// 5. ref/reactive（本地状态）
-const isActive = ref(false);
-const formData = reactive({
+// ==================== 业务模块：表单 ====================
+// 4. 业务逻辑（按功能模块分组，组内：ref → computed → 方法 → watch → 生命周期）
+const formData = ref({
   username: "",
   email: "",
 });
+const isFormValid = computed(() => formData.value.username.length > 0);
 
-// 6. computed（计算属性）
-const isFormValid = computed(() => formData.username.length > 0);
+const resetForm = () => {
+  formData.value = { username: "", email: "" };
+};
+
+const handleSubmit = async () => {
+  try {
+    await apiPostForm(formData.value);
+    emit("submit");
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+// ==================== 业务模块：表格 ====================
 const displayUsers = computed(() => tableData.value.filter((u) => u.active));
 
-// 7. watch（侦听器）
 watch(
   () => props.userId,
   (newId) => {
@@ -468,34 +559,19 @@ watch(
   }
 );
 
-// 8. 方法（业务函数）
-const init = () => {
-  fetchData(props.userId);
-};
-
-const handleSubmit = async () => {
-  try {
-    await apiPostForm(formData);
-    emit("submit");
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
 const onClickSubmit = () => {
   handleSubmit();
 };
 
-// 9. 生命周期钩子
 onMounted(() => {
-  init();
+  fetchData(props.userId);
 });
 
 onUnmounted(() => {
   // 清理逻辑
 });
 
-// 10. defineExpose（可选，暴露给父组件）
+// 5. defineExpose（对外暴露）
 defineExpose({
   resetForm,
   fetchData,
@@ -622,7 +698,7 @@ export default defineComponent({
 
 ##### TSX 组件结构顺序
 
-1. imports（按 7 组排序）
+1. imports（按 4 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -678,7 +754,7 @@ const handleClick = () => {
 
 ##### JSX 组件结构顺序
 
-1. imports（按 7 组排序）
+1. imports（按 4 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -1683,7 +1759,7 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 
 ---
 
-## 8. 📝 输出格式
+## 10. 📝 输出格式
 
 **优化结果汇总示例**：
 
@@ -1717,7 +1793,7 @@ const emit = defineEmits(["select", "change"]);  // 禁止
 
 ---
 
-## 9. 🚀 对话开场白
+## 11. 🚀 对话开场白
 
 ```markdown
 你好！我是前端代码优化助手 ⚡
