@@ -87,33 +87,14 @@ function resolveInput(inputFile: string): {
   filePath: string;
   isHtml: boolean;
 } {
-  if (fs.existsSync(inputFile)) {
-    const content = fs.readFileSync(inputFile, 'utf-8');
-    const isHtml = inputFile.endsWith('.html');
-    return { content, filePath: inputFile, isHtml };
+  if (!fs.existsSync(inputFile)) {
+    console.error(`❌ 文件不存在: ${inputFile}`);
+    process.exit(1);
   }
 
-  const slug = generateSlug(inputFile.slice(0, 30));
-  const now = new Date();
-  const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-  const dir = path.join(process.cwd(), 'post-to-wechat', dateStr);
-  fs.mkdirSync(dir, { recursive: true });
-  const filePath = path.join(dir, `${slug}.md`);
-  const content = inputFile;
-  fs.writeFileSync(filePath, content, 'utf-8');
-  console.log(`💾 纯文本已保存到: ${filePath}`);
-  return { content, filePath, isHtml: false };
-}
-
-function generateSlug(text: string): string {
-  const cleaned = text
-    .trim()
-    .toLowerCase()
-    .replace(/[^\w\s\u4e00-\u9fa5]/g, '')
-    .replace(/\s+/g, '-')
-    .slice(0, 40);
-
-  return cleaned || 'untitled';
+  const content = fs.readFileSync(inputFile, 'utf-8');
+  const isHtml = inputFile.endsWith('.html');
+  return { content, filePath: inputFile, isHtml };
 }
 
 interface FrontMatterAttributes {
@@ -217,6 +198,7 @@ async function main() {
 
   const { content, filePath, isHtml } = resolveInput(inputFile);
   const baseDir = path.dirname(filePath);
+  const metadata = resolveMetadata(content, options, config, filePath);
 
   let htmlContent: string;
   let imagePaths: string[];
@@ -225,8 +207,6 @@ async function main() {
     htmlContent = content;
     imagePaths = extractImagePaths(htmlContent, baseDir);
   } else {
-    const metadata = resolveMetadata(content, options, config, filePath);
-
     if (!metadata.coverPath) {
       console.error('❌ 缺少封面图片，请通过 --cover 指定，或在 frontmatter 中配置，或将其放在 imgs/cover.png');
       process.exit(1);
@@ -245,17 +225,13 @@ async function main() {
 
     htmlContent = convertResult.html;
     imagePaths = convertResult.imagePaths;
-
-    (globalThis as any)._metadata = metadata;
   }
-
-  const metadata = (globalThis as any)._metadata;
 
   console.log(`📝 文章信息:
   标题: ${metadata.title}
   作者: ${metadata.author}
   摘要: ${metadata.digest.slice(0, 50)}${metadata.digest.length > 50 ? '...' : ''}
-  封面: ${metadata.coverPath}
+  封面: ${metadata.coverPath || '(无)'}
   正文图片: ${imagePaths.length} 张
 `);
 
@@ -267,8 +243,11 @@ async function main() {
   console.log('🔑 获取 Access Token...');
   const accessToken = await getAccessToken(config.appId, config.appSecret);
 
-  console.log('🖼️  上传封面图片...');
-  const thumbMediaId = await uploadThumbMedia(accessToken, metadata.coverPath!);
+  let thumbMediaId = '';
+  if (metadata.coverPath) {
+    console.log('🖼️  上传封面图片...');
+    thumbMediaId = await uploadThumbMedia(accessToken, metadata.coverPath);
+  }
 
   if (imagePaths.length > 0) {
     console.log(`🖼️  上传 ${imagePaths.length} 张正文图片...`);
@@ -312,12 +291,6 @@ async function main() {
 下一步:
 → 管理草稿: https://mp.weixin.qq.com (登录后进入「内容管理」→「草稿箱」)
 `);
-
-  if (!fs.existsSync(inputFile)) {
-    console.log(`创建的文件:
-• ${filePath}
-`);
-  }
 }
 
 main().catch(error => {
