@@ -26,7 +26,7 @@ description: >
 ### 1. 读取两个文件
 
 - 读取 `.opencode.json` 的 `instructions` 数组
-- 读取 `AGENTS.md` 的 `## 需要遵守的规则` 章节
+- 读取 `AGENTS.md` 全文（而非仅"需要遵守的规则"章节），因为部分规则可能已在其他章节中体现
 
 ### 2. 逐条分类 instructions 中的规则
 
@@ -38,6 +38,8 @@ description: >
   - 规则内容是对 OpenCode 工具本身的操作约束（而非通用的编码/协作规范）
   - 示例："本地测试后再提交，将技能复制到 OpenCode 并测试调用"——这条规则指定了使用 OpenCode 作为测试工具，属于 OpenCode 专属
 - **通用规则**：AGENTS.md 中没有的、且不是 OpenCode 专属的规则，需要同步
+  - 判断"AGENTS.md 中没有"时，需检查 AGENTS.md **全文**，而非仅"需要遵守的规则"章节
+  - 如果规则内容已在 AGENTS.md 其他章节中体现（语义等价），视为"已有"，无需重复添加
 
 ### 3. 同步通用规则到 AGENTS.md
 
