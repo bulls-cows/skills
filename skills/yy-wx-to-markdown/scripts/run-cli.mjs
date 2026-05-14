@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
  * CLI 入口：微信公众号文章转 Markdown
- * 用法: node run_cli.mjs <微信文章URL> [输出文件路径]
+ * 用法: node run-cli.mjs <微信文章URL> [输出文件路径]
  */
 
-import { wxArticleToMarkdown } from './wechat_article_parser.mjs';
+import { wxArticleToMarkdown } from './wechat-article-parser.mjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -12,8 +12,8 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length === 0) {
-    console.error('用法: node run_cli.mjs <微信文章URL> [输出文件路径]');
-    console.error('示例: node run_cli.mjs https://mp.weixin.qq.com/s/xxx output.md');
+    console.error('用法: node run-cli.mjs <微信文章URL> [输出文件路径]');
+    console.error('示例: node run-cli.mjs https://mp.weixin.qq.com/s/xxx output.md');
     process.exit(1);
   }
 
