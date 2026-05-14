@@ -1,14 +1,12 @@
-# AGENTS.md - 智能体编码指南
+# AGENTS.md
 
-## Scope
+## 范围
 
 - 本仓库默认语言: Markdown, JSON
 - 允许修改目录: .claude-plugin/, build/, docs/, rules/, skills/, AGENTS.md, README.md
 - 禁止修改目录: 无
 
----
-
-## Quality Gate
+## 改动检查
 
 **改动后必须执行:**
 
@@ -22,27 +20,15 @@
 - 验证 README.md 中每个技能列表与其对应的 skills/ 目录技能内容一致
 - 修复上述验证过程中发现的错误
 
----
-
-## Delivery Format
+## 交付格式
 
 - 修改后先说明修改原因和影响范围
 - 所有文件引用都要带路径和行号
 - 对于技能变更，说明变更后对用户的影响
 
----
-
 ## 项目结构
 
 参考 [@docs/STRUCTURE.md](./docs/STRUCTURE.md)
-
----
-
-## 编辑器配置
-
-编写内容时，需遵循 [@.editorconfig](./.editorconfig)
-
----
 
 ## AI 思考方式
 
@@ -126,7 +112,20 @@
 - 枚举具体的失真类型作为核查清单，而非笼统要求"保持一致"
 - 检测到偏移时回退到原始定义，而非尝试修正偏移后的版本
 
----
+## 路径格式规范
+
+- 在文档中提及文件路径时，优先使用相对路径，以保持跨设备下的通用性
+- 在终端中提及文件路径时，优先使用绝对路径，以方便终端/IDE 将其识别为可点击的链接
+- 使用正斜杠作为路径分隔符，路径包含空格时使用引号包裹，以确保跨平台兼容性和正确解析
+
+## 需要遵守的规则
+
+- [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
+- [@rules/text/RULE.md](./rules/text/RULE.md)
+
+## 编辑器配置
+
+编写内容时，需遵循 [@.editorconfig](./.editorconfig)
 
 ## 智能体重要提示
 
@@ -138,8 +137,6 @@
 6. **始终使用中文交互** - 智能体必须始终使用中文与用户进行交流，无论用户使用何种语言提问，都必须用中文回答
 7. **本地测试后再提交** - 将技能复制到 OpenCode 并测试调用
 
----
-
 ## 关键参考
 
 - `skills/yy-review/SKILL.md` - 代码质量检查工作流
@@ -149,14 +146,3 @@
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
 - `rules/file-scope-limit/RULE.md` - 文件修改范围限制规则
-
-## 需要遵守的规则
-
-- [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
-- [@rules/text/RULE.md](./rules/text/RULE.md)
-
-## 路径格式规范
-
-- 在文档中提及文件路径时，优先使用相对路径，以保持跨设备下的通用性
-- 在终端中提及文件路径时，优先使用绝对路径，以方便终端/IDE 将其识别为可点击的链接
-- 使用正斜杠作为路径分隔符，路径包含空格时使用引号包裹，以确保跨平台兼容性和正确解析
