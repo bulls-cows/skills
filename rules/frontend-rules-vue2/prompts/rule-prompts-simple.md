@@ -321,6 +321,32 @@ async handleSubmit() {
 | 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
 | 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
 
+### 6.5 CSS 布局推荐
+
+- **定位层级**：`position: relative` 搭配 `z-index: 0` 创建定位上下文
+- **padding 方向**：优先 `padding-top/left/right`，避免 `padding-bottom`
+- **margin 方向**：优先 `margin-bottom/left/right`，避免 `margin-top`
+
+**原因**：向下布局更稳定，减少 margin collapse 问题。
+
+### 6.6 CSS 兼容性指南
+
+| 属性 | 问题 | 降级方案 |
+| ---------------- | ------------------------------------------ | ------------------------------ |
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+
+**兼容性开发实践**：
+
+- **查兼容性**：[Can I use](https://caniuse.com/) 查询属性支持情况
+- **自动前缀**：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- **渐进增强**：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
+
 ---
 
 ## 7. ⚡ 响应式与数据流
@@ -413,12 +439,15 @@ const handleScroll = throttle(() => {
 | 5   | computed try/catch  | 必须 try/catch 包裹，避免计算属性报错       |
 | 6   | 减少 data 冗余      | 优先 computed 派生，减少 data 属性          |
 
-### 🟡 不推荐
+### 🟡 不推荐（尽量避免）
 
 | #   | 不推荐项            | 说明                            |
 | --- | ------------------- | ------------------------------- |
 | 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
 | 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+| 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
 
 ### ⚠️ 注意事项
 

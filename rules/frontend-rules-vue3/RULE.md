@@ -41,7 +41,7 @@ alwaysApply: true
 
 - **[@rules/frontend-rules-vue3/references/typescript.md](./references/typescript.md)** — TypeScript 类型注解规范（禁用 any，不推荐 as any/@ts-ignore）
 - **[@rules/frontend-rules-vue3/references/code-style.md](./references/code-style.md)** — 代码风格与 Prettier 配置
-- **[@rules/frontend-rules-vue3/references/css.md](./references/css.md)** — CSS 样式规范（BEM 命名/作用域/响应式适配）
+- **[@rules/frontend-rules-vue3/references/css.md](./references/css.md)** — CSS 样式规范（BEM 命名/作用域）
 - **[@rules/frontend-rules-vue3/references/performance.md](./references/performance.md)** — 性能优化规范（懒加载/KeepAlive/虚拟滚动/防抖节流）
 - **[@rules/frontend-rules-vue3/references/comments.md](./references/comments.md)** — 注释规范（模板/脚本/样式/保护原则）
 
@@ -61,7 +61,7 @@ alwaysApply: true
 | 网络请求 | async/await、统一响应解构、错误处理、安全规范 |
 | 代码风格 | Prettier 配置、箭头函数优先 |
 | 注释 | 模板/脚本/样式注释格式、注释保护原则 |
-| CSS/BEM | BEM 命名、scoped 优先、响应式适配、自定义指令 |
+| CSS/BEM | BEM 命名、scoped 优先、自定义指令 |
 | TypeScript | 禁止 any / as any / @ts-ignore、类型注解规范、import type |
 | 性能 | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
 | 约束清单 | 10 项禁止、5 项推荐、2 项不推荐、注意事项 |

@@ -684,7 +684,69 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 ---
 
-## 6. ⚡ 响应式与数据流
+## 6. 🎨 CSS 样式规范
+
+### 6.1 CSS 处理
+
+- 预处理器：Sass/SCSS、Less
+- 格式化：csscomb + prettier
+- 全局样式：`src/styles/`
+
+### 6.2 作用域
+
+- `scoped`：仅作用于当前组件
+- 非 `scoped`：需标注 `/* 全局 */`
+- 优先使用 `scoped`
+
+### 6.3 CSS 命名（BEM）
+
+- 遵循 BEM：`.block__element--modifier`，全小写
+- 详见 §2.3 CSS 命名（BEM 规范）
+
+### 6.4 样式区注释
+
+| 场景     | 格式                    | 示例            |
+| -------- | ----------------------- | --------------- |
+| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
+| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`          | `/* 响应式 */` |
+
+### 6.5 CSS 布局推荐
+
+#### 定位层级
+
+- `position: relative` 搭配 `z-index: 0` 创建定位上下文，避免子元素 `z-index` 影响外部元素
+
+#### 外边距与内边距方向
+
+- **padding**：优先使用 `padding-top`、`padding-left`、`padding-right`，避免 `padding-bottom`
+- **margin**：优先使用 `margin-bottom`、`margin-left`、`margin-right`，避免 `margin-top`
+
+**原因**：向下布局更稳定，减少相邻元素的间距叠加问题（margin collapse）。
+
+### 6.6 CSS 兼容性指南
+
+以下属性存在兼容性风险，需提供降级方案：
+
+| 属性 | 问题 | 降级方案 |
+| ---------------- | ------------------------------------------ | ------------------------------ |
+| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
+| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
+| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
+| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+
+**兼容性开发实践**：
+
+- **查兼容性**：[Can I use](https://caniuse.com/) 查询属性支持情况
+- **自动前缀**：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
+- **渐进增强**：使用 `@supports` 包裹新属性，不支持浏览器自动忽略
+
+---
+
+## 7. ⚡ 响应式与数据流
 
 ### 6.1 核心原则
 
@@ -811,9 +873,9 @@ const items = computed<IListItem[]>(() =>
 
 ---
 
-## 7. 🔥 性能优化
+## 8. 🔥 性能优化
 
-### 7.1 优化速查表
+### 8.1 优化速查表
 
 | 优化项         | 说明                                                                                            |
 | -------------- | ----------------------------------------------------------------------------------------------- |
@@ -826,7 +888,7 @@ const items = computed<IListItem[]>(() =>
 | 路由守卫       | `beforeRouteLeave` 中清理定时器、取消未完成请求、关闭弹窗；全局守卫统一处理登录校验、权限控制   |
 | 自定义指令清理 | `unmounted` 钩子中必须清理事件监听器和定时器                                                    |
 
-### 7.2 防抖 / 节流示例
+### 8.2 防抖 / 节流示例
 
 ```typescript
 import { debounce } from "lodash-es";
@@ -842,7 +904,7 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 8. 📋 约束清单
+## 9. 📋 约束清单
 
 ### 🔴 绝对禁止
 
@@ -869,12 +931,15 @@ const handleScroll = throttle(() => {
 | 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`      |
 | 5   | Hooks 抽离          | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
 
-### 🟡 不推荐
+### 🟡 不推荐（尽量避免）
 
 | #   | 不推荐项            | 说明                            |
 | --- | ------------------- | ------------------------------- |
 | 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
 | 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+| 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
 
 ### ⚠️ 注意
 
@@ -886,15 +951,15 @@ const handleScroll = throttle(() => {
 
 ---
 
-## 9. 🚀 Hooks 规范
+## 10. 🚀 Hooks 规范
 
-### 9.1 命名与文件组织
+### 10.1 命名与文件组织
 
 - 必须以 `use` 开头（如 `useTable`、`useSearchForm`、`usePagination`）
 - 文件名与函数名一致
 - 存放在 `src/hooks/` 目录（全局放在 `@src/hooks/`，局部放在组件同级目录）
 
-### 9.2 返回值规范
+### 10.2 返回值规范
 
 - 统一返回对象（推荐 `toRefs` 解构后返回）
 - **禁止**直接返回 `reactive` 对象
@@ -989,20 +1054,20 @@ export const useTable = () => {
 };
 ```
 
-### 9.3 抽离建议
+### 10.3 抽离建议
 
 - 可复用逻辑超过 **30 行**或跨 **2 个以上组件**使用时，**必须**抽离为 Hook
 - **禁止**在 Hooks 中进行 UI 操作
 - 每个 Hooks 只处理一类核心逻辑（如数据获取、表单校验、分页管理）
 - 使用 `try/catch/finally` 结构
 
-### 9.4 Hooks 使用规范
+### 10.4 Hooks 使用规范
 
 - **生命周期钩子**（`onMounted` 等）只能在组件顶层或 Hooks 顶层调用
 - **禁止**在条件语句、循环、嵌套函数中调用生命周期钩子
 - **禁止**在 Hooks 内部直接调用其他生命周期钩子（应通过参数或回调传递）
 
-### 9.5 Hooks 注释要求
+### 10.5 Hooks 注释要求
 
 引入 Hooks 时必须使用行注释标注：
 
@@ -1023,16 +1088,16 @@ const { searchParams, handleReset } = useSearchForm();
 
 ---
 
-## 10. 📦 TypeScript 类型
+## 11. 📦 TypeScript 类型
 
-### 10.1 类型注解要求
+### 11.1 类型注解要求
 
 - **参数**：函数参数必须明确类型
 - **返回值**：函数返回值必须明确类型
 - **变量**：变量声明必须明确类型
 - **模板 `ref`**：`const formRef = ref<HTMLFormElement | null>(null)`
 
-### 10.2 禁止使用 `any`
+### 11.2 禁止使用 `any`
 
 **禁止**使用 `any` 类型，应使用以下替代：
 
@@ -1049,7 +1114,7 @@ const userInfo: IUserInfo = { id: "1", name: "test" };
 const data: any = JSON.parse(raw);
 ```
 
-### 10.3 Emits 类型定义
+### 11.3 Emits 类型定义
 
 **必须**使用 TypeScript **泛型**定义 emits：
 
@@ -1064,7 +1129,7 @@ const emit = defineEmits<{
 const emit = defineEmits(["update:modelValue", "change"]);
 ```
 
-### 10.4 Hook 返回值类型
+### 11.4 Hook 返回值类型
 
 **必须**为 Hooks 返回值声明类型接口：
 
@@ -1080,13 +1145,13 @@ export const useTable = (): IUseTableReturn => {
 };
 ```
 
-### 10.5 `.d.ts` 类型文件组织
+### 11.5 `.d.ts` 类型文件组织
 
 - **全局类型**：放在 `src/types/` 目录下（如 `src/types/user.d.ts`）
 - **组件私有类型**：放在组件同级目录或 SFC 内 `export type`
 - **全局注入**：在 `src/types/index.d.ts` 中统一导出
 
-### 10.6 类型导入
+### 11.6 类型导入
 
 - 使用 `import type` 导入纯类型
 - 混合导入时，`import type` 与值导入分开
@@ -1096,6 +1161,6 @@ import type { IUser } from "./types";
 import { userApi } from "./api";
 ```
 
-### 10.7 禁止 `@ts-ignore` / `@ts-expect-error`
+### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`
 
 禁止使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。
