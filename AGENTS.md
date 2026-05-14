@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## 项目简介
+
+- 本仓库维护实用的规则和 AI 技能
+- 这是一个 npm 项目，根目录有 package.json
+- 技能是主要产出物，每个技能都是独立的 SKILL.md
+
 ## 范围
 
 - 本仓库默认语言: Markdown, JSON
@@ -122,20 +128,12 @@
 
 - [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [@rules/text/RULE.md](./rules/text/RULE.md)
+- [@rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
+- 中文是主要语言，描述和文档使用中文
+- 始终使用中文交互，无论用户使用何种语言提问，都必须用中文回答
+- 本地测试后再提交，将技能复制到 OpenCode 并测试调用
+- 不要手动修改 marketplace.json，由 `build/lint.mts` 自动生成
 
-## 编辑器配置
-
-编写内容时，需遵循 [@.editorconfig](./.editorconfig)
-
-## 智能体重要提示
-
-1. **这是一个 npm 项目** - 根目录有 package.json
-2. **运行 lint** - 每次修改后必须执行 `npm run lint`
-3. **不要手动修改 marketplace.json** - 由 `build/lint.mts` 自动生成
-4. **技能是主要产出物** - 每个技能都是独立的 SKILL.md
-5. **中文是主要语言** - 描述和文档使用中文
-6. **始终使用中文交互** - 智能体必须始终使用中文与用户进行交流，无论用户使用何种语言提问，都必须用中文回答
-7. **本地测试后再提交** - 将技能复制到 OpenCode 并测试调用
 
 ## 关键参考
 
@@ -145,4 +143,5 @@
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/lint.mts` - lint 入口脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
-- `rules/file-scope-limit/RULE.md` - 文件修改范围限制规则
+- `.editorconfig` - 通用编辑器配置文件, 编写内容时需遵循
+- `README.md` - 项目说明文档
