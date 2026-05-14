@@ -34,16 +34,26 @@ description: >
 - **有效微信链接**：进入步骤 2
 - **非微信链接**：提示仅支持微信公众号文章链接，退出执行
 
-### 2. 获取网页内容
-
-使用自定义 User-Agent 请求网页获取 HTML。
+### 2. 选择执行方式并获取内容
 
 **决策分支**：
+
+- **脚本可用**（`scripts/run-cli.mjs` 存在且 Node.js 可用）：使用脚本执行转换，直接进入步骤 4
+
+  ```bash
+  node scripts/run-cli.mjs <url> [output-path]
+  ```
+
+- **脚本不可用**：使用 WebFetch 工具手动获取网页内容，进入步骤 3
+
+**脚本不可用时的决策分支**：
 
 - **请求成功**：进入步骤 3
 - **请求失败**：输出错误状态码和原因，退出执行
 
-### 3. 提取信息并转换
+### 3. 手动提取信息并转换
+
+仅在步骤 2 中脚本不可用时执行此步骤。
 
 1. 提取文章标题和作者/公众号名称
 2. 提取 `js_content` 区域的正文 HTML
@@ -63,16 +73,6 @@ description: >
 
 - **用户指定输出路径**：保存为文件，输出保存位置和字符统计
 - **用户未指定路径**：直接输出 Markdown 文本
-
-## 使用示例
-
-```bash
-# 直接输出到终端
-node skills/yy-wx-to-markdown/scripts/run-cli.mjs https://mp.weixin.qq.com/s/xxx
-
-# 保存到文件
-node skills/yy-wx-to-markdown/scripts/run-cli.mjs https://mp.weixin.qq.com/s/xxx output.md
-```
 
 ## 相关资源
 
