@@ -69,7 +69,7 @@ examples:
 
 | 维度 ID | 检查内容 | 严重程度 | 详细规范 |
 | ---- | ---- | ---- | ---- |
-| D01 | 代码风格（缩进、引号、分号、导入顺序等） | 🟢 轻微 | `references/code-style.md` |
+| D01 | 代码风格（2 空格缩进、JS 单引号、分号、尾随逗号、箭头函数、3 组导入顺序） | 🟢 轻微 | `references/code-style.md` |
 | D02 | 最佳实践（调试代码、scoped、未使用变量等） | 🟢 轻微 | `references/best-practice.md` |
 | D03 | Vue2 组件规范（脚本结构、Props、Emit 等） | 🟡 中等 | `references/component.md` |
 | D04 | 命名规范（API、事件、常量、组件名等） | 🟡 中等 | `references/naming.md` |

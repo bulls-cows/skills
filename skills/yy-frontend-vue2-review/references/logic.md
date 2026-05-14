@@ -18,6 +18,16 @@ const userName = this.user.info.name
 const userName = this.user?.info?.name
 ```
 
+**⚠️ 可选链操作符不推荐**：不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代
+
+---
+
+## 不推荐项
+
+| 项 | 说明 |
+| ---- | ---- |
+| 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+
 ---
 
 ## 数组越界
