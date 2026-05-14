@@ -225,7 +225,8 @@ examples:
 
 - 优先执行 `npx prettier --write <target-file>`；若失败则参考 fallback 规则手动格式化
 - 导入按 4 组排序，组间空一行，组内字母排序
-- `<script setup>` 结构顺序：`imports` → `defineProps` → `defineEmits` → `全局Hooks` → **业务模块（按领域分组，组内自由组合）** → `defineExpose`
+- `<script setup>` 结构顺序：`imports` → `defineProps` / `defineEmits` → `全局Hooks` → **业务逻辑（按功能模块分组）** → `defineExpose`
+- 业务模块内部顺序：`ref`/`reactive`（优先 ref）→ `computed` → 方法 → `watch` → 生命周期钩子
 - `<script setup>` 标签：若项目已安装 `unplugin-vue-setup-extend-plus`，在 `<script setup>` 上添加 `name="PascalCase组件名"` 属性（如 `<script setup lang="ts" name="UserCard">`）
 - 方法内部顺序：`init...()` → `getListData/postFormData` → `onClick/onChange` → `computedXxx`
 - 模板属性顺序：`is` → `v-for` → `v-if/v-else-if/v-else` → `v-show/v-cloak` → `id` → `props/attrs` → `v-on` → `v-html/v-text` → `v-slot`
@@ -244,6 +245,22 @@ examples:
 - 嵌套最大深度 2 层，SCSS/LESS 使用 `&` 引用父选择器
 - **scoped 样式必须同步修改模板中的 class 属性**
 
+**CSS 布局推荐**：
+
+- 定位层级：`position: relative` + `z-index: 0` 创建定位上下文
+- padding 方向：优先 `padding-top/left/right`，避免 `padding-bottom`
+- margin 方向：优先 `margin-bottom/left/right`，避免 `margin-top`
+
+**CSS 兼容性指南**：
+
+| 属性 | 问题 | 降级方案 |
+|------|------|----------|
+| `gap` | Safari 14.4及以下不支持 | margin 负边距 |
+| `aspect-ratio` | iOS 15.6以下支持不全 | `padding-bottom` Hack |
+| `100vh` | iOS Safari 高度偏差 | JS 动态计算或 dvh |
+| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` |
+| `will-change` | 动画结束不重置占内存 | 动画结束后设为 `auto` |
+
 ### T05 🔤 语义化命名重构（🟡 中风险）
 
 **详见**：[sub-skills/naming.md](./sub-skills/naming.md)
@@ -255,7 +272,7 @@ examples:
 - 常量：全大写 + 下划线（`MAX_RETRY_COUNT`）
 - Props：camelCase（`userName`），组件名：PascalCase（`<UserList />`）
 - 布尔值：`isXX` / `hasXX` / `showXX` 前缀
-- Hooks：`use + PascalCase`（`useTable`）
+- Hooks：`use` + 功能名（`useTable`、`useSearchForm`）
 - **涉及跨文件引用时，需提示用户范围并确认**
 
 ### T06 ⚡ 逻辑深度优化（🔴 高风险 · 主代理执行）
@@ -268,10 +285,12 @@ examples:
 - 🚨 **每项改动需用户单独确认**：展示变更 → 用户确认 → 执行 → 下一项
 - `.then()` → `async/await`，使用 `try/catch/finally + console.warn`
 - 除与后端交互和定时器外，其他尽可能使用 `computed`
+- 网络请求：前置检查项目是否安装 `ahooks-vue` 或 `vue-hooks-plus`（已安装用 `useRequest`，未安装用手动 `async/await`）
 - 网络请求统一模式：`{ code, data, msg }` 响应处理
 - 单个方法超过 50 行必须拆分，重复 ≥2 次逻辑抽离为公共函数或 Hook
 - **reactive 转 ref：优先使用 `ref`，尽可能少用 `reactive`**（仅复杂对象场景使用）
-- Emit 白名单（仅 19 种）：v-model更新/交互类/弹窗类/操作类，顺序 `update:modelValue` → 其它 → `change/click`
+- Emit 白名单（19 种）：v-model更新（`update:modelValue`, `update:value`）/交互类/弹窗类/操作类
+- Emit 顺序：`update:modelValue/value` → 其他业务事件 → `change/click`
 - Props 增强：TypeScript 泛型定义、明确类型、添加注释、提供默认值
 - Emits 标准化：TypeScript 泛型定义、明确事件名和 payload 类型
 - Hooks 抽离：可复用逻辑超过 30 行或跨 2+ 组件使用时必须抽离
@@ -322,6 +341,29 @@ examples:
 8. 组件拆分：弹窗→独立组件，表格→表格+业务分离，表单→表单+校验分离
 9. 性能：路由和大组件使用动态 import，合理使用 `<KeepAlive>`
 10. TypeScript 类型：参数、返回值、变量必须明确类型
+
+---
+
+## 🟡 不推荐项
+
+| # | 不推荐项 | 说明 |
+|---|----------|------|
+| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
+| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
+| 3 | 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4 | CSS 嵌套原生写法 | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
+| 5 | `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+
+---
+
+## ⚠️ 注意事项
+
+- **未使用变量**：ESLint 已关闭检查，需自行清理无用代码
+- **v-html**：可使用，但必须防范 XSS 风险
+- **等于运算符**：使用 `==` 不视为问题
+- **注释检查**：注释相关问题默认忽略，不进行检查
+- **不要过度封装**：简单逻辑直接写在 template 中
+- **CSS 兼容性**：`gap`、`aspect-ratio`、`100vh`、`inset` 等属性需提供降级方案
 
 ---
 

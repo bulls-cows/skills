@@ -39,7 +39,19 @@
 
 ## 异步与网络请求
 
-### 目标结构
+### 前置检查：是否使用 useRequest
+
+**在编写网络请求代码前，先检查项目是否安装了以下任一库：**
+
+- `ahooks-vue`
+- `vue-hooks-plus`
+
+**检查方式**：查看项目 `package.json` 的 `dependencies` 是否包含上述包名。
+
+**已安装** → 使用 `useRequest`（自动管理 `loading`/`data`）
+**未安装** → 使用手动 `async/await` + `try/catch/finally`
+
+### 目标结构（未安装 useRequest）
 
 ```typescript
 const { code, data, msg } = await apiXXX();
@@ -48,6 +60,25 @@ if (code === 0) {
 } else {
   console.warn(msg);
 }
+```
+
+### 目标结构（已安装 useRequest）
+
+```typescript
+// 已安装 ahooks-vue 或 vue-hooks-plus
+const { loading, run } = useRequest(() => apiXXX(), {
+  manual: true,
+  onSuccess: (res) => {
+    if (res.code === 0) {
+      // 数据处理
+    } else {
+      console.warn(res.msg);
+    }
+  },
+  onError: (error) => {
+    console.warn(error);
+  },
+});
 ```
 
 ### 变更内容

@@ -67,37 +67,49 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 `import` 分为**4 组**，**组间空一行，组内按字母顺序排列**：
 
-1. 外部依赖（vue、dayjs、lodash 等）
-2. types（`import type` 类型导入）
-3. 全局内部依赖（`@src/...`）
-4. 相对内部依赖（`./...`、`../...`）
+1. **node_modules（外部依赖）**：`vue`, `dayjs`, `lodash` 等第三方库。
+2. **types（类型导入）**：所有 `import type` 导入的纯类型。
+3. **内部全局依赖**：`@src/` 开头的路径（包括 API、工具、Hooks、Store、常量、组件等）。
+4. **内部相对依赖**：`./` 或 `../` 开头的相对路径（包括工具、Hooks、常量、组件等）。
+
+**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序排列。
 
 ```typescript
-// 外部依赖
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
+// 1. node_modules（外部依赖）
+import { ref, computed, onMounted } from "vue";
+import dayjs from "dayjs";
+import { debounce } from "lodash";
 
-// types
-import type { IUserInfo } from '@src/types/user';
+// 2. types（类型导入）
+import type { IUserInfo } from "@src/types";
 
-// 全局内部依赖
-import { apiGetUserInfo } from '@src/api/user';
-import { formatDate } from '@src/utils';
+// 3. 内部全局依赖（@src/）
+import { apiGetUserInfo } from "@src/api/user";
+import { formatDate } from "@src/utils/date";
+import { useTable } from "@src/hooks/useTable";
+import store from "@src/store";
+import { APP_CONFIG } from "@src/constants";
+import DataTable from "@src/components/DataTable.vue";
 
-// 相对内部依赖
-import { MAX_RETRY_COUNT } from './constants';
-import { formatFileSize } from './utils/format';
+// 4. 内部相对依赖（./）
+import { localHelper } from "./utils/helper";
+import { MAX_RETRY_COUNT } from "./constants";
+import SearchBar from "./SearchBar.vue";
 ```
 
 ### `<script setup>` 结构顺序
 
-整体顺序遵守：
+脚本内的声明必须按以下宏观顺序排列：
 
-`imports` → `defineProps` → `defineEmits` → `全局Hooks（多个业务共享的 useXxx）` → **业务模块（按领域分组）** → `defineExpose`
+| 步骤 | 内容                          | 说明                                      |
+| ---- | ----------------------------- | ----------------------------------------- |
+| 1    | `imports`                     | 导入（4 组）                              |
+| 2    | `defineProps` / `defineEmits` | 交互定义                                  |
+| 3    | 全局 Hooks                    | `useXxx`（如 `useRouter`、`useTable` 等） |
+| 4    | 业务逻辑                      | 按功能模块分组                            |
+| 5    | `defineExpose`                | 对外暴露                                  |
 
-**Hooks 位置**：全局共享的 Hook 放 defineEmits 后，仅单业务使用的 Hook 放对应业务模块顶部。
-
-**业务模块内部**：按业务逻辑分组（如表单相关、表格相关、弹窗相关），组内自由组合 `ref/reactive`（**优先 ref，尽可能少用 reactive**）、`computed`、`watch/watchEffect`、方法/函数、生命周期钩子，不必严格按类型排序。
+**第 4 步「业务逻辑」内部，按功能模块分组，每个模块内部顺序**：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子
 
 **Vue3 组合式 API 标准结构示例**：
 
@@ -110,23 +122,22 @@ import type { IUserInfo } from '@src/types/user';
 
 import { apiGetUserList } from '@src/api/user';
 
-// 2. defineProps
+// 2. defineProps / defineEmits（交互定义）
 const props = defineProps<{
   userId: string;
   pageSize?: number;
 }>();
 
-// 3. defineEmits
 const emit = defineEmits<{
   (e: 'select', user: IUserInfo): void;
   (e: 'change', page: number): void;
 }>();
 
-// 4. 全局Hooks（多个业务共享的 useXxx）
+// 3. 全局 Hooks
 const { globalState } = useGlobalStore();
 
 // ==================== 表单模块 ====================
-// 5. 业务模块：组内自由组合 ref/computed/watch/方法/生命周期
+// 4. 业务逻辑：按功能模块分组，模块内部：ref → computed → 方法 → watch → 生命周期
 const formData = ref({
   username: '',
   email: '',
@@ -138,7 +149,7 @@ const resetForm = () => {
 };
 
 // ==================== 表格模块 ====================
-// 6. 业务模块：组内自由组合（含该模块专属 Hooks）
+// 业务模块：模块内部：ref → computed → 方法 → watch → 生命周期
 const { tableData, loading, fetchData } = useTable();
 const total = ref(0);
 const displayUsers = computed(() => tableData.value.filter((u) => u.active));
@@ -169,7 +180,6 @@ const openDialog = (row: IUserInfo) => {
   dialogVisible.value = true;
 };
 
-// 7. 生命周期钩子（全局级）
 onMounted(() => {
   fetchData(props.userId);
 });
@@ -178,7 +188,7 @@ onUnmounted(() => {
   // 清理逻辑
 });
 
-// 8. defineExpose（可选，暴露给父组件）
+// 5. defineExpose（对外暴露）
 defineExpose({
   resetForm,
   fetchData,
@@ -277,7 +287,7 @@ export default defineComponent({
 
 ### TSX 组件结构顺序
 
-1. imports（按 3 组排序）
+1. imports（按 4 组排序）
 2. 类型定义
 3. defineComponent
 4. name
@@ -332,7 +342,7 @@ const handleClick = () => {
 
 ### JSX 组件结构顺序
 
-1. imports（按 3 组排序）
+1. imports（按 4 组排序）
 2. 类型定义
 3. defineComponent
 4. name
