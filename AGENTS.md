@@ -19,6 +19,7 @@
 - 执行 `npm run lint` 检测代码和文档。
 - 执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)。
 - 如果改动涉及 AI 思考方式的调整，执行技能 [@skills-internal/yy-sync-thinking-method/SKILL.md](./skills-internal/yy-sync-thinking-method/SKILL.md)。
+- 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)。
 
 **检查项:**
 
@@ -126,13 +127,13 @@
 
 ## 需要遵守的规则
 
-- [@rules/markdown/RULE.md](./rules/markdown/RULE.md)
-- [@rules/text/RULE.md](./rules/text/RULE.md)
-- [@rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
 - 中文是主要语言，描述和文档使用中文
-- 始终使用中文交互，无论用户使用何种语言提问，都必须用中文回答
-- 本地测试后再提交，将技能复制到 OpenCode 并测试调用
+- 无论用户使用何种语言提问，请始终使用简体中文进行解释和回答
+- 除非用户明确要求提交。否则禁止你使用git
 - 不要手动修改 marketplace.json，由 `build/lint.mts` 自动生成
+- [文件修改范围限制规则 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
+- [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
+- [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
 
 
 ## 关键参考
