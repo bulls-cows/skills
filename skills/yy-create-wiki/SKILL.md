@@ -159,6 +159,8 @@ description: >
 
 ### 输出
 
+输出文档的示例见 `examples/wiki/` 目录。
+
 ```markdown
 ## 生成结果
 
