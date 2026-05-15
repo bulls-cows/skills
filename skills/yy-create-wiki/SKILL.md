@@ -117,8 +117,7 @@ description: >
 
 将生成的文档写入目标目录：
 
-- 按规划的结构创建子目录
-- 每个文档写入对应的 `.md` 文件
+- 所有文档平铺在目标目录下，不创建子目录
 - 文件名使用中文，与文档标题一致
 
 ### 7. 验证
@@ -165,9 +164,9 @@ description: >
 
 ### 文档结构
 - .agents/wiki/项目概述.md
-- .agents/wiki/技能系统/技能系统.md
-- .agents/wiki/规则系统/规则系统.md
-- .agents/wiki/构建工具/构建工具.md
+- .agents/wiki/技能系统.md
+- .agents/wiki/规则系统.md
+- .agents/wiki/构建工具.md
 
 ### 文档统计
 - 文件数量: 4
