@@ -52,6 +52,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-create-report](./skills/yy-create-report/SKILL.md) | 将指定时间范围内当前 Git 账号的提交记录整理合并生成工作报告 | `npx skills add bulls-cows/skills --skill yy-create-report` |
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md) | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
 | [yy-create-skill](./skills/yy-create-skill/SKILL.md) | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
+| [yy-create-wiki](./skills/yy-create-wiki/SKILL.md) | 为项目生成结构化的 Wiki 文档，帮助新成员或 AI 快速理解项目架构和模块关系 | `npx skills add bulls-cows/skills --skill yy-create-wiki` |
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md) | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill yy-design-ui` |
 | [yy-distill](./skills/yy-distill/SKILL.md) | 从用户指定的内容中提炼思维方式，分析思维模式、决策逻辑和认知习惯 | `npx skills add bulls-cows/skills --skill yy-distill` |
 | [yy-handoff](./skills/yy-handoff/SKILL.md) | 创建或更新项目交接文档 handoff.md，用于跨会话续接当前任务 | `npx skills add bulls-cows/skills --skill yy-handoff` |
