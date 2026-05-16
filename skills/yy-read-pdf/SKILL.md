@@ -62,10 +62,30 @@ print(json.dumps(result, ensure_ascii=False, indent=2))
 "
 ```
 
+分段读取（超过 10 页时使用，每次最多 20 页）：
+
+```bash
+python -c "
+import fitz, json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+doc = fitz.open(r'文件路径')
+start, end = 0, 20  # 起始页码（0-indexed），end 为结束页码（不含）
+result = {'page_count': doc.page_count, 'metadata': doc.metadata, 'pages': []}
+for i in range(start, min(end, doc.page_count)):
+    page = doc[i]
+    text = page.get_text()
+    tables = [t.extract() for t in page.find_tables()]
+    result['pages'].append({'page_num': i + 1, 'text': text, 'tables': tables})
+doc.close()
+print(json.dumps(result, ensure_ascii=False, indent=2))
+"
+```
+
 **决策分支**：
 
 - **10 页以内的 PDF**：直接读取全部内容
-- **超过 10 页的 PDF**：分段读取，每次最多 20 页（Read 工具使用 `pages` 参数；pymupdf 使用页码切片 `doc.pages[start:end]`）
+- **超过 10 页的 PDF**：分段读取，每次最多 20 页（Read 工具使用 `pages` 参数；pymupdf 使用上方分段读取代码，调整 `start` 和 `end` 变量）
+- **Read 工具失败（非加密、非扫描）**：降级到 pymupdf 方式重试
 - **读取失败（加密 PDF）**：提示用户需要先解密，退出执行
 - **读取内容为空或乱码（扫描版 PDF）**：提示用户该 PDF 为扫描版，需要 OCR 工具处理，退出执行
 
