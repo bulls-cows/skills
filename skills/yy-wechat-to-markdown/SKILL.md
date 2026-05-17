@@ -38,10 +38,10 @@ description: >
 
 **决策分支**：
 
-- **脚本可用**（`scripts/run-cli.mjs` 存在且 Node.js 可用）：使用脚本执行转换，直接进入步骤 4
+- **脚本可用**（`scripts/package.json` 存在且 Node.js >= 22.18.0 可用）：使用脚本执行转换，直接进入步骤 4
 
   ```bash
-  node scripts/run-cli.mjs <url> [output-path]
+  node scripts/ <url> [output-path]
   ```
 
 - **脚本不可用**：使用 WebFetch 工具手动获取网页内容，进入步骤 3
@@ -78,5 +78,7 @@ description: >
 
 本技能包含以下辅助资源：
 
-- `scripts/run-cli.mjs`：CLI 入口脚本
-- `scripts/wechat-article-parser.mjs`：微信文章解析和转换模块
+- `scripts/src/cli.ts`：CLI 入口脚本
+- `scripts/src/parser/html-to-md.ts`：HTML 转 Markdown 模块
+- `scripts/src/parser/extract-meta.ts`：文章元信息提取模块
+- `scripts/src/parser/extract-body.ts`：正文区域提取模块
