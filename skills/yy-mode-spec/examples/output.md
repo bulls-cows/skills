@@ -2,7 +2,24 @@
 
 本文档展示制定规格后的预期输出示例。
 
-## 示例 1：简单需求输出
+## 示例 1：方案方向输出（步骤 3）
+
+```markdown
+## 方案方向
+
+**目标**：实现基于 JWT 令牌的用户认证功能
+**方法**：使用 JWT 进行无状态认证，access token 短期有效，refresh token 长期有效
+**涉及范围**：src/auth/、src/middleware/
+
+**待确认点**：
+- token 存储位置：localStorage 还是 cookie？
+
+---
+
+请确认方向是否正确，或提出调整意见。
+```
+
+## 示例 2：简单需求输出
 
 对于简单需求，直接在对话中输出规格摘要：
 
@@ -48,7 +65,7 @@ export function batchDeleteUsers(ids: string[]): Promise<void> {
 
 ---
 
-## 示例 2：复杂需求输出
+## 示例 3：复杂需求输出
 
 对于复杂需求，创建规格文件并展示路径：
 
@@ -76,7 +93,7 @@ export function batchDeleteUsers(ids: string[]): Promise<void> {
 
 ---
 
-## 示例 3：规格文件内容
+## 示例 4：规格文件内容
 
 ### spec.md 内容
 

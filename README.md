@@ -59,7 +59,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 | [yy-init](./skills/yy-init/SKILL.md) | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
 | [yy-lint](./skills/yy-lint/SKILL.md) | 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误 | `npx skills add bulls-cows/skills --skill yy-lint` |
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md) | 计划优先执行模式，澄清需求后展示方案方向，确认后再制定详细计划 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
-| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md) | 规格优先开发模式，要求在实施前完成详细文档编写 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
+| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md) | 规格优先开发模式，澄清需求后展示方案方向，确认后再编写详细规格文档 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
 | [yy-optimize](./skills/yy-optimize/SKILL.md) | 优化方案生成器，分析现状并生成多个优化方案供用户选择，确认后才执行改动 | `npx skills add bulls-cows/skills --skill yy-optimize` |
 | [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md) | 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片 | `npx skills add bulls-cows/skills --skill yy-post-to-wechat` |
 | [yy-read-pdf](./skills/yy-read-pdf/SKILL.md) | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill yy-read-pdf` |
