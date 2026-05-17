@@ -1,0 +1,7 @@
+{
+  "name": "yy-read-pdf-scripts",
+  "private": true,
+  "scripts": {
+    "lint": "python -m ruff check . && python -m ruff format --check ."
+  }
+}
