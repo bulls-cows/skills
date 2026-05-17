@@ -45,46 +45,26 @@ description: >
 2. **Python 工具**：使用 `pymupdf` 提取文本（通过 `python -c "import fitz"` 检测是否已安装）
 3. **未安装 pymupdf**：请求用户授权后执行 `pip install pymupdf` 安装，安装后重试
 
-pymupdf 使用方式：
+pymupdf 使用方式（通过脚本调用，AI 只需传入参数）：
 
 ```bash
-python -c "
-import fitz, json, sys
-sys.stdout.reconfigure(encoding='utf-8')
-doc = fitz.open(r'文件路径')
-result = {'page_count': doc.page_count, 'metadata': doc.metadata, 'pages': []}
-for i, page in enumerate(doc):
-    text = page.get_text()
-    tables = [t.extract() for t in page.find_tables()]
-    result['pages'].append({'page_num': i + 1, 'text': text, 'tables': tables})
-doc.close()
-print(json.dumps(result, ensure_ascii=False, indent=2))
-"
+# 全量读取
+python skills/yy-read-pdf/scripts/read_pdf.py --file "文件路径"
+
+# 分段读取（第 0-19 页，超过 10 页时使用，每次最多 20 页）
+python skills/yy-read-pdf/scripts/read_pdf.py --file "文件路径" --start 0 --end 20
 ```
 
-分段读取（超过 10 页时使用，每次最多 20 页）：
+参数说明：
 
-```bash
-python -c "
-import fitz, json, sys
-sys.stdout.reconfigure(encoding='utf-8')
-doc = fitz.open(r'文件路径')
-start, end = 0, 20  # 起始页码（0-indexed），end 为结束页码（不含）
-result = {'page_count': doc.page_count, 'metadata': doc.metadata, 'pages': []}
-for i in range(start, min(end, doc.page_count)):
-    page = doc[i]
-    text = page.get_text()
-    tables = [t.extract() for t in page.find_tables()]
-    result['pages'].append({'page_num': i + 1, 'text': text, 'tables': tables})
-doc.close()
-print(json.dumps(result, ensure_ascii=False, indent=2))
-"
-```
+- `--file`：PDF 文件路径（必需）
+- `--start`：起始页码，0-indexed（默认 0）
+- `--end`：结束页码，不含该页（默认读取到末页）
 
 **决策分支**：
 
-- **10 页以内的 PDF**：直接读取全部内容
-- **超过 10 页的 PDF**：分段读取，每次最多 20 页（Read 工具使用 `pages` 参数；pymupdf 使用上方分段读取代码，调整 `start` 和 `end` 变量）
+- **10 页以内的 PDF**：直接读取全部内容（不传 `--start`/`--end`）
+- **超过 10 页的 PDF**：分段读取，每次最多 20 页（Read 工具使用 `pages` 参数；pymupdf 传入 `--start` 和 `--end` 参数）
 - **Read 工具失败（非加密、非扫描）**：降级到 pymupdf 方式重试
 - **读取失败（加密 PDF）**：提示用户需要先解密，退出执行
 - **读取内容为空或乱码（扫描版 PDF）**：提示用户该 PDF 为扫描版，需要 OCR 工具处理，退出执行
@@ -121,5 +101,6 @@ print(json.dumps(result, ensure_ascii=False, indent=2))
 
 本技能包含以下辅助资源：
 
+- `scripts/read_pdf.py`：pymupdf 读取 PDF 的执行脚本
 - `examples/output.md`：使用 pymupdf 读取 PDF 的输出示例
 - `resources/sample.pdf`：用于测试的示例 PDF 文件
