@@ -46,9 +46,7 @@ def main():
         page = doc[i]
         text = page.get_text()
         tables = [t.extract() for t in page.find_tables()]
-        result["pages"].append(
-            {"page_num": i + 1, "text": text, "tables": tables}
-        )
+        result["pages"].append({"page_num": i + 1, "text": text, "tables": tables})
 
     doc.close()
     print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,0 +1,12 @@
+[project]
+name = "yy-read-pdf-scripts"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["ruff>=0.11"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
