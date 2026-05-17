@@ -166,7 +166,7 @@ description 只用于给 AI 判断是否触发技能：
 2. 使用中文描述
 3. 代码示例包含语言标签
 4. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/）
-5. 如有脚本文件，依赖配置放在 `scripts/package.json`
+5. 如有脚本文件，依赖配置放在 `scripts/package.json`（Node.js）或 `scripts/requirements.txt`（Python）
 
 #### 更新技能后检查项
 
@@ -202,8 +202,12 @@ description 只用于给 AI 判断是否触发技能：
 skill-name/
 ├── SKILL.md          # 必需，技能主文件
 ├── scripts/          # 可选，脚本目录（可执行技能）
-│   ├── main.ts       # 主执行脚本
-│   └── package.json  # 依赖配置
+│   ├── Node.js 方式
+│   │   ├── main.ts       # 主执行脚本
+│   │   └── package.json  # 依赖配置
+│   └── Python 方式
+│       ├── read_pdf.py   # 主执行脚本
+│       └── requirements.txt  # 依赖声明
 ├── examples/         # 可选，示例目录
 ├── templates/        # 可选，模板目录
 └── resources/        # 可选，资源目录
