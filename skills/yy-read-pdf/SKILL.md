@@ -43,7 +43,7 @@ description: >
 
 1. **Read 工具**：使用 Read 工具读取 PDF 文件
 2. **Python 工具**：使用 `pymupdf` 提取文本（通过 `python -c "import fitz"` 检测是否已安装）
-3. **未安装 pymupdf**：请求用户授权后执行 `pip install pymupdf` 安装，安装后重试
+3. **未安装 pymupdf**：请求用户授权后执行 `pip install -r skills/yy-read-pdf/scripts/requirements.txt` 安装，安装后重试
 
 pymupdf 使用方式（通过脚本调用，AI 只需传入参数）：
 
