@@ -29,6 +29,12 @@ function findPackageJsonDirs(root: string): string[] {
   return results;
 }
 
+function hasReadyScript(dir: string): boolean {
+  const pkgPath = path.join(dir, 'package.json');
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+  return pkg.scripts && pkg.scripts.ready !== undefined;
+}
+
 const dirs = findPackageJsonDirs(skillsDir);
 
 if (dirs.length === 0) {
@@ -36,10 +42,19 @@ if (dirs.length === 0) {
   process.exit(0);
 }
 
+let readyCount = 0;
+
 for (const dir of dirs) {
   const relative = path.relative(projectRoot, dir);
-  console.log(`Installing dependencies in ${relative}...`);
-  execSync('npm install', { cwd: dir, stdio: 'inherit' });
+
+  if (!hasReadyScript(dir)) {
+    console.log(`Skipping ${relative} (no "ready" script defined)`);
+    continue;
+  }
+
+  console.log(`Running ready script in ${relative}...`);
+  execSync('npm run ready', { cwd: dir, stdio: 'inherit' });
+  readyCount++;
 }
 
-console.log(`\nDone. Installed dependencies in ${dirs.length} skill directories.`);
+console.log(`\nDone. Ran ready scripts in ${readyCount} of ${dirs.length} skill directories.`);

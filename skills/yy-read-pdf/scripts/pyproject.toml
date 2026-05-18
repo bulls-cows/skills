@@ -1,6 +1,7 @@
 [project]
 name = "yy-read-pdf-scripts"
 requires-python = ">=3.10"
+dependencies = ["pymupdf"]
 
 [project.optional-dependencies]
 dev = ["ruff>=0.11"]
