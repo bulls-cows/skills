@@ -6,7 +6,9 @@
 
 import fs from 'fs';
 import path from 'path';
-import { extractMeta, extractBody, htmlToMarkdown } from './parser/index.js';
+import { extractMeta } from './parser/extract-meta';
+import { extractBody } from './parser/extract-body';
+import { htmlToMarkdown } from './parser/html-to-md';
 
 const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';

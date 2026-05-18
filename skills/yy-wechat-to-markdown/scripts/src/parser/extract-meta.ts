@@ -1,5 +1,3 @@
-import type { ArticleMeta } from '../typings/parser.js';
-
 /**
  * 从 HTML 中提取文章元信息（标题、作者）
  */

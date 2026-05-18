@@ -1,4 +1,4 @@
-export interface CliArgs {
+interface CliArgs {
   url: string;
   outputPath?: string;
 }

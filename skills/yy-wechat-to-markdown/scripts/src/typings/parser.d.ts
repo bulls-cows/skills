@@ -1,4 +1,4 @@
-export interface ArticleMeta {
+interface ArticleMeta {
   title: string;
   author: string;
 }
