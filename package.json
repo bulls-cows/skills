@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "ready": "npm install && node ./build/install-skills-deps.mts",
-    "lint": "node --run check:skill && node --run lint:skills && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace && node --run lint:eslint && node --run lint:prettier",
+    "lint": "node --run lint:prettier && node --run check:skill && node --run lint:skills && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace && node --run lint:eslint",
     "lint:eslint": "eslint build/",
     "lint:prettier": "prettier --write .",
     "lint:skills": "node ./build/lint-skills.mts",
