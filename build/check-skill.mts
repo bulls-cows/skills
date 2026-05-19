@@ -135,8 +135,7 @@ function validateMetadataJson(
 ) {
   try {
     const jsonContent = fs.readFileSync(metadataJsonPath, 'utf-8')
-    const metadataJson: MetadataJson = JSON.parse(jsonContent)
-
+    const metadataJson = JSON.parse(jsonContent) as MetadataJson
     // 1. 检查 description -> abstract
     if (skillMetadata.description && metadataJson.abstract !== undefined) {
       const descriptionSingleLine = multilineToSingleLine(skillMetadata.description)

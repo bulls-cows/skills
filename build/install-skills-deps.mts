@@ -34,7 +34,7 @@ function hasReadyScript(dir: string): boolean {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8')) as {
     scripts?: Record<string, string>
   }
-  return !!pkg.scripts && pkg.scripts.ready !== undefined
+  return pkg.scripts?.ready !== undefined
 }
 
 const dirs = findPackageJsonDirs(skillsDir)

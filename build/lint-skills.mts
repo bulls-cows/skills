@@ -33,7 +33,9 @@ const dirs = findPackageJsonDirs(skillsDir)
 let hasError = false
 
 for (const dir of dirs) {
-  const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf-8'))
+  const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf-8')) as {
+    scripts?: Record<string, string>
+  }
   if (!pkg.scripts?.lint) continue
 
   const relative = path.relative(projectRoot, dir)
