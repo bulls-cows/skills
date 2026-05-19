@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": true
   },
   "include": ["**/*.mts", "**/*.ts"],
   "exclude": ["node_modules", "skills", "skills-internal"]
