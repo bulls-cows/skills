@@ -65,11 +65,11 @@
 
 ### Emit 事件白名单
 
-| 类别 | 白名单事件 |
-| ---- | ---------- |
+| 类别       | 白名单事件                                                               |
+| ---------- | ------------------------------------------------------------------------ |
 | **交互类** | `change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add` |
-| **弹窗类** | `open`、`close`、`show`、`hide` |
-| **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
+| **弹窗类** | `open`、`close`、`show`、`hide`                                          |
+| **操作类** | `cancel`、`confirm`、`ok`、`editSuccess`、`error`                        |
 
 ---
 

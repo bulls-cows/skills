@@ -8,8 +8,23 @@
     "total_references": 18,
     "categories": {
       "essential": ["spec-index.md", "component-dev.md", "interaction.md", "directives.md"],
-      "strongly_recommended": ["order.md", "naming.md", "hooks.md", "reactivity.md", "watch.md", "network.md", "data-flow.md"],
-      "recommended": ["code-style.md", "comments.md", "css.md", "typescript.md", "performance.md", "constraints.md"],
+      "strongly_recommended": [
+        "order.md",
+        "naming.md",
+        "hooks.md",
+        "reactivity.md",
+        "watch.md",
+        "network.md",
+        "data-flow.md"
+      ],
+      "recommended": [
+        "code-style.md",
+        "comments.md",
+        "css.md",
+        "typescript.md",
+        "performance.md",
+        "constraints.md"
+      ],
       "ai_behavior": ["ai-behavior.md"]
     }
   }

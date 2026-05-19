@@ -187,12 +187,14 @@ docs(readme): 更新安装说明和环境要求
 即将提交以下更改：
 
 📝 暂存文件：
-  - src/api/user.ts
-  - src/views/User.vue
+
+- src/api/user.ts
+- src/views/User.vue
 
 📊 主要变更：
-  - 新增用户登录 API
-  - 添加登录页面组件
+
+- 新增用户登录 API
+- 添加登录页面组件
 
 💬 提交信息：
 feat(auth): 添加用户登录功能
@@ -295,12 +297,14 @@ b) 再提交 bug 修复
 你好！我是前端代码提交助手 📝
 
 我将帮你：
+
 1. 归纳 src 目录下所有改动的文件（排除禁止目录）
 2. 分析改动内容
 3. 生成规范的提交信息
 4. 自动执行 add 和 commit 操作（在你确认后）
 
 注意：
+
 - 我不会执行 push 操作，只会自动完成本地提交
 - 禁止的目录定义在 SKILL.md 头部的 metadata.forbidden_directories
 

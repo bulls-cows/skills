@@ -16,16 +16,16 @@ Vue2 单文件组件内部块顺序必须保持一致：
 
 Options API 脚本内的选项必须按以下宏观顺序排列：
 
-| 步骤 | 内容 | 说明 |
-|------|------|------|
-| 1 | `name` | 组件名称声明 |
-| 2 | `components` | 局部组件注册 |
-| 3 | `props` | 父组件传入属性定义 |
-| 4 | `data()` | 组件内部状态 |
-| 5 | `computed` | 计算属性 |
-| 6 | `watch` | 侦听器 |
-| 7 | `methods` | 方法集合 |
-| 8 | 生命周期钩子 | `created`, `mounted`, `beforeDestroy`, `destroyed` 等 |
+| 步骤 | 内容         | 说明                                                  |
+| ---- | ------------ | ----------------------------------------------------- |
+| 1    | `name`       | 组件名称声明                                          |
+| 2    | `components` | 局部组件注册                                          |
+| 3    | `props`      | 父组件传入属性定义                                    |
+| 4    | `data()`     | 组件内部状态                                          |
+| 5    | `computed`   | 计算属性                                              |
+| 6    | `watch`      | 侦听器                                                |
+| 7    | `methods`    | 方法集合                                              |
+| 8    | 生命周期钩子 | `created`, `mounted`, `beforeDestroy`, `destroyed` 等 |
 
 ### 完整示例
 
@@ -56,20 +56,20 @@ export default {
       dataSource: [],
       // loading: 加载状态
       loading: false,
-    };
+    }
   },
 
   computed: {
     // computed: 是否显示搜索按钮
     isShowSearch() {
-      return this.searchQuery.length > 0;
+      return this.searchQuery.length > 0
     },
   },
 
   watch: {
     // watch: 监听用户输入变化
     searchQuery(newVal) {
-      this.fetchSuggestions(newVal);
+      this.fetchSuggestions(newVal)
     },
   },
 
@@ -86,7 +86,7 @@ export default {
 
   // 生命周期钩子
   created() {
-    this.fetchData();
+    this.fetchData()
   },
 
   mounted() {
@@ -96,7 +96,7 @@ export default {
   beforeDestroy() {
     // 清理定时器、事件监听器
   },
-};
+}
 ```
 
 ---
@@ -113,18 +113,18 @@ Import 必须分为 3 组，组间空一行，组内按字母顺序排序：
 
 ```javascript
 // 1. node_modules
-import Vue from 'vue';
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
+import Vue from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user';
-import store from '@src/store';
-import { APP_CONFIG } from '@src/constants';
-import DataTable from '@src/components/DataTable';
+import { apiGetUserInfo } from '@src/api/user'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable'
 
 // 3. 内部相对依赖（./）
-import { localHelper } from './utils/helper';
-import { MAX_RETRY_COUNT } from './constants';
-import SearchBar from './SearchBar.vue';
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```

@@ -62,12 +62,12 @@
 ```typescript
 // ✅ 正确：类型命名以 I 为前缀
 type IUserInfo = {
-  id: string;
-  name: string;
-};
+  id: string
+  name: string
+}
 
 interface ITableConfig {
-  columns: ITableColumn[];
+  columns: ITableColumn[]
 }
 ```
 

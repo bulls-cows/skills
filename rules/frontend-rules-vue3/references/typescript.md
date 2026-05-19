@@ -21,11 +21,11 @@
 
 ```typescript
 // ✅ 正确
-const data: unknown = JSON.parse(raw);
-const userInfo: IUserInfo = { id: "1", name: "test" };
+const data: unknown = JSON.parse(raw)
+const userInfo: IUserInfo = { id: '1', name: 'test' }
 
 // ❌ 错误
-const data: any = JSON.parse(raw); // 禁止
+const data: any = JSON.parse(raw) // 禁止
 ```
 
 ---
@@ -39,15 +39,15 @@ const data: any = JSON.parse(raw); // 禁止
 ```typescript
 // ✅ 正确：泛型定义
 const props = defineProps<{
-  userId: string | number; // userId: 用户ID
-  isLoading?: boolean; // isLoading: 加载状态，默认 false
-  maxItems?: number; // maxItems: 最大条目数，默认 10
-}>();
+  userId: string | number // userId: 用户ID
+  isLoading?: boolean // isLoading: 加载状态，默认 false
+  maxItems?: number // maxItems: 最大条目数，默认 10
+}>()
 
 // ❌ 错误：运行时对象形式（不推荐）
 const props = defineProps({
   userId: { type: [String, Number], required: true },
-});
+})
 ```
 
 ### `withDefaults()` 设置默认值
@@ -58,16 +58,16 @@ const props = defineProps({
 // ✅ 正确
 const props = withDefaults(
   defineProps<{
-    title?: string;
-    size?: "small" | "medium" | "large";
-    disabled?: boolean;
+    title?: string
+    size?: 'small' | 'medium' | 'large'
+    disabled?: boolean
   }>(),
   {
-    title: "默认标题",
-    size: "medium",
+    title: '默认标题',
+    size: 'medium',
     disabled: false,
   },
-);
+)
 ```
 
 ### v-model 兼容模式
@@ -82,16 +82,16 @@ const props = withDefaults(
 
 ```typescript
 // ✅ 正确：显式标注类型
-const userName = ref<string>("");
-const userList = ref<IUserInfo[]>([]);
-const isLoading = ref<boolean>(false);
-const selectedUser = ref<IUserInfo | null>(null);
+const userName = ref<string>('')
+const userList = ref<IUserInfo[]>([])
+const isLoading = ref<boolean>(false)
+const selectedUser = ref<IUserInfo | null>(null)
 
 // 可选：类型推断（当初始值已明确时）
-const count = ref(0); // 推断为 Ref<number>
+const count = ref(0) // 推断为 Ref<number>
 
 // ❌ 不推荐：无初始值时未标注类型
-const data = ref(); // 推断为 Ref<undefined>，应明确类型
+const data = ref() // 推断为 Ref<undefined>，应明确类型
 ```
 
 ### `reactive<T>()` 类型标注
@@ -99,29 +99,29 @@ const data = ref(); // 推断为 Ref<undefined>，应明确类型
 ```typescript
 // ✅ 正确：显式标注类型
 const state = reactive<{
-  name: string;
-  age: number;
-  roles: string[];
+  name: string
+  age: number
+  roles: string[]
 }>({
-  name: "",
+  name: '',
   age: 0,
   roles: [],
-});
+})
 ```
 
 ### `computed<T>()` 类型标注
 
 ```typescript
 // ✅ 正确：类型推断自动推导
-const isDisabled = computed(() => props.disabled || isLoading.value);
+const isDisabled = computed(() => props.disabled || isLoading.value)
 
 // ✅ 正确：需要显式标注复杂类型时
 const items = computed<IListItem[]>(() => {
   return rawData.value.map((item) => ({
     id: item.id,
     label: item.name,
-  }));
-});
+  }))
+})
 ```
 
 ---
@@ -133,14 +133,14 @@ const items = computed<IListItem[]>(() => {
 ```typescript
 // ✅ 正确：泛型定义
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  "update:value": [value: string];
-  change: [id: number, action: string];
-  confirm: [];
-}>();
+  'update:modelValue': [value: string]
+  'update:value': [value: string]
+  change: [id: number, action: string]
+  confirm: []
+}>()
 
 // ❌ 错误：运行时对象形式
-const emit = defineEmits(["update:modelValue", "change", "confirm"]);
+const emit = defineEmits(['update:modelValue', 'change', 'confirm'])
 ```
 
 ---
@@ -152,21 +152,21 @@ const emit = defineEmits(["update:modelValue", "change", "confirm"]);
 ```typescript
 // ✅ 正确：声明返回值类型
 interface IUseTableReturn {
-  dataSource: Ref<IUserInfo[]>;
-  loading: Ref<boolean>;
-  fetchList: () => Promise<void>;
+  dataSource: Ref<IUserInfo[]>
+  loading: Ref<boolean>
+  fetchList: () => Promise<void>
 }
 
 export const useTable = (): IUseTableReturn => {
-  const dataSource = ref<IUserInfo[]>([]);
-  const loading = ref(false);
+  const dataSource = ref<IUserInfo[]>([])
+  const loading = ref(false)
 
   const fetchList = async () => {
     /* ... */
-  };
+  }
 
-  return { dataSource, loading, fetchList };
-};
+  return { dataSource, loading, fetchList }
+}
 ```
 
 ---
@@ -185,8 +185,8 @@ export const useTable = (): IUseTableReturn => {
 使用 `import type` 导入纯类型，减少运行时依赖：
 
 ```typescript
-import type { User, dataSource } from "@src/types";
-import { ref, computed } from "vue";
+import type { User, dataSource } from '@src/types'
+import { ref, computed } from 'vue'
 ```
 
 **规则**：

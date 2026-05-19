@@ -4,10 +4,7 @@ import tseslint from 'typescript-eslint'
 export default tseslint.config(
   {
     files: ['build/**/*.ts', 'build/**/*.mts'],
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.strictTypeChecked,
-    ],
+    extends: [eslint.configs.recommended, ...tseslint.configs.strictTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true,

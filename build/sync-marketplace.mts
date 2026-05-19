@@ -1,92 +1,96 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const projectRoot = path.dirname(__dirname);
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const projectRoot = path.dirname(__dirname)
 
-const packageJsonPath = path.join(projectRoot, 'package.json');
-const marketplaceJsonPath = path.join(projectRoot, '.claude-plugin', 'marketplace.json');
-const skillsDir = path.join(projectRoot, 'skills');
+const packageJsonPath = path.join(projectRoot, 'package.json')
+const marketplaceJsonPath = path.join(projectRoot, '.claude-plugin', 'marketplace.json')
+const skillsDir = path.join(projectRoot, 'skills')
 
 // 读取 package.json
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 // 读取 marketplace.json
-const marketplaceJson = JSON.parse(fs.readFileSync(marketplaceJsonPath, 'utf-8'));
+const marketplaceJson = JSON.parse(fs.readFileSync(marketplaceJsonPath, 'utf-8'))
 
 // 1. 同步 name
-marketplaceJson.name = packageJson.name;
-marketplaceJson.plugins[0].name = packageJson.name;
+marketplaceJson.name = packageJson.name
+marketplaceJson.plugins[0].name = packageJson.name
 
 // 2. 同步 version
-marketplaceJson.metadata.version = packageJson.version;
+marketplaceJson.metadata.version = packageJson.version
 
 // 3. 同步 description
-marketplaceJson.metadata.description = packageJson.description;
+marketplaceJson.metadata.description = packageJson.description
 
 // 4. 同步 author
-marketplaceJson.owner.name = packageJson.author;
+marketplaceJson.owner.name = packageJson.author
 
 // 5. 读取 skills 目录，过滤空目录并按字母顺序排序
-const skillNames = fs.readdirSync(skillsDir, { withFileTypes: true })
-  .filter(dirent => dirent.isDirectory())
-  .map(dirent => dirent.name)
-  .filter(name => {
-    const skillPath = path.join(skillsDir, name);
-    const files = fs.readdirSync(skillPath);
+const skillNames = fs
+  .readdirSync(skillsDir, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name)
+  .filter((name) => {
+    const skillPath = path.join(skillsDir, name)
+    const files = fs.readdirSync(skillPath)
     if (files.length === 0) {
-      fs.rmdirSync(skillPath);
-      console.log(`✓ 已删除空目录: ${name}`);
-      return false;
+      fs.rmdirSync(skillPath)
+      console.log(`✓ 已删除空目录: ${name}`)
+      return false
     }
-    return true;
+    return true
   })
-  .sort();
+  .sort()
 
-const skillsList = skillNames.map(name => `./skills/${name}`);
+const skillsList = skillNames.map((name) => `./skills/${name}`)
 
-const frontendSkillsList = skillsList.filter(skill => skill.includes('frontend'));
-const nonFrontendSkillsList = skillsList.filter(skill => !skill.includes('frontend'));
+const frontendSkillsList = skillsList.filter((skill) => skill.includes('frontend'))
+const nonFrontendSkillsList = skillsList.filter((skill) => !skill.includes('frontend'))
 
-const openSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'open-skills');
+const openSkillsPlugin = marketplaceJson.plugins.find(
+  (plugin: any) => plugin.name === 'open-skills',
+)
 if (openSkillsPlugin) {
-  openSkillsPlugin.skills = nonFrontendSkillsList;
+  openSkillsPlugin.skills = nonFrontendSkillsList
 }
 
-const frontendSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'frontend-skills');
+const frontendSkillsPlugin = marketplaceJson.plugins.find(
+  (plugin: any) => plugin.name === 'frontend-skills',
+)
 if (frontendSkillsPlugin) {
-  frontendSkillsPlugin.skills = frontendSkillsList;
+  frontendSkillsPlugin.skills = frontendSkillsList
 }
 
 // 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
-const skillsInternalDir = path.join(projectRoot, 'skills-internal');
-const internalSkillNames = fs.readdirSync(skillsInternalDir, { withFileTypes: true })
-  .filter(dirent => dirent.isDirectory())
-  .map(dirent => dirent.name)
-  .filter(name => {
-    const skillPath = path.join(skillsInternalDir, name);
-    const files = fs.readdirSync(skillPath);
+const skillsInternalDir = path.join(projectRoot, 'skills-internal')
+const internalSkillNames = fs
+  .readdirSync(skillsInternalDir, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name)
+  .filter((name) => {
+    const skillPath = path.join(skillsInternalDir, name)
+    const files = fs.readdirSync(skillPath)
     if (files.length === 0) {
-      fs.rmdirSync(skillPath);
-      console.log(`✓ 已删除空目录: ${name}`);
-      return false;
+      fs.rmdirSync(skillPath)
+      console.log(`✓ 已删除空目录: ${name}`)
+      return false
     }
-    return true;
+    return true
   })
-  .sort();
+  .sort()
 
-const internalSkillsList = internalSkillNames.map(name => `./skills-internal/${name}`);
-const internalSkillsPlugin = marketplaceJson.plugins.find((plugin: any) => plugin.name === 'internal-skills');
+const internalSkillsList = internalSkillNames.map((name) => `./skills-internal/${name}`)
+const internalSkillsPlugin = marketplaceJson.plugins.find(
+  (plugin: any) => plugin.name === 'internal-skills',
+)
 if (internalSkillsPlugin) {
-  internalSkillsPlugin.skills = internalSkillsList;
+  internalSkillsPlugin.skills = internalSkillsList
 }
 
 // 写入 marketplace.json
-fs.writeFileSync(
-  marketplaceJsonPath,
-  JSON.stringify(marketplaceJson, null, 2) + '\n',
-  'utf-8'
-);
+fs.writeFileSync(marketplaceJsonPath, JSON.stringify(marketplaceJson, null, 2) + '\n', 'utf-8')
 
-console.log('✓ 已同步 marketplace.json');
+console.log('✓ 已同步 marketplace.json')

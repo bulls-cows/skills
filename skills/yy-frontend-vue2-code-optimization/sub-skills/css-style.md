@@ -36,7 +36,9 @@
     }
   }
 
-  .user-card__body { /* ... */ }
+  .user-card__body {
+    /* ... */
+  }
 }
 ```
 
@@ -55,7 +57,9 @@
     }
   }
 
-  &__body { /* ... */ }
+  &__body {
+    /* ... */
+  }
 }
 ```
 
@@ -232,15 +236,15 @@
 
 以下属性存在兼容性风险，需提供降级方案：
 
-| 属性 | 问题 | 降级方案 |
-|------|------|----------|
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 ### 降级方案示例
 

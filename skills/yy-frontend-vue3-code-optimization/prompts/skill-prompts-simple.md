@@ -22,14 +22,14 @@
 
 ### 任务清单
 
-| 任务 ID | 子技能       | 风险等级  | 说明                                                                             |
-| ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
-| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
-| T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则） |
+| 任务 ID | 子技能       | 风险等级  | 说明                                                                                                   |
+| ------- | ------------ | --------- | ------------------------------------------------------------------------------------------------------ |
+| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                                            |
+| T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则）                                 |
 | T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(4组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
-| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
-| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
-| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
+| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                                                     |
+| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                                           |
+| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强                       |
 
 ### 执行规则
 
@@ -92,12 +92,12 @@
 
   ```typescript
   try {
-    const res = await apiXXX();
+    const res = await apiXXX()
     if (res.code === 0) {
       // 处理成功逻辑
     }
   } catch (e) {
-    console.warn("请求失败：", e);
+    console.warn('请求失败：', e)
   }
   ```
 
@@ -156,7 +156,7 @@
 | 常量     | 全大写 + 下划线             | `MAX_RETRY_COUNT` |
 | 组件名   | PascalCase                  | `<UserList />`    |
 | Props    | camelCase                   | `userName`        |
-| Hooks    | `use` + 功能名 | `useTable`        |
+| Hooks    | `use` + 功能名              | `useTable`        |
 | 布尔值   | `isXX` / `hasXX` / `showXX` | `isLoading`       |
 
 _跨文件引用重命名需提示用户确认_
@@ -206,15 +206,19 @@ _跨文件引用重命名需提示用户确认_
 // 已安装 useRequest
 const { loading, run } = useRequest(() => apiXXX(), {
   manual: true,
-  onSuccess: (res) => { if (res.code === 0) { /* 成功 */ } },
-});
+  onSuccess: (res) => {
+    if (res.code === 0) {
+      /* 成功 */
+    }
+  },
+})
 
 // 未安装 useRequest
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 处理成功逻辑
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -252,13 +256,13 @@ if (code === 0) {
 
 ## 7. 🟡 不推荐项（尽量避免）
 
-| # | 不推荐项 | 说明 |
-|---|----------|------|
-| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
-| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
-| 3 | 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
-| 4 | CSS 嵌套原生写法 | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
-| 5 | `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+| #   | 不推荐项            | 说明                                                        |
+| --- | ------------------- | ----------------------------------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化                                          |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit                             |
+| 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用         |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用         |
 
 ---
 
@@ -326,15 +330,15 @@ if (code === 0) {
 
 **CSS 兼容性指南**：
 
-| 属性 | 问题 | 降级方案 |
-|------|------|----------|
-| `gap` | Safari 14.4及以下不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6以下支持不全 | `padding-bottom` Hack |
-| `100vh` | iOS Safari 高度偏差 | JS 动态计算或 dvh |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` |
-| `will-change` | 动画结束不重置占内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                    | 降级方案                     |
+| -------------------- | ----------------------- | ---------------------------- |
+| `gap`                | Safari 14.4及以下不支持 | margin 负边距                |
+| `aspect-ratio`       | iOS 15.6以下支持不全    | `padding-bottom` Hack        |
+| `100vh`              | iOS Safari 高度偏差     | JS 动态计算或 dvh            |
+| `inset`              | 旧浏览器不识别          | 先写 `top/right/bottom/left` |
+| `will-change`        | 动画结束不重置占内存    | 动画结束后设为 `auto`        |
+| `content-visibility` | 仅 Chromium 支持        | 仅作性能增强                 |
+| `subgrid`            | 浏览器支持不完善        | 传统 Grid/Flex 降级          |
 
 - **兼容性查询**：[Can I Use](https://caniuse.com/)
 - **自动前缀**：配置 Autoprefixer + PostCSS

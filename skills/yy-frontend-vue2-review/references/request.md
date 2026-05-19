@@ -36,8 +36,8 @@ async function fetchData() {
 
 ## 统一响应处理模式
 
-| 响应码 | 处理方式 |
-| ------ | -------- |
+| 响应码       | 处理方式                             |
+| ------------ | ------------------------------------ |
 | `code === 0` | 成功，调用 `this.$message.success()` |
-| 非零 `code` | 失败，调用 `this.$message.error()` |
-| `msg` 为空 | 使用默认文案 |
+| 非零 `code`  | 失败，调用 `this.$message.error()`   |
+| `msg` 为空   | 使用默认文案                         |

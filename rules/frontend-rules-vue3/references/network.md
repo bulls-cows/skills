@@ -26,11 +26,11 @@
 ### 目标结构
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -76,12 +76,12 @@ if (code === 0) {
 
 ```typescript
 // ✅ 正确：单次解构
-const { code, data, msg } = await api.getUserList();
+const { code, data, msg } = await api.getUserList()
 
 // ❌ 错误：连续解构
 const {
   data: { data: list },
-} = await api.getUserList(); // 禁止
+} = await api.getUserList() // 禁止
 ```
 
 ### 先判断成功后使用数据
@@ -90,21 +90,21 @@ const {
 
 ```typescript
 // 错误：假设 res.data 一定存在
-const res = await api.getUserList();
-const list = res.data;
+const res = await api.getUserList()
+const list = res.data
 
 // 正确：先判断成功，再做类型守卫
-const res = await api.getUserList();
+const res = await api.getUserList()
 if (res.success && Array.isArray(res.data)) {
-  const list = res.data;
+  const list = res.data
 }
 
 // 统一模式
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 成功处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -119,16 +119,16 @@ if (code === 0) {
 ```typescript
 // ❌ 错误：空 catch
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
   // 禁止空 catch
 }
 
 // ✅ 正确：catch 中 console.warn 即可
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
-  console.warn(error);
+  console.warn(error)
 }
 ```
 
@@ -137,11 +137,11 @@ try {
 业务侧返回的非成功状态码，在 `else` 分支中 `console.warn` 记录即可：
 
 ```typescript
-const { code, data, msg } = await apiGetData();
+const { code, data, msg } = await apiGetData()
 if (code === 0) {
   // 成功处理
 } else {
-  console.warn(msg); // 业务错误日志
+  console.warn(msg) // 业务错误日志
 }
 ```
 
@@ -154,53 +154,50 @@ if (code === 0) {
 #### 手动执行（按钮点击/表单提交等场景）
 
 ```typescript
-import { useRequest } from "ahooks-vue";
+import { useRequest } from 'ahooks-vue'
 
 const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
   if (code === 0) {
-    console.log("登录成功");
+    console.log('登录成功')
     // 处理 token、跳转等
   } else {
-    console.warn(msg);
+    console.warn(msg)
   }
-};
+}
 
 // login Hook（manual 模式，手动触发）
-const { loading, run: runLogin } = useRequest(
-  () => apiPostLogin(loginForm.value),
-  {
-    manual: true,
-    onSuccess: onLoginSuccess,
-    onError: () => {
-      console.warn("网络异常，请重试");
-    },
+const { loading, run: runLogin } = useRequest(() => apiPostLogin(loginForm.value), {
+  manual: true,
+  onSuccess: onLoginSuccess,
+  onError: () => {
+    console.warn('网络异常，请重试')
   },
-);
+})
 
 // 在事件处理函数中调用
 const handleSubmit = async () => {
-  await runLogin();
-};
+  await runLogin()
+}
 ```
 
 #### 带参数（分页场景）
 
 ```typescript
-import { useRequest } from "ahooks-vue";
-import { ref } from "vue";
+import { useRequest } from 'ahooks-vue'
+import { ref } from 'vue'
 
-const pagination = ref({ page: 1, limit: 20 });
-const total = ref(0);
-const dataSource = ref<any[]>([]);
+const pagination = ref({ page: 1, limit: 20 })
+const total = ref(0)
+const dataSource = ref<any[]>([])
 
 const onListSuccess = ({ code, data, msg }: IApiResponse) => {
   if (code === 0) {
-    dataSource.value = data.list ?? [];
-    total.value = data.total ?? 0;
+    dataSource.value = data.list ?? []
+    total.value = data.total ?? 0
   } else {
-    console.warn(msg);
+    console.warn(msg)
   }
-};
+}
 
 const { loading, run: getList } = useRequest(
   (params) => apiGetList(Object.assign({}, pagination.value, params)),
@@ -208,10 +205,10 @@ const { loading, run: getList } = useRequest(
     manual: true,
     onSuccess: onListSuccess,
     onError: (error) => {
-      console.warn(error);
+      console.warn(error)
     },
   },
-);
+)
 ```
 
 ---
@@ -221,27 +218,27 @@ const { loading, run: getList } = useRequest(
 #### 手动执行（按钮点击/表单提交等场景）
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const loading = ref(false);
+const loading = ref(false)
 
 const handleSubmit = async () => {
-  if (loading.value) return; // 防重复提交
+  if (loading.value) return // 防重复提交
 
-  loading.value = true;
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 ```
 
 ---
@@ -255,51 +252,51 @@ const handleSubmit = async () => {
 `useRequest` 的 `loading` 自动控制，按钮直接用 `:disabled="loading"` 禁用：
 
 ```typescript
-import { useRequest } from "ahooks-vue";
+import { useRequest } from 'ahooks-vue'
 
 const { loading, run } = useRequest(() => apiSubmit(formData.value), {
   manual: true,
   onSuccess: (res) => {
     if (res.code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(res.msg);
+      console.warn(res.msg)
     }
   },
   onError: (error) => {
-    console.warn(error);
+    console.warn(error)
   },
-});
+})
 
 const handleSubmit = async () => {
-  await run();
-};
+  await run()
+}
 ```
 
 ### 互斥锁方式（未安装 `useRequest`）
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const loading = ref(false);
+const loading = ref(false)
 
 const handleSubmit = async () => {
-  if (loading.value) return; // 互斥锁
+  if (loading.value) return // 互斥锁
 
-  loading.value = true;
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 ```
 
 ### 模板中关联按钮禁用
@@ -310,27 +307,27 @@ const handleSubmit = async () => {
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const loading = ref(false);
+const loading = ref(false)
 
 const handleSubmit = async () => {
-  if (loading.value) return;
+  if (loading.value) return
 
-  loading.value = true;
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 </script>
 ```
 

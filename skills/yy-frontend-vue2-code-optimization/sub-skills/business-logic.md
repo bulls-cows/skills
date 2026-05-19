@@ -74,7 +74,7 @@
 export default {
   name: 'ComponentName',
   // ...
-};
+}
 ```
 
 ## 多次改动示例
@@ -114,7 +114,7 @@ export default {
 export default {
   name: 'UserListPage',
   // ...
-};
+}
 ```
 
 ## 注意事项

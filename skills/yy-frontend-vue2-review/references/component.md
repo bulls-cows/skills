@@ -28,23 +28,29 @@ export default {
   name: 'UserCard',
   components: { UserAvatar },
   props: {
-    userId: { type: String, required: true }
+    userId: { type: String, required: true },
   },
   data() {
     return { isLoading: false }
   },
   computed: {
-    userName() { /* ... */ }
+    userName() {
+      /* ... */
+    },
   },
   watch: {
-    userId() { /* ... */ }
+    userId() {
+      /* ... */
+    },
   },
   methods: {
-    fetchData() { /* ... */ }
+    fetchData() {
+      /* ... */
+    },
   },
   mounted() {
     this.fetchData()
-  }
+  },
 }
 ```
 
@@ -137,11 +143,11 @@ props: {
 
 ### 白名单
 
-| 类别 | 白名单事件 |
-| ---- | ---------- |
+| 类别   | 白名单事件                                                               |
+| ------ | ------------------------------------------------------------------------ |
 | 交互类 | `change`、`click`、`select`、`expand`、`input`、`clear`、`remove`、`add` |
-| 弹窗类 | `open`、`close`、`show`、`hide` |
-| 操作类 | `cancel`、`confirm`、`ok`、`editSuccess`、`error` |
+| 弹窗类 | `open`、`close`、`show`、`hide`                                          |
+| 操作类 | `cancel`、`confirm`、`ok`、`editSuccess`、`error`                        |
 
 ### 生命周期 emit 限制
 

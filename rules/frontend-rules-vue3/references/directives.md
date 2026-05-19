@@ -46,9 +46,9 @@
 - 避免直接操作未过滤的字符串。
 
 ```typescript
-import DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify'
 
-const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
+const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value))
 ```
 
 ```vue
@@ -61,11 +61,11 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 统一使用指令简写形式，使模板更简洁：
 
-| 完整写法 | 简写 | 示例 |
-|----------|------|------|
-| `v-bind:attr` | `:attr` | `:src="avatar"` |
-| `v-on:event` | `@event` | `@click="handleClick"` |
-| `v-slot:name` | `#name` | `#default="slotProps"` |
+| 完整写法      | 简写     | 示例                   |
+| ------------- | -------- | ---------------------- |
+| `v-bind:attr` | `:attr`  | `:src="avatar"`        |
+| `v-on:event`  | `@event` | `@click="handleClick"` |
+| `v-slot:name` | `#name`  | `#default="slotProps"` |
 
 ```vue
 <!-- ✅ 正确：简写 -->
@@ -92,7 +92,15 @@ HTML 元素上的属性顺序应保持统一：
 9. 动态 `v-slot`（`#`）
 
 ```vue
-<template v-for="item in items" :key="item.id" v-if="item.visible" id="list-item" :class="item.class" @click="handleClick(item)" #default="slotProps">
+<template
+  v-for="item in items"
+  :key="item.id"
+  v-if="item.visible"
+  id="list-item"
+  :class="item.class"
+  @click="handleClick(item)"
+  #default="slotProps"
+>
   {{ item.name }}
 </template>
 ```

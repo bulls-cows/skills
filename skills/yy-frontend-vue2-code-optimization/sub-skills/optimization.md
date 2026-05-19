@@ -40,11 +40,11 @@
 ### 目标结构
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -160,11 +160,11 @@ watch: {
 
 Vue2 使用 `Object.defineProperty` 实现响应式，以下场景必须使用 `$set` 或替代方案：
 
-| 场景 | 错误写法 | 正确写法 |
-| ---- | --------- | -------- |
+| 场景         | 错误写法                | 正确写法                             |
+| ------------ | ----------------------- | ------------------------------------ |
 | 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
-| 数组索引赋值 | `this.arr[i] = val` | `this.$set(this.arr, i, val)` |
-| 数组长度修改 | `this.arr.length = n` | `this.arr.splice(n)` |
+| 数组索引赋值 | `this.arr[i] = val`     | `this.$set(this.arr, i, val)`        |
+| 数组长度修改 | `this.arr.length = n`   | `this.arr.splice(n)`                 |
 
 ### 变更预览格式
 
@@ -188,12 +188,12 @@ Vue2 使用 `Object.defineProperty` 实现响应式，以下场景必须使用 `
 
 频繁触发的事件必须使用防抖或节流优化：
 
-| 场景 | 方式 | 说明 |
-| ---- | ---- | ---- |
-| 搜索框输入 | 防抖 | 延迟发起请求，减少无效调用 |
-| 滚动事件 | 节流 | 控制触发频率，避免过度渲染 |
-| 窗口 resize | 节流 | 布局计算不宜过于频繁 |
-| 按钮点击 | 防抖/锁 | 防止重复提交 |
+| 场景        | 方式    | 说明                       |
+| ----------- | ------- | -------------------------- |
+| 搜索框输入  | 防抖    | 延迟发起请求，减少无效调用 |
+| 滚动事件    | 节流    | 控制触发频率，避免过度渲染 |
+| 窗口 resize | 节流    | 布局计算不宜过于频繁       |
+| 按钮点击    | 防抖/锁 | 防止重复提交               |
 
 ### 防抖/节流示例
 

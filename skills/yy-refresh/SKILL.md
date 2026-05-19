@@ -69,6 +69,7 @@ description: >
 ## 刷新结果
 
 ### 统计信息
+
 - 改动文件总数：N 个
 - 已暂存文件：M 个
 - 未暂存文件：K 个
@@ -76,6 +77,7 @@ description: >
 ### 文件详情
 
 #### src/auth/login.ts
+
 - 改动类型: 修改
 - 改动内容: 新增 getToken 方法、修改 validateUser 函数签名
 - 关键变化:
@@ -83,12 +85,14 @@ description: >
   - `validateUser()`: 新增 passwordHash 参数
 
 #### src/utils/helper.ts
+
 - 改动类型: 新增
 - 改动内容: 新增文件
 - 关键变化:
   - 整个文件为新增，包含 3 个工具函数
 
 #### src/components/Button.vue
+
 - 改动类型: 删除
 - 改动内容: 删除废弃组件
 - 关键变化:

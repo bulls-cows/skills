@@ -44,30 +44,30 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 适用于大多数 Git 项目，对项目目录结构没有特殊要求。
 
-| 技能 | 说明 | 安装命令 |
-| ---- | ---- | -------- |
-| [yy-comment](./skills/yy-comment/SKILL.md) | 为代码添加注释，可为整个文件或指定函数添加 JSDoc 注释和内部逻辑注释 | `npx skills add bulls-cows/skills --skill yy-comment` |
-| [yy-commit](./skills/yy-commit/SKILL.md) | Git 代码提交助手，生成规范的提交信息并执行提交操作 | `npx skills add bulls-cows/skills --skill yy-commit` |
-| [yy-create-readme](./skills/yy-create-readme/SKILL.md) | 创建或更新项目根目录下的 README.md 文件 | `npx skills add bulls-cows/skills --skill yy-create-readme` |
-| [yy-create-report](./skills/yy-create-report/SKILL.md) | 将指定时间范围内当前 Git 账号的提交记录整理合并生成工作报告 | `npx skills add bulls-cows/skills --skill yy-create-report` |
-| [yy-create-rule](./skills/yy-create-rule/SKILL.md) | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系 | `npx skills add bulls-cows/skills --skill yy-create-rule` |
-| [yy-create-skill](./skills/yy-create-skill/SKILL.md) | 创建或更新规范的 Claude Skill | `npx skills add bulls-cows/skills --skill yy-create-skill` |
-| [yy-create-wiki](./skills/yy-create-wiki/SKILL.md) | 为项目生成结构化的 Wiki 文档，帮助新成员或 AI 快速理解项目架构和模块关系 | `npx skills add bulls-cows/skills --skill yy-create-wiki` |
-| [yy-design-ui](./skills/yy-design-ui/SKILL.md) | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格 | `npx skills add bulls-cows/skills --skill yy-design-ui` |
-| [yy-distill](./skills/yy-distill/SKILL.md) | 从用户指定的内容中提炼思维方式，分析思维模式、决策逻辑和认知习惯 | `npx skills add bulls-cows/skills --skill yy-distill` |
-| [yy-handoff](./skills/yy-handoff/SKILL.md) | 创建或更新项目交接文档 handoff.md，用于跨会话续接当前任务 | `npx skills add bulls-cows/skills --skill yy-handoff` |
-| [yy-init](./skills/yy-init/SKILL.md) | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构 | `npx skills add bulls-cows/skills --skill yy-init` |
-| [yy-lint](./skills/yy-lint/SKILL.md) | 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误 | `npx skills add bulls-cows/skills --skill yy-lint` |
-| [yy-mode-plan](./skills/yy-mode-plan/SKILL.md) | 计划优先执行模式，澄清需求后展示方案方向，确认后再制定详细计划 | `npx skills add bulls-cows/skills --skill yy-mode-plan` |
-| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md) | 规格优先开发模式，澄清需求后展示方案方向，确认后再编写详细规格文档 | `npx skills add bulls-cows/skills --skill yy-mode-spec` |
-| [yy-optimize](./skills/yy-optimize/SKILL.md) | 优化方案生成器，分析现状并生成多个优化方案供用户选择，确认后才执行改动 | `npx skills add bulls-cows/skills --skill yy-optimize` |
-| [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md) | 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片 | `npx skills add bulls-cows/skills --skill yy-post-to-wechat` |
-| [yy-read-pdf](./skills/yy-read-pdf/SKILL.md) | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息 | `npx skills add bulls-cows/skills --skill yy-read-pdf` |
-| [yy-refresh](./skills/yy-refresh/SKILL.md) | 刷新 AI 对代码的理解，对比所有改动文件并重新解析关键代码 | `npx skills add bulls-cows/skills --skill yy-refresh` |
-| [yy-review](./skills/yy-review/SKILL.md) | 执行代码审核，包括语法错误、逻辑错误、安全漏洞和最佳实践检查 | `npx skills add bulls-cows/skills --skill yy-review` |
-| [yy-run-skills](./skills/yy-run-skills/SKILL.md) | 串行执行多个技能。当用户需要按顺序执行多个技能时使用。技能名称之间支持使用空格、英文逗号(,)、中文逗号(,)、中文顿号(、)作为分隔符 | `npx skills add bulls-cows/skills --skill yy-run-skills` |
-| [yy-skills-reverse-analysis](./skills/yy-skills-reverse-analysis/SKILL.md) | 专业的技能逆向解析工程师，将用户提供的技能文件内容逆向还原成完整、可直接使用的系统提示词 | `npx skills add bulls-cows/skills --skill yy-skills-reverse-analysis` |
-| [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md) | 将微信公众号文章转换为 Markdown 格式 | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown` |
+| 技能                                                                       | 说明                                                                                                                             | 安装命令                                                              |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [yy-comment](./skills/yy-comment/SKILL.md)                                 | 为代码添加注释，可为整个文件或指定函数添加 JSDoc 注释和内部逻辑注释                                                              | `npx skills add bulls-cows/skills --skill yy-comment`                 |
+| [yy-commit](./skills/yy-commit/SKILL.md)                                   | Git 代码提交助手，生成规范的提交信息并执行提交操作                                                                               | `npx skills add bulls-cows/skills --skill yy-commit`                  |
+| [yy-create-readme](./skills/yy-create-readme/SKILL.md)                     | 创建或更新项目根目录下的 README.md 文件                                                                                          | `npx skills add bulls-cows/skills --skill yy-create-readme`           |
+| [yy-create-report](./skills/yy-create-report/SKILL.md)                     | 将指定时间范围内当前 Git 账号的提交记录整理合并生成工作报告                                                                      | `npx skills add bulls-cows/skills --skill yy-create-report`           |
+| [yy-create-rule](./skills/yy-create-rule/SKILL.md)                         | 创建或更新规则文档，并更新 AGENTS.md 中的引用关系                                                                                | `npx skills add bulls-cows/skills --skill yy-create-rule`             |
+| [yy-create-skill](./skills/yy-create-skill/SKILL.md)                       | 创建或更新规范的 Claude Skill                                                                                                    | `npx skills add bulls-cows/skills --skill yy-create-skill`            |
+| [yy-create-wiki](./skills/yy-create-wiki/SKILL.md)                         | 为项目生成结构化的 Wiki 文档，帮助新成员或 AI 快速理解项目架构和模块关系                                                         | `npx skills add bulls-cows/skills --skill yy-create-wiki`             |
+| [yy-design-ui](./skills/yy-design-ui/SKILL.md)                             | 创建符合国人审美的网页界面设计，专注于简洁、精致、和谐的设计风格                                                                 | `npx skills add bulls-cows/skills --skill yy-design-ui`               |
+| [yy-distill](./skills/yy-distill/SKILL.md)                                 | 从用户指定的内容中提炼思维方式，分析思维模式、决策逻辑和认知习惯                                                                 | `npx skills add bulls-cows/skills --skill yy-distill`                 |
+| [yy-handoff](./skills/yy-handoff/SKILL.md)                                 | 创建或更新项目交接文档 handoff.md，用于跨会话续接当前任务                                                                        | `npx skills add bulls-cows/skills --skill yy-handoff`                 |
+| [yy-init](./skills/yy-init/SKILL.md)                                       | 初始化项目 AGENTS.md 文档，用于指导 AI 助手理解项目规范、范围和结构                                                              | `npx skills add bulls-cows/skills --skill yy-init`                    |
+| [yy-lint](./skills/yy-lint/SKILL.md)                                       | 执行代码 lint 检查，包括检测 lint 脚本、验证 Node 版本、执行 lint 检查并尝试自动修复错误                                         | `npx skills add bulls-cows/skills --skill yy-lint`                    |
+| [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                             | 计划优先执行模式，澄清需求后展示方案方向，确认后再制定详细计划                                                                   | `npx skills add bulls-cows/skills --skill yy-mode-plan`               |
+| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md)                             | 规格优先开发模式，澄清需求后展示方案方向，确认后再编写详细规格文档                                                               | `npx skills add bulls-cows/skills --skill yy-mode-spec`               |
+| [yy-optimize](./skills/yy-optimize/SKILL.md)                               | 优化方案生成器，分析现状并生成多个优化方案供用户选择，确认后才执行改动                                                           | `npx skills add bulls-cows/skills --skill yy-optimize`                |
+| [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md)                   | 通过微信公众号 API 直接将本地 Markdown/HTML 文章发布到公众号草稿箱。支持多主题、多颜色预设，自动上传图片                         | `npx skills add bulls-cows/skills --skill yy-post-to-wechat`          |
+| [yy-read-pdf](./skills/yy-read-pdf/SKILL.md)                               | 读取并解析 PDF 文件内容，提取文本、表格和结构化信息                                                                              | `npx skills add bulls-cows/skills --skill yy-read-pdf`                |
+| [yy-refresh](./skills/yy-refresh/SKILL.md)                                 | 刷新 AI 对代码的理解，对比所有改动文件并重新解析关键代码                                                                         | `npx skills add bulls-cows/skills --skill yy-refresh`                 |
+| [yy-review](./skills/yy-review/SKILL.md)                                   | 执行代码审核，包括语法错误、逻辑错误、安全漏洞和最佳实践检查                                                                     | `npx skills add bulls-cows/skills --skill yy-review`                  |
+| [yy-run-skills](./skills/yy-run-skills/SKILL.md)                           | 串行执行多个技能。当用户需要按顺序执行多个技能时使用。技能名称之间支持使用空格、英文逗号(,)、中文逗号(,)、中文顿号(、)作为分隔符 | `npx skills add bulls-cows/skills --skill yy-run-skills`              |
+| [yy-skills-reverse-analysis](./skills/yy-skills-reverse-analysis/SKILL.md) | 专业的技能逆向解析工程师，将用户提供的技能文件内容逆向还原成完整、可直接使用的系统提示词                                         | `npx skills add bulls-cows/skills --skill yy-skills-reverse-analysis` |
+| [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md)           | 将微信公众号文章转换为 Markdown 格式                                                                                             | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`      |
 
 #### 特定技能
 
@@ -77,13 +77,13 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 代码提交和审核时会自动聚焦于上述目录下的源代码文件，**其他目录的文件不会被处理**。
 
-| 技能 | 说明 | 安装命令 |
-| ---- | ---- | -------- |
-| [yy-frontend-commit](./skills/yy-frontend-commit/SKILL.md) | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作 | `npx skills add bulls-cows/skills --skill yy-frontend-commit` |
-| [yy-frontend-vue2-code-optimization](./skills/yy-frontend-vue2-code-optimization/SKILL.md) | 针对 Vue2 页面组件，通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，提升代码可读性与可维护性 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-code-optimization` |
-| [yy-frontend-vue2-review](./skills/yy-frontend-vue2-review/SKILL.md) | Vue2 前端代码审核助手，基于 Vue2 开发规范检查组件规范、代码风格、逻辑错误和安全漏洞 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-review` |
+| 技能                                                                                       | 说明                                                                                                                               | 安装命令                                                                      |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [yy-frontend-commit](./skills/yy-frontend-commit/SKILL.md)                                 | 前端代码提交助手，归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作                                       | `npx skills add bulls-cows/skills --skill yy-frontend-commit`                 |
+| [yy-frontend-vue2-code-optimization](./skills/yy-frontend-vue2-code-optimization/SKILL.md) | 针对 Vue2 页面组件，通过统一代码结构、语义化命名、BEM 样式规范、逻辑分层、关键注释等手段，提升代码可读性与可维护性                 | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-code-optimization` |
+| [yy-frontend-vue2-review](./skills/yy-frontend-vue2-review/SKILL.md)                       | Vue2 前端代码审核助手，基于 Vue2 开发规范检查组件规范、代码风格、逻辑错误和安全漏洞                                                | `npx skills add bulls-cows/skills --skill yy-frontend-vue2-review`            |
 | [yy-frontend-vue3-code-optimization](./skills/yy-frontend-vue3-code-optimization/SKILL.md) | Vue3 前端代码标准化与优化技能，优化 `<script setup>` 组件、组合式 API、BEM 样式、语义化命名、Hooks 规范、TypeScript 类型、注释增强 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-code-optimization` |
-| [yy-frontend-vue3-review](./skills/yy-frontend-vue3-review/SKILL.md) | Vue3 前端代码审核助手，基于 Vue3 开发规范检查 `<script setup>` 组件规范、代码风格、逻辑错误和安全漏洞 | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-review` |
+| [yy-frontend-vue3-review](./skills/yy-frontend-vue3-review/SKILL.md)                       | Vue3 前端代码审核助手，基于 Vue3 开发规范检查 `<script setup>` 组件规范、代码风格、逻辑错误和安全漏洞                              | `npx skills add bulls-cows/skills --skill yy-frontend-vue3-review`            |
 
 ### 推荐外部技能
 

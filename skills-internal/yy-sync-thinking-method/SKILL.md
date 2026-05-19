@@ -60,14 +60,17 @@ yy-optimize 中是思考方式的**应用适配**，非直接复制。同步检�
 ## 同步结果
 
 ### 变更内容
+
 - [新增/修改/删除]：[思考方式名称]
 
 ### 已更新文件
+
 - AGENTS.md: [具体变更]
 - skills/yy-init/templates/agents-minimal-template.md: [具体变更]
 - skills/yy-optimize/SKILL.md: [具体变更 / 无需变更]
 
 ### 一致性验证
+
 - AGENTS.md ↔ 模板文件: ✅ 一致 / ❌ 不一致
 - AGENTS.md ↔ yy-optimize: ✅ 对应关系正确 / ❌ 缺少对应
 ```

@@ -76,25 +76,25 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 ```typescript
 // 1. node_modules（外部依赖）
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+import { ref, computed, onMounted } from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. types（类型导入）
-import type { IUserInfo } from "@src/types";
+import type { IUserInfo } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from "@src/api/user";
-import { formatDate } from "@src/utils/date";
-import { useTable } from "@src/hooks/useTable";
-import store from "@src/store";
-import { APP_CONFIG } from "@src/constants";
-import DataTable from "@src/components/DataTable.vue";
+import { apiGetUserInfo } from '@src/api/user'
+import { formatDate } from '@src/utils/date'
+import { useTable } from '@src/hooks/useTable'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable.vue'
 
 // 4. 内部相对依赖（./）
-import { localHelper } from "./utils/helper";
-import { MAX_RETRY_COUNT } from "./constants";
-import SearchBar from "./SearchBar.vue";
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ### `<script setup>` 结构顺序
@@ -237,9 +237,9 @@ defineExpose({
 
 ```tsx
 // UserCard.tsx
-import { defineComponent, ref, computed } from 'vue';
-import type { PropType } from 'vue';
-import type { IUserInfo } from '@src/types/user';
+import { defineComponent, ref, computed } from 'vue'
+import type { PropType } from 'vue'
+import type { IUserInfo } from '@src/types/user'
 
 /**
  * UserCard 组件
@@ -262,14 +262,14 @@ export default defineComponent({
   emits: ['select', 'change'],
 
   setup(props, { emit }) {
-    const isActive = ref(false);
+    const isActive = ref(false)
 
-    const displayName = computed(() => props.user.name || '未知用户');
+    const displayName = computed(() => props.user.name || '未知用户')
 
     const handleClick = () => {
-      emit('select', props.user);
-      isActive.value = !isActive.value;
-    };
+      emit('select', props.user)
+      isActive.value = !isActive.value
+    }
 
     return () => (
       <div class="user-card">
@@ -280,9 +280,9 @@ export default defineComponent({
           <button onClick={handleClick}>选择用户</button>
         </div>
       </div>
-    );
+    )
   },
-});
+})
 ```
 
 ### TSX 组件结构顺序
@@ -302,30 +302,30 @@ export default defineComponent({
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed } from 'vue'
 
 /**
  * UserCard 组件
  * @description 用户卡片组件，显示用户基本信息
  */
 const props = defineProps<{
-  user: IUserInfo;
-  isLoading?: boolean;
-}>();
+  user: IUserInfo
+  isLoading?: boolean
+}>()
 
 const emit = defineEmits<{
-  select: [user: IUserInfo];
-  change: [];
-}>();
+  select: [user: IUserInfo]
+  change: []
+}>()
 
-const isActive = ref(false);
+const isActive = ref(false)
 
-const displayName = computed(() => props.user?.name || '未知用户');
+const displayName = computed(() => props.user?.name || '未知用户')
 
 const handleClick = () => {
-  emit('select', props.user);
-  isActive.value = !isActive.value;
-};
+  emit('select', props.user)
+  isActive.value = !isActive.value
+}
 </script>
 
 <template>

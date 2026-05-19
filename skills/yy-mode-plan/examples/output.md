@@ -12,6 +12,7 @@
 **涉及范围**：src/auth/、src/middleware/
 
 **待确认点**：
+
 - token 存储位置：localStorage 还是 cookie？
 
 ---

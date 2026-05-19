@@ -14,11 +14,11 @@
 
 ## ⚠️ 风险说明（执行前必须展示给用户）
 
-| 风险项 | 影响范围 | 说明 |
-| ------ | -------- | ---- |
-| **Git Diff 膨胀** | 全文件 | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
-| **合并冲突** | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突 |
-| **格式不一致** | 团队协作 | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异 |
+| 风险项            | 影响范围     | 说明                                                                              |
+| ----------------- | ------------ | --------------------------------------------------------------------------------- |
+| **Git Diff 膨胀** | 全文件       | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
+| **合并冲突**      | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突                                      |
+| **格式不一致**    | 团队协作     | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异                    |
 
 > **建议**：在执行格式化前，确保当前分支是干净的，且没有待合并的代码。
 
@@ -63,16 +63,16 @@ Vue2 单文件组件内部块顺序必须保持一致：
 
 `<script>` 内部选项必须按以下宏观顺序排列：
 
-| 步骤 | 内容 | 说明 |
-| ---- | ---- | ---- |
-| 1 | `name` | 组件名称声明 |
-| 2 | `components` | 局部组件注册 |
-| 3 | `props` | 父组件传入属性定义 |
-| 4 | `data()` | 组件内部状态 |
-| 5 | `computed` | 计算属性 |
-| 6 | `watch` | 侦听器 |
-| 7 | `methods` | 方法集合 |
-| 8 | 生命周期钩子 | `created`, `mounted`, `beforeDestroy`, `destroyed` 等 |
+| 步骤 | 内容         | 说明                                                  |
+| ---- | ------------ | ----------------------------------------------------- |
+| 1    | `name`       | 组件名称声明                                          |
+| 2    | `components` | 局部组件注册                                          |
+| 3    | `props`      | 父组件传入属性定义                                    |
+| 4    | `data()`     | 组件内部状态                                          |
+| 5    | `computed`   | 计算属性                                              |
+| 6    | `watch`      | 侦听器                                                |
+| 7    | `methods`    | 方法集合                                              |
+| 8    | 生命周期钩子 | `created`, `mounted`, `beforeDestroy`, `destroyed` 等 |
 
 ### 导入顺序
 
@@ -84,20 +84,20 @@ Vue2 单文件组件内部块顺序必须保持一致：
 
 ```javascript
 // 1. node_modules
-import Vue from 'vue';
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
+import Vue from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user';
-import store from '@src/store';
-import { APP_CONFIG } from '@src/constants';
-import DataTable from '@src/components/DataTable';
+import { apiGetUserInfo } from '@src/api/user'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable'
 
 // 3. 内部相对依赖（./）
-import { localHelper } from './utils/helper';
-import { MAX_RETRY_COUNT } from './constants';
-import SearchBar from './SearchBar.vue';
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ### 模板属性顺序
@@ -114,7 +114,14 @@ HTML 元素上的属性顺序应保持统一：
 8. `v-html` / `v-text`
 
 ```vue
-<template v-for="item in items" :key="item.id" v-if="item.visible" id="list-item" :class="item.class" @click="handleClick(item)">
+<template
+  v-for="item in items"
+  :key="item.id"
+  v-if="item.visible"
+  id="list-item"
+  :class="item.class"
+  @click="handleClick(item)"
+>
   {{ item.name }}
 </template>
 ```
@@ -123,11 +130,11 @@ HTML 元素上的属性顺序应保持统一：
 
 统一使用指令简写形式：
 
-| 完整写法 | 简写 | 示例 |
-| -------- | ---- | ---- |
-| `v-bind:attr` | `:attr` | `:src="'avatar'"` |
-| `v-on:event` | `@event` | `@click="handleClick"` |
-| `v-slot:name` | `#name` | `#default="slotProps"` |
+| 完整写法      | 简写     | 示例                   |
+| ------------- | -------- | ---------------------- |
+| `v-bind:attr` | `:attr`  | `:src="'avatar'"`      |
+| `v-on:event`  | `@event` | `@click="handleClick"` |
+| `v-slot:name` | `#name`  | `#default="slotProps"` |
 
 ```vue
 <!-- ✅ 正确：简写 -->
@@ -141,9 +148,9 @@ HTML 元素上的属性顺序应保持统一：
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-| 原写法 | 推荐写法 |
-| ------ | -------- |
-| `function fetchData() {}` | `const fetchData = () => {}` |
+| 原写法                       | 推荐写法                        |
+| ---------------------------- | ------------------------------- |
+| `function fetchData() {}`    | `const fetchData = () => {}`    |
 | `function handleClick(e) {}` | `const handleClick = (e) => {}` |
 
 > 注意：Options API 的 methods 中仍使用传统方法定义，箭头函数偏好主要应用于独立函数声明。

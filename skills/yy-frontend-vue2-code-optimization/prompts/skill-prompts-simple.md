@@ -20,14 +20,14 @@
 
 ### 任务清单
 
-| 任务 ID | 子技能       | 风险等级  | 说明                                                                             |
-| ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
-| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
+| 任务 ID | 子技能       | 风险等级  | 说明                                                                   |
+| ------- | ------------ | --------- | ---------------------------------------------------------------------- |
+| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                            |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则） |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(3组)、Options API 结构排序、模板属性顺序、组件 name 属性                |
-| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
-| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量命名规范                                                            |
-| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、computed 优先、逻辑拆分、Props 增强                                 |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(3组)、Options API 结构排序、模板属性顺序、组件 name 属性      |
+| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                     |
+| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量命名规范                                                  |
+| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、computed 优先、逻辑拆分、Props 增强                       |
 
 ### 执行规则
 
@@ -81,12 +81,12 @@
 
   ```javascript
   try {
-    const res = await apiXXX();
+    const res = await apiXXX()
     if (res.code === 0) {
       // 处理成功逻辑
     }
   } catch (e) {
-    console.warn("请求失败：", e);
+    console.warn('请求失败：', e)
   }
   ```
 
@@ -158,7 +158,7 @@ _跨文件引用重命名需提示用户确认_
 ### 网络请求统一模式
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 处理成功逻辑
 } else {
@@ -251,15 +251,15 @@ if (code === 0) {
 
 #### CSS 兼容性指南
 
-| 属性 | 问题 | 降级方案 |
-|------|------|----------|
-| `gap` | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` Hack |
-| `100vh` | iOS Safari 地址栏偏差 | JS 动态计算或 `dvh` |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` |
-| `will-change` | 不重置占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强 |
-| `subgrid` | 支持不完善 | Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                     |
+| -------------------- | ------------------------------ | ---------------------------- |
+| `gap`                | Safari 14.4及以下、IE11 不支持 | margin 负边距                |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` Hack        |
+| `100vh`              | iOS Safari 地址栏偏差          | JS 动态计算或 `dvh`          |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` |
+| `will-change`        | 不重置占用内存                 | 动画结束后设为 `auto`        |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强                 |
+| `subgrid`            | 支持不完善                     | Grid/Flex 降级               |
 
 **实践**：[Can I use](https://caniuse.com/) 查兼容性 + Autoprefixer + `@supports`
 

@@ -1,1051 +1,1242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>管理后台 - Dashboard</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: #f1f5f9;
-      min-height: 100vh;
-      line-height: 1.6;
-      color: #1e293b;
-    }
-
-    /* 布局 */
-    .app {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* 侧边栏 */
-    .sidebar {
-      width: 256px;
-      background: #1e293b;
-      color: #fff;
-      position: fixed;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-logo {
-      padding: 24px;
-      border-bottom: 1px solid #334155;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .sidebar-logo-icon {
-      width: 40px;
-      height: 40px;
-      background: #3b82f6;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sidebar-logo-text {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .sidebar-nav {
-      flex: 1;
-      padding: 16px;
-      overflow-y: auto;
-    }
-
-    .sidebar-section {
-      font-size: 12px;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 8px 12px;
-      margin-bottom: 8px;
-    }
-
-    .sidebar-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 14px;
-      transition: all 0.2s;
-      border-left: 3px solid transparent;
-    }
-
-    .sidebar-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .sidebar-item.active {
-      background: rgba(59, 130, 246, 0.2);
-      color: #fff;
-      border-left-color: #3b82f6;
-    }
-
-    .sidebar-user {
-      padding: 16px;
-      border-top: 1px solid #334155;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .sidebar-user-avatar {
-      width: 40px;
-      height: 40px;
-      background: #475569;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-
-    .sidebar-user-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .sidebar-user-name {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .sidebar-user-email {
-      font-size: 12px;
-      color: #94a3b8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    /* 主内容区 */
-    .main {
-      flex: 1;
-      margin-left: 256px;
-    }
-
-    /* 顶部栏 */
-    .header {
-      background: #fff;
-      padding: 16px 32px;
-      border-bottom: 1px solid #e2e8f0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header-title {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .header-subtitle {
-      font-size: 14px;
-      color: #64748b;
-      margin-top: 4px;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .search-box {
-      position: relative;
-    }
-
-    .search-input {
-      width: 256px;
-      padding: 8px 12px 8px 40px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .search-input:focus {
-      border-color: #3b82f6;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-    }
-
-    .notification-btn {
-      position: relative;
-      padding: 8px;
-      color: #64748b;
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .notification-btn:hover {
-      color: #1e293b;
-    }
-
-    .notification-dot {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 8px;
-      height: 8px;
-      background: #ef4444;
-      border-radius: 50%;
-    }
-
-    /* 内容区 */
-    .content {
-      padding: 32px;
-    }
-
-    /* 统计卡片 */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-
-    .stat-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: #64748b;
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 600;
-    }
-
-    .stat-change {
-      font-size: 14px;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .stat-change.up {
-      color: #10b981;
-    }
-
-    .stat-change.down {
-      color: #ef4444;
-    }
-
-    .stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-icon.blue {
-      background: #eff6ff;
-      color: #3b82f6;
-    }
-
-    .stat-icon.green {
-      background: #ecfdf5;
-      color: #10b981;
-    }
-
-    .stat-icon.amber {
-      background: #fffbeb;
-      color: #f59e0b;
-    }
-
-    .stat-icon.purple {
-      background: #f5f3ff;
-      color: #8b5cf6;
-    }
-
-    /* 图表区域 */
-    .charts-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-
-    .chart-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .chart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .chart-title {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .chart-tabs {
-      display: flex;
-      gap: 4px;
-    }
-
-    .chart-tab {
-      padding: 6px 12px;
-      font-size: 14px;
-      border: none;
-      background: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      color: #64748b;
-    }
-
-    .chart-tab:hover {
-      background: #f1f5f9;
-    }
-
-    .chart-tab.active {
-      background: #eff6ff;
-      color: #3b82f6;
-    }
-
-    /* SVG 图表 */
-    .line-chart {
-      width: 100%;
-      height: 200px;
-    }
-
-    .pie-chart-container {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .pie-chart {
-      width: 160px;
-      height: 160px;
-    }
-
-    .pie-legend {
-      flex: 1;
-    }
-
-    .pie-legend-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      font-size: 14px;
-    }
-
-    .pie-legend-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #64748b;
-    }
-
-    .pie-legend-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .pie-legend-value {
-      font-weight: 500;
-    }
-
-    /* 数据列表 */
-    .data-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .data-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .data-header {
-      padding: 24px;
-      border-bottom: 1px solid #f1f5f9;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .data-title {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .data-link {
-      font-size: 14px;
-      color: #3b82f6;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .data-link:hover {
-      color: #2563eb;
-    }
-
-    .data-list {
-      max-height: 320px;
-      overflow-y: auto;
-    }
-
-    .data-item {
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #f1f5f9;
-      transition: background 0.2s;
-    }
-
-    .data-item:last-child {
-      border-bottom: none;
-    }
-
-    .data-item:hover {
-      background: #f8fafc;
-    }
-
-    .data-item-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .data-item-icon {
-      width: 40px;
-      height: 40px;
-      background: #f1f5f9;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-      color: #64748b;
-    }
-
-    .data-item-info {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .data-item-meta {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-
-    .data-item-right {
-      text-align: right;
-    }
-
-    .data-item-value {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .data-item-status {
-      display: inline-block;
-      padding: 2px 8px;
-      font-size: 12px;
-      border-radius: 4px;
-      margin-top: 4px;
-    }
-
-    .status-completed {
-      background: #ecfdf5;
-      color: #10b981;
-    }
-
-    .status-shipping {
-      background: #eff6ff;
-      color: #3b82f6;
-    }
-
-    .status-pending {
-      background: #fffbeb;
-      color: #f59e0b;
-    }
-
-    .data-item-sales {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-
-    /* 响应式 */
-    @media (max-width: 1280px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .charts-grid {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理后台 - Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .data-grid {
-        grid-template-columns: 1fr;
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+          'Microsoft YaHei', sans-serif;
+        background: #f1f5f9;
+        min-height: 100vh;
+        line-height: 1.6;
+        color: #1e293b;
       }
-    }
 
-    @media (max-width: 768px) {
+      /* 布局 */
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* 侧边栏 */
       .sidebar {
-        width: 80px;
+        width: 256px;
+        background: #1e293b;
+        color: #fff;
+        position: fixed;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
-      .sidebar-logo-text,
-      .sidebar-section,
-      .sidebar-item span,
-      .sidebar-user-info {
-        display: none;
+      .sidebar-logo {
+        padding: 24px;
+        border-bottom: 1px solid #334155;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .sidebar-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: #3b82f6;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-logo-text {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+      }
+
+      .sidebar-section {
+        font-size: 12px;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 8px 12px;
+        margin-bottom: 8px;
       }
 
       .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.2s;
+        border-left: 3px solid transparent;
+      }
+
+      .sidebar-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-item.active {
+        background: rgba(59, 130, 246, 0.2);
+        color: #fff;
+        border-left-color: #3b82f6;
+      }
+
+      .sidebar-user {
+        padding: 16px;
+        border-top: 1px solid #334155;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .sidebar-user-avatar {
+        width: 40px;
+        height: 40px;
+        background: #475569;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        padding: 12px;
+        font-size: 14px;
       }
 
+      .sidebar-user-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .sidebar-user-name {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .sidebar-user-email {
+        font-size: 12px;
+        color: #94a3b8;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* 主内容区 */
       .main {
-        margin-left: 80px;
+        flex: 1;
+        margin-left: 256px;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
+      /* 顶部栏 */
       .header {
-        padding: 16px;
+        background: #fff;
+        padding: 16px 32px;
+        border-bottom: 1px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
-      .content {
-        padding: 16px;
+      .header-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .header-subtitle {
+        font-size: 14px;
+        color: #64748b;
+        margin-top: 4px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .search-box {
+        position: relative;
       }
 
       .search-input {
-        width: 180px;
+        width: 256px;
+        padding: 8px 12px 8px 40px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="app">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-        </div>
-        <span class="sidebar-logo-text">管理后台</span>
-      </div>
 
-      <nav class="sidebar-nav">
-        <div class="sidebar-section">主菜单</div>
-        <a href="#" class="sidebar-item active">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7" rx="1"/>
-            <rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="7" height="7" rx="1"/>
-          </svg>
-          <span>数据概览</span>
-        </a>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <span>用户管理</span>
-        </a>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-          </svg>
-          <span>商品管理</span>
-        </a>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-          <span>订单管理</span>
-        </a>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="20" x2="18" y2="10"/>
-            <line x1="12" y1="20" x2="12" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="14"/>
-          </svg>
-          <span>数据分析</span>
-        </a>
+      .search-input:focus {
+        border-color: #3b82f6;
+      }
 
-        <div class="sidebar-section">系统设置</div>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-          <span>系统设置</span>
-        </a>
-        <a href="#" class="sidebar-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          <span>安全中心</span>
-        </a>
-      </nav>
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+      }
 
-      <div class="sidebar-user">
-        <div class="sidebar-user-avatar">管</div>
-        <div class="sidebar-user-info">
-          <div class="sidebar-user-name">管理员</div>
-          <div class="sidebar-user-email">admin@example.com</div>
-        </div>
-      </div>
-    </aside>
+      .notification-btn {
+        position: relative;
+        padding: 8px;
+        color: #64748b;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
 
-    <!-- 主内容区 -->
-    <main class="main">
-      <!-- 顶部栏 -->
-      <header class="header">
-        <div>
-          <h1 class="header-title">数据概览</h1>
-          <p class="header-subtitle">欢迎回来，今天是 2024年1月15日</p>
-        </div>
-        <div class="header-actions">
-          <div class="search-box">
-            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      .notification-btn:hover {
+        color: #1e293b;
+      }
+
+      .notification-dot {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 8px;
+        height: 8px;
+        background: #ef4444;
+        border-radius: 50%;
+      }
+
+      /* 内容区 */
+      .content {
+        padding: 32px;
+      }
+
+      /* 统计卡片 */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        color: #64748b;
+        margin-bottom: 4px;
+      }
+
+      .stat-value {
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .stat-change {
+        font-size: 14px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .stat-change.up {
+        color: #10b981;
+      }
+
+      .stat-change.down {
+        color: #ef4444;
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stat-icon.blue {
+        background: #eff6ff;
+        color: #3b82f6;
+      }
+
+      .stat-icon.green {
+        background: #ecfdf5;
+        color: #10b981;
+      }
+
+      .stat-icon.amber {
+        background: #fffbeb;
+        color: #f59e0b;
+      }
+
+      .stat-icon.purple {
+        background: #f5f3ff;
+        color: #8b5cf6;
+      }
+
+      /* 图表区域 */
+      .charts-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .chart-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .chart-title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .chart-tabs {
+        display: flex;
+        gap: 4px;
+      }
+
+      .chart-tab {
+        padding: 6px 12px;
+        font-size: 14px;
+        border: none;
+        background: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        color: #64748b;
+      }
+
+      .chart-tab:hover {
+        background: #f1f5f9;
+      }
+
+      .chart-tab.active {
+        background: #eff6ff;
+        color: #3b82f6;
+      }
+
+      /* SVG 图表 */
+      .line-chart {
+        width: 100%;
+        height: 200px;
+      }
+
+      .pie-chart-container {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .pie-chart {
+        width: 160px;
+        height: 160px;
+      }
+
+      .pie-legend {
+        flex: 1;
+      }
+
+      .pie-legend-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        font-size: 14px;
+      }
+
+      .pie-legend-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #64748b;
+      }
+
+      .pie-legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .pie-legend-value {
+        font-weight: 500;
+      }
+
+      /* 数据列表 */
+      .data-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .data-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .data-header {
+        padding: 24px;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .data-title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .data-link {
+        font-size: 14px;
+        color: #3b82f6;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .data-link:hover {
+        color: #2563eb;
+      }
+
+      .data-list {
+        max-height: 320px;
+        overflow-y: auto;
+      }
+
+      .data-item {
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f5f9;
+        transition: background 0.2s;
+      }
+
+      .data-item:last-child {
+        border-bottom: none;
+      }
+
+      .data-item:hover {
+        background: #f8fafc;
+      }
+
+      .data-item-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .data-item-icon {
+        width: 40px;
+        height: 40px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #64748b;
+      }
+
+      .data-item-info {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .data-item-meta {
+        font-size: 12px;
+        color: #94a3b8;
+      }
+
+      .data-item-right {
+        text-align: right;
+      }
+
+      .data-item-value {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .data-item-status {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 12px;
+        border-radius: 4px;
+        margin-top: 4px;
+      }
+
+      .status-completed {
+        background: #ecfdf5;
+        color: #10b981;
+      }
+
+      .status-shipping {
+        background: #eff6ff;
+        color: #3b82f6;
+      }
+
+      .status-pending {
+        background: #fffbeb;
+        color: #f59e0b;
+      }
+
+      .data-item-sales {
+        font-size: 12px;
+        color: #94a3b8;
+      }
+
+      /* 响应式 */
+      @media (max-width: 1280px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .charts-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .data-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 80px;
+        }
+
+        .sidebar-logo-text,
+        .sidebar-section,
+        .sidebar-item span,
+        .sidebar-user-info {
+          display: none;
+        }
+
+        .sidebar-item {
+          justify-content: center;
+          padding: 12px;
+        }
+
+        .main {
+          margin-left: 80px;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header {
+          padding: 16px;
+        }
+
+        .content {
+          padding: 16px;
+        }
+
+        .search-input {
+          width: 180px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- 侧边栏 -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            <input type="text" class="search-input" placeholder="搜索...">
           </div>
-          <button class="notification-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          <span class="sidebar-logo-text">管理后台</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <div class="sidebar-section">主菜单</div>
+          <a href="#" class="sidebar-item active">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
             </svg>
-            <span class="notification-dot"></span>
-          </button>
+            <span>数据概览</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span>用户管理</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+              />
+            </svg>
+            <span>商品管理</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <span>订单管理</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+            <span>数据分析</span>
+          </a>
+
+          <div class="sidebar-section">系统设置</div>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              />
+            </svg>
+            <span>系统设置</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span>安全中心</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar">管</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">管理员</div>
+            <div class="sidebar-user-email">admin@example.com</div>
+          </div>
         </div>
-      </header>
+      </aside>
 
-      <!-- 内容区 -->
-      <div class="content">
-        <!-- 统计卡片 -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-header">
-              <div>
-                <p class="stat-label">总用户数</p>
-                <p class="stat-value">12,846</p>
-                <p class="stat-change up">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="18 15 12 9 6 15"/>
-                  </svg>
-                  +12.5%
-                </p>
-              </div>
-              <div class="stat-icon blue">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-            </div>
+      <!-- 主内容区 -->
+      <main class="main">
+        <!-- 顶部栏 -->
+        <header class="header">
+          <div>
+            <h1 class="header-title">数据概览</h1>
+            <p class="header-subtitle">欢迎回来，今天是 2024年1月15日</p>
           </div>
-
-          <div class="stat-card">
-            <div class="stat-header">
-              <div>
-                <p class="stat-label">今日订单</p>
-                <p class="stat-value">1,234</p>
-                <p class="stat-change up">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="18 15 12 9 6 15"/>
-                  </svg>
-                  +8.2%
-                </p>
-              </div>
-              <div class="stat-icon green">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-header">
-              <div>
-                <p class="stat-label">销售额</p>
-                <p class="stat-value">¥89,432</p>
-                <p class="stat-change down">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                  -3.1%
-                </p>
-              </div>
-              <div class="stat-icon amber">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="12" y1="1" x2="12" y2="23"/>
-                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-header">
-              <div>
-                <p class="stat-label">转化率</p>
-                <p class="stat-value">24.8%</p>
-                <p class="stat-change up">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="18 15 12 9 6 15"/>
-                  </svg>
-                  +5.4%
-                </p>
-              </div>
-              <div class="stat-icon purple">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                  <polyline points="17 6 23 6 23 12"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 图表区域 -->
-        <div class="charts-grid">
-          <!-- 销售趋势 -->
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3 class="chart-title">销售趋势</h3>
-              <div class="chart-tabs">
-                <button class="chart-tab active">周</button>
-                <button class="chart-tab">月</button>
-                <button class="chart-tab">年</button>
-              </div>
-            </div>
-            <svg class="line-chart" viewBox="0 0 600 200">
-              <!-- 网格线 -->
-              <g stroke="#f1f5f9" stroke-width="1">
-                <line x1="50" y1="20" x2="580" y2="20"/>
-                <line x1="50" y1="60" x2="580" y2="60"/>
-                <line x1="50" y1="100" x2="580" y2="100"/>
-                <line x1="50" y1="140" x2="580" y2="140"/>
-                <line x1="50" y1="180" x2="580" y2="180"/>
-              </g>
-
-              <!-- Y轴标签 -->
-              <g fill="#94a3b8" font-size="12">
-                <text x="40" y="24" text-anchor="end">¥30k</text>
-                <text x="40" y="64" text-anchor="end">¥22k</text>
-                <text x="40" y="104" text-anchor="end">¥15k</text>
-                <text x="40" y="144" text-anchor="end">¥8k</text>
-                <text x="40" y="184" text-anchor="end">¥0</text>
-              </g>
-
-              <!-- X轴标签 -->
-              <g fill="#94a3b8" font-size="12" text-anchor="middle">
-                <text x="100" y="198">周一</text>
-                <text x="175" y="198">周二</text>
-                <text x="250" y="198">周三</text>
-                <text x="325" y="198">周四</text>
-                <text x="400" y="198">周五</text>
-                <text x="475" y="198">周六</text>
-                <text x="550" y="198">周日</text>
-              </g>
-
-              <!-- 销售额折线 -->
-              <polyline
+          <div class="header-actions">
+            <div class="search-box">
+              <svg
+                class="search-icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
                 fill="none"
-                stroke="#3b82f6"
+                stroke="currentColor"
                 stroke-width="2"
-                points="100,120 175,80 250,100 325,60 400,90 475,40 550,70"
-              />
-              <!-- 销售额区域填充 -->
-              <polygon
-                fill="url(#blueGradient)"
-                points="100,120 175,80 250,100 325,60 400,90 475,40 550,70 550,180 100,180"
-                opacity="0.3"
-              />
-
-              <!-- 数据点 -->
-              <g fill="#3b82f6">
-                <circle cx="100" cy="120" r="4"/>
-                <circle cx="175" cy="80" r="4"/>
-                <circle cx="250" cy="100" r="4"/>
-                <circle cx="325" cy="60" r="4"/>
-                <circle cx="400" cy="90" r="4"/>
-                <circle cx="475" cy="40" r="4"/>
-                <circle cx="550" cy="70" r="4"/>
-              </g>
-
-              <!-- 渐变定义 -->
-              <defs>
-                <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
-                  <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
-          <!-- 用户来源 -->
-          <div class="chart-card">
-            <div class="chart-header">
-              <h3 class="chart-title">用户来源</h3>
-            </div>
-            <div class="pie-chart-container">
-              <svg class="pie-chart" viewBox="0 0 100 100">
-                <!-- 直接访问 35% -->
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="20" stroke-dasharray="87.96 251.33" stroke-dashoffset="0"/>
-                <!-- 搜索引擎 28% -->
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="20" stroke-dasharray="70.37 251.33" stroke-dashoffset="-87.96"/>
-                <!-- 社交媒体 22% -->
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" stroke-width="20" stroke-dasharray="55.29 251.33" stroke-dashoffset="-158.33"/>
-                <!-- 其他 15% -->
-                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#8b5cf6" stroke-width="20" stroke-dasharray="37.70 251.33" stroke-dashoffset="-213.62"/>
-                <!-- 中心圆 -->
-                <circle cx="50" cy="50" r="25" fill="#fff"/>
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
-              <div class="pie-legend">
-                <div class="pie-legend-item">
-                  <span class="pie-legend-label">
-                    <span class="pie-legend-dot" style="background:#3b82f6"></span>
-                    直接访问
-                  </span>
-                  <span class="pie-legend-value">35%</span>
+              <input type="text" class="search-input" placeholder="搜索..." />
+            </div>
+            <button class="notification-btn">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="notification-dot"></span>
+            </button>
+          </div>
+        </header>
+
+        <!-- 内容区 -->
+        <div class="content">
+          <!-- 统计卡片 -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <div>
+                  <p class="stat-label">总用户数</p>
+                  <p class="stat-value">12,846</p>
+                  <p class="stat-change up">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="18 15 12 9 6 15" />
+                    </svg>
+                    +12.5%
+                  </p>
                 </div>
-                <div class="pie-legend-item">
-                  <span class="pie-legend-label">
-                    <span class="pie-legend-dot" style="background:#10b981"></span>
-                    搜索引擎
-                  </span>
-                  <span class="pie-legend-value">28%</span>
+                <div class="stat-icon blue">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
                 </div>
-                <div class="pie-legend-item">
-                  <span class="pie-legend-label">
-                    <span class="pie-legend-dot" style="background:#f59e0b"></span>
-                    社交媒体
-                  </span>
-                  <span class="pie-legend-value">22%</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div>
+                  <p class="stat-label">今日订单</p>
+                  <p class="stat-value">1,234</p>
+                  <p class="stat-change up">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="18 15 12 9 6 15" />
+                    </svg>
+                    +8.2%
+                  </p>
                 </div>
-                <div class="pie-legend-item">
-                  <span class="pie-legend-label">
-                    <span class="pie-legend-dot" style="background:#8b5cf6"></span>
-                    其他
-                  </span>
-                  <span class="pie-legend-value">15%</span>
+                <div class="stat-icon green">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div>
+                  <p class="stat-label">销售额</p>
+                  <p class="stat-value">¥89,432</p>
+                  <p class="stat-change down">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                    -3.1%
+                  </p>
+                </div>
+                <div class="stat-icon amber">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <div>
+                  <p class="stat-label">转化率</p>
+                  <p class="stat-value">24.8%</p>
+                  <p class="stat-change up">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="18 15 12 9 6 15" />
+                    </svg>
+                    +5.4%
+                  </p>
+                </div>
+                <div class="stat-icon purple">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 图表区域 -->
+          <div class="charts-grid">
+            <!-- 销售趋势 -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">销售趋势</h3>
+                <div class="chart-tabs">
+                  <button class="chart-tab active">周</button>
+                  <button class="chart-tab">月</button>
+                  <button class="chart-tab">年</button>
+                </div>
+              </div>
+              <svg class="line-chart" viewBox="0 0 600 200">
+                <!-- 网格线 -->
+                <g stroke="#f1f5f9" stroke-width="1">
+                  <line x1="50" y1="20" x2="580" y2="20" />
+                  <line x1="50" y1="60" x2="580" y2="60" />
+                  <line x1="50" y1="100" x2="580" y2="100" />
+                  <line x1="50" y1="140" x2="580" y2="140" />
+                  <line x1="50" y1="180" x2="580" y2="180" />
+                </g>
+
+                <!-- Y轴标签 -->
+                <g fill="#94a3b8" font-size="12">
+                  <text x="40" y="24" text-anchor="end">¥30k</text>
+                  <text x="40" y="64" text-anchor="end">¥22k</text>
+                  <text x="40" y="104" text-anchor="end">¥15k</text>
+                  <text x="40" y="144" text-anchor="end">¥8k</text>
+                  <text x="40" y="184" text-anchor="end">¥0</text>
+                </g>
+
+                <!-- X轴标签 -->
+                <g fill="#94a3b8" font-size="12" text-anchor="middle">
+                  <text x="100" y="198">周一</text>
+                  <text x="175" y="198">周二</text>
+                  <text x="250" y="198">周三</text>
+                  <text x="325" y="198">周四</text>
+                  <text x="400" y="198">周五</text>
+                  <text x="475" y="198">周六</text>
+                  <text x="550" y="198">周日</text>
+                </g>
+
+                <!-- 销售额折线 -->
+                <polyline
+                  fill="none"
+                  stroke="#3b82f6"
+                  stroke-width="2"
+                  points="100,120 175,80 250,100 325,60 400,90 475,40 550,70"
+                />
+                <!-- 销售额区域填充 -->
+                <polygon
+                  fill="url(#blueGradient)"
+                  points="100,120 175,80 250,100 325,60 400,90 475,40 550,70 550,180 100,180"
+                  opacity="0.3"
+                />
+
+                <!-- 数据点 -->
+                <g fill="#3b82f6">
+                  <circle cx="100" cy="120" r="4" />
+                  <circle cx="175" cy="80" r="4" />
+                  <circle cx="250" cy="100" r="4" />
+                  <circle cx="325" cy="60" r="4" />
+                  <circle cx="400" cy="90" r="4" />
+                  <circle cx="475" cy="40" r="4" />
+                  <circle cx="550" cy="70" r="4" />
+                </g>
+
+                <!-- 渐变定义 -->
+                <defs>
+                  <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color: #3b82f6; stop-opacity: 0.3" />
+                    <stop offset="100%" style="stop-color: #3b82f6; stop-opacity: 0" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <!-- 用户来源 -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">用户来源</h3>
+              </div>
+              <div class="pie-chart-container">
+                <svg class="pie-chart" viewBox="0 0 100 100">
+                  <!-- 直接访问 35% -->
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    fill="transparent"
+                    stroke="#3b82f6"
+                    stroke-width="20"
+                    stroke-dasharray="87.96 251.33"
+                    stroke-dashoffset="0"
+                  />
+                  <!-- 搜索引擎 28% -->
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    fill="transparent"
+                    stroke="#10b981"
+                    stroke-width="20"
+                    stroke-dasharray="70.37 251.33"
+                    stroke-dashoffset="-87.96"
+                  />
+                  <!-- 社交媒体 22% -->
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    fill="transparent"
+                    stroke="#f59e0b"
+                    stroke-width="20"
+                    stroke-dasharray="55.29 251.33"
+                    stroke-dashoffset="-158.33"
+                  />
+                  <!-- 其他 15% -->
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    fill="transparent"
+                    stroke="#8b5cf6"
+                    stroke-width="20"
+                    stroke-dasharray="37.70 251.33"
+                    stroke-dashoffset="-213.62"
+                  />
+                  <!-- 中心圆 -->
+                  <circle cx="50" cy="50" r="25" fill="#fff" />
+                </svg>
+                <div class="pie-legend">
+                  <div class="pie-legend-item">
+                    <span class="pie-legend-label">
+                      <span class="pie-legend-dot" style="background: #3b82f6"></span>
+                      直接访问
+                    </span>
+                    <span class="pie-legend-value">35%</span>
+                  </div>
+                  <div class="pie-legend-item">
+                    <span class="pie-legend-label">
+                      <span class="pie-legend-dot" style="background: #10b981"></span>
+                      搜索引擎
+                    </span>
+                    <span class="pie-legend-value">28%</span>
+                  </div>
+                  <div class="pie-legend-item">
+                    <span class="pie-legend-label">
+                      <span class="pie-legend-dot" style="background: #f59e0b"></span>
+                      社交媒体
+                    </span>
+                    <span class="pie-legend-value">22%</span>
+                  </div>
+                  <div class="pie-legend-item">
+                    <span class="pie-legend-label">
+                      <span class="pie-legend-dot" style="background: #8b5cf6"></span>
+                      其他
+                    </span>
+                    <span class="pie-legend-value">15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 数据列表 -->
+          <div class="data-grid">
+            <!-- 最近订单 -->
+            <div class="data-card">
+              <div class="data-header">
+                <h3 class="data-title">最近订单</h3>
+                <a href="#" class="data-link">查看全部</a>
+              </div>
+              <div class="data-list">
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div class="data-item-icon">#1024</div>
+                    <div>
+                      <div class="data-item-info">张三</div>
+                      <div class="data-item-meta">2024-01-15 14:32</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥299.00</div>
+                    <span class="data-item-status status-completed">已完成</span>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div class="data-item-icon">#1023</div>
+                    <div>
+                      <div class="data-item-info">李四</div>
+                      <div class="data-item-meta">2024-01-15 13:21</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥1,299.00</div>
+                    <span class="data-item-status status-shipping">配送中</span>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div class="data-item-icon">#1022</div>
+                    <div>
+                      <div class="data-item-info">王五</div>
+                      <div class="data-item-meta">2024-01-15 11:45</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥599.00</div>
+                    <span class="data-item-status status-pending">待付款</span>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div class="data-item-icon">#1021</div>
+                    <div>
+                      <div class="data-item-info">赵六</div>
+                      <div class="data-item-meta">2024-01-15 10:18</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥199.00</div>
+                    <span class="data-item-status status-completed">已完成</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 热门商品 -->
+            <div class="data-card">
+              <div class="data-header">
+                <h3 class="data-title">热门商品</h3>
+                <a href="#" class="data-link">查看全部</a>
+              </div>
+              <div class="data-list">
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div
+                      class="data-item-icon"
+                      style="background: linear-gradient(135deg, #dbeafe, #bfdbfe)"
+                    >
+                      📱
+                    </div>
+                    <div>
+                      <div class="data-item-info">智能手表 Pro</div>
+                      <div class="data-item-meta">电子产品</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥1,299</div>
+                    <div class="data-item-sales">已售 328</div>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div
+                      class="data-item-icon"
+                      style="background: linear-gradient(135deg, #d1fae5, #a7f3d0)"
+                    >
+                      🎧
+                    </div>
+                    <div>
+                      <div class="data-item-info">无线耳机</div>
+                      <div class="data-item-meta">电子产品</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥599</div>
+                    <div class="data-item-sales">已售 256</div>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div
+                      class="data-item-icon"
+                      style="background: linear-gradient(135deg, #fef3c7, #fde68a)"
+                    >
+                      🎒
+                    </div>
+                    <div>
+                      <div class="data-item-info">运动背包</div>
+                      <div class="data-item-meta">箱包配饰</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥299</div>
+                    <div class="data-item-sales">已售 189</div>
+                  </div>
+                </div>
+                <div class="data-item">
+                  <div class="data-item-left">
+                    <div
+                      class="data-item-icon"
+                      style="background: linear-gradient(135deg, #ede9fe, #ddd6fe)"
+                    >
+                      🥤
+                    </div>
+                    <div>
+                      <div class="data-item-info">保温杯</div>
+                      <div class="data-item-meta">家居用品</div>
+                    </div>
+                  </div>
+                  <div class="data-item-right">
+                    <div class="data-item-value">¥129</div>
+                    <div class="data-item-sales">已售 167</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- 数据列表 -->
-        <div class="data-grid">
-          <!-- 最近订单 -->
-          <div class="data-card">
-            <div class="data-header">
-              <h3 class="data-title">最近订单</h3>
-              <a href="#" class="data-link">查看全部</a>
-            </div>
-            <div class="data-list">
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon">#1024</div>
-                  <div>
-                    <div class="data-item-info">张三</div>
-                    <div class="data-item-meta">2024-01-15 14:32</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥299.00</div>
-                  <span class="data-item-status status-completed">已完成</span>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon">#1023</div>
-                  <div>
-                    <div class="data-item-info">李四</div>
-                    <div class="data-item-meta">2024-01-15 13:21</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥1,299.00</div>
-                  <span class="data-item-status status-shipping">配送中</span>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon">#1022</div>
-                  <div>
-                    <div class="data-item-info">王五</div>
-                    <div class="data-item-meta">2024-01-15 11:45</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥599.00</div>
-                  <span class="data-item-status status-pending">待付款</span>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon">#1021</div>
-                  <div>
-                    <div class="data-item-info">赵六</div>
-                    <div class="data-item-meta">2024-01-15 10:18</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥199.00</div>
-                  <span class="data-item-status status-completed">已完成</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 热门商品 -->
-          <div class="data-card">
-            <div class="data-header">
-              <h3 class="data-title">热门商品</h3>
-              <a href="#" class="data-link">查看全部</a>
-            </div>
-            <div class="data-list">
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">📱</div>
-                  <div>
-                    <div class="data-item-info">智能手表 Pro</div>
-                    <div class="data-item-meta">电子产品</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥1,299</div>
-                  <div class="data-item-sales">已售 328</div>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">🎧</div>
-                  <div>
-                    <div class="data-item-info">无线耳机</div>
-                    <div class="data-item-meta">电子产品</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥599</div>
-                  <div class="data-item-sales">已售 256</div>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🎒</div>
-                  <div>
-                    <div class="data-item-info">运动背包</div>
-                    <div class="data-item-meta">箱包配饰</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥299</div>
-                  <div class="data-item-sales">已售 189</div>
-                </div>
-              </div>
-              <div class="data-item">
-                <div class="data-item-left">
-                  <div class="data-item-icon" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">🥤</div>
-                  <div>
-                    <div class="data-item-info">保温杯</div>
-                    <div class="data-item-meta">家居用品</div>
-                  </div>
-                </div>
-                <div class="data-item-right">
-                  <div class="data-item-value">¥129</div>
-                  <div class="data-item-sales">已售 167</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</body>
+      </main>
+    </div>
+  </body>
 </html>

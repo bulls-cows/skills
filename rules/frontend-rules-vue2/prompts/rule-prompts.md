@@ -93,20 +93,20 @@
 
 ```javascript
 // 1. node_modules
-import Vue from "vue";
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+import Vue from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. 内部全局依赖（@src/）
-import { apiGetUserInfo } from "@src/api/user";
-import store from "@src/store";
-import { APP_CONFIG } from "@src/constants";
-import DataTable from "@src/components/DataTable";
+import { apiGetUserInfo } from '@src/api/user'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable'
 
 // 3. 内部相对依赖（./）
-import { localHelper } from "./utils/helper";
-import { MAX_RETRY_COUNT } from "./constants";
-import SearchBar from "./SearchBar.vue";
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ### 2.3 命名速查表
@@ -175,18 +175,18 @@ import SearchBar from "./SearchBar.vue";
 
 ```javascript
 export default {
-  name: "ComponentName",
+  name: 'ComponentName',
   components: {},
   props: {},
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
   methods: {},
   mounted() {},
   destroyed() {},
-};
+}
 ```
 
 ### 3.3 SFC 块顺序
@@ -416,11 +416,11 @@ HTML 元素上的属性顺序必须遵循：
 ### 5.2 数据处理
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   /* 成功处理数据 */
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -434,9 +434,9 @@ if (code === 0) {
 
 ```javascript
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
-  console.warn(error);
+  console.warn(error)
 }
 ```
 
@@ -503,10 +503,10 @@ async handleSubmit() {
 
 ### 6.4 样式区注释
 
-| 场景     | 格式                    | 示例            |
-| -------- | ----------------------- | --------------- |
-| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
-| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
 
 ### 6.5 CSS 布局推荐
 
@@ -525,15 +525,15 @@ async handleSubmit() {
 
 以下属性存在兼容性风险，需提供降级方案：
 
-| 属性 | 问题 | 降级方案 |
-| ---------------- | ------------------------------------------ | ------------------------------ |
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 **兼容性开发实践**：
 
@@ -597,13 +597,13 @@ async handleSubmit() {
 ### 8.2 防抖 / 节流示例
 
 ```javascript
-import { debounce, throttle } from "lodash-es";
+import { debounce, throttle } from 'lodash-es'
 const handleSearch = debounce((query) => {
-  fetchSearchResults(query);
-}, 300);
+  fetchSearchResults(query)
+}, 300)
 const handleScroll = throttle(() => {
-  updateScrollPosition();
-}, 100);
+  updateScrollPosition()
+}, 100)
 ```
 
 ---
@@ -638,13 +638,13 @@ const handleScroll = throttle(() => {
 
 ### 🟡 不推荐（尽量避免）
 
-| #   | 不推荐项            | 说明                            |
-| --- | ------------------- | ------------------------------- |
-| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
-| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+| #   | 不推荐项            | 说明                                                        |
+| --- | ------------------- | ----------------------------------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化                                          |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit                             |
 | 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
-| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
-| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用         |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用         |
 
 ### ⚠️ 注意事项
 

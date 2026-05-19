@@ -20,14 +20,14 @@
 
 ### 任务清单
 
-| 任务 ID | 子技能       | 风险等级  | 说明                                                                             |
-| ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
-| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
+| 任务 ID | 子技能       | 风险等级  | 说明                                                                   |
+| ------- | ------------ | --------- | ---------------------------------------------------------------------- |
+| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                            |
 | T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则） |
-| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(3组)、Options API 结构排序、模板属性顺序、组件 name 属性                |
-| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
-| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量命名规范                                                            |
-| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、computed 优先、逻辑拆分、Props 增强                                 |
+| T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(3组)、Options API 结构排序、模板属性顺序、组件 name 属性      |
+| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                     |
+| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量命名规范                                                  |
+| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、computed 优先、逻辑拆分、Props 增强                       |
 
 ### 执行规则
 
@@ -145,16 +145,16 @@ _跨文件引用重命名需提示用户确认_
 
 Vue2 使用 `Object.defineProperty` 实现响应式，以下场景必须使用 `$set` 或替代方案：
 
-| 场景 | 错误写法 | 正确写法 |
-|------|---------|---------|
+| 场景         | 错误写法                | 正确写法                             |
+| ------------ | ----------------------- | ------------------------------------ |
 | 新增对象属性 | `this.obj.newKey = val` | `this.$set(this.obj, 'newKey', val)` |
-| 数组索引赋值 | `this.arr[i] = val` | `this.$set(this.arr, i, val)` |
-| 数组长度修改 | `this.arr.length = n` | `this.arr.splice(n)` |
+| 数组索引赋值 | `this.arr[i] = val`     | `this.$set(this.arr, i, val)`        |
+| 数组长度修改 | `this.arr.length = n`   | `this.arr.splice(n)`                 |
 
 ### 网络请求统一模式
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 处理成功逻辑
 } else {
@@ -200,13 +200,13 @@ if (code === 0) {
 
 ### 边界条件
 
-| 场景               | 处理方式                                                                |
-| ------------------ | ----------------------------------------------------------------------- |
-| **不生成新组件**   | 组件拆分属于架构调整，必须用户确认后执行                                |
-| **不修改业务逻辑** | 组件拆分属于架构调整，必须确认后执行                                    |
-| **运算符转换**     | `==`/`===` 不视为问题，保持原有写法                                     |
-| **回滚机制**       | 建议用户先提交当前状态，以便随时回滚                                    |
-| **大型文件**       | 超过 1000 行的文件建议分批优化，避免单次变更过大                        |
+| 场景               | 处理方式                                         |
+| ------------------ | ------------------------------------------------ |
+| **不生成新组件**   | 组件拆分属于架构调整，必须用户确认后执行         |
+| **不修改业务逻辑** | 组件拆分属于架构调整，必须确认后执行             |
+| **运算符转换**     | `==`/`===` 不视为问题，保持原有写法              |
+| **回滚机制**       | 建议用户先提交当前状态，以便随时回滚             |
+| **大型文件**       | 超过 1000 行的文件建议分批优化，避免单次变更过大 |
 
 ### T01 🔍 业务逻辑梳理（🟢 零风险 · 仅 .vue）
 
@@ -304,11 +304,11 @@ if (code === 0) {
 
 #### ⚠️ 风险说明（执行前必须展示给用户）
 
-| 风险项 | 影响范围 | 说明 |
-|--------|----------|------|
-| **Git Diff 膨胀** | 全文件 | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
-| **合并冲突** | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突 |
-| **格式不一致** | 团队协作 | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异 |
+| 风险项            | 影响范围     | 说明                                                                              |
+| ----------------- | ------------ | --------------------------------------------------------------------------------- |
+| **Git Diff 膨胀** | 全文件       | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
+| **合并冲突**      | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突                                      |
+| **格式不一致**    | 团队协作     | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异                    |
 
 > **建议**：在执行格式化前，确保当前分支是干净的，且没有待合并的代码。
 
@@ -349,20 +349,20 @@ Prettier 无法处理代码结构排序。格式化后，需手动执行以下**
 
 ```javascript
 // 1. node_modules
-import Vue from 'vue';
-import dayjs from 'dayjs';
-import { debounce } from 'lodash';
+import Vue from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user';
-import store from '@src/store';
-import { APP_CONFIG } from '@src/constants';
-import DataTable from '@src/components/DataTable';
+import { apiGetUserInfo } from '@src/api/user'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable'
 
 // 3. 内部相对依赖（./）
-import { localHelper } from './utils/helper';
-import { MAX_RETRY_COUNT } from './constants';
-import SearchBar from './SearchBar.vue';
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ##### Options API 结构顺序
@@ -396,20 +396,20 @@ export default {
       dataSource: [],
       // loading: 加载状态
       loading: false,
-    };
+    }
   },
 
   computed: {
     // computed: 是否显示搜索按钮
     isShowSearch() {
-      return this.searchQuery.length > 0;
+      return this.searchQuery.length > 0
     },
   },
 
   watch: {
     // watch: 监听用户输入变化
     searchQuery(newVal) {
-      this.fetchSuggestions(newVal);
+      this.fetchSuggestions(newVal)
     },
   },
 
@@ -426,7 +426,7 @@ export default {
 
   // 生命周期钩子
   created() {
-    this.fetchData();
+    this.fetchData()
   },
 
   mounted() {
@@ -436,7 +436,7 @@ export default {
   beforeDestroy() {
     // 清理定时器、事件监听器
   },
-};
+}
 ```
 
 ##### 方法内部顺序
@@ -492,9 +492,7 @@ export default {
     <!-- 条件: 有权限时显示操作按钮 -->
     <div v-if="hasPermission" class="user-card__actions">
       <!-- 循环: 操作按钮列表 -->
-      <button v-for="action in actions" :key="action.id">
-        {{ action.label }}
-      </button>
+      <button v-for="action in actions" :key="action.id">{{ action.label }}</button>
     </div>
 
     <!-- 插槽: 默认内容 -->
@@ -511,18 +509,18 @@ export default {
 
 ##### Options API 注释对照表
 
-| 内容         | 注释格式               | 示例                              |
-| ------------ | ---------------------- | --------------------------------- |
-| name         | `// name: 组件名`      | `// name: UserCard`               |
-| props        | `// prop名: 描述`      | `// userId: 用户ID`               |
-| data         | `// 属性名: 描述`      | `// searchQuery: 搜索查询参数`    |
-| computed     | `// computed: 描述`    | `// computed: 是否全选`           |
-| watch        | `// watch: 描述`       | `// watch: 监听用户输入`          |
-| methods      | `// methods: 描述`     | `// methods: 提交表单`            |
-| 生命周期     | `// 生命周期名: 描述`  | `// created: 初始化数据`          |
-| 组件引入     | `// component: 组件名` | `// component: UserCard`          |
-| provide      | `// 提供的键名: 描述`  | `// appConfig: 全局配置`          |
-| inject       | `// 注入的键名: 描述`  | `// parentData: 父组件提供的数据` |
+| 内容     | 注释格式               | 示例                              |
+| -------- | ---------------------- | --------------------------------- |
+| name     | `// name: 组件名`      | `// name: UserCard`               |
+| props    | `// prop名: 描述`      | `// userId: 用户ID`               |
+| data     | `// 属性名: 描述`      | `// searchQuery: 搜索查询参数`    |
+| computed | `// computed: 描述`    | `// computed: 是否全选`           |
+| watch    | `// watch: 描述`       | `// watch: 监听用户输入`          |
+| methods  | `// methods: 描述`     | `// methods: 提交表单`            |
+| 生命周期 | `// 生命周期名: 描述`  | `// created: 初始化数据`          |
+| 组件引入 | `// component: 组件名` | `// component: UserCard`          |
+| provide  | `// 提供的键名: 描述`  | `// appConfig: 全局配置`          |
+| inject   | `// 注入的键名: 描述`  | `// parentData: 父组件提供的数据` |
 
 ##### Props 注释示例
 
@@ -540,7 +538,7 @@ export default {
       default: false,
     },
   },
-};
+}
 ```
 
 ##### Options API 区完整示例
@@ -572,20 +570,20 @@ export default {
       dataSource: [],
       // loading: 加载状态
       loading: false,
-    };
+    }
   },
 
   computed: {
     // computed: 是否显示搜索按钮
     isShowSearch() {
-      return this.searchQuery.length > 0;
+      return this.searchQuery.length > 0
     },
   },
 
   watch: {
     // watch: 监听用户输入变化
     searchQuery(newVal) {
-      this.fetchSuggestions(newVal);
+      this.fetchSuggestions(newVal)
     },
   },
 
@@ -609,7 +607,7 @@ export default {
 
   // created: 初始化数据
   created() {
-    this.fetchData();
+    this.fetchData()
   },
 
   // mounted: DOM 操作
@@ -621,7 +619,7 @@ export default {
   beforeDestroy() {
     // ...
   },
-};
+}
 ```
 
 #### 关键注释场景映射
@@ -692,7 +690,9 @@ export default {
     }
   }
 
-  .user-card__body { /* ... */ }
+  .user-card__body {
+    /* ... */
+  }
 }
 ```
 
@@ -711,7 +711,9 @@ export default {
     }
   }
 
-  &__body { /* ... */ }
+  &__body {
+    /* ... */
+  }
 }
 ```
 
@@ -856,15 +858,15 @@ Vue2 推荐使用 CSS 变量实现动态样式：
 
 以下属性存在兼容性风险，需提供降级方案：
 
-| 属性 | 问题 | 降级方案 |
-|------|------|----------|
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 **兼容性开发实践**：
 
@@ -896,10 +898,10 @@ Vue2 推荐使用 CSS 变量实现动态样式：
 
 ##### data 属性命名
 
-| 类型      | 规范     | 示例                     |
-| --------- | -------- | ------------------------ |
+| 类型      | 规范      | 示例                                   |
+| --------- | --------- | -------------------------------------- |
 | data 属性 | camelCase | `searchQuery`, `dataSource`, `loading` |
-| computed  | camelCase | `isSelected`, `totalPage` |
+| computed  | camelCase | `isSelected`, `totalPage`              |
 
 ##### 禁止项
 
@@ -922,6 +924,7 @@ Vue2 推荐使用 CSS 变量实现动态样式：
 ⚠️ 命名重构影响范围检测：
 
 `getUserInfo` 函数在以下文件中被引用：
+
 1. src/views/UserList.vue (line 23, 45)
 2. src/components/UserCard.vue (line 12)
 3. src/api/user.js (定义位置)
@@ -938,11 +941,11 @@ Vue2 推荐使用 CSS 变量实现动态样式：
 ##### 目标结构
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -1038,7 +1041,7 @@ export default {
       default: false,
     },
   },
-};
+}
 ```
 
 ##### Props 注释要求

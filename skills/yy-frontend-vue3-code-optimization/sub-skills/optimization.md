@@ -54,11 +54,11 @@
 ### 目标结构（未安装 useRequest）
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -72,13 +72,13 @@ const { loading, run } = useRequest(() => apiXXX(), {
     if (res.code === 0) {
       // 数据处理
     } else {
-      console.warn(res.msg);
+      console.warn(res.msg)
     }
   },
   onError: (error) => {
-    console.warn(error);
+    console.warn(error)
   },
-});
+})
 ```
 
 ### 变更内容
@@ -138,10 +138,10 @@ const { loading, run } = useRequest(() => apiXXX(), {
 
 ### 声明方式对照
 
-| 原写法 | 推荐写法 |
-|--------|---------|
-| `function fetchData() {}` | `const fetchData = () => {}` |
-| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| 原写法                           | 推荐写法                            |
+| -------------------------------- | ----------------------------------- |
+| `function fetchData() {}`        | `const fetchData = () => {}`        |
+| `function handleClick(e) {}`     | `const handleClick = (e) => {}`     |
 | `async function submitForm() {}` | `const submitForm = async () => {}` |
 
 ### 示例
@@ -152,18 +152,18 @@ function fetchData() {
   // ...
 }
 
-const handleClick = function() {
+const handleClick = function () {
   // ...
 }
 
 // ✅ 正确：箭头函数（推荐）
 const fetchData = () => {
   // ...
-};
+}
 
 const handleSubmit = async () => {
   // ...
-};
+}
 ```
 
 ### 注意事项
@@ -193,8 +193,8 @@ const handleSubmit = async () => {
 
 ```typescript
 // hooks/useTable.ts
-import { ref, computed } from "vue";
-import type { ITableColumn } from "@/types/table";
+import { ref, computed } from 'vue'
+import type { ITableColumn } from '@/types/table'
 
 /**
  * 表格逻辑 Hook
@@ -202,35 +202,35 @@ import type { ITableColumn } from "@/types/table";
  */
 export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
   // ref: 表格数据
-  const tableData = ref<T[]>([]);
-  
+  const tableData = ref<T[]>([])
+
   // ref: 加载状态
-  const loading = ref(false);
-  
+  const loading = ref(false)
+
   // ref: 分页信息（优先使用 ref，尽可能少用 reactive）
-  const page = ref(1);
-  const pageSize = ref(20);
-  const total = ref(0);
-  
+  const page = ref(1)
+  const pageSize = ref(20)
+  const total = ref(0)
+
   // computed: 是否有数据
-  const hasData = computed(() => tableData.value.length > 0);
-  
+  const hasData = computed(() => tableData.value.length > 0)
+
   /**
    * 获取表格数据
    * @param fetchFn - 数据获取函数
    */
   const fetchData = async (fetchFn: () => Promise<{ data: T[]; total: number }>) => {
-    loading.value = true;
+    loading.value = true
     try {
-      const { data, total: resTotal } = await fetchFn();
-      tableData.value = data;
-      total.value = resTotal;
+      const { data, total: resTotal } = await fetchFn()
+      tableData.value = data
+      total.value = resTotal
     } catch (err) {
-      console.warn(err);
+      console.warn(err)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
   // 返回公共接口（禁止直接返回 reactive 对象）
   return {
@@ -241,8 +241,8 @@ export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
     total,
     hasData,
     fetchData,
-  };
-};
+  }
+}
 ```
 
 ### 使用示例
@@ -280,27 +280,27 @@ onMounted(() => {
 ```typescript
 // ✅ 正确：使用 TypeScript 泛型定义 Props
 const props = defineProps<{
-  userId: string;
-  pageSize?: number;
-}>();
+  userId: string
+  pageSize?: number
+}>()
 
 // ✅ 正确：使用 withDefaults 设置默认值
 const props = withDefaults(
   defineProps<{
-    pageSize?: number;
-    isLoading?: boolean;
+    pageSize?: number
+    isLoading?: boolean
   }>(),
   {
     pageSize: 20,
     isLoading: false,
-  }
-);
+  },
+)
 
 // ❌ 错误：使用运行时 Props 定义（Vue2 风格）
 const props = defineProps({
-  userId: String,  // 禁止在 Vue3 中使用
+  userId: String, // 禁止在 Vue3 中使用
   pageSize: Number,
-});
+})
 ```
 
 ### Props 注释要求
@@ -312,10 +312,10 @@ const props = defineProps({
 ```typescript
 const props = defineProps<{
   // userId: 用户唯一标识
-  userId: string;
+  userId: string
   // pageSize: 分页大小，默认 20
-  pageSize?: number;
-}>();
+  pageSize?: number
+}>()
 ```
 
 ### 风险：Props 增强
@@ -327,11 +327,11 @@ const props = defineProps<{
 ### Emits 白名单（仅限以下 19 种事件）
 
 | 类别             | 白名单事件                                                               |
-| ------ | ------------------------------------------------------------------------ |
+| ---------------- | ------------------------------------------------------------------------ |
 | **v-model 更新** | `update:modelValue` (标准), `update:value` (AntD 风格)                   |
-| **交互类** | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
-| **弹窗类** | `open`, `close`, `show`, `hide`                                          |
-| **操作类** | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
+| **交互类**       | `change`, `click`, `select`, `expand`, `input`, `clear`, `remove`, `add` |
+| **弹窗类**       | `open`, `close`, `show`, `hide`                                          |
+| **操作类**       | `cancel`, `confirm`, `ok`, `editSuccess`, `error`                        |
 
 ### TypeScript Emits 定义规范
 
@@ -339,13 +339,13 @@ const props = defineProps<{
 // ✅ 正确：使用 TypeScript 类型定义 Emits
 const emit = defineEmits<{
   // select: 选中用户事件
-  (e: "select", user: IUserInfo): void;
+  (e: 'select', user: IUserInfo): void
   // change: 页面变化事件
-  (e: "change", page: number): void;
-}>();
+  (e: 'change', page: number): void
+}>()
 
 // ❌ 错误：使用运行时 Emits 定义（Vue2 风格）
-const emit = defineEmits(["select", "change"]);  // 禁止
+const emit = defineEmits(['select', 'change']) // 禁止
 ```
 
 ### Emit 顺序

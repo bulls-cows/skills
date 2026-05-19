@@ -27,7 +27,7 @@ export default {
       default: false,
     },
   },
-};
+}
 ```
 
 ### 2. v-model 写法
@@ -47,12 +47,12 @@ export default {
 
 仅允许使用以下语义化事件名：
 
-| 类别 | 事件名 |
-|------|--------|
-| **v-model** | `input` |
-| **交互类** | `change`, `click`, `select`, `expand`, `clear`, `remove`, `add` |
-| **弹窗类** | `open`, `close`, `show`, `hide` |
-| **操作类** | `cancel`, `confirm`, `ok`, `editSuccess`, `error` |
+| 类别        | 事件名                                                          |
+| ----------- | --------------------------------------------------------------- |
+| **v-model** | `input`                                                         |
+| **交互类**  | `change`, `click`, `select`, `expand`, `clear`, `remove`, `add` |
+| **弹窗类**  | `open`, `close`, `show`, `hide`                                 |
+| **操作类**  | `cancel`, `confirm`, `ok`, `editSuccess`, `error`               |
 
 ### 2. Emit 顺序
 
@@ -66,9 +66,9 @@ export default {
 
 ```javascript
 // ✅ 正确：语义化事件名
-this.$emit('input', newValue);
-this.$emit('change', item);
-this.$emit('click', id);
+this.$emit('input', newValue)
+this.$emit('change', item)
+this.$emit('click', id)
 ```
 
 ---
@@ -95,7 +95,7 @@ this.$emit('click', id);
 
 ```javascript
 // 父组件中访问
-this.$refs.childRef.someMethod();
+this.$refs.childRef.someMethod()
 ```
 
 ---

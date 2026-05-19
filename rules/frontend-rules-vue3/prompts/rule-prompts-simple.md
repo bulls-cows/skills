@@ -291,11 +291,11 @@
 ### 5.3 数据处理
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   /* 成功处理数据 */
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -318,35 +318,35 @@ const { loading, run } = useRequest(() => apiSubmit(formData.value), {
     if (res.code === 0) {
       /* 成功 */
     } else {
-      console.warn(res.msg);
+      console.warn(res.msg)
     }
   },
   onError: () => {
-    console.warn("网络异常");
+    console.warn('网络异常')
   },
-});
+})
 ```
 
 **未安装 useRequest（手动 async/await）**：
 
 ```typescript
-const loading = ref(false);
+const loading = ref(false)
 const handleSubmit = async () => {
-  if (loading.value) return;
-  loading.value = true;
+  if (loading.value) return
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
       /* 成功 */
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 ```
 
 ### 5.6 防止重复提交
@@ -356,19 +356,13 @@ const handleSubmit = async () => {
 **useRequest 方式**（loading 自动控制）：
 
 ```vue
-<button
-  @click="run"
-  :disabled="loading"
->{{ loading ? '提交中...' : '提交' }}</button>
+<button @click="run" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
 ```
 
 **手动 async/await 方式**：
 
 ```vue
-<button
-  @click="handleSubmit"
-  :disabled="loading"
->{{ loading ? '提交中...' : '提交' }}</button>
+<button @click="handleSubmit" :disabled="loading">{{ loading ? '提交中...' : '提交' }}</button>
 ```
 
 ### 5.7 安全规范
@@ -408,10 +402,10 @@ const handleSubmit = async () => {
 
 ### 6.4 样式区注释
 
-| 场景     | 格式                    | 示例            |
-| -------- | ----------------------- | --------------- |
-| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
-| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
 
 ### 6.5 CSS 布局推荐
 
@@ -423,15 +417,15 @@ const handleSubmit = async () => {
 
 ### 6.6 CSS 兼容性指南
 
-| 属性 | 问题 | 降级方案 |
-| ---------------- | ------------------------------------------ | ------------------------------ |
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 **兼容性开发实践**：
 
@@ -462,9 +456,9 @@ const handleSubmit = async () => {
 
 ```typescript
 onBeforeUnmount(() => {
-  if (timer.value) clearInterval(timer.value);
-  window.removeEventListener("resize", handleResize);
-});
+  if (timer.value) clearInterval(timer.value)
+  window.removeEventListener('resize', handleResize)
+})
 ```
 
 **watch vs watchEffect**：优先使用 `watch`（显式依赖、可获新旧值）；需要自动追踪时用 `watchEffect`。
@@ -488,9 +482,9 @@ onBeforeUnmount(() => {
 ### 7.6 响应式类型标注（TypeScript）
 
 ```typescript
-const userName = ref<string>("");
-const userList = ref<IUserInfo[]>([]);
-const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
+const userName = ref<string>('')
+const userList = ref<IUserInfo[]>([])
+const state = reactive<{ name: string; age: number }>({ name: '', age: 0 })
 ```
 
 ---
@@ -513,13 +507,13 @@ const state = reactive<{ name: string; age: number }>({ name: "", age: 0 });
 ### 8.2 防抖 / 节流示例
 
 ```typescript
-import { debounce, throttle } from "lodash-es";
+import { debounce, throttle } from 'lodash-es'
 const handleSearch = debounce((query: string) => {
-  fetchSearchResults(query);
-}, 300);
+  fetchSearchResults(query)
+}, 300)
 const handleScroll = throttle(() => {
-  updateScrollPosition();
-}, 100);
+  updateScrollPosition()
+}, 100)
 ```
 
 ---
@@ -547,13 +541,13 @@ const handleScroll = throttle(() => {
 
 ### 🟡 不推荐（尽量避免）
 
-| #   | 不推荐项            | 说明                            |
-| --- | ------------------- | ------------------------------- |
-| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
-| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+| #   | 不推荐项            | 说明                                                        |
+| --- | ------------------- | ----------------------------------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化                                          |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit                             |
 | 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
-| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
-| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用         |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用         |
 
 ### ⚠️ 注意
 
@@ -580,22 +574,22 @@ const handleScroll = throttle(() => {
 **标准模板（已安装 useRequest）**：
 
 ```typescript
-import { useRequest } from "ahooks-vue";
-import { ref } from "vue";
+import { useRequest } from 'ahooks-vue'
+import { ref } from 'vue'
 
 export const useTable = () => {
-  const pagination = ref({ page: 1, limit: 20 });
-  const dataSource = ref<any[]>([]);
-  const total = ref(0);
+  const pagination = ref({ page: 1, limit: 20 })
+  const dataSource = ref<any[]>([])
+  const total = ref(0)
 
   const onGetListSuccess = ({ code, data, msg }) => {
     if (code === 0) {
-      dataSource.value = data.list ?? [];
-      total.value = data.total;
+      dataSource.value = data.list ?? []
+      total.value = data.total
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
-  };
+  }
 
   const { loading, run: getDataSourceTotal } = useRequest(
     (params) => apiGetList(Object.assign({}, pagination.value, params)),
@@ -604,45 +598,45 @@ export const useTable = () => {
       onSuccess: onGetListSuccess,
       onError: (error) => console.warn(error),
     },
-  );
+  )
 
-  return { loading, dataSource, total, pagination, getDataSourceTotal };
-};
+  return { loading, dataSource, total, pagination, getDataSourceTotal }
+}
 ```
 
 **标准模板（未安装 useRequest）**：
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export const useTable = () => {
-  const pagination = ref({ page: 1, limit: 20 });
-  const loading = ref(false);
-  const dataSource = ref<any[]>([]);
-  const total = ref(0);
+  const pagination = ref({ page: 1, limit: 20 })
+  const loading = ref(false)
+  const dataSource = ref<any[]>([])
+  const total = ref(0)
 
   const getDataSourceTotal = async () => {
-    loading.value = true;
+    loading.value = true
     try {
       const { code, data, msg } = await apiGetList({
         page: pagination.value.page,
         limit: pagination.value.limit,
-      });
+      })
       if (code === 0) {
-        dataSource.value = data.list;
-        total.value = data.total;
+        dataSource.value = data.list
+        total.value = data.total
       } else {
-        console.warn(msg);
+        console.warn(msg)
       }
     } catch (error) {
-      console.warn(error);
+      console.warn(error)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
-  return { loading, dataSource, total, pagination, getDataSourceTotal };
-};
+  return { loading, dataSource, total, pagination, getDataSourceTotal }
+}
 ```
 
 ### 10.3 抽离建议
@@ -662,9 +656,9 @@ export const useTable = () => {
 
 ```typescript
 // hook: useTable
-const { loading, dataSource } = useTable();
+const { loading, dataSource } = useTable()
 // hook: useSearchForm
-const { searchParams } = useSearchForm();
+const { searchParams } = useSearchForm()
 ```
 
 ---
@@ -682,11 +676,11 @@ const { searchParams } = useSearchForm();
 
 ```typescript
 // ✅ 正确
-const data: unknown = JSON.parse(raw);
-const userInfo: IUserInfo = { id: "1", name: "test" };
+const data: unknown = JSON.parse(raw)
+const userInfo: IUserInfo = { id: '1', name: 'test' }
 
 // ❌ 错误
-const data: any = JSON.parse(raw);
+const data: any = JSON.parse(raw)
 ```
 
 ### 11.3 Emits 类型定义
@@ -696,12 +690,12 @@ const data: any = JSON.parse(raw);
 ```typescript
 // ✅ 正确：泛型定义
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  change: [value: string];
-}>();
+  'update:modelValue': [value: string]
+  change: [value: string]
+}>()
 
 // ❌ 错误：运行时对象形式
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(['update:modelValue', 'change'])
 ```
 
 ### 11.4 Hook 返回值类型
@@ -710,14 +704,14 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 ```typescript
 interface IUseTableReturn {
-  dataSource: Ref<IUserInfo[]>;
-  loading: Ref<boolean>;
-  fetchList: () => Promise<void>;
+  dataSource: Ref<IUserInfo[]>
+  loading: Ref<boolean>
+  fetchList: () => Promise<void>
 }
 
 export const useTable = (): IUseTableReturn => {
   // ...
-};
+}
 ```
 
 ### 11.5 `.d.ts` 类型文件组织
@@ -732,8 +726,8 @@ export const useTable = (): IUseTableReturn => {
 - 混合导入时，`import type` 与值导入分开
 
 ```typescript
-import type { IUser } from "./types";
-import { userApi } from "./api";
+import type { IUser } from './types'
+import { userApi } from './api'
 ```
 
 ### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`

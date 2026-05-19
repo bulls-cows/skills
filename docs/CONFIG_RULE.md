@@ -30,4 +30,4 @@ your-project/
 │       └── security.md     # Security requirements
 ```
 
-* 参考：[How Claude remembers your project - Claude Code Docs](https://code.claude.com/docs/en/memory)
+- 参考：[How Claude remembers your project - Claude Code Docs](https://code.claude.com/docs/en/memory)

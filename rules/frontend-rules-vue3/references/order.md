@@ -104,27 +104,27 @@ defineExpose({ validateForm, resetForm, getDataSourceTotal });
 
 ```typescript
 // 1. node_modules（外部依赖）
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+import { ref, computed, onMounted } from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. types（类型导入）
-import type { User, dataSource } from "@src/types";
+import type { User, dataSource } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from "@src/api/user";
-import { formatDate } from "@src/utils/date";
-import { useTable } from "@src/hooks/useTable";
-import { useSearchForm } from "@src/hooks/useSearchForm";
-import store from "@src/store";
-import { APP_CONFIG } from "@src/constants";
-import DataTable from "@src/components/DataTable.vue";
+import { apiGetUserInfo } from '@src/api/user'
+import { formatDate } from '@src/utils/date'
+import { useTable } from '@src/hooks/useTable'
+import { useSearchForm } from '@src/hooks/useSearchForm'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable.vue'
 
 // 4. 内部相对依赖（./）
-import { localHelper } from "./utils/helper";
-import { useFormValidate } from "./hooks/useFormValidate";
-import { MAX_RETRY_COUNT } from "./constants";
-import SearchBar from "./SearchBar.vue";
+import { localHelper } from './utils/helper'
+import { useFormValidate } from './hooks/useFormValidate'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ---

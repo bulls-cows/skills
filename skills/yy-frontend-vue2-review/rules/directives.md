@@ -50,10 +50,10 @@
 export default {
   computed: {
     safeHtml() {
-      return DOMPurify.sanitize(this.rawHtml);
+      return DOMPurify.sanitize(this.rawHtml)
     },
   },
-};
+}
 ```
 
 ```vue
@@ -66,11 +66,11 @@ export default {
 
 统一使用指令简写形式，使模板更简洁：
 
-| 完整写法 | 简写 | 示例 |
-|----------|------|------|
-| `v-bind:attr` | `:attr` | `:src="'avatar'"` |
-| `v-on:event` | `@event` | `@click="handleClick"` |
-| `v-slot:name` | `#name` | `#default="slotProps"` |
+| 完整写法      | 简写     | 示例                   |
+| ------------- | -------- | ---------------------- |
+| `v-bind:attr` | `:attr`  | `:src="'avatar'"`      |
+| `v-on:event`  | `@event` | `@click="handleClick"` |
+| `v-slot:name` | `#name`  | `#default="slotProps"` |
 
 ```vue
 <!-- ✅ 正确：简写 -->
@@ -96,7 +96,14 @@ HTML 元素上的属性顺序应保持统一：
 8. `v-html` / `v-text`
 
 ```vue
-<template v-for="item in items" :key="item.id" v-if="item.visible" id="list-item" :class="item.class" @click="handleClick(item)">
+<template
+  v-for="item in items"
+  :key="item.id"
+  v-if="item.visible"
+  id="list-item"
+  :class="item.class"
+  @click="handleClick(item)"
+>
   {{ item.name }}
 </template>
 ```

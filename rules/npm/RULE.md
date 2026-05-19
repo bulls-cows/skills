@@ -39,7 +39,7 @@ npm install --save-dev <package-name>
 - 构建工具（webpack、vite、typescript 等）
 - 测试框架（jest、vitest 等）
 - 代码检查工具（eslint、prettier 等）
-- 类型定义包（@types/*，除非项目是发布的 npm 包）
+- 类型定义包（@types/\*，除非项目是发布的 npm 包）
 
 **注意事项**：
 

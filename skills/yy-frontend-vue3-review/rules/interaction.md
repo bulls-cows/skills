@@ -15,9 +15,9 @@
 
 ```typescript
 const props = defineProps<{
-  userId: string | number; // userId: 用户ID
-  isLoading?: boolean; // isLoading: 加载状态，控制加载动画显示
-}>();
+  userId: string | number // userId: 用户ID
+  isLoading?: boolean // isLoading: 加载状态，控制加载动画显示
+}>()
 ```
 
 ### 2. v-model 写法
@@ -29,12 +29,12 @@ const props = defineProps<{
 
 ```typescript
 const props = defineProps<{
-  modelValue?: string; // modelValue: v-model 默认绑定值 (Vue 3 标准)
-  value?: string; // value: v-model:value 绑定值 (Ant Design Vue 风格)
+  modelValue?: string // modelValue: v-model 默认绑定值 (Vue 3 标准)
+  value?: string // value: v-model:value 绑定值 (Ant Design Vue 风格)
 
-  userId: number; // userId: 用户ID
-  isLoading?: boolean; // isLoading: 加载状态
-}>();
+  userId: number // userId: 用户ID
+  isLoading?: boolean // isLoading: 加载状态
+}>()
 ```
 
 ### 3. 使用限制
@@ -72,13 +72,13 @@ const props = defineProps<{
 ```typescript
 const emit = defineEmits<{
   // 1. v-model 风格
-  "update:modelValue": [value: string];
-  "update:value": [value: string];
+  'update:modelValue': [value: string]
+  'update:value': [value: string]
 
   // 2. 业务事件
-  change: [value: string];
-  click: [id: number];
-}>();
+  change: [value: string]
+  click: [id: number]
+}>()
 ```
 
 ---
@@ -94,15 +94,15 @@ const emit = defineEmits<{
 ```typescript
 const validate = async () => {
   /* ... */
-};
+}
 const resetForm = () => {
   /* ... */
-};
+}
 
 defineExpose({
   validate,
   resetForm,
-});
+})
 ```
 
 ---

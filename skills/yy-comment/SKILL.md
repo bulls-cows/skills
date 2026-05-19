@@ -129,15 +129,15 @@ description: >
 ```typescript
 function processData(data: Data[]): Result {
   // 单独处理首条记录，作为基准值
-  const baseline = data[0];
+  const baseline = data[0]
 
   // 递归处理嵌套结构
   for (const item of data) {
-    processItem(item);
+    processItem(item)
   }
 
   // 合并并排序结果
-  return sortResults(results);
+  return sortResults(results)
 }
 ```
 
@@ -145,7 +145,7 @@ function processData(data: Data[]): Result {
 
 ```typescript
 // ❌ 显而易见的注释
-i = i + 1; // i 加 1
+i = i + 1 // i 加 1
 
 // ❌ 重复代码的注释
 // 遍历数组

@@ -35,7 +35,7 @@
 export default {
   name: 'ComponentName',
   // ...
-};
+}
 ```
 
 ### Vue 元素特性顺序
@@ -68,9 +68,9 @@ export default {
 - 按功能区块拆分：搜索表单、数据表格、分页器、操作按钮组
 - 弹窗、表格、表单等复杂模块拆分为独立组件
 
-| 模块 | 处理方式 |
-|------|----------|
-| 弹窗 | 拆分为独立组件 |
+| 模块 | 处理方式                |
+| ---- | ----------------------- |
+| 弹窗 | 拆分为独立组件          |
 | 表格 | 表格组件 + 业务逻辑分离 |
 | 表单 | 表单组件 + 校验逻辑分离 |
 
@@ -80,12 +80,12 @@ export default {
 
 ## 相关模块引用
 
-| 内容 | 详见 |
-|------|------|
-| Props 定义 | [interaction.md](./interaction.md#一props-定义规范) |
-| Emit 事件 | [interaction.md](./interaction.md#二emit-事件规范) |
-| v-model | [interaction.md](./interaction.md#二v-model-写法) |
-| 组件通信 | [interaction.md](./interaction.md#四组件间通信) |
-| `$refs` 访问 | [interaction.md](./interaction.md#四对外访问) |
+| 内容           | 详见                                                    |
+| -------------- | ------------------------------------------------------- |
+| Props 定义     | [interaction.md](./interaction.md#一props-定义规范)     |
+| Emit 事件      | [interaction.md](./interaction.md#二emit-事件规范)      |
+| v-model        | [interaction.md](./interaction.md#二v-model-写法)       |
+| 组件通信       | [interaction.md](./interaction.md#四组件间通信)         |
+| `$refs` 访问   | [interaction.md](./interaction.md#四对外访问)           |
 | provide/inject | [interaction.md](./interaction.md#三provideinject-规范) |
-| 导入顺序 | [order.md](./order.md) |
+| 导入顺序       | [order.md](./order.md)                                  |

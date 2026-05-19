@@ -10,11 +10,9 @@
 - 路由页面使用 `() => import()` 惰性加载
 
 ```typescript
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from 'vue'
 
-const HeavyComponent = defineAsyncComponent(() =>
-  import('./HeavyComponent.vue')
-);
+const HeavyComponent = defineAsyncComponent(() => import('./HeavyComponent.vue'))
 ```
 
 ---
@@ -38,12 +36,7 @@ const HeavyComponent = defineAsyncComponent(() =>
 - 仅渲染可视区域内的元素，降低渲染开销
 
 ```vue
-<RecycleScroller
-  :items="longList"
-  :item-size="50"
-  key-field="id"
-  v-slot="{ item }"
->
+<RecycleScroller :items="longList" :item-size="50" key-field="id" v-slot="{ item }">
   <div>{{ item.name }}</div>
 </RecycleScroller>
 ```
@@ -54,31 +47,31 @@ const HeavyComponent = defineAsyncComponent(() =>
 
 频繁触发的事件必须使用防抖或节流优化：
 
-| 场景       | 方式   | 说明                           |
-| ---------- | ------ | ------------------------------ |
-| 搜索框输入 | 防抖   | 延迟发起请求，减少无效调用     |
-| 滚动事件   | 节流   | 控制触发频率，避免过度渲染     |
-| 窗口 resize | 节流  | 布局计算不宜过于频繁             |
-| 按钮点击   | 防抖/锁 | 防止重复提交（详见 `network.md`） |
+| 场景        | 方式    | 说明                              |
+| ----------- | ------- | --------------------------------- |
+| 搜索框输入  | 防抖    | 延迟发起请求，减少无效调用        |
+| 滚动事件    | 节流    | 控制触发频率，避免过度渲染        |
+| 窗口 resize | 节流    | 布局计算不宜过于频繁              |
+| 按钮点击    | 防抖/锁 | 防止重复提交（详见 `network.md`） |
 
 ### 防抖示例
 
 ```typescript
-import { debounce } from 'lodash-es';
+import { debounce } from 'lodash-es'
 
 const handleSearch = debounce((query: string) => {
-  fetchSearchResults(query);
-}, 300);
+  fetchSearchResults(query)
+}, 300)
 ```
 
 ### 节流示例
 
 ```typescript
-import { throttle } from 'lodash-es';
+import { throttle } from 'lodash-es'
 
 const handleScroll = throttle(() => {
-  updateScrollPosition();
-}, 100);
+  updateScrollPosition()
+}, 100)
 ```
 
 ---
@@ -119,12 +112,12 @@ const handleScroll = throttle(() => {
 ```typescript
 app.directive('focus', {
   mounted(el) {
-    el.focus();
+    el.focus()
   },
   unmounted(el) {
     // 清理逻辑
-  }
-});
+  },
+})
 ```
 
 ---

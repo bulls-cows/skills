@@ -23,7 +23,6 @@ name: format-code
 description: >
   在提交代码前自动格式化代码。用于：用户提到"格式化代码"、"代码格式化"、
   "提交前格式化"时触发。
-
 ---
 
 # format-code
@@ -75,7 +74,6 @@ description: >
 name: generate-readme
 description: >
   为项目生成标准 README 文档。用于：用户需要创建或更新项目的 README 文件时触发。
-
 ---
 
 # generate-readme
@@ -161,7 +159,6 @@ name: api-test
 description: >
   基于 OpenAPI/Swagger 规范自动生成并执行 API 测试。
   用于：用户需要测试 REST API、验证 API 规范、生成测试报告。
-
 ---
 
 # api-test

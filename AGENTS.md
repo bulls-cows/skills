@@ -135,7 +135,6 @@
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
 
-
 ## 关键参考
 
 - `skills/yy-review/SKILL.md` - 代码质量检查工作流

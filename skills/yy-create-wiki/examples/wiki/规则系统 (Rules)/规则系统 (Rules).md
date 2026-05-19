@@ -26,6 +26,7 @@
 规则是对 AI 行为的约束性文档，以 RULE.md 为载体，通过 `@` 语法在 AGENTS.md 中引用后生效。规则与技能的区别：规则是被动约束，技能是主动工作流。
 
 **章节来源**
+
 - [AGENTS.md:40-50](file://AGENTS.md#L40-L50)
 
 ## 项目结构
@@ -41,6 +42,7 @@ rules/
 ```
 
 **章节来源**
+
 - [AGENTS.md:50-60](file://AGENTS.md#L50-L60)
 
 ## 核心组件
@@ -50,6 +52,7 @@ rules/
 - **text**：文本表达规范，要求默认中文、精简专业、克制客观、面向执行
 
 **章节来源**
+
 - [rules/file-scope-limit/RULE.md:1-10](file://rules/file-scope-limit/RULE.md#L1-L10)
 - [rules/markdown/RULE.md:1-10](file://rules/markdown/RULE.md#L1-L10)
 
@@ -65,9 +68,11 @@ graph TB
 ```
 
 **图表来源**
+
 - [AGENTS.md:40-60](file://AGENTS.md#L40-L60)
 
 **章节来源**
+
 - [AGENTS.md:40-60](file://AGENTS.md#L40-L60)
 
 ## 详细组件分析
@@ -78,6 +83,7 @@ graph TB
 - 数据流：用户指定目录 → AI 在授权范围内操作 → 需要跨目录时请求授权
 
 **章节来源**
+
 - [rules/file-scope-limit/RULE.md:1-30](file://rules/file-scope-limit/RULE.md#L1-L30)
 
 ### markdown
@@ -86,6 +92,7 @@ graph TB
 - 数据流：lint 检查 → 发现 MD040 错误 → 修复代码块语言标识
 
 **章节来源**
+
 - [rules/markdown/RULE.md:1-30](file://rules/markdown/RULE.md#L1-L30)
 
 ## 依赖分析
@@ -94,6 +101,7 @@ graph TB
 - 外部依赖：markdownlint-cli（规则检查工具）
 
 **章节来源**
+
 - [package.json:1-30](file://package.json#L1-L30)
 
 ## 性能考虑
@@ -102,6 +110,7 @@ graph TB
 - 规则内容精简，避免上下文膨胀
 
 **章节来源**
+
 - [AGENTS.md:50-60](file://AGENTS.md#L50-L60)
 
 ## 故障排查指南
@@ -110,6 +119,7 @@ graph TB
 - **lint 报错**：检查 markdownlint 规则，确保所有代码块声明了语言标识
 
 **章节来源**
+
 - [rules/markdown/RULE.md:20-40](file://rules/markdown/RULE.md#L20-L40)
 
 ## 结论
@@ -117,6 +127,7 @@ graph TB
 规则系统通过 RULE.md 文件和 AGENTS.md 的 `@` 引用机制，实现了对 AI 行为的约束性控制。6 个规则覆盖文件操作范围、Markdown 格式、文本表达等核心约束场景。
 
 **章节来源**
+
 - [AGENTS.md:40-50](file://AGENTS.md#L40-L50)
 
 ## 附录
@@ -126,4 +137,5 @@ graph TB
 - [text RULE.md](file://rules/text/RULE.md)
 
 **章节来源**
+
 - [AGENTS.md:40-60](file://AGENTS.md#L40-L60)

@@ -62,9 +62,9 @@
 
 ## 导入顺序（4 组，组间空一行，组内字母排序）
 
-| 组别 | 说明 | 示例 |
-| ---- | ---- | ---- |
-| 1 | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'`、`import { debounce } from 'lodash'` |
-| 2 | types（类型导入，仅 TS） | `import type { IUserInfo, ITableConfig } from '@src/types'` |
-| 3 | 内部全局依赖（@src/） | `import { apiGetUser } from '@src/api/user'`、`import { formatDate } from '@src/utils'`、`import { useTable } from '@src/hooks/useTable'`、`import store from '@src/store'`、`import { APP_CONFIG } from '@src/constants'`、`import DataTable from '@src/components/DataTable'` |
-| 4 | 内部相对依赖（./、../） | `import { localHelpers } from './utils/helpers'`、`import { useLocalForm } from './hooks/useLocalForm'`、`import { MODULE_CONFIG } from './constants'`、`import SearchBar from './SearchBar.vue'` |
+| 组别 | 说明                     | 示例                                                                                                                                                                                                                                                                            |
+| ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | 外部依赖（node_modules） | `import { ref, computed } from 'vue'`、`import dayjs from 'dayjs'`、`import { debounce } from 'lodash'`                                                                                                                                                                         |
+| 2    | types（类型导入，仅 TS） | `import type { IUserInfo, ITableConfig } from '@src/types'`                                                                                                                                                                                                                     |
+| 3    | 内部全局依赖（@src/）    | `import { apiGetUser } from '@src/api/user'`、`import { formatDate } from '@src/utils'`、`import { useTable } from '@src/hooks/useTable'`、`import store from '@src/store'`、`import { APP_CONFIG } from '@src/constants'`、`import DataTable from '@src/components/DataTable'` |
+| 4    | 内部相对依赖（./、../）  | `import { localHelpers } from './utils/helpers'`、`import { useLocalForm } from './hooks/useLocalForm'`、`import { MODULE_CONFIG } from './constants'`、`import SearchBar from './SearchBar.vue'`                                                                               |

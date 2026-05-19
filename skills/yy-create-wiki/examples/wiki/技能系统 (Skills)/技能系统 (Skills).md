@@ -27,6 +27,7 @@
 技能系统是本仓库的核心产出物，每个技能是一个独立的 SKILL.md 文件，定义了可按需加载的任务工作流。技能通过 description 字段实现自动发现与精确触发，避免上下文膨胀。
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:1-20](file://skills/yy-create-skill/SKILL.md#L1-L20)
 
 ## 项目结构
@@ -63,9 +64,11 @@ graph TB
 ```
 
 **图表来源**
+
 - [README.md:1-30](file://README.md#L1-L30)
 
 **章节来源**
+
 - [README.md:1-30](file://README.md#L1-L30)
 
 ## 核心组件
@@ -77,6 +80,7 @@ graph TB
 - **yy-init**：初始化或更新项目的 AGENTS.md 文档
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:1-10](file://skills/yy-create-skill/SKILL.md#L1-L10)
 - [skills/yy-review/SKILL.md:1-10](file://skills/yy-review/SKILL.md#L1-L10)
 
@@ -93,9 +97,11 @@ graph TB
 ```
 
 **图表来源**
+
 - [skills/yy-create-skill/SKILL.md:20-40](file://skills/yy-create-skill/SKILL.md#L20-L40)
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:20-40](file://skills/yy-create-skill/SKILL.md#L20-L40)
 
 ## 详细组件分析
@@ -106,6 +112,7 @@ graph TB
 - 数据流：用户指定技能名称 → 生成 SKILL.md 模板 → 填充内容 → 验证格式
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:1-50](file://skills/yy-create-skill/SKILL.md#L1-L50)
 
 ### yy-review
@@ -114,6 +121,7 @@ graph TB
 - 数据流：获取 git diff → 逐文件审核 → 生成审核报告
 
 **章节来源**
+
 - [skills/yy-review/SKILL.md:1-50](file://skills/yy-review/SKILL.md#L1-L50)
 
 ## 依赖分析
@@ -122,6 +130,7 @@ graph TB
 - 内部依赖：AGENTS.md（技能引用入口）、marketplace.json（技能市场配置）
 
 **章节来源**
+
 - [package.json:1-30](file://package.json#L1-L30)
 
 ## 性能考虑
@@ -130,6 +139,7 @@ graph TB
 - description 字段精确匹配触发条件，减少误触发
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:30-50](file://skills/yy-create-skill/SKILL.md#L30-L50)
 
 ## 故障排查指南
@@ -138,6 +148,7 @@ graph TB
 - **技能执行失败**：检查步骤定义是否完整，输出格式是否正确
 
 **章节来源**
+
 - [skills/yy-create-skill/SKILL.md:40-60](file://skills/yy-create-skill/SKILL.md#L40-L60)
 
 ## 结论
@@ -145,6 +156,7 @@ graph TB
 技能系统通过标准化的 SKILL.md 文件格式，实现了可发现、可触发、可复用的 AI 工作流定义。27 个公共技能覆盖代码质量、创建生成、Git 操作等核心场景。
 
 **章节来源**
+
 - [README.md:1-10](file://README.md#L1-L10)
 
 ## 附录
@@ -154,4 +166,5 @@ graph TB
 - [yy-lint SKILL.md](file://skills/yy-lint/SKILL.md)
 
 **章节来源**
+
 - [README.md:1-50](file://README.md#L1-L50)

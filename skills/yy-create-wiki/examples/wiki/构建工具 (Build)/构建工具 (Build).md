@@ -25,6 +25,7 @@
 构建工具负责项目的代码质量检查和技能市场配置同步。lint.mts 是核心入口脚本，marketplace.json 由 lint.mts 自动生成，禁止手动修改。
 
 **章节来源**
+
 - [build/lint.mts:1-20](file://build/lint.mts#L1-L20)
 
 ## 项目结构
@@ -37,6 +38,7 @@ build/
 ```
 
 **章节来源**
+
 - [build/lint.mts:1-10](file://build/lint.mts#L1-L10)
 
 ## 核心组件
@@ -45,6 +47,7 @@ build/
 - **marketplace.json**：技能市场配置文件，定义插件和技能分组
 
 **章节来源**
+
 - [build/lint.mts:1-20](file://build/lint.mts#L1-L20)
 
 ## 架构总览
@@ -61,9 +64,11 @@ flowchart TD
 ```
 
 **图表来源**
+
 - [build/lint.mts:1-30](file://build/lint.mts#L1-L30)
 
 **章节来源**
+
 - [build/lint.mts:1-30](file://build/lint.mts#L1-L30)
 
 ## 详细组件分析
@@ -74,6 +79,7 @@ flowchart TD
 - 数据流：读取 skills/ 目录 → 执行 markdownlint → 检查技能一致性 → 生成 marketplace.json
 
 **章节来源**
+
 - [build/lint.mts:1-50](file://build/lint.mts#L1-L50)
 
 ## 依赖分析
@@ -82,6 +88,7 @@ flowchart TD
 - 开发依赖：markdownlint-cli、eslint、prettier
 
 **章节来源**
+
 - [package.json:1-30](file://package.json#L1-L30)
 
 ## 性能考虑
@@ -90,6 +97,7 @@ flowchart TD
 - marketplace.json 由 lint.mts 自动生成，避免手动维护带来的不一致
 
 **章节来源**
+
 - [build/lint.mts:20-40](file://build/lint.mts#L20-L40)
 
 ## 故障排查指南
@@ -99,6 +107,7 @@ flowchart TD
 - **技能一致性检查失败**：检查 README.md 中的技能列表是否与 skills/ 目录一致
 
 **章节来源**
+
 - [build/lint.mts:30-50](file://build/lint.mts#L30-L50)
 
 ## 结论
@@ -106,6 +115,7 @@ flowchart TD
 构建工具通过 lint.mts 统一入口，实现了代码质量检查和技能市场配置的自动化管理。marketplace.json 的自动生成机制避免了手动维护的不一致问题。
 
 **章节来源**
+
 - [build/lint.mts:1-20](file://build/lint.mts#L1-L20)
 
 ## 附录
@@ -114,4 +124,5 @@ flowchart TD
 - [marketplace.json](file://.claude-plugin/marketplace.json)
 
 **章节来源**
+
 - [build/lint.mts:1-50](file://build/lint.mts#L1-L50)

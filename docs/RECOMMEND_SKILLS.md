@@ -4,11 +4,11 @@
 
 ## 前端开发
 
-| 技能                        | 说明                                                      | 安装命令                                                                      |
-| --------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| frontend-design             | 网页 / 移动端界面设计、布局、样式、交互逻辑、前端视觉方案 | `npx skills add anthropics/skills --skill frontend-design`                    |
-| ui-ux-pro-max               | 高保真界面设计、用户体验流程、交互原型、可用性优化        | `npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max`   |
-| canvas-design               | 基于 Canvas 实现可视化、图表、动画、海报生成、交互式图形  | `npx skills add anthropics/skills --skill canvas-design`                      |
+| 技能            | 说明                                                      | 安装命令                                                                    |
+| --------------- | --------------------------------------------------------- | --------------------------------------------------------------------------- |
+| frontend-design | 网页 / 移动端界面设计、布局、样式、交互逻辑、前端视觉方案 | `npx skills add anthropics/skills --skill frontend-design`                  |
+| ui-ux-pro-max   | 高保真界面设计、用户体验流程、交互原型、可用性优化        | `npx skills add nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max` |
+| canvas-design   | 基于 Canvas 实现可视化、图表、动画、海报生成、交互式图形  | `npx skills add anthropics/skills --skill canvas-design`                    |
 
 ## 浏览器与自动化
 
@@ -40,13 +40,13 @@
 
 ## Vercel agent-skills
 
-| 技能                        | 说明                                                      | 安装命令                                                                      |
-| --------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| web-design-guidelines       | 色彩、字体、间距、响应式、组件规范、设计系统输出          | `npx skills add vercel-labs/agent-skills --skill web-design-guidelines`       |
-| vercel-react-best-practices | Vercel 官方 React/Next.js 最佳实践                        | `npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices` |
-| vercel-composition-patterns | Vercel 官方 React 组件组合模式                            | `npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns` |
-| vercel-react-native-skills  | Vercel 官方 React Native 开发最佳实践                      | `npx skills add vercel-labs/agent-skills --skill vercel-react-native-skills`  |
-| deploy-to-vercel            | 一键部署应用到 Vercel 平台，支持静态网站和 Serverless    | `npx skills add vercel-labs/agent-skills --skill deploy-to-vercel`            |
+| 技能                        | 说明                                                  | 安装命令                                                                      |
+| --------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------- |
+| web-design-guidelines       | 色彩、字体、间距、响应式、组件规范、设计系统输出      | `npx skills add vercel-labs/agent-skills --skill web-design-guidelines`       |
+| vercel-react-best-practices | Vercel 官方 React/Next.js 最佳实践                    | `npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices` |
+| vercel-composition-patterns | Vercel 官方 React 组件组合模式                        | `npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns` |
+| vercel-react-native-skills  | Vercel 官方 React Native 开发最佳实践                 | `npx skills add vercel-labs/agent-skills --skill vercel-react-native-skills`  |
+| deploy-to-vercel            | 一键部署应用到 Vercel 平台，支持静态网站和 Serverless | `npx skills add vercel-labs/agent-skills --skill deploy-to-vercel`            |
 
 ## Vue3
 

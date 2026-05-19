@@ -22,14 +22,14 @@
 
 ### 任务清单
 
-| 任务 ID | 子技能       | 风险等级  | 说明                                                                             |
-| ------- | ------------ | --------- | -------------------------------------------------------------------------------- |
-| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                      |
-| T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则） |
+| 任务 ID | 子技能       | 风险等级  | 说明                                                                                                   |
+| ------- | ------------ | --------- | ------------------------------------------------------------------------------------------------------ |
+| T01     | 业务逻辑梳理 | 🟢 零风险 | 仅 .vue，生成业务说明 JSDoc                                                                            |
+| T02     | 注释增强     | 🟢 零风险 | 模板/脚本/样式注释，只增不改；已有正确注释禁止修改（详见注释保护原则）                                 |
 | T03     | 代码风格清洗 | 🟡 中风险 | 导入排序(4组)、`<script setup>`结构、模板属性顺序、组件 name 属性（需 unplugin-vue-setup-extend-plus） |
-| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                               |
-| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                     |
-| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强 |
+| T04     | CSS/BEM 规范 | 🟡 中风险 | 类名转为 BEM 格式，scoped 同步修改                                                                     |
+| T05     | 语义化命名   | 🟡 中风险 | API/事件/常量/Hooks 命名规范                                                                           |
+| T06     | 逻辑深度优化 | 🔴 高风险 | async/await、Hooks抽离、**reactive转ref（尽可能少用reactive）**、Props/Emits增强                       |
 
 ### 执行规则
 
@@ -99,22 +99,27 @@
   const { loading, run } = useRequest(() => apiSubmit(formData.value), {
     manual: true,
     onSuccess: (res) => {
-      if (res.code === 0) { /* 成功 */ }
-      else { console.warn(res.msg); }
+      if (res.code === 0) {
+        /* 成功 */
+      } else {
+        console.warn(res.msg)
+      }
     },
-    onError: () => { console.warn("网络异常"); },
-  });
+    onError: () => {
+      console.warn('网络异常')
+    },
+  })
 
   // 未安装 useRequest（手动 async/await）
   try {
-    const { code, data, msg } = await apiXXX();
+    const { code, data, msg } = await apiXXX()
     if (code === 0) {
       // 处理成功逻辑
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (e) {
-    console.warn("请求失败：", e);
+    console.warn('请求失败：', e)
   }
   ```
 
@@ -148,15 +153,15 @@
 
 以下属性存在兼容性风险，需提供降级方案：
 
-| 属性 | 问题 | 降级方案 |
-|------|------|----------|
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 dvh 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 dvh 单位              |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 - **查兼容性**：[Can I Use](https://caniuse.com/) 查询属性支持情况
 - **自动前缀**：配置 Autoprefixer + PostCSS，自动补齐 `-webkit-`、`-ms-` 前缀
@@ -198,7 +203,7 @@
 | 常量     | 全大写 + 下划线             | `MAX_RETRY_COUNT` |
 | 组件名   | PascalCase                  | `<UserList />`    |
 | Props    | camelCase                   | `userName`        |
-| Hooks    | `use` + 功能名 | `useTable`        |
+| Hooks    | `use` + 功能名              | `useTable`        |
 | 布尔值   | `isXX` / `hasXX` / `showXX` | `isLoading`       |
 
 _跨文件引用重命名需提示用户确认_
@@ -247,7 +252,7 @@ _跨文件引用重命名需提示用户确认_
 ### 网络请求统一模式
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 处理成功逻辑
 } else {
@@ -289,13 +294,13 @@ if (code === 0) {
 
 ## 7. 🟡 不推荐项（尽量避免）
 
-| # | 不推荐项 | 说明 |
-|---|----------|------|
-| 1 | 多层 try/catch 嵌套 | 异步操作尽量扁平化 |
-| 2 | 生命周期 emit | 不推荐在生命周期中主动向外 emit |
-| 3 | 可选链操作符 `?.` | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
-| 4 | CSS 嵌套原生写法 | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
-| 5 | `:has()` 伪类 | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+| #   | 不推荐项            | 说明                                                        |
+| --- | ------------------- | ----------------------------------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化                                          |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit                             |
+| 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用         |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用         |
 
 ---
 
@@ -422,11 +427,11 @@ if (code === 0) {
 
 #### ⚠️ 风险说明（执行前必须展示给用户）
 
-| 风险项 | 影响范围 | 说明 |
-|--------|----------|------|
-| **Git Diff 膨胀** | 全文件 | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
-| **合并冲突** | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突 |
-| **格式不一致** | 团队协作 | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异 |
+| 风险项            | 影响范围     | 说明                                                                              |
+| ----------------- | ------------ | --------------------------------------------------------------------------------- |
+| **Git Diff 膨胀** | 全文件       | 格式化会改变缩进、引号、分号等，导致 git diff 行数大幅增加，增加 Code Review 难度 |
+| **合并冲突**      | 多人协作分支 | 大规模格式化可能导致与他人的分支产生合并冲突                                      |
+| **格式不一致**    | 团队协作     | 如果项目未统一 Prettier 配置，格式化可能与团队现有风格产生差异                    |
 
 > **建议**：在执行格式化前，确保当前分支是干净的，且没有待合并的代码。
 
@@ -474,25 +479,25 @@ Prettier 无法处理代码结构排序和运算符调整。格式化后，需�
 
 ```typescript
 // 1. node_modules（外部依赖）
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
-import { debounce } from "lodash";
+import { ref, computed, onMounted } from 'vue'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 
 // 2. types（类型导入）
-import type { IUserInfo } from "@src/types";
+import type { IUserInfo } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from "@src/api/user";
-import { formatDate } from "@src/utils/date";
-import { useTable } from "@src/hooks/useTable";
-import store from "@src/store";
-import { APP_CONFIG } from "@src/constants";
-import DataTable from "@src/components/DataTable.vue";
+import { apiGetUserInfo } from '@src/api/user'
+import { formatDate } from '@src/utils/date'
+import { useTable } from '@src/hooks/useTable'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable.vue'
 
 // 4. 内部相对依赖（./）
-import { localHelper } from "./utils/helper";
-import { MAX_RETRY_COUNT } from "./constants";
-import SearchBar from "./SearchBar.vue";
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ##### `<script setup>` 结构顺序
@@ -587,10 +592,10 @@ defineExpose({
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-| 原写法 | 推荐写法 |
-|--------|---------|
-| `function fetchData() {}` | `const fetchData = () => {}` |
-| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| 原写法                           | 推荐写法                            |
+| -------------------------------- | ----------------------------------- |
+| `function fetchData() {}`        | `const fetchData = () => {}`        |
+| `function handleClick(e) {}`     | `const handleClick = (e) => {}`     |
 | `async function submitForm() {}` | `const submitForm = async () => {}` |
 
 > ⚠️ 该转换属于**代码风格统一**，需在 T02 任务中提示用户确认后执行。
@@ -625,16 +630,16 @@ defineExpose({
 
 ```typescript
 // ✅ 正确：明确类型
-const userList = ref<IUserInfo[]>([]);
-const selectedId = ref<string | null>(null);
+const userList = ref<IUserInfo[]>([])
+const selectedId = ref<string | null>(null)
 const formData = reactive<{ username: string; email: string }>({
-  username: "",
-  email: "",
-});
+  username: '',
+  email: '',
+})
 
 // ❌ 错误：使用 any
-const userList = ref<any>([]);  // 禁止
-const data: any = {};  // 禁止
+const userList = ref<any>([]) // 禁止
+const data: any = {} // 禁止
 ```
 
 #### TSX/JSX 组件结构规范
@@ -643,16 +648,16 @@ const data: any = {};  // 禁止
 
 ```tsx
 // UserCard.tsx
-import { defineComponent, ref, computed } from "vue";
-import type { PropType } from "vue";
-import type { IUserInfo } from "@/types/user";
+import { defineComponent, ref, computed } from 'vue'
+import type { PropType } from 'vue'
+import type { IUserInfo } from '@/types/user'
 
 /**
  * UserCard 组件
  * @description 用户卡片组件，显示用户基本信息
  */
 export default defineComponent({
-  name: "UserCard",
+  name: 'UserCard',
 
   props: {
     // user: 用户信息对象
@@ -667,20 +672,20 @@ export default defineComponent({
     },
   },
 
-  emits: ["select", "change"],
+  emits: ['select', 'change'],
 
   setup(props, { emit }) {
     // ref: 是否激活
-    const isActive = ref(false);
+    const isActive = ref(false)
 
     // computed: 显示名称
-    const displayName = computed(() => props.user.name || "未知用户");
+    const displayName = computed(() => props.user.name || '未知用户')
 
     // 方法: 处理点击
     const handleClick = () => {
-      emit("select", props.user);
-      isActive.value = !isActive.value;
-    };
+      emit('select', props.user)
+      isActive.value = !isActive.value
+    }
 
     return () => (
       <div class="user-card">
@@ -691,9 +696,9 @@ export default defineComponent({
           <button onClick={handleClick}>选择用户</button>
         </div>
       </div>
-    );
+    )
   },
-});
+})
 ```
 
 ##### TSX 组件结构顺序
@@ -769,12 +774,12 @@ const handleClick = () => {
 
 #### JSX/TSX 注释
 
-| 场景     | 注释格式                  | 示例                            |
-| -------- | ------------------------- | ------------------------------- |
-| 根节点   | `{/* 组件名称 */}`       | `{/* UserCard */}`             |
-| 循环节点 | `{/* 循环: 描述 */}`     | `{/* 循环: 用户列表 */}`       |
-| 条件分支 | `{/* 条件: 描述 */}`     | `{/* 条件: 有数据时 */}`       |
-| 关键区块 | `{/* 区块名称 */}`       | `{/* 操作按钮组 */}`           |
+| 场景     | 注释格式             | 示例                     |
+| -------- | -------------------- | ------------------------ |
+| 根节点   | `{/* 组件名称 */}`   | `{/* UserCard */}`       |
+| 循环节点 | `{/* 循环: 描述 */}` | `{/* 循环: 用户列表 */}` |
+| 条件分支 | `{/* 条件: 描述 */}` | `{/* 条件: 有数据时 */}` |
+| 关键区块 | `{/* 区块名称 */}`   | `{/* 操作按钮组 */}`     |
 
 ##### JSX/TSX 示例
 
@@ -832,9 +837,7 @@ export default defineComponent({
     <!-- 条件: 有权限时显示操作按钮 -->
     <div v-if="hasPermission" class="user-card__actions">
       <!-- 循环: 操作按钮列表 -->
-      <button v-for="action in actions" :key="action.id">
-        {{ action.label }}
-      </button>
+      <button v-for="action in actions" :key="action.id">{{ action.label }}</button>
     </div>
 
     <!-- 插槽: 默认内容 -->
@@ -851,16 +854,16 @@ export default defineComponent({
 
 ##### `<script setup>` 注释对照表
 
-| 内容         | 注释格式               | 示例                              |
-| ------------ | ---------------------- | --------------------------------- |
-| Props        | `// prop名: 描述`      | `// userId: 用户ID`               |
-| ref          | `// ref名: 描述`       | `// searchQuery: 搜索查询参数`    |
-| reactive     | `// reactive名: 描述`  | `// formData: 表单数据`           |
-| computed     | `// computed: 描述`    | `// computed: 是否全选`           |
-| watch        | `// watch: 描述`       | `// watch: 监听用户输入`          |
-| 方法         | `// 方法名: 描述`      | `// handleSubmit: 提交表单`       |
-| Hooks        | `// Hook名: 描述`      | `// useTable: 表格逻辑 Hook`      |
-| 生命周期     | `// 生命周期名: 描述`  | `// onMounted: 初始化数据`        |
+| 内容     | 注释格式              | 示例                           |
+| -------- | --------------------- | ------------------------------ |
+| Props    | `// prop名: 描述`     | `// userId: 用户ID`            |
+| ref      | `// ref名: 描述`      | `// searchQuery: 搜索查询参数` |
+| reactive | `// reactive名: 描述` | `// formData: 表单数据`        |
+| computed | `// computed: 描述`   | `// computed: 是否全选`        |
+| watch    | `// watch: 描述`      | `// watch: 监听用户输入`       |
+| 方法     | `// 方法名: 描述`     | `// handleSubmit: 提交表单`    |
+| Hooks    | `// Hook名: 描述`     | `// useTable: 表格逻辑 Hook`   |
+| 生命周期 | `// 生命周期名: 描述` | `// onMounted: 初始化数据`     |
 
 ##### Props 注释示例
 
@@ -1002,10 +1005,10 @@ onMounted(() => {
  * @description 包含用户基本信息和状态
  */
 interface IUserInfo {
-  id: string;
-  username: string;
-  email: string;
-  active: boolean;
+  id: string
+  username: string
+  email: string
+  active: boolean
 }
 
 /**
@@ -1013,11 +1016,11 @@ interface IUserInfo {
  * @description 定义表格列的显示配置
  */
 type ITableColumn = {
-  key: string;
-  title: string;
-  width?: number;
-  sortable?: boolean;
-};
+  key: string
+  title: string
+  width?: number
+  sortable?: boolean
+}
 ```
 
 ### T04 🎨 CSS/BEM 架构规范（🟡 中风险）
@@ -1050,7 +1053,9 @@ type ITableColumn = {
     }
   }
 
-  .user-card__body { /* ... */ }
+  .user-card__body {
+    /* ... */
+  }
 }
 ```
 
@@ -1069,7 +1074,9 @@ type ITableColumn = {
     }
   }
 
-  &__body { /* ... */ }
+  &__body {
+    /* ... */
+  }
 }
 ```
 
@@ -1221,39 +1228,39 @@ Vue3 推荐使用 CSS 变量实现动态样式：
 
 ##### ref / reactive 命名
 
-| 类型      | 规范          | 示例                     |
-| --------- | ------------- | ------------------------ |
-| ref       | camelCase     | `isLoading`, `userName`  |
-| reactive  | camelCase     | `formData`, `tableData`  |
-| computed  | camelCase     | `isSelected`, `totalPage` |
+| 类型     | 规范      | 示例                      |
+| -------- | --------- | ------------------------- |
+| ref      | camelCase | `isLoading`, `userName`   |
+| reactive | camelCase | `formData`, `tableData`   |
+| computed | camelCase | `isSelected`, `totalPage` |
 
 ##### Hooks 命名规范
 
 **必须以 `use` 开头**，遵循 Vue3 组合式 API 约定：
 
-| 类型            | 规范                    | 示例                              |
-| --------------- | ----------------------- | --------------------------------- |
-| 表格逻辑 Hook   | `use + 功能名`          | `useTable`                        |
-| 表单逻辑 Hook   | `use + 功能名`          | `useSearchForm`                   |
-| 请求逻辑 Hook   | `use + 功能名 + Fetch`  | `useUserFetch`                    |
-| 通用逻辑 Hook   | `use + 功能名`          | `useLocalStorage`                 |
+| 类型          | 规范                   | 示例              |
+| ------------- | ---------------------- | ----------------- |
+| 表格逻辑 Hook | `use + 功能名`         | `useTable`        |
+| 表单逻辑 Hook | `use + 功能名`         | `useSearchForm`   |
+| 请求逻辑 Hook | `use + 功能名 + Fetch` | `useUserFetch`    |
+| 通用逻辑 Hook | `use + 功能名`         | `useLocalStorage` |
 
 ```typescript
 // ✅ 正确：Hooks 命名以 use 开头
-const { tableData, loading } = useTable();
-const { searchQuery, resetForm } = useSearchForm();
+const { tableData, loading } = useTable()
+const { searchQuery, resetForm } = useSearchForm()
 
 // ❌ 错误：不以 use 开头
-const { tableData } = tableHook();  // 禁止
+const { tableData } = tableHook() // 禁止
 ```
 
 #### TypeScript 类型命名规范
 
-| 类型     | 规范        | 示例               |
-| -------- | ----------- | ------------------ |
+| 类型     | 规范             | 示例                        |
+| -------- | ---------------- | --------------------------- |
 | 类型别名 | `I` + PascalCase | `IUserInfo`, `ITableConfig` |
-| 接口     | `I` + PascalCase | `IUser`, `ITable` |
-| 泛型参数 | 单字母大写  | `T`, `K`, `V`      |
+| 接口     | `I` + PascalCase | `IUser`, `ITable`           |
+| 泛型参数 | 单字母大写       | `T`, `K`, `V`               |
 
 ```typescript
 // ✅ 正确：类型命名以 I 为前缀
@@ -1295,6 +1302,7 @@ interface TableConfig { ... };  // 应为 ITableConfig
 ⚠️ 命名重构影响范围检测：
 
 `getUserInfo` 函数在以下文件中被引用：
+
 1. src/views/UserList.vue (line 23, 45)
 2. src/components/UserCard.vue (line 12)
 3. src/api/user.ts (定义位置)
@@ -1330,11 +1338,11 @@ interface TableConfig { ... };  // 应为 ITableConfig
 ##### 目标结构
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -1389,12 +1397,13 @@ if (code === 0) {
 
 ```typescript
 // ✅ 正确：computed 用于同步派生逻辑
-const isSelected = computed(() => selectedItems.value.length === totalItems.value);
+const isSelected = computed(() => selectedItems.value.length === totalItems.value)
 
 // ❌ 错误：computed 中使用异步逻辑
-const userList = computed(async () => {  // 禁止
-  return await apiGetUserList();
-});
+const userList = computed(async () => {
+  // 禁止
+  return await apiGetUserList()
+})
 ```
 
 ##### 风险：计算属性优先
@@ -1409,10 +1418,10 @@ const userList = computed(async () => {  // 禁止
 
 ##### 声明方式对照
 
-| 原写法 | 推荐写法 |
-|--------|---------|
-| `function fetchData() {}` | `const fetchData = () => {}` |
-| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| 原写法                           | 推荐写法                            |
+| -------------------------------- | ----------------------------------- |
+| `function fetchData() {}`        | `const fetchData = () => {}`        |
+| `function handleClick(e) {}`     | `const handleClick = (e) => {}`     |
 | `async function submitForm() {}` | `const submitForm = async () => {}` |
 
 ##### 示例
@@ -1423,18 +1432,18 @@ function fetchData() {
   // ...
 }
 
-const handleClick = function() {
+const handleClick = function () {
   // ...
 }
 
 // ✅ 正确：箭头函数（推荐）
 const fetchData = () => {
   // ...
-};
+}
 
 const handleSubmit = async () => {
   // ...
-};
+}
 ```
 
 ##### 注意事项
@@ -1462,8 +1471,8 @@ const handleSubmit = async () => {
 
 ```typescript
 // hooks/useTable.ts
-import { ref, computed } from "vue";
-import type { ITableColumn } from "@/types/table";
+import { ref, computed } from 'vue'
+import type { ITableColumn } from '@/types/table'
 
 /**
  * 表格逻辑 Hook
@@ -1471,37 +1480,37 @@ import type { ITableColumn } from "@/types/table";
  */
 export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
   // ref: 表格数据
-  const tableData = ref<T[]>([]);
-  
+  const tableData = ref<T[]>([])
+
   // ref: 加载状态
-  const loading = ref(false);
-  
+  const loading = ref(false)
+
   // ref: 分页信息（优先使用 ref，尽可能少用 reactive）
-  const page = ref(1);
-  const pageSize = ref(20);
-  const total = ref(0);
-  
+  const page = ref(1)
+  const pageSize = ref(20)
+  const total = ref(0)
+
   // computed: 是否有数据
-  const hasData = computed(() => tableData.value.length > 0);
-  
+  const hasData = computed(() => tableData.value.length > 0)
+
   /**
    * 获取表格数据
    * @param fetchFn - 数据获取函数
    */
   const fetchData = async (fetchFn: () => Promise<{ data: T[]; total: number }>) => {
-    loading.value = true;
+    loading.value = true
     try {
-      const { data, total } = await fetchFn();
-      tableData.value = data;
-      total.value = total;
+      const { data, total } = await fetchFn()
+      tableData.value = data
+      total.value = total
     } catch (err) {
-      console.warn(err);
+      console.warn(err)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
-  
-// 返回公共接口（禁止直接返回 reactive 对象）
+  }
+
+  // 返回公共接口（禁止直接返回 reactive 对象）
   return {
     tableData,
     loading,
@@ -1510,8 +1519,8 @@ export const useTable = <T = any>(initialColumns?: ITableColumn[]) => {
     total,
     hasData,
     fetchData,
-  };
-};
+  }
+}
 ```
 
 ##### 使用示例
@@ -1546,12 +1555,12 @@ onMounted(() => {
 
 ##### 转换规则
 
-| 场景 | 原写法（reactive） | 推荐写法（ref） |
-|------|---------------------|-----------------|
-| 简单状态 | `const state = reactive({ count: 0 })` | `const count = ref(0)` |
-| 对象数据 | `const user = reactive({ name: '', age: 0 })` | `const userName = ref('')`<br>`const userAge = ref(0)` |
-| 数组数据 | `const list = reactive([])` | `const list = ref([])` |
-| 分页信息 | `const pagination = reactive({ page: 1, size: 20 })` | `const page = ref(1)`<br>`const pageSize = ref(20)` |
+| 场景     | 原写法（reactive）                                   | 推荐写法（ref）                                        |
+| -------- | ---------------------------------------------------- | ------------------------------------------------------ |
+| 简单状态 | `const state = reactive({ count: 0 })`               | `const count = ref(0)`                                 |
+| 对象数据 | `const user = reactive({ name: '', age: 0 })`        | `const userName = ref('')`<br>`const userAge = ref(0)` |
+| 数组数据 | `const list = reactive([])`                          | `const list = ref([])`                                 |
+| 分页信息 | `const pagination = reactive({ page: 1, size: 20 })` | `const page = ref(1)`<br>`const pageSize = ref(20)`    |
 
 ##### 转换示例
 
@@ -1563,26 +1572,26 @@ const formData = reactive({
   username: '',
   email: '',
   phone: '',
-});
+})
 
 const pagination = reactive({
   page: 1,
   pageSize: 20,
   total: 0,
-});
+})
 ```
 
 **优化后（使用 ref）**：
 
 ```typescript
 // ✅ 推荐：使用 ref
-const username = ref('');
-const email = ref('');
-const phone = ref('');
+const username = ref('')
+const email = ref('')
+const phone = ref('')
 
-const page = ref(1);
-const pageSize = ref(20);
-const total = ref(0);
+const page = ref(1)
+const pageSize = ref(20)
+const total = ref(0)
 ```
 
 ##### Hooks 中的规范
@@ -1592,22 +1601,22 @@ const total = ref(0);
 ```typescript
 // ❌ 错误：直接返回 reactive
 export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return { form };  // 禁止
-};
+  const form = reactive({ name: '', age: 0 })
+  return { form } // 禁止
+}
 
 // ✅ 正确：使用 toRefs 解构后返回
 export const useForm = () => {
-  const name = ref('');
-  const age = ref(0);
-  return { name, age };
-};
+  const name = ref('')
+  const age = ref(0)
+  return { name, age }
+}
 
 // ✅ 正确：如果必须用 reactive，使用 toRefs
 export const useForm = () => {
-  const form = reactive({ name: '', age: 0 });
-  return toRefs(form);  // 允许
-};
+  const form = reactive({ name: '', age: 0 })
+  return toRefs(form) // 允许
+}
 ```
 
 ##### 风险：Reactive 转 Ref
@@ -1646,27 +1655,27 @@ export const useForm = () => {
 ```typescript
 // ✅ 正确：使用 TypeScript 泛型定义 Props
 const props = defineProps<{
-  userId: string;
-  pageSize?: number;
-}>();
+  userId: string
+  pageSize?: number
+}>()
 
 // ✅ 正确：使用 withDefaults 设置默认值
 const props = withDefaults(
   defineProps<{
-    pageSize?: number;
-    isLoading?: boolean;
+    pageSize?: number
+    isLoading?: boolean
   }>(),
   {
     pageSize: 20,
     isLoading: false,
-  }
-);
+  },
+)
 
 // ❌ 错误：使用运行时 Props 定义（Vue2 风格）
 const props = defineProps({
-  userId: String,  // 禁止在 Vue3 中使用
+  userId: String, // 禁止在 Vue3 中使用
   pageSize: Number,
-});
+})
 ```
 
 ##### Props 注释要求
@@ -1678,10 +1687,10 @@ const props = defineProps({
 ```typescript
 const props = defineProps<{
   // userId: 用户唯一标识
-  userId: string;
+  userId: string
   // pageSize: 分页大小，默认 20
-  pageSize?: number;
-}>();
+  pageSize?: number
+}>()
 ```
 
 ##### 风险：Props 增强
@@ -1704,13 +1713,13 @@ const props = defineProps<{
 // ✅ 正确：使用 TypeScript 类型定义 Emits
 const emit = defineEmits<{
   // select: 选中用户事件
-  (e: "select", user: IUserInfo): void;
+  (e: 'select', user: IUserInfo): void
   // change: 页面变化事件
-  (e: "change", page: number): void;
-}>();
+  (e: 'change', page: number): void
+}>()
 
 // ❌ 错误：使用运行时 Emits 定义（Vue2 风格）
-const emit = defineEmits(["select", "change"]);  // 禁止
+const emit = defineEmits(['select', 'change']) // 禁止
 ```
 
 ##### Emit 顺序

@@ -22,7 +22,7 @@
 #### 未安装 `useRequest` 时（手动管理状态）
 
 ```typescript
-import { ref, toRefs } from "vue";
+import { ref, toRefs } from 'vue'
 
 /**
  * 表格数据管理
@@ -30,33 +30,33 @@ import { ref, toRefs } from "vue";
  */
 export const useTable = () => {
   // 分页请求参数（组合使用）
-  const pagination = ref({ page: 1, limit: 20 });
+  const pagination = ref({ page: 1, limit: 20 })
   // 加载状态
-  const loading = ref(false);
+  const loading = ref(false)
   // 表格数据源
-  const dataSource = ref<any[]>([]);
+  const dataSource = ref<any[]>([])
   // 总条数（响应数据，独立管理）
-  const total = ref(0);
+  const total = ref(0)
 
   const getDataSourceTotal = async () => {
-    loading.value = true;
+    loading.value = true
     try {
       const { code, data, msg } = await apiGetList({
         page: pagination.value.page,
         limit: pagination.value.limit,
-      });
+      })
       if (code === 0) {
-        dataSource.value = data.list;
-        total.value = data.total;
+        dataSource.value = data.list
+        total.value = data.total
       } else {
-        console.warn(msg);
+        console.warn(msg)
       }
     } catch (error) {
-      console.warn("getDataSourceTotal error:", error);
+      console.warn('getDataSourceTotal error:', error)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
   return {
     loading,
@@ -64,15 +64,15 @@ export const useTable = () => {
     total,
     pagination,
     getDataSourceTotal,
-  };
-};
+  }
+}
 ```
 
 #### 已安装 `useRequest` 时（自动管理状态）
 
 ```typescript
-import { useRequest } from "ahooks-vue"; // 或 'vue-hooks-plus'
-import { ref } from "vue";
+import { useRequest } from 'ahooks-vue' // 或 'vue-hooks-plus'
+import { ref } from 'vue'
 
 /**
  * 表格数据管理
@@ -80,22 +80,22 @@ import { ref } from "vue";
  */
 export const useTable = () => {
   // 分页请求参数（组合使用）
-  const pagination = ref({ page: 1, limit: 20 });
+  const pagination = ref({ page: 1, limit: 20 })
   // 加载状态（useRequest 自动管理）
   // 表格数据源
-  const dataSource = ref<any[]>([]);
+  const dataSource = ref<any[]>([])
   // 总条数（响应数据，独立管理）
-  const total = ref(0);
+  const total = ref(0)
 
   // 分页查询成功回调
   const onGetListSuccess = ({ code, data, msg }: IApiResponse) => {
     if (code === 0) {
-      dataSource.value = data.list ?? [];
-      total.value = data.total;
+      dataSource.value = data.list ?? []
+      total.value = data.total
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
-  };
+  }
 
   const { loading, run: getDataSourceTotal } = useRequest(
     (params) => apiGetList(Object.assign({}, pagination.value, params)),
@@ -103,10 +103,10 @@ export const useTable = () => {
       manual: true,
       onSuccess: onGetListSuccess,
       onError: (error) => {
-        console.warn("getDataSourceTotal error:", error);
+        console.warn('getDataSourceTotal error:', error)
       },
     },
-  );
+  )
 
   return {
     loading,
@@ -114,8 +114,8 @@ export const useTable = () => {
     total,
     pagination,
     getDataSourceTotal,
-  };
-};
+  }
+}
 ```
 
 ---

@@ -3,7 +3,6 @@ name: yy-post-to-wechat
 description: >
   通过微信公众号 API 将本地 Markdown/HTML 文章发布到公众号草稿箱。
   当用户需要发布文章到微信公众号、推送内容到公众号时触发。
-
 ---
 
 # yy-post-to-wechat

@@ -8,12 +8,12 @@
 
 ## 基础格式
 
-| 规范项 | 要求 |
-| ------ | ---- |
-| 缩进 | 2 空格 |
-| 引号 | JavaScript 单引号，HTML/模板双引号 |
-| 分号 | 语句末尾必须有分号 |
-| 行宽 | 最大 120 字符 |
+| 规范项 | 要求                               |
+| ------ | ---------------------------------- |
+| 缩进   | 2 空格                             |
+| 引号   | JavaScript 单引号，HTML/模板双引号 |
+| 分号   | 语句末尾必须有分号                 |
+| 行宽   | 最大 120 字符                      |
 
 ---
 
@@ -36,7 +36,7 @@ const obj = {
 - 多参数或无参数时保留括号
 
 ```js
-items.map(item => item.id) // ✅ 单参数省略括号
+items.map((item) => item.id) // ✅ 单参数省略括号
 items.map((item, index) => item.id) // ✅ 多参数保留括号
 items.filter(() => isReady) // ✅ 无参数保留括号
 ```
@@ -49,7 +49,7 @@ items.filter(() => isReady) // ✅ 无参数保留括号
 
 ```js
 const obj = { foo: bar } // ✅
-const obj = {foo: bar} // ❌
+const obj = { foo: bar } // ❌
 ```
 
 ---
@@ -58,11 +58,11 @@ const obj = {foo: bar} // ❌
 
 `import` 语句必须按以下 3 组顺序排列，**组间空一行**，组内按字母顺序排序：
 
-| 组别 | 说明 | 示例 |
-| ---- | ---- | ---- |
-| 1 | 外部依赖 | `import Vue from 'vue'`、`import dayjs from 'dayjs'` |
-| 2 | 内部全局（@src/） | `import { apiGetUser } from '@src/api/user'`、`import store from '@src/store'`、`import { APP_CONFIG } from '@src/constants'`、`import UserAvatar from '@src/components/UserAvatar'` |
-| 3 | 内部相对（./、../） | `import { helper } from './utils'`、`import { localConfig } from './constants'`、`import StatusBadge from './StatusBadge.vue'` |
+| 组别 | 说明                | 示例                                                                                                                                                                                 |
+| ---- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | 外部依赖            | `import Vue from 'vue'`、`import dayjs from 'dayjs'`                                                                                                                                 |
+| 2    | 内部全局（@src/）   | `import { apiGetUser } from '@src/api/user'`、`import store from '@src/store'`、`import { APP_CONFIG } from '@src/constants'`、`import UserAvatar from '@src/components/UserAvatar'` |
+| 3    | 内部相对（./、../） | `import { helper } from './utils'`、`import { localConfig } from './constants'`、`import StatusBadge from './StatusBadge.vue'`                                                       |
 
 ---
 

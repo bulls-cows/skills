@@ -301,7 +301,7 @@
 **统一响应处理模式**：
 
 ```typescript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 处理成功逻辑
 } else {

@@ -14,11 +14,11 @@
 ### 目标结构
 
 ```javascript
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
-  this.$message.success(msg || '操作成功');
+  this.$message.success(msg || '操作成功')
 } else {
-  this.$message.error(msg);
+  this.$message.error(msg)
 }
 ```
 
@@ -83,12 +83,12 @@ async handleSubmit() {
 
 ```javascript
 // ✅ 正确：单次解构
-const { code, data, msg } = await api.getUserList();
+const { code, data, msg } = await api.getUserList()
 
 // ❌ 错误：连续解构
 const {
   data: { data: list },
-} = await api.getUserList(); // 禁止
+} = await api.getUserList() // 禁止
 ```
 
 ### 先判断成功后使用数据
@@ -97,21 +97,21 @@ const {
 
 ```javascript
 // 错误：假设 res.data 一定存在
-const res = await api.getUserList();
-const list = res.data;
+const res = await api.getUserList()
+const list = res.data
 
 // 正确：先判断成功，再做类型守卫
-const res = await api.getUserList();
+const res = await api.getUserList()
 if (res.success && Array.isArray(res.data)) {
-  const list = res.data;
+  const list = res.data
 }
 
 // 统一模式
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 成功处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -126,16 +126,16 @@ if (code === 0) {
 ```javascript
 // ❌ 错误：空 catch
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
   // 禁止空 catch
 }
 
 // ✅ 正确：catch 中 console.warn 即可
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
-  console.warn(error);
+  console.warn(error)
 }
 ```
 
@@ -144,11 +144,11 @@ try {
 业务侧返回的非成功状态码，在 `else` 分支中 `console.warn` 记录即可：
 
 ```javascript
-const { code, msg } = await apiGetData();
+const { code, msg } = await apiGetData()
 if (code === 0) {
-  this.showData(msg);
+  this.showData(msg)
 } else {
-  console.warn(msg); // 记录业务错误
+  console.warn(msg) // 记录业务错误
 }
 ```
 

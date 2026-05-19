@@ -15,11 +15,11 @@
 
 注释增强应以**增量补充**为第一原则，仅在以下 **3 种情况**才允许修改原有注释：
 
-| 可修改情况 | 判定标准 | 示例 |
-| ---------- | -------- | ---- |
-| **注释明显错误** | 注释描述的行为与代码实际行为不一致 | 注释写"获取用户列表"，但实际调用的是 `apiDeleteUser` |
-| **业务逻辑已发生实质性变更** | 代码的业务含义已完全不同，旧注释不再适用 | 旧注释"提交订单"，代码已全部改为"提交退款申请" |
-| **命名导致注释引用失效** | 注释中引用了已被重命名或删除的标识符 | 注释提到 `oldName`，但变量已更名为 `newName` |
+| 可修改情况                   | 判定标准                                 | 示例                                                 |
+| ---------------------------- | ---------------------------------------- | ---------------------------------------------------- |
+| **注释明显错误**             | 注释描述的行为与代码实际行为不一致       | 注释写"获取用户列表"，但实际调用的是 `apiDeleteUser` |
+| **业务逻辑已发生实质性变更** | 代码的业务含义已完全不同，旧注释不再适用 | 旧注释"提交订单"，代码已全部改为"提交退款申请"       |
+| **命名导致注释引用失效**     | 注释中引用了已被重命名或删除的标识符     | 注释提到 `oldName`，但变量已更名为 `newName`         |
 
 **禁止修改的常见场景**：
 
@@ -35,12 +35,12 @@
 
 ## JSX/TSX 注释
 
-| 场景     | 注释格式                  | 示例                            |
-| -------- | ------------------------- | ------------------------------- |
-| 根节点   | `{/* 组件名称 */}`       | `{/* UserCard */}`             |
-| 循环节点 | `{/* 循环: 描述 */}`     | `{/* 循环: 用户列表 */}`       |
-| 条件分支 | `{/* 条件: 描述 */}`     | `{/* 条件: 有数据时 */}`       |
-| 关键区块 | `{/* 区块名称 */}`       | `{/* 操作按钮组 */}`           |
+| 场景     | 注释格式             | 示例                     |
+| -------- | -------------------- | ------------------------ |
+| 根节点   | `{/* 组件名称 */}`   | `{/* UserCard */}`       |
+| 循环节点 | `{/* 循环: 描述 */}` | `{/* 循环: 用户列表 */}` |
+| 条件分支 | `{/* 条件: 描述 */}` | `{/* 条件: 有数据时 */}` |
+| 关键区块 | `{/* 区块名称 */}`   | `{/* 操作按钮组 */}`     |
 
 ### JSX/TSX 示例
 
@@ -98,9 +98,7 @@ export default defineComponent({
     <!-- 条件: 有权限时显示操作按钮 -->
     <div v-if="hasPermission" class="user-card__actions">
       <!-- 循环: 操作按钮列表 -->
-      <button v-for="action in actions" :key="action.id">
-        {{ action.label }}
-      </button>
+      <button v-for="action in actions" :key="action.id">{{ action.label }}</button>
     </div>
 
     <!-- 插槽: 默认内容 -->
@@ -117,16 +115,16 @@ export default defineComponent({
 
 ### `<script setup>` 注释对照表
 
-| 内容         | 注释格式               | 示例                              |
-| ------------ | ---------------------- | --------------------------------- |
-| Props        | `// prop名: 描述`      | `// userId: 用户ID`               |
-| ref          | `// ref名: 描述`       | `// searchQuery: 搜索查询参数`    |
-| reactive     | `// reactive名: 描述`  | `// formData: 表单数据`           |
-| computed     | `// computed: 描述`    | `// computed: 是否全选`           |
-| watch        | `// watch: 描述`       | `// watch: 监听用户输入`          |
-| 方法         | `// 方法名: 描述`      | `// handleSubmit: 提交表单`       |
-| Hooks        | `// Hook名: 描述`      | `// useTable: 表格逻辑 Hook`      |
-| 生命周期     | `// 生命周期名: 描述`  | `// onMounted: 初始化数据`        |
+| 内容     | 注释格式              | 示例                           |
+| -------- | --------------------- | ------------------------------ |
+| Props    | `// prop名: 描述`     | `// userId: 用户ID`            |
+| ref      | `// ref名: 描述`      | `// searchQuery: 搜索查询参数` |
+| reactive | `// reactive名: 描述` | `// formData: 表单数据`        |
+| computed | `// computed: 描述`   | `// computed: 是否全选`        |
+| watch    | `// watch: 描述`      | `// watch: 监听用户输入`       |
+| 方法     | `// 方法名: 描述`     | `// handleSubmit: 提交表单`    |
+| Hooks    | `// Hook名: 描述`     | `// useTable: 表格逻辑 Hook`   |
+| 生命周期 | `// 生命周期名: 描述` | `// onMounted: 初始化数据`     |
 
 ### Props 注释示例
 
@@ -268,10 +266,10 @@ onMounted(() => {
  * @description 包含用户基本信息和状态
  */
 interface IUserInfo {
-  id: string;
-  username: string;
-  email: string;
-  active: boolean;
+  id: string
+  username: string
+  email: string
+  active: boolean
 }
 
 /**
@@ -279,9 +277,9 @@ interface IUserInfo {
  * @description 定义表格列的显示配置
  */
 type ITableColumn = {
-  key: string;
-  title: string;
-  width?: number;
-  sortable?: boolean;
-};
+  key: string
+  title: string
+  width?: number
+  sortable?: boolean
+}
 ```

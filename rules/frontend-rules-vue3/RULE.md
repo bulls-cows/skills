@@ -47,21 +47,21 @@ alwaysApply: true
 
 ## 快速导航
 
-| 模块 | 核心内容 |
-|------|----------|
-| 规范总纲 | 三级优先级索引（基础/强烈推荐/风格指南） |
-| 组件开发 | `<script setup>` 脚本结构、JSDoc、元素顺序、方法职责、页面拆分 |
-| 交互通信 | Props 定义、Emit 白名单、defineExpose、provide/inject、禁用 $parent/$children |
-| 模板指令 | v-for/key、v-if 冲突、v-html 安全、指令简写、属性顺序 |
-| 结构顺序 | 4 组 import 排序、`<script setup>` 内部 5 段结构 |
-| 命名规范 | 文件/组件/API/事件/常量/布尔值/Hooks（Props/Emit 详见交互通信） |
-| Hooks | 命名/返回值/使用规范、抽离建议、组件中导入顺序 |
-| 响应式 | ref 优先、reactive 转 ref、computed 规范、try/catch 包裹 |
-| 监听 | watch 深度/立即、清理资源、与 computed 选择策略 |
-| 网络请求 | async/await、统一响应解构、错误处理、安全规范 |
-| 代码风格 | Prettier 配置、箭头函数优先 |
-| 注释 | 模板/脚本/样式注释格式、注释保护原则 |
-| CSS/BEM | BEM 命名、scoped 优先、自定义指令 |
-| TypeScript | 禁止 any / as any / @ts-ignore、类型注解规范、import type |
-| 性能 | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
-| 约束清单 | 10 项禁止、5 项推荐、2 项不推荐、注意事项 |
+| 模块       | 核心内容                                                                      |
+| ---------- | ----------------------------------------------------------------------------- |
+| 规范总纲   | 三级优先级索引（基础/强烈推荐/风格指南）                                      |
+| 组件开发   | `<script setup>` 脚本结构、JSDoc、元素顺序、方法职责、页面拆分                |
+| 交互通信   | Props 定义、Emit 白名单、defineExpose、provide/inject、禁用 $parent/$children |
+| 模板指令   | v-for/key、v-if 冲突、v-html 安全、指令简写、属性顺序                         |
+| 结构顺序   | 4 组 import 排序、`<script setup>` 内部 5 段结构                              |
+| 命名规范   | 文件/组件/API/事件/常量/布尔值/Hooks（Props/Emit 详见交互通信）               |
+| Hooks      | 命名/返回值/使用规范、抽离建议、组件中导入顺序                                |
+| 响应式     | ref 优先、reactive 转 ref、computed 规范、try/catch 包裹                      |
+| 监听       | watch 深度/立即、清理资源、与 computed 选择策略                               |
+| 网络请求   | async/await、统一响应解构、错误处理、安全规范                                 |
+| 代码风格   | Prettier 配置、箭头函数优先                                                   |
+| 注释       | 模板/脚本/样式注释格式、注释保护原则                                          |
+| CSS/BEM    | BEM 命名、scoped 优先、自定义指令                                             |
+| TypeScript | 禁止 any / as any / @ts-ignore、类型注解规范、import type                     |
+| 性能       | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化                               |
+| 约束清单   | 10 项禁止、5 项推荐、2 项不推荐、注意事项                                     |

@@ -76,23 +76,23 @@
 
 ```typescript
 // 1. node_modules
-import { ref, computed, onMounted } from "vue";
-import dayjs from "dayjs";
+import { ref, computed, onMounted } from 'vue'
+import dayjs from 'dayjs'
 
 // 2. types
-import type { IUserInfo } from "@src/types";
+import type { IUserInfo } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from "@src/api/user";
-import { useTable } from "@src/hooks/useTable";
-import store from "@src/store";
-import { APP_CONFIG } from "@src/constants";
-import DataTable from "@src/components/DataTable.vue";
+import { apiGetUserInfo } from '@src/api/user'
+import { useTable } from '@src/hooks/useTable'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable.vue'
 
 // 4. 内部相对依赖（./）
-import { localHelper } from "./utils/helper";
-import { MAX_RETRY_COUNT } from "./constants";
-import SearchBar from "./SearchBar.vue";
+import { localHelper } from './utils/helper'
+import { MAX_RETRY_COUNT } from './constants'
+import SearchBar from './SearchBar.vue'
 ```
 
 ### 2.3 命名速查表
@@ -226,15 +226,15 @@ Vue 单文件组件内部块顺序：`<template>` → `<script setup>` → `<sty
 ```typescript
 const props = withDefaults(
   defineProps<{
-    title?: string; // title: 标题
-    userId: string | number; // userId: 用户ID
-    isLoading?: boolean; // isLoading: 加载状态
+    title?: string // title: 标题
+    userId: string | number // userId: 用户ID
+    isLoading?: boolean // isLoading: 加载状态
   }>(),
   {
-    title: "默认标题",
+    title: '默认标题',
     isLoading: false,
   },
-);
+)
 ```
 
 - **禁止修改 Props**：禁止在子组件内部直接修改 `props` 值
@@ -249,17 +249,17 @@ const props = withDefaults(
 
 ```typescript
 const props = defineProps<{
-  modelValue?: string; // modelValue: v-model 默认绑定值 (Vue 3 标准)
-  value?: string; // value: v-model:value 绑定值 (Ant Design Vue 风格)
-  userId: number; // userId: 用户ID
-  isLoading?: boolean; // isLoading: 加载状态
-}>();
+  modelValue?: string // modelValue: v-model 默认绑定值 (Vue 3 标准)
+  value?: string // value: v-model:value 绑定值 (Ant Design Vue 风格)
+  userId: number // userId: 用户ID
+  isLoading?: boolean // isLoading: 加载状态
+}>()
 
 // ✅ emit
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  "update:value": [value: string];
-}>();
+  'update:modelValue': [value: string]
+  'update:value': [value: string]
+}>()
 ```
 
 ### 3.6 Emit 事件白名单（19种）
@@ -277,11 +277,11 @@ const emit = defineEmits<{
 
 ```typescript
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  "update:value": [value: string];
-  change: [value: string];
-  click: [id: number];
-}>();
+  'update:modelValue': [value: string]
+  'update:value': [value: string]
+  change: [value: string]
+  click: [id: number]
+}>()
 ```
 
 ### 3.7 对外暴露（defineExpose）
@@ -292,11 +292,11 @@ const emit = defineEmits<{
 ```typescript
 const validate = async () => {
   /* ... */
-};
+}
 const resetForm = () => {
   /* ... */
-};
-defineExpose({ validate, resetForm });
+}
+defineExpose({ validate, resetForm })
 ```
 
 ### 3.8 provide/inject 规范
@@ -472,11 +472,11 @@ HTML 元素上的属性顺序：
 
 ```typescript
 // 目标结构
-const { code, data, msg } = await apiXXX();
+const { code, data, msg } = await apiXXX()
 if (code === 0) {
   // 数据处理
 } else {
-  console.warn(msg);
+  console.warn(msg)
 }
 ```
 
@@ -492,9 +492,9 @@ if (code === 0) {
 
 ```typescript
 try {
-  await apiGetData();
+  await apiGetData()
 } catch (error) {
-  console.warn(error); // catch 中 console.warn 即可
+  console.warn(error) // catch 中 console.warn 即可
 }
 ```
 
@@ -505,53 +505,50 @@ try {
 **手动执行（按钮点击/表单提交等场景）**：
 
 ```typescript
-import { useRequest } from "ahooks-vue";
+import { useRequest } from 'ahooks-vue'
 
 const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
   if (code === 0) {
-    console.log("登录成功");
+    console.log('登录成功')
     // 处理 token、跳转等
   } else {
-    console.warn(msg);
+    console.warn(msg)
   }
-};
+}
 
 // login Hook（manual 模式，手动触发）
-const { loading, run: runLogin } = useRequest(
-  () => apiPostLogin(loginForm.value),
-  {
-    manual: true,
-    onSuccess: onLoginSuccess,
-    onError: () => {
-      console.warn("网络异常，请重试");
-    },
+const { loading, run: runLogin } = useRequest(() => apiPostLogin(loginForm.value), {
+  manual: true,
+  onSuccess: onLoginSuccess,
+  onError: () => {
+    console.warn('网络异常，请重试')
   },
-);
+})
 
 // 在事件处理函数中调用
 export const handleSubmit = async () => {
-  await runLogin();
-};
+  await runLogin()
+}
 ```
 
 **带参数（分页场景）**：
 
 ```typescript
-import { useRequest } from "ahooks-vue";
-import { ref } from "vue";
+import { useRequest } from 'ahooks-vue'
+import { ref } from 'vue'
 
-const pagination = ref({ page: 1, limit: 20 });
-const total = ref(0);
-const dataSource = ref<any[]>([]);
+const pagination = ref({ page: 1, limit: 20 })
+const total = ref(0)
+const dataSource = ref<any[]>([])
 
 const onListSuccess = ({ code, data, msg }: IApiResponse) => {
   if (code === 0) {
-    dataSource.value = data.list ?? [];
-    total.value = data.total ?? 0;
+    dataSource.value = data.list ?? []
+    total.value = data.total ?? 0
   } else {
-    console.warn(msg);
+    console.warn(msg)
   }
-};
+}
 
 const { loading, run: getList } = useRequest(
   (params) => apiGetList(Object.assign({}, pagination.value, params)),
@@ -559,10 +556,10 @@ const { loading, run: getList } = useRequest(
     manual: true,
     onSuccess: onListSuccess,
     onError: (error) => {
-      console.warn(error);
+      console.warn(error)
     },
   },
-);
+)
 ```
 
 #### ⚙️ 未安装 `useRequest` 时
@@ -570,27 +567,27 @@ const { loading, run: getList } = useRequest(
 **手动执行（按钮点击/表单提交等场景）**：
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const loading = ref(false);
+const loading = ref(false)
 
 const handleSubmit = async () => {
-  if (loading.value) return; // 防重复提交
+  if (loading.value) return // 防重复提交
 
-  loading.value = true;
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 ```
 
 ### 5.6 防止重复提交
@@ -602,21 +599,21 @@ const handleSubmit = async () => {
 `useRequest` 的 `loading` 自动控制，按钮直接用 `:disabled="loading"` 禁用：
 
 ```typescript
-import { useRequest } from "ahooks-vue";
+import { useRequest } from 'ahooks-vue'
 
 const { loading, run } = useRequest(() => apiSubmit(formData.value), {
   manual: true,
   onSuccess: (res) => {
     if (res.code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(res.msg);
+      console.warn(res.msg)
     }
   },
   onError: () => {
-    console.warn("网络异常，请重试");
+    console.warn('网络异常，请重试')
   },
-});
+})
 ```
 
 ```vue
@@ -630,24 +627,24 @@ const { loading, run } = useRequest(() => apiSubmit(formData.value), {
 通过 `loading` 状态控制：
 
 ```typescript
-const loading = ref(false);
+const loading = ref(false)
 
 const submitForm = async () => {
-  if (loading.value) return; // 互斥锁
-  loading.value = true;
+  if (loading.value) return // 互斥锁
+  loading.value = true
   try {
-    const { code, msg } = await apiSubmit(formData.value);
+    const { code, msg } = await apiSubmit(formData.value)
     if (code === 0) {
-      console.log("提交成功");
+      console.log('提交成功')
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 ```
 
 ```vue
@@ -661,8 +658,8 @@ const submitForm = async () => {
 - **v-html XSS**：必须用 DOMPurify 过滤 HTML
 
 ```typescript
-import DOMPurify from "dompurify";
-const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
+import DOMPurify from 'dompurify'
+const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value))
 ```
 
 ```vue
@@ -705,11 +702,11 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 ### 6.4 样式区注释
 
-| 场景     | 格式                    | 示例            |
-| -------- | ----------------------- | --------------- |
-| 模块分组 | `/* 模块名称 */`        | `/* 用户卡片 */` |
-| 子模块   | `/* 模块 > 子模块 */`   | `/* 用户卡片 > 头部 */` |
-| 响应式   | `/* 响应式 */`          | `/* 响应式 */` |
+| 场景     | 格式                  | 示例                    |
+| -------- | --------------------- | ----------------------- |
+| 模块分组 | `/* 模块名称 */`      | `/* 用户卡片 */`        |
+| 子模块   | `/* 模块 > 子模块 */` | `/* 用户卡片 > 头部 */` |
+| 响应式   | `/* 响应式 */`        | `/* 响应式 */`          |
 
 ### 6.5 CSS 布局推荐
 
@@ -728,15 +725,15 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 以下属性存在兼容性风险，需提供降级方案：
 
-| 属性 | 问题 | 降级方案 |
-| ---------------- | ------------------------------------------ | ------------------------------ |
-| `gap` (Flexbox) | Safari 14.4及以下、IE11 不支持 | margin 负边距 |
-| `aspect-ratio` | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack |
-| `100vh` | iOS Safari 地址栏导致高度偏差 | JS 动态计算或 `dvh` 单位 |
-| `inset` | 旧浏览器不识别 | 先写 `top/right/bottom/left` 再覆盖 |
-| `will-change` | 动画结束不重置会占用内存 | 动画结束后设为 `auto` |
-| `content-visibility` | 仅 Chromium 支持 | 仅作性能增强，不影响核心布局 |
-| `subgrid` | 浏览器支持不完善 | 传统 Grid/Flex 降级 |
+| 属性                 | 问题                           | 降级方案                            |
+| -------------------- | ------------------------------ | ----------------------------------- |
+| `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
+| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
+| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
+| `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
+| `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
+| `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
+| `subgrid`            | 浏览器支持不完善               | 传统 Grid/Flex 降级                 |
 
 **兼容性开发实践**：
 
@@ -773,13 +770,13 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value));
 
 ```typescript
 // ✅ 推荐：使用 computed
-const totalPage = computed(() => Math.ceil(total.value / pageSize.value));
+const totalPage = computed(() => Math.ceil(total.value / pageSize.value))
 
 // ❌ 不推荐：使用 ref + watch
-const totalPage = ref(0);
+const totalPage = ref(0)
 watch([total, pageSize], () => {
-  totalPage.value = Math.ceil(total.value / pageSize.value);
-});
+  totalPage.value = Math.ceil(total.value / pageSize.value)
+})
 ```
 
 ### 6.3 watch 规范
@@ -797,9 +794,9 @@ watch(
   {
     deep: true, // 对象/数组必须声明
     immediate: true, // 初始化需触发时添加
-    flush: "post", // 刷新时机（默认 'pre'）
+    flush: 'post', // 刷新时机（默认 'pre'）
   },
-);
+)
 ```
 
 - watch 中必须标注注释（详见 4.2 脚本区注释）
@@ -822,10 +819,10 @@ watch(
 ```typescript
 onBeforeUnmount(() => {
   if (timer.value) {
-    clearInterval(timer.value);
+    clearInterval(timer.value)
   }
-  window.removeEventListener("resize", handleResize);
-});
+  window.removeEventListener('resize', handleResize)
+})
 ```
 
 ### 6.4 eventBus / Pinia
@@ -853,22 +850,22 @@ onBeforeUnmount(() => {
 
 ```typescript
 // ✅ ref<T>() 显式标注
-const userName = ref<string>("");
-const userList = ref<IUserInfo[]>([]);
-const isLoading = ref<boolean>(false);
-const selectedUser = ref<IUserInfo | null>(null);
+const userName = ref<string>('')
+const userList = ref<IUserInfo[]>([])
+const isLoading = ref<boolean>(false)
+const selectedUser = ref<IUserInfo | null>(null)
 
 // ✅ reactive<T>() 显式标注
 const state = reactive<{ name: string; age: number; roles: string[] }>({
-  name: "",
+  name: '',
   age: 0,
   roles: [],
-});
+})
 
 // ✅ computed<T>() 复杂类型显式标注
 const items = computed<IListItem[]>(() =>
   rawData.value.map((item) => ({ id: item.id, label: item.name })),
-);
+)
 ```
 
 ---
@@ -891,15 +888,15 @@ const items = computed<IListItem[]>(() =>
 ### 8.2 防抖 / 节流示例
 
 ```typescript
-import { debounce } from "lodash-es";
+import { debounce } from 'lodash-es'
 const handleSearch = debounce((query: string) => {
-  fetchSearchResults(query);
-}, 300);
+  fetchSearchResults(query)
+}, 300)
 
-import { throttle } from "lodash-es";
+import { throttle } from 'lodash-es'
 const handleScroll = throttle(() => {
-  updateScrollPosition();
-}, 100);
+  updateScrollPosition()
+}, 100)
 ```
 
 ---
@@ -933,13 +930,13 @@ const handleScroll = throttle(() => {
 
 ### 🟡 不推荐（尽量避免）
 
-| #   | 不推荐项            | 说明                            |
-| --- | ------------------- | ------------------------------- |
-| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化              |
-| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit |
+| #   | 不推荐项            | 说明                                                        |
+| --- | ------------------- | ----------------------------------------------------------- |
+| 1   | 多层 try/catch 嵌套 | 异步操作尽量扁平化                                          |
+| 2   | 生命周期 emit       | 不推荐在生命周期中主动向外 emit                             |
 | 3   | 可选链操作符 `?.`   | 不推荐 `a?.b?.c`，建议使用 lodash `get(a, ['b', 'c'])` 替代 |
-| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用 |
-| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用 |
+| 4   | CSS 嵌套原生写法    | 不推荐直接使用原生嵌套语法，需经 PostCSS 编译后使用         |
+| 5   | `:has()` 伪类       | Safari 15.4-15.6 存严重渲染 Bug，谨慎在生产环境使用         |
 
 ### ⚠️ 注意
 
@@ -968,8 +965,8 @@ const handleScroll = throttle(() => {
 #### 标准模板（已安装 `useRequest` 时）
 
 ```typescript
-import { useRequest } from "ahooks-vue"; // 或 'vue-hooks-plus'
-import { ref } from "vue";
+import { useRequest } from 'ahooks-vue' // 或 'vue-hooks-plus'
+import { ref } from 'vue'
 
 /**
  * 表格数据管理
@@ -977,22 +974,22 @@ import { ref } from "vue";
  */
 export const useTable = () => {
   // 分页请求参数（组合使用）
-  const pagination = ref({ page: 1, limit: 20 });
+  const pagination = ref({ page: 1, limit: 20 })
   // 加载状态（useRequest 自动管理）
   // 表格数据源
-  const dataSource = ref<any[]>([]);
+  const dataSource = ref<any[]>([])
   // 总条数（响应数据，独立管理）
-  const total = ref(0);
+  const total = ref(0)
 
   // 分页查询成功回调
   const onGetListSuccess = ({ code, data, msg }: IApiResponse) => {
     if (code === 0) {
-      dataSource.value = data.list ?? [];
-      total.value = data.total;
+      dataSource.value = data.list ?? []
+      total.value = data.total
     } else {
-      console.warn(msg);
+      console.warn(msg)
     }
-  };
+  }
 
   const { loading, run: getDataSourceTotal } = useRequest(
     (params) => apiGetList(Object.assign({}, pagination.value, params)),
@@ -1000,10 +997,10 @@ export const useTable = () => {
       manual: true,
       onSuccess: onGetListSuccess,
       onError: (error) => {
-        console.warn("getDataSourceTotal error:", error);
+        console.warn('getDataSourceTotal error:', error)
       },
     },
-  );
+  )
 
   return {
     loading,
@@ -1011,47 +1008,47 @@ export const useTable = () => {
     total,
     pagination,
     getDataSourceTotal,
-  };
-};
+  }
+}
 ```
 
 #### 标准模板（未安装 `useRequest` 时）
 
 ```typescript
-import { ref, toRefs } from "vue";
+import { ref, toRefs } from 'vue'
 
 /**
  * 表格数据管理
  * @description 封装表格数据获取、分页、加载状态等逻辑
  */
 export const useTable = () => {
-  const pagination = ref({ page: 1, limit: 20 });
-  const loading = ref(false);
-  const dataSource = ref<any[]>([]);
-  const total = ref(0);
+  const pagination = ref({ page: 1, limit: 20 })
+  const loading = ref(false)
+  const dataSource = ref<any[]>([])
+  const total = ref(0)
 
   const getDataSourceTotal = async () => {
-    loading.value = true;
+    loading.value = true
     try {
       const { code, data, msg } = await apiGetList({
         page: pagination.value.page,
         limit: pagination.value.limit,
-      });
+      })
       if (code === 0) {
-        dataSource.value = data.list;
-        total.value = data.total;
+        dataSource.value = data.list
+        total.value = data.total
       } else {
-        console.warn(msg);
+        console.warn(msg)
       }
     } catch (error) {
-      console.warn("getDataSourceTotal error:", error);
+      console.warn('getDataSourceTotal error:', error)
     } finally {
-      loading.value = false;
+      loading.value = false
     }
-  };
+  }
 
-  return { loading, dataSource, total, pagination, getDataSourceTotal };
-};
+  return { loading, dataSource, total, pagination, getDataSourceTotal }
+}
 ```
 
 ### 10.3 抽离建议
@@ -1073,9 +1070,9 @@ export const useTable = () => {
 
 ```typescript
 // hook: useTable
-const { tableData, loading, pagination } = useTable();
+const { tableData, loading, pagination } = useTable()
 // hook: useSearchForm
-const { searchParams, handleReset } = useSearchForm();
+const { searchParams, handleReset } = useSearchForm()
 ```
 
 **Hook 内部注释格式**：
@@ -1107,11 +1104,11 @@ const { searchParams, handleReset } = useSearchForm();
 
 ```typescript
 // ✅ 正确
-const data: unknown = JSON.parse(raw);
-const userInfo: IUserInfo = { id: "1", name: "test" };
+const data: unknown = JSON.parse(raw)
+const userInfo: IUserInfo = { id: '1', name: 'test' }
 
 // ❌ 错误
-const data: any = JSON.parse(raw);
+const data: any = JSON.parse(raw)
 ```
 
 ### 11.3 Emits 类型定义
@@ -1121,12 +1118,12 @@ const data: any = JSON.parse(raw);
 ```typescript
 // ✅ 正确：泛型定义
 const emit = defineEmits<{
-  "update:modelValue": [value: string];
-  change: [value: string];
-}>();
+  'update:modelValue': [value: string]
+  change: [value: string]
+}>()
 
 // ❌ 错误：运行时对象形式
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(['update:modelValue', 'change'])
 ```
 
 ### 11.4 Hook 返回值类型
@@ -1135,14 +1132,14 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 ```typescript
 interface IUseTableReturn {
-  dataSource: Ref<IUserInfo[]>;
-  loading: Ref<boolean>;
-  fetchList: () => Promise<void>;
+  dataSource: Ref<IUserInfo[]>
+  loading: Ref<boolean>
+  fetchList: () => Promise<void>
 }
 
 export const useTable = (): IUseTableReturn => {
   // ...
-};
+}
 ```
 
 ### 11.5 `.d.ts` 类型文件组织
@@ -1157,8 +1154,8 @@ export const useTable = (): IUseTableReturn => {
 - 混合导入时，`import type` 与值导入分开
 
 ```typescript
-import type { IUser } from "./types";
-import { userApi } from "./api";
+import type { IUser } from './types'
+import { userApi } from './api'
 ```
 
 ### 11.7 禁止 `@ts-ignore` / `@ts-expect-error`

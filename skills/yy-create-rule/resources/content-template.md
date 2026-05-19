@@ -70,16 +70,16 @@ this.$emit('update:value', newValue)
 使用 `position: absolute` 替代，或将固定定位元素移到键盘弹起时不可见的区域。
 
 \`\`\`css
-/* ❌ 可能有问题 */
+/_ ❌ 可能有问题 _/
 .fixed-header {
-  position: fixed;
-  top: 0;
+position: fixed;
+top: 0;
 }
 
-/* ✅ 更稳定的方案 */
+/_ ✅ 更稳定的方案 _/
 .header-container {
-  position: absolute;
-  top: 0;
+position: absolute;
+top: 0;
 }
 \`\`\`
 
@@ -101,16 +101,16 @@ this.$emit('update:value', newValue)
 \`\`\`javascript
 // ❌ 错误：静默忽略错误
 try {
-  const data = await api.getData()
+const data = await api.getData()
 } catch (e) {
-  // 什么都不做
+// 什么都不做
 }
 
 // ✅ 正确：统一错误处理
 try {
-  const data = await api.getData()
+const data = await api.getData()
 } catch (e) {
-  handleError(e)
+handleError(e)
 }
 \`\`\`
 
