@@ -31,6 +31,7 @@ function isMissingSkill(output: string): boolean {
 function removeSkillFromGlobal(skillName: string): boolean {
   const result = spawnSync(npxCommand, ['skills', 'remove', skillName, '-g', '-y', '--all'], {
     encoding: 'utf8',
+    shell: true,
   })
 
   if (result.error) {
