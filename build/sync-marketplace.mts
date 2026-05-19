@@ -51,14 +51,14 @@ const frontendSkillsList = skillsList.filter((skill) => skill.includes('frontend
 const nonFrontendSkillsList = skillsList.filter((skill) => !skill.includes('frontend'))
 
 const openSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: any) => plugin.name === 'open-skills',
+  (plugin: { name: string; skills?: string[] }) => plugin.name === 'open-skills',
 )
 if (openSkillsPlugin) {
   openSkillsPlugin.skills = nonFrontendSkillsList
 }
 
 const frontendSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: any) => plugin.name === 'frontend-skills',
+  (plugin: { name: string; skills?: string[] }) => plugin.name === 'frontend-skills',
 )
 if (frontendSkillsPlugin) {
   frontendSkillsPlugin.skills = frontendSkillsList
@@ -84,7 +84,7 @@ const internalSkillNames = fs
 
 const internalSkillsList = internalSkillNames.map((name) => `./skills-internal/${name}`)
 const internalSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: any) => plugin.name === 'internal-skills',
+  (plugin: { name: string; skills?: string[] }) => plugin.name === 'internal-skills',
 )
 if (internalSkillsPlugin) {
   internalSkillsPlugin.skills = internalSkillsList

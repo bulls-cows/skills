@@ -15,7 +15,7 @@ interface SkillMetadata {
   metadata?: {
     author?: string
     version?: string
-    [key: string]: any
+    [key: string]: unknown
   }
 }
 
