@@ -35,9 +35,13 @@
 
 ## 项目结构
 
-- `skills/`：所有技能的根目录
+- `skills/`：对外发布的所有技能的根目录
+- `skills-internal/`：内部技能目录，不对外发布
 - `rules/`：自定义规则目录
-- `.claude-plugin/`：插件市场配置目录
+- `build/`：构建脚本目录
+- `docs/`：项目文档目录
+- `types/`：TypeScript 类型定义目录(不适用于 `skills/` 和 `skills-internal/` 目录下的脚本)
+- `.claude-plugin/`：claude code 插件市场配置目录
   - `marketplace.json`：技能市场配置文件，定义插件和技能分组
 - `README.md`：项目说明文档
 - `AGENTS.md`：AI 代理的项目规范说明文档
