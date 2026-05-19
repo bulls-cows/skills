@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "lib": ["ES2022"],
+    "types": ["node"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types", "./src/typings"],
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "strict": true,
     "noEmit": true
   },
   "include": ["src/**/*"],

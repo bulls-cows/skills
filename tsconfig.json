@@ -10,7 +10,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./types"],
-    "strict": true
+    "strict": true,
+    "noEmit": true
   },
   "include": ["**/*.mts", "**/*.ts"],
   "exclude": ["node_modules", "skills", "skills-internal"]
