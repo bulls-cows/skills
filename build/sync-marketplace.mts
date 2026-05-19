@@ -10,10 +10,10 @@ const marketplaceJsonPath = path.join(projectRoot, '.claude-plugin', 'marketplac
 const skillsDir = path.join(projectRoot, 'skills')
 
 // 读取 package.json
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8')) as PackageJson
 
 // 读取 marketplace.json
-const marketplaceJson = JSON.parse(fs.readFileSync(marketplaceJsonPath, 'utf-8'))
+const marketplaceJson = JSON.parse(fs.readFileSync(marketplaceJsonPath, 'utf-8')) as MarketplaceJson
 
 // 1. 同步 name
 marketplaceJson.name = packageJson.name
@@ -51,14 +51,14 @@ const frontendSkillsList = skillsList.filter((skill) => skill.includes('frontend
 const nonFrontendSkillsList = skillsList.filter((skill) => !skill.includes('frontend'))
 
 const openSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: { name: string; skills?: string[] }) => plugin.name === 'open-skills',
+  (plugin) => plugin.name === 'open-skills',
 )
 if (openSkillsPlugin) {
   openSkillsPlugin.skills = nonFrontendSkillsList
 }
 
 const frontendSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: { name: string; skills?: string[] }) => plugin.name === 'frontend-skills',
+  (plugin) => plugin.name === 'frontend-skills',
 )
 if (frontendSkillsPlugin) {
   frontendSkillsPlugin.skills = frontendSkillsList
@@ -84,7 +84,7 @@ const internalSkillNames = fs
 
 const internalSkillsList = internalSkillNames.map((name) => `./skills-internal/${name}`)
 const internalSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin: { name: string; skills?: string[] }) => plugin.name === 'internal-skills',
+  (plugin) => plugin.name === 'internal-skills',
 )
 if (internalSkillsPlugin) {
   internalSkillsPlugin.skills = internalSkillsList
