@@ -38,7 +38,7 @@ AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文
 
 ### 本仓库技能
 
-执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。如果你使用 Claude Code，可以[通过插件市场安装这些技能](./docs/CLAUDE_CODE_SKILL.md)。
+执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
 
 #### 通用技能
 
