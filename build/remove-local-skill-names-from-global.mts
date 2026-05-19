@@ -38,7 +38,7 @@ function removeSkillFromGlobal(skillName: string): boolean {
     throw result.error
   }
 
-  const output = `${result.stdout ?? ''}${result.stderr ?? ''}`
+  const output = `${result.stdout}${result.stderr}`
 
   if (result.status === 0) {
     console.log(`已移除全局技能: ${skillName}`)
