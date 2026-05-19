@@ -59,4 +59,6 @@ for (const dir of dirs) {
   readyCount++
 }
 
-console.log(`\nDone. Ran ready scripts in ${String(readyCount)} of ${String(dirs.length)} skill directories.`)
+console.log(
+  `\nDone. Ran ready scripts in ${String(readyCount)} of ${String(dirs.length)} skill directories.`,
+)
