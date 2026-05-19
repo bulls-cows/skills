@@ -108,5 +108,5 @@ const result = await convertDirectory(projectRoot)
 const actionLabel = checkOnly ? '可转换' : '已转换'
 
 console.log(
-  `${actionLabel}文件 ${result.convertedFileCount} 个，已扫描文本文件 ${result.scannedFileCount} 个`,
+  `${actionLabel}文件 ${String(result.convertedFileCount)} 个，已扫描文本文件 ${String(result.scannedFileCount)} 个`,
 )

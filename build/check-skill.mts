@@ -164,7 +164,7 @@ function validateMetadataJson(
 
     // 3. 检查 metadata.version -> version
     if (skillMetadata.metadata?.version && metadataJson.version !== undefined) {
-      if (metadataJson.version !== String(skillMetadata.metadata.version)) {
+      if (metadataJson.version !== skillMetadata.metadata.version) {
         result.warnings.push(
           `metadata.json 中 version 字段与 SKILL.md 中 metadata.version 字段不一致\n` +
             `  - metadata.json.version: "${metadataJson.version}"\n` +
@@ -225,7 +225,7 @@ function main() {
   }
 
   console.log(
-    `\n检查完成: ${results.length} 个技能，${totalErrors} 个错误，${totalWarnings} 个警告`,
+    `\n检查完成: ${String(results.length)} 个技能，${String(totalErrors)} 个错误，${String(totalWarnings)} 个警告`,
   )
 
   if (totalErrors > 0) {
