@@ -6,7 +6,6 @@
     "在输出最终结果前，请务必进行自我审查：你是否对既定的术语、格式或规则描述进行了任何形式的同义替换、过度解释或冗余补充？如果是，请立即撤回修改，严格保持原始定义不变。",
     "本地测试后再提交，将技能复制到 OpenCode 并测试调用",
     "AGENTS.md",
-    "./docs/STRUCTURE.md",
     "./rules/file-scope-limit/RULE.md",
     "./rules/markdown/RULE.md",
     "./rules/text/RULE.md"
