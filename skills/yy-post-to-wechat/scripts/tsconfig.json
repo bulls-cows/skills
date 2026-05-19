@@ -5,6 +5,7 @@
     "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
     "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types", "./src/typings"],
     "noEmit": true
   },
   "include": ["src/**/*"],
