@@ -50,9 +50,7 @@ const skillsList = skillNames.map((name) => `./skills/${name}`)
 const frontendSkillsList = skillsList.filter((skill) => skill.includes('frontend'))
 const nonFrontendSkillsList = skillsList.filter((skill) => !skill.includes('frontend'))
 
-const openSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin) => plugin.name === 'open-skills',
-)
+const openSkillsPlugin = marketplaceJson.plugins.find((plugin) => plugin.name === 'open-skills')
 if (openSkillsPlugin) {
   openSkillsPlugin.skills = nonFrontendSkillsList
 }

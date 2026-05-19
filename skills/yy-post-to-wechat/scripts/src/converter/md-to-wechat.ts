@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { marked } from 'marked';
 import frontMatter from 'front-matter';
 
-import { getTheme, normalizeColor } from '../themes/index.js';
+import { getTheme, normalizeColor } from '../themes';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,7 +90,7 @@ export function convertMarkdownToWechat(
 }
 
 export function parseFrontMatter<T>(content: string): { attributes: T; body: string } {
-  return frontMatter.default<T>(content);
+  return frontMatter<T>(content);
 }
 
 function escapeHtml(text: string): string {
