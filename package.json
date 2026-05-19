@@ -15,7 +15,7 @@
     "lint:lf": "node ./build/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts",
-    "install:skill": "node ./build/remove-local-skill-names-from-global.mts && npx skills add ./ -g -y -a claude-code -a codex -a opencode -a trae-cn -a codebuddy"
+    "install:skill": "node ./build/remove-local-skill-names-from-global.mts && npx skills add ./ -g -y --all"
   },
   "repository": {
     "type": "git",
