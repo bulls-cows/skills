@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { spawnSync } from 'child_process'
+import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -28,35 +28,48 @@ function isMissingSkill(output: string): boolean {
   ].some((pattern) => pattern.test(output))
 }
 
-function removeSkillFromGlobal(skillName: string): boolean {
-  const result = spawnSync(npxCommand, ['skills', 'remove', skillName, '-g', '-y', '--all'], {
-    encoding: 'utf8',
-    shell: true,
-  })
-
-  if (result.error) {
-    throw result.error
-  }
-
-  const output = `${result.stdout}${result.stderr}`
-
-  if (result.status === 0) {
-    console.log(`已移除全局技能: ${skillName}`)
-    return true
-  }
-
-  if (isMissingSkill(output)) {
-    console.log(`跳过未安装的全局技能: ${skillName}`)
-    return true
-  }
-
-  console.error(`移除全局技能失败: ${skillName}`)
-  if (result.stdout) console.error(result.stdout)
-  if (result.stderr) console.error(result.stderr)
-  return false
+interface RemoveResult {
+  skillName: string
+  success: boolean
+  output: string
+  missing: boolean
 }
 
-function main() {
+async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(npxCommand, ['skills', 'remove', skillName, '-g', '-y', '--all'], {
+      shell: true,
+    })
+
+    let stdout = ''
+    let stderr = ''
+    child.stdout.on('data', (data: Buffer) => {
+      stdout += data.toString()
+    })
+    child.stderr.on('data', (data: Buffer) => {
+      stderr += data.toString()
+    })
+
+    child.on('error', (err) => {
+      reject(err)
+    })
+
+    child.on('close', (code) => {
+      const output = `${stdout}${stderr}`
+      const missing = isMissingSkill(output)
+
+      if (code === 0) {
+        resolve({ skillName, success: true, output, missing })
+      } else if (missing) {
+        resolve({ skillName, success: true, output, missing })
+      } else {
+        resolve({ skillName, success: false, output, missing })
+      }
+    })
+  })
+}
+
+async function main() {
   const skillNames = [...new Set(skillDirs.flatMap((dir) => readSkillNames(dir)))].sort((a, b) =>
     a.localeCompare(b),
   )
@@ -66,16 +79,25 @@ function main() {
     return
   }
 
-  let hasError = false
+  const promises = skillNames.map((name) =>
+    removeSkillFromGlobal(name).then((result) => {
+      if (result.missing) {
+        console.log(`跳过未安装的全局技能: ${result.skillName}`)
+      } else if (result.success) {
+        console.log(`已移除全局技能: ${result.skillName}`)
+      } else {
+        console.error(`移除全局技能失败: ${result.skillName}`)
+        if (result.output) console.error(result.output)
+      }
+      return result
+    }),
+  )
 
-  for (const skillName of skillNames) {
-    const ok = removeSkillFromGlobal(skillName)
-    if (!ok) hasError = true
-  }
+  const results = await Promise.all(promises)
 
-  if (hasError) {
+  if (results.some((r) => !r.success)) {
     process.exit(1)
   }
 }
 
-main()
+void main()
