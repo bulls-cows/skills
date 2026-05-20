@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
 const skillDirs = [path.join(projectRoot, 'skills'), path.join(projectRoot, 'skills-internal')]
 const npxCommand = process.platform === 'win32' ? 'npx.cmd' : 'npx'
+const agents = ['claude-code', 'codex', 'opencode', 'trae-cn', 'codebuddy']
 
 function readSkillNames(dir: string): string[] {
   if (!fs.existsSync(dir)) return []
@@ -37,9 +38,13 @@ interface RemoveResult {
 
 async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
   return new Promise((resolve, reject) => {
-    const child = spawn(npxCommand, ['skills', 'remove', skillName, '-g', '-y', '--all'], {
-      shell: true,
-    })
+    const child = spawn(
+      npxCommand,
+      ['skills', 'remove', skillName, '-g', '-y', ...agents.flatMap((a) => ['-a', a])],
+      {
+        shell: true,
+      },
+    )
 
     let stdout = ''
     let stderr = ''
@@ -102,10 +107,8 @@ async function main() {
   await installSkills()
 }
 
-const clients = ['claude-code', 'codex', 'opencode', 'trae-cn', 'codebuddy']
-
 async function installSkills(): Promise<void> {
-  const args = ['skills', 'add', projectRoot, '-g', '-y', ...clients.flatMap((c) => ['-a', c])]
+  const args = ['skills', 'add', projectRoot, '-g', '-y', ...agents.flatMap((a) => ['-a', a])]
 
   return new Promise((resolve, reject) => {
     const child = spawn(npxCommand, args, { shell: true, stdio: 'inherit' })
