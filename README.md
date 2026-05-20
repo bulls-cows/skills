@@ -13,21 +13,12 @@
 
 [点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
-### 通用规则
-
 - [rules/file-scope-limit](./rules/file-scope-limit/RULE.md)：文件修改范围限制规则，AI 仅允许修改用户授权的目录范围内的文件
-
-### 特定规则
-
-**注意**：以下规则对项目目录结构有特定要求
-
-- **React 项目**需要包含：`src/api`、`src/components`、`src/constants` 目录
-- **Vue2/Vue3 项目**需要包含：`src/api`、`src/views`、`src/constants` 目录
-
-AI 仅允许修改上述目录范围内的源代码文件，**其他目录的文件不会被处理**。
-
-- [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：前端 Vue2 项目开发规范，包含代码风格、组件规范、API 规范等
-- [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：前端 Vue3 项目开发规范，包含 `<script setup>` 组合式 API 规范、Hooks 规范、代码风格、组件规范、API 规范等
+- [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：Vue2 前端项目开发规范与架构指南
+- [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：Vue3 前端项目开发规范与架构指南
+- [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
+- [rules/npm](./rules/npm/RULE.md)：NPM 使用规范
+- [rules/text](./rules/text/RULE.md)：文本表达规范
 
 ## Skills 技能
 
