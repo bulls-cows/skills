@@ -98,6 +98,31 @@ async function main() {
   if (results.some((r) => !r.success)) {
     process.exit(1)
   }
+
+  await installSkills()
+}
+
+const clients = ['claude-code', 'codex', 'opencode', 'trae-cn', 'codebuddy']
+
+async function installSkills(): Promise<void> {
+  const args = ['skills', 'add', projectRoot, '-g', '-y', ...clients.flatMap((c) => ['-a', c])]
+
+  return new Promise((resolve, reject) => {
+    const child = spawn(npxCommand, args, { shell: true, stdio: 'inherit' })
+
+    child.on('error', (err) => {
+      reject(err)
+    })
+    child.on('close', (code) => {
+      if (code === 0) {
+        console.log('技能安装完成。')
+        resolve()
+      } else {
+        console.error(`技能安装失败，退出码: ${String(code ?? 'unknown')}`)
+        process.exit(1)
+      }
+    })
+  })
 }
 
 void main()
