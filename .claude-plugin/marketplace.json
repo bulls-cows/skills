@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "open-skills",
-      "description": "本仓库维护的通用技能。",
+      "description": "本仓库维护的技能",
       "source": "./",
       "strict": true,
       "skills": [
@@ -22,6 +22,11 @@
         "./skills/yy-create-skill",
         "./skills/yy-design-ui",
         "./skills/yy-distill",
+        "./skills/yy-frontend-commit",
+        "./skills/yy-frontend-vue2-code-optimization",
+        "./skills/yy-frontend-vue2-review",
+        "./skills/yy-frontend-vue3-code-optimization",
+        "./skills/yy-frontend-vue3-review",
         "./skills/yy-handoff",
         "./skills/yy-init",
         "./skills/yy-lint",
@@ -35,19 +40,6 @@
         "./skills/yy-run-skills",
         "./skills/yy-skills-reverse-analysis",
         "./skills/yy-wechat-to-markdown"
-      ]
-    },
-    {
-      "name": "frontend-skills",
-      "description": "本仓库维护的前端技能。",
-      "source": "./",
-      "strict": true,
-      "skills": [
-        "./skills/yy-frontend-commit",
-        "./skills/yy-frontend-vue2-code-optimization",
-        "./skills/yy-frontend-vue2-review",
-        "./skills/yy-frontend-vue3-code-optimization",
-        "./skills/yy-frontend-vue3-review"
       ]
     },
     {

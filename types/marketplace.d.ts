@@ -7,6 +7,9 @@ interface PackageJson {
 
 interface Plugin {
   name: string
+  description?: string
+  source?: string
+  strict?: boolean
   skills?: string[]
 }
 

@@ -47,19 +47,10 @@ const skillNames = fs
 
 const skillsList = skillNames.map((name) => `./skills/${name}`)
 
-const frontendSkillsList = skillsList.filter((skill) => skill.includes('frontend'))
-const nonFrontendSkillsList = skillsList.filter((skill) => !skill.includes('frontend'))
-
 const openSkillsPlugin = marketplaceJson.plugins.find((plugin) => plugin.name === 'open-skills')
 if (openSkillsPlugin) {
-  openSkillsPlugin.skills = nonFrontendSkillsList
-}
-
-const frontendSkillsPlugin = marketplaceJson.plugins.find(
-  (plugin) => plugin.name === 'frontend-skills',
-)
-if (frontendSkillsPlugin) {
-  frontendSkillsPlugin.skills = frontendSkillsList
+  openSkillsPlugin.skills = skillsList
+  openSkillsPlugin.description = '本仓库维护的技能'
 }
 
 // 6. 读取 skills-internal 目录，过滤空目录并按字母顺序排序
