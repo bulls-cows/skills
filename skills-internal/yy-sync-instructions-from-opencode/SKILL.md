@@ -23,12 +23,12 @@ description: >
 
 ## 指令
 
-### 1. 读取两个文件
+### 步骤 1. 读取两个文件
 
 - 读取 `.opencode.json` 的 `instructions` 数组
 - 读取 `AGENTS.md` 全文（而非仅"需要遵守的规则"章节），因为部分规则可能已在其他章节中体现
 
-### 2. 逐条分类 instructions 中的规则
+### 步骤 2. 逐条分类 instructions 中的规则
 
 对 `instructions` 数组中的每一条，按以下规则分类：
 
@@ -41,18 +41,18 @@ description: >
   - 判断"AGENTS.md 中没有"时，需检查 AGENTS.md **全文**，而非仅"需要遵守的规则"章节
   - 如果规则内容已在 AGENTS.md 其他章节中体现（语义等价），视为"已有"，无需重复添加
 
-### 3. 同步通用规则到 AGENTS.md
+### 步骤 3. 同步通用规则到 AGENTS.md
 
 - 将步骤 2 识别出的通用规则，添加到 AGENTS.md 的 `## 需要遵守的规则` 章节末尾
 - 保持 AGENTS.md 现有规则的格式和顺序
 
-### 4. 验证一致性
+### 步骤 4. 验证一致性
 
 - 确认所有通用规则在 AGENTS.md 中已存在
 - 确认未修改 `.opencode.json`
 - 确认未将 OpenCode 专属规则同步到 AGENTS.md
 
-### 5. 输出结果
+### 步骤 5. 输出结果
 
 ```markdown
 ## 同步结果
