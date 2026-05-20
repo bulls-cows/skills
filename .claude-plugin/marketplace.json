@@ -48,6 +48,7 @@
       "source": "./",
       "strict": true,
       "skills": [
+        "./skills-internal/yy-check-rules-consistency",
         "./skills-internal/yy-check-skills-consistency",
         "./skills-internal/yy-sync-instructions-from-opencode",
         "./skills-internal/yy-sync-thinking-method"

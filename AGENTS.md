@@ -20,6 +20,7 @@
 - 执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)。
 - 如果改动涉及 AI 思考方式的调整，执行技能 [@skills-internal/yy-sync-thinking-method/SKILL.md](./skills-internal/yy-sync-thinking-method/SKILL.md)。
 - 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)。
+- 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)。
 
 **检查项:**
 
