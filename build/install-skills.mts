@@ -7,7 +7,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
 const skillDirs = [path.join(projectRoot, 'skills'), path.join(projectRoot, 'skills-internal')]
 const npxCommand = process.platform === 'win32' ? 'npx.cmd' : 'npx'
-const agents = ['claude-code', 'codex', 'opencode', 'trae-cn', 'codebuddy']
+
+// 列出常用的 agent, 注意对于安装目录相同的 agent 不要重复列出, 比如 Codex 和 Antigravity 的全局技能安装目录都是 `.agents/skills/`, 所以写一个就可以了
+const agents = [
+  'claude-code',
+  'codex',
+  'opencode',
+  'trae-cn',
+  'codebuddy',
+  'openclaw',
+  'qoder',
+  'qwen-code',
+  'windsurf',
+  'zencoder',
+]
 
 function readSkillNames(dir: string): string[] {
   if (!fs.existsSync(dir)) return []
