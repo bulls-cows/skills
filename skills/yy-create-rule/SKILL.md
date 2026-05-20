@@ -64,10 +64,12 @@ description: >
 
 **情况 B：没有合适的现有规则文档**
 
-- 根据内容主题自动生成文件名（kebab-case，如 `vue-component-norms.md`、`api-best-practices.md`）
-- 在规则目录下新建该文件
+- 根据内容主题自动生成目录名（kebab-case，如 `vue-component-norms`、`api-best-practices`）
+- 在 `rules/` 目录下新建该目录，并在其中创建 `RULE.md` 文件：`rules/[目录名]/RULE.md`
 - 将内容写入新文件
 - 在 AGENTS.md 中新增对该文件的引用（引用路径应包含完整目录路径）
+
+**目录结构约定**：每个规则独立一个目录，目录内只有一个 `RULE.md` 文件（及可选的 `references/` 子目录存放拆分模块）。
 
 **情况 C：用户指定在现有文档中追加**
 
@@ -80,13 +82,27 @@ description: >
 
 语言规范详见 `resources/rule-best-practices.md`。
 
+**新建规则文档时**，必须在文件开头添加 frontmatter：
+
+```yaml
+---
+description: [规则简要描述，与 README.md 中该规则的说明一致]
+alwaysApply: true
+---
+```
+
+- `description`：规则的简要描述，用于 README.md 等处展示
+- `alwaysApply`：是否始终应用，默认为 `true`
+
+更新现有规则文档时，不修改已有的 frontmatter。
+
 ### 5. 更新 AGENTS.md 引用（仅当创建新规则文档时）
 
 在 AGENTS.md 中添加对新建规则文档的引用：
 
 1. 检查 AGENTS.md 中是否存在 `## Rules` 章节
 2. 如果不存在，在文件末尾添加 `## Rules` 章节
-3. 在 Rules 章节中添加引用：`- [规则目录路径]/[文件名].md: [简要说明]`
+3. 在 Rules 章节中添加引用：`- [规则名称 @rules/[目录名]/RULE.md](./rules/[目录名]/RULE.md)`
 
 ### 6. 更新文档并输出结果
 

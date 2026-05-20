@@ -67,15 +67,15 @@
 在 AGENTS.md 中添加对规则文档的引用：
 
 ```markdown
-## Rules
+## 需要遵守的规则
 
-- .agents/rules/vue组件规范.md: Vue 组件开发规范
-- .agents/rules/api调用最佳实践.md: API 调用的最佳实践和错误处理
+- [规则名称 @rules/vue-component-norms/RULE.md](./rules/vue-component-norms/RULE.md)
+- [规则名称 @rules/api-best-practices/RULE.md](./rules/api-best-practices/RULE.md)
 ```
 
-引用格式：`- [规则目录路径]/[文件名].md: [简要说明]`
+引用格式：`- [规则名称 @rules/[目录名]/RULE.md](./rules/[目录名]/RULE.md)`
 
-简要说明要清晰，让 AI 能够快速了解该规则文档的作用。
+规则名称要清晰，让 AI 能够快速了解该规则文档的作用。
 
 ## 注意事项
 

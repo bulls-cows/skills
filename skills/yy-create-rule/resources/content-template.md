@@ -2,6 +2,17 @@
 
 本文档提供规则内容的格式模板，用于规范规则文档的编写。
 
+## Frontmatter
+
+新建规则文档时，必须在文件开头添加 frontmatter：
+
+```yaml
+---
+description: [规则简要描述]
+alwaysApply: true
+---
+```
+
 ## 基础结构
 
 ```markdown

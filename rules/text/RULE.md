@@ -1,3 +1,8 @@
+---
+description: 文本表达规范
+alwaysApply: true
+---
+
 # 文本表达规范
 
 ## 语言优先级

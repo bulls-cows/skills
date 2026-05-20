@@ -1,4 +1,9 @@
-# Markdown书写规范
+---
+description: Markdown 书写规范
+alwaysApply: true
+---
+
+# Markdown 书写规范
 
 ## 代码块语言标识
 
@@ -59,7 +64,7 @@ skill-name/
 
 **正确示例（列表形式）：**
 
-```markdownmarkdown
+```markdown
 - 技能目录：kebab-case（如 `create-skill/`）
 - 技能名称：kebab-case，动宾结构，名词单数（如 `create-rule`、`read-pdf`）
 ```

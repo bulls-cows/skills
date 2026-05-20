@@ -1,3 +1,8 @@
+---
+description: NPM 使用规范
+alwaysApply: true
+---
+
 # NPM 使用规范
 
 ## 依赖安装规范

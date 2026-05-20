@@ -150,7 +150,7 @@
 - 无论用户使用何种语言提问，请始终使用简体中文进行解释和回答
 - 除非用户明确要求提交。否则禁止你使用git
 - 不要手动修改 marketplace.json，由 `build/lint.mts` 自动生成
-- [文件修改范围限制规则 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
+- [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
 
