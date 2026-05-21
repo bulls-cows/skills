@@ -17,7 +17,7 @@
 **改动后必须执行:**
 
 - 执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)。
-- 如果改动涉及 AI 思考方式的调整，执行技能 [@skills-internal/yy-sync-thinking-method/SKILL.md](./skills-internal/yy-sync-thinking-method/SKILL.md)。
+- 如果改动涉及 AI 能力模型的调整，执行技能 [@skills-internal/yy-sync-capability-model/SKILL.md](./skills-internal/yy-sync-capability-model/SKILL.md)。
 - 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)。
 - 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)。
 - 执行 `npm run lint` 检测代码和文档。
