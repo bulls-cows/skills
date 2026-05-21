@@ -30,7 +30,6 @@ description: >
 git status
 git diff
 git diff --staged
-git log --oneline -5
 ```
 
 理解：
@@ -38,7 +37,6 @@ git log --oneline -5
 - 哪些文件已修改
 - 变更的具体内容
 - 是否有已暂存的内容
-- 项目的提交历史风格
 
 ### 2. 理解改动意图
 
