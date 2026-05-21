@@ -54,14 +54,25 @@ git log --oneline -5
 **应该暂存的文件：**
 
 - 源代码文件（.ts, .js, .vue, .jsx, .tsx 等）
-- 配置文件（package.json, tsconfig.json 等）
+- 依赖与脚本声明文件（package.json 等）
 - 文档文件（.md, .txt 等）
 - 样式文件（.css, .scss 等）
 - 测试文件
 
+**默认不暂存的项目配置文件（仅在用户明确授权时放行）：**
+
+- 构建与工具配置文件（包括但不限于 vite.config.ts、vite.config.js、vue.config.js、webpack.config.js、rollup.config.js、tsconfig.json、jsconfig.json、babel.config.js、postcss.config.js、eslint.config.js 等）
+- 环境配置文件（包括但不限于 .env、.env.test、.env.production、.env.local 等）
+
+**配置文件放行规则：**
+
+- **用户明确说“提交所有文件”**：允许一并暂存当前改动中的配置文件
+- **用户明确说“连同配置文件一起提交”**：允许一并暂存当前改动中的配置文件
+- **用户明确点名具体文件**：仅暂存用户点名的配置文件，例如“提交 vite.config.ts”或“提交 .env.production”
+- **用户未明确授权**：从暂存列表中排除上述配置文件，并在展示阶段明确告知排除原因
+
 **应该警告的文件（询问用户）：**
 
-- 环境变量文件（.env, .env.local 等）
 - 凭证文件（credentials.json, secrets.\* 等）
 - 私钥文件（_.key, _.pem 等）
 - 大型二进制文件
@@ -121,8 +132,9 @@ refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 向用户展示：
 
 1. 将要暂存的文件列表
-2. 关键变更摘要（从 diff 提取的主要改动）
-3. 生成的提交信息
+2. 默认排除的配置文件列表（如存在）及排除原因
+3. 关键变更摘要（从 diff 提取的主要改动）
+4. 生成的提交信息
 
 **快速提交模式判断：**
 
@@ -142,6 +154,9 @@ refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 📝 暂存文件：
   - src/auth/login.ts
   - src/components/LoginForm.vue
+
+🚫 默认排除：
+  - vite.config.ts（未收到明确授权，不随本次提交）
 
 📊 主要变更：
   - 新增 JWT token 生成逻辑
