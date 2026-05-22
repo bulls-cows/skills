@@ -1,8 +1,0 @@
-{
-  "version": "2.0.0",
-  "date": "April 2026",
-  "author": "wengdongyang",
-  "abstract": "前端代码提交助手，在存在 src 目录结构的前端项目中触发。 归纳 src 目录下改动的文件，生成规范的提交信息并自动执行 add 和 commit 操作。 支持禁止目录过滤、智能文件选择、冲突检测、多改动分离等功能。注意：禁止执行 push 操作。",
-  "references": ["https://www.conventionalcommits.org/"],
-  "tags": ["frontend", "git-commit", "commit-message"]
-}
