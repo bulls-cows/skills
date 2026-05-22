@@ -131,7 +131,7 @@ description: >
 
 ### 文件间一致性
 
-当技能包含辅助文件（resources/、templates/、examples/）时，确保各文件对同一事项的描述一致。
+当技能包含辅助文件（resources/、templates/、examples/、prompts/）时，确保各文件对同一事项的描述一致。
 
 **一致性检查要点：**
 
@@ -187,8 +187,10 @@ skill-name/
 │   └── output.md     # 输出示例
 ├── templates/        # 可选，模板目录
 │   └── example.md    # 模板文件
-└── resources/        # 可选，资源目录
-    └── reference.md  # 参考文档
+├── resources/        # 可选，资源目录
+│   └── reference.md  # 参考文档
+└── prompts/          # 可选，提示词派生产物目录
+    └── skill-prompts.md  # 由 SKILL.md 派生出的系统提示词
 ```
 
 ### 目录说明
@@ -198,6 +200,7 @@ skill-name/
 - `examples/`：**可选**，技能使用方式不直观时提供示例说明
 - `templates/`：**可选**，需要生成特定格式文件或模板实际内容超过 20 行时使用（计数规则：只统计实际内容行，不含空行、代码块围栏标记行、YAML frontmatter 行）
 - `resources/`：**可选**，需要参考文档或素材文件时使用
+- `prompts/`：**可选**，存放由 SKILL.md 派生出的系统提示词文件，默认文件为 `prompts/skill-prompts.md`；该目录是派生产物目录，不作为技能主定义来源，优先由 `yy-skill-to-prompt` 生成
 
 ## 交互设计原则
 
@@ -385,7 +388,7 @@ skill-name/
 4. 指令步骤完整可执行，最后一步描述输出格式
 5. YAML 格式正确
 6. **决策点显式化**：步骤中隐含的分支选择已转化为明确规则
-7. **文件间一致性**：SKILL.md 与辅助文件对同一事项描述一致
+7. **文件间一致性**：SKILL.md 与辅助文件对同一事项描述一致；如存在 prompts/skill-prompts.md，其提示词内容应覆盖 SKILL.md 的核心角色、流程、约束和输出规则
 8. **安全边界**：涉及敏感操作的技能已明确禁止行为
 
 ### 创建技能后检查项
@@ -404,6 +407,7 @@ skill-name/
 1. description 只保留触发判断所需信息，没有混入执行细节
 2. 如有参考文件，检查是否需要同步更新
 3. 步骤编号、章节名称、术语是否与辅助文件一致
+4. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
 
 ## 质量要求
 

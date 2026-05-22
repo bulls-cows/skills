@@ -85,19 +85,20 @@ Skill 本质上是"可按需加载的任务说明书"，用于复用复杂流程
 
 ### 步骤 4. 编写 SKILL.md
 
-**生成 SKILL.md 的文本内容**，并判断是否需要创建辅助目录（templates/、resources/、examples/）。此步骤不执行文件写入操作，文件写入在步骤 5 执行。
+**生成 SKILL.md 的文本内容**，并判断是否需要创建辅助目录（templates/、resources/、examples/、prompts/）。此步骤不执行文件写入操作，文件写入在步骤 5 执行。
 
 编写原则和模板请参考 `templates/skill-template.md`。
 
 #### 默认策略
 
 - description 默认使用 `>` 折叠式语法（禁止行内写法）
-- 默认只生成 SKILL.md，不自动创建 examples/、templates/、resources/、scripts/ 目录
+- 默认只生成 SKILL.md，不自动创建 examples/、templates/、resources/、scripts/、prompts/ 目录
 - 仅在以下条件满足时才创建辅助目录：
   - **scripts/**：技能需要可执行脚本，用户明确要求或技能功能必须通过脚本实现
   - **templates/**：需要生成的模板内容超过 20 行（计数规则：只统计实际内容行，不含空行、代码块围栏标记行 ` ``` `、YAML frontmatter 行）
   - **resources/**：需要独立的参考文档，且内容不适合放在 SKILL.md 正文
   - **examples/**：用户明确要求提供示例
+  - **prompts/**：可选派生产物目录，仅用于存放由 SKILL.md 派生出的系统提示词文件；默认不手写，优先由 `yy-skill-to-prompt` 生成
 
 #### description 编写约束
 
@@ -137,7 +138,7 @@ description 只用于给 AI 判断是否触发技能：
 
 - **先读取再修改**：读取现有 SKILL.md 和辅助文件内容，理解当前结构后再修改
 - **默认补充+优化**：保留现有内容，补充缺失部分，优化表达和结构；若用户明确要求"完全重写"，则覆盖生成
-- **同步检查辅助文件**：修改 SKILL.md 后，检查 examples/、templates/、resources/ 中的文件是否需要同步更新。判断依据：辅助文件中引用的步骤编号、章节名称、字段名是否与修改后的 SKILL.md 一致
+- **同步检查辅助文件**：修改 SKILL.md 后，检查 examples/、templates/、resources/、prompts/ 中的文件是否需要同步更新。判断依据：辅助文件中引用的步骤编号、章节名称、字段名是否与修改后的 SKILL.md 一致；如 prompts/skill-prompts.md 已存在，应确认其核心提示词内容与更新后的 SKILL.md 不冲突
 - **description 独立评估**：更新其他章节时，单独评估 description 是否需要同步调整，避免 description 混入实现细节
 - **确认流程**：执行更新操作前，必须经过确认流程（见步骤 1 的"更新现有技能"分支）。确认流程不可跳过
 
@@ -159,6 +160,15 @@ description 只用于给 AI 判断是否触发技能：
 2. 只修改 SKILL.md 或用户指定的部分
 3. 不删除已有辅助文件
 
+#### 生成提示词派生产物
+
+创建或更新 SKILL.md 后，按以下决策分支处理 `prompts/skill-prompts.md`：
+
+- **当前环境已安装 `yy-skill-to-prompt`**：优先使用 `yy-skill-to-prompt` 将当前技能转换为系统提示词，并生成或更新 `prompts/skill-prompts.md`
+- **当前环境未安装 `yy-skill-to-prompt`**：跳过 `prompts/skill-prompts.md` 生成，不阻塞技能创建或更新
+- **用户明确要求必须生成提示词文件，但 `yy-skill-to-prompt` 不可用**：提示用户安装 `yy-skill-to-prompt`，或确认是否使用本技能内的最小回退流程手动生成
+- **使用最小回退流程时**：根据 SKILL.md 的描述、使用场景、指令、限制和输出格式，生成结构化系统提示词，并写入 `prompts/skill-prompts.md`
+
 ### 步骤 6. 验收
 
 创建或更新技能后，检查以下项目：
@@ -171,7 +181,7 @@ description 只用于给 AI 判断是否触发技能：
 4. 指令步骤完整可执行，最后一步描述输出格式
 5. YAML 格式正确（name 和 description 两个字段，description 使用 `>` 折叠式语法）
 6. **决策点显式化**：步骤中隐含的分支选择已转化为明确规则
-7. **文件间一致性**：SKILL.md 与辅助文件对同一事项描述一致
+7. **文件间一致性**：SKILL.md 与辅助文件对同一事项描述一致；如存在 prompts/skill-prompts.md，其提示词内容应覆盖 SKILL.md 的核心角色、流程、约束和输出规则
 8. **安全边界**：涉及敏感操作的技能已明确禁止行为
 
 #### 创建技能后检查项
@@ -186,6 +196,7 @@ description 只用于给 AI 判断是否触发技能：
 
 1. description 只保留触发判断所需信息，没有混入执行细节
 2. 如有辅助文件，检查是否需要同步更新（引用的步骤编号、章节名称、字段名是否一致）
+3. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
 
 注意, 以上并非所有验收检查项, 详细验收清单见 `resources/skill-guide.md`。
 
@@ -195,7 +206,8 @@ description 只用于给 AI 判断是否触发技能：
 
 1. **创建/更新结果**：技能名称和操作类型（创建/更新）
 2. **目录结构**：生成的文件树（使用 `tree` 或 `text` 代码块）
-3. **SKILL.md 内容摘要**：
+3. **提示词派生产物状态**：说明是否生成或更新 `prompts/skill-prompts.md`，以及使用的是 `yy-skill-to-prompt` 还是本地回退流程；如未生成，说明跳过原因
+4. **SKILL.md 内容摘要**：
    - description 文本（完整复制）
    - 指令步骤概要（格式：`步骤编号. 步骤名称`，如 `步骤 1. 捕获意图`、`步骤 2. 确定技能目录`）
 
@@ -224,7 +236,9 @@ skill-name/
 │       └── requirements.txt  # 依赖声明
 ├── examples/         # 可选，示例目录
 ├── templates/        # 可选，模板目录
-└── resources/        # 可选，资源目录
+├── resources/        # 可选，资源目录
+└── prompts/          # 可选，提示词派生产物目录
+    └── skill-prompts.md  # 由 SKILL.md 派生出的系统提示词
 ```
 
 详细规范见 `resources/skill-guide.md`。
