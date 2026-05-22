@@ -401,6 +401,7 @@ skill-name/
 6. 如有 evals 测试用例，格式正确
 7. SKILL.md 包含执行步骤，不是纯知识文档
 8. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/，不含空行和代码块标记行）
+9. 如需生成提示词派生产物，默认不手写 `prompts/skill-prompts.md`，优先由 `yy-skill-to-prompt` 生成
 
 ### 更新技能后检查项
 
