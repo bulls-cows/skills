@@ -7,7 +7,7 @@
   "scripts": {
     "ready": "npm install && node ./build/install-skills-deps.mts",
     "lint": "node --run lint:prettier && node --run check:skill && node --run lint:skills && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace && node --run lint:eslint",
-    "lint:eslint": "eslint build/",
+    "lint:eslint": "eslint build/ --fix",
     "lint:prettier": "prettier --write .",
     "lint:skills": "node ./build/lint-skills.mts",
     "check:skill": "node ./build/check-skill.mts",
@@ -39,6 +39,7 @@
     "@types/js-yaml": "4.0.9",
     "@types/node": "22.19.15",
     "eslint": "10.4.0",
+    "eslint-config-prettier": "10.1.8",
     "js-yaml": "4.1.1",
     "markdownlint-cli": "0.48.0",
     "prettier": "3.8.3",
