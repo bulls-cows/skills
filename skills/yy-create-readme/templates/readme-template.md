@@ -4,20 +4,20 @@
 
 ## 特性
 
-- 特性 1：具体说明，而非泛泛而谈
-- 特性 2：突出与同类项目的差异
-- 特性 3：用动词开头，如"支持"、"提供"、"自动"
+- ⭐ **特性 1**：具体说明，而非泛泛而谈
+- 🚀 **特性 2**：突出与同类项目的差异
+- 💡 **特性 3**：用动词开头，如"支持"、"提供"、"自动"
 
 ## 技术栈
 
-- **前端**：Vue 3、TypeScript、Element Plus
-- **后端**：Node.js、Express、Knex
-- **数据库**：PostgreSQL
-- **工具**：ESLint、Prettier、Jest
+- 🖥️ **前端**：Vue 3、TypeScript、Element Plus
+- ⚙️ **后端**：Node.js、Express、Knex
+- 🗄️ **数据库**：PostgreSQL
+- 🧰 **工具**：ESLint、Prettier、Jest
 
 ## 环境要求
 
-- Node.js >= 18.x
+- 📦 Node.js >= 18.x
 - 或其他环境要求
 
 ## 安装
@@ -69,4 +69,4 @@ npm run lint
 
 ## 协议
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+📄 MIT License - 详见 [LICENSE](LICENSE) 文件
