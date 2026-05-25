@@ -80,7 +80,7 @@ git diff --cached --name-only
 
 默认排除以下文件和目录：
 
-- 依赖与构建产物：`node_modules/`、`dist/`、`build/`、`coverage/`、`.next/`、`.nuxt/`、`.output/`
+- 依赖与构建产物：`node_modules/`、`dist/`、`build/`、`coverage/`、`.next/`、`.nuxt/`、`.output/`、`target/`、`Cargo.lock`
 - 锁文件与生成文件：`package-lock.json`、`pnpm-lock.yaml`、`yarn.lock`、`*.min.js`、`*.generated.*`
 - 二进制文件、图片、字体、压缩包、快照文件
 
@@ -117,6 +117,19 @@ git diff --cached --name-only
 | D06     | 可维护性与最佳实践：重复代码、复杂条件、无意义命名、死代码、过度封装          | 中等     |
 | D07     | 调试代码与低风险风格问题：`console.log`、`debugger`、临时注释、格式轻微不一致 | 轻微     |
 
+**Rust 专项检查项**：
+
+| 检查项 | 描述                                         | 严重程度 |
+| ------ | -------------------------------------------- | -------- |
+| R01    | 使用 `unwrap()` 或 `expect()` 在非测试代码中 | 严重     |
+| R02    | 未处理的 `Result` 或 `Option`                | 严重     |
+| R03    | 不必要的 `clone()` 调用                      | 中等     |
+| R04    | 未检查状态码就继续处理                       | 中等     |
+| R05    | 错误统计缺失：失败路径未记录统计数据         | 中等     |
+| R06    | 重试逻辑中计数器顺序错误                     | 中等     |
+| R07    | 未使用的变量或导入                           | 轻微     |
+| R08    | 未处理的异步错误                             | 中等     |
+
 审核执行规则：
 
 - 严重问题：发现即审核不通过，必须修复。
@@ -150,7 +163,7 @@ git diff --cached --name-only
 - 问题位置必须使用 `文件路径:行号` 格式，使用相对于项目根目录的路径
 - 每个问题必须包含问题类型、描述、影响和修复建议
 - 问题按严重、中等、轻微顺序排列，同级别按文件路径排序
-- 代码片段使用语言标签（如 `typescript`、`javascript`）
+- 代码片段使用语言标签（如 `typescript`、`javascript`、`rust`）
 - 不要直接修改代码
 
 通过格式：
