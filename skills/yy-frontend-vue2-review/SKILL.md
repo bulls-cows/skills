@@ -67,17 +67,17 @@ examples:
 
 ### 阎段二：生成审核清单
 
-| 维度 ID | 检查内容                                                                  | 严重程度 | 详细规范                      |
-| ------- | ------------------------------------------------------------------------- | -------- | ----------------------------- |
-| D01     | 代码风格（2 空格缩进、JS 单引号、分号、尾随逗号、箭头函数、3 组导入顺序） | 🟢 轻微  | `references/code-style.md`    |
-| D02     | 最佳实践（调试代码、scoped、未使用变量等）                                | 🟢 轻微  | `references/best-practice.md` |
-| D03     | Vue2 组件规范（脚本结构、Props、Emit 等）                                 | 🟡 中等  | `references/component.md`     |
-| D04     | 命名规范（API、事件、常量、组件名等）                                     | 🟡 中等  | `references/naming.md`        |
-| D05     | 网络请求规范（async/await、统一响应等）                                   | 🟡 中等  | `references/request.md`       |
-| D06     | computed 规范（try/catch、有意义命名）                                    | 🟡 中等  | `references/computed.md`      |
-| D07     | 逻辑错误（空指针、数组越界、判断遗漏等）                                  | 🔴 严重  | `references/logic.md`         |
-| D08     | 安全漏洞（XSS、敏感信息泄露）                                             | 🔴 严重  | `references/security.md`      |
-| D09     | 绝对禁止项（连续解构、修改 props 等）                                     | 🔴 严重  | `references/forbidden.md`     |
+| 维度 ID | 检查内容                                                                  | 严重程度 | 执行方式       | 详细规范                      |
+| ------- | ------------------------------------------------------------------------- | -------- | -------------- | ----------------------------- |
+| D01     | 代码风格（2 空格缩进、JS 单引号、分号、尾随逗号、箭头函数、3 组导入顺序） | 🟢 轻微  | 文件子代理执行 | `references/code-style.md`    |
+| D02     | 最佳实践（调试代码、scoped、未使用变量等）                                | 🟢 轻微  | 文件子代理执行 | `references/best-practice.md` |
+| D03     | Vue2 组件规范（脚本结构、Props、Emit 等）                                 | 🟡 中等  | 文件子代理执行 | `references/component.md`     |
+| D04     | 命名规范（API、事件、常量、组件名等）                                     | 🟡 中等  | 文件子代理执行 | `references/naming.md`        |
+| D05     | 网络请求规范（async/await、统一响应等）                                   | 🟡 中等  | 文件子代理执行 | `references/request.md`       |
+| D06     | computed 规范（try/catch、有意义命名）                                    | 🟡 中等  | 文件子代理执行 | `references/computed.md`      |
+| D07     | 逻辑错误（空指针、数组越界、判断遗漏等）                                  | 🔴 严重  | 主代理执行     | `references/logic.md`         |
+| D08     | 安全漏洞（XSS、敏感信息泄露）                                             | 🔴 严重  | 主代理执行     | `references/security.md`      |
+| D09     | 绝对禁止项（连续解构、修改 props 等）                                     | 🔴 严重  | 主代理执行     | `references/forbidden.md`     |
 
 **审核执行规则**：
 
@@ -88,6 +88,11 @@ examples:
 ### 阎段三：逐文件逐维度审核
 
 按文件 × 维度生成审核矩阵，按 D01 → D09 顺序逐项检查。
+
+**子代理调度架构**：
+
+- **文件子代理**（D01-D06，轻微+中等）：每个文件独立分配一个子代理，负责该文件的 D01-D06 维度检查，多个文件可并行审核
+- **主代理**（D07-D09，严重）：主代理亲自执行严重级别维度检查，确保高风险问题的准确识别
 
 ### 阎段四：结果汇总与判断
 
