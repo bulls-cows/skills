@@ -39,7 +39,8 @@
         "./skills/yy-review",
         "./skills/yy-run-skills",
         "./skills/yy-skill-to-prompt",
-        "./skills/yy-wechat-to-markdown"
+        "./skills/yy-wechat-to-markdown",
+        "./skills/yy-write"
       ]
     },
     {
