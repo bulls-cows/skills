@@ -168,7 +168,7 @@
 
 对每个目标文件输出：
 
-```
+```text
 ✅ src/views/User/index.vue
    项目类型: Vue3
    注入位置: <script setup> 内部顶部

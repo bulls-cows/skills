@@ -149,7 +149,7 @@ AI 编码助手集成指南详见 `references/ai-integration.md`。
 
 示例：
 
-```
+```text
 ✅ src/views/User/index.vue
    项目类型: Vue3
    注入位置: <script setup> 内部顶部
