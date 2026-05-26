@@ -95,6 +95,8 @@ git diff --cached --name-only
 - **通用审核规则**：见 references/general.md（审核维度 D01-D07、最佳实践 P01）
 - **Rust 专项规则**：见 references/rust.md（检查项 R01-R08）
 
+规则冲突时，专项规则优先适用。
+
 审核执行规则：
 
 - 严重问题：发现即审核不通过，必须修复。
