@@ -92,8 +92,8 @@ git diff --cached --name-only
 
 对每个目标文件按以下规则检查：
 
-- **通用审核规则**：见 references/general.md（审核维度 D01-D07、最佳实践 P01）
-- **Rust 专项规则**：见 references/rust.md（检查项 R01-R08）
+- **通用审核规则**：见 references/general.md（审核维度与最佳实践）
+- **Rust 专项规则**：见 references/rust.md（Rust 检查项）
 
 规则冲突时，专项规则优先适用。
 
