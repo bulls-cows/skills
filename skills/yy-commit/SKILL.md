@@ -85,7 +85,9 @@ git diff --staged
 - `refactor` - 重构（既非新功能也非修复）
 - `perf` - 性能优化
 - `test` - 测试相关
-- `chore` - 构建/工具/依赖相关
+- `build` - 构建系统或外部依赖变更
+- `ci` - CI 配置文件和脚本变更
+- `chore` - 其他杂项变更（不属于上述类型）
 - `revert` - 回滚提交
 
 **Scope（范围）- 可选：**
@@ -100,6 +102,7 @@ git diff --staged
 - 使用中文（代码标识符、专有名词除外）
 - 使用动词开头的祈使语气
 - 精炼，不超过 50 个字符，一句话
+- 句末不加句号
 - 优先说明”为什么”或”为了解决什么问题”，而不只是”做了什么”
 - 精确性原则：当改动内容不多时，要具体描述变更的细节
 - 避免使用”统一”、”所有”等绝对性词汇：基于实际修改的文件来描述
@@ -171,13 +174,21 @@ feat(auth): 添加 JWT 用户认证功能
 git add <file1> <file2> ...
 
 # 2. 创建提交
-git commit -m “<提交信息>”
+# 仅 title
+git commit -m "<title>"
+
+# title + body
+git commit -m "<title>" -m "<body>"
+
+# title + body + footer
+git commit -m "<title>" -m "<body>" -m "<footer>"
 ```
 
 **提交信息格式：**
 
 - 单次改动较少：仅使用 title 即可
 - 单次改动较多：在 title 后添加 body，以列表形式说明具体改动点
+- 存在 Issue 关联或破坏性变更：在 body 后追加 footer
 
 ```text
 docs(yy-comment): 补充触发示例和判断标准
@@ -192,6 +203,13 @@ docs(yy-comment): 补充触发示例和判断标准
 - 禁止添加 `Co-Authored-By:` 等署名备注
 - body 内容使用列表形式，每项以 `- ` 开头
 - body 每项简洁明了，一句话说明一个改动点
+
+**Footer（页脚）规则：**
+
+- 仅在存在明确关联 Issue、任务单或破坏性变更时添加 footer
+- 关联 Issue 时，优先使用 `Closes #<编号>` 或 `Fixes #<编号>`
+- 存在破坏性变更时，必须显式说明影响
+- 未发现明确关联项时，不要为了凑格式添加 footer
 
 ### 7. 输出结果
 
