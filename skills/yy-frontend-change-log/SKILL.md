@@ -3,10 +3,7 @@ name: yy-frontend-change-log
 description: >
   分析前端项目文件（Vue2/Vue3/React/JS/TS/样式/文档/测试）的业务职责、数据流、交互关系和完整组件逻辑，
   生成结构化业务说明与改动记录，以 JSDoc 注释追加到文件顶部（保留历史记录）。
-  只要用户提到以下任何内容，就应使用此技能：生成变更日志、记录代码改动、
-  生成业务说明、代码交接文档、变更记录归档、前端改动追踪、补充文件级业务上下文、
-  梳理组件逻辑、整理页面逻辑、分析前端组件逻辑、理清页面交互逻辑、整理React/Vue组件逻辑、组件文档化。
-  即使用户没有明确说"变更日志"，只要是关于记录、说明前端代码改动或梳理组件逻辑的需求，也应触发。
+  只要用户提到变更日志、改动记录、业务说明、代码交接、组件逻辑梳理、页面逻辑整理、组件文档化等需求，就应触发。
 ---
 
 # yy-frontend-change-log
@@ -17,17 +14,16 @@ description: >
 
 支持Vue2/Vue3/React全框架分析，可根据用户需求生成精简版业务说明或完整版组件逻辑文档。
 
-AI 编码助手集成指南详见 `references/ai-integration.md`。
+AI 编码助手集成指南（面向用户）详见 `references/ai-integration.md`。
 
 **核心原则**：仅追加注释，不修改业务逻辑、原有代码结构或 `import` 语句。
 
-## 基础原则
+## 输出原则
 
-- 以结构化、可读性强的方式呈现组件逻辑
-- 使用标准化的符号和格式，便于后续引用和维护
-- 区分展示逻辑和业务逻辑
-- 明确标注组件的状态管理和数据流向
-- 使用图表结合文字说明，图表使用 Mermaid 语法
+- 组件超过 200 行时，注释块中的业务说明仅保留核心职责和数据流（一行概述），详细逻辑放入逻辑梳理输出
+- 当同一小时内对同一文件执行多次时，变更记录合并到同一条，取类型优先级更高的前缀
+- 图表仅在依赖关系或状态流转较复杂时生成，简单场景用列表即可
+- Mermaid 语法仅用于流程图、时序图和状态图，结构化文本用缩进列表
 
 ## 使用场景
 
@@ -145,11 +141,11 @@ AI 编码助手集成指南详见 `references/ai-integration.md`。
 
 ### 步骤 5. 生成注释块并注入
 
-按文件类型生成 JSDoc 注释块并注入文件头部。详细的注释格式、注入位置、改动类型分类、Scope 推断规则和历史记录合并规则详见 `references/output-format.md`。
+按文件类型生成 JSDoc 注释块并注入文件头部。详细的注释格式、注入位置、改动类型分类、Scope 推断规则和历史记录合并规则详见 `references/annotation-format.md`。
 
 ### 步骤 6. 输出结果
 
-对每个目标文件输出分析结果，包括文件路径、项目类型、注入位置、业务摘要和变更记录。详细的输出格式和逻辑梳理输出结构详见 `references/output-format.md`。
+对每个目标文件输出分析结果，包括文件路径、项目类型、注入位置、业务摘要和变更记录。详细的输出格式和逻辑梳理输出结构详见 `references/output-template.md`。
 
 ## 相关资源
 
@@ -157,8 +153,9 @@ AI 编码助手集成指南详见 `references/ai-integration.md`。
 - `references/vue2-rules.md` - Vue2 专属分析规则
 - `references/vue3-rules.md` - Vue3 专属分析规则
 - `references/react-rules.md` - React 专属分析规则
-- `references/output-format.md` - 注释注入规范与输出格式
-- `references/ai-integration.md` - OpenCode / Claude Code / Cursor 集成指南
+- `references/annotation-format.md` - 注释格式、注入位置与历史记录合并规则
+- `references/output-template.md` - 输出格式与逻辑梳理输出模板
+- `references/ai-integration.md` - AI 编码助手集成指南（用户文档，供参考）
 
 ## 安全边界
 
@@ -169,7 +166,12 @@ AI 编码助手集成指南详见 `references/ai-integration.md`。
 - 执行 git commit / git push
 - 修改 `.vue` 的 `<template>` / `<style>` 部分
 - 覆盖或替换已有变更记录（仅允许追加）
-- 修改已有注释内容（无论格式是否相同）
+- 修改文件顶部已有的非格式注释内容（如 `@param`、`//` 行注释等）
+
+**允许覆盖更新**（仅限注释块内部）：
+
+- 业务说明部分：每次执行时重新分析并覆盖，确保反映代码当前状态
+- 已有 JSDoc 注释块的格式对齐（不改变语义）
 
 **仅在用户明确要求时**：
 
