@@ -30,15 +30,9 @@
 
 ## 状态管理（Vuex）
 
-| 辅助函数       | 说明                        | 导入方式                              |
-| -------------- | --------------------------- | ------------------------------------- |
-| `mapState`     | 映射 state 到组件计算属性   | `import { mapState } from 'vuex'`     |
-| `mapGetters`   | 映射 getters 到组件计算属性 | `import { mapGetters } from 'vuex'`   |
-| `mapMutations` | 映射 mutations 到组件方法   | `import { mapMutations } from 'vuex'` |
-| `mapActions`   | 映射 actions 到组件方法     | `import { mapActions } from 'vuex'`   |
-
-- 使用的辅助函数（`mapState / mapGetters / mapMutations / mapActions`）。
+- 使用的辅助函数（`mapState`/`mapGetters`/`mapMutations`/`mapActions`）。
 - 绑定的 store 模块、state 字段、getter、mutation 和 action。
+- 关注各辅助函数映射到的计算属性或方法，以及数据流动方向。
 
 ## 组件通信
 

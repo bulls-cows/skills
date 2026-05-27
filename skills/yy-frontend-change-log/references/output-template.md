@@ -55,22 +55,19 @@
 
 ### 3. 生命周期 / 渲染逻辑
 
-使用 Mermaid 时序图展示组件的生命周期和渲染流程：
+使用 Mermaid 时序图展示组件的生命周期和渲染流程（根据实际框架选用对应阶段的参与者）：
 
 ```mermaid
 sequenceDiagram
-    participant M as 挂载阶段
-    participant U as 更新阶段
-    participant D as 卸载阶段
-    M->>U: props/state 变化触发重渲染
-    U->>U: diff 比对后按需更新 DOM
-    U->>D: 组件卸载
+    participant Mount as 挂载阶段
+    participant Update as 更新阶段
+    participant Unmount as 卸载阶段
+    Mount->>Update: props/state 变化触发重渲染
+    Update->>Update: diff 比对后按需更新 DOM
+    Update->>Unmount: 组件卸载
 ```
 
-用文字补充说明：
-
-- 关键生命周期钩子 / Hook 的用途和执行时机
-- 渲染触发条件和渲染内容分支
+用文字补充说明：关键生命周期钩子/Hook 的用途和执行时机、渲染触发条件和内容分支。
 
 ### 4. 交互事件与处理流程
 
@@ -86,16 +83,7 @@ sequenceDiagram
 后置影响：[状态变化/UI更新]
 ```
 
-当事件间存在流转关系时，用 Mermaid 流程图表示：
-
-```mermaid
-flowchart TD
-    A[用户点击提交] --> B{表单校验}
-    B -->|通过| C[调用 API]
-    B -->|失败| D[显示错误提示]
-    C -->|成功| E[更新列表状态]
-    C -->|失败| F[显示网络异常]
-```
+当事件间存在流转关系时，用 Mermaid `flowchart TD` 展示决策分支和状态影响。
 
 ### 5. 依赖关系
 
@@ -114,31 +102,11 @@ API 接口：
   - 用途：[用途说明]
 ```
 
-当依赖关系较复杂时，用 Mermaid 图表示：
-
-```mermaid
-flowchart LR
-    A[当前组件] --> B[子组件1]
-    A --> C[子组件2]
-    B --> D[工具函数]
-    C --> E[API 模块]
-```
+当依赖关系较复杂时，用 Mermaid `flowchart LR` 展示依赖树和模块层级。
 
 ### 6. 状态流转
 
-当组件内部涉及状态机或复杂状态变化时，用 Mermaid 状态图描述：
-
-```mermaid
-stateDiagram-v2
-    [*] --> 空闲
-    空闲 --> 加载中: 触发请求
-    加载中 --> 成功: 请求返回
-    加载中 --> 失败: 请求异常
-    成功 --> 空闲: 重置
-    失败 --> 加载中: 重试
-```
-
-用文字补充说明状态定义和流转规则。
+当组件内部涉及状态机或复杂状态变化时，用 Mermaid `stateDiagram-v2` 描述状态定义、触发事件和流转规则，并补充文字说明。
 
 ### 7. 异常边界与处理
 

@@ -54,23 +54,11 @@
 | 测试相关  | `test`     | 新增/修改测试用例、mock 数据                                   |
 | 构建/工具 | `chore`    | 依赖升级、配置文件变更、脚本调整                               |
 
-类型推断优先级：`feat` > `fix` > `refactor` > `perf` > `style` > `docs` > `test` > `chore`
+类型推断优先级：`feat` > `fix` > `refactor` > `perf` > `style` > `docs` > `test` > `chore`。当一次变更的 diff 同时涉及多种改动类型时（如既有新增功能又有样式调整），取优先级最高的类型作为记录前缀，其余类型在摘要中体现。
 
 ## Scope 推断规则
 
-变更记录格式为 `<type>(<scope>):`，scope 从文件路径自动推断：
-
-| 路径模式               | scope 取值       | 示例                                             |
-| ---------------------- | ---------------- | ------------------------------------------------ |
-| `views/<module>/`      | `<module>`       | `views/User/index.vue` → `feat(user):`           |
-| `components/<module>/` | `<module>`       | `components/Table/index.tsx` → `fix(table):`     |
-| `store/<module>/`      | `<module>`       | `store/user.ts` → `feat(user):`                  |
-| `api/<module>/`        | `<module>`       | `api/user.ts` → `fix(user):`                     |
-| `utils/<name>`         | `<name>`         | `utils/format.ts` → `refactor(format):`          |
-| `hooks/<name>`         | `<name>`         | `hooks/useAuth.ts` → `feat(useAuth):`            |
-| `pages/<module>/`      | `<module>`       | `pages/Dashboard/index.tsx` → `feat(dashboard):` |
-| 路径层级不明确         | 取最近一级目录名 | `shared/helpers.ts` → `chore(shared):`           |
-| 无法推断               | 省略 scope       | `feat: 新增功能`                                 |
+变更记录格式为 `<type>(<scope>):`。scope 从文件路径的第一级有意义目录名推断：优先取 `views/`、`components/`、`store/`、`api/`、`pages/`、`hooks/`、`utils/` 等常见目录的下一级名称；路径层级不明确时取最近一级目录名；无法推断则省略 scope。示例：`views/User/index.vue` → `feat(user):`，`utils/format.ts` → `refactor(format):`。
 
 ## 历史记录合并
 
