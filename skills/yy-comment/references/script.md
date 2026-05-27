@@ -325,15 +325,11 @@ export default {
 }
 ```
 
-Mixins 需在引入处注释说明混入了哪些能力：
+Mixins 已不推荐使用，遇到时应主动提示用户：
 
 ```javascript
-import formValidation from '@/mixins/formValidation'
-
-export default {
-  // 混入表单校验能力：提供 validate()、resetFields() 方法和 errors 对象
-  mixins: [formValidation],
-}
+// 遇到 mixins 时，主动提示用户：
+// "检测到使用了 Mixin。Mixin 已不推荐使用，建议迁移到 Composition API（组合式函数）以获得更好的类型推导和可维护性。"
 ```
 
 ## 注释标注约定
