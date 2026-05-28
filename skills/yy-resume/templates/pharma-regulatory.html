@@ -53,17 +53,19 @@
         }
         .experience-item,
         .project-item,
-        .education-item {
+        .education-item,
+        .cert-item {
           break-inside: avoid;
         }
-        .skills-category {
+        .skills-category,
+        .regulatory-group {
           break-inside: avoid;
         }
       }
 
       .header {
         text-align: center;
-        border-bottom: 2px solid #007acc;
+        border-bottom: 2px solid #2c5f7c;
         padding-bottom: 20px;
         margin-bottom: 20px;
       }
@@ -77,7 +79,7 @@
 
       .title {
         font-size: 18px;
-        color: #007acc;
+        color: #2c5f7c;
         margin-bottom: 12px;
       }
 
@@ -87,7 +89,7 @@
       }
 
       .contact a {
-        color: #007acc;
+        color: #2c5f7c;
         text-decoration: none;
       }
 
@@ -101,7 +103,7 @@
 
       h2 {
         font-size: 18px;
-        color: #007acc;
+        color: #2c5f7c;
         border-bottom: 1px solid #ddd;
         padding-bottom: 6px;
         margin-bottom: 12px;
@@ -112,29 +114,47 @@
         color: #444;
       }
 
-      .skills-category {
+      .competency-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .competency-tag {
+        display: inline-block;
+        background: #e8f0f5;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #2c5f7c;
+        border: 1px solid #c5d8e4;
+      }
+
+      .regulatory-group {
         margin-bottom: 12px;
       }
 
-      .skills-category h3 {
+      .regulatory-group h3 {
         font-size: 14px;
         font-weight: 600;
         color: #444;
         margin-bottom: 6px;
       }
 
-      .skills-list {
-        font-size: 14px;
-        color: #555;
+      .regulatory-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
       }
 
-      .skills-list span {
+      .regulatory-tag {
         display: inline-block;
-        background: #f0f7ff;
-        padding: 4px 10px;
-        margin: 2px 4px 2px 0;
+        background: #f5f0e8;
+        padding: 4px 12px;
         border-radius: 4px;
         font-size: 13px;
+        color: #5a4a3a;
+        border: 1px solid #ddd0bf;
       }
 
       .experience-item,
@@ -170,9 +190,9 @@
         color: #888;
       }
 
-      .tech-stack {
+      .submission-type {
         font-size: 13px;
-        color: #007acc;
+        color: #2c5f7c;
         margin: 4px 0 6px 0;
       }
 
@@ -186,14 +206,20 @@
         margin-bottom: 4px;
       }
 
-      .links {
+      .cert-item {
+        margin-bottom: 8px;
         font-size: 14px;
+        color: #444;
       }
 
-      .links a {
-        color: #007acc;
-        text-decoration: none;
-        margin-right: 16px;
+      .cert-item .cert-name {
+        font-weight: 600;
+        color: #222;
+      }
+
+      .cert-item .cert-detail {
+        color: #666;
+        font-size: 13px;
       }
     </style>
   </head>
@@ -201,18 +227,13 @@
     <div class="page">
       <header class="header">
         <div class="name">姓名</div>
-        <div class="title">职位</div>
+        <div class="title">国际药品注册经理</div>
         <div class="contact">
           <span>城市</span>
           <span>|</span>
           <span>电话</span>
           <span>|</span>
           <span>邮箱</span>
-        </div>
-        <div class="links" style="margin-top: 8px">
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">博客</a>
         </div>
       </header>
 
@@ -221,34 +242,31 @@
         <p class="summary">个人简介内容</p>
       </section>
 
-      <section class="skills-section">
-        <h2>技能栈</h2>
-        <div class="skills-category">
-          <h3>前端</h3>
-          <div class="skills-list">
-            <span>技能1</span>
-            <span>技能2</span>
+      <section class="competency-section">
+        <h2>核心能力</h2>
+        <div class="competency-list">
+          <span class="competency-tag">注册策略制定</span>
+          <span class="competency-tag">申报项目管理</span>
+          <span class="competency-tag">合规审查</span>
+          <span class="competency-tag">法规解读与研判</span>
+        </div>
+      </section>
+
+      <section class="regulatory-section">
+        <h2>法规体系</h2>
+        <div class="regulatory-group">
+          <h3>国际法规</h3>
+          <div class="regulatory-list">
+            <span class="regulatory-tag">ICH</span>
+            <span class="regulatory-tag">FDA</span>
+            <span class="regulatory-tag">EMA</span>
           </div>
         </div>
-        <div class="skills-category">
-          <h3>后端</h3>
-          <div class="skills-list">
-            <span>技能1</span>
-            <span>技能2</span>
-          </div>
-        </div>
-        <div class="skills-category">
-          <h3>数据库</h3>
-          <div class="skills-list">
-            <span>技能1</span>
-            <span>技能2</span>
-          </div>
-        </div>
-        <div class="skills-category">
-          <h3>工具</h3>
-          <div class="skills-list">
-            <span>技能1</span>
-            <span>技能2</span>
+        <div class="regulatory-group">
+          <h3>国内法规</h3>
+          <div class="regulatory-list">
+            <span class="regulatory-tag">NMPA</span>
+            <span class="regulatory-tag">CDE</span>
           </div>
         </div>
       </section>
@@ -259,7 +277,7 @@
           <div class="item-header">
             <div>
               <div class="company">公司名称</div>
-              <div class="position">职位</div>
+              <div class="position">注册经理</div>
             </div>
             <div class="date">2020.01 - 至今</div>
           </div>
@@ -274,11 +292,11 @@
         <h2>项目经验</h2>
         <div class="project-item">
           <div class="item-header">
-            <div class="project-name">项目名称</div>
+            <div class="project-name">产品/项目名称</div>
             <div class="date">2021.01 - 2021.06</div>
           </div>
           <div class="role">角色</div>
-          <div class="tech-stack">技术栈：React, Node.js, PostgreSQL</div>
+          <div class="submission-type">注册类型：NDA</div>
           <ul>
             <li>项目描述1</li>
             <li>项目描述2</li>
@@ -296,6 +314,14 @@
             </div>
             <div class="date">2016.09 - 2020.06</div>
           </div>
+        </div>
+      </section>
+
+      <section class="certs-section">
+        <h2>资质证书</h2>
+        <div class="cert-item">
+          <span class="cert-name">证书名称</span>
+          <span class="cert-detail"> — 颁发机构，年份</span>
         </div>
       </section>
     </div>

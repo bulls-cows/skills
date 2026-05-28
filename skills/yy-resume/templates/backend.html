@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>张三 - 全栈开发工程师</title>
+    <title>简历</title>
     <style>
       * {
         margin: 0;
@@ -63,7 +63,7 @@
 
       .header {
         text-align: center;
-        border-bottom: 2px solid #007acc;
+        border-bottom: 2px solid #2d8659;
         padding-bottom: 20px;
         margin-bottom: 20px;
       }
@@ -77,7 +77,7 @@
 
       .title {
         font-size: 18px;
-        color: #007acc;
+        color: #2d8659;
         margin-bottom: 12px;
       }
 
@@ -87,12 +87,22 @@
       }
 
       .contact a {
-        color: #007acc;
+        color: #2d8659;
         text-decoration: none;
       }
 
       .contact span {
         margin: 0 8px;
+      }
+
+      .links {
+        font-size: 14px;
+      }
+
+      .links a {
+        color: #2d8659;
+        text-decoration: none;
+        margin-right: 16px;
       }
 
       section {
@@ -101,7 +111,7 @@
 
       h2 {
         font-size: 18px;
-        color: #007acc;
+        color: #2d8659;
         border-bottom: 1px solid #ddd;
         padding-bottom: 6px;
         margin-bottom: 12px;
@@ -130,7 +140,7 @@
 
       .skills-list span {
         display: inline-block;
-        background: #f0f7ff;
+        background: #e8f5ee;
         padding: 4px 10px;
         margin: 2px 4px 2px 0;
         border-radius: 4px;
@@ -151,7 +161,6 @@
       }
 
       .company,
-      .project-name,
       .school {
         font-size: 15px;
         font-weight: 600;
@@ -159,7 +168,6 @@
       }
 
       .position,
-      .role,
       .degree {
         font-size: 14px;
         color: #444;
@@ -170,9 +178,20 @@
         color: #888;
       }
 
+      .project-item .project-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #222;
+      }
+
+      .project-item .role {
+        font-size: 14px;
+        color: #444;
+      }
+
       .tech-stack {
         font-size: 13px;
-        color: #007acc;
+        color: #2d8659;
         margin: 4px 0 6px 0;
       }
 
@@ -185,72 +204,45 @@
       li {
         margin-bottom: 4px;
       }
-
-      .links {
-        font-size: 14px;
-      }
-
-      .links a {
-        color: #007acc;
-        text-decoration: none;
-        margin-right: 16px;
-      }
     </style>
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <div class="name">张三</div>
-        <div class="title">全栈开发工程师</div>
+        <div class="name">姓名</div>
+        <div class="title">后端开发工程师</div>
         <div class="contact">
-          <span>北京</span>
+          <span>城市</span>
           <span>|</span>
-          <span>13800138000</span>
+          <span>电话</span>
           <span>|</span>
-          <span>zhangsan@example.com</span>
+          <span>邮箱</span>
         </div>
         <div class="links" style="margin-top: 8px">
-          <a href="https://github.com/zhangsan">GitHub</a>
-          <a href="https://linkedin.com/in/zhangsan">LinkedIn</a>
-          <a href="https://blog.zhangsan.dev">博客</a>
+          <a href="#">GitHub</a>
+          <a href="#">技术博客</a>
         </div>
       </header>
 
       <section class="summary-section">
         <h2>个人简介</h2>
-        <p class="summary">
-          5 年全栈开发经验，熟练掌握 React、Node.js、TypeScript
-          等技术栈。具有丰富的团队协作和项目管理经验，擅长从 0 到 1 搭建项目架构。热爱开源，在
-          GitHub 上有多个 Star 超 1000 的项目。
-        </p>
+        <p class="summary">个人简介内容</p>
       </section>
 
       <section class="skills-section">
         <h2>技能栈</h2>
         <div class="skills-category">
-          <h3>前端</h3>
+          <h3>编程语言</h3>
           <div class="skills-list">
-            <span>React</span>
-            <span>Vue.js</span>
-            <span>TypeScript</span>
-            <span>JavaScript</span>
-            <span>HTML5</span>
-            <span>CSS3</span>
-            <span>Webpack</span>
-            <span>Vite</span>
-            <span>Tailwind CSS</span>
+            <span>Java</span>
+            <span>Go</span>
           </div>
         </div>
         <div class="skills-category">
-          <h3>后端</h3>
+          <h3>框架</h3>
           <div class="skills-list">
-            <span>Node.js</span>
-            <span>Express</span>
-            <span>Koa</span>
-            <span>NestJS</span>
-            <span>Python</span>
-            <span>Django</span>
-            <span>FastAPI</span>
+            <span>Spring Boot</span>
+            <span>Gin</span>
           </div>
         </div>
         <div class="skills-category">
@@ -258,21 +250,22 @@
           <div class="skills-list">
             <span>MySQL</span>
             <span>PostgreSQL</span>
-            <span>MongoDB</span>
             <span>Redis</span>
-            <span>Elasticsearch</span>
           </div>
         </div>
         <div class="skills-category">
-          <h3>工具</h3>
+          <h3>中间件</h3>
           <div class="skills-list">
-            <span>Git</span>
+            <span>Kafka</span>
+            <span>RabbitMQ</span>
+          </div>
+        </div>
+        <div class="skills-category">
+          <h3>DevOps</h3>
+          <div class="skills-list">
             <span>Docker</span>
             <span>Kubernetes</span>
             <span>Jenkins</span>
-            <span>Linux</span>
-            <span>AWS</span>
-            <span>Nginx</span>
           </div>
         </div>
       </section>
@@ -282,31 +275,14 @@
         <div class="experience-item">
           <div class="item-header">
             <div>
-              <div class="company">ABC 科技有限公司</div>
-              <div class="position">全栈开发工程师</div>
+              <div class="company">公司名称</div>
+              <div class="position">后端开发工程师</div>
             </div>
-            <div class="date">2021.03 - 至今</div>
+            <div class="date">2020.01 - 至今</div>
           </div>
           <ul>
-            <li>负责公司核心产品的前后端开发，使用 React + Node.js 技术栈</li>
-            <li>主导前端架构升级，将项目从 Vue 2 迁移到 React 18，提升开发效率 40%</li>
-            <li>设计并实现 RESTful API，支持日活 10 万用户的并发访问</li>
-            <li>优化数据库查询性能，将关键接口响应时间从 500ms 降低到 100ms</li>
-          </ul>
-        </div>
-        <div class="experience-item">
-          <div class="item-header">
-            <div>
-              <div class="company">XYZ 互联网公司</div>
-              <div class="position">前端开发工程师</div>
-            </div>
-            <div class="date">2019.07 - 2021.02</div>
-          </div>
-          <ul>
-            <li>参与电商平台前端开发，使用 Vue.js 技术栈</li>
-            <li>负责商品展示、购物车、订单系统等核心模块的开发</li>
-            <li>优化页面加载速度，首屏加载时间从 3s 降低到 1.2s</li>
-            <li>编写单元测试，测试覆盖率达到 80% 以上</li>
+            <li>工作描述1</li>
+            <li>工作描述2</li>
           </ul>
         </div>
       </section>
@@ -315,32 +291,14 @@
         <h2>项目经验</h2>
         <div class="project-item">
           <div class="item-header">
-            <div class="project-name">在线教育平台</div>
-            <div class="date">2021.06 - 2022.03</div>
+            <div class="project-name">项目名称</div>
+            <div class="date">2021.01 - 2021.06</div>
           </div>
-          <div class="role">技术负责人</div>
-          <div class="tech-stack">
-            技术栈：React, TypeScript, Node.js, PostgreSQL, Redis, Docker
-          </div>
+          <div class="role">角色</div>
+          <div class="tech-stack">技术栈：Java, Spring Boot, MySQL, Redis</div>
           <ul>
-            <li>从 0 到 1 搭建在线教育平台，支持视频课程、直播、作业系统等功能</li>
-            <li>设计微服务架构，将系统拆分为用户服务、课程服务、订单服务等模块</li>
-            <li>使用 WebSocket 实现实时直播互动功能</li>
-            <li>平台上线后 3 个月内用户数达到 10 万，系统稳定性达到 99.9%</li>
-            <li>代码开源后获得 2000+ Star</li>
-          </ul>
-        </div>
-        <div class="project-item">
-          <div class="item-header">
-            <div class="project-name">开源组件库</div>
-            <div class="date">2020.01 - 至今</div>
-          </div>
-          <div class="role">作者</div>
-          <div class="tech-stack">技术栈：React, TypeScript, Storybook</div>
-          <ul>
-            <li>开发并维护一个 React UI 组件库，提供 50+ 常用组件</li>
-            <li>编写完善的文档和示例，支持主题定制</li>
-            <li>GitHub 上获得 3500+ Star，被 100+ 项目使用</li>
+            <li>项目描述1</li>
+            <li>项目描述2</li>
           </ul>
         </div>
       </section>
@@ -350,10 +308,10 @@
         <div class="education-item">
           <div class="item-header">
             <div>
-              <div class="school">北京大学</div>
-              <div class="degree">计算机科学与技术 - 本科</div>
+              <div class="school">学校名称</div>
+              <div class="degree">专业</div>
             </div>
-            <div class="date">2015.09 - 2019.06</div>
+            <div class="date">2016.09 - 2020.06</div>
           </div>
         </div>
       </section>
