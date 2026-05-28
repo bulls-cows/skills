@@ -1,35 +1,45 @@
 # 简历信息示例
 
 ## 基本信息
+
 - 姓名：张三
 - 职位：全栈开发工程师
 - 电话：13800138000
-- 邮箱：zhangsan@example.com
+- 邮箱：<zhangsan@example.com>
 - 城市：北京
 
 ## 社交链接
-- GitHub：https://github.com/zhangsan
-- LinkedIn：https://linkedin.com/in/zhangsan
-- 博客：https://blog.zhangsan.dev
+
+- GitHub：<https://github.com/zhangsan>
+- LinkedIn：<https://linkedin.com/in/zhangsan>
+- 博客：<https://blog.zhangsan.dev>
 
 ## 个人简介
+
 5 年全栈开发经验，熟练掌握 React、Node.js、TypeScript 等技术栈。具有丰富的团队协作和项目管理经验，擅长从 0 到 1 搭建项目架构。热爱开源，在 GitHub 上有多个 Star 超 1000 的项目。
 
 ## 技能栈
+
 ### 前端
+
 React, Vue.js, TypeScript, JavaScript, HTML5, CSS3, Webpack, Vite, Tailwind CSS
 
 ### 后端
+
 Node.js, Express, Koa, NestJS, Python, Django, FastAPI
 
 ### 数据库
+
 MySQL, PostgreSQL, MongoDB, Redis, Elasticsearch
 
 ### 工具
+
 Git, Docker, Kubernetes, Jenkins, Linux, AWS, Nginx
 
 ## 工作经验
+
 ### ABC 科技有限公司
+
 - 职位：全栈开发工程师
 - 时间：2021.03 - 至今
 - 工作描述：
@@ -39,6 +49,7 @@ Git, Docker, Kubernetes, Jenkins, Linux, AWS, Nginx
   - 优化数据库查询性能，将关键接口响应时间从 500ms 降低到 100ms
 
 ### XYZ 互联网公司
+
 - 职位：前端开发工程师
 - 时间：2019.07 - 2021.02
 - 工作描述：
@@ -48,7 +59,9 @@ Git, Docker, Kubernetes, Jenkins, Linux, AWS, Nginx
   - 编写单元测试，测试覆盖率达到 80% 以上
 
 ## 项目经验
+
 ### 在线教育平台
+
 - 角色：技术负责人
 - 技术栈：React, TypeScript, Node.js, PostgreSQL, Redis, Docker
 - 项目描述：
@@ -61,6 +74,7 @@ Git, Docker, Kubernetes, Jenkins, Linux, AWS, Nginx
   - 代码开源后获得 2000+ Star
 
 ### 开源组件库
+
 - 角色：作者
 - 技术栈：React, TypeScript, Storybook
 - 项目描述：
@@ -71,7 +85,9 @@ Git, Docker, Kubernetes, Jenkins, Linux, AWS, Nginx
   - 被 100+ 项目使用
 
 ## 教育背景
+
 ### 北京大学
+
 - 专业：计算机科学与技术
 - 时间：2015.09 - 2019.06
 - 学历：本科

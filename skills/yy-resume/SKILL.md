@@ -41,6 +41,13 @@ description: >
 
 使用 `templates/resume-template.html` 作为模板，将收集到的信息填充到模板中，生成完整的 HTML 文件。
 
+生成的 HTML 必须满足以下 A4 分页打印约束：
+
+1. **章节不被截断**：每个 `section` 使用 `break-inside: avoid`，避免同一章节被分页截断
+2. **条目不被截断**：每个经验/项目/教育条目使用 `break-inside: avoid`，避免同一公司或项目的标题与描述被拆到两页
+3. **标题不孤悬**：`h2` 使用 `break-after: avoid`，避免章节标题在页末而内容在下一页
+4. **技能类别不被截断**：每个 `.skills-category` 使用 `break-inside: avoid`，避免技能类别名称与技能标签被拆开
+
 ### 步骤 3. 输出结果
 
 将生成的 HTML 文件保存到用户指定的位置，或直接输出 HTML 内容，并说明：
