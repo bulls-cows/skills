@@ -1,0 +1,211 @@
+{
+  "general": {
+    "theme": {
+      "primary": "#2c3e50",
+      "tagBg": "#eef1f5",
+      "tagBorder": "#d7dde6"
+    },
+    "headerLinks": false,
+    "sections": [
+      { "id": "header", "fields": ["name", "title", "city", "phone", "email"] },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "skills", "title": "技能", "fields": ["skills[]{category,items[]}"] },
+      {
+        "id": "experience",
+        "title": "工作经验",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "fields": ["projects[]{name,url,role,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      },
+      { "id": "certs", "title": "证书与其他", "fields": ["certs[]{name,issuer,year}"] }
+    ]
+  },
+  "frontend": {
+    "theme": {
+      "primary": "#007acc",
+      "tagBg": "#f0f7ff",
+      "tagBorder": "#cfe8ff"
+    },
+    "headerLinks": true,
+    "sections": [
+      {
+        "id": "header",
+        "fields": ["name", "title", "city", "phone", "email", "links[]{label,url}"]
+      },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "skills", "title": "技能栈", "fields": ["skills[]{category,items[]}"] },
+      {
+        "id": "experience",
+        "title": "工作经验",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "variant": "tech",
+        "fields": ["projects[]{name,url,role,techStack,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      }
+    ]
+  },
+  "backend": {
+    "theme": {
+      "primary": "#2d8659",
+      "tagBg": "#e8f5ee",
+      "tagBorder": "#c7e5d5"
+    },
+    "headerLinks": true,
+    "sections": [
+      {
+        "id": "header",
+        "fields": ["name", "title", "city", "phone", "email", "links[]{label,url}"]
+      },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "skills", "title": "技能栈", "fields": ["skills[]{category,items[]}"] },
+      {
+        "id": "experience",
+        "title": "工作经验",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "variant": "tech",
+        "fields": ["projects[]{name,url,role,techStack,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      }
+    ]
+  },
+  "fullstack": {
+    "theme": {
+      "primary": "#007acc",
+      "tagBg": "#f0f7ff",
+      "tagBorder": "#cfe8ff"
+    },
+    "headerLinks": true,
+    "sections": [
+      {
+        "id": "header",
+        "fields": ["name", "title", "city", "phone", "email", "links[]{label,url}"]
+      },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "skills", "title": "技能栈", "fields": ["skills[]{category,items[]}"] },
+      {
+        "id": "experience",
+        "title": "工作经验",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "variant": "tech",
+        "fields": ["projects[]{name,url,role,techStack,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      }
+    ]
+  },
+  "pharma-regulatory": {
+    "theme": {
+      "primary": "#2c5f7c",
+      "tagBg": "#e8f0f5",
+      "tagBorder": "#c5d8e4"
+    },
+    "headerLinks": false,
+    "sections": [
+      { "id": "header", "fields": ["name", "title", "city", "phone", "email"] },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "competency", "title": "核心能力", "fields": ["competencies[]"] },
+      {
+        "id": "regulatory",
+        "title": "法规体系",
+        "fields": ["regulatorySystems[]{category,items[]}"]
+      },
+      {
+        "id": "experience",
+        "title": "工作经验",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "variant": "submission",
+        "fields": ["projects[]{name,url,role,submissionType,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      },
+      { "id": "certs", "title": "资质证书", "fields": ["certs[]{name,issuer,year}"] }
+    ]
+  },
+  "bioinformatics": {
+    "theme": {
+      "primary": "#5b6abf",
+      "tagBg": "#ededf7",
+      "tagBorder": "#d7daf0"
+    },
+    "headerLinks": true,
+    "sections": [
+      {
+        "id": "header",
+        "fields": ["name", "title", "city", "phone", "email", "links[]{label,url}"]
+      },
+      { "id": "summary", "title": "个人简介", "fields": ["summary"] },
+      { "id": "skills", "title": "技术能力", "fields": ["skills[]{category,items[]}"] },
+      {
+        "id": "experience",
+        "title": "研究经历",
+        "fields": [
+          "experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "项目经验",
+        "variant": "tools",
+        "fields": ["projects[]{name,url,role,toolsMethods,startDate,endDate,descriptions[]}"]
+      },
+      {
+        "id": "publications",
+        "title": "发表论文",
+        "fields": ["publications[]{title,journal,year,authors}"]
+      },
+      {
+        "id": "education",
+        "title": "教育背景",
+        "fields": ["education[]{school,major,startDate,endDate}"]
+      }
+    ]
+  }
+}

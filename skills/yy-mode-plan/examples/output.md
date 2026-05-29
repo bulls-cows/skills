@@ -85,7 +85,7 @@
 function generateToken(userId: string): string {
   return jwt.sign({ userId }, SECRET_KEY, { expiresIn: '7d' });
 }
-````
+```
 
 ````
 
@@ -103,4 +103,4 @@ function generateToken(userId: string): string {
 ---
 
 请确认是否按调整方案继续。
-````
+```

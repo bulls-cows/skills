@@ -1,0 +1,32 @@
+<section class="projects-section">
+  <h2><!-- {{section.title}} --></h2>
+  <!-- {{BEGIN:projects}} -->
+  <div class="project-item">
+    <div class="item-header">
+      <div class="project-name">
+        <a href="<!-- {{url}} -->" target="_blank"><!-- {{name}} --></a>
+      </div>
+      <div class="date">
+        <!-- {{startDate}} -->
+        -
+        <!-- {{endDate}} -->
+      </div>
+    </div>
+    <div class="role"><!-- {{role}} --></div>
+    <!-- {{IF_VARIANT:tech}} -->
+    <div class="tech-stack">技术栈：<!-- {{techStack}} --></div>
+    <!-- {{END_IF_VARIANT:tech}} -->
+    <!-- {{IF_VARIANT:submission}} -->
+    <div class="submission-type">注册类型：<!-- {{submissionType}} --></div>
+    <!-- {{END_IF_VARIANT:submission}} -->
+    <!-- {{IF_VARIANT:tools}} -->
+    <div class="tools-methods">工具/方法：<!-- {{toolsMethods}} --></div>
+    <!-- {{END_IF_VARIANT:tools}} -->
+    <ul class="desc-list">
+      <!-- {{BEGIN:descriptions}} -->
+      <li><!-- {{item}} --></li>
+      <!-- {{END:descriptions}} -->
+    </ul>
+  </div>
+  <!-- {{END:projects}} -->
+</section>

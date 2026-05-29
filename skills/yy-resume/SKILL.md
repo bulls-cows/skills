@@ -131,23 +131,44 @@ description: >
 
 ### 步骤 3. 生成 HTML 简历
 
-使用 `templates/{模板标识}.html` 作为模板，将收集到的信息填充到模板中，生成完整的 HTML 文件。
+使用组件化模板生成完整 HTML 文件。
+
+#### 组件化拼装流程
+
+1. 读取 `templates/profiles.json`，获取选定模板类型对应的 profile 配置
+2. 根据 profile 中的 `fields` 字段契约，从用户输入中提取结构化简历数据；缺失必要字段时继续向用户追问
+3. 读取 `templates/base.html`，作为最终 HTML 骨架
+4. 按 profile 中 `sections` 数组的顺序，逐个读取 `templates/sections/{section.id}.html`
+5. 将 `section.title`、`section.variant` 和对应字段数据填入章节片段
+6. 将所有填充后的章节片段拼接后，替换 `base.html` 中的 `<!-- {{SECTIONS}} -->`
+7. 将 profile 中的 `theme.primary`、`theme.tagBg`、`theme.tagBorder` 替换到 `base.html` 的 CSS custom properties 中
+8. 输出完整 HTML 文件
+
+#### 数据契约规则
+
+1. **字段来源**：以 `profiles.json` 中当前 profile 的 `fields` 为准，不从 HTML 片段反推字段需求
+2. **数组字段**：`skills[]{category,items[]}` 表示技能类别数组，`items[]` 表示该类别下的技能项数组
+3. **可选字段**：用户未提供可选字段时，删除对应的条件片段，如 links、tags、variant 扩展字段
+4. **变体字段**：根据 `section.variant` 渲染对应项目扩展行：
+   - `tech`：渲染 `techStack`
+   - `submission`：渲染 `submissionType`
+   - `tools`：渲染 `toolsMethods`
 
 #### 内容渲染规则
 
 生成的 HTML 必须满足以下要求：
 
-1. **HTML 高亮渲染**：模板中使用 `v-html` 或将用户输入的 HTML 内容直接渲染
-2. **序号样式**：模板 CSS 支持 `① ② ③` 序号，使用 `position: relative; top: -1.2pt` 调整位置
-3. **公司标签**：模板支持显示公司标签（如上市、高新），使用边框样式
-4. **链接支持**：公司名称、项目名称可渲染为可点击链接
+1. **HTML 高亮渲染**：用户输入中的 `<strong>` 标签保留为 HTML 内容
+2. **序号样式**：`① ② ③` 序号使用 `<span class="num">①</span>` 包裹
+3. **公司标签**：公司或机构标签渲染为 `.company-tag`
+4. **链接支持**：公司名称、机构名称、项目名称可渲染为可点击链接
 
 #### A4 分页打印约束
 
 1. **章节不被截断**：每个 `section` 使用 `break-inside: avoid`
-2. **条目不被截断**：每个经验/项目/教育条目使用 `break-inside: avoid`
+2. **条目不被截断**：每个经验/项目/教育/证书/论文条目使用 `break-inside: avoid`
 3. **标题不孤悬**：`h2` 使用 `break-after: avoid`
-4. **技能类别不被截断**：每个 `.skills-category` 使用 `break-inside: avoid`
+4. **分组不被截断**：每个 `.skills-category` 和 `.regulatory-group` 使用 `break-inside: avoid`
 
 ### 步骤 4. 输出结果
 
@@ -160,10 +181,16 @@ description: >
 
 ## 相关资源
 
-- `templates/general.html`：通用简历模板
-- `templates/frontend.html`：前端开发简历模板
-- `templates/backend.html`：后端开发简历模板
-- `templates/fullstack.html`：全栈开发简历模板
-- `templates/pharma-regulatory.html`：国际药品注册简历模板
-- `templates/bioinformatics.html`：生物信息学简历模板
+- `templates/profiles.json`：职业类型配置、主题配置、章节组合和字段契约
+- `templates/base.html`：HTML 骨架和通用 CSS 样式
+- `templates/sections/header.html`：简历头部片段
+- `templates/sections/summary.html`：个人简介片段
+- `templates/sections/skills.html`：技能列表片段
+- `templates/sections/experience.html`：经历条目片段
+- `templates/sections/projects.html`：项目经验片段
+- `templates/sections/education.html`：教育背景片段
+- `templates/sections/certs.html`：证书与其他片段
+- `templates/sections/competency.html`：核心能力片段
+- `templates/sections/regulatory.html`：法规体系片段
+- `templates/sections/publications.html`：发表论文片段
 - `examples/input.md`：输入示例

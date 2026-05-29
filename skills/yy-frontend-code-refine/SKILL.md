@@ -162,7 +162,7 @@ icon: 🧹
 
 - 导入按以下 4 组排序，组间空一行，组内按字母排序：
 
-```
+```typescript
 // 1. node_modules（外部依赖）
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
@@ -198,7 +198,7 @@ import SearchBar from './SearchBar.vue'
 
 Vue 选项按以下顺序排列：
 
-```
+```text
 name → components → props → data → computed →
 watch → methods → 生命周期（beforeCreate → created →
 beforeMount → mounted → beforeUpdate → updated →
@@ -207,14 +207,14 @@ beforeDestroy → destroyed）
 
 方法内部顺序：
 
-```
+```text
 init...() → apiXxx → getXxx/postXxx → onXxx →
 computedXxx
 ```
 
 模板属性顺序：
 
-```
+```text
 is → v-for → v-if/v-else-if/v-else → v-show/v-cloak →
 id → props/attrs → v-on → v-html/v-text → v-slot
 ```
@@ -223,7 +223,7 @@ id → props/attrs → v-on → v-html/v-text → v-slot
 
 按以下顺序编组：
 
-```
+```text
 1. 导入（import）
 2. 类型定义（type/interface）
 3. Props / Emits
@@ -239,7 +239,7 @@ id → props/attrs → v-on → v-html/v-text → v-slot
 
 按以下顺序编组：
 
-```
+```text
 1. 导入（import）
 2. 类型定义（type/interface）
 3. 常量（const）
