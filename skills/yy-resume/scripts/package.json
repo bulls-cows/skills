@@ -1,0 +1,22 @@
+{
+  "name": "resume-editor",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ready": "npm install",
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "sass": "^1.86.3",
+    "typescript": "~5.7.3",
+    "vite": "^6.3.2",
+    "vue-tsc": "^2.2.8"
+  }
+}

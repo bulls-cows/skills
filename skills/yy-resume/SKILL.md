@@ -30,6 +30,14 @@ description: >
 - `pharma-regulatory`：国际药品注册，适用于药品注册、注册申报、法规事务等
 - `bioinformatics`：生物信息学，适用于生信分析、基因组学、生物信息等
 
+## 前提
+
+使用此技能前，需要确保 `scripts/` 目录下的前端项目依赖已安装。如果尚未安装，先执行：
+
+```bash
+cd scripts && npm install
+```
+
 ## 指令
 
 ### 步骤 1. 推断或选择简历模板
@@ -129,24 +137,13 @@ description: >
 8. **教育背景**：学校、专业、时间区间
 9. **其他**：学术奖项等（可选）
 
-### 步骤 3. 生成 HTML 简历
+### 步骤 3. 启动编辑器和准备数据
 
-使用组件化模板生成完整 HTML 文件。
-
-#### 组件化拼装流程
-
-1. 读取 `templates/profiles.json`，获取选定模板类型对应的 profile 配置
-2. 根据 profile 中的 `fields` 字段契约，从用户输入中提取结构化简历数据；缺失必要字段时继续向用户追问
-3. 读取 `templates/base.html`，作为最终 HTML 骨架
-4. 按 profile 中 `sections` 数组的顺序，逐个读取 `templates/sections/{section.id}.html`
-5. 将 `section.title`、`section.variant` 和对应字段数据填入章节片段
-6. 将所有填充后的章节片段拼接后，替换 `base.html` 中的 `<!-- {{SECTIONS}} -->`
-7. 将 profile 中的 `theme.primary`、`theme.tagBg`、`theme.tagBorder` 替换到 `base.html` 的 CSS custom properties 中
-8. 输出完整 HTML 文件
+使用 `scripts/` 目录下的 Vue3 前端项目启动本地开发服务，支持热更新。
 
 #### 数据契约规则
 
-1. **字段来源**：以 `profiles.json` 中当前 profile 的 `fields` 为准，不从 HTML 片段反推字段需求
+1. **字段来源**：以 `scripts/src/data/profiles.ts` 中当前 profile 的 `fields` 为准
 2. **数组字段**：`skills[]{category,items[]}` 表示技能类别数组，`items[]` 表示该类别下的技能项数组
 3. **可选字段**：用户未提供可选字段时，删除对应的条件片段，如 links、tags、variant 扩展字段
 4. **变体字段**：根据 `section.variant` 渲染对应项目扩展行：
@@ -154,9 +151,9 @@ description: >
    - `submission`：渲染 `submissionType`
    - `tools`：渲染 `toolsMethods`
 
-#### 内容渲染规则
+#### 内容渲染约束
 
-生成的 HTML 必须满足以下要求：
+生成的简历 HTML 必须满足以下要求：
 
 1. **HTML 高亮渲染**：用户输入中的 `<strong>` 标签保留为 HTML 内容
 2. **序号样式**：`① ② ③` 序号使用 `<span class="num">①</span>` 包裹
@@ -170,39 +167,84 @@ description: >
 3. **标题不孤悬**：`h2` 使用 `break-after: avoid`
 4. **分组不被截断**：每个 `.skills-category` 和 `.regulatory-group` 使用 `break-inside: avoid`
 
-### 步骤 4. 输出结果
+### 步骤 4. 启动开发服务并填充数据
 
-将生成的文件保存到项目根目录，并说明：
+#### 启动前端开发服务
 
-#### 输出文件位置
-- **交互式编辑器**：保存为 `resume-editor.html` 到项目根目录
-- **简历数据**：保存为 `resume-data.json` 到项目根目录（可选）
-- **纯简历 HTML**：保存为 `resume.html` 到项目根目录（可选）
+根据选定的模板和用户提供的简历信息，生成结构化的简历 JSON 数据，然后执行以下操作：
 
-#### 使用说明
-1. **打开编辑器**：用浏览器打开 `resume-editor.html`
-2. **实时编辑**：在左侧编辑 JSON 数据，右侧会实时更新预览
-3. **切换模板**：使用顶部的下拉菜单选择不同的简历模板
-4. **下载文件**：
-   - 点击"下载 JSON"保存简历数据
-   - 点击"下载简历 HTML"保存纯简历文件
-   - 点击"打印"直接打印或另存为 PDF
-5. **打印提示**：使用浏览器的打印功能（Ctrl+P / Cmd+P）选择 A4 纸张进行打印
+1. 切换到 `scripts/` 目录：`cd scripts`
+2. 启动 Vite 开发服务器：`npm run dev`
+3. 开发者工具将自动在浏览器打开 `http://localhost:5173`
+4. 编辑器左侧展示 JSON 编辑区，右侧实时预览简历效果
+
+#### 数据填充说明
+
+初始加载时，编辑器会展示示例数据供参考。根据用户提供的信息，将 JSON 编辑器中的示例数据替换为用户的实际信息，主要字段包括：
+
+| 字段路径 | 类型 | 说明 |
+|----------|------|------|
+| `template` | string | 模板类型，与 `scripts/src/data/profiles.ts` 中的 key 对应 |
+| `name`, `title`, `city`, `phone`, `email` | string | 基本信息 |
+| `links[]` | array | 社交链接，含 `label` 和 `url` |
+| `summary` | string | 个人简介（支持 HTML） |
+| `skills[]` | array | 技能类别，含 `category` 和 `items[]` |
+| `competencies[]` | array | 核心能力（字符串数组） |
+| `regulatorySystems[]` | array | 法规体系，含 `category` 和 `items[]` |
+| `experience[]` | array | 工作经验，含 `organization`, `position`, `startDate`, `endDate`, `descriptions[]` |
+| `projects[]` | array | 项目经验，含 `name`, `role`, `startDate`, `endDate`, `descriptions[]` |
+| `education[]` | array | 教育背景，含 `school`, `major`, `startDate`, `endDate` |
+| `certs[]` | array | 证书，含 `name`, `issuer`, `year` |
+| `publications[]` | array | 论文，含 `title`, `journal`, `year`, `authors` |
+
+#### 操作按钮说明
+
+1. **下载 JSON**：导出当前编辑的简历数据为 `resume-data.json`
+2. **下载简历 HTML**：导出当前简历为独立 HTML 文件 `resume.html`
+3. **打印**：调起浏览器打印功能，可选择"另存为 PDF"获得 A4 格式的简历 PDF
 
 ## 相关资源
 
-- `templates/editor.html`：交互式简历编辑器模板
+### 前端项目（scripts/）
+
+前端项目是一个独立的 Vue3 + TypeScript + Sass 应用，使用 Vite 构建，支持热更新开发。
+
+**输入**：用户在左侧 JSON 编辑器中编辑简历数据
+**处理**：`src/data/profiles.ts` 定义模板配置，`src/types/resume.ts` 定义数据结构
+**渲染**：`src/components/sections/*.vue` 将数据渲染为简历 HTML 片段
+**输出**：右侧实时预览 + 导出 JSON/HTML/PDF
+
+**项目结构：**
+
+- `scripts/package.json`：前端项目依赖和脚本
+- `scripts/vite.config.ts`：Vite 构建配置
+- `scripts/src/main.ts`：应用入口
+- `scripts/src/App.vue`：根组件
+- `scripts/src/types/resume.ts`：简历数据类型定义
+- `scripts/src/data/profiles.ts`：职业类型配置和示例数据
+- `scripts/src/utils/export.ts`：导出 JSON/HTML/PDF 工具函数
+- `scripts/src/styles/`：SCSS 样式文件
+- `scripts/src/components/Toolbar.vue`：工具栏组件
+- `scripts/src/components/JsonEditor.vue`：JSON 编辑器组件
+- `scripts/src/components/ResumePreview.vue`：简历预览组件
+- `scripts/src/components/ResumeEditor.vue`：编辑器主布局组件
+- `scripts/src/components/sections/`：简历各章节 Vue 组件
+  - `ResumeHeader.vue`：简历头部
+  - `ResumeSummary.vue`：个人简介
+  - `ResumeSkills.vue`：技能列表
+  - `ResumeCompetency.vue`：核心能力
+  - `ResumeRegulatory.vue`：法规体系
+  - `ResumeExperience.vue`：工作经验
+  - `ResumeProjects.vue`：项目经验
+  - `ResumeEducation.vue`：教育背景
+  - `ResumeCerts.vue`：证书资质
+  - `ResumePublications.vue`：发表论文
+
+### 模板资源
+
+- `templates/editor.html`：旧版交互式简历编辑器模板（保留兼容）
 - `templates/profiles.json`：职业类型配置、主题配置、章节组合和字段契约
 - `templates/base.html`：HTML 骨架和通用 CSS 样式
-- `templates/sections/header.html`：简历头部片段
-- `templates/sections/summary.html`：个人简介片段
-- `templates/sections/skills.html`：技能列表片段
-- `templates/sections/experience.html`：经历条目片段
-- `templates/sections/projects.html`：项目经验片段
-- `templates/sections/education.html`：教育背景片段
-- `templates/sections/certs.html`：证书与其他片段
-- `templates/sections/competency.html`：核心能力片段
-- `templates/sections/regulatory.html`：法规体系片段
-- `templates/sections/publications.html`：发表论文片段
+- `templates/sections/`：旧版 HTML 片段模板（保留兼容）
 - `examples/input.md`：输入示例
 - `examples/resume-data.json`：简历数据示例
