@@ -104,12 +104,16 @@ async function main() {
     removeSkillFromGlobal(name).then((result) => {
       if (result.missing) {
         console.log(`跳过未安装的全局技能: ${result.skillName}`)
-      } else if (result.success) {
-        console.log(`已移除全局技能: ${result.skillName}`)
-      } else {
-        console.error(`移除全局技能失败: ${result.skillName}`)
-        if (result.output) console.error(result.output)
+        return result
       }
+
+      if (result.success) {
+        console.log(`已移除全局技能: ${result.skillName}`)
+        return result
+      }
+
+      console.error(`移除全局技能失败: ${result.skillName}`)
+      if (result.output) console.error(result.output)
       return result
     }),
   )

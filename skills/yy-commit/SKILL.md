@@ -72,9 +72,12 @@ git diff --staged
 
 ### 4. 生成提交信息
 
-默认遵循 Conventional Commits 规范：`type(scope): description`
+先检查项目 AGENTS.md、README 或其他明确规则中的提交规范。
 
-如果项目 AGENTS.md、README 或其他明确规则中定义了不同规范，则以项目约定为准。
+- **项目已定义提交标题规范**：必须优先使用项目约定，不得继续默认套用 Conventional Commits
+- **项目未定义提交标题规范**：再使用 Conventional Commits 规范：`type(scope): description`
+
+例如，项目若明确要求使用 `功能: ...`、`重构: ...`、`文档: ...` 这类中文前缀，则提交标题必须直接按该规范生成。
 
 **Type（类型）：**
 
@@ -85,7 +88,9 @@ git diff --staged
 - `refactor` - 重构（既非新功能也非修复）
 - `perf` - 性能优化
 - `test` - 测试相关
-- `chore` - 构建/工具/依赖相关
+- `build` - 构建系统或外部依赖变更
+- `ci` - CI 配置文件和脚本变更
+- `chore` - 其他杂项变更（不属于上述类型）
 - `revert` - 回滚提交
 
 **Scope（范围）- 可选：**
@@ -100,6 +105,7 @@ git diff --staged
 - 使用中文（代码标识符、专有名词除外）
 - 使用动词开头的祈使语气
 - 精炼，不超过 50 个字符，一句话
+- 句末不加句号
 - 优先说明”为什么”或”为了解决什么问题”，而不只是”做了什么”
 - 精确性原则：当改动内容不多时，要具体描述变更的细节
 - 避免使用”统一”、”所有”等绝对性词汇：基于实际修改的文件来描述
@@ -135,10 +141,19 @@ refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 
 **修改提交信息规则：**
 
-- 当用户要求修改提交信息时，默认只修改 `type(scope): description` 中的 `description` 部分
-- `type(scope):` 前缀部分只可更新（如调整 type 或 scope），不可删除
+- 当用户要求修改提交信息时，默认将用户反馈视为对冒号后 `description` 语义的修正，而不是要求用户手工重写前缀
+- AI 必须基于新的 description、代码改动内容、对话上下文和项目规范，重新评估冒号前前缀是否仍然匹配
+- 若原前缀与项目规范或改动性质不匹配，AI 应自动调整前缀，不要求用户手写调整冒号前内容
+- 仅当用户明确指定前缀类型时，才将该前缀作为强约束保留
 - 如果提交信息包含 body（多行描述），body 部分需要保留，只更新 title 部分
 - 仅在用户明确要求重新生成整个提交信息时，才重新生成完整的提交信息
+
+**前缀自动适配规则：**
+
+- **项目有固定前缀规范**：前缀必须优先适配到项目规范，例如 `功能:`、`重构:`、`文档:`
+- **项目无固定前缀规范，且当前前缀与改动性质匹配**：保留前缀，只调整 description
+- **项目无固定前缀规范，但当前前缀与改动性质不匹配**：AI 自动重新推导 type/scope
+- **用户只指出“标题不合适”“这不是修复”“这其实是需求”**：视为允许 AI 根据真实改动自动重算前缀
 
 展示格式：
 
@@ -162,6 +177,39 @@ feat(auth): 添加 JWT 用户认证功能
 是否确认提交？
 ```
 
+项目使用中文前缀规范时，可展示为：
+
+```text
+即将提交以下更改：
+
+📝 暂存文件：
+  - apps/client-core-host/src/diagnostics_v2/facade.rs
+
+📊 主要变更：
+  - 在 diagnostics.startTest 的统一返回出口清洗 buttonCaption 前导下划线
+  - 补充对应单元测试
+
+💬 提交信息：
+功能: diagnostics.startTest 下发的 buttonCaption 字段统一去掉前置下划线
+
+是否确认提交？
+```
+
+当用户只修改 description 语义时，应这样处理：
+
+```text
+原提交信息：
+fix(diagnostics_v2): 修复 startTest 按钮文案前导下划线
+
+用户反馈：
+这不是修复, 这是一个需求。提交信息应该改为 diagnostics.startTest 下发的 buttonCaption 字段统一去掉前置下划线
+
+正确处理：
+- 将用户反馈视为对 description 的修正
+- AI 根据项目规范和改动性质，自动把前缀从 fix(diagnostics_v2): 调整为 功能:
+- 输出新的完整提交标题供用户确认
+```
+
 ### 6. 执行提交
 
 用户确认后，按顺序执行（不可并行）：
@@ -171,13 +219,21 @@ feat(auth): 添加 JWT 用户认证功能
 git add <file1> <file2> ...
 
 # 2. 创建提交
-git commit -m “<提交信息>”
+# 仅 title
+git commit -m "<title>"
+
+# title + body
+git commit -m "<title>" -m "<body>"
+
+# title + body + footer
+git commit -m "<title>" -m "<body>" -m "<footer>"
 ```
 
 **提交信息格式：**
 
 - 单次改动较少：仅使用 title 即可
 - 单次改动较多：在 title 后添加 body，以列表形式说明具体改动点
+- 存在 Issue 关联或破坏性变更：在 body 后追加 footer
 
 ```text
 docs(yy-comment): 补充触发示例和判断标准
@@ -192,6 +248,13 @@ docs(yy-comment): 补充触发示例和判断标准
 - 禁止添加 `Co-Authored-By:` 等署名备注
 - body 内容使用列表形式，每项以 `- ` 开头
 - body 每项简洁明了，一句话说明一个改动点
+
+**Footer（页脚）规则：**
+
+- 仅在存在明确关联 Issue、任务单或破坏性变更时添加 footer
+- 关联 Issue 时，优先使用 `Closes #<编号>` 或 `Fixes #<编号>`
+- 存在破坏性变更时，必须显式说明影响
+- 未发现明确关联项时，不要为了凑格式添加 footer
 
 ### 7. 输出结果
 
