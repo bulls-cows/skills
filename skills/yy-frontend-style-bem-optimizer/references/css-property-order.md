@@ -1,40 +1,48 @@
-# CSS 属性分层排列规则
+# CSS 属性排列规则
 
-## 分层原则
+## 排序方法论
 
-每条 CSS 规则中的声明按语义重新排列，分为**布局层**和**功能层**。布局层属性影响元素在页面中的位置、空间和流式关系，排在前面；功能层属性影响元素的视觉表现、交互反馈和内容渲染，排在后面。
+CSS 属性按 [csscomb](https://github.com/csscomb/csscomb.js) zen 预设顺序排列。该预设的核心哲学是：按属性对布局的影响力由大到小排列（定位 → 盒模型 → 排版 → 视觉 → 动效）。本规则在 csscomb zen 预设基础上：
+
+- 补充了 zen 预设未覆盖的现代 CSS 属性（CSS Grid、Container Queries、逻辑属性等）
+- 移除了已过时的 IE 前缀 hack（`filter:progid:DXImageTransform.*` 等）
+- 排序结果可用 `csscomb` CLI 工具验证
+
+## 属性排列顺序（csscomb zen 预设 + 现代属性补充）
+
+按以下序列排列每个 CSS 规则内的声明：
+
+1. **定位**：`position`、`top`、`right`、`bottom`、`left`、`inset`、`z-index`
+2. **显示模式**：`display`、`visibility`、`flex`、`flex-direction`、`flex-wrap`、`flex-flow`、`justify-content`、`align-items`、`align-content`、`align-self`、`flex-grow`、`flex-shrink`、`flex-basis`、`order`、`grid`、`grid-template-columns`、`grid-template-rows`、`grid-template-areas`、`grid-template`、`grid-auto-columns`、`grid-auto-rows`、`grid-auto-flow`、`grid-column`、`grid-row`、`grid-area`、`grid-column-start`、`grid-column-end`、`grid-row-start`、`grid-row-end`、`gap`、`row-gap`、`column-gap`、`place-items`、`place-content`、`place-self`、`container`、`container-type`、`container-name`、`columns`、`column-width`、`column-count`、`column-fill`、`column-rule`、`column-span`、`object-fit`、`object-position`
+3. **盒模型**：`box-sizing`、`aspect-ratio`、`width`、`min-width`、`max-width`、`height`、`min-height`、`max-height`、`margin`、`margin-top`、`margin-right`、`margin-bottom`、`margin-left`、`padding`、`padding-top`、`padding-right`、`padding-bottom`、`padding-left`
+4. **溢出与裁切**：`overflow`、`overflow-x`、`overflow-y`、`clip`、`clip-path`、`scroll-behavior`、`scroll-snap-type`、`scroll-snap-align`、`scroll-snap-stop`、`overscroll-behavior`、`overscroll-behavior-x`、`overscroll-behavior-y`
+5. **浮动**：`float`、`clear`
+6. **排版**：`font`、`font-family`、`font-size`、`font-weight`、`font-style`、`font-variant`、`line-height`、`letter-spacing`、`word-spacing`、`word-break`、`word-wrap`、`overflow-wrap`、`white-space`、`text-align`、`text-decoration`、`text-transform`、`text-indent`、`text-overflow`、`text-shadow`、`vertical-align`、`color`、`direction`、`writing-mode`、`unicode-bidi`
+7. **背景**：`background`、`background-color`、`background-image`、`background-repeat`、`background-position`、`background-size`、`background-attachment`、`background-origin`、`background-clip`、`background-blend-mode`
+8. **边框**：`border`、`border-width`、`border-style`、`border-color`、`border-radius`、`border-top`、`border-right`、`border-bottom`、`border-left`、`outline`、`outline-width`、`outline-style`、`outline-color`、`outline-offset`
+9. **视觉效果**：`opacity`、`box-shadow`、`filter`、`backdrop-filter`、`mix-blend-mode`、`isolation`、`contain`
+10. **变换与过渡**：`transform`、`transform-origin`、`transition`、`transition-property`、`transition-duration`、`transition-timing-function`、`transition-delay`、`animation`、`animation-name`、`animation-duration`、`animation-timing-function`、`animation-delay`、`animation-iteration-count`、`animation-direction`、`animation-fill-mode`、`animation-play-state`
+11. **交互**：`cursor`、`pointer-events`、`user-select`、`resize`
+12. **其他**：`content`、`counter-reset`、`counter-increment`、`list-style`、`list-style-position`、`list-style-type`、`list-style-image`、`table-layout`、`border-collapse`、`border-spacing`、`caption-side`、`empty-cells`、`quotes`、`page-break-before`、`page-break-inside`、`page-break-after`、`break-before`、`break-inside`、`break-after`、`orphans`、`widows`
 
 > ⚠️ 标记表示该属性在当前主流浏览器（Last 2 versions of Chrome/Firefox/Safari/Edge）中存在兼容性限制，详见文末「兼容性警告」章节。若项目有 `.browserslistrc` 配置，以项目实际兼容性要求为准。
 
-## 布局层属性（按以下顺序排列）
-
-1. **定位**：`position`、`top`、`right`、`bottom`、`left`、`z-index`
-2. **显示模式**：`display`、`flex`、`flex-direction`、`flex-wrap`、`flex-flow`、`justify-content`、`align-items`、`align-content`、`align-self`、`flex-grow`、`flex-shrink`、`flex-basis`、`flex`、`grid`、`grid-template-columns`、`grid-template-rows`、`grid-template-areas`、`grid-template`、`grid-auto-columns`、`grid-auto-rows`、`grid-auto-flow`、`grid-column`、`grid-row`、`grid-area`、`grid-column-start`、`grid-column-end`、`grid-row-start`、`grid-row-end`、`gap`、`row-gap`、`column-gap`、`place-items`、`place-content`、`place-self`
-3. **盒模型**：`box-sizing`、`width`、`min-width`、`max-width`、`height`、`min-height`、`max-height`、`margin`、`margin-top`、`margin-right`、`margin-bottom`、`margin-left`、`padding`、`padding-top`、`padding-right`、`padding-bottom`、`padding-left`
-4. **溢出与裁切**：`overflow`、`overflow-x`、`overflow-y`、`clip`、`clip-path`
-5. **浮动**：`float`、`clear`
-
-## 功能层属性（按以下顺序排列）
-
-1. **排版**：`font`、`font-family`、`font-size`、`font-weight`、`font-style`、`font-variant`、`line-height`、`letter-spacing`、`word-spacing`、`word-break`、`word-wrap`、`overflow-wrap`、`white-space`、`text-align`、`text-decoration`、`text-transform`、`text-indent`、`text-overflow`、`text-shadow`、`vertical-align`、`color`、`direction`、`writing-mode`
-2. **背景**：`background`、`background-color`、`background-image`、`background-repeat`、`background-position`、`background-size`、`background-attachment`、`background-origin`、`background-clip`、`background-blend-mode`
-3. **边框**：`border`、`border-width`、`border-style`、`border-color`、`border-radius`、`border-top`、`border-right`、`border-bottom`、`border-left`、`outline`、`outline-width`、`outline-style`、`outline-color`、`outline-offset`
-4. **视觉效果**：`opacity`、`box-shadow`、`filter`、`backdrop-filter`、`mix-blend-mode`、`visibility`
-5. **变换与过渡**：`transform`、`transform-origin`、`transition`、`transition-property`、`transition-duration`、`transition-timing-function`、`transition-delay`、`animation`、`animation-name`、`animation-duration`、`animation-timing-function`、`animation-delay`、`animation-iteration-count`、`animation-direction`、`animation-fill-mode`、`animation-play-state`
-6. **交互**：`cursor`、`pointer-events`、`user-select`、`resize`
-7. **其他**：`content`、`counter-*`、`list-style`、`table-layout`、`border-collapse`
-
 ## 执行规则
 
-- 每条 CSS 规则内的属性按上述分层顺序重新排列
-- 布局层属性整体排在功能层属性之前
-- 同一层内按上述子类顺序排列
-- 不在上述列表中的属性保持原位置，排在功能层末尾
-- 若某条规则仅包含单层属性（如只有布局属性），不强制添加分隔
-- 每条规则内布局层与功能层之间使用空行分隔（仅当两层属性同时存在时）
-- 遇到 CSS 简写属性（如 `margin: 0`）时，视为对应的逻辑分类，不拆分为子属性
-- SCSS/Less/Stylus 中的变量、mixin 调用等非标准声明，视为「其他」类排在功能层末尾
-- 兼容性检查与属性分层同步执行，详见「兼容性警告」章节
+- 每条 CSS 规则内的属性按上述顺序重新排列，这是一个连续序列，不分层、不加空行分隔
+- 不在上述列表中的属性保持原位置，排在末尾
+- 遇到 CSS 简写属性（如 `margin: 0`）时，视为对应的分类，不拆分为子属性
+- SCSS/Less/Stylus 中的变量、mixin 调用等非标准声明，排在末尾
+- 兼容性检查与属性排序同步执行，详见「兼容性警告」章节
+
+### 浏览器前缀排序规则
+
+当 CSS 规则中同时存在带前缀和不带前缀的同一属性时，按以下规则排列：
+
+- 带前缀的属性紧跟对应的标准属性之前，按 `-webkit-` → `-moz-` → `-ms-` → `-o-` → 标准属性 顺序排列
+- 示例：`-webkit-transform`、`-moz-transform`、`-ms-transform`、`-o-transform`、`transform`
+- 若标准属性不在上述属性列表中（如仍在实验阶段的属性），带前缀的变体与标准属性一起排在功能层末尾
+- SCSS/Less/Stylus 中的 mixin 或函数自动处理前缀的情况（如 `@include transform(...)`），不适用此规则
 
 ## 兼容性警告
 
@@ -47,6 +55,9 @@
 | `backdrop-filter`              | 🟡       | Firefox 103+ 支持，Safari 需 `-webkit-` 前缀（较旧版本），旧版 Firefox 完全不支持 |
 | `clip-path`（复杂形状）        | 🟡       | Safari 对 `path()` 和复杂 `polygon()` 的支持晚于 Chrome/Firefox                   |
 | `container` / `container-type` | 🟡       | Container Queries 在 Safari 16+ 支持，更旧版本不支持                              |
+| `aspect-ratio`                 | 🟡       | Safari 15+ 支持，旧版不支持，需 `padding-top` hack 降级                           |
+| `scroll-snap-type`             | 🟡       | 所有现代浏览器均支持，旧版 Safari 需 `-webkit-` 前缀                              |
+| `overscroll-behavior`          | 🟡       | Safari 16+ 支持，Firefox 和 Chrome 已全面支持                                     |
 | `color-mix()`                  | 🟡       | CSS 颜色函数，Safari 16.2+ 支持，部分旧版浏览器不支持                             |
 | `:has()` 选择器                | 🟡       | Safari 15.4+ 支持，Firefox 121+ 支持，更旧版本不支持                              |
 | `@layer`                       | 🟡       | CSS Cascade Layers，Safari 15.4+ 支持，更旧版本不支持                             |
@@ -72,6 +83,7 @@
 | `--custom-property`（CSS 自定义属性）              | 🔴       | IE11 完全不支持                                        |
 | `position: sticky`                                 | 🔴       | IE11 不支持                                            |
 | `object-fit`                                       | 🔴       | IE11 不支持                                            |
+| `aspect-ratio`                                     | 🔴       | IE11 和 2020 年前的所有浏览器不支持                    |
 | `gap` / `row-gap` / `column-gap`（Flexbox 上下文） | 🔴       | IE11 和 Chrome 84 以下不支持                           |
 | `filter` / `backdrop-filter`                       | 🔴       | IE11 完全不支持，旧版 Chrome/Safari 需 `-webkit-` 前缀 |
 | `clip-path`（basic-shape 值）                      | 🔴       | IE11 不支持，旧版 Chrome 需 `-webkit-` 前缀            |
@@ -87,6 +99,7 @@
 - **CSS 变量** → 编译时替换为硬编码值（PostCSS 插件 `postcss-custom-properties`）
 - **sticky 定位** → `position: relative` + JavaScript 滚动监听
 - **object-fit** → 背景图 `background-size: cover/contain` 方案
+- **aspect-ratio** → `padding-top` 百分比 hack 方案
 - **gap（Flexbox）** → 子元素 `margin` 方案
 - **filter / backdrop-filter** → 渐进增强，提供 fallback 背景色
 - **clip-path** → 渐进增强，使用 `overflow: hidden` 或 PNG 遮罩降级

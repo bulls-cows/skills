@@ -16,7 +16,7 @@
 </div>
 ```
 
-**转换前 SCSS**：
+**转换前 SCSS/Less/Stylus**：
 
 ```scss
 .card {
@@ -63,36 +63,36 @@
 </div>
 ```
 
-**转换后 SCSS**：
+**转换后 SCSS/Less/Stylus**（BEM 嵌套结构）：
 
 ```scss
 .card {
   border: 1px solid #ccc;
-}
 
-.card__header {
-  padding: 16px;
-}
+  &__header {
+    padding: 16px;
+  }
 
-.card__title {
-  font-size: 18px;
-}
+  &__title {
+    font-size: 18px;
+  }
 
-.card__body {
-  padding: 16px;
-}
+  &__body {
+    padding: 16px;
+  }
 
-.card__text {
-  color: #333;
+  &__text {
+    color: #333;
+  }
 }
 
 .btn {
   padding: 8px 16px;
-}
 
-.btn--primary {
-  background: blue;
-  color: white;
+  &--primary {
+    background: blue;
+    color: white;
+  }
 }
 ```
 
@@ -148,7 +148,7 @@
 
 ## 示例 4：CSS 属性分层
 
-**转换前 SCSS**（属性顺序混乱）：
+**转换前 SCSS/Less/Stylus**（属性顺序混乱）：
 
 ```scss
 .card {
@@ -184,18 +184,16 @@
 }
 ```
 
-**转换后 SCSS**（按布局层 → 功能层排列，空行分隔）：
+**转换后 SCSS/Less/Stylus**（按布局层 → 功能层排列，空行分隔）：
 
 ```scss
 .card {
-  /* 布局层 */
   position: relative;
   display: flex;
   flex-direction: column;
   width: 300px;
   padding: 16px;
 
-  /* 功能层 */
   color: #333;
   font-size: 14px;
   background: #fff;
@@ -205,25 +203,21 @@
 }
 
 .card__header {
-  /* 布局层 */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
 
-  /* 功能层 */
   font-size: 16px;
   font-weight: bold;
   border-bottom: 1px solid #eee;
 }
 
 .card__body {
-  /* 布局层 */
   flex: 1;
   padding: 16px;
   overflow-y: auto;
 
-  /* 功能层 */
   color: #666;
   line-height: 1.6;
 }
@@ -231,7 +225,7 @@
 
 ## 示例 5：BEM 嵌套结构重组
 
-**转换前 SCSS**（扁平分散的 BEM 规则）：
+**转换前 SCSS/Less/Stylus**（扁平分散的 BEM 规则）：
 
 ```scss
 .card {
@@ -292,18 +286,16 @@
 }
 ```
 
-**转换后 SCSS**（重组为 BEM 嵌套结构，属性已分层）：
+**转换后 SCSS/Less/Stylus**（重组为 BEM 嵌套结构，属性已分层）：
 
 ```scss
 .card {
-  /* 布局层 */
   position: relative;
   display: flex;
   flex-direction: column;
   width: 300px;
   padding: 16px;
 
-  /* 功能层 */
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -311,7 +303,6 @@
 
   // Block 级 Modifier
   &--large {
-    /* 布局层 */
     width: 500px;
     padding: 24px;
   }
@@ -323,13 +314,11 @@
 
   // Element: header
   &__header {
-    /* 布局层 */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
 
-    /* 功能层 */
     font-size: 16px;
     font-weight: bold;
     border-bottom: 1px solid #eee;
@@ -343,32 +332,27 @@
 
   // Element: title
   &__title {
-    /* 功能层 */
     font-size: 18px;
     color: #333;
   }
 
   // Element: body
   &__body {
-    /* 布局层 */
     flex: 1;
     padding: 16px;
     overflow-y: auto;
 
-    /* 功能层 */
     color: #666;
     line-height: 1.6;
   }
 
   // Element: footer
   &__footer {
-    /* 布局层 */
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     padding: 12px 16px;
 
-    /* 功能层 */
     border-top: 1px solid #eee;
   }
 }
@@ -376,7 +360,7 @@
 
 ## 示例 6：SCSS 按逻辑域拆分（单文件内拆分）
 
-**转换前 SCSS**（所有规则混合在一起）：
+**转换前 SCSS/Less/Stylus**（所有规则混合在一起）：
 
 ```scss
 // 变量
@@ -488,7 +472,7 @@ $border-radius: 4px;
 }
 ```
 
-**转换后 SCSS**（按逻辑域拆分，注释分隔块组织）：
+**转换后 SCSS/Less/Stylus**（BEM 嵌套 + 逻辑域拆分，注释分隔块组织）：
 
 ```scss
 // 变量
@@ -500,11 +484,11 @@ $border-radius: 4px;
 .page-wrapper {
   display: flex;
   min-height: 100vh;
-}
 
-.page-sidebar {
-  width: 240px;
-  background: #f5f5f5;
+  &__sidebar {
+    width: 240px;
+    background: #f5f5f5;
+  }
 }
 
 // ─── 检索（Search）─────────────────────
@@ -515,22 +499,22 @@ $border-radius: 4px;
   background: #fff;
   border: 1px solid #d9d9d9;
   border-radius: $border-radius;
-}
 
-.search-bar__input {
-  flex: 1;
-  padding: 8px 12px;
-  border: none;
-  font-size: 14px;
-}
+  &__input {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    font-size: 14px;
+  }
 
-.search-bar__btn {
-  padding: 8px 16px;
-  background: $primary-color;
-  color: #fff;
-  border: none;
-  border-radius: $border-radius;
-  cursor: pointer;
+  &__btn {
+    padding: 8px 16px;
+    background: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+  }
 }
 
 // ─── 表单（Form）─────────────────────
@@ -540,36 +524,36 @@ $border-radius: 4px;
   background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: $border-radius;
-}
 
-.form-container__field {
-  margin-bottom: 16px;
-}
+  &__field {
+    margin-bottom: 16px;
+  }
 
-.form-container__label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-}
+  &__label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
 
-.form-container__input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d9d9d9;
-  border-radius: $border-radius;
-  font-size: 14px;
-}
+  &__input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: $border-radius;
+    font-size: 14px;
 
-.form-container__input--error {
-  border-color: #ff4d4f;
-}
+    &--error {
+      border-color: #ff4d4f;
+    }
+  }
 
-.form-container__error-msg {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #ff4d4f;
+  &__error-msg {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #ff4d4f;
+  }
 }
 
 // ─── 表格（Table）─────────────────────
@@ -577,16 +561,16 @@ $border-radius: 4px;
 .result-table {
   width: 100%;
   border-collapse: collapse;
-}
 
-.result-table__header {
-  background: #fafafa;
-  font-weight: 600;
-}
+  &__header {
+    background: #fafafa;
+    font-weight: 600;
+  }
 
-.result-table__cell {
-  padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e8;
+  &__cell {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e8e8e8;
+  }
 }
 
 // ─── 弹窗（Modal）─────────────────────
@@ -630,7 +614,7 @@ function Dialog({ size, type }) {
 }
 ```
 
-**转换前 SCSS**：
+**转换前 SCSS/Less/Stylus**：
 
 ```scss
 .dialog {
@@ -684,11 +668,10 @@ function Dialog({ size, type }) {
 
 > **注意**：`dialog--${size}` 为动态拼接类名，在转换报告中标记为需人工确认。
 
-**转换后 SCSS**（BEM 嵌套结构，属性已分层）：
+**转换后 SCSS/Less/Stylus**（BEM 嵌套结构，属性已分层）：
 
 ```scss
 .dialog {
-  /* 布局层 */
   border: 1px solid #ddd;
 
   // Block 级 Modifier
@@ -703,7 +686,6 @@ function Dialog({ size, type }) {
 
   // Element: title
   &__title {
-    /* 功能层 */
     font-size: 18px;
 
     // Element 级 Modifier
@@ -714,7 +696,6 @@ function Dialog({ size, type }) {
 
   // Element: close
   &__close {
-    /* 布局层 */
     float: right;
   }
 
@@ -725,7 +706,6 @@ function Dialog({ size, type }) {
 
   // Element: message
   &__message {
-    /* 功能层 */
     color: #333;
 
     // Element 级 Modifier
