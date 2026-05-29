@@ -182,20 +182,20 @@ cd scripts && npm install
 
 初始加载时，编辑器会展示示例数据供参考。根据用户提供的信息，将 JSON 编辑器中的示例数据替换为用户的实际信息，主要字段包括：
 
-| 字段路径 | 类型 | 说明 |
-|----------|------|------|
-| `template` | string | 模板类型，与 `scripts/src/data/profiles.ts` 中的 key 对应 |
-| `name`, `title`, `city`, `phone`, `email` | string | 基本信息 |
-| `links[]` | array | 社交链接，含 `label` 和 `url` |
-| `summary` | string | 个人简介（支持 HTML） |
-| `skills[]` | array | 技能类别，含 `category` 和 `items[]` |
-| `competencies[]` | array | 核心能力（字符串数组） |
-| `regulatorySystems[]` | array | 法规体系，含 `category` 和 `items[]` |
-| `experience[]` | array | 工作经验，含 `organization`, `position`, `startDate`, `endDate`, `descriptions[]` |
-| `projects[]` | array | 项目经验，含 `name`, `role`, `startDate`, `endDate`, `descriptions[]` |
-| `education[]` | array | 教育背景，含 `school`, `major`, `startDate`, `endDate` |
-| `certs[]` | array | 证书，含 `name`, `issuer`, `year` |
-| `publications[]` | array | 论文，含 `title`, `journal`, `year`, `authors` |
+| 字段路径                                  | 类型   | 说明                                                                              |
+| ----------------------------------------- | ------ | --------------------------------------------------------------------------------- |
+| `template`                                | string | 模板类型，与 `scripts/src/data/profiles.ts` 中的 key 对应                         |
+| `name`, `title`, `city`, `phone`, `email` | string | 基本信息                                                                          |
+| `links[]`                                 | array  | 社交链接，含 `label` 和 `url`                                                     |
+| `summary`                                 | string | 个人简介（支持 HTML）                                                             |
+| `skills[]`                                | array  | 技能类别，含 `category` 和 `items[]`                                              |
+| `competencies[]`                          | array  | 核心能力（字符串数组）                                                            |
+| `regulatorySystems[]`                     | array  | 法规体系，含 `category` 和 `items[]`                                              |
+| `experience[]`                            | array  | 工作经验，含 `organization`, `position`, `startDate`, `endDate`, `descriptions[]` |
+| `projects[]`                              | array  | 项目经验，含 `name`, `role`, `startDate`, `endDate`, `descriptions[]`             |
+| `education[]`                             | array  | 教育背景，含 `school`, `major`, `startDate`, `endDate`                            |
+| `certs[]`                                 | array  | 证书，含 `name`, `issuer`, `year`                                                 |
+| `publications[]`                          | array  | 论文，含 `title`, `journal`, `year`, `authors`                                    |
 
 #### 操作按钮说明
 

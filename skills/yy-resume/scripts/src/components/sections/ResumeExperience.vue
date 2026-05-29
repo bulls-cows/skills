@@ -31,6 +31,90 @@ defineProps<{
   </section>
 </template>
 
-<style scoped>
-@use '../../styles/resume' as *;
+<style lang="scss" scoped>
+section {
+  margin-bottom: 24px;
+
+  @media print {
+    break-inside: avoid;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  color: var(--primary, #2c3e50);
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+
+  @media print {
+    break-after: avoid;
+  }
+}
+
+.experience-item {
+  margin-bottom: 16px;
+
+  @media print {
+    break-inside: avoid;
+  }
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.company {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+.position {
+  font-size: 14px;
+  color: #444;
+}
+
+.date {
+  font-size: 13px;
+  color: #888;
+}
+
+.company-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+}
+
+.company-tag {
+  font-size: 9px;
+  padding: 0 3px;
+  border: 1px solid #333;
+  color: #333;
+}
+
+.desc-list {
+  strong {
+    font-weight: 600;
+  }
+
+  .num {
+    position: relative;
+    top: -1.2pt;
+  }
+}
+
+ul {
+  margin-left: 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+li {
+  margin-bottom: 4px;
+}
 </style>

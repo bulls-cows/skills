@@ -83,14 +83,33 @@ function handleDownloadHtml() {
         @clear-error="handleClearError"
       />
       <div v-if="errorMsg" class="error-message">{{ errorMsg }}</div>
-      <ResumePreview
-        v-if="!errorMsg"
-        :data="parsedData"
-      />
+      <ResumePreview v-if="!errorMsg" :data="parsedData" />
     </div>
   </div>
 </template>
 
-<style scoped>
-@use '../styles/editor' as *;
+<style lang="scss" scoped>
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.error-message {
+  padding: 12px 16px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 13px;
+  border-top: 1px solid #fca5a5;
+}
+
+@media print {
+  .main-content {
+    display: block;
+  }
+
+  :deep(.error-message) {
+    display: none !important;
+  }
+}
 </style>

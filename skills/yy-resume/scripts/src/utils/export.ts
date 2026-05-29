@@ -55,21 +55,32 @@ function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
       return `<section><h2>${section.title || ''}</h2>${data.regulatorySystems.map((c) => `<div class="regulatory-group"><h3>${c.category}</h3><div class="regulatory-list">${c.items.map((i) => `<span class="regulatory-tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`
     case 'experience':
       if (!data.experience?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.experience.map((e) => {
-        const tagsHtml = e.tags?.length ? `<span class="company-tags">${e.tags.map((t) => `<span class="company-tag">${t}</span>`).join('')}</span>` : ''
-        const orgHtml = e.url ? `<a href="${e.url}" target="_blank">${e.organization}</a>` : e.organization
-        return `<div class="experience-item"><div class="item-header"><div><div class="company">${orgHtml}${tagsHtml}</div><div class="position">${e.position || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
-      }).join('')}</section>`
+      return `<section><h2>${section.title || ''}</h2>${data.experience
+        .map((e) => {
+          const tagsHtml = e.tags?.length
+            ? `<span class="company-tags">${e.tags.map((t) => `<span class="company-tag">${t}</span>`).join('')}</span>`
+            : ''
+          const orgHtml = e.url
+            ? `<a href="${e.url}" target="_blank">${e.organization}</a>`
+            : e.organization
+          return `<div class="experience-item"><div class="item-header"><div><div class="company">${orgHtml}${tagsHtml}</div><div class="position">${e.position || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
+        })
+        .join('')}</section>`
     case 'projects':
       if (!data.projects?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.projects.map((p) => {
-        const nameHtml = p.url ? `<a href="${p.url}" target="_blank">${p.name}</a>` : p.name
-        let variantHtml = ''
-        if (section.variant === 'tech' && p.techStack) variantHtml = `<div class="tech-stack">${p.techStack}</div>`
-        else if (section.variant === 'submission' && p.submissionType) variantHtml = `<div class="submission-type">${p.submissionType}</div>`
-        else if (section.variant === 'tools' && p.toolsMethods) variantHtml = `<div class="tools-methods">${p.toolsMethods}</div>`
-        return `<div class="project-item"><div class="item-header"><div><div class="project-name">${nameHtml}</div><div class="role">${p.role || ''}</div></div><div class="date">${p.startDate || ''} - ${p.endDate || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
-      }).join('')}</section>`
+      return `<section><h2>${section.title || ''}</h2>${data.projects
+        .map((p) => {
+          const nameHtml = p.url ? `<a href="${p.url}" target="_blank">${p.name}</a>` : p.name
+          let variantHtml = ''
+          if (section.variant === 'tech' && p.techStack)
+            variantHtml = `<div class="tech-stack">${p.techStack}</div>`
+          else if (section.variant === 'submission' && p.submissionType)
+            variantHtml = `<div class="submission-type">${p.submissionType}</div>`
+          else if (section.variant === 'tools' && p.toolsMethods)
+            variantHtml = `<div class="tools-methods">${p.toolsMethods}</div>`
+          return `<div class="project-item"><div class="item-header"><div><div class="project-name">${nameHtml}</div><div class="role">${p.role || ''}</div></div><div class="date">${p.startDate || ''} - ${p.endDate || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
+        })
+        .join('')}</section>`
     case 'education':
       if (!data.education?.length) return ''
       return `<section><h2>${section.title || ''}</h2>${data.education.map((e) => `<div class="education-item"><div class="item-header"><div><div class="school">${e.school || ''}</div><div class="degree">${e.major || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div></div>`).join('')}</section>`

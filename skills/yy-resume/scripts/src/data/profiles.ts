@@ -15,9 +15,7 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '工作经验',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
@@ -49,9 +47,7 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '工作经验',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
@@ -83,9 +79,7 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '工作经验',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
@@ -117,9 +111,7 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '工作经验',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
@@ -153,17 +145,13 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '工作经验',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
         title: '项目经验',
         variant: 'submission',
-        fields: [
-          'projects[]{name,url,role,submissionType,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['projects[]{name,url,role,submissionType,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'education',
@@ -190,17 +178,13 @@ export const profiles: Record<string, Profile> = {
       {
         id: 'experience',
         title: '研究经历',
-        fields: [
-          'experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['experience[]{organization,url,tags[],position,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'projects',
         title: '项目经验',
         variant: 'tools',
-        fields: [
-          'projects[]{name,url,role,toolsMethods,startDate,endDate,descriptions[]}',
-        ],
+        fields: ['projects[]{name,url,role,toolsMethods,startDate,endDate,descriptions[]}'],
       },
       {
         id: 'publications',

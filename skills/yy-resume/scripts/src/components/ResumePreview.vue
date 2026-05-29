@@ -29,11 +29,14 @@ const profile = computed(() => {
 
 <template>
   <div class="preview-pane">
-    <div class="resume-wrapper" :style="{
-      '--primary': theme.primary,
-      '--tag-bg': theme.tagBg,
-      '--tag-border': theme.tagBorder,
-    }">
+    <div
+      class="resume-wrapper"
+      :style="{
+        '--primary': theme.primary,
+        '--tag-bg': theme.tagBg,
+        '--tag-border': theme.tagBorder,
+      }"
+    >
       <template v-for="section in profile.sections" :key="section.id">
         <ResumeHeader
           v-if="section.id === 'header'"
@@ -96,7 +99,37 @@ const profile = computed(() => {
   </div>
 </template>
 
-<style scoped>
-@use '../styles/editor' as *;
-@use '../styles/resume';
+<style lang="scss" scoped>
+.preview-pane {
+  width: 50%;
+  overflow: auto;
+  padding: 20px;
+  background: #f0f2f5;
+}
+
+.resume-wrapper {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  margin: 0 auto;
+  padding: 20mm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media print {
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+}
+
+@media print {
+  .preview-pane {
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+    background: white;
+  }
+}
 </style>
