@@ -2,15 +2,16 @@
 
 各示例对应的处理步骤：
 
-| 示例   | 对应步骤       | 展示内容                                 |
-| ------ | -------------- | ---------------------------------------- |
-| 示例 1 | 步骤 5 + 7     | 基础 BEM 命名转换 + 嵌套重组             |
-| 示例 2 | 步骤 5 + 7     | 带修饰符的 BEM 转换 + 嵌套               |
-| 示例 3 | 步骤 4 + 5     | 忽略第三方类名                           |
-| 示例 4 | 步骤 6         | CSS 属性排序                             |
-| 示例 5 | 步骤 5 + 6 + 7 | BEM 转换 + 属性排序 + 嵌套重组（全流程） |
-| 示例 6 | 步骤 5 + 7 + 8 | 逻辑域拆分（单文件内注释分隔）           |
-| 示例 7 | 步骤 5 + 7     | JSX + SCSS 同步转换 + 动态类名处理       |
+| 示例   | 对应步骤       | 展示内容                                                 |
+| ------ | -------------- | -------------------------------------------------------- |
+| 示例 1 | 步骤 5 + 7     | 基础 BEM 命名转换 + 嵌套重组                             |
+| 示例 2 | 步骤 5 + 7     | 带修饰符的 BEM 转换 + 嵌套                               |
+| 示例 3 | 步骤 4 + 5     | 忽略第三方类名                                           |
+| 示例 4 | 步骤 6         | CSS 属性排序                                             |
+| 示例 5 | 步骤 5 + 6 + 7 | BEM 转换 + 属性排序 + 嵌套重组（全流程）                 |
+| 示例 6 | 步骤 5 + 7 + 8 | 逻辑域拆分（单文件内注释分隔）                           |
+| 示例 7 | 步骤 5 + 7     | JSX + SCSS 同步转换 + 动态类名处理                       |
+| 示例 8 | 步骤 5 + 6     | 纯 CSS 文件：BEM 命名转换 + 属性排序，保持扁平结构不嵌套 |
 
 ## 示例 1：基础 BEM 命名转换
 
@@ -97,14 +98,97 @@
     color: #333;
   }
 }
+```
 
-.btn {
-  padding: 8px 16px;
+## 示例 8：纯 CSS 文件 BEM 命名转换 + 属性排序（不嵌套）
 
-  &--primary {
-    background: blue;
-    color: white;
-  }
+纯 `.css` 文件不执行嵌套重组（除非用户明确要求且项目支持 CSS 原生嵌套），仅执行命名转换和属性排序，保持扁平结构。
+
+**转换前 CSS**：
+
+```css
+.card {
+  color: #333;
+  position: relative;
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #ccc;
+  display: flex;
+  font-size: 14px;
+  width: 300px;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.card-header {
+  font-weight: bold;
+  display: flex;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+.card-body {
+  color: #666;
+  padding: 16px;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #eee;
+}
+```
+
+**转换后 CSS**（类名转换为 BEM 格式，属性按 csscomb zen 顺序排列，保持扁平结构）：
+
+```css
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 16px;
+
+  color: #333;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.card__body {
+  flex: 1;
+  padding: 16px;
+
+  color: #666;
+  line-height: 1.6;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+
+  border-top: 1px solid #eee;
 }
 ```
 

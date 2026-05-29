@@ -60,19 +60,20 @@ CSS 属性按 [csscomb](https://github.com/csscomb/csscomb.js) zen 预设顺序�
 
 默认兼容性基准为最近 2 个主要版本的 Chrome、Firefox、Safari、Edge。在此基准下，以下属性仍存在兼容性限制：
 
-| 属性                           | 严重程度 | 问题描述                                                                          |
-| ------------------------------ | -------- | --------------------------------------------------------------------------------- |
-| `backdrop-filter`              | 🟡       | Firefox 103+ 支持，Safari 需 `-webkit-` 前缀（较旧版本），旧版 Firefox 完全不支持 |
-| `clip-path`（复杂形状）        | 🟡       | Safari 对 `path()` 和复杂 `polygon()` 的支持晚于 Chrome/Firefox                   |
-| `container` / `container-type` | 🟡       | Container Queries 在 Safari 16+ 支持，更旧版本不支持                              |
-| `aspect-ratio`                 | 🟡       | Safari 15+ 支持，旧版不支持，需 `padding-top` hack 降级                           |
-| `scroll-snap-type`             | 🟡       | 所有现代浏览器均支持，旧版 Safari 需 `-webkit-` 前缀                              |
-| `overscroll-behavior`          | 🟡       | Safari 16+ 支持，Firefox 和 Chrome 已全面支持                                     |
-| `color-mix()`                  | 🟡       | CSS 颜色函数，Safari 16.2+ 支持，部分旧版浏览器不支持                             |
-| `:has()` 选择器                | 🟡       | Safari 15.4+ 支持，Firefox 121+ 支持，更旧版本不支持                              |
-| `@layer`                       | 🟡       | CSS Cascade Layers，Safari 15.4+ 支持，更旧版本不支持                             |
-| `anchor-positioning`           | 🔴       | CSS Anchor Positioning 仍为实验性特性，仅 Chrome 125+ 部分支持                    |
-| `view-transitions`             | 🔴       | View Transitions API 仅 Chrome 111+ 支持，Firefox/Safari 尚不支持                 |
+| 属性                    | 严重程度 | 问题描述                                                                          |
+| ----------------------- | -------- | --------------------------------------------------------------------------------- |
+| `backdrop-filter`       | 🟡       | Firefox 103+ 支持，Safari 需 `-webkit-` 前缀（较旧版本），旧版 Firefox 完全不支持 |
+| `clip-path`（复杂形状） | 🟡       | Safari 对 `path()` 和复杂 `polygon()` 的支持晚于 Chrome/Firefox                   |
+| `container-type`        | 🟡       | Container Queries 在 Safari 16+ 支持，更旧版本不支持                              |
+| `container`             | 🟡       | Container Queries 简写属性，兼容性同 `container-type`                             |
+| `aspect-ratio`          | 🟡       | Safari 15+ 支持，旧版不支持，需 `padding-top` hack 降级                           |
+| `scroll-snap-type`      | 🟡       | 所有现代浏览器均支持，旧版 Safari 需 `-webkit-` 前缀                              |
+| `overscroll-behavior`   | 🟡       | Safari 16+ 支持，Firefox 和 Chrome 已全面支持                                     |
+| `color-mix()`           | 🟡       | CSS 颜色函数，Safari 16.2+ 支持，部分旧版浏览器不支持                             |
+| `:has()` 选择器         | 🟡       | Safari 15.4+ 支持，Firefox 121+ 支持，更旧版本不支持                              |
+| `@layer`                | 🟡       | CSS Cascade Layers，Safari 15.4+ 支持，更旧版本不支持                             |
+| `anchor-positioning`    | 🔴       | CSS Anchor Positioning 仍为实验性特性，仅 Chrome 125+ 部分支持                    |
+| `view-transitions`      | 🔴       | View Transitions API 仅 Chrome 111+ 支持，Firefox/Safari 尚不支持                 |
 
 ### 兼容性检查流程
 

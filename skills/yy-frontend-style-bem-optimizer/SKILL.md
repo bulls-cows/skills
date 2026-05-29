@@ -4,8 +4,7 @@ description: >
   前端 BEM 命名规范转换与 CSS 样式优化器。将 HTML/JSX/TSX/Vue 代码中的 class/className 属性
   与对应的 CSS/Sass/Less/Stylus 选择器同步转换为 BEM 命名格式，将 CSS 属性按 csscomb zen 预设顺序排列，
   将扁平 CSS 规则重组为 BEM 嵌套结构，并将样式规则按逻辑域拆分为独立集合。
-  当用户要求 BEM 类名转换、CSS 属性排序、样式命名规范化、样式文件拆分、嵌套重组时触发。
-  即使用户用口语化表达——"这个 scss 太乱了帮我整理下"、"把 class 名改成规范格式"、
+  即使用户口语化表达——"这个 scss 太乱了帮我整理下"、"把 class 名改成规范格式"、
   "CSS 属性顺序排一下"、"这个样式文件拆开吧"——也应触发此技能。
 ---
 
@@ -71,10 +70,10 @@ description: >
 
 当需要执行多项能力时，按以下顺序执行，每一步依赖前一步的结果：
 
-1. **BEM 命名转换**（步骤 5）→ 必须最先执行，后续步骤依赖转换后的 BEM 类名
-2. **CSS 属性排序**（步骤 6）→ 应在嵌套重组之前执行，因为嵌套后属性更难重排
-3. **BEM 嵌套重组**（步骤 7）→ 依赖命名转换完成后的 BEM 类名，用户明确要求时才执行
-4. **逻辑域拆分**（步骤 8）→ 应在嵌套重组之后执行，因为嵌套后的完整 Block 才是拆分的最小单元；用户明确要求时才执行
+1. **BEM 命名转换** → 必须最先执行，后续步骤依赖转换后的 BEM 类名
+2. **CSS 属性排序** → 应在嵌套重组之前执行。先排序可以确保所有声明的顺序统一，嵌套重组只移动规则位置、不改变每个规则块内的声明顺序，从而避免在嵌套后的多层 `&` 结构中逐层重排
+3. **BEM 嵌套重组** → 依赖命名转换完成后的 BEM 类名，用户明确要求时才执行
+4. **逻辑域拆分** → 应在嵌套重组之后执行，因为嵌套后的完整 Block 才是拆分的最小单元；用户明确要求时才执行
 
 ### 步骤 2. 确定转换模式
 
@@ -88,6 +87,7 @@ description: >
 - 用户指定文件路径 → 单文件模式
 - 用户指定目录路径 → 批量目录模式
 - 用户未明确范围 → 询问用户要转换的范围
+- 代码片段模式下用户仅提供了标记代码（HTML/JSX/Vue）而未提供样式代码（CSS/SCSS 等）→ 询问用户是否同时提供样式内容，以确保 BEM 命名转换在标记和样式之间保持一致。若用户明确表示只需转换标记代码，则跳过样式文件处理。
 
 ### 步骤 3. 读取和解析源内容
 
@@ -103,31 +103,7 @@ description: >
 
 ### 步骤 4. 确定配置
 
-详细配置项、配置文件示例和 Tailwind CSS 忽略配置见 `references/config-reference.md`。
-
-**Tailwind CSS / Windi CSS / UnoCSS 项目忽略配置**：
-
-若项目使用 utility-first 框架，建议将 utility 类名加入 `ignore` 和 `ignorePattern`：
-
-```json
-{
-  "ignore": [
-    "ant-",
-    "el-",
-    "mui-",
-    "v-",
-    "is-",
-    "has-",
-    "js-",
-    "no-",
-    "global-",
-    "fa-",
-    "icon-",
-    "material-icons"
-  ],
-  "ignorePattern": "^(p-|m-|w-|h-|text-|bg-|flex|grid|border-|rounded-|shadow-|space-|gap-|inset-|top-|right-|bottom-|left-|z-|opacity-|hover:|focus:|active:|disabled:|sm:|md:|lg:|xl:|2xl:)"
-}
-```
+详细配置项、配置文件示例、Tailwind/Windi CSS/UnoCSS 忽略配置见 `references/config-reference.md`。该文件包含 `.bemrc` 完整示例和 utility-first 框架忽略配置模板。
 
 ### 步骤 5. 执行 BEM 命名转换
 
@@ -212,6 +188,7 @@ description: >
 ─────────────────────
 original-class → bem-class
 ...
+映射表按文件分组，每个文件下按 Block 聚合展示。同一 Block 的 Element 和 Modifier 映射缩进排列在其 Block 行下方。
 
 兼容性警告（仅在属性排序启用时输出）
 ─────────────────────
@@ -246,6 +223,7 @@ original-class → bem-class
 | 示例 5 | 步骤 5 + 6 + 7 | BEM 转换 + 属性排序 + 嵌套重组（全流程） |
 | 示例 6 | 步骤 5 + 7 + 8 | 逻辑域拆分（单文件内注释分隔）           |
 | 示例 7 | 步骤 5 + 7     | JSX + SCSS 同步转换 + 动态类名处理       |
+| 示例 8 | 步骤 5 + 6     | 纯 CSS 文件：BEM 命名转换 + 属性排序，保持扁平结构不嵌套 |
 
 完整示例代码见 `references/examples.md`。
 
