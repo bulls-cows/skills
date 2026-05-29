@@ -196,6 +196,35 @@
         margin: 4px 0 6px 0;
       }
 
+      .company-tags {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 12px;
+      }
+
+      .company-tag {
+        font-size: 9px;
+        padding: 0 3px;
+        border: 1px solid #333;
+        color: #333;
+      }
+
+      .summary strong,
+      .desc-list strong {
+        font-weight: 600;
+      }
+
+      .desc-list .num {
+        position: relative;
+        top: -1.2pt;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #ff0000;
+      }
+
       ul {
         margin-left: 20px;
         font-size: 14px;
@@ -295,33 +324,47 @@
 
       <section class="experience-section">
         <h2>研究经历</h2>
+        <!-- 模板说明：以下 HTML 结构为参考示例，生成时需根据用户实际数据填充 -->
+        <!-- 机构名称支持链接：<a href="URL" target="_blank">机构名称</a> -->
+        <!-- 机构标签示例：<span class="company-tags"><span class="company-tag">985</span><span class="company-tag">211</span></span> -->
+        <!-- 序号示例：<span class="num">①</span> 研究成果1<br> -->
+        <!-- 高亮示例：完成<strong>核心分析</strong>工作 -->
         <div class="experience-item">
           <div class="item-header">
             <div>
-              <div class="company">机构名称</div>
+              <div class="company">
+                <a href="#" target="_blank">机构名称</a>
+                <span class="company-tags">
+                  <span class="company-tag">985</span>
+                  <span class="company-tag">211</span>
+                </span>
+              </div>
               <div class="position">职位</div>
             </div>
             <div class="date">2020.01 - 至今</div>
           </div>
-          <ul>
-            <li>研究方向与成果1</li>
-            <li>研究方向与成果2</li>
+          <ul class="desc-list">
+            <li><span class="num">①</span> 研究方向与成果1，<strong>关键词高亮</strong></li>
+            <li><span class="num">②</span> 研究方向与成果2</li>
           </ul>
         </div>
       </section>
 
       <section class="projects-section">
         <h2>项目经验</h2>
+        <!-- 项目名称支持链接：<a href="URL" target="_blank">项目名称</a> -->
         <div class="project-item">
           <div class="item-header">
-            <div class="project-name">项目名称</div>
+            <div class="project-name">
+              <a href="#" target="_blank">项目名称</a>
+            </div>
             <div class="date">2021.01 - 2021.06</div>
           </div>
           <div class="role">角色</div>
           <div class="tools-methods">工具/方法：Python, GATK, DESeq2</div>
-          <ul>
-            <li>项目描述1</li>
-            <li>项目描述2</li>
+          <ul class="desc-list">
+            <li><span class="num">①</span> 项目描述1，<strong>核心成果</strong></li>
+            <li><span class="num">②</span> 项目描述2</li>
           </ul>
         </div>
       </section>
