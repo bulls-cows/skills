@@ -6,88 +6,43 @@
 2. 项目根目录下的 `.bemrc` 或 `bem.config.js` 配置文件
 3. 使用默认配置
 
+## 默认配置
+
+- 元素分隔符：`__`（双下划线）
+- 修饰符分隔符：`--`（双横线）
+- 无统一前缀
+- 忽略类名：`ant-*`、`el-*`、`mui-*`、`v-*`、`is-*`、`has-*`、`js-*`、`no-*`、`global-*`、Tailwind 等 utility-first 类名
+
 ## 配置项
 
-### elementSeparator
+### 基础配置
 
-Block 与 Element 之间的分隔符。
+| 配置项              | 类型     | 默认值                                                                  | 说明                                                                                                  |
+| ------------------- | -------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `elementSeparator`  | string   | `__`                                                                    | Block 与 Element 之间的分隔符，可选 `_`、`-` 等                                                       |
+| `modifierSeparator` | string   | `--`                                                                    | Block/Element 与 Modifier 之间的分隔符，可选 `_`、`-` 等                                              |
+| `prefix`            | string   | `""`                                                                    | 统一前缀，添加到所有 Block 前。示例：`"my-"` 使 `button` → `my-button`                                |
+| `ignore`            | string[] | `["ant-", "el-", "mui-", "v-", "is-", "has-", "js-", "no-", "global-"]` | 忽略的类名前缀列表。Utility-first 类名（如 Tailwind 的 `flex`、`text-sm`、`bg-blue-500`）应加入此列表 |
+| `ignorePattern`     | string   | `""`                                                                    | 忽略类名的正则表达式。示例：`"^(is-\|has-\|js-)"` 保留 `is-active`、`has-error`、`js-toggle`          |
 
-- 默认值：`__`
-- 可选值：任何字符串，如 `_`、`-` 等
+### domainSplit：CSS 规则逻辑域拆分配置
 
-### modifierSeparator
+| 子配置项      | 类型                     | 默认值                              | 说明                                                                                    |
+| ------------- | ------------------------ | ----------------------------------- | --------------------------------------------------------------------------------------- |
+| `mode`        | string                   | `"inline"`                          | 拆分模式：`"inline"` 同文件内注释分隔；`"files"` 拆为独立子文件                         |
+| `domains`     | Record<string, string[]> | —                                   | 自定义逻辑域映射，键为域名，值为 Block 名称列表。用户自定义域与默认域合并，用户配置优先 |
+| `domainOrder` | string[]                 | `["layout", ..., "modal", "other"]` | 域的排列顺序。未配置时使用：布局 → 用户域（按配置顺序）→ 通用组件 → 弹窗 → 其他         |
 
-Block/Element 与 Modifier 之间的分隔符。
+### nesting：BEM 嵌套结构重组配置
 
-- 默认值：`--`
-- 可选值：任何字符串，如 `_`、`-` 等
+| 子配置项   | 类型    | 默认值  | 说明                                                         |
+| ---------- | ------- | ------- | ------------------------------------------------------------ |
+| `enabled`  | boolean | `false` | 是否启用嵌套重组。`true` 时执行 `&` 嵌套转换                 |
+| `maxDepth` | number  | `4`     | 最大嵌套深度。示例：Block → Element → Modifier → 伪类 = 4 层 |
 
-### prefix
+## 配置文件示例
 
-统一前缀，添加到所有 Block 前。
-
-- 默认值：空字符串
-- 示例：`"my-"` 会使 `button` 变为 `my-button`
-
-### ignore
-
-忽略的类名前缀列表。
-
-- 默认值：`["ant-", "el-", "mui-", "v-", "is-", "has-", "js-", "no-", "global-"]`
-- 示例：`["el-", "ant-"]` 会保留 `el-button`、`ant-input` 等不变
-- Utility-first 类名（如 Tailwind CSS 的 `flex`、`text-sm`、`bg-blue-500` 等）应加入忽略列表，避免误转换
-
-### ignorePattern
-
-忽略类名的正则表达式。
-
-- 默认值：`""`
-- 示例：`"^(is-|has-|js-)"` 会保留 `is-active`、`has-error`、`js-toggle` 等不变
-
-### domainSplit
-
-CSS 规则逻辑域拆分配置。
-
-#### mode
-
-拆分模式：
-
-- `"inline"`（默认）：在同一文件内用注释分隔块组织
-- `"files"`：拆分为独立的子文件，原文件改为入口文件
-
-#### domains
-
-自定义逻辑域映射，键为域名，值为属于该域的 Block 名称列表。
-
-- 未配置时使用默认域分类
-- 用户自定义域会与默认域合并，用户配置优先
-
-#### domainOrder
-
-域的排列顺序。
-
-- 未配置时使用默认顺序：布局 → 用户域（按配置顺序）→ 通用组件 → 弹窗 → 其他
-
-### nesting
-
-BEM 嵌套结构重组配置。
-
-#### enabled
-
-是否启用嵌套重组。
-
-- 默认值：`true`
-- `false` 时保持所有规则扁平排列，不执行嵌套
-
-#### maxDepth
-
-最大嵌套深度。
-
-- 默认值：`4`
-- 超过此深度的规则保持扁平
-- 示例：Block → Element → Modifier → 伪类 = 4 层深度
-
-## .bemrc 配置文件示例
+### 基础 `.bemrc` 示例
 
 ```json
 {
@@ -118,15 +73,15 @@ BEM 嵌套结构重组配置。
     "domainOrder": ["layout", "search", "form", "table", "modal", "other"]
   },
   "nesting": {
-    "enabled": true,
+    "enabled": false,
     "maxDepth": 4
   }
 }
 ```
 
-## Tailwind CSS 等 Utility-first 框架的忽略配置
+### Tailwind CSS / Windi CSS / UnoCSS 项目忽略配置
 
-若项目使用 Tailwind CSS、Windi CSS、UnoCSS 等 utility-first 框架，建议将以下内容加入 `.bemrc` 的 `ignore` 和 `ignorePattern` 中，避免 utility 类名被误转换：
+若项目使用 utility-first 框架，建议将 utility 类名加入 `ignore` 和 `ignorePattern`：
 
 ```json
 {

@@ -1,4 +1,15 @@
-# CSS 属性排列规则
+# CSS 属性排序规则
+
+按 csscomb zen 预设顺序重新排列每个 CSS 规则中的声明。zen 预设按属性对布局的影响力由大到小排列（定位 → 盒模型 → 排版 → 视觉 → 动效），是可验证的社区标准——排序结果可用 `csscomb` CLI 工具直接校验。
+
+## 兼容性检查
+
+与属性排序同步执行。兼容性警告是属性排序的核心附加价值，不输出警告等于排序只做了一半。
+
+1. 检查项目是否有 `.browserslistrc` 或 `package.json` 中的 `browserslist` 配置
+2. 根据项目兼容性目标，读取下文兼容性警告章节
+3. 扫描当前处理的每条 CSS 规则，比对兼容性风险属性列表
+4. 发现匹配时，将该属性、所在规则、严重程度和降级建议记入兼容性警告清单
 
 ## 排序方法论
 
@@ -25,17 +36,16 @@ CSS 属性按 [csscomb](https://github.com/csscomb/csscomb.js) zen 预设顺序�
 11. **交互**：`cursor`、`pointer-events`、`user-select`、`resize`
 12. **其他**：`content`、`counter-reset`、`counter-increment`、`list-style`、`list-style-position`、`list-style-type`、`list-style-image`、`table-layout`、`border-collapse`、`border-spacing`、`caption-side`、`empty-cells`、`quotes`、`page-break-before`、`page-break-inside`、`page-break-after`、`break-before`、`break-inside`、`break-after`、`orphans`、`widows`
 
-> ⚠️ 标记表示该属性在当前主流浏览器（Last 2 versions of Chrome/Firefox/Safari/Edge）中存在兼容性限制，详见文末「兼容性警告」章节。若项目有 `.browserslistrc` 配置，以项目实际兼容性要求为准。
+> ⚠️ 标记表示该属性在当前主流浏览器（Last 2 versions of Chrome/Firefox/Safari/Edge）中存在兼容性限制，详见下文「兼容性警告」章节。若项目有 `.browserslistrc` 配置，以项目实际兼容性要求为准。
 
 ## 执行规则
 
-- 每条 CSS 规则内的属性按上述顺序重新排列，这是一个连续序列，不分层、不加空行分隔
-- 不在上述列表中的属性保持原位置，排在末尾
+- 每条 CSS 规则内的属性按上述顺序重新排列，各逻辑层之间保留一个空行分隔（定位/显示/盒模型 → 空行 → 排版/背景/边框/视觉/动效/交互/其他）
+- 不在上述列表中的属性排在各逻辑层末尾
 - 遇到 CSS 简写属性（如 `margin: 0`）时，视为对应的分类，不拆分为子属性
 - SCSS/Less/Stylus 中的变量、mixin 调用等非标准声明，排在末尾
-- 兼容性检查与属性排序同步执行，详见「兼容性警告」章节
 
-### 浏览器前缀排序规则
+## 浏览器前缀排序规则
 
 当 CSS 规则中同时存在带前缀和不带前缀的同一属性时，按以下规则排列：
 
@@ -75,7 +85,7 @@ CSS 属性按 [csscomb](https://github.com/csscomb/csscomb.js) zen 预设顺序�
 
 ### 旧浏览器兼容性（仅供参考）
 
-若项目需要支持较旧的浏览器（如 IE11 或 2020 年前的 Chrome/Safari 版本），以下属性在旧环境中存在严重兼容性问题。执行属性分层时，若检测到项目 `.browserslistrc` 包含旧浏览器目标，应额外输出这些警告：
+若项目需要支持较旧的浏览器（如 IE11 或 2020 年前的 Chrome/Safari 版本），以下属性在旧环境中存在严重兼容性问题。执行属性排序时，若检测到项目 `.browserslistrc` 包含旧浏览器目标，应额外输出这些警告：
 
 | 属性                                               | 严重程度 | 旧环境问题                                             |
 | -------------------------------------------------- | -------- | ------------------------------------------------------ |
