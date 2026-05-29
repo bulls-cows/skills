@@ -172,15 +172,26 @@ description: >
 
 ### 步骤 4. 输出结果
 
-将生成的 HTML 文件保存到用户指定的位置，或直接输出 HTML 内容，并说明：
+将生成的文件保存到项目根目录，并说明：
 
-- 使用的模板类型
-- 如何在浏览器中打开预览
-- 如何使用浏览器的打印功能（Ctrl+P / Cmd+P）选择 A4 纸张进行打印
-- 建议使用"打印到 PDF"功能保存为 PDF 格式
+#### 输出文件位置
+- **交互式编辑器**：保存为 `resume-editor.html` 到项目根目录
+- **简历数据**：保存为 `resume-data.json` 到项目根目录（可选）
+- **纯简历 HTML**：保存为 `resume.html` 到项目根目录（可选）
+
+#### 使用说明
+1. **打开编辑器**：用浏览器打开 `resume-editor.html`
+2. **实时编辑**：在左侧编辑 JSON 数据，右侧会实时更新预览
+3. **切换模板**：使用顶部的下拉菜单选择不同的简历模板
+4. **下载文件**：
+   - 点击"下载 JSON"保存简历数据
+   - 点击"下载简历 HTML"保存纯简历文件
+   - 点击"打印"直接打印或另存为 PDF
+5. **打印提示**：使用浏览器的打印功能（Ctrl+P / Cmd+P）选择 A4 纸张进行打印
 
 ## 相关资源
 
+- `templates/editor.html`：交互式简历编辑器模板
 - `templates/profiles.json`：职业类型配置、主题配置、章节组合和字段契约
 - `templates/base.html`：HTML 骨架和通用 CSS 样式
 - `templates/sections/header.html`：简历头部片段
@@ -194,3 +205,4 @@ description: >
 - `templates/sections/regulatory.html`：法规体系片段
 - `templates/sections/publications.html`：发表论文片段
 - `examples/input.md`：输入示例
+- `examples/resume-data.json`：简历数据示例
