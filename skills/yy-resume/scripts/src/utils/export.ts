@@ -1,6 +1,11 @@
 import type { ResumeData, SectionConfig } from '@/types/resume';
 import { profiles } from '@/data/profiles';
 
+/**
+ * 创建 Blob 下载链接并触发下载
+ * @param blob - 要下载的文件数据
+ * @param filename - 下载文件名
+ */
 function downloadBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -10,11 +15,18 @@ function downloadBlob(blob: Blob, filename: string): void {
   URL.revokeObjectURL(url);
 }
 
+/** 将简历数据导出为 JSON 文件并下载 */
 export function downloadJson(data: ResumeData): void {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   downloadBlob(blob, 'resume-data.json');
 }
 
+/**
+ * 根据章节配置渲染对应的 HTML 片段
+ * @param data - 简历数据
+ * @param section - 章节配置
+ * @returns 渲染后的 HTML 字符串
+ */
 function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
   switch (section.id) {
     case 'header': {
@@ -85,6 +97,7 @@ function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
   }
 }
 
+/** 将简历数据导出为 HTML 文件并下载 */
 export function downloadHtml(data: ResumeData): void {
   const profile = profiles[data.template] || profiles.general;
   const theme = profile.theme;
@@ -161,6 +174,7 @@ export function downloadHtml(data: ResumeData): void {
   downloadBlob(blob, 'resume.html');
 }
 
+/** 调用浏览器打印功能打印简历 */
 export function printResume(): void {
   window.print();
 }

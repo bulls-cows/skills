@@ -1,5 +1,6 @@
 import type { Profile } from '@/types/resume';
 
+/** 简历模板配置集合，key 为模板名称 */
 export const profiles: Record<string, Profile> = {
   general: {
     theme: {
@@ -200,6 +201,7 @@ export const profiles: Record<string, Profile> = {
   },
 };
 
+/** 示例简历数据，用于预览与调试 */
 export const sampleData = {
   template: 'frontend',
   name: '张三',
