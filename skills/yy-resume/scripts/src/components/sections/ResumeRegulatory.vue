@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { SkillCategory } from '@/types/resume'
+import type { SkillCategory } from '@/types/resume';
 
 defineProps<{
-  title: string
-  regulatorySystems?: SkillCategory[]
-}>()
+  title: string;
+  regulatorySystems?: SkillCategory[];
+}>();
 </script>
 
 <template>

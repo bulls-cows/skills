@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Cert } from '@/types/resume'
+import type { Cert } from '@/types/resume';
 
 defineProps<{
-  title: string
-  certs?: Cert[]
-}>()
+  title: string;
+  certs?: Cert[];
+}>();
 </script>
 
 <template>

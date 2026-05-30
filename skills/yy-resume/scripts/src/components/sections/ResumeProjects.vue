@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Project } from '@/types/resume'
+import type { Project } from '@/types/resume';
 
 const props = defineProps<{
-  title: string
-  projects?: Project[]
-  variant?: 'tech' | 'submission' | 'tools'
-}>()
+  title: string;
+  projects?: Project[];
+  variant?: 'tech' | 'submission' | 'tools';
+}>();
 </script>
 
 <template>

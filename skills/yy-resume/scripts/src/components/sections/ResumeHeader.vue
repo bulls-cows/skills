@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { Link } from '@/types/resume'
+import type { Link } from '@/types/resume';
 
 defineProps<{
-  name?: string
-  title?: string
-  city?: string
-  phone?: string
-  email?: string
-  links?: Link[]
-  showLinks?: boolean
-}>()
+  name?: string;
+  title?: string;
+  city?: string;
+  phone?: string;
+  email?: string;
+  links?: Link[];
+  showLinks?: boolean;
+}>();
 </script>
 
 <template>

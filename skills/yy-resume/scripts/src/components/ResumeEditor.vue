@@ -1,51 +1,51 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import type { ResumeData } from '@/types/resume'
-import { profiles, sampleData } from '@/data/profiles'
-import { downloadJson, downloadHtml, printResume } from '@/utils/export'
-import Toolbar from './Toolbar.vue'
-import JsonEditor from './JsonEditor.vue'
-import ResumePreview from './ResumePreview.vue'
-import StopOverlay from './StopOverlay.vue'
+import { ref, computed, watch } from 'vue';
+import type { ResumeData } from '@/types/resume';
+import { profiles, sampleData } from '@/data/profiles';
+import { downloadJson, downloadHtml, printResume } from '@/utils/export';
+import Toolbar from './Toolbar.vue';
+import JsonEditor from './JsonEditor.vue';
+import ResumePreview from './ResumePreview.vue';
+import StopOverlay from './StopOverlay.vue';
 
-const rawData = ref(JSON.stringify(sampleData, null, 2))
-const errorMsg = ref('')
-const showStopOverlay = ref(false)
-const debounceTimer = ref<ReturnType<typeof setTimeout> | null>(null)
+const rawData = ref(JSON.stringify(sampleData, null, 2));
+const errorMsg = ref('');
+const showStopOverlay = ref(false);
+const debounceTimer = ref<ReturnType<typeof setTimeout> | null>(null);
 
 const parsedData = computed<ResumeData>(() => {
   try {
-    return JSON.parse(rawData.value)
+    return JSON.parse(rawData.value);
   } catch {
-    return rawData.value as unknown as ResumeData
+    return rawData.value as unknown as ResumeData;
   }
-})
+});
 
 const currentTemplate = computed(() => {
   try {
-    return JSON.parse(rawData.value).template || 'general'
+    return JSON.parse(rawData.value).template || 'general';
   } catch {
-    return 'general'
+    return 'general';
   }
-})
+});
 
 function handleJsonUpdate(value: string) {
-  rawData.value = value
+  rawData.value = value;
 }
 
 function handleError(msg: string) {
-  errorMsg.value = msg
+  errorMsg.value = msg;
 }
 
 function handleClearError() {
-  errorMsg.value = ''
+  errorMsg.value = '';
 }
 
 function handleTemplateChange(tpl: string) {
   try {
-    const data = JSON.parse(rawData.value)
-    data.template = tpl
-    rawData.value = JSON.stringify(data, null, 2)
+    const data = JSON.parse(rawData.value);
+    data.template = tpl;
+    rawData.value = JSON.stringify(data, null, 2);
   } catch {
     // ignore if JSON is invalid
   }
@@ -53,7 +53,7 @@ function handleTemplateChange(tpl: string) {
 
 function handleDownloadJson() {
   try {
-    downloadJson(JSON.parse(rawData.value))
+    downloadJson(JSON.parse(rawData.value));
   } catch {
     // ignore
   }
@@ -61,17 +61,17 @@ function handleDownloadJson() {
 
 function handleDownloadHtml() {
   try {
-    downloadHtml(JSON.parse(rawData.value))
+    downloadHtml(JSON.parse(rawData.value));
   } catch {
     // ignore
   }
 }
 
 function handleStopServer() {
-  showStopOverlay.value = true
+  showStopOverlay.value = true;
   fetch('/__stop-server').catch(() => {
     // 服务关闭后连接中断是预期行为
-  })
+  });
 }
 </script>
 

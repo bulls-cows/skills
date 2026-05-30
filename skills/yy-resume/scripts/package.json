@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint && npm run lint:type",
-    "lint:prettier": "prettier --check \"src/**/*.ts\" \"src/**/*.vue\"",
+    "lint:prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\"",
     "lint:eslint": "eslint \"src/**/*.{ts,vue}\"",
     "lint:type": "vue-tsc --build",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\"",
     "ready": "npm install",
     "dev": "vite",
     "build": "vue-tsc --build && vite build",

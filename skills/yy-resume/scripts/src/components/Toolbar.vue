@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { profiles } from '@/data/profiles'
+import { profiles } from '@/data/profiles';
 
 defineProps<{
-  template: string
-}>()
+  template: string;
+}>();
 
 const emit = defineEmits<{
-  (e: 'update:template', value: string): void
-  (e: 'downloadJson'): void
-  (e: 'downloadHtml'): void
-  (e: 'print'): void
-  (e: 'stopServer'): void
-}>()
+  (e: 'update:template', value: string): void;
+  (e: 'downloadJson'): void;
+  (e: 'downloadHtml'): void;
+  (e: 'print'): void;
+  (e: 'stopServer'): void;
+}>();
 
 const templateOptions = [
   { value: 'general', label: '通用模板' },
@@ -20,7 +20,7 @@ const templateOptions = [
   { value: 'fullstack', label: '全栈开发' },
   { value: 'pharma-regulatory', label: '国际药品注册' },
   { value: 'bioinformatics', label: '生物信息学' },
-]
+];
 </script>
 
 <template>

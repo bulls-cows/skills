@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Education } from '@/types/resume'
+import type { Education } from '@/types/resume';
 
 defineProps<{
-  title: string
-  education?: Education[]
-}>()
+  title: string;
+  education?: Education[];
+}>();
 </script>
 
 <template>

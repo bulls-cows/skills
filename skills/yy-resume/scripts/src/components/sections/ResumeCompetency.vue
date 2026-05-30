@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
-  competencies?: string[]
-}>()
+  title: string;
+  competencies?: string[];
+}>();
 </script>
 
 <template>

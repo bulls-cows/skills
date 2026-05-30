@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import type { ResumeData, SectionConfig } from '@/types/resume'
-import { profiles } from '@/data/profiles'
-import ResumeHeader from './sections/ResumeHeader.vue'
-import ResumeSummary from './sections/ResumeSummary.vue'
-import ResumeSkills from './sections/ResumeSkills.vue'
-import ResumeCompetency from './sections/ResumeCompetency.vue'
-import ResumeRegulatory from './sections/ResumeRegulatory.vue'
-import ResumeExperience from './sections/ResumeExperience.vue'
-import ResumeProjects from './sections/ResumeProjects.vue'
-import ResumeEducation from './sections/ResumeEducation.vue'
-import ResumeCerts from './sections/ResumeCerts.vue'
-import ResumePublications from './sections/ResumePublications.vue'
-import { computed } from 'vue'
+import type { ResumeData, SectionConfig } from '@/types/resume';
+import { profiles } from '@/data/profiles';
+import ResumeHeader from './sections/ResumeHeader.vue';
+import ResumeSummary from './sections/ResumeSummary.vue';
+import ResumeSkills from './sections/ResumeSkills.vue';
+import ResumeCompetency from './sections/ResumeCompetency.vue';
+import ResumeRegulatory from './sections/ResumeRegulatory.vue';
+import ResumeExperience from './sections/ResumeExperience.vue';
+import ResumeProjects from './sections/ResumeProjects.vue';
+import ResumeEducation from './sections/ResumeEducation.vue';
+import ResumeCerts from './sections/ResumeCerts.vue';
+import ResumePublications from './sections/ResumePublications.vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
-  data: ResumeData
-}>()
+  data: ResumeData;
+}>();
 
 const theme = computed(() => {
-  const profile = profiles[props.data.template] || profiles.general
-  return profile.theme
-})
+  const profile = profiles[props.data.template] || profiles.general;
+  return profile.theme;
+});
 
 const profile = computed(() => {
-  return profiles[props.data.template] || profiles.general
-})
+  return profiles[props.data.template] || profiles.general;
+});
 </script>
 
 <template>
