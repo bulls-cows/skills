@@ -1,4 +1,4 @@
-import type { ResumeData, Profile, SectionConfig } from '@/types/resume';
+import type { ResumeData, SectionConfig } from '@/types/resume';
 import { profiles } from '@/data/profiles';
 
 function downloadBlob(blob: Blob, filename: string): void {
@@ -16,16 +16,6 @@ export function downloadJson(data: ResumeData): void {
 }
 
 function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
-  const tpl = profiles[data.template];
-  const theme = tpl?.theme ?? profiles.general.theme;
-
-  const cssVariables = `
-    :root {
-      --primary: ${theme.primary};
-      --tag-bg: ${theme.tagBg};
-      --tag-border: ${theme.tagBorder};
-    }`;
-
   switch (section.id) {
     case 'header': {
       let linksHtml = '';

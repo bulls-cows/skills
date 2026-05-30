@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { profiles } from '@/data/profiles';
-
 defineProps<{
   template: string;
 }>();

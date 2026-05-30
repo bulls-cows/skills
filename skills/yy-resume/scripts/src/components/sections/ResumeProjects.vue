@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Project } from '@/types/resume';
 
-const props = defineProps<{
+defineProps<{
   title: string;
   projects?: Project[];
   variant?: 'tech' | 'submission' | 'tools';

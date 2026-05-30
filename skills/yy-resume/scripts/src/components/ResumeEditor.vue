@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import type { ResumeData } from '@/types/resume';
-import { profiles, sampleData } from '@/data/profiles';
+import { sampleData } from '@/data/profiles';
 import { downloadJson, downloadHtml, printResume } from '@/utils/export';
 import Toolbar from './Toolbar.vue';
 import JsonEditor from './JsonEditor.vue';
@@ -11,8 +11,6 @@ import StopOverlay from './StopOverlay.vue';
 const rawData = ref(JSON.stringify(sampleData, null, 2));
 const errorMsg = ref('');
 const showStopOverlay = ref(false);
-const debounceTimer = ref<ReturnType<typeof setTimeout> | null>(null);
-
 const parsedData = computed<ResumeData>(() => {
   try {
     return JSON.parse(rawData.value);

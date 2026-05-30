@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ResumeData, SectionConfig } from '@/types/resume';
+import type { ResumeData } from '@/types/resume';
 import { profiles } from '@/data/profiles';
 import ResumeHeader from './sections/ResumeHeader.vue';
 import ResumeSummary from './sections/ResumeSummary.vue';
