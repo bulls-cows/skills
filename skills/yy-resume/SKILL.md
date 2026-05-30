@@ -89,29 +89,13 @@ cd scripts && npm install
 
 **项目结构：**
 
-- `scripts/package.json`：前端项目依赖和脚本
-- `scripts/vite.config.ts`：Vite 构建配置
-- `scripts/src/main.ts`：应用入口
-- `scripts/src/App.vue`：根组件
-- `scripts/src/types/resume.ts`：简历数据类型定义
-- `scripts/src/data/profiles.ts`：职业类型配置和示例数据
-- `scripts/src/utils/export.ts`：导出 JSON/HTML/PDF 工具函数
-- `scripts/src/styles/`：SCSS 样式文件
-- `scripts/src/components/Toolbar.vue`：工具栏组件
-- `scripts/src/components/JsonEditor.vue`：JSON 编辑器组件
-- `scripts/src/components/ResumePreview.vue`：简历预览组件
-- `scripts/src/components/ResumeEditor.vue`：编辑器主布局组件
-- `scripts/src/components/sections/`：简历各章节 Vue 组件
-  - `ResumeHeader.vue`：简历头部
-  - `ResumeSummary.vue`：个人简介
-  - `ResumeSkills.vue`：技能列表
-  - `ResumeCompetency.vue`：核心能力
-  - `ResumeRegulatory.vue`：法规体系
-  - `ResumeExperience.vue`：工作经验
-  - `ResumeProjects.vue`：项目经验
-  - `ResumeEducation.vue`：教育背景
-  - `ResumeCerts.vue`：证书资质
-  - `ResumePublications.vue`：发表论文
+- `scripts/`：前端 Vue3 + TypeScript 项目，使用 Vite 构建
+  - 入口：`src/main.ts`
+  - 模板配置与数据定义：`src/data/profiles.ts`、`src/types/resume.ts`
+  - 编辑器组件：`src/components/`
+  - 样式文件：`src/styles/`
+  - 导出工具：`src/utils/export.ts`
+- `examples/`：输入示例和简历数据示例
 
 - `examples/input.md`：输入示例
 - `examples/resume-data.json`：简历数据示例
