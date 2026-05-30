@@ -241,11 +241,5 @@ cd scripts && npm install
   - `ResumeCerts.vue`：证书资质
   - `ResumePublications.vue`：发表论文
 
-### 模板资源
-
-- `templates/editor.html`：旧版交互式简历编辑器模板（保留兼容）
-- `templates/profiles.json`：职业类型配置、主题配置、章节组合和字段契约
-- `templates/base.html`：HTML 骨架和通用 CSS 样式
-- `templates/sections/`：旧版 HTML 片段模板（保留兼容）
 - `examples/input.md`：输入示例
 - `examples/resume-data.json`：简历数据示例
