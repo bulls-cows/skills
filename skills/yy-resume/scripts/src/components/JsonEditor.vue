@@ -88,7 +88,8 @@ function handleInput() {
 <style lang="scss" scoped>
 /* 编辑器根容器 */
 .json-editor {
-  width: 50%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #e5e7eb;

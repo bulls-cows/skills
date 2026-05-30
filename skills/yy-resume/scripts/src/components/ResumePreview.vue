@@ -136,8 +136,10 @@ const profile = computed(() => {
 <style lang="scss" scoped>
 /* 预览面板根容器 */
 .resume-preview {
-  width: 50%;
-  overflow: auto;
+  flex: none;
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 50px 20px;
   background: #464646;
   display: flex;
