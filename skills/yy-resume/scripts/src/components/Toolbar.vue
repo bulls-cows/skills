@@ -10,6 +10,7 @@ const emit = defineEmits<{
   (e: 'downloadJson'): void
   (e: 'downloadHtml'): void
   (e: 'print'): void
+  (e: 'stopServer'): void
 }>()
 
 const templateOptions = [
@@ -40,6 +41,7 @@ const templateOptions = [
       <button class="btn btn-secondary" @click="emit('downloadJson')">下载 JSON</button>
       <button class="btn btn-primary" @click="emit('downloadHtml')">下载简历 HTML</button>
       <button class="btn btn-secondary" @click="emit('print')">打印</button>
+      <button class="btn btn-danger" @click="emit('stopServer')">停止服务</button>
     </div>
   </div>
 </template>
@@ -105,6 +107,15 @@ const templateOptions = [
 
     &:hover {
       background: #e5e7eb;
+    }
+  }
+
+  &-danger {
+    background: #ef4444;
+    color: #fff;
+
+    &:hover {
+      background: #dc2626;
     }
   }
 }

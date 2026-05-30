@@ -64,6 +64,12 @@ function handleDownloadHtml() {
     // ignore
   }
 }
+
+function handleStopServer() {
+  fetch('/__stop-server').catch(() => {
+    // 服务关闭后连接中断是预期行为
+  })
+}
 </script>
 
 <template>
@@ -74,6 +80,7 @@ function handleDownloadHtml() {
       @download-json="handleDownloadJson"
       @download-html="handleDownloadHtml"
       @print="printResume"
+      @stop-server="handleStopServer"
     />
     <div class="main-content">
       <JsonEditor

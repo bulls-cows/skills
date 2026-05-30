@@ -85,9 +85,18 @@
         border: 1px solid #d1d5db;
       }
 
-      .btn-secondary:hover {
-        background: #e5e7eb;
-      }
+        .btn-secondary:hover {
+          background: #e5e7eb;
+        }
+
+        .btn-danger {
+          background: #ef4444;
+          color: #fff;
+        }
+
+        .btn-danger:hover {
+          background: #dc2626;
+        }
 
       .main-content {
         display: flex;
@@ -419,6 +428,7 @@
           <button id="downloadJson" class="btn btn-secondary">下载 JSON</button>
           <button id="downloadHtml" class="btn btn-primary">下载简历 HTML</button>
           <button id="printBtn" class="btn btn-secondary">打印</button>
+          <button id="stopServerBtn" class="btn btn-danger">停止服务</button>
         </div>
       </div>
       <div class="main-content">
@@ -707,6 +717,9 @@
         document.getElementById('downloadJson').addEventListener('click', downloadJson)
         document.getElementById('downloadHtml').addEventListener('click', downloadHtml)
         document.getElementById('printBtn').addEventListener('click', () => window.print())
+        document.getElementById('stopServerBtn').addEventListener('click', () => {
+          fetch('/__stop-server').catch(() => {})
+        })
       }
 
       function debounce(func, wait) {
