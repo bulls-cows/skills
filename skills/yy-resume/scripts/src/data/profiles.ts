@@ -1,4 +1,4 @@
-import type { Profile } from '@/types/resume'
+import type { Profile } from '@/types/resume';
 
 export const profiles: Record<string, Profile> = {
   general: {
@@ -198,7 +198,7 @@ export const profiles: Record<string, Profile> = {
       },
     ],
   },
-}
+};
 
 export const sampleData = {
   template: 'frontend',
@@ -257,4 +257,4 @@ export const sampleData = {
       endDate: '2019.06',
     },
   ],
-}
+};

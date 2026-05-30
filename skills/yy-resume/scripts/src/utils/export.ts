@@ -1,36 +1,36 @@
-import type { ResumeData, Profile, SectionConfig } from '@/types/resume'
-import { profiles } from '@/data/profiles'
+import type { ResumeData, Profile, SectionConfig } from '@/types/resume';
+import { profiles } from '@/data/profiles';
 
 function downloadBlob(blob: Blob, filename: string): void {
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename
-  a.click()
-  URL.revokeObjectURL(url)
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 export function downloadJson(data: ResumeData): void {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-  downloadBlob(blob, 'resume-data.json')
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  downloadBlob(blob, 'resume-data.json');
 }
 
 function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
-  const tpl = profiles[data.template]
-  const theme = tpl?.theme ?? profiles.general.theme
+  const tpl = profiles[data.template];
+  const theme = tpl?.theme ?? profiles.general.theme;
 
   const cssVariables = `
     :root {
       --primary: ${theme.primary};
       --tag-bg: ${theme.tagBg};
       --tag-border: ${theme.tagBorder};
-    }`
+    }`;
 
   switch (section.id) {
     case 'header': {
-      let linksHtml = ''
+      let linksHtml = '';
       if (data.links?.length) {
-        linksHtml = `<div class="links">${data.links.map((l) => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`
+        linksHtml = `<div class="links">${data.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`;
       }
       return `<header class="header">
         <div class="name">${data.name || ''}</div>
@@ -39,70 +39,70 @@ function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
           <span>${data.city || ''}</span><span>|</span><span>${data.phone || ''}</span><span>|</span><span>${data.email || ''}</span>
         </div>
         ${linksHtml}
-      </header>`
+      </header>`;
     }
     case 'summary':
-      if (!data.summary) return ''
-      return `<section><h2>${section.title || ''}</h2><div class="summary">${data.summary}</div></section>`
+      if (!data.summary) return '';
+      return `<section><h2>${section.title || ''}</h2><div class="summary">${data.summary}</div></section>`;
     case 'skills':
-      if (!data.skills?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.skills.map((c) => `<div class="skills-category"><h3>${c.category}</h3><div class="skills-list">${c.items.map((i) => `<span>${i}</span>`).join('')}</div></div>`).join('')}</section>`
+      if (!data.skills?.length) return '';
+      return `<section><h2>${section.title || ''}</h2>${data.skills.map(c => `<div class="skills-category"><h3>${c.category}</h3><div class="skills-list">${c.items.map(i => `<span>${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'competency':
-      if (!data.competencies?.length) return ''
-      return `<section><h2>${section.title || ''}</h2><div class="competency-list">${data.competencies.map((i) => `<span class="competency-tag">${i}</span>`).join('')}</div></section>`
+      if (!data.competencies?.length) return '';
+      return `<section><h2>${section.title || ''}</h2><div class="competency-list">${data.competencies.map(i => `<span class="competency-tag">${i}</span>`).join('')}</div></section>`;
     case 'regulatory':
-      if (!data.regulatorySystems?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.regulatorySystems.map((c) => `<div class="regulatory-group"><h3>${c.category}</h3><div class="regulatory-list">${c.items.map((i) => `<span class="regulatory-tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`
+      if (!data.regulatorySystems?.length) return '';
+      return `<section><h2>${section.title || ''}</h2>${data.regulatorySystems.map(c => `<div class="regulatory-group"><h3>${c.category}</h3><div class="regulatory-list">${c.items.map(i => `<span class="regulatory-tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'experience':
-      if (!data.experience?.length) return ''
+      if (!data.experience?.length) return '';
       return `<section><h2>${section.title || ''}</h2>${data.experience
-        .map((e) => {
+        .map(e => {
           const tagsHtml = e.tags?.length
-            ? `<span class="company-tags">${e.tags.map((t) => `<span class="company-tag">${t}</span>`).join('')}</span>`
-            : ''
+            ? `<span class="company-tags">${e.tags.map(t => `<span class="company-tag">${t}</span>`).join('')}</span>`
+            : '';
           const orgHtml = e.url
             ? `<a href="${e.url}" target="_blank">${e.organization}</a>`
-            : e.organization
-          return `<div class="experience-item"><div class="item-header"><div><div class="company">${orgHtml}${tagsHtml}</div><div class="position">${e.position || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
+            : e.organization;
+          return `<div class="experience-item"><div class="item-header"><div><div class="company">${orgHtml}${tagsHtml}</div><div class="position">${e.position || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
         })
-        .join('')}</section>`
+        .join('')}</section>`;
     case 'projects':
-      if (!data.projects?.length) return ''
+      if (!data.projects?.length) return '';
       return `<section><h2>${section.title || ''}</h2>${data.projects
-        .map((p) => {
-          const nameHtml = p.url ? `<a href="${p.url}" target="_blank">${p.name}</a>` : p.name
-          let variantHtml = ''
+        .map(p => {
+          const nameHtml = p.url ? `<a href="${p.url}" target="_blank">${p.name}</a>` : p.name;
+          let variantHtml = '';
           if (section.variant === 'tech' && p.techStack)
-            variantHtml = `<div class="tech-stack">${p.techStack}</div>`
+            variantHtml = `<div class="tech-stack">${p.techStack}</div>`;
           else if (section.variant === 'submission' && p.submissionType)
-            variantHtml = `<div class="submission-type">${p.submissionType}</div>`
+            variantHtml = `<div class="submission-type">${p.submissionType}</div>`;
           else if (section.variant === 'tools' && p.toolsMethods)
-            variantHtml = `<div class="tools-methods">${p.toolsMethods}</div>`
-          return `<div class="project-item"><div class="item-header"><div><div class="project-name">${nameHtml}</div><div class="role">${p.role || ''}</div></div><div class="date">${p.startDate || ''} - ${p.endDate || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map((d) => `<li>${d}</li>`).join('')}</ul></div>`
+            variantHtml = `<div class="tools-methods">${p.toolsMethods}</div>`;
+          return `<div class="project-item"><div class="item-header"><div><div class="project-name">${nameHtml}</div><div class="role">${p.role || ''}</div></div><div class="date">${p.startDate || ''} - ${p.endDate || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
         })
-        .join('')}</section>`
+        .join('')}</section>`;
     case 'education':
-      if (!data.education?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.education.map((e) => `<div class="education-item"><div class="item-header"><div><div class="school">${e.school || ''}</div><div class="degree">${e.major || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div></div>`).join('')}</section>`
+      if (!data.education?.length) return '';
+      return `<section><h2>${section.title || ''}</h2>${data.education.map(e => `<div class="education-item"><div class="item-header"><div><div class="school">${e.school || ''}</div><div class="degree">${e.major || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div></div>`).join('')}</section>`;
     case 'certs':
-      if (!data.certs?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.certs.map((c) => `<div class="cert-item"><div class="cert-name">${c.name || ''}</div><div class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</div></div>`).join('')}</section>`
+      if (!data.certs?.length) return '';
+      return `<section><h2>${section.title || ''}</h2>${data.certs.map(c => `<div class="cert-item"><div class="cert-name">${c.name || ''}</div><div class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</div></div>`).join('')}</section>`;
     case 'publications':
-      if (!data.publications?.length) return ''
-      return `<section><h2>${section.title || ''}</h2>${data.publications.map((p) => `<div class="publication-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · <span class="pub-journal">${p.journal}</span>` : ''}${p.year ? ` · <span class="pub-year">${p.year}</span>` : ''}</div></div>`).join('')}</section>`
+      if (!data.publications?.length) return '';
+      return `<section><h2>${section.title || ''}</h2>${data.publications.map(p => `<div class="publication-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · <span class="pub-journal">${p.journal}</span>` : ''}${p.year ? ` · <span class="pub-year">${p.year}</span>` : ''}</div></div>`).join('')}</section>`;
     default:
-      return ''
+      return '';
   }
 }
 
 export function downloadHtml(data: ResumeData): void {
-  const profile = profiles[data.template] || profiles.general
-  const theme = profile.theme
+  const profile = profiles[data.template] || profiles.general;
+  const theme = profile.theme;
 
-  let sectionsHtml = ''
-  profile.sections.forEach((section) => {
-    sectionsHtml += renderSectionHtml(data, section)
-  })
+  let sectionsHtml = '';
+  profile.sections.forEach(section => {
+    sectionsHtml += renderSectionHtml(data, section);
+  });
 
   const html = `<!doctype html>
 <html lang="zh-CN">
@@ -165,12 +165,12 @@ export function downloadHtml(data: ResumeData): void {
 <body>
   <div class="page">${sectionsHtml}</div>
 </body>
-</html>`
+</html>`;
 
-  const blob = new Blob([html], { type: 'text/html' })
-  downloadBlob(blob, 'resume.html')
+  const blob = new Blob([html], { type: 'text/html' });
+  downloadBlob(blob, 'resume.html');
 }
 
 export function printResume(): void {
-  window.print()
+  window.print();
 }
