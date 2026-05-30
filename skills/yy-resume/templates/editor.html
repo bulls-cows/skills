@@ -718,6 +718,7 @@
         document.getElementById('downloadHtml').addEventListener('click', downloadHtml)
         document.getElementById('printBtn').addEventListener('click', () => window.print())
         document.getElementById('stopServerBtn').addEventListener('click', () => {
+          showStopOverlay()
           fetch('/__stop-server').catch(() => {})
         })
       }
@@ -1318,6 +1319,20 @@
       }
 
       init()
+
+      function showStopOverlay() {
+        const overlay = document.createElement('div')
+        overlay.id = 'stopOverlay'
+        overlay.style.cssText =
+          'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;'
+        overlay.innerHTML =
+          '<div style="background:#fff;border-radius:12px;padding:48px 64px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);">' +
+          '<div style="font-size:48px;color:#22c55e;margin-bottom:16px;line-height:1;">✓</div>' +
+          '<div style="font-size:20px;font-weight:600;color:#1f2937;margin-bottom:8px;">服务已停止</div>' +
+          '<div style="font-size:14px;color:#6b7280;">您可安全关闭此页面</div>' +
+          '</div>'
+        document.body.appendChild(overlay)
+      }
     </script>
   </body>
 </html>

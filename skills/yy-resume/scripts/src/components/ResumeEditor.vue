@@ -6,9 +6,11 @@ import { downloadJson, downloadHtml, printResume } from '@/utils/export'
 import Toolbar from './Toolbar.vue'
 import JsonEditor from './JsonEditor.vue'
 import ResumePreview from './ResumePreview.vue'
+import StopOverlay from './StopOverlay.vue'
 
 const rawData = ref(JSON.stringify(sampleData, null, 2))
 const errorMsg = ref('')
+const showStopOverlay = ref(false)
 const debounceTimer = ref<ReturnType<typeof setTimeout> | null>(null)
 
 const parsedData = computed<ResumeData>(() => {
@@ -66,6 +68,7 @@ function handleDownloadHtml() {
 }
 
 function handleStopServer() {
+  showStopOverlay.value = true
   fetch('/__stop-server').catch(() => {
     // 服务关闭后连接中断是预期行为
   })
@@ -92,6 +95,7 @@ function handleStopServer() {
       <div v-if="errorMsg" class="error-message">{{ errorMsg }}</div>
       <ResumePreview v-if="!errorMsg" :data="parsedData" />
     </div>
+    <StopOverlay :visible="showStopOverlay" />
   </div>
 </template>
 
