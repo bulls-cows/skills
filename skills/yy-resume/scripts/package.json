@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint && npm run lint:type",
-    "lint:prettier": "prettier --check \"src/**/*.ts\"",
-    "lint:eslint": "eslint \"src/**/*.ts\"",
-    "lint:type": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "lint:prettier": "prettier --check \"src/**/*.ts\" \"src/**/*.vue\"",
+    "lint:eslint": "eslint \"src/**/*.{ts,vue}\"",
+    "lint:type": "vue-tsc --build",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\"",
     "ready": "npm install",
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc --build && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,9 +19,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@tsconfig/node22": "^22.0.0",
     "@types/node": "^25.7.0",
     "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/eslint-config-typescript": "^14.0.0",
+    "@vue/tsconfig": "0.7.0",
     "eslint": "^9.0.0",
+    "eslint-plugin-vue": "^9.0.0",
     "prettier": "^3.0.0",
     "sass": "^1.86.3",
     "typescript": "~5.7.3",
