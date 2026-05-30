@@ -29,33 +29,7 @@ description: >
 
 ## 指令
 
-### 步骤 1. 识别 Vue3 Composition API 项目与专项技能
-
-在执行默认审核流程前，先判断当前项目是否应交由 Vue3 专项审核技能处理。
-
-项目类型识别规则：
-
-- **Vue3 项目**：仅当 `package.json` 中 `dependencies` 或 `devDependencies` 的 `vue` 主版本为 `3` 时，才识别为 Vue3 项目。
-- **非 Vue3 项目或无法判断版本**：不进行专项技能委托，继续执行本技能默认审核逻辑。
-
-Composition API 识别规则：
-
-- **使用 Composition API**：目标 `.vue` 文件中出现 `<script setup>`、`setup()`、`defineProps`、`defineEmits`、`ref`、`reactive`、`computed`、`watch` 等 Composition API 特征。
-- **未使用 Composition API 或无法判断写法**：继续执行本技能默认审核逻辑。
-
-技能委托规则：
-
-- **识别为 Vue3 项目，且目标文件使用 Composition API，且当前环境已安装 `yy-frontend-vue3-review`**：立即使用 `yy-frontend-vue3-review` 执行审核，并遵循该技能的审核范围、输出格式和安全边界。
-- **识别为 Vue3 项目，但目标文件未使用 Composition API 或无法判断写法**：继续执行本技能默认审核逻辑。
-- **识别为 Vue3 项目，且目标文件使用 Composition API，但未安装 `yy-frontend-vue3-review`**：继续执行本技能默认审核逻辑。
-
-判断顺序：
-
-1. 先读取 `package.json`，仅根据 `dependencies` 或 `devDependencies` 中的 `vue` 主版本是否为 `3` 判断是否为 Vue3 项目。
-2. 确认为 Vue3 项目后，再检查目标 `.vue` 文件是否使用 Composition API。
-3. 只有同时满足 Vue3 项目、使用 Composition API、已安装 `yy-frontend-vue3-review` 三个条件时，才委托专项技能。
-
-### 步骤 2. 获取审核目标
+### 步骤 1. 获取审核目标
 
 按以下规则获取需要审核的文件。
 
@@ -84,7 +58,7 @@ git diff --cached --name-only
 - 锁文件与生成文件：`package-lock.json`、`pnpm-lock.yaml`、`yarn.lock`、`*.min.js`、`*.generated.*`
 - 二进制文件、图片、字体、压缩包、快照文件
 
-### 步骤 3. 确定审核范围
+### 步骤 2. 确定审核范围
 
 优先审查 diff 变更行，并按需读取上下文。
 
@@ -103,14 +77,15 @@ git diff --cached --name-only
 - 组件级改动：读取完整组件文件
 - 跨文件影响：读取相关依赖文件
 
-### 步骤 4. 按维度审核代码
+### 步骤 3. 按维度审核代码
 
 对每个目标文件按以下规则检查。
 
 - **通用审核规则**：见 [references/general.md](./references/general.md)
+- **Vue3 专项规则**：见 [references/vue3.md](./references/vue3.md)
 - **Rust 专项规则**：见 [references/rust.md](./references/rust.md)
 
-规则冲突时，专项规则优先适用。
+规则冲突时，专项规则优先适用。专项规则之间冲突时，按文件列表顺序靠后的优先。
 
 报告口径：
 
@@ -126,7 +101,7 @@ git diff --cached --name-only
 - 轻微问题：发现则列出，不影响审核通过结论。
 - `catch` 块中用于记录异常的 `console.warn` 不视为问题。
 
-### 步骤 5. 处理边界条件
+### 步骤 4. 处理边界条件
 
 | 场景           | 处理方式                                                           |
 | -------------- | ------------------------------------------------------------------ |
@@ -139,7 +114,7 @@ git diff --cached --name-only
 | 新增模块或入口 | 检查路由、导航、权限、导出、类型、配置、文档和依赖接入是否同步完成 |
 | 无法确认的问题 | 标记为“需人工确认”，说明原因和建议确认方式                         |
 
-### 步骤 6. 输出审核结果
+### 步骤 5. 输出审核结果
 
 **决策分支**：
 
