@@ -28,3 +28,23 @@
 1. 先读取 `package.json`，仅根据 `dependencies` 或 `devDependencies` 中的 `vue` 主版本是否为 `3` 判断是否为 Vue3 项目。
 2. 确认为 Vue3 项目后，再检查目标 `.vue` 文件是否使用 Composition API。
 3. 只有同时满足 Vue3 项目、使用 Composition API、已安装 `yy-frontend-vue3-review` 三个条件时，才委托专项技能。
+
+## Vue3 专项审核规则
+
+无论是否将审核任务委托给 `yy-frontend-vue3-review` 技能，均应对目标 `.vue` 文件追加检查以下 Vue3 专项审核规则。若本文件中的规则与 `yy-frontend-vue3-review` 技能中的规则冲突，以本文件为准。
+
+### 代码结构顺序
+
+Vue3 单文件组件应统一按以下顺序组织代码结构：
+
+```text
+<template>
+<script lang="ts" setup>
+<style lang="scss" scoped>
+```
+
+- `<template>`：模板部分
+- `<script lang="ts" setup>`：使用 TypeScript 的 Composition API 逻辑部分
+- `<style lang="scss" scoped>`：使用 SCSS 的作用域样式部分
+
+各区块之间应保留一个空行分隔。
