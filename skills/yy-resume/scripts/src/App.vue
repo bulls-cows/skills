@@ -152,7 +152,7 @@ async function handleStopServer() {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 /* ====== 全局重置 ====== */
 * {
   margin: 0;
@@ -169,6 +169,11 @@ body {
   overflow: hidden;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
 /* ====== 应用根布局 ====== */
 .app {
   display: flex;
@@ -190,7 +195,7 @@ body {
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 /* ====== 主内容区布局 ====== */
 .app__main-content {
   display: flex;
