@@ -163,10 +163,20 @@ async function handleStopServer() {
 /* ====== 页面主体 ====== */
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: #f0f2f5;
+    'Microsoft Yahei',
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    Tahoma,
+    serif;
+  background: #464646;
   height: 100vh;
   overflow: hidden;
+  color: #000;
+  font-weight: 400;
 }
 
 html,
@@ -191,6 +201,7 @@ body,
   body {
     overflow: visible;
     height: auto;
+    background: #fff;
   }
 }
 </style>

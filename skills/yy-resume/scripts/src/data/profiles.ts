@@ -3,11 +3,6 @@ import type { Profile } from '@/types/resume';
 /** 简历模板配置集合，key 为模板名称 */
 export const profiles: Record<string, Profile> = {
   general: {
-    theme: {
-      primary: '#2c3e50',
-      tagBg: '#eef1f5',
-      tagBorder: '#d7dde6',
-    },
     headerLinks: false,
     sections: [
       { id: 'header', fields: ['name', 'title', 'city', 'phone', 'email'] },
@@ -32,11 +27,6 @@ export const profiles: Record<string, Profile> = {
     ],
   },
   frontend: {
-    theme: {
-      primary: '#007acc',
-      tagBg: '#f0f7ff',
-      tagBorder: '#cfe8ff',
-    },
     headerLinks: true,
     sections: [
       {
@@ -64,11 +54,6 @@ export const profiles: Record<string, Profile> = {
     ],
   },
   backend: {
-    theme: {
-      primary: '#2d8659',
-      tagBg: '#e8f5ee',
-      tagBorder: '#c7e5d5',
-    },
     headerLinks: true,
     sections: [
       {
@@ -96,11 +81,6 @@ export const profiles: Record<string, Profile> = {
     ],
   },
   fullstack: {
-    theme: {
-      primary: '#007acc',
-      tagBg: '#f0f7ff',
-      tagBorder: '#cfe8ff',
-    },
     headerLinks: true,
     sections: [
       {
@@ -128,11 +108,6 @@ export const profiles: Record<string, Profile> = {
     ],
   },
   'pharma-regulatory': {
-    theme: {
-      primary: '#2c5f7c',
-      tagBg: '#e8f0f5',
-      tagBorder: '#c5d8e4',
-    },
     headerLinks: false,
     sections: [
       { id: 'header', fields: ['name', 'title', 'city', 'phone', 'email'] },
@@ -163,11 +138,6 @@ export const profiles: Record<string, Profile> = {
     ],
   },
   bioinformatics: {
-    theme: {
-      primary: '#5b6abf',
-      tagBg: '#ededf7',
-      tagBorder: '#d7daf0',
-    },
     headerLinks: true,
     sections: [
       {

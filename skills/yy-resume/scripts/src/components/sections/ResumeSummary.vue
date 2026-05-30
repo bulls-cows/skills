@@ -1,16 +1,8 @@
 <script setup lang="ts">
 /**
- * ResumeSummary - 简历摘要/概述组件
+ * ResumeSummary - 简历摘要/概述组件（DescBlock 风格）
  *
- * 职责: 展示简历顶部个人综述段落，使用 v-html 支持富文本内容
- *
- * 数据流向:
- *   - 父组件通过 Props 传入标题和 HTML 格式的摘要内容
- *   - 纯展示组件，无内部状态，无事件派发
- *
- * 核心业务流程:
- *   - summary 为空时整个区块不渲染
- *   - 内容通过 v-html 渲染，支持富文本格式
+ * 职责: 展示简历顶部个人综述段落，使用 DescBlock 样式包装
  */
 defineProps<{
   /** 区块标题 */
@@ -22,43 +14,28 @@ defineProps<{
 
 <template>
   <!-- 个人概述区块 -->
-  <section v-if="summary" class="resume-summary">
-    <h2 class="resume-summary__title">{{ title }}</h2>
-    <!-- 摘要内容（支持富文本） -->
-    <div class="resume-summary__content" v-html="summary"></div>
+  <section v-if="summary" class="resume-section">
+    <div class="section-header">
+      <div class="section-header__left">{{ title }}</div>
+    </div>
+    <div class="desc-block" v-html="summary"></div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-/* 区块容器 */
-.resume-summary {
-  margin-bottom: 24px;
+@use './section-common';
 
-  @media print {
-    break-inside: avoid;
+.desc-block {
+  display: block;
+  font-size: 0;
+  width: 100%;
+  :deep(*) {
+    font-size: 11pt;
+    font-weight: 400;
+    line-height: 1.8;
   }
-}
-
-/* 区块标题 */
-.resume-summary__title {
-  font-size: 18px;
-  color: var(--primary, #2c3e50);
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 6px;
-  margin-bottom: 12px;
-
-  @media print {
-    break-after: avoid;
+  :deep(strong) {
+    font-weight: 600;
   }
-}
-
-/* 摘要内容 */
-.resume-summary__content {
-  font-size: 14px;
-  color: #444;
-}
-
-.resume-summary__content strong {
-  font-weight: 600;
 }
 </style>

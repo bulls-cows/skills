@@ -7,7 +7,7 @@
  *
  * 【数据流向】
  * - 接收: data (ResumeData 简历数据)
- * - 从 profiles 获取模板配置（主题色、章节列表、头部链接显示）
+ * - 从 profiles 获取模板配置（章节列表、头部链接显示）
  *
  * 【交互关系】
  * - 依赖 profiles 数据源获取模板配置
@@ -19,7 +19,6 @@
 import { computed } from 'vue';
 import type { ResumeData } from '@/types/resume';
 import { profiles } from '@/data/profiles';
-import ResumeHeader from './sections/ResumeHeader.vue';
 import ResumeSummary from './sections/ResumeSummary.vue';
 import ResumeSkills from './sections/ResumeSkills.vue';
 import ResumeCompetency from './sections/ResumeCompetency.vue';
@@ -35,12 +34,6 @@ const props = defineProps<{
   data: ResumeData;
 }>();
 
-// 当前模板的主题色配置
-const theme = computed(() => {
-  const profile = profiles[props.data.template] || profiles.general;
-  return profile.theme;
-});
-
 // 当前模板的完整配置（章节列表、头部链接等）
 const profile = computed(() => {
   return profiles[props.data.template] || profiles.general;
@@ -50,31 +43,39 @@ const profile = computed(() => {
 <template>
   <!-- 预览面板根容器 -->
   <div class="resume-preview">
-    <!-- 简历内容容器，绑定 CSS 变量用于主题色 -->
-    <div
-      class="resume-preview__wrapper"
-      :style="{
-        '--primary': theme.primary,
-        '--tag-bg': theme.tagBg,
-        '--tag-border': theme.tagBorder,
-      }"
-    >
-      <!-- 按模板配置的章节顺序动态渲染 -->
+    <!-- A4 页面容器 -->
+    <div class="resume-preview__page">
+      <!-- 简历标题 -->
+      <div class="resume-preview__title">{{ data.name || '' }}的简历</div>
+
+      <!-- 联系信息表 -->
+      <div class="resume-preview__meta">
+        <div class="meta-item" v-if="data.city">
+          <span class="meta-label">坐标：</span>{{ data.city }}
+        </div>
+        <div class="meta-item" v-if="data.phone">
+          <span class="meta-label">手机：</span>{{ data.phone }}
+        </div>
+        <div class="meta-item" v-if="data.email">
+          <span class="meta-label">邮箱：</span>{{ data.email }}
+        </div>
+        <div class="meta-item" v-if="data.title">
+          <span class="meta-label">职位：</span>{{ data.title }}
+        </div>
+      </div>
+
+      <!-- 社交链接 -->
+      <div v-if="profile.headerLinks && data.links?.length" class="resume-preview__links">
+        <a v-for="link in data.links" :key="link.label" :href="link.url" target="_blank">
+          {{ link.label }}
+        </a>
+      </div>
+
+      <!-- 按模板配置的章节顺序动态渲染（跳过 header，已在上面直接渲染） -->
       <template v-for="section in profile.sections" :key="section.id">
-        <!-- 个人信息头部 -->
-        <ResumeHeader
-          v-if="section.id === 'header'"
-          :name="data.name"
-          :title="data.title"
-          :city="data.city"
-          :phone="data.phone"
-          :email="data.email"
-          :links="data.links"
-          :show-links="profile.headerLinks"
-        />
         <!-- 个人简介 -->
         <ResumeSummary
-          v-else-if="section.id === 'summary'"
+          v-if="section.id === 'summary'"
           :title="section.title || ''"
           :summary="data.summary"
         />
@@ -137,35 +138,86 @@ const profile = computed(() => {
 .resume-preview {
   width: 50%;
   overflow: auto;
-  padding: 20px;
-  background: #f0f2f5;
+  padding: 50px 20px;
+  background: #464646;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-/* 简历内容容器，A4 尺寸 */
-.resume-preview__wrapper {
-  width: 210mm;
-  min-height: 297mm;
-  background: white;
-  margin: 0 auto;
-  padding: 20mm;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* A4 页面容器 */
+.resume-preview__page {
+  width: 190mm;
+  min-height: 277mm;
+  padding: 10mm;
+  box-sizing: content-box;
+  background: #fff;
+  border: 0.75pt solid #666;
+  display: flex;
+  flex-direction: column;
+  gap: 6pt;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: #000;
+}
 
-  @media print {
-    box-shadow: none;
-    margin: 0;
-    width: 100%;
-    height: auto;
-    min-height: auto;
+/* 简历标题 */
+.resume-preview__title {
+  text-align: center;
+  font-size: 20pt;
+  line-height: 1.1;
+  padding-bottom: 5pt;
+}
+
+/* 联系信息表 */
+.resume-preview__meta {
+  display: flex;
+  flex-wrap: wrap;
+  border: 0.75pt dashed #000;
+  padding: 6pt;
+  line-height: 1.8;
+  width: 100%;
+  gap: 0;
+}
+
+.meta-item {
+  display: inline-flex;
+  width: 50%;
+  font-size: 11pt;
+}
+
+.meta-label {
+  font-weight: 400;
+}
+
+/* 社交链接 */
+.resume-preview__links {
+  font-size: 11pt;
+  text-align: center;
+  a {
+    color: #000;
+    margin: 0 8pt;
   }
 }
 
-/* 打印时预览面板全屏显示 */
+/* 打印样式 */
 @media print {
   .resume-preview {
     width: 100%;
     overflow: visible;
     padding: 0;
-    background: white;
+    background: #fff;
+  }
+
+  .resume-preview__page {
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    min-height: auto;
   }
 }
 </style>

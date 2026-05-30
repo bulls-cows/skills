@@ -57,7 +57,7 @@ function handleInput() {
       emit('update:modelValue', editorValue.value);
       emit('clearError');
       status.value = '已更新';
-      const timer = setTimeout(() => (status.value = '已就绪'), 1000);
+      setTimeout(() => (status.value = '已就绪'), 1000);
     } catch (e) {
       emit('error', `JSON 解析错误: ${(e as Error).message}`);
       status.value = '解析错误';

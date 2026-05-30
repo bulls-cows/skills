@@ -136,20 +136,8 @@ export interface SectionConfig {
   variant?: 'tech' | 'submission' | 'tools';
 }
 
-/** 主题颜色配置 */
-export interface ThemeConfig {
-  /** 主题色 */
-  primary: string;
-  /** 标签背景色 */
-  tagBg: string;
-  /** 标签边框色 */
-  tagBorder: string;
-}
-
 /** 简历模板配置 */
 export interface Profile {
-  /** 主题颜色配置 */
-  theme: ThemeConfig;
   /** 是否在页眉显示社交链接 */
   headerLinks: boolean;
   /** 章节配置列表 */

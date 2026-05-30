@@ -1,0 +1,43 @@
+// 章节公共样式 — 通过 @use 引入
+
+/* 章节容器 */
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 6pt;
+}
+
+/* 章节头部：虚线分割、左右布局 */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 13pt;
+  line-height: 1.8;
+  border-bottom: 0.75pt dashed #000;
+  width: 100%;
+}
+
+.section-header__left {
+  font-weight: bold;
+}
+
+.section-header__right {
+  font-size: 9pt;
+}
+
+/* 标签 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 11pt;
+  padding: 0 1pt;
+  font-size: 9pt;
+  border: 1px solid #000;
+  color: #000;
+  overflow: hidden;
+  white-space: nowrap;
+}

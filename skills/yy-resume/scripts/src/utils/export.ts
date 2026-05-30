@@ -23,75 +23,62 @@ export function downloadJson(data: ResumeData): void {
 
 /**
  * 根据章节配置渲染对应的 HTML 片段
- * @param data - 简历数据
- * @param section - 章节配置
- * @returns 渲染后的 HTML 字符串
  */
 function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
   switch (section.id) {
-    case 'header': {
-      let linksHtml = '';
-      if (data.links?.length) {
-        linksHtml = `<div class="links">${data.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`;
-      }
-      return `<header class="header">
-        <div class="name">${data.name || ''}</div>
-        <div class="title">${data.title || ''}</div>
-        <div class="contact">
-          <span>${data.city || ''}</span><span>|</span><span>${data.phone || ''}</span><span>|</span><span>${data.email || ''}</span>
-        </div>
-        ${linksHtml}
-      </header>`;
-    }
+    case 'header':
+      return ''; // 头部已在模板中直接渲染
     case 'summary':
       if (!data.summary) return '';
-      return `<section><h2>${section.title || ''}</h2><div class="summary">${data.summary}</div></section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div><div class="desc-block">${data.summary}</div></section>`;
     case 'skills':
       if (!data.skills?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.skills.map(c => `<div class="skills-category"><h3>${c.category}</h3><div class="skills-list">${c.items.map(i => `<span>${i}</span>`).join('')}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.skills.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'competency':
       if (!data.competencies?.length) return '';
-      return `<section><h2>${section.title || ''}</h2><div class="competency-list">${data.competencies.map(i => `<span class="competency-tag">${i}</span>`).join('')}</div></section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div><div class="tag-list">${data.competencies.map(i => `<span class="tag">${i}</span>`).join('')}</div></section>`;
     case 'regulatory':
       if (!data.regulatorySystems?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.regulatorySystems.map(c => `<div class="regulatory-group"><h3>${c.category}</h3><div class="regulatory-list">${c.items.map(i => `<span class="regulatory-tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.regulatorySystems.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'experience':
       if (!data.experience?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.experience
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.experience
         .map(e => {
           const tagsHtml = e.tags?.length
-            ? `<span class="company-tags">${e.tags.map(t => `<span class="company-tag">${t}</span>`).join('')}</span>`
+            ? `<span class="exp-tags">${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}</span>`
             : '';
           const orgHtml = e.url
-            ? `<a href="${e.url}" target="_blank">${e.organization}</a>`
-            : e.organization;
-          return `<div class="experience-item"><div class="item-header"><div><div class="company">${orgHtml}${tagsHtml}</div><div class="position">${e.position || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
+            ? `<a href="${e.url}" target="_blank" class="exp-org">${e.organization}</a>`
+            : `<span class="exp-org">${e.organization}</span>`;
+          return `<div class="exp-item"><div class="exp-header"><div class="exp-left"><span class="exp-duration">${e.startDate || ''} ~ ${e.endDate || ''}</span>${orgHtml}${tagsHtml}</div><div class="exp-right">${e.position || ''}</div></div><ul class="desc-list">${(e.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
         })
         .join('')}</section>`;
     case 'projects':
       if (!data.projects?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.projects
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.projects
         .map(p => {
-          const nameHtml = p.url ? `<a href="${p.url}" target="_blank">${p.name}</a>` : p.name;
+          const nameHtml = p.url
+            ? `<a href="${p.url}" target="_blank" class="proj-name">${p.name}</a>`
+            : `<span class="proj-name">${p.name}</span>`;
           let variantHtml = '';
           if (section.variant === 'tech' && p.techStack)
-            variantHtml = `<div class="tech-stack">${p.techStack}</div>`;
+            variantHtml = `<div class="proj-variant">${p.techStack}</div>`;
           else if (section.variant === 'submission' && p.submissionType)
-            variantHtml = `<div class="submission-type">${p.submissionType}</div>`;
+            variantHtml = `<div class="proj-variant">${p.submissionType}</div>`;
           else if (section.variant === 'tools' && p.toolsMethods)
-            variantHtml = `<div class="tools-methods">${p.toolsMethods}</div>`;
-          return `<div class="project-item"><div class="item-header"><div><div class="project-name">${nameHtml}</div><div class="role">${p.role || ''}</div></div><div class="date">${p.startDate || ''} - ${p.endDate || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
+            variantHtml = `<div class="proj-variant">${p.toolsMethods}</div>`;
+          return `<div class="proj-item"><div class="proj-header"><div class="proj-left"><span class="proj-duration">${p.startDate || ''} ~ ${p.endDate || ''}</span>${nameHtml}</div><div class="proj-right">${p.role || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
         })
         .join('')}</section>`;
     case 'education':
       if (!data.education?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.education.map(e => `<div class="education-item"><div class="item-header"><div><div class="school">${e.school || ''}</div><div class="degree">${e.major || ''}</div></div><div class="date">${e.startDate || ''} - ${e.endDate || ''}</div></div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.education.map(e => `<div class="edu-item"><div class="edu-header"><div class="edu-left"><span class="edu-duration">${e.startDate || ''} ~ ${e.endDate || ''}</span><span class="edu-school">${e.school || ''}</span></div><div class="edu-right">${e.major || ''}</div></div></div>`).join('')}</section>`;
     case 'certs':
       if (!data.certs?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.certs.map(c => `<div class="cert-item"><div class="cert-name">${c.name || ''}</div><div class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.certs.map(c => `<div class="cert-item"><span class="cert-name">${c.name || ''}</span><span class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</span></div>`).join('')}</section>`;
     case 'publications':
       if (!data.publications?.length) return '';
-      return `<section><h2>${section.title || ''}</h2>${data.publications.map(p => `<div class="publication-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · <span class="pub-journal">${p.journal}</span>` : ''}${p.year ? ` · <span class="pub-year">${p.year}</span>` : ''}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.publications.map(p => `<div class="pub-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · ${p.journal}` : ''}${p.year ? ` · ${p.year}` : ''}</div></div>`).join('')}</section>`;
     default:
       return '';
   }
@@ -100,12 +87,35 @@ function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
 /** 将简历数据导出为 HTML 文件并下载 */
 export function downloadHtml(data: ResumeData): void {
   const profile = profiles[data.template] || profiles.general;
-  const theme = profile.theme;
 
   let sectionsHtml = '';
   profile.sections.forEach(section => {
     sectionsHtml += renderSectionHtml(data, section);
   });
+
+  // 头部信息
+  const headerHtml = data.name ? `<div class="resume-title">${data.name}的简历</div>` : '';
+  const metaHtml = `<div class="resume-meta">${
+    data.city
+      ? `<div class="meta-item"><span class="meta-label">坐标：</span>${data.city}</div>`
+      : ''
+  }${
+    data.phone
+      ? `<div class="meta-item"><span class="meta-label">手机：</span>${data.phone}</div>`
+      : ''
+  }${
+    data.email
+      ? `<div class="meta-item"><span class="meta-label">邮箱：</span>${data.email}</div>`
+      : ''
+  }${
+    data.title
+      ? `<div class="meta-item"><span class="meta-label">职位：</span>${data.title}</div>`
+      : ''
+  }</div>`;
+  const linksHtml =
+    profile.headerLinks && data.links?.length
+      ? `<div class="resume-links">${data.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`
+      : '';
 
   const html = `<!doctype html>
 <html lang="zh-CN">
@@ -114,59 +124,88 @@ export function downloadHtml(data: ResumeData): void {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>简历 - ${data.name || ''}</title>
   <style>
-    :root {
-      --primary: ${theme.primary};
-      --tag-bg: ${theme.tagBg};
-      --tag-border: ${theme.tagBorder};
-    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-    .page { width: 210mm; min-height: 297mm; background: white; margin: 0 auto; padding: 20mm; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    @media print {
-      body { background: white; padding: 0; }
-      .page { box-shadow: none; margin: 0; width: 100%; height: auto; min-height: auto; }
-      @page { size: A4; margin: 0; }
-      section { break-inside: avoid; }
-      h2 { break-after: avoid; }
-      .experience-item, .project-item, .education-item, .cert-item, .publication-item { break-inside: avoid; }
-      .skills-category, .regulatory-group { break-inside: avoid; }
-    }
-    .header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 20px; }
-    .name { font-size: 32px; font-weight: bold; color: #222; margin-bottom: 8px; }
-    .title { font-size: 18px; color: var(--primary); margin-bottom: 12px; }
-    .contact { font-size: 14px; color: #666; }
-    .contact a, .links a { color: var(--primary); text-decoration: none; }
-    .contact span { margin: 0 8px; }
-    .links { font-size: 14px; margin-top: 8px; }
-    .links a { margin-right: 16px; }
-    section { margin-bottom: 24px; }
-    h2 { font-size: 18px; color: var(--primary); border-bottom: 1px solid #ddd; padding-bottom: 6px; margin-bottom: 12px; }
-    .summary { font-size: 14px; color: #444; }
-    .skills-category, .regulatory-group { margin-bottom: 12px; }
-    .skills-category h3, .regulatory-group h3 { font-size: 14px; font-weight: 600; color: #444; margin-bottom: 6px; }
-    .skills-list, .regulatory-list, .competency-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skills-list span, .regulatory-tag, .competency-tag { display: inline-block; background: var(--tag-bg); padding: 4px 10px; border-radius: 4px; font-size: 13px; color: var(--primary); border: 1px solid var(--tag-border); }
-    .experience-item, .project-item, .education-item { margin-bottom: 16px; }
-    .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
-    .company, .project-name, .school { font-size: 15px; font-weight: 600; color: #222; }
-    .position, .role, .degree { font-size: 14px; color: #444; }
-    .date { font-size: 13px; color: #888; }
-    .tech-stack, .submission-type, .tools-methods { font-size: 13px; color: var(--primary); margin: 4px 0 6px 0; }
-    .company-tags { display: inline-flex; align-items: center; gap: 4px; margin-left: 12px; }
-    .company-tag { font-size: 9px; padding: 0 3px; border: 1px solid #333; color: #333; }
-    .summary strong, .desc-list strong { font-weight: 600; }
+    body { font-family: "Microsoft Yahei", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif, Tahoma, serif; background: #464646; padding: 50px 20px; color: #000; font-weight: 400; }
+    .page { width: 190mm; min-height: 277mm; padding: 10mm; box-sizing: content-box; background: #fff; margin: 0 auto; border: 0.75pt solid #666; font-size: 12pt; line-height: 1.5; }
+
+    /* 标题 */
+    .resume-title { text-align: center; font-size: 20pt; line-height: 1.1; padding-bottom: 5pt; }
+
+    /* 联系信息表 */
+    .resume-meta { display: flex; flex-wrap: wrap; border: 0.75pt dashed #000; padding: 6pt; line-height: 1.8; width: 100%; }
+    .meta-item { display: inline-flex; width: 50%; font-size: 11pt; }
+    .meta-label { font-weight: 400; }
+
+    /* 社交链接 */
+    .resume-links { font-size: 11pt; text-align: center; padding-top: 3pt; }
+    .resume-links a { color: #000; margin: 0 8pt; }
+
+    /* 章节 */
+    .resume-section { display: flex; flex-direction: column; width: 100%; margin-top: 6pt; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; text-align: left; font-size: 13pt; line-height: 1.8; border-bottom: 0.75pt dashed #000; width: 100%; }
+    .section-header__left { font-weight: bold; }
+    .section-header__right { font-size: 9pt; }
+
+    /* DescBlock */
+    .desc-block { display: block; font-size: 0; width: 100%; }
+    .desc-block * { font-size: 11pt; font-weight: 400; line-height: 1.8; }
+    .desc-block strong { font-weight: 600; }
+
+    /* 标签 */
+    .tag-group { margin-bottom: 6pt; }
+    .tag-group__title { font-size: 11pt; font-weight: 600; margin-bottom: 3pt; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 3pt; }
+    .tag { display: inline-flex; align-items: center; justify-content: center; height: 11pt; padding: 0 1pt; font-size: 9pt; border: 1px solid #000; color: #000; overflow: hidden; white-space: nowrap; }
+
+    /* 工作经历 */
+    .exp-item { display: flex; flex-direction: column; width: 100%; gap: 3pt; margin-top: 6pt; }
+    .exp-header { display: flex; align-items: center; justify-content: space-between; width: 100%; font-size: 11pt; }
+    .exp-left { display: inline-flex; align-items: center; gap: 12pt; }
+    .exp-duration { white-space: nowrap; }
+    .exp-org { font-weight: 400; color: #000; text-decoration: none; }
+    .exp-tags { display: inline-flex; align-items: center; gap: 3pt; }
+    .exp-right { font-weight: 400; font-size: 11pt; }
+
+    /* 项目经历 */
+    .proj-item { display: flex; flex-direction: column; width: 100%; gap: 3pt; margin-top: 6pt; }
+    .proj-header { display: flex; align-items: center; justify-content: space-between; width: 100%; font-size: 11pt; }
+    .proj-left { display: inline-flex; align-items: center; gap: 12pt; }
+    .proj-duration { white-space: nowrap; }
+    .proj-name { font-weight: 600; color: #000; text-decoration: none; }
+    .proj-right { font-weight: 600; font-size: 11pt; }
+    .proj-variant { font-size: 11pt; margin-left: 2em; }
+
+    /* 教育经历 */
+    .edu-item { width: 100%; margin-top: 6pt; }
+    .edu-header { display: flex; align-items: center; justify-content: space-between; width: 100%; font-size: 11pt; }
+    .edu-left { display: inline-flex; align-items: center; gap: 12pt; }
+    .edu-duration { white-space: nowrap; }
+    .edu-school { font-weight: 400; }
+    .edu-right { font-weight: 400; font-size: 11pt; }
+
+    /* 证书 */
+    .cert-item { font-size: 11pt; line-height: 1.8; width: 100%; margin-top: 3pt; }
+    .cert-name { font-weight: 600; }
+
+    /* 出版物 */
+    .pub-item { font-size: 11pt; line-height: 1.8; width: 100%; margin-top: 3pt; }
+    .pub-title { font-weight: 600; }
+
+    /* 描述列表 */
+    .desc-list { font-size: 11pt; line-height: 1.8; margin-left: 2em; list-style: none; }
+    .desc-list strong { font-weight: 600; }
     .desc-list .num { position: relative; top: -1.2pt; }
-    ul { margin-left: 20px; font-size: 14px; color: #444; }
-    li { margin-bottom: 4px; }
-    .cert-item, .publication-item { margin-bottom: 10px; font-size: 14px; color: #444; }
-    .cert-name, .pub-title { font-weight: 600; color: #222; }
-    .cert-detail, .pub-authors { color: #666; font-size: 13px; }
-    .pub-journal { color: var(--primary); font-style: italic; }
-    .pub-year { color: #888; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { border: none; box-shadow: none; margin: 0; width: 100%; height: auto; min-height: auto; padding: 0; }
+      @page { size: A4; margin: 10mm; }
+      .resume-section { break-inside: avoid; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">${sectionsHtml}</div>
+  <div class="page">${headerHtml}${metaHtml}${linksHtml}${sectionsHtml}</div>
 </body>
 </html>`;
 
