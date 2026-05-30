@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { fileURLToPath, URL } from 'node:url'
-import type { ServerResponse } from 'node:http'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { fileURLToPath, URL } from 'node:url';
+import type { ServerResponse } from 'node:http';
 
 /**
  * 终止开发服务器的 Vite 插件。
@@ -12,15 +12,18 @@ function stopServerPlugin() {
     name: 'stop-server',
     configureServer(server: {
       middlewares: {
-        use: (path: string, handler: (req: import('node:http').IncomingMessage, res: ServerResponse) => void) => void
-      }
+        use: (
+          path: string,
+          handler: (req: import('node:http').IncomingMessage, res: ServerResponse) => void
+        ) => void;
+      };
     }) {
       server.middlewares.use('/__stop-server', (_req, res) => {
-        res.end('Server is stopping...')
-        setTimeout(() => process.exit(0), 100)
-      })
+        res.end('Server is stopping...');
+        setTimeout(() => process.exit(0), 100);
+      });
     },
-  }
+  };
 }
 
 export default defineConfig({
@@ -34,4 +37,4 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
-})
+});
