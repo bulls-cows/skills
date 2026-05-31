@@ -44,7 +44,7 @@ function updateItem(index: number, value: string) {
     </div>
     <div class="editor__field">
       <label class="editor__label">能力列表</label>
-      <div v-for="(item, i) in competencies" :key="i" class="editor__list-item">
+      <div v-for="(item, i) in competencies" :key="'comp-' + i" class="editor__list-item">
         <input
           class="editor__input"
           :value="item"
@@ -58,6 +58,6 @@ function updateItem(index: number, value: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

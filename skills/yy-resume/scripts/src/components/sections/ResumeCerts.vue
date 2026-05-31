@@ -18,7 +18,7 @@ defineProps<{
     <div class="section-header">
       <div class="section-header__left">{{ title }}</div>
     </div>
-    <div v-for="(cert, i) in certs" :key="i" class="cert-item">
+    <div v-for="(cert, i) in certs" :key="'cert-' + i" class="cert-item">
       <span class="cert-item__name">{{ cert.name || '' }}</span>
       <span class="cert-item__detail">
         {{ cert.issuer || '' }}<template v-if="cert.year"> · {{ cert.year }}</template>

@@ -80,7 +80,7 @@ function handleRenameKeydown(e: KeyboardEvent) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .page-tabs {
   border-bottom: 1px solid #e5e7eb;
   background: #fff;

@@ -51,7 +51,7 @@ function updateField(index: number, field: string, value: string) {
     </div>
     <div class="editor__field">
       <label class="editor__label">论文列表</label>
-      <div v-for="(pub, i) in publications" :key="i" class="editor__array-item">
+      <div v-for="(pub, i) in publications" :key="'pub-' + i" class="editor__array-item">
         <div class="editor__array-item-header">
           <span class="editor__array-item-index">论文 {{ i + 1 }}</span>
           <button class="editor__btn-remove" @click="removeItem(i)">×</button>
@@ -89,6 +89,6 @@ function updateField(index: number, field: string, value: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

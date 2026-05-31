@@ -96,6 +96,6 @@ function updateItem(catIndex: number, itemIndex: number, value: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

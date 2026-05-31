@@ -89,7 +89,7 @@ function updateLink(index: number, field: 'label' | 'url', value: string) {
     </div>
     <div class="editor__field">
       <label class="editor__label">社交链接</label>
-      <div v-for="(link, i) in links" :key="i" class="editor__list-item">
+      <div v-for="(link, i) in links" :key="'link-' + i" class="editor__list-item">
         <input
           class="editor__input editor__input--sm"
           :value="link.label"
@@ -109,6 +109,6 @@ function updateLink(index: number, field: 'label' | 'url', value: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

@@ -148,7 +148,7 @@ function updateBlock(block: BlockConfig) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .property-panel {
   flex: 1;
   min-height: 0;

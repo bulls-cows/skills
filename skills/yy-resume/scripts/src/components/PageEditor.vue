@@ -161,7 +161,7 @@ function addBlock(type: BlockType) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .page-editor {
   flex: 1;
   min-width: 0;

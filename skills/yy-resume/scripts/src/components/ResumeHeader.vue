@@ -41,7 +41,7 @@ defineProps<{
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .resume-preview__title {
   text-align: center;
   font-size: 20pt;

@@ -113,7 +113,7 @@ const showAddMenu = ref(false);
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .block-list {
   flex: 1;
   min-height: 0;

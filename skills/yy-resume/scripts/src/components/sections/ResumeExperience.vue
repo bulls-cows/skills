@@ -21,7 +21,7 @@ defineProps<{
       <div class="section-header__left">{{ title }}</div>
     </div>
     <!-- 工作经历循环 -->
-    <div v-for="(exp, i) in experience" :key="i" class="exp-item">
+    <div v-for="(exp, i) in experience" :key="'exp-' + i" class="exp-item">
       <!-- 经历头部 -->
       <div class="exp-item__header">
         <div class="exp-item__left">

@@ -54,7 +54,7 @@ const parsedData = computed<ResumeData>(() => {
   try {
     return JSON.parse(rawData.value);
   } catch {
-    return rawData.value as unknown as ResumeData;
+    return sampleData;
   }
 });
 

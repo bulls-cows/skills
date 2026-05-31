@@ -38,6 +38,6 @@ const emit = defineEmits<{
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

@@ -18,7 +18,7 @@ defineProps<{
     <div class="section-header">
       <div class="section-header__left">{{ title }}</div>
     </div>
-    <div v-for="(pub, i) in publications" :key="i" class="pub-item">
+    <div v-for="(pub, i) in publications" :key="'pub-' + i" class="pub-item">
       <div class="pub-item__title">{{ pub.title || '' }}</div>
       <div class="pub-item__authors">
         {{ pub.authors || '' }}

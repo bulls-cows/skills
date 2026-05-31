@@ -18,7 +18,7 @@ defineProps<{
     <div class="section-header">
       <div class="section-header__left">{{ title }}</div>
     </div>
-    <div v-for="(edu, i) in education" :key="i" class="edu-item">
+    <div v-for="(edu, i) in education" :key="'edu-' + i" class="edu-item">
       <div class="edu-item__header">
         <div class="edu-item__left">
           <div class="edu-item__duration">{{ edu.startDate || '' }} ~ {{ edu.endDate || '' }}</div>

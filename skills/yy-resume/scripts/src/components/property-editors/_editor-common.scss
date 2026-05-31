@@ -28,6 +28,10 @@
   color: #6b7280;
 }
 
+.editor__label--sm {
+  font-size: 11px;
+}
+
 .editor__input {
   padding: 6px 8px;
   border: 1px solid #d1d5db;
@@ -62,6 +66,10 @@
     border-color: #3b82f6;
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
   }
+}
+
+.editor__textarea--sm {
+  min-height: 40px;
 }
 
 .editor__select {
@@ -119,6 +127,11 @@
   display: flex;
   gap: 6px;
   align-items: center;
+}
+
+.editor__sub-field--column {
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .editor__array-item {

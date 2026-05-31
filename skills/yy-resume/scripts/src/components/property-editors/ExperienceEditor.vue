@@ -91,7 +91,7 @@ function updateDescription(expIndex: number, descIndex: number, value: string) {
     </div>
     <div class="editor__field">
       <label class="editor__label">经历列表</label>
-      <div v-for="(exp, i) in experience" :key="i" class="editor__array-item">
+      <div v-for="(exp, i) in experience" :key="'exp-' + i" class="editor__array-item">
         <div class="editor__array-item-header">
           <span class="editor__array-item-index">经历 {{ i + 1 }}</span>
           <button class="editor__btn-remove" @click="removeItem(i)">×</button>
@@ -138,15 +138,14 @@ function updateDescription(expIndex: number, descIndex: number, value: string) {
           @input="updateTags(i, ($event.target as HTMLInputElement).value)"
           placeholder="标签（逗号分隔）"
         />
-        <div class="editor__sub-field" style="flex-direction: column; align-items: stretch">
-          <label class="editor__label" style="font-size: 11px">描述</label>
-          <div v-for="(desc, di) in exp.descriptions" :key="di" class="editor__list-item">
+        <div class="editor__sub-field editor__sub-field--column">
+          <label class="editor__label editor__label--sm">描述</label>
+          <div v-for="(desc, di) in exp.descriptions" :key="'desc-' + di" class="editor__list-item">
             <textarea
-              class="editor__textarea"
+              class="editor__textarea editor__textarea--sm"
               :value="desc"
               @input="updateDescription(i, di, ($event.target as HTMLTextAreaElement).value)"
               rows="2"
-              style="min-height: 40px"
             ></textarea>
             <button class="editor__btn-remove" @click="removeDescription(i, di)">×</button>
           </div>
@@ -158,6 +157,6 @@ function updateDescription(expIndex: number, descIndex: number, value: string) {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @use './editor-common';
 </style>

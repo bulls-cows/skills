@@ -23,7 +23,7 @@ defineProps<{
       <div class="section-header__left">{{ title }}</div>
     </div>
     <!-- 项目经历循环 -->
-    <div v-for="(proj, i) in projects" :key="i" class="proj-item">
+    <div v-for="(proj, i) in projects" :key="'proj-' + i" class="proj-item">
       <!-- 项目头部 -->
       <div class="proj-item__header">
         <div class="proj-item__left">
