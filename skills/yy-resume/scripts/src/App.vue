@@ -29,7 +29,7 @@ import { ref, computed } from 'vue';
 
 // --- 类型与内部数据 ---
 import type { ResumeData } from '@/types/resume';
-import { sampleData } from '@/data/profiles';
+import { sampleData } from '@/data/resume-data';
 
 // --- 工具函数 ---
 import { downloadJson, downloadHtml, printResume } from '@/utils/export';
