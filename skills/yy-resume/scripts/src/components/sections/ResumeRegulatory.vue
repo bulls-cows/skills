@@ -1,17 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeRegulatory - 监管资质/合规体系组件（紧凑标签风格）
- */
-import type { SkillCategory } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 监管体系分类列表 */
-  regulatorySystems?: SkillCategory[];
-}>();
-</script>
-
 <template>
   <!-- 监管资质区块 -->
   <section v-if="regulatorySystems?.length" class="resume-section">
@@ -26,6 +12,20 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeRegulatory - 监管资质/合规体系组件（紧凑标签风格）
+ */
+import type { SkillCategory } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 监管体系分类列表 */
+  regulatorySystems?: SkillCategory[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

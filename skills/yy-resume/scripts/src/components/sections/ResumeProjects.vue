@@ -1,21 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeProjects - 项目经历组件
- *
- * 职责: 按时间倒序列出项目经历，支持三种变体
- */
-import type { Project } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 项目经历列表 */
-  projects?: Project[];
-  /** 项目变体类型 */
-  variant?: 'tech' | 'submission' | 'tools';
-}>();
-</script>
-
 <template>
   <!-- 项目经历区块 -->
   <section v-if="projects?.length" class="resume-section">
@@ -54,6 +36,24 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeProjects - 项目经历组件
+ *
+ * 职责: 按时间倒序列出项目经历，支持三种变体
+ */
+import type { Project } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 项目经历列表 */
+  projects?: Project[];
+  /** 项目变体类型 */
+  variant?: 'tech' | 'submission' | 'tools';
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

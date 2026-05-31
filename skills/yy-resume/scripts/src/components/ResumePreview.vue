@@ -1,34 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumePreview - 简历预览面板
- *
- * 【职责】
- * 根据 pages 配置动态渲染多页简历，每页渲染对应的区块组件
- *
- * 【数据流向】
- * - 接收: data (ResumeData 简历数据)
- * - 根据 data.pages 遍历渲染每个页面的区块
- *
- * 【核心流程】
- * 接收 data → 遍历 data.pages → 每页遍历 blocks → 按 type 分发到对应章节组件
- */
-import type { ResumeData } from '@/types/resume';
-import ResumeHeader from './ResumeHeader.vue';
-import ResumeSummary from './sections/ResumeSummary.vue';
-import ResumeSkills from './sections/ResumeSkills.vue';
-import ResumeCompetency from './sections/ResumeCompetency.vue';
-import ResumeRegulatory from './sections/ResumeRegulatory.vue';
-import ResumeExperience from './sections/ResumeExperience.vue';
-import ResumeProjects from './sections/ResumeProjects.vue';
-import ResumeEducation from './sections/ResumeEducation.vue';
-import ResumeCerts from './sections/ResumeCerts.vue';
-import ResumePublications from './sections/ResumePublications.vue';
-
-defineProps<{
-  data: ResumeData;
-}>();
-</script>
-
 <template>
   <div class="resume-preview">
     <div v-for="page in data.pages" :key="page.id" class="resume-preview__page">
@@ -94,6 +63,37 @@ defineProps<{
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumePreview - 简历预览面板
+ *
+ * 【职责】
+ * 根据 pages 配置动态渲染多页简历，每页渲染对应的区块组件
+ *
+ * 【数据流向】
+ * - 接收: data (ResumeData 简历数据)
+ * - 根据 data.pages 遍历渲染每个页面的区块
+ *
+ * 【核心流程】
+ * 接收 data → 遍历 data.pages → 每页遍历 blocks → 按 type 分发到对应章节组件
+ */
+import type { ResumeData } from '@/types/resume';
+import ResumeHeader from './ResumeHeader.vue';
+import ResumeSummary from './sections/ResumeSummary.vue';
+import ResumeSkills from './sections/ResumeSkills.vue';
+import ResumeCompetency from './sections/ResumeCompetency.vue';
+import ResumeRegulatory from './sections/ResumeRegulatory.vue';
+import ResumeExperience from './sections/ResumeExperience.vue';
+import ResumeProjects from './sections/ResumeProjects.vue';
+import ResumeEducation from './sections/ResumeEducation.vue';
+import ResumeCerts from './sections/ResumeCerts.vue';
+import ResumePublications from './sections/ResumePublications.vue';
+
+defineProps<{
+  data: ResumeData;
+}>();
+</script>
 
 <style lang="scss" scoped>
 /* 预览面板根容器 */

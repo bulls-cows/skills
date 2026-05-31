@@ -1,76 +1,3 @@
-<script setup lang="ts">
-/**
- * ProjectsEditor - projects 区块属性编辑器
- *
- * 编辑项目经验列表，含 variant 选择
- */
-import type { Project } from '@/types/resume';
-
-const props = defineProps<{
-  blockTitle: string;
-  variant: string;
-  projects: Project[];
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:blockTitle', value: string): void;
-  (e: 'update:variant', value: string): void;
-  (e: 'update:projects', value: Project[]): void;
-}>();
-
-function addItem() {
-  emit('update:projects', [
-    ...props.projects,
-    {
-      name: '',
-      role: '',
-      startDate: '',
-      endDate: '',
-      descriptions: [],
-    },
-  ]);
-}
-
-function removeItem(index: number) {
-  emit(
-    'update:projects',
-    props.projects.filter((_, i) => i !== index)
-  );
-}
-
-function updateField(index: number, field: string, value: string) {
-  const updated = props.projects.map((proj, i) =>
-    i === index ? { ...proj, [field]: value } : proj
-  );
-  emit('update:projects', updated);
-}
-
-function addDescription(projIndex: number) {
-  const updated = props.projects.map((proj, i) =>
-    i === projIndex ? { ...proj, descriptions: [...proj.descriptions, ''] } : proj
-  );
-  emit('update:projects', updated);
-}
-
-function removeDescription(projIndex: number, descIndex: number) {
-  const updated = props.projects.map((proj, i) =>
-    i === projIndex
-      ? { ...proj, descriptions: proj.descriptions.filter((_, j) => j !== descIndex) }
-      : proj
-  );
-  emit('update:projects', updated);
-}
-
-function updateDescription(projIndex: number, descIndex: number, value: string) {
-  const updated = props.projects.map((proj, i) =>
-    i === projIndex
-      ? { ...proj, descriptions: proj.descriptions.map((d, j) => (j === descIndex ? value : d)) }
-      : proj
-  );
-  emit('update:projects', updated);
-}
-</script>
-
 <template>
   <div class="editor">
     <h3 class="editor__title">项目经验</h3>
@@ -186,6 +113,79 @@ function updateDescription(projIndex: number, descIndex: number, value: string) 
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * ProjectsEditor - projects 区块属性编辑器
+ *
+ * 编辑项目经验列表，含 variant 选择
+ */
+import type { Project } from '@/types/resume';
+
+const props = defineProps<{
+  blockTitle: string;
+  variant: string;
+  projects: Project[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:blockTitle', value: string): void;
+  (e: 'update:variant', value: string): void;
+  (e: 'update:projects', value: Project[]): void;
+}>();
+
+function addItem() {
+  emit('update:projects', [
+    ...props.projects,
+    {
+      name: '',
+      role: '',
+      startDate: '',
+      endDate: '',
+      descriptions: [],
+    },
+  ]);
+}
+
+function removeItem(index: number) {
+  emit(
+    'update:projects',
+    props.projects.filter((_, i) => i !== index)
+  );
+}
+
+function updateField(index: number, field: string, value: string) {
+  const updated = props.projects.map((proj, i) =>
+    i === index ? { ...proj, [field]: value } : proj
+  );
+  emit('update:projects', updated);
+}
+
+function addDescription(projIndex: number) {
+  const updated = props.projects.map((proj, i) =>
+    i === projIndex ? { ...proj, descriptions: [...proj.descriptions, ''] } : proj
+  );
+  emit('update:projects', updated);
+}
+
+function removeDescription(projIndex: number, descIndex: number) {
+  const updated = props.projects.map((proj, i) =>
+    i === projIndex
+      ? { ...proj, descriptions: proj.descriptions.filter((_, j) => j !== descIndex) }
+      : proj
+  );
+  emit('update:projects', updated);
+}
+
+function updateDescription(projIndex: number, descIndex: number, value: string) {
+  const updated = props.projects.map((proj, i) =>
+    i === projIndex
+      ? { ...proj, descriptions: proj.descriptions.map((d, j) => (j === descIndex ? value : d)) }
+      : proj
+  );
+  emit('update:projects', updated);
+}
+</script>
 
 <style lang="scss" scoped>
 @use './editor-common';

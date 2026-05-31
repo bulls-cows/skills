@@ -1,43 +1,3 @@
-<script setup lang="ts">
-/**
- * PublicationsEditor - publications 区块属性编辑器
- *
- * 编辑出版物列表
- */
-import type { Publication } from '@/types/resume';
-
-const props = defineProps<{
-  blockTitle: string;
-  publications: Publication[];
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:blockTitle', value: string): void;
-  (e: 'update:publications', value: Publication[]): void;
-}>();
-
-function addItem() {
-  emit('update:publications', [
-    ...props.publications,
-    { title: '', journal: '', year: '', authors: '' },
-  ]);
-}
-
-function removeItem(index: number) {
-  emit(
-    'update:publications',
-    props.publications.filter((_, i) => i !== index)
-  );
-}
-
-function updateField(index: number, field: string, value: string) {
-  const updated = props.publications.map((pub, i) =>
-    i === index ? { ...pub, [field]: value } : pub
-  );
-  emit('update:publications', updated);
-}
-</script>
-
 <template>
   <div class="editor">
     <h3 class="editor__title">出版发表</h3>
@@ -88,6 +48,46 @@ function updateField(index: number, field: string, value: string) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * PublicationsEditor - publications 区块属性编辑器
+ *
+ * 编辑出版物列表
+ */
+import type { Publication } from '@/types/resume';
+
+const props = defineProps<{
+  blockTitle: string;
+  publications: Publication[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:blockTitle', value: string): void;
+  (e: 'update:publications', value: Publication[]): void;
+}>();
+
+function addItem() {
+  emit('update:publications', [
+    ...props.publications,
+    { title: '', journal: '', year: '', authors: '' },
+  ]);
+}
+
+function removeItem(index: number) {
+  emit(
+    'update:publications',
+    props.publications.filter((_, i) => i !== index)
+  );
+}
+
+function updateField(index: number, field: string, value: string) {
+  const updated = props.publications.map((pub, i) =>
+    i === index ? { ...pub, [field]: value } : pub
+  );
+  emit('update:publications', updated);
+}
+</script>
 
 <style lang="scss" scoped>
 @use './editor-common';

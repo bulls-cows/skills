@@ -1,44 +1,3 @@
-<script setup lang="ts">
-/**
- * HeaderEditor - header 区块属性编辑器
- *
- * 编辑简历头部信息：姓名、职位、城市、手机、邮箱、社交链接
- */
-import type { Link } from '@/types/resume';
-
-const props = defineProps<{
-  name: string;
-  title: string;
-  city: string;
-  phone: string;
-  email: string;
-  links: Link[];
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:name', value: string): void;
-  (e: 'update:title', value: string): void;
-  (e: 'update:city', value: string): void;
-  (e: 'update:phone', value: string): void;
-  (e: 'update:email', value: string): void;
-  (e: 'update:links', value: Link[]): void;
-}>();
-
-function addLink() {
-  emit('update:links', [...props.links, { label: '', url: '' }]);
-}
-
-function removeLink(index: number) {
-  const updated = props.links.filter((_, i) => i !== index);
-  emit('update:links', updated);
-}
-
-function updateLink(index: number, field: 'label' | 'url', value: string) {
-  const updated = props.links.map((link, i) => (i === index ? { ...link, [field]: value } : link));
-  emit('update:links', updated);
-}
-</script>
-
 <template>
   <div class="editor">
     <h3 class="editor__title">头部信息</h3>
@@ -108,6 +67,47 @@ function updateLink(index: number, field: 'label' | 'url', value: string) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * HeaderEditor - header 区块属性编辑器
+ *
+ * 编辑简历头部信息：姓名、职位、城市、手机、邮箱、社交链接
+ */
+import type { Link } from '@/types/resume';
+
+const props = defineProps<{
+  name: string;
+  title: string;
+  city: string;
+  phone: string;
+  email: string;
+  links: Link[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:name', value: string): void;
+  (e: 'update:title', value: string): void;
+  (e: 'update:city', value: string): void;
+  (e: 'update:phone', value: string): void;
+  (e: 'update:email', value: string): void;
+  (e: 'update:links', value: Link[]): void;
+}>();
+
+function addLink() {
+  emit('update:links', [...props.links, { label: '', url: '' }]);
+}
+
+function removeLink(index: number) {
+  const updated = props.links.filter((_, i) => i !== index);
+  emit('update:links', updated);
+}
+
+function updateLink(index: number, field: 'label' | 'url', value: string) {
+  const updated = props.links.map((link, i) => (i === index ? { ...link, [field]: value } : link));
+  emit('update:links', updated);
+}
+</script>
 
 <style lang="scss" scoped>
 @use './editor-common';

@@ -1,17 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeEducation - 教育经历组件
- */
-import type { Education } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 教育经历列表 */
-  education?: Education[];
-}>();
-</script>
-
 <template>
   <!-- 教育经历区块 -->
   <section v-if="education?.length" class="resume-section">
@@ -29,6 +15,20 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeEducation - 教育经历组件
+ */
+import type { Education } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 教育经历列表 */
+  education?: Education[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

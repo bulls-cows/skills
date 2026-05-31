@@ -1,20 +1,3 @@
-<script setup lang="ts">
-/**
- * SummaryEditor - summary 区块属性编辑器
- *
- * 编辑个人简介标题和 HTML 内容
- */
-defineProps<{
-  blockTitle: string;
-  summary: string;
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:blockTitle', value: string): void;
-  (e: 'update:summary', value: string): void;
-}>();
-</script>
-
 <template>
   <div class="editor">
     <h3 class="editor__title">个人简介</h3>
@@ -37,6 +20,23 @@ const emit = defineEmits<{
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * SummaryEditor - summary 区块属性编辑器
+ *
+ * 编辑个人简介标题和 HTML 内容
+ */
+defineProps<{
+  blockTitle: string;
+  summary: string;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:blockTitle', value: string): void;
+  (e: 'update:summary', value: string): void;
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './editor-common';

@@ -1,3 +1,39 @@
+<template>
+  <div class="page-editor">
+    <!-- 顶部：页面标签 -->
+    <PageTabs
+      :pages="data.pages"
+      :current-page-id="currentPageId"
+      @select="
+        currentPageId = $event;
+        selectedBlockId = null;
+      "
+      @add="addPage"
+      @remove="removePage"
+      @rename="renamePage"
+    />
+
+    <!-- 中部：区块列表 -->
+    <BlockList
+      v-if="currentPage"
+      :blocks="currentPage.blocks"
+      :selected-block-id="selectedBlockId"
+      @select="selectBlock"
+      @move-up="moveBlockUp"
+      @move-down="moveBlockDown"
+      @remove="removeBlock"
+      @add="addBlock"
+    />
+
+    <!-- 底部：属性面板 -->
+    <BlockPropertyPanel
+      :block="selectedBlock"
+      :data="data"
+      @update:data="emit('update:data', $event)"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 /**
  * PageEditor - 可视化页面/区块编辑器
@@ -124,42 +160,6 @@ function addBlock(type: BlockType) {
   selectedBlockId.value = newBlock.id;
 }
 </script>
-
-<template>
-  <div class="page-editor">
-    <!-- 顶部：页面标签 -->
-    <PageTabs
-      :pages="data.pages"
-      :current-page-id="currentPageId"
-      @select="
-        currentPageId = $event;
-        selectedBlockId = null;
-      "
-      @add="addPage"
-      @remove="removePage"
-      @rename="renamePage"
-    />
-
-    <!-- 中部：区块列表 -->
-    <BlockList
-      v-if="currentPage"
-      :blocks="currentPage.blocks"
-      :selected-block-id="selectedBlockId"
-      @select="selectBlock"
-      @move-up="moveBlockUp"
-      @move-down="moveBlockDown"
-      @remove="removeBlock"
-      @add="addBlock"
-    />
-
-    <!-- 底部：属性面板 -->
-    <BlockPropertyPanel
-      :block="selectedBlock"
-      :data="data"
-      @update:data="emit('update:data', $event)"
-    />
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .page-editor {

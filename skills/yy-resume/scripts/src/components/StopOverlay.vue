@@ -1,3 +1,21 @@
+<template>
+  <!-- 淡入淡出过渡动画 -->
+  <Transition name="fade">
+    <!-- 全屏遮罩层 -->
+    <div v-if="visible" class="stop-overlay">
+      <!-- 停止提示卡片 -->
+      <div class="stop-overlay__card">
+        <!-- 成功图标 -->
+        <div class="stop-overlay__icon">✓</div>
+        <!-- 停止标题 -->
+        <div class="stop-overlay__title">服务已停止</div>
+        <!-- 操作提示 -->
+        <div class="stop-overlay__hint">您可安全关闭此页面</div>
+      </div>
+    </div>
+  </Transition>
+</template>
+
 <script setup lang="ts">
 /**
  * StopOverlay - 服务停止遮罩层
@@ -21,24 +39,6 @@ defineProps<{
   visible: boolean;
 }>();
 </script>
-
-<template>
-  <!-- 淡入淡出过渡动画 -->
-  <Transition name="fade">
-    <!-- 全屏遮罩层 -->
-    <div v-if="visible" class="stop-overlay">
-      <!-- 停止提示卡片 -->
-      <div class="stop-overlay__card">
-        <!-- 成功图标 -->
-        <div class="stop-overlay__icon">✓</div>
-        <!-- 停止标题 -->
-        <div class="stop-overlay__title">服务已停止</div>
-        <!-- 操作提示 -->
-        <div class="stop-overlay__hint">您可安全关闭此页面</div>
-      </div>
-    </div>
-  </Transition>
-</template>
 
 <style lang="scss" scoped>
 /* 全屏遮罩层 */

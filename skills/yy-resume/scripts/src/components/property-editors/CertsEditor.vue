@@ -1,38 +1,3 @@
-<script setup lang="ts">
-/**
- * CertsEditor - certs 区块属性编辑器
- *
- * 编辑证书列表
- */
-import type { Cert } from '@/types/resume';
-
-const props = defineProps<{
-  blockTitle: string;
-  certs: Cert[];
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:blockTitle', value: string): void;
-  (e: 'update:certs', value: Cert[]): void;
-}>();
-
-function addItem() {
-  emit('update:certs', [...props.certs, { name: '', issuer: '', year: '' }]);
-}
-
-function removeItem(index: number) {
-  emit(
-    'update:certs',
-    props.certs.filter((_, i) => i !== index)
-  );
-}
-
-function updateField(index: number, field: string, value: string) {
-  const updated = props.certs.map((cert, i) => (i === index ? { ...cert, [field]: value } : cert));
-  emit('update:certs', updated);
-}
-</script>
-
 <template>
   <div class="editor">
     <h3 class="editor__title">证书资质</h3>
@@ -75,6 +40,41 @@ function updateField(index: number, field: string, value: string) {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * CertsEditor - certs 区块属性编辑器
+ *
+ * 编辑证书列表
+ */
+import type { Cert } from '@/types/resume';
+
+const props = defineProps<{
+  blockTitle: string;
+  certs: Cert[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:blockTitle', value: string): void;
+  (e: 'update:certs', value: Cert[]): void;
+}>();
+
+function addItem() {
+  emit('update:certs', [...props.certs, { name: '', issuer: '', year: '' }]);
+}
+
+function removeItem(index: number) {
+  emit(
+    'update:certs',
+    props.certs.filter((_, i) => i !== index)
+  );
+}
+
+function updateField(index: number, field: string, value: string) {
+  const updated = props.certs.map((cert, i) => (i === index ? { ...cert, [field]: value } : cert));
+  emit('update:certs', updated);
+}
+</script>
 
 <style lang="scss" scoped>
 @use './editor-common';

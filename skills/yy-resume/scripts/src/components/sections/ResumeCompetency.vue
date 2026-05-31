@@ -1,15 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeCompetency - 核心竞争力组件（紧凑标签风格）
- */
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 核心竞争力列表 */
-  competencies?: string[];
-}>();
-</script>
-
 <template>
   <!-- 核心竞争力区块 -->
   <section v-if="competencies?.length" class="resume-section">
@@ -21,6 +9,18 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeCompetency - 核心竞争力组件（紧凑标签风格）
+ */
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 核心竞争力列表 */
+  competencies?: string[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

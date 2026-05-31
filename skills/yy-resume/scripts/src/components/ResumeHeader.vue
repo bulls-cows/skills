@@ -1,16 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeHeader - 简历头部区块
- *
- * 展示姓名、联系信息、社交链接
- */
-import type { ResumeData } from '@/types/resume';
-
-defineProps<{
-  data: ResumeData;
-}>();
-</script>
-
 <template>
   <div>
     <!-- 简历标题 -->
@@ -40,6 +27,19 @@ defineProps<{
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeHeader - 简历头部区块
+ *
+ * 展示姓名、联系信息、社交链接
+ */
+import type { ResumeData } from '@/types/resume';
+
+defineProps<{
+  data: ResumeData;
+}>();
+</script>
 
 <style lang="scss" scoped>
 .resume-preview__title {

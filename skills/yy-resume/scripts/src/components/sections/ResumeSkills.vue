@@ -1,17 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeSkills - 技能列表组件（紧凑标签风格）
- */
-import type { SkillCategory } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 技能分类列表 */
-  skills?: SkillCategory[];
-}>();
-</script>
-
 <template>
   <!-- 技能列表区块 -->
   <section v-if="skills?.length" class="resume-section">
@@ -26,6 +12,20 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeSkills - 技能列表组件（紧凑标签风格）
+ */
+import type { SkillCategory } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 技能分类列表 */
+  skills?: SkillCategory[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

@@ -1,21 +1,3 @@
-<script setup lang="ts">
-/**
- * Toolbar - 简历编辑器工具栏
- *
- * 【职责】
- * 提供文件下载（JSON/HTML）、打印、停止服务等操作入口
- *
- * 【数据流向】
- * - 输出: downloadJson、downloadHtml、print、stopServer
- */
-const emit = defineEmits<{
-  (e: 'downloadJson'): void;
-  (e: 'downloadHtml'): void;
-  (e: 'print'): void;
-  (e: 'stopServer'): void;
-}>();
-</script>
-
 <template>
   <!-- 工具栏根容器 -->
   <div class="toolbar">
@@ -38,6 +20,24 @@ const emit = defineEmits<{
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * Toolbar - 简历编辑器工具栏
+ *
+ * 【职责】
+ * 提供文件下载（JSON/HTML）、打印、停止服务等操作入口
+ *
+ * 【数据流向】
+ * - 输出: downloadJson、downloadHtml、print、stopServer
+ */
+const emit = defineEmits<{
+  (e: 'downloadJson'): void;
+  (e: 'downloadHtml'): void;
+  (e: 'print'): void;
+  (e: 'stopServer'): void;
+}>();
+</script>
 
 <style lang="scss" scoped>
 /* 工具栏根容器 */

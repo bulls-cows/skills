@@ -1,44 +1,3 @@
-<script setup lang="ts">
-/**
- * BlockPropertyPanel - 区块属性面板
- *
- * 根据选中的区块类型，动态分发到对应的属性编辑器
- * 编辑 resumeData 中对应字段的数据
- */
-import type { BlockConfig, ResumeData } from '@/types/resume';
-import HeaderEditor from './property-editors/HeaderEditor.vue';
-import SummaryEditor from './property-editors/SummaryEditor.vue';
-import SkillsEditor from './property-editors/SkillsEditor.vue';
-import CompetencyEditor from './property-editors/CompetencyEditor.vue';
-import RegulatoryEditor from './property-editors/RegulatoryEditor.vue';
-import ExperienceEditor from './property-editors/ExperienceEditor.vue';
-import ProjectsEditor from './property-editors/ProjectsEditor.vue';
-import EducationEditor from './property-editors/EducationEditor.vue';
-import CertsEditor from './property-editors/CertsEditor.vue';
-import PublicationsEditor from './property-editors/PublicationsEditor.vue';
-
-const props = defineProps<{
-  block: BlockConfig | null;
-  data: ResumeData;
-}>();
-
-const emit = defineEmits<{
-  (e: 'update:data', value: ResumeData): void;
-}>();
-
-function updateField(field: string, value: unknown) {
-  emit('update:data', { ...props.data, [field]: value });
-}
-
-function updateBlock(block: BlockConfig) {
-  const pages = props.data.pages.map(page => ({
-    ...page,
-    blocks: page.blocks.map(b => (b.id === block.id ? block : b)),
-  }));
-  emit('update:data', { ...props.data, pages });
-}
-</script>
-
 <template>
   <div class="property-panel">
     <div v-if="!block" class="property-panel__empty">请选择一个区块进行编辑</div>
@@ -147,6 +106,47 @@ function updateBlock(block: BlockConfig) {
     </template>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * BlockPropertyPanel - 区块属性面板
+ *
+ * 根据选中的区块类型，动态分发到对应的属性编辑器
+ * 编辑 resumeData 中对应字段的数据
+ */
+import type { BlockConfig, ResumeData } from '@/types/resume';
+import HeaderEditor from './property-editors/HeaderEditor.vue';
+import SummaryEditor from './property-editors/SummaryEditor.vue';
+import SkillsEditor from './property-editors/SkillsEditor.vue';
+import CompetencyEditor from './property-editors/CompetencyEditor.vue';
+import RegulatoryEditor from './property-editors/RegulatoryEditor.vue';
+import ExperienceEditor from './property-editors/ExperienceEditor.vue';
+import ProjectsEditor from './property-editors/ProjectsEditor.vue';
+import EducationEditor from './property-editors/EducationEditor.vue';
+import CertsEditor from './property-editors/CertsEditor.vue';
+import PublicationsEditor from './property-editors/PublicationsEditor.vue';
+
+const props = defineProps<{
+  block: BlockConfig | null;
+  data: ResumeData;
+}>();
+
+const emit = defineEmits<{
+  (e: 'update:data', value: ResumeData): void;
+}>();
+
+function updateField(field: string, value: unknown) {
+  emit('update:data', { ...props.data, [field]: value });
+}
+
+function updateBlock(block: BlockConfig) {
+  const pages = props.data.pages.map(page => ({
+    ...page,
+    blocks: page.blocks.map(b => (b.id === block.id ? block : b)),
+  }));
+  emit('update:data', { ...props.data, pages });
+}
+</script>
 
 <style lang="scss" scoped>
 .property-panel {

@@ -1,17 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeCerts - 证书/资质组件
- */
-import type { Cert } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 证书列表 */
-  certs?: Cert[];
-}>();
-</script>
-
 <template>
   <!-- 证书资质区块 -->
   <section v-if="certs?.length" class="resume-section">
@@ -26,6 +12,20 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeCerts - 证书/资质组件
+ */
+import type { Cert } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 证书列表 */
+  certs?: Cert[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

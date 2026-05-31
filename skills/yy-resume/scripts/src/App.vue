@@ -1,3 +1,25 @@
+<template>
+  <!-- 根容器 -->
+  <div class="app">
+    <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
+    <Toolbar
+      @download-json="handleDownloadJson"
+      @download-html="handleDownloadHtml"
+      @print="printResume"
+      @stop-server="handleStopServer"
+    />
+    <!-- 主内容区：编辑器 + 预览 -->
+    <div class="app__main-content">
+      <!-- 可视化页面编辑器 -->
+      <PageEditor :data="parsedData" @update:data="handleDataUpdate" />
+      <!-- 简历实时预览 -->
+      <ResumePreview :data="parsedData" />
+    </div>
+    <!-- 服务停止遮罩 -->
+    <StopOverlay :visible="showStopOverlay" />
+  </div>
+</template>
+
 <script setup lang="ts">
 /**
  * App.vue - 简历编辑器根组件
@@ -89,28 +111,6 @@ async function handleStopServer() {
   }
 }
 </script>
-
-<template>
-  <!-- 根容器 -->
-  <div class="app">
-    <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
-    <Toolbar
-      @download-json="handleDownloadJson"
-      @download-html="handleDownloadHtml"
-      @print="printResume"
-      @stop-server="handleStopServer"
-    />
-    <!-- 主内容区：编辑器 + 预览 -->
-    <div class="app__main-content">
-      <!-- 可视化页面编辑器 -->
-      <PageEditor :data="parsedData" @update:data="handleDataUpdate" />
-      <!-- 简历实时预览 -->
-      <ResumePreview :data="parsedData" />
-    </div>
-    <!-- 服务停止遮罩 -->
-    <StopOverlay :visible="showStopOverlay" />
-  </div>
-</template>
 
 <style lang="scss">
 /* ====== 全局重置 ====== */

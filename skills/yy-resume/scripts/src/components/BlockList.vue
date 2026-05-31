@@ -1,54 +1,3 @@
-<script setup lang="ts">
-/**
- * BlockList - 区块列表管理
- *
- * 显示当前页面中的所有区块，支持排序、删除、添加
- */
-import { ref } from 'vue';
-import type { BlockConfig, BlockType } from '@/types/resume';
-
-defineProps<{
-  blocks: BlockConfig[];
-  selectedBlockId: string | null;
-}>();
-
-const emit = defineEmits<{
-  (e: 'select', blockId: string): void;
-  (e: 'move-up', blockId: string): void;
-  (e: 'move-down', blockId: string): void;
-  (e: 'remove', blockId: string): void;
-  (e: 'add', type: BlockType): void;
-}>();
-
-const blockTypeLabels: Record<BlockType, string> = {
-  header: '头部信息',
-  summary: '个人简介',
-  skills: '技能',
-  competency: '核心能力',
-  regulatory: '法规体系',
-  experience: '工作经历',
-  projects: '项目经验',
-  education: '教育背景',
-  certs: '证书资质',
-  publications: '出版发表',
-};
-
-const availableTypes: { type: BlockType; label: string }[] = [
-  { type: 'header', label: '头部信息' },
-  { type: 'summary', label: '个人简介' },
-  { type: 'skills', label: '技能' },
-  { type: 'competency', label: '核心能力' },
-  { type: 'regulatory', label: '法规体系' },
-  { type: 'experience', label: '工作经历' },
-  { type: 'projects', label: '项目经验' },
-  { type: 'education', label: '教育背景' },
-  { type: 'certs', label: '证书资质' },
-  { type: 'publications', label: '出版发表' },
-];
-
-const showAddMenu = ref(false);
-</script>
-
 <template>
   <div class="block-list">
     <div class="block-list__header">
@@ -112,6 +61,57 @@ const showAddMenu = ref(false);
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/**
+ * BlockList - 区块列表管理
+ *
+ * 显示当前页面中的所有区块，支持排序、删除、添加
+ */
+import { ref } from 'vue';
+import type { BlockConfig, BlockType } from '@/types/resume';
+
+defineProps<{
+  blocks: BlockConfig[];
+  selectedBlockId: string | null;
+}>();
+
+const emit = defineEmits<{
+  (e: 'select', blockId: string): void;
+  (e: 'move-up', blockId: string): void;
+  (e: 'move-down', blockId: string): void;
+  (e: 'remove', blockId: string): void;
+  (e: 'add', type: BlockType): void;
+}>();
+
+const blockTypeLabels: Record<BlockType, string> = {
+  header: '头部信息',
+  summary: '个人简介',
+  skills: '技能',
+  competency: '核心能力',
+  regulatory: '法规体系',
+  experience: '工作经历',
+  projects: '项目经验',
+  education: '教育背景',
+  certs: '证书资质',
+  publications: '出版发表',
+};
+
+const availableTypes: { type: BlockType; label: string }[] = [
+  { type: 'header', label: '头部信息' },
+  { type: 'summary', label: '个人简介' },
+  { type: 'skills', label: '技能' },
+  { type: 'competency', label: '核心能力' },
+  { type: 'regulatory', label: '法规体系' },
+  { type: 'experience', label: '工作经历' },
+  { type: 'projects', label: '项目经验' },
+  { type: 'education', label: '教育背景' },
+  { type: 'certs', label: '证书资质' },
+  { type: 'publications', label: '出版发表' },
+];
+
+const showAddMenu = ref(false);
+</script>
 
 <style lang="scss" scoped>
 .block-list {

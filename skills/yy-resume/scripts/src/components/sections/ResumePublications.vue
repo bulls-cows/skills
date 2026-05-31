@@ -1,17 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumePublications - 发表物/出版物组件
- */
-import type { Publication } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 出版物列表 */
-  publications?: Publication[];
-}>();
-</script>
-
 <template>
   <!-- 出版物区块 -->
   <section v-if="publications?.length" class="resume-section">
@@ -28,6 +14,20 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumePublications - 发表物/出版物组件
+ */
+import type { Publication } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 出版物列表 */
+  publications?: Publication[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

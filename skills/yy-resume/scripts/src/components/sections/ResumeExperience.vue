@@ -1,19 +1,3 @@
-<script setup lang="ts">
-/**
- * ResumeExperience - 工作经历组件
- *
- * 职责: 按时间倒序列出工作经历，SectionBox + WorkExperience 风格
- */
-import type { Experience } from '@/types/resume';
-
-defineProps<{
-  /** 区块标题 */
-  title: string;
-  /** 工作经历列表 */
-  experience?: Experience[];
-}>();
-</script>
-
 <template>
   <!-- 工作经历区块 -->
   <section v-if="experience?.length" class="resume-section">
@@ -43,6 +27,22 @@ defineProps<{
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+/**
+ * ResumeExperience - 工作经历组件
+ *
+ * 职责: 按时间倒序列出工作经历，SectionBox + WorkExperience 风格
+ */
+import type { Experience } from '@/types/resume';
+
+defineProps<{
+  /** 区块标题 */
+  title: string;
+  /** 工作经历列表 */
+  experience?: Experience[];
+}>();
+</script>
 
 <style lang="scss" scoped>
 @use './section-common';

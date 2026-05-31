@@ -1,3 +1,43 @@
+<template>
+  <div class="editor">
+    <h3 class="editor__title">技能</h3>
+    <div class="editor__field">
+      <label class="editor__label">区块标题</label>
+      <input
+        class="editor__input"
+        :value="blockTitle"
+        @input="emit('update:blockTitle', ($event.target as HTMLInputElement).value)"
+      />
+    </div>
+    <div class="editor__field">
+      <label class="editor__label">技能分类</label>
+      <div v-for="(cat, ci) in skills" :key="ci" class="editor__array-item">
+        <div class="editor__array-item-header">
+          <span class="editor__array-item-index">分类 {{ ci + 1 }}</span>
+          <button class="editor__btn-remove" @click="removeCategory(ci)">×</button>
+        </div>
+        <input
+          class="editor__input"
+          :value="cat.category"
+          @input="updateCategory(ci, ($event.target as HTMLInputElement).value)"
+          placeholder="分类名称"
+        />
+        <div v-for="(item, ii) in cat.items" :key="ii" class="editor__list-item">
+          <input
+            class="editor__input editor__input--sm"
+            :value="item"
+            @input="updateItem(ci, ii, ($event.target as HTMLInputElement).value)"
+            placeholder="技能项"
+          />
+          <button class="editor__btn-remove" @click="removeItem(ci, ii)">×</button>
+        </div>
+        <button class="editor__btn-add" @click="addItem(ci)">+ 添加技能项</button>
+      </div>
+      <button class="editor__btn-add" @click="addCategory">+ 添加分类</button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 /**
  * SkillsEditor - skills 区块属性编辑器
@@ -55,46 +95,6 @@ function updateItem(catIndex: number, itemIndex: number, value: string) {
   emit('update:skills', updated);
 }
 </script>
-
-<template>
-  <div class="editor">
-    <h3 class="editor__title">技能</h3>
-    <div class="editor__field">
-      <label class="editor__label">区块标题</label>
-      <input
-        class="editor__input"
-        :value="blockTitle"
-        @input="emit('update:blockTitle', ($event.target as HTMLInputElement).value)"
-      />
-    </div>
-    <div class="editor__field">
-      <label class="editor__label">技能分类</label>
-      <div v-for="(cat, ci) in skills" :key="ci" class="editor__array-item">
-        <div class="editor__array-item-header">
-          <span class="editor__array-item-index">分类 {{ ci + 1 }}</span>
-          <button class="editor__btn-remove" @click="removeCategory(ci)">×</button>
-        </div>
-        <input
-          class="editor__input"
-          :value="cat.category"
-          @input="updateCategory(ci, ($event.target as HTMLInputElement).value)"
-          placeholder="分类名称"
-        />
-        <div v-for="(item, ii) in cat.items" :key="ii" class="editor__list-item">
-          <input
-            class="editor__input editor__input--sm"
-            :value="item"
-            @input="updateItem(ci, ii, ($event.target as HTMLInputElement).value)"
-            placeholder="技能项"
-          />
-          <button class="editor__btn-remove" @click="removeItem(ci, ii)">×</button>
-        </div>
-        <button class="editor__btn-add" @click="addItem(ci)">+ 添加技能项</button>
-      </div>
-      <button class="editor__btn-add" @click="addCategory">+ 添加分类</button>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 @use './editor-common';

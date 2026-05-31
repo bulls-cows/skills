@@ -1,3 +1,42 @@
+<template>
+  <div class="page-tabs">
+    <div class="page-tabs__list">
+      <div
+        v-for="page in pages"
+        :key="page.id"
+        class="page-tabs__tab"
+        :class="{ 'page-tabs__tab--active': page.id === currentPageId }"
+        @click="emit('select', page.id)"
+      >
+        <template v-if="editingPageId === page.id">
+          <input
+            ref="renameInput"
+            class="page-tabs__rename-input"
+            v-model="editName"
+            @blur="finishRename"
+            @keydown="handleRenameKeydown"
+            @click.stop
+          />
+        </template>
+        <template v-else>
+          <span class="page-tabs__tab-name" @dblclick="startRename(page.id, page.name)">{{
+            page.name
+          }}</span>
+        </template>
+        <button
+          v-if="pages.length > 1"
+          class="page-tabs__btn-remove"
+          @click.stop="emit('remove', page.id)"
+          title="删除页面"
+        >
+          ×
+        </button>
+      </div>
+      <button class="page-tabs__btn-add" @click="emit('add')" title="添加页面">+</button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 /**
  * PageTabs - 页面标签管理
@@ -40,45 +79,6 @@ function handleRenameKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') editingPageId.value = null;
 }
 </script>
-
-<template>
-  <div class="page-tabs">
-    <div class="page-tabs__list">
-      <div
-        v-for="page in pages"
-        :key="page.id"
-        class="page-tabs__tab"
-        :class="{ 'page-tabs__tab--active': page.id === currentPageId }"
-        @click="emit('select', page.id)"
-      >
-        <template v-if="editingPageId === page.id">
-          <input
-            ref="renameInput"
-            class="page-tabs__rename-input"
-            v-model="editName"
-            @blur="finishRename"
-            @keydown="handleRenameKeydown"
-            @click.stop
-          />
-        </template>
-        <template v-else>
-          <span class="page-tabs__tab-name" @dblclick="startRename(page.id, page.name)">{{
-            page.name
-          }}</span>
-        </template>
-        <button
-          v-if="pages.length > 1"
-          class="page-tabs__btn-remove"
-          @click.stop="emit('remove', page.id)"
-          title="删除页面"
-        >
-          ×
-        </button>
-      </div>
-      <button class="page-tabs__btn-add" @click="emit('add')" title="添加页面">+</button>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .page-tabs {
