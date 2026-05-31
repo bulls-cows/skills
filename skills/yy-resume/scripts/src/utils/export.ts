@@ -1,5 +1,4 @@
-import type { ResumeData, SectionConfig } from '@/types/resume';
-import { profiles } from '@/data/profiles';
+import type { ResumeData, BlockConfig } from '@/types/resume';
 
 /**
  * 创建 Blob 下载链接并触发下载
@@ -22,27 +21,27 @@ export function downloadJson(data: ResumeData): void {
 }
 
 /**
- * 根据章节配置渲染对应的 HTML 片段
+ * 根据区块配置渲染对应的 HTML 片段
  */
-function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
-  switch (section.id) {
+function renderBlockHtml(data: ResumeData, block: BlockConfig): string {
+  switch (block.type) {
     case 'header':
-      return ''; // 头部已在模板中直接渲染
+      return renderHeaderHtml(data);
     case 'summary':
       if (!data.summary) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div><div class="desc-block">${data.summary}</div></section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div><div class="desc-block">${data.summary}</div></section>`;
     case 'skills':
       if (!data.skills?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.skills.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.skills.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'competency':
       if (!data.competencies?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div><div class="tag-list">${data.competencies.map(i => `<span class="tag">${i}</span>`).join('')}</div></section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div><div class="tag-list">${data.competencies.map(i => `<span class="tag">${i}</span>`).join('')}</div></section>`;
     case 'regulatory':
       if (!data.regulatorySystems?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.regulatorySystems.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.regulatorySystems.map(c => `<div class="tag-group"><h3 class="tag-group__title">${c.category}</h3><div class="tag-list">${c.items.map(i => `<span class="tag">${i}</span>`).join('')}</div></div>`).join('')}</section>`;
     case 'experience':
       if (!data.experience?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.experience
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.experience
         .map(e => {
           const tagsHtml = e.tags?.length
             ? `<span class="exp-tags">${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}</span>`
@@ -55,45 +54,36 @@ function renderSectionHtml(data: ResumeData, section: SectionConfig): string {
         .join('')}</section>`;
     case 'projects':
       if (!data.projects?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.projects
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.projects
         .map(p => {
           const nameHtml = p.url
             ? `<a href="${p.url}" target="_blank" class="proj-name">${p.name}</a>`
             : `<span class="proj-name">${p.name}</span>`;
           let variantHtml = '';
-          if (section.variant === 'tech' && p.techStack)
+          if (block.variant === 'tech' && p.techStack)
             variantHtml = `<div class="proj-variant">${p.techStack}</div>`;
-          else if (section.variant === 'submission' && p.submissionType)
+          else if (block.variant === 'submission' && p.submissionType)
             variantHtml = `<div class="proj-variant">${p.submissionType}</div>`;
-          else if (section.variant === 'tools' && p.toolsMethods)
+          else if (block.variant === 'tools' && p.toolsMethods)
             variantHtml = `<div class="proj-variant">${p.toolsMethods}</div>`;
           return `<div class="proj-item"><div class="proj-header"><div class="proj-left"><span class="proj-duration">${p.startDate || ''} ~ ${p.endDate || ''}</span>${nameHtml}</div><div class="proj-right">${p.role || ''}</div></div>${variantHtml}<ul class="desc-list">${(p.descriptions || []).map(d => `<li>${d}</li>`).join('')}</ul></div>`;
         })
         .join('')}</section>`;
     case 'education':
       if (!data.education?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.education.map(e => `<div class="edu-item"><div class="edu-header"><div class="edu-left"><span class="edu-duration">${e.startDate || ''} ~ ${e.endDate || ''}</span><span class="edu-school">${e.school || ''}</span></div><div class="edu-right">${e.major || ''}</div></div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.education.map(e => `<div class="edu-item"><div class="edu-header"><div class="edu-left"><span class="edu-duration">${e.startDate || ''} ~ ${e.endDate || ''}</span><span class="edu-school">${e.school || ''}</span></div><div class="edu-right">${e.major || ''}</div></div></div>`).join('')}</section>`;
     case 'certs':
       if (!data.certs?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.certs.map(c => `<div class="cert-item"><span class="cert-name">${c.name || ''}</span><span class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</span></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.certs.map(c => `<div class="cert-item"><span class="cert-name">${c.name || ''}</span><span class="cert-detail">${c.issuer || ''}${c.year ? ` · ${c.year}` : ''}</span></div>`).join('')}</section>`;
     case 'publications':
       if (!data.publications?.length) return '';
-      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${section.title || ''}</div></div>${data.publications.map(p => `<div class="pub-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · ${p.journal}` : ''}${p.year ? ` · ${p.year}` : ''}</div></div>`).join('')}</section>`;
+      return `<section class="resume-section"><div class="section-header"><div class="section-header__left">${block.title || ''}</div></div>${data.publications.map(p => `<div class="pub-item"><div class="pub-title">${p.title || ''}</div><div class="pub-authors">${p.authors || ''}${p.journal ? ` · ${p.journal}` : ''}${p.year ? ` · ${p.year}` : ''}</div></div>`).join('')}</section>`;
     default:
       return '';
   }
 }
 
-/** 将简历数据导出为 HTML 文件并下载 */
-export function downloadHtml(data: ResumeData): void {
-  const profile = profiles[data.template] || profiles.general;
-
-  let sectionsHtml = '';
-  profile.sections.forEach(section => {
-    sectionsHtml += renderSectionHtml(data, section);
-  });
-
-  // 头部信息
+function renderHeaderHtml(data: ResumeData): string {
   const headerHtml = data.name ? `<div class="resume-title">${data.name}的简历</div>` : '';
   const metaHtml = `<div class="resume-meta">${
     data.city
@@ -112,10 +102,22 @@ export function downloadHtml(data: ResumeData): void {
       ? `<div class="meta-item"><span class="meta-label">职位：</span>${data.title}</div>`
       : ''
   }</div>`;
-  const linksHtml =
-    profile.headerLinks && data.links?.length
-      ? `<div class="resume-links">${data.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`
-      : '';
+  const linksHtml = data.links?.length
+    ? `<div class="resume-links">${data.links.map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}</div>`
+    : '';
+  return `${headerHtml}${metaHtml}${linksHtml}`;
+}
+
+/** 将简历数据导出为 HTML 文件并下载 */
+export function downloadHtml(data: ResumeData): void {
+  let pagesHtml = '';
+  data.pages.forEach(page => {
+    let pageContent = '';
+    page.blocks.forEach(block => {
+      pageContent += renderBlockHtml(data, block);
+    });
+    pagesHtml += `<div class="page">${pageContent}</div>`;
+  });
 
   const html = `<!doctype html>
 <html lang="zh-CN">
@@ -127,6 +129,7 @@ export function downloadHtml(data: ResumeData): void {
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: "Microsoft Yahei", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif, Tahoma, serif; background: #464646; padding: 50px 20px; color: #000; font-weight: 400; }
     .page { width: 190mm; min-height: 277mm; padding: 10mm; box-sizing: content-box; background: #fff; margin: 0 auto; border: 0.75pt solid #666; font-size: 12pt; line-height: 1.5; }
+    .page + .page { margin-top: 20px; }
 
     /* 标题 */
     .resume-title { text-align: center; font-size: 20pt; line-height: 1.1; padding-bottom: 5pt; }
@@ -198,14 +201,15 @@ export function downloadHtml(data: ResumeData): void {
 
     @media print {
       body { background: #fff; padding: 0; }
-      .page { border: none; box-shadow: none; margin: 0; width: 100%; height: auto; min-height: auto; padding: 0; }
+      .page { border: none; box-shadow: none; margin: 0; width: 100%; height: auto; min-height: auto; padding: 0; page-break-after: always; }
+      .page:last-child { page-break-after: auto; }
       @page { size: A4; margin: 10mm; }
       .resume-section { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <div class="page">${headerHtml}${metaHtml}${linksHtml}${sectionsHtml}</div>
+  ${pagesHtml}
 </body>
 </html>`;
 

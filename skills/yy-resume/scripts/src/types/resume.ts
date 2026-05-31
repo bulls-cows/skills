@@ -88,10 +88,43 @@ export interface Publication {
   authors: string;
 }
 
+/** 区块类型 — 对应渲染组件 */
+export type BlockType =
+  | 'header'
+  | 'summary'
+  | 'skills'
+  | 'competency'
+  | 'regulatory'
+  | 'experience'
+  | 'projects'
+  | 'education'
+  | 'certs'
+  | 'publications';
+
+/** 区块配置 */
+export interface BlockConfig {
+  /** 唯一标识 */
+  id: string;
+  /** 组件类型，决定渲染哪个组件和绑定哪个数据字段 */
+  type: BlockType;
+  /** 区块标题（可选，覆盖组件默认标题） */
+  title?: string;
+  /** 区块变体（可选），仅 projects 使用：tech/submission/tools */
+  variant?: 'tech' | 'submission' | 'tools';
+}
+
+/** 页面配置 */
+export interface PageConfig {
+  /** 唯一标识 */
+  id: string;
+  /** 页面标签名，如"第 1 页" */
+  name: string;
+  /** 该页包含的区块列表 */
+  blocks: BlockConfig[];
+}
+
 /** 简历完整数据结构 */
 export interface ResumeData {
-  /** 模板名称，对应 profiles 中的 key */
-  template: string;
   /** 姓名 */
   name: string;
   /** 职位头衔 */
@@ -108,9 +141,9 @@ export interface ResumeData {
   summary?: string;
   /** 技能分类列表（可选） */
   skills?: SkillCategory[];
-  /** 核心能力列表（可选，pharma-regulatory 模板用） */
+  /** 核心能力列表（可选） */
   competencies?: string[];
-  /** 法规体系列表（可选，pharma-regulatory 模板用） */
+  /** 法规体系列表（可选） */
   regulatorySystems?: SkillCategory[];
   /** 工作经历列表（可选） */
   experience?: Experience[];
@@ -122,24 +155,6 @@ export interface ResumeData {
   certs?: Cert[];
   /** 发表论文列表（可选） */
   publications?: Publication[];
-}
-
-/** 简历章节配置 */
-export interface SectionConfig {
-  /** 章节 ID，对应渲染逻辑中的 switch case */
-  id: string;
-  /** 章节标题（可选） */
-  title?: string;
-  /** 字段路径列表，描述数据提取方式 */
-  fields: string[];
-  /** 章节变体（可选），影响渲染内容：tech/submission/tools */
-  variant?: 'tech' | 'submission' | 'tools';
-}
-
-/** 简历模板配置 */
-export interface Profile {
-  /** 是否在页眉显示社交链接 */
-  headerLinks: boolean;
-  /** 章节配置列表 */
-  sections: SectionConfig[];
+  /** 页面配置列表 — 定义简历的多页布局 */
+  pages: PageConfig[];
 }

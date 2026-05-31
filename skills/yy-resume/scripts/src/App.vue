@@ -8,18 +8,17 @@
  *
  * ## 数据流向
  * - 单向数据流：rawData (JSON 字符串) → JSON.parse → parsedData (ResumeData)
- * - 用户编辑 → JsonEditor 组件 → handleJsonUpdate → rawData 更新 → 响应式驱动预览刷新
- * - 模板切换 → Toolbar 组件 → handleTemplateChange → rawData 内嵌 template 字段更新
+ * - 用户编辑 → PageEditor → handleDataUpdate → rawData 更新 → 响应式驱动预览刷新
  *
  * ## 交互关系
- * - Toolbar: 模板选择、JSON/HTML 下载、打印、停止服务
- * - JsonEditor: JSON 源码编辑与错误反馈
- * - ResumePreview: 简历实时预览，仅在无解析错误时显示
+ * - Toolbar: JSON/HTML 下载、打印、停止服务
+ * - PageEditor: 可视化页面/区块编辑器
+ * - ResumePreview: 简历实时预览
  * - StopOverlay: 服务停止后的全屏遮罩提示
  *
  * ## 核心业务流程
  * 1. 初始化：加载 sampleData 作为默认简历数据
- * 2. 编辑：用户在 JsonEditor 中编辑 JSON → 实时解析 → 更新预览
+ * 2. 编辑：用户在 PageEditor 中编辑 → 实时更新 → 刷新预览
  * 3. 导出：下载 JSON / 下载 HTML / 打印
  * 4. 停止：点击停止服务 → 显示遮罩 → 请求 /__stop-server 接口
  */
@@ -36,7 +35,7 @@ import { downloadJson, downloadHtml, printResume } from '@/utils/export';
 
 // --- 子组件 ---
 import Toolbar from './components/Toolbar.vue';
-import JsonEditor from './components/JsonEditor.vue';
+import PageEditor from './components/PageEditor.vue';
 import ResumePreview from './components/ResumePreview.vue';
 import StopOverlay from './components/StopOverlay.vue';
 
@@ -44,9 +43,6 @@ import StopOverlay from './components/StopOverlay.vue';
 
 // JSON 原始字符串，作为数据的唯一来源
 const rawData = ref(JSON.stringify(sampleData, null, 2));
-
-// JSON 解析错误信息，为空表示无错误
-const errorMsg = ref('');
 
 // 服务停止遮罩层显示控制
 const showStopOverlay = ref(false);
@@ -62,37 +58,10 @@ const parsedData = computed<ResumeData>(() => {
   }
 });
 
-// 当前选中的模板名称，默认使用 general
-const currentTemplate = computed(() => {
-  try {
-    return JSON.parse(rawData.value).template || 'general';
-  } catch {
-    return 'general';
-  }
-});
-
 // --- 事件处理方法 ---
 
-function handleJsonUpdate(value: string) {
-  rawData.value = value;
-}
-
-function handleError(msg: string) {
-  errorMsg.value = msg;
-}
-
-function handleClearError() {
-  errorMsg.value = '';
-}
-
-function handleTemplateChange(tpl: string) {
-  try {
-    const data = JSON.parse(rawData.value);
-    data.template = tpl;
-    rawData.value = JSON.stringify(data, null, 2);
-  } catch {
-    // ignore if JSON is invalid
-  }
+function handleDataUpdate(data: ResumeData) {
+  rawData.value = JSON.stringify(data, null, 2);
 }
 
 function handleDownloadJson() {
@@ -124,10 +93,8 @@ async function handleStopServer() {
 <template>
   <!-- 根容器 -->
   <div class="app">
-    <!-- 工具栏：模板选择、导出（JSON/HTML）、打印、停止服务 -->
+    <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
     <Toolbar
-      :template="currentTemplate"
-      @update:template="handleTemplateChange"
       @download-json="handleDownloadJson"
       @download-html="handleDownloadHtml"
       @print="printResume"
@@ -135,17 +102,10 @@ async function handleStopServer() {
     />
     <!-- 主内容区：编辑器 + 预览 -->
     <div class="app__main-content">
-      <!-- JSON 源码编辑器 -->
-      <JsonEditor
-        :model-value="rawData"
-        @update:model-value="handleJsonUpdate"
-        @error="handleError"
-        @clear-error="handleClearError"
-      />
-      <!-- JSON 解析错误提示 -->
-      <div v-if="errorMsg" class="app__error-message">{{ errorMsg }}</div>
-      <!-- 简历实时预览（无错误时显示） -->
-      <ResumePreview v-if="!errorMsg" :data="parsedData" />
+      <!-- 可视化页面编辑器 -->
+      <PageEditor :data="parsedData" @update:data="handleDataUpdate" />
+      <!-- 简历实时预览 -->
+      <ResumePreview :data="parsedData" />
     </div>
     <!-- 服务停止遮罩 -->
     <StopOverlay :visible="showStopOverlay" />
@@ -214,23 +174,10 @@ body,
   overflow: hidden;
 }
 
-/* ====== JSON 解析错误提示 ====== */
-.app__error-message {
-  padding: 12px 16px;
-  background: #fee2e2;
-  color: #dc2626;
-  font-size: 13px;
-  border-top: 1px solid #fca5a5;
-}
-
 /* ====== 打印样式（scoped） ====== */
 @media print {
   .app__main-content {
     display: block;
-  }
-
-  :deep(.app__error-message) {
-    display: none !important;
   }
 }
 </style>

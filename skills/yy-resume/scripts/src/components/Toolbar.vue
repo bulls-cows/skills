@@ -3,61 +3,25 @@
  * Toolbar - 简历编辑器工具栏
  *
  * 【职责】
- * 提供模板选择、文件下载（JSON/HTML）、打印、停止服务等操作入口
+ * 提供文件下载（JSON/HTML）、打印、停止服务等操作入口
  *
  * 【数据流向】
- * - 接收: template (当前选中的模板名称)
- * - 输出: update:template、downloadJson、downloadHtml、print、stopServer
- *
- * 【交互关系】
- * - 模板选择通过 emit('update:template') 通知父组件
- * - 下载/打印/停止服务通过对应 emit 触发父组件操作
- *
- * 【核心流程】
- * 用户选择模板 → emit update:template → 父组件更新简历模板
- * 用户点击下载/打印/停止 → emit 对应事件 → 父组件执行操作
+ * - 输出: downloadJson、downloadHtml、print、stopServer
  */
-
-// Props: 当前选中的模板名称
-defineProps<{
-  template: string;
-}>();
-
-// Emits: 模板切换、下载、打印、停止服务事件
 const emit = defineEmits<{
-  (e: 'update:template', value: string): void;
   (e: 'downloadJson'): void;
   (e: 'downloadHtml'): void;
   (e: 'print'): void;
   (e: 'stopServer'): void;
 }>();
-
-// 模板选项列表
-const templateOptions = [
-  { value: 'general', label: '通用模板' },
-  { value: 'frontend', label: '前端开发' },
-  { value: 'backend', label: '后端开发' },
-  { value: 'fullstack', label: '全栈开发' },
-  { value: 'pharma-regulatory', label: '国际药品注册' },
-  { value: 'bioinformatics', label: '生物信息学' },
-];
 </script>
 
 <template>
   <!-- 工具栏根容器 -->
   <div class="toolbar">
-    <!-- 工具栏左侧：标题 + 模板选择 -->
+    <!-- 工具栏左侧：标题 -->
     <div class="toolbar__left">
       <span class="toolbar__title">简历编辑器</span>
-      <select
-        class="toolbar__template-select"
-        :value="template"
-        @change="emit('update:template', ($event.target as HTMLSelectElement).value)"
-      >
-        <option v-for="opt in templateOptions" :key="opt.value" :value="opt.value">
-          {{ opt.label }}
-        </option>
-      </select>
     </div>
     <!-- 工具栏右侧：操作按钮组 -->
     <div class="toolbar__right">
@@ -105,16 +69,6 @@ const templateOptions = [
 .toolbar__right {
   display: flex;
   gap: 10px;
-}
-
-/* 模板选择器 */
-.toolbar__template-select {
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  background: #fff;
 }
 
 /* 工具栏按钮基础样式 */

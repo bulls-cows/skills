@@ -1,10 +1,9 @@
 /**
- * 简历示例数据 - 全栈开发模板
+ * 简历示例数据
  *
- * 作为编辑器的默认加载数据，同时作为 fullstack 模板的示例参考。
+ * 作为编辑器的默认加载数据。
  */
 export const sampleData = {
-  template: 'fullstack',
   name: '张三',
   title: '前端负责人 / 中级 Node.js 后端',
   city: '浦东周浦',
@@ -165,6 +164,21 @@ export const sampleData = {
       major: '理学学士 | 药学(食品药学) | CET-6',
       startDate: '2009.09',
       endDate: '2013.07',
+    },
+  ],
+  pages: [
+    {
+      id: 'page-1',
+      name: '第 1 页',
+      blocks: [
+        { id: 'block-1', type: 'header' },
+        { id: 'block-2', type: 'summary', title: '个人简介' },
+        { id: 'block-3', type: 'skills', title: '技能' },
+        { id: 'block-4', type: 'experience', title: '工作经验' },
+        { id: 'block-5', type: 'projects', title: '项目经验', variant: 'tech' },
+        { id: 'block-6', type: 'education', title: '教育背景' },
+        { id: 'block-7', type: 'certs', title: '证书与其他' },
+      ],
     },
   ],
 };
