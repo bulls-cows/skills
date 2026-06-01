@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from "node:url";
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { createRuntimeDefines } from "./vite.shared";
 
