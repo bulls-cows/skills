@@ -1,425 +1,174 @@
 ---
 name: yy-create-vue3
 description: >
-  创建类似 yak/apps/ui 结构的 Vue 3 + TypeScript + Vite 项目。支持目录结构对齐、命名规范对齐、配置规范对齐。
-  新建项目时可直接复制 scripts/ 参考项目，修改优化时可供参考。
+  创建基于当前技能 `scripts/` 参考工程的 Vue 3 + TypeScript + Vite 项目骨架，或按同一结构补齐空白/轻量项目。
+  当用户需要快速落地统一目录、配置和页面骨架时触发，不用于复杂迁移、重构或通用 Vue 问答。
 ---
 
 # yy-create-vue3
 
 ## 描述
 
-基于 yak/apps/ui 的项目结构规范，创建 Vue 3 + TypeScript + Vite 的前端项目。自动生成完整的目录结构、配置文件、源码骨架，并确保目录层级和命名规范与参考项目一致。
+基于当前技能目录下 `scripts/` 的权威参考工程，创建或补齐 Vue 3 + TypeScript + Vite 项目。优先复用现成参考文件，只做与项目名称、页面列表、可选目录和验证动作直接相关的最小调整。
 
 ## 使用场景
 
-- 用户需要创建一个新的 Vue 3 前端项目
-- 用户希望项目目录结构和命名规范与 yak/apps/ui 对齐
-- 用户需要参考 yak/apps/ui 的项目结构来调整现有项目
+- 用户需要新建 Vue 3 + TypeScript + Vite 前端项目
+- 用户需要生成与当前技能 `scripts/` 参考工程一致的目录结构、配置文件和源码骨架
+- 用户需要在空白或轻量项目中补齐标准化的 Vue 3 工程基础设施
 
 不应触发：
 
-- 用户只需要创建单个组件或页面
-- 用户正在使用 React、Angular 等其他框架
-- 用户只是询问 Vue 3 的用法
+- 用户只需要单个组件、页面或样式片段
+- 用户要处理 React、Vue 2、Angular 或非 Vite 项目
+- 用户要对成熟现有项目做大规模迁移、重构或架构改造
+- 用户只是询问 Vue 3、TypeScript 或 Vite 的概念和用法
 
 ## 指令
 
-### 步骤 1. 确认项目基本信息
+### 步骤 1. 确认任务边界与最小输入
 
-与用户确认以下信息：
+收集完成任务所需的最小信息：
 
-1. **项目名称**：英文短横线命名，如 `my-app`
-2. **目标目录**：在哪个目录下创建项目
-3. **是否需要 Mock 目录**：`public/mock/`（默认否）
-4. **是否需要国际化目录**：`src/languages/`（默认否）
-5. **是否需要页面示例**：在 `src/views/` 下创建示例页面（默认是）
-6. **需要哪些页面**：列出需要创建的页面视图名称（如 `HomeView`, `LoginView`, `ErrorView`）
-7. **项目标题**：`index.html` 中的 `<title>` 内容
+- 项目名称，使用英文短横线命名，如 `my-app`
+- 目标目录
+- 项目标题
+- 页面列表，默认至少包含 `HomeView`
+- 是否需要 `public/mock/`，默认否
+- 是否需要 `src/languages/`，默认否
+- 是否执行依赖安装与验证
+- 目标目录是新目录、空目录还是已有项目目录
 
-### 步骤 2. 创建项目目录结构
+**决策分支**：
 
-在目标目录下创建以下目录结构：
+- **用户已提供关键信息**：直接进入步骤 2
+- **仅缺少少量必要信息**：只追问缺失项，不重复确认已明确内容
+- **目标目录已有内容但处理边界不明**：先确认只做补齐或对齐，不默认覆盖、删除或清空现有文件
+
+### 步骤 2. 判定生成模式
+
+以当前技能目录下的 `scripts/` 为唯一权威参考，以 `templates/` 中的轻量说明为快速校准材料。
+
+**决策分支**：
+
+- **目标目录不存在或为空目录**：按“新建项目”模式处理，复制参考工程的基础骨架，再做最小定制
+- **目标目录已有少量工程文件，且用户明确要求对齐结构**：按“补齐项目”模式处理，只新增缺失文件或修改与本次目标直接相关的文件
+- **目标目录已有成熟工程内容**：说明该技能只适合脚手架创建和轻量对齐，要求用户缩小范围后再继续
+
+### 步骤 3. 复制参考工程并过滤无效产物
+
+从 `scripts/` 复制项目骨架时，只保留可作为脚手架的一次性源文件，不复制缓存和安装产物。
+
+**决策分支**：
+
+- **新建项目模式**：复制 `scripts/` 中的基础目录和配置文件，保留 `public/`、`src/`、`tests/`、构建脚本和根配置
+- **补齐项目模式**：逐项对照 `scripts/`，只补齐缺失的目录、配置和基础源码文件
+
+**禁止复制的内容**：
+
+- `node_modules/`
+- `.eslintcache`
+- 其他缓存、临时目录和本地安装产物
+
+**建议处理方式**：
+
+- `package-lock.json` 默认不复制，优先通过后续 `npm install` 重新生成
+- `package.json`、`vite.config.ts`、`vite.shared.ts`、`tsconfig*.json`、`eslint.config.ts`、`.prettierrc.json`、`.editorconfig`、`.gitignore`、`index.html` 直接以 `scripts/` 同名文件为基准
+
+### 步骤 4. 生成目录结构与基础配置
+
+确保目标项目至少具备与参考工程一致的基础目录结构：
 
 ```text
 project-name/
-├── scripts/                          # 构建辅助脚本
 ├── public/
-│   └── static/                       # 静态资源（字体、图片等）
+├── scripts/
 ├── src/
-│   ├── apis/                         # Bridge API / 后端 API 函数
-│   ├── components/                   # 通用组件
-│   ├── composables/                  # 组合式函数
-│   ├── router/                       # 路由定义
-│   ├── scripts/                      # 跨页面复用工具
-│   ├── stores/                       # 状态管理
-│   ├── styles/                       # 全局样式
-│   ├── typings/                      # 类型声明
-│   └── views/                        # 页面视图
-├── tests/                            # 测试文件
-└── public/mock/                      # （可选）Mock 数据
+│   ├── apis/
+│   ├── components/
+│   ├── composables/
+│   ├── router/
+│   ├── scripts/
+│   ├── stores/
+│   ├── styles/
+│   ├── typings/
+│   └── views/
+└── tests/
 ```
 
-### 步骤 3. 创建核心配置文件
+**决策分支**：
 
-参考 `templates/` 目录下的轻量引用说明，结合 `scripts/` 目录中的权威文件，生成以下配置文件：
+- **用户需要 Mock 数据目录**：补充 `public/mock/`
+- **用户需要国际化目录**：补充 `src/languages/`
+- **用户未提出额外目录要求**：保持与 `scripts/` 参考工程一致，不自行扩展更多目录
 
-**3.1 package.json**
+配置文件处理规则：
 
-使用 `npm` 作为包管理工具。核心依赖：
+- 复制 `scripts/package.json` 后，仅调整项目名称和用户明确要求的元数据
+- 复制 `scripts/vite.config.ts` 与 `scripts/vite.shared.ts`，保持 `base: "./"` 和 `@src -> ./src` 别名不变
+- 整组复制 `scripts/tsconfig*.json`，不要手写拆分
+- 复制 `scripts/eslint.config.ts`、`scripts/.prettierrc.json`、`scripts/.editorconfig`、`scripts/.gitignore`
+- 若用户需要环境变量文件，再按 `vite.shared.ts` 使用到的运行时常量创建最小 `.env`，不要凭空扩展字段
 
-| 类别   | 包名                                  | 用途            |
-| ------ | ------------------------------------- | --------------- |
-| 运行时 | `vue` ^3.5                            | Vue 框架        |
-| 运行时 | `vue-router` ^4.6                     | 路由            |
-| 运行时 | `pinia` ^3.0                          | 状态管理        |
-| 开发   | `vite` ^7.3                           | 构建工具        |
-| 开发   | `@vitejs/plugin-vue` ^6.0             | Vite Vue 插件   |
-| 开发   | `typescript` ~5.9                     | TypeScript      |
-| 开发   | `vue-tsc` ^3.2                        | Vue TS 检查     |
-| 开发   | `sass` ^1.98                          | SCSS 编译       |
-| 开发   | `vitest` ^3.2                         | 单元测试        |
-| 开发   | `@vue/test-utils` ^2.4                | Vue 测试工具    |
-| 开发   | `jsdom` ^29                           | 测试 DOM 环境   |
-| 开发   | `eslint` ^9.38                        | 代码检查        |
-| 开发   | `@vue/eslint-config-typescript` ^14.7 | Vue TS ESLint   |
-| 开发   | `eslint-plugin-vue` ^10.8             | Vue ESLint 插件 |
-| 开发   | `prettier` ^3.8                       | 格式化          |
-| 开发   | `@tsconfig/node24` ^24.0              | Node TS 配置    |
-| 开发   | `@types/node` ^24.12                  | Node 类型       |
-| 开发   | `cross-env` ^10.1                     | 跨平台环境变量  |
-| 开发   | `dotenv` ^17.4                        | 环境变量加载    |
+### 步骤 5. 生成源码骨架与页面
 
-npm scripts 规范：
+优先复制 `scripts/src/` 和 `scripts/tests/` 的基础文件，再围绕用户输入做最小定制。
 
-```json
-{
-  "scripts": {
-    "clean": "node ./scripts/clean.ts",
-    "dev:test": "cross-env NODE_ENV=development MODE=test vite dev --mode development",
-    "dev:production": "cross-env NODE_ENV=development MODE=production vite dev --mode development",
-    "build:test": "node --run lint && cross-env NODE_ENV=production MODE=test vite build --mode production",
-    "build:production": "node --run lint && cross-env NODE_ENV=production MODE=production vite build --mode production",
-    "preview": "vite preview",
-    "lint": "node --run format && run-s lint:* && node --run type-check && node --run test",
-    "type-check": "vue-tsc --build",
-    "test": "cross-env NODE_ENV=production MODE=test vitest run --config vitest.config.ts",
-    "lint:oxlint": "oxlint . --fix",
-    "lint:eslint": "eslint . --fix --cache",
-    "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
-    "format": "prettier --write --experimental-cli src/ public/mock"
-  }
-}
-```
+必须完成的调整：
 
-**3.2 vite.config.ts**
+- `index.html` 的 `<title>` 使用用户提供的项目标题
+- `package.json` 的 `name` 使用项目名称
+- 路由配置与页面目录根据页面列表同步生成
+- 默认页面至少保证存在 `HomeView`
 
-- `base: "./"`
-- 使用 `@src` 别名指向 `./src`
-- 集成 Vue 插件
-- 运行时定义通过 `vite.shared.ts` 管理
+页面生成规则：
 
-```typescript
-// vite.config.ts
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { createRuntimeDefines } from './vite.shared'
-
-export default defineConfig({
-  base: './',
-  plugins: [vue()],
-  define: createRuntimeDefines(),
-  resolve: {
-    alias: {
-      '@src': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
-  build: {
-    sourcemap: true,
-  },
-  server: {
-    host: '0.0.0.0',
-    port: 4173,
-  },
-})
-```
-
-**3.3 vite.shared.ts**
-
-管理运行时编译时常量定义：
-
-```typescript
-import { existsSync, readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import dotenv from 'dotenv'
-
-const currentDir = dirname(fileURLToPath(import.meta.url))
-
-const MODE = process.env.MODE as TMode
-const NODE_ENV = process.env.NODE_ENV as TNodeEnv
-
-dotenv.config({
-  path: [
-    resolve(currentDir, `.env.${MODE}.local`),
-    resolve(currentDir, `.env.${MODE}`),
-    resolve(currentDir, `.env.local`),
-    resolve(currentDir, `.env`),
-  ].filter((path) => existsSync(path)),
-})
-
-export function createRuntimeDefines() {
-  return {
-    __APP_VERSION__: JSON.stringify('0.1.0'),
-    __NODE_ENV__: JSON.stringify(NODE_ENV),
-    __MODE__: JSON.stringify(MODE),
-    __ENABLE_REPORT__: JSON.stringify('0'),
-    __MOCK__: JSON.stringify('0'),
-    __NEED_AUTH__: JSON.stringify('1'),
-    __LOG_LEVEL__: JSON.stringify('INFO'),
-  }
-}
-```
-
-**3.4 tsconfig 系列**
-
-- `tsconfig.json`：项目引用入口，引用 app/node/test 配置
-- `tsconfig.app.json`：继承 `@vue/tsconfig/tsconfig.dom.json`，包含 `src/**/*`，配置 `@src` 路径别名
-- `tsconfig.node.json`：继承 `@tsconfig/node24`，包含 vite/eslint/scripts 配置
-- `tsconfig.test.json`：继承 `@vue/tsconfig/tsconfig.dom.json`，包含 `tests/**/*`
-
-**3.5 代码检查配置**
-
-- `eslint.config.ts`：使用扁平化配置，集成 `eslint-plugin-vue`、`@vue/eslint-config-typescript`、`eslint-plugin-oxlint`
-- `.prettierrc.json`：semi: true, singleQuote: false, trailingComma: "all"
-- `.editorconfig`：indent_size=2, indent_style=space, charset=utf-8, end_of_line=lf
-
-**3.6 环境变量文件**
-
-创建 `.env` 文件：
-
-```text
-ENABLE_REPORT=1
-MOCK=0
-NEED_AUTH=1
-LOG_LEVEL=INFO
-```
-
-**3.7 .gitignore**
-
-```text
-node_modules/
-dist/
-.eslintcache
-.env.local
-.agents/
-.idea/
-```
-
-### 步骤 4. 创建 src/ 源码骨架
-
-**4.1 index.html**
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>项目标题</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
-</html>
-```
-
-**4.2 src/main.ts**
-
-```typescript
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import { router } from './router'
-import './styles/main.scss'
-
-const app = createApp(App)
-const pinia = createPinia()
-
-app.use(pinia)
-app.use(router)
-
-app.mount('#root')
-```
-
-**4.3 src/App.vue**
-
-创建根组件，包含：
-
-- `RouterView` 渲染路由页面
-- 页面布局插槽（sidebar + main 结构）
-
-```vue
-<template>
-  <div class="app">
-    <router-view />
-  </div>
-</template>
-
-<script setup lang="ts">
-import { RouterView } from 'vue-router'
-</script>
-
-<style scoped lang="scss">
-.app {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-}
-</style>
-```
-
-**4.4 src/router/index.ts**
-
-```typescript
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
-
-const routeConfigList: RouteRecordRaw[] = [
-  {
-    path: '/',
-    redirect: '/home',
-  },
-  // 根据用户确认的页面列表生成路由配置
-]
-
-export const router = createRouter({
-  history: createWebHashHistory(),
-  routes: routeConfigList,
-})
-```
-
-**4.5 src/stores/store.ts**
-
-按功能模块分组，使用 `ref` 管理全局状态：
-
-```typescript
-import { ref } from 'vue'
-
-/**
- * 全局状态
- */
-export const globalLoading = ref<boolean>(false)
-
-/**
- * 页面切换状态
- */
-export const isPageMounting = ref<boolean>(false)
-```
-
-**4.6 src/styles/**
-
-创建以下样式文件：
-
-- `_variables.scss`：CSS 自定义属性（颜色、字体、间距、圆角、阴影）
-- `_mixins.scss`：SCSS 混入（panel、text-label、section-title）
-- `main.scss`：全局样式（reset、字体定义、滚动条样式）
-
-**4.7 src/typings/**
-
-创建类型声明文件：
-
-- `env.d.ts`：Vite 环境变量类型声明
-- `route.d.ts`：路由元信息类型扩展
-- `api.d.ts`：API 参数类型
-- `bridge.d.ts`：Bridge 通信类型
-- `component.d.ts`：组件局部类型
-
-**4.8 src/apis/**
-
-创建 API 调用函数和订阅函数：
-
-- `api.ts`：导出具体的 API 函数，每个函数使用 `doRequest` 封装
-- `subscribe.ts`：导出订阅函数，每个函数使用 `subscribe` 封装
-
-### 步骤 5. 创建页面视图
-
-根据步骤 1 中用户确认的页面列表，在 `src/views/` 下创建页面目录：
-
-每个页面视图使用"同名目录 + 同名文件"的组织方式：
-
-```text
-src/views/HomeView/
-├── HomeView.vue
-└── _components/              # 页面专属子组件（可选）
-```
-
-**页面组件规范**：
-
-- 文件名：PascalCase（如 `HomeView.vue`）
-- 目录名：与组件文件同名（如 `HomeView/`）
+- 页面目录与页面文件同名，使用 PascalCase，例如 `HomeView/HomeView.vue`
 - 页面专属子组件放在 `_components/` 目录下
-- 子组件命名：PascalCase（如 `DialogBindCurrentDevice.vue`）
+- 如果用户未提供页面列表，默认只生成 `HomeView`
 
-### 步骤 6. 创建测试骨架
+**决策分支**：
 
-在 `tests/` 目录下创建测试文件：
+- **参考工程已有可复用页面**：复制后做最小改名或内容替换
+- **参考工程缺少用户指定页面**：按现有页面结构补齐同构目录和基础页面文件
+- **用户要求保留已有页面**：仅新增缺失页面，不重写无关页面
 
-```typescript
-// tests/App.spec.ts
-import { describe, it, expect } from 'vitest'
+### 步骤 6. 安装依赖并执行验证
 
-describe('App', () => {
-  it('creates app successfully', () => {
-    expect(true).toBe(true)
-  })
-})
-```
+在目标项目根目录执行安装和验证，默认使用 `npm`。
 
-### 步骤 7. 安装依赖并验证
+**决策分支**：
 
-1. 在项目根目录执行 `npm install`
-2. 执行 `npm run type-check` 验证 TypeScript 配置
-3. 执行 `npm run test` 验证测试框架
-4. 执行 `npm run dev:test` 验证开发服务器启动
+- **用户未禁止安装与验证**：执行 `npm install`、`npm run type-check`、`npm run test`
+- **用户明确要求启动开发环境**：额外执行 `npm run dev:test`，以短时启动并确认可正常进入开发态
+- **用户明确要求跳过安装或当前环境不适合联网安装**：跳过命令执行，并在结果中说明未验证项
 
-### 步骤 8. 输出结果
+验证时保持以下约束：
+
+- 包管理工具使用 `npm`，不改成 `pnpm`
+- 路径别名保持 `@src`，不改成 `@`
+- 不额外执行 `build:*`、部署或发布命令，除非用户明确要求
+
+### 步骤 7. 输出结果
 
 输出以下内容：
 
-1. **项目结构**：使用 tree 格式展示创建的项目目录结构
-2. **配置文件清单**：列出所有创建的配置文件及其用途
-3. **验证结果**：lint、type-check、test 的执行结果
-4. **注意事项**：
-   - 包管理工具为 `npm`，非 pnpm
-   - 路径别名为 `@src`，非 `@`
-   - 如需添加页面，需同时更新路由配置
+1. 项目结构，使用 `tree` 或 `text` 代码块展示
+2. 本次创建或补齐的核心文件与目录
+3. 验证结果，区分已执行、跳过和失败项
+4. 关键注意事项，包括包管理工具、路径别名、后续新增页面时需要同步更新路由
+
+## 安全边界
+
+- 不修改当前技能目录下的 `scripts/` 参考工程本身
+- 不删除目标目录中的无关现有文件
+- 未获用户明确授权时，不覆盖与本次目标无关的已有实现
+- 不执行部署、发布、推送或其他与脚手架创建无关的高影响操作
 
 ## 相关资源
 
-本技能包含以下辅助资源：
-
-- `templates/package-json.md`：package.json 轻量引用说明，权威来源为 `scripts/package.json`
+- `templates/package-json.md`：`package.json` 轻量引用说明，权威来源为 `scripts/package.json`
 - `templates/vite-config.md`：Vite 轻量引用说明，权威来源为 `scripts/vite.config.ts` 和 `scripts/vite.shared.ts`
 - `templates/tsconfig-templates.md`：TypeScript 轻量引用说明，权威来源为 `scripts/tsconfig*.json`
 - `templates/eslint-prettier.md`：代码检查轻量引用说明，权威来源为 `scripts/eslint.config.ts`、`scripts/.prettierrc.json`、`scripts/.editorconfig`
-- `scripts/`：完整的可参考项目（可复制使用，也作为优化参考）
-
-## 命名规范参考
-
-| 目录/文件类型       | 命名风格                | 示例                            |
-| ------------------- | ----------------------- | ------------------------------- |
-| 组件目录 & 文件     | PascalCase              | `CustomButton/CustomButton.vue` |
-| 页面视图目录 & 文件 | PascalCase              | `HomeView/HomeView.vue`         |
-| 页面子组件          | PascalCase              | `DialogBindCurrentDevice.vue`   |
-| Composables         | camelCase (use前缀)     | `useAccount.ts`                 |
-| API 函数            | camelCase               | `loginWithPassword`             |
-| 工具脚本            | camelCase               | `logUtils.ts`                   |
-| Store               | camelCase               | `store.ts`                      |
-| 类型声明文件        | camelCase (`*.d.ts`)    | `api.d.ts`                      |
-| 语言文件            | camelCase               | `languageEnUS.ts`               |
-| SCSS 部分文件       | `_` 前缀 + camelCase    | `_variables.scss`               |
-| 路由文件            | camelCase               | `index.ts`                      |
-| 测试文件            | camelCase (`*.spec.ts`) | `App.spec.ts`                   |
-| 构建脚本            | camelCase               | `clean.ts`                      |
+- `scripts/`：完整参考工程，也是目录结构、配置和基础源码的唯一权威来源
