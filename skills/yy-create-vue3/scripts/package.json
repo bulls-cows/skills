@@ -1,0 +1,53 @@
+{
+  "name": "vue3-scaffold",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "ready": "npm install",
+    "clean": "node ./scripts/clean.ts",
+    "dev:test": "cross-env NODE_ENV=development MODE=test vite dev --mode development",
+    "dev:production": "cross-env NODE_ENV=development MODE=production vite dev --mode development",
+    "build:test": "node --run lint && cross-env NODE_ENV=production MODE=test vite build --mode production",
+    "build:production": "node --run lint && cross-env NODE_ENV=production MODE=production vite build --mode production",
+    "preview": "vite preview",
+    "lint": "node --run format && run-s lint:* && node --run type-check && node --run test",
+    "type-check": "vue-tsc --build",
+    "test": "cross-env NODE_ENV=production MODE=test vitest run --config vitest.config.ts",
+    "lint:oxlint": "oxlint . --fix",
+    "lint:eslint": "eslint . --fix --cache",
+    "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
+    "format": "prettier --write --experimental-cli src/ public/mock"
+  },
+  "dependencies": {
+    "pinia": "^3.0.4",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^24.12.0",
+    "@vitejs/plugin-vue": "^6.0.4",
+    "@vue/eslint-config-typescript": "^14.7.0",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.9.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-oxlint": "^1.51.0",
+    "eslint-plugin-vue": "^10.8.0",
+    "jsdom": "^29.0.1",
+    "npm-run-all2": "8.0.4",
+    "oxlint": "^1.51.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.98.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^3.2.4",
+    "vue-tsc": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=22.18.0 <23"
+  }
+}
