@@ -41,7 +41,7 @@ description: >
 
 在目标目录下创建以下目录结构：
 
-```
+```text
 project-name/
 ├── scripts/                          # 构建辅助脚本
 ├── public/
@@ -199,7 +199,7 @@ export function createRuntimeDefines() {
 
 创建 `.env` 文件：
 
-```
+```text
 ENABLE_REPORT=1
 MOCK=0
 NEED_AUTH=1
@@ -208,7 +208,7 @@ LOG_LEVEL=INFO
 
 **3.7 .gitignore**
 
-```
+```text
 node_modules/
 dist/
 .eslintcache
@@ -349,7 +349,7 @@ export const isPageMounting = ref<boolean>(false)
 
 每个页面视图使用"同名目录 + 同名文件"的组织方式：
 
-```
+```text
 src/views/HomeView/
 ├── HomeView.vue
 └── _components/              # 页面专属子组件（可选）

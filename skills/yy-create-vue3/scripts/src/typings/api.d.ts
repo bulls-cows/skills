@@ -1,9 +1,8 @@
-type ApiAccountPhase =
-  | "restoring_session"
-  | "needs_login"
-  | "logging_in"
-  | "needs_binding"
-  | "binding_device"
-  | "ready"
-  | "blocked"
-  | "error";
+type TReturn<T, K = undefined> = [null, T] | [Error, K];
+
+interface ExampleTodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
