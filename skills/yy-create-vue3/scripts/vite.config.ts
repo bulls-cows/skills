@@ -1,11 +1,22 @@
+import fs from "node:fs";
 import { fileURLToPath, URL } from "node:url";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { createRuntimeDefines } from "./vite.shared";
 
+function excludePublicMock(): Plugin {
+  return {
+    name: "exclude-public-mock",
+    closeBundle() {
+      const mockDir = fileURLToPath(new URL("./dist/mock", import.meta.url));
+      fs.rmSync(mockDir, { recursive: true, force: true });
+    },
+  };
+}
+
 export default defineConfig({
   base: "./",
-  plugins: [vue()],
+  plugins: [vue(), excludePublicMock()],
   define: createRuntimeDefines(),
   resolve: {
     alias: {
