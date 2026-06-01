@@ -15,9 +15,13 @@
       v-if="currentPage"
       :blocks="currentPage.blocks"
       :selected-block-id="selectedBlockId"
+      :show-move-to-previous-page="canMoveBlockToPreviousPage"
+      :show-move-to-next-page="canMoveBlockToNextPage"
       @select="selectBlock"
       @move-up="moveBlockUp"
       @move-down="moveBlockDown"
+      @move-to-previous-page="moveBlockToPreviousPage"
+      @move-to-next-page="moveBlockToNextPage"
       @remove="removeBlock"
       @add="addBlock"
     />
@@ -63,10 +67,24 @@ const currentPageId = ref(props.data.pages[0]?.id || '');
 // 当前选中的区块 ID
 const selectedBlockId = ref<string | null>(null);
 
+// 当前页面索引
+const currentPageIndex = computed(() => {
+  const index = props.data.pages.findIndex(p => p.id === currentPageId.value);
+  return index >= 0 ? index : 0;
+});
+
 // 当前页面
 const currentPage = computed(() => {
-  return props.data.pages.find(p => p.id === currentPageId.value) || props.data.pages[0];
+  return props.data.pages[currentPageIndex.value];
 });
+
+const canMoveBlockToPreviousPage = computed(
+  () => props.data.pages.length > 1 && currentPageIndex.value > 0
+);
+
+const canMoveBlockToNextPage = computed(
+  () => props.data.pages.length > 1 && currentPageIndex.value < props.data.pages.length - 1
+);
 
 // 当前选中的区块
 const selectedBlock = computed(() => {
@@ -143,6 +161,38 @@ function moveBlockDown(blockId: string) {
   [blocks[idx], blocks[idx + 1]] = [blocks[idx + 1], blocks[idx]];
   const pages = props.data.pages.map(p => (p.id === currentPageId.value ? { ...p, blocks } : p));
   updatePages(pages);
+}
+
+function moveBlockToPage(blockId: string, targetPageIndex: number) {
+  if (!currentPage.value) return;
+  const block = currentPage.value.blocks.find(b => b.id === blockId);
+  const targetPage = props.data.pages[targetPageIndex];
+  if (!block || !targetPage) return;
+
+  const pages = props.data.pages.map((page, index) => {
+    if (index === currentPageIndex.value) {
+      return { ...page, blocks: page.blocks.filter(b => b.id !== blockId) };
+    }
+    if (index === targetPageIndex) {
+      return { ...page, blocks: [block, ...page.blocks] };
+    }
+    return page;
+  });
+
+  updatePages(pages);
+  currentPageId.value = targetPage.id;
+  selectedBlockId.value = blockId;
+  emit('select-block', { pageId: targetPage.id, blockId });
+}
+
+function moveBlockToPreviousPage(blockId: string) {
+  if (!canMoveBlockToPreviousPage.value) return;
+  moveBlockToPage(blockId, currentPageIndex.value - 1);
+}
+
+function moveBlockToNextPage(blockId: string) {
+  if (!canMoveBlockToNextPage.value) return;
+  moveBlockToPage(blockId, currentPageIndex.value + 1);
 }
 
 function removeBlock(blockId: string) {

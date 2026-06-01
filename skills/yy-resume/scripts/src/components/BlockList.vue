@@ -33,6 +33,14 @@
         </div>
         <div class="block-list__item-actions">
           <button
+            v-if="showMoveToPreviousPage"
+            class="block-list__btn-move"
+            @click.stop="emit('move-to-previous-page', block.id)"
+            title="移到前一页"
+          >
+            ←
+          </button>
+          <button
             class="block-list__btn-move"
             :disabled="i === 0"
             @click.stop="emit('move-up', block.id)"
@@ -47,6 +55,14 @@
             title="下移"
           >
             ↓
+          </button>
+          <button
+            v-if="showMoveToNextPage"
+            class="block-list__btn-move"
+            @click.stop="emit('move-to-next-page', block.id)"
+            title="移到下一页"
+          >
+            →
           </button>
           <button
             class="block-list__btn-remove"
@@ -74,12 +90,16 @@ import type { BlockConfig, BlockType } from '@/types/resume';
 defineProps<{
   blocks: BlockConfig[];
   selectedBlockId: string | null;
+  showMoveToPreviousPage: boolean;
+  showMoveToNextPage: boolean;
 }>();
 
 const emit = defineEmits<{
   (e: 'select', blockId: string): void;
   (e: 'move-up', blockId: string): void;
   (e: 'move-down', blockId: string): void;
+  (e: 'move-to-previous-page', blockId: string): void;
+  (e: 'move-to-next-page', blockId: string): void;
   (e: 'remove', blockId: string): void;
   (e: 'add', type: BlockType): void;
 }>();
