@@ -11,9 +11,13 @@
     <!-- 主内容区：编辑器 + 预览 -->
     <div class="app__main-content">
       <!-- 可视化页面编辑器 -->
-      <PageEditor :data="parsedData" @update:data="handleDataUpdate" />
+      <PageEditor
+        :data="parsedData"
+        @update:data="handleDataUpdate"
+        @select-block="handleSelectBlock"
+      />
       <!-- 简历实时预览 -->
-      <ResumePreview :data="parsedData" />
+      <ResumePreview :data="parsedData" :active-target="selectedPreviewTarget" />
     </div>
     <!-- 服务停止遮罩 -->
     <StopOverlay :visible="showStopOverlay" />
@@ -69,6 +73,9 @@ const rawData = ref(JSON.stringify(sampleData, null, 2));
 // 服务停止遮罩层显示控制
 const showStopOverlay = ref(false);
 
+// 当前需要在预览区突出显示的区块
+const selectedPreviewTarget = ref<{ pageId: string; blockId: string } | null>(null);
+
 // --- 计算属性 ---
 
 // 解析后的结构化简历数据
@@ -84,6 +91,10 @@ const parsedData = computed<ResumeData>(() => {
 
 function handleDataUpdate(data: ResumeData) {
   rawData.value = JSON.stringify(data, null, 2);
+}
+
+function handleSelectBlock(target: { pageId: string; blockId: string } | null) {
+  selectedPreviewTarget.value = target;
 }
 
 function handleDownloadJson() {

@@ -1,7 +1,15 @@
 <template>
   <div class="resume-preview">
     <div v-for="page in data.pages" :key="page.id" class="resume-preview__page">
-      <template v-for="block in page.blocks" :key="block.id">
+      <div
+        v-for="block in page.blocks"
+        :key="block.id"
+        :ref="el => setBlockElement(page.id, block.id, el)"
+        class="resume-preview__block"
+        :class="{
+          'resume-preview__block--active': isActiveBlock(page.id, block.id),
+        }"
+      >
         <!-- 头部信息 -->
         <ResumeHeader v-if="block.type === 'header'" :data="data" />
         <!-- 个人简介 -->
@@ -59,7 +67,7 @@
           :title="block.title || ''"
           :publications="data.publications"
         />
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +86,7 @@
  * 【核心流程】
  * 接收 data → 遍历 data.pages → 每页遍历 blocks → 按 type 分发到对应章节组件
  */
+import { nextTick, watch, type ComponentPublicInstance } from 'vue';
 import type { ResumeData } from '@/types/resume';
 import ResumeHeader from './ResumeHeader.vue';
 import ResumeSummary from './sections/ResumeSummary.vue';
@@ -90,9 +99,46 @@ import ResumeEducation from './sections/ResumeEducation.vue';
 import ResumeCerts from './sections/ResumeCerts.vue';
 import ResumePublications from './sections/ResumePublications.vue';
 
-defineProps<{
+const props = defineProps<{
   data: ResumeData;
+  activeTarget: { pageId: string; blockId: string } | null;
 }>();
+
+const blockElements = new Map<string, Element>();
+
+function getBlockKey(pageId: string, blockId: string) {
+  return `${pageId}:${blockId}`;
+}
+
+function setBlockElement(
+  pageId: string,
+  blockId: string,
+  el: Element | ComponentPublicInstance | null
+) {
+  const key = getBlockKey(pageId, blockId);
+  const element = el instanceof Element ? el : el?.$el;
+  if (element instanceof Element) {
+    blockElements.set(key, element);
+    return;
+  }
+  blockElements.delete(key);
+}
+
+function isActiveBlock(pageId: string, blockId: string) {
+  return props.activeTarget?.pageId === pageId && props.activeTarget.blockId === blockId;
+}
+
+watch(
+  () => props.activeTarget,
+  async target => {
+    if (!target) return;
+    await nextTick();
+    blockElements.get(getBlockKey(target.pageId, target.blockId))?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -110,6 +156,21 @@ defineProps<{
   gap: 20px;
 }
 
+/* 预览区块容器 */
+.resume-preview__block {
+  margin: -3pt;
+  padding: 3pt;
+  border-radius: 4pt;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.resume-preview__block--active {
+  background: rgba(59, 130, 246, 0.08);
+  box-shadow: 0 0 0 2pt rgba(59, 130, 246, 0.65);
+}
+
 /* A4 页面容器 */
 .resume-preview__page {
   width: 190mm;
@@ -124,6 +185,7 @@ defineProps<{
   font-size: 12pt;
   line-height: 1.5;
   color: #000;
+  overflow: hidden;
 }
 
 /* 打印样式 */
@@ -133,6 +195,11 @@ defineProps<{
     overflow: visible;
     padding: 0;
     background: #fff;
+  }
+
+  .resume-preview__block--active {
+    background: transparent;
+    box-shadow: none;
   }
 
   .resume-preview__page {

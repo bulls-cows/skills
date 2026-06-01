@@ -7,6 +7,7 @@
       @select="
         currentPageId = $event;
         selectedBlockId = null;
+        emit('select-block', null);
       "
       @add="addPage"
       @remove="removePage"
@@ -57,6 +58,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:data', value: ResumeData): void;
+  (e: 'select-block', value: { pageId: string; blockId: string } | null): void;
 }>();
 
 // 当前选中的页面 ID
@@ -89,6 +91,7 @@ function addPage() {
   emit('update:data', { ...props.data, pages });
   currentPageId.value = newId;
   selectedBlockId.value = null;
+  emit('select-block', null);
 }
 
 function removePage(pageId: string) {
@@ -99,6 +102,7 @@ function removePage(pageId: string) {
     currentPageId.value = pages[0]?.id || '';
   }
   selectedBlockId.value = null;
+  emit('select-block', null);
 }
 
 function renamePage(payload: { pageId: string; name: string }) {
@@ -116,6 +120,7 @@ function updatePages(pages: typeof props.data.pages) {
 
 function selectBlock(blockId: string) {
   selectedBlockId.value = blockId;
+  emit('select-block', { pageId: currentPageId.value, blockId });
 }
 
 function moveBlockUp(blockId: string) {
@@ -145,6 +150,7 @@ function removeBlock(blockId: string) {
   updatePages(pages);
   if (selectedBlockId.value === blockId) {
     selectedBlockId.value = null;
+    emit('select-block', null);
   }
 }
 
@@ -158,6 +164,7 @@ function addBlock(type: BlockType) {
   const pages = props.data.pages.map(p => (p.id === currentPageId.value ? { ...p, blocks } : p));
   updatePages(pages);
   selectedBlockId.value = newBlock.id;
+  emit('select-block', { pageId: currentPageId.value, blockId: newBlock.id });
 }
 </script>
 
