@@ -42,3 +42,37 @@ Vue3 单文件组件应统一按以下顺序组织代码结构：
 - `<style lang="scss" scoped>`：使用 SCSS 的作用域样式部分
 
 各区块之间应保留一个空行分隔。
+
+### 模板表达式简洁性
+
+Vue3 模板中应避免书写多行函数逻辑，模板只保留声明式绑定和简单表达式。
+
+- 事件处理、状态更新、`emit` 调用应提取到 `<script lang="ts" setup>` 中的命名函数。
+- 模板事件绑定应直接引用命名函数，如 `@select="selectPage"`。
+- 禁止在模板中通过多行表达式混合执行赋值、状态重置和事件派发。
+
+**反例：**
+
+```vue
+<PageTabs
+  @select="
+    currentPageId = $event
+    selectedBlockId = null
+    emit('select-block', null)
+  "
+/>
+```
+
+**正例：**
+
+```vue
+<PageTabs @select="selectPage" />
+
+<script lang="ts" setup>
+function selectPage(pageId: string) {
+  currentPageId.value = pageId
+  selectedBlockId.value = null
+  emit('select-block', null)
+}
+</script>
+```

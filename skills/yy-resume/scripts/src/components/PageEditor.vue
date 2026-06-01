@@ -4,11 +4,7 @@
     <PageTabs
       :pages="data.pages"
       :current-page-id="currentPageId"
-      @select="
-        currentPageId = $event;
-        selectedBlockId = null;
-        emit('select-block', null);
-      "
+      @select="selectPage"
       @add="addPage"
       @remove="removePage"
       @rename="renamePage"
@@ -79,6 +75,12 @@ const selectedBlock = computed(() => {
 });
 
 // --- 页面操作 ---
+
+function selectPage(pageId: string) {
+  currentPageId.value = pageId;
+  selectedBlockId.value = null;
+  emit('select-block', null);
+}
 
 function addPage() {
   const newId = `page-${Date.now()}`;
