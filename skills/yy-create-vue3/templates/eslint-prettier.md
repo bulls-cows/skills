@@ -1,70 +1,19 @@
-# 代码检查配置模板
+# 代码检查配置引用
 
-## eslint.config.ts
+## 权威来源
 
-```typescript
-import pluginVue from 'eslint-plugin-vue'
-import eslintPluginOxlint from 'eslint-plugin-oxlint'
-import vueTs from '@vue/eslint-config-typescript'
+- `../scripts/eslint.config.ts`
+- `../scripts/.prettierrc.json`
+- `../scripts/.editorconfig`
 
-export default [
-  ...pluginVue.configs['flat/essential'],
-  ...vueTs(),
-  ...eslintPluginOxlint.configs['flat/all'],
-  {
-    files: ['src/**/*.{ts,vue}'],
-    rules: {
-      'vue/multi-word-component-names': 'error',
-    },
-  },
-]
-```
+## 使用方式
 
-### 配置说明
+- 创建项目时优先直接复制这 3 个文件。
+- 若用户没有额外规范要求，保持 ESLint、Prettier、EditorConfig 三者组合不变。
+- 若后续新增规则，以 `scripts/` 中对应文件为唯一维护入口。
 
-| 插件                             | 用途                                   |
-| -------------------------------- | -------------------------------------- |
-| `eslint-plugin-vue`              | Vue 语法规则检查                       |
-| `@vue/eslint-config-typescript`  | Vue + TypeScript 集成规则              |
-| `eslint-plugin-oxlint`           | Oxlint 补充规则（扁平化配置格式）      |
-| `vue/multi-word-component-names` | 强制组件名使用多单词（防止根组件冲突） |
+## 关键检查点
 
-## .prettierrc.json
-
-```json
-{
-  "semi": true,
-  "singleQuote": false,
-  "trailingComma": "all"
-}
-```
-
-### 格式化规则
-
-| 规则            | 值      | 说明             |
-| --------------- | ------- | ---------------- |
-| `semi`          | `true`  | 语句末尾加分号   |
-| `singleQuote`   | `false` | 使用双引号       |
-| `trailingComma` | `"all"` | 多行时末尾加逗号 |
-
-## .editorconfig
-
-```ini
-[*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue,css,scss,sass,less,styl,json,html}]
-charset = utf-8
-indent_size = 2
-indent_style = space
-insert_final_newline = true
-trim_trailing_whitespace = true
-end_of_line = lf
-max_line_length = 100
-```
-
-### 编辑器规则
-
-| 规则              | 值      | 说明        |
-| ----------------- | ------- | ----------- |
-| `indent_size`     | `2`     | 2 空格缩进  |
-| `indent_style`    | `space` | 空格缩进    |
-| `end_of_line`     | `lf`    | Unix 换行符 |
-| `max_line_length` | `100`   | 最大行宽    |
+- ESLint 使用扁平化配置，并保留 Vue、TypeScript、Oxlint 的组合。
+- Prettier 维持 `semi: true`、`singleQuote: false`、`trailingComma: "all"`。
+- EditorConfig 维持 2 空格缩进、UTF-8、LF 换行。

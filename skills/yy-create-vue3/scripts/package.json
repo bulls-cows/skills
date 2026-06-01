@@ -37,6 +37,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-oxlint": "^1.51.0",
     "eslint-plugin-vue": "^10.8.0",
+    "jiti": "2.6.1",
     "jsdom": "^29.0.1",
     "npm-run-all2": "8.0.4",
     "oxlint": "^1.51.0",
@@ -48,6 +49,6 @@
     "vue-tsc": "^3.2.5"
   },
   "engines": {
-    "node": ">=22.18.0 <23"
+    "node": ">=22.18.0"
   }
 }

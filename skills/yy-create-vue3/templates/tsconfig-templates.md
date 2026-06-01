@@ -1,94 +1,21 @@
-# TypeScript 配置模板
+# TypeScript 配置引用
 
-## tsconfig.json（项目引用入口）
+## 权威来源
 
-```json
-{
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.test.json"
-    }
-  ]
-}
-```
+- `../scripts/tsconfig.json`
+- `../scripts/tsconfig.app.json`
+- `../scripts/tsconfig.node.json`
+- `../scripts/tsconfig.test.json`
 
-## tsconfig.app.json（应用代码配置）
+## 使用方式
 
-```json
-{
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["src/**/*", "src/**/*.vue", "src/typings/**/*.d.ts"],
-  "exclude": ["src/**/__tests__/*", "tests/**/*"],
-  "compilerOptions": {
-    "noUncheckedIndexedAccess": true,
-    "verbatimModuleSyntax": false,
-    "paths": {
-      "@src/*": ["./src/*"]
-    },
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
-  }
-}
-```
+- 创建项目时整组复制 `tsconfig*.json`，不要手写拆分。
+- 仅在路径或包含范围与目标项目实际结构不一致时做最小调整。
+- `@src/*` 路径映射必须与 `vite.config.ts` 保持一致。
 
-## tsconfig.node.json（Node 端配置）
+## 关键检查点
 
-```json
-{
-  "extends": "@tsconfig/node24/tsconfig.json",
-  "include": [
-    "vite.config.*",
-    "vitest.config.*",
-    "eslint.config.*",
-    "scripts/**/*.ts",
-    "src/typings/**/*.d.ts"
-  ],
-  "compilerOptions": {
-    "module": "preserve",
-    "moduleResolution": "bundler",
-    "types": ["node"],
-    "noEmit": true,
-    "verbatimModuleSyntax": false,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"
-  }
-}
-```
-
-## tsconfig.test.json（测试配置）
-
-```json
-{
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [
-    "tests/**/*.spec.ts",
-    "tests/**/*.test.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "src/typings/**/*.d.ts"
-  ],
-  "compilerOptions": {
-    "noUncheckedIndexedAccess": true,
-    "verbatimModuleSyntax": false,
-    "paths": {
-      "@src/*": ["./src/*"]
-    },
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
-  }
-}
-```
-
-## 关键说明
-
-| 配置项                     | 说明                                |
-| -------------------------- | ----------------------------------- |
-| `extends`                  | 继承社区标准配置，减少重复声明      |
-| `paths`                    | `@src/*` 别名，与 Vite 配置保持一致 |
-| `noUncheckedIndexedAccess` | 开启数组/对象索引访问的类型检查     |
-| `verbatimModuleSyntax`     | 关闭，保持与 ESLint 兼容            |
-| `tsBuildInfoFile`          | 增量构建缓存，加速后续编译          |
+- `tsconfig.json` 负责引用入口。
+- `tsconfig.app.json` 覆盖应用源码和 `src/typings`。
+- `tsconfig.node.json` 覆盖 Vite、ESLint 和脚本侧配置。
+- `tsconfig.test.json` 覆盖测试文件，并与应用侧路径别名保持同步。

@@ -62,7 +62,7 @@ project-name/
 
 ### 步骤 3. 创建核心配置文件
 
-参考 `templates/` 目录下的模板，生成以下配置文件：
+参考 `templates/` 目录下的轻量引用说明，结合 `scripts/` 目录中的权威文件，生成以下配置文件：
 
 **3.1 package.json**
 
@@ -400,10 +400,10 @@ describe('App', () => {
 
 本技能包含以下辅助资源：
 
-- `templates/package-json.md`：package.json 配置模板
-- `templates/vite-config.md`：Vite 配置模板
-- `templates/tsconfig-templates.md`：TypeScript 配置模板
-- `templates/eslint-prettier.md`：ESLint + Prettier + Editorconfig 模板
+- `templates/package-json.md`：package.json 轻量引用说明，权威来源为 `scripts/package.json`
+- `templates/vite-config.md`：Vite 轻量引用说明，权威来源为 `scripts/vite.config.ts` 和 `scripts/vite.shared.ts`
+- `templates/tsconfig-templates.md`：TypeScript 轻量引用说明，权威来源为 `scripts/tsconfig*.json`
+- `templates/eslint-prettier.md`：代码检查轻量引用说明，权威来源为 `scripts/eslint.config.ts`、`scripts/.prettierrc.json`、`scripts/.editorconfig`
 - `scripts/`：完整的可参考项目（可复制使用，也作为优化参考）
 
 ## 命名规范参考
