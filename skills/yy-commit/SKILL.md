@@ -1,7 +1,11 @@
 ---
 name: yy-commit
 description: >
-  帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit 时使用。
+  帮助用户创建规范的 Git 提交。当用户想要提交代码、保存更改、创建 commit、
+  暂存文件、完成功能或修复后需要提交时使用。即使用户只是说"提交一下"、
+  "帮我存一下"、"commit 一下"这类简短表达，也应触发此技能。
+  不适用于：仅查看 git 状态或历史、执行 push/pull/merge 等非提交操作、
+  修改代码或实现功能。
 ---
 
 # yy-commit
@@ -30,6 +34,7 @@ description: >
 git status
 git diff
 git diff --staged
+git log --oneline -5
 ```
 
 理解：
@@ -37,6 +42,7 @@ git diff --staged
 - 哪些文件已修改
 - 变更的具体内容
 - 是否有已暂存的内容
+- 最近的提交记录（用于保持 scope 和风格的一致性）
 
 ### 2. 理解改动意图
 
@@ -62,6 +68,7 @@ git diff --staged
 1. 构建与工具配置文件（包括但不限于 vite.config.ts、vite.config.js、vue.config.js、webpack.config.js、rollup.config.js、tsconfig.json、jsconfig.json、babel.config.js、postcss.config.js、eslint.config.js 等）
 2. 环境配置文件（包括但不限于 .env、.env.test、.env.production、.env.local 等）
 3. 凭证与私钥文件（包括但不限于 credentials.json、secrets.\*、\*.key、\*.pem 等）
+4. AI 工具生成文件（包括但不限于 .cursor/、.aider/、.claude/ 等目录下的非项目文件）
 
 **文件放行规则：**
 
@@ -120,6 +127,10 @@ docs(readme): 更新安装说明和环境要求
 refactor(api): 简化请求拦截器逻辑
 refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 ```
+
+**复杂改动提供候选选项：**
+
+当单次改动涉及多个维度（如同时包含功能新增和重构），或改动意图可以从不同角度描述时，提供 2 个候选提交信息供用户选择，帮助用户找到最准确的表达。简单改动（意图明确、变更单一）只需生成 1 个即可。
 
 ### 5. 展示并确认
 
