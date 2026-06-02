@@ -69,11 +69,7 @@ import SearchBar from './SearchBar.vue'
 - 由主代理执行，禁止派发子代理。子代理无法跨文件查影响范围。
 - 每项重命名单独确认。批量改名 = 用户失去逐项否决权 = 高风险事故来源。
 
-**影响范围如何查（优先级从高到低）：**
-
-1. **LSP `find_references`**（语义级，最准）：能区分同名变量与目标符号，优先用。
-2. **ripgrep / grep**（文本级，会误伤）：LSP 不可用时退回此方案，但在汇总里要明确标注"以下是文本匹配，可能包含同名误判，请人工复核"。
-3. **模板与字符串引用**：不论用哪种工具，都额外搜一遍 `.vue` 模板里的 `@click="名字"` / `v-if="名字"`、动态组件名、`this[name]` 字符串引用——这些 LSP 也未必能追到。
+**影响范围查询**：参照主文档步骤 4 的「影响范围查询优先级」执行，不在本文件重复。
 
 命名规则与示例见 `resources/naming.md`。
 
@@ -101,22 +97,32 @@ import SearchBar from './SearchBar.vue'
 
 ---
 
-## T04 · Props 增强（🔴 高风险 · 主代理）
+## T04 · Props/Emits 增强（🔴 高风险 · 主代理）
 
 **执行约束：** 同 T03，主代理串行 + 逐项确认。
 
-**要求：**
+**影响范围查询**：参照主文档步骤 4 的「影响范围查询优先级」执行。
+
+### Props 增强
 
 - 必须明确 `type` 和 `default`。
 - 命名 camelCase。
 - 每个 Prop 添加注释说明用途（已有注释保留，参见 `resources/style.md` 注释保护）。
 - 复杂类型使用 `PropType<T>` / TypeScript 接口明确指定，不要用裸 `Object` / `Array`。
 
+### Emits 增强
+
+- Vue2：`this.$emit('eventName', payload)` 中的事件名必须在 `emits` 选项中声明；缺失则补充。
+- Vue3：使用 `defineEmits<{ (e: 'eventName', payload: Type): void }>()` 明确类型签名；缺失类型则补充。
+- React：函数 Props 的 `onXxx` 回调参数类型必须明确；缺失则补充。
+- 每个 Emit 添加注释说明触发时机（已有注释保留）。
+
 ### 逐项确认对话范例
 
 ```text
 [T04 改动 1/N]
 文件：src/components/UserCard.vue
+类别：Props
 Prop：userInfo
 当前：{ type: Object }
 建议：
@@ -125,6 +131,17 @@ Prop：userInfo
     type: Object as PropType<IUserInfo>,
     default: () => ({}),
   }
+
+请回复："确认" / "跳过" / "全部停止"。
+
+[T04 改动 2/N]
+文件：src/components/UserCard.vue
+类别：Emits
+Emit：delete
+当前：未在 emits 中声明
+建议：
+  // 用户点击删除按钮时触发，payload 为用户 ID
+  delete: [payload: { id: string }]
 
 请回复："确认" / "跳过" / "全部停止"。
 ```

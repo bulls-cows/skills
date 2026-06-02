@@ -13,6 +13,17 @@
 - Hooks：`use + 功能名`（如 `useTable`、`useSearchForm`）
 - 布尔值：`isXxx` / `hasXxx` / `showXxx` 前缀（如 `isLoading`、`hasError`）
 
+### 反例 → 正例对照
+
+| 反例                         | 正例                           | 规则                              |
+| ---------------------------- | ------------------------------ | --------------------------------- |
+| `getUserInfo()`（含 HTTP）   | `apiGetUserInfo()`             | API 函数加 `api` 前缀             |
+| `handleClick()`              | `onClickSubmit()`              | 事件函数用 `on` + 具体事件名      |
+| `const limit = 10`           | `const MAX_RETRY_COUNT = 10`   | 常量全大写 + 下划线               |
+| `Prop: user_name`            | `Prop: userName`               | Props 使用 camelCase              |
+| `function tableHook()`       | `function useTable()`          | Hooks 使用 `use` 前缀             |
+| `const loading = ref(false)` | `const isLoading = ref(false)` | 布尔值使用 `is`/`has`/`show` 前缀 |
+
 ---
 
 ## 跨文件引用提醒

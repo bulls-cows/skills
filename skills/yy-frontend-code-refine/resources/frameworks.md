@@ -10,7 +10,7 @@ T02 代码结构排序按框架分别处理。本文件汇总三大框架的具�
 
 ```text
 is → v-for → v-if/v-else-if/v-else → v-show/v-cloak →
-id → props/attrs → v-on → v-html/v-text → v-slot
+id → props/attrs → v-on（含 @ 简写）→ v-html/v-text → v-slot
 ```
 
 模板只负责展示，不写复杂表达式。简单逻辑内联，不过度封装。
@@ -47,13 +47,14 @@ init...() → getXxx / postXxx → onXxx → computedXxx
 ```text
 1. 导入（import）
 2. 类型定义（type / interface）
-3. Props / Emits
-4. 常量（const）
-5. 响应式状态（ref / reactive）
-6. 计算属性（computed）
-7. 监听器（watch / watchEffect）
-8. 方法（function）
-9. 生命周期钩子（onMounted 等）
+3. Props（defineProps）
+4. Emits（defineEmits）
+5. 常量（const）
+6. 响应式状态（ref / reactive）
+7. 计算属性（computed）
+8. 监听器（watch / watchEffect）
+9. 方法（function）
+10. 生命周期钩子（onMounted 等）
 ```
 
 ### 组件名前置检测
