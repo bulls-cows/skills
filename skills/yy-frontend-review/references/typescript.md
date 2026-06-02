@@ -13,8 +13,11 @@
 - 类型断言滥用：应使用类型守卫（`typeof`、`instanceof`、`in`）收窄类型时却使用 `as` 断言
 - 缺少类型声明：导出函数缺少参数类型或返回类型；组件 Props 缺少 TypeScript 接口定义（Vue3 未使用 `defineProps<T>()`，React 未定义 Props interface）
 - 枚举与常量：使用 `enum` 而非联合类型或 `as const` 对象（或反之，取决于项目约定）
+- 泛型约束过宽：泛型参数缺少 `extends` 约束，导致类型推断过于宽松，失去类型保护意义
+- 可辨识联合未使用：多个类型可通过字段区分时应使用可辨识联合（discriminated union），而非类型断言或条件判断
 
 ## 轻微
 
 - 类型导入：未使用 `import type` 导入纯类型，可能导致不必要的运行时引用
 - 未使用的类型声明：已定义但未引用的 interface 或 type
+- `type` 与 `interface` 混用：同一项目中对同类结构混用 `type` 和 `interface`，缺乏统一约定
