@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.eslintcache
+.env.local
+.agents/
+.idea/

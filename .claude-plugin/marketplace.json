@@ -20,6 +20,7 @@
         "./skills/yy-create-report",
         "./skills/yy-create-rule",
         "./skills/yy-create-skill",
+        "./skills/yy-create-vue3",
         "./skills/yy-design-ui",
         "./skills/yy-distill",
         "./skills/yy-frontend-change-log",

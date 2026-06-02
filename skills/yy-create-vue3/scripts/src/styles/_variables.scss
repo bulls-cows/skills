@@ -1,0 +1,42 @@
+:root {
+  --font-headline:
+    "Noto Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-body:
+    "Noto Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f3f4f5;
+  --color-text: #191c1d;
+  --color-text-muted: #5c403b;
+  --color-primary: #b50303;
+  --color-primary-strong: #da291c;
+  --color-primary-soft: #ffdad4;
+  --color-secondary: #0074c8;
+  --color-secondary-soft: #d2e4ff;
+  --color-success: #18794e;
+  --color-success-soft: #daf2e3;
+  --color-warning: #c27b00;
+  --color-warning-soft: #fff0c2;
+  --color-danger: #ba1a1a;
+  --color-danger-soft: #ffdad6;
+  --color-border: #d9dadb;
+  --color-overlay: rgba(9, 12, 13, 0.58);
+  --space-2: 0.02rem;
+  --space-4: 0.04rem;
+  --space-8: 0.08rem;
+  --space-12: 0.12rem;
+  --space-16: 0.16rem;
+  --space-20: 0.2rem;
+  --space-24: 0.24rem;
+  --space-32: 0.32rem;
+  --space-40: 0.4rem;
+  --space-48: 0.48rem;
+  --radius-xs: 0.04rem;
+  --radius-sm: 0.06rem;
+  --radius-md: 0.08rem;
+  --radius-lg: 0.12rem;
+  --shadow-panel: 0 0.12rem 0.32rem rgba(25, 28, 29, 0.08);
+  --shadow-float: 0 0.2rem 0.5rem rgba(25, 28, 29, 0.14);
+}

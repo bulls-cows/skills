@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 3 Scaffold</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        window.returnJsonpData = function (handler) {
+          var currentScript = document.currentScript;
+          var scriptUrl = currentScript && currentScript.src;
+          if (!scriptUrl) {
+            return;
+          }
+
+          var url = new URL(scriptUrl, window.location.origin);
+          var callbackName = url.searchParams.get("callback");
+          var callback = callbackName ? window[callbackName] : undefined;
+          if (typeof callback !== "function") {
+            return;
+          }
+
+          var topic = url.searchParams.get("topic");
+          var payloadText = url.searchParams.get("payload");
+          var payload = {};
+          if (payloadText) {
+            try {
+              payload = JSON.parse(payloadText) || {};
+            } catch {
+              payload = {};
+            }
+          }
+
+          var result = handler(payload, topic);
+          callback(result);
+        };
+      })();
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
