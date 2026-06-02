@@ -1,9 +1,12 @@
 ---
 name: yy-frontend-review
 description: >
-  前端代码审核。审核前端项目 git 变动文件的 DOM/模板、样式、组件设计、性能、安全、可维护性等问题，
-  按严重程度输出审核结果。
-  用于：用户要求审核前端代码、前端代码 review、检查前端代码质量时触发。
+  前端代码审核。审核前端项目 git 变动文件的 DOM/模板、样式、组件设计、TypeScript 类型安全、状态管理、
+  性能、安全、可维护性等问题，按严重程度输出审核结果。
+  用于：用户要求审核前端代码、前端代码 review、检查前端代码质量、
+  review Vue/React 改动、审核组件代码、PR 前端审核、前端提交前检查时触发。
+  即使用户没有明确说"前端代码"，只要审核对象是前端文件（.vue/.tsx/.jsx/.css 等），也应使用此技能。
+  不用于：审核后端代码、直接修改代码、运行构建/测试/部署。
 ---
 
 # yy-frontend-review
@@ -11,6 +14,8 @@ description: >
 ## 描述
 
 对前端项目 git 变动文件进行代码审核，覆盖 Vue2/Vue3/React/原生 JS/TS/CSS 等技术栈，优先审查变更行及必要上下文，按严重程度输出问题描述、影响和修复建议。
+
+审核覆盖类型安全、状态管理（Pinia/Redux Toolkit/Zustand）、TypeScript 类型质量等现代前端关注点。
 
 核心原则：默认只审核，不修改代码；只有用户明确要求修复时，才进入代码修改流程。
 
@@ -20,10 +25,13 @@ description: >
 - 用户提到"审核前端改动"、"review 前端代码"、"检查前端代码质量"
 - 用户指定前端文件或目录范围，要求检查其中的代码质量
 - 用户要求审核 UI 组件、页面布局、样式实现
+- 用户说"帮我看看这几个 vue/react 文件"、"review 一下组件改动"
+- PR 审核、合并前审核、提交前检查，且变更内容为前端代码
 
 不应触发：
 
-- 用户要求审核后端代码（应使用 yy-review）
+- 用户要求审核后端代码
+- 用户要求审核全栈项目但未明确指定前端部分
 - 用户要求直接修改代码（应使用其他优化或修复技能）
 - 用户只是询问某个前端问题
 - 用户要求生成 git 提交信息
@@ -31,33 +39,7 @@ description: >
 
 ## 指令
 
-### 步骤 1. 框架检测与专项技能委托
-
-在执行默认审核流程前，先判断当前项目是否应交由框架专项审核技能处理。
-
-项目类型识别规则：
-
-- **Vue2 项目**：`package.json` 中 `dependencies` 或 `devDependencies` 的 `vue` 主版本为 `2`
-- **Vue3 项目**：`package.json` 中 `dependencies` 或 `devDependencies` 的 `vue` 主版本为 `3`
-- **React 项目**：`package.json` 中 `dependencies` 或 `devDependencies` 包含 `react`
-- **原生项目**：无以上框架依赖，但存在 `.js`、`.ts`、`.css`、`.html` 等前端文件
-- **无法判断**：不进行专项技能委托，继续执行本技能默认审核逻辑
-
-Composition API 识别规则（仅 Vue3 项目适用）：
-
-- **使用 Composition API**：目标 `.vue` 文件中出现 `<script setup>`、`setup()`、`defineProps`、`defineEmits`、`ref`、`reactive`、`computed`、`watch` 等 Composition API 特征
-- **未使用 Composition API 或无法判断写法**：继续执行本技能默认审核逻辑
-
-技能委托规则：
-
-- 所有前端项目类型均使用本技能默认审核逻辑
-
-判断顺序：
-
-1. 先读取 `package.json`，根据框架依赖判断项目类型
-2. 确认项目类型后，直接执行本技能默认审核逻辑
-
-### 步骤 2. 获取审核目标
+### 步骤 1. 获取审核目标
 
 按以下规则获取需要审核的文件。
 
@@ -86,7 +68,18 @@ git diff --cached --name-only
 - 锁文件与生成文件：`package-lock.json`、`pnpm-lock.yaml`、`yarn.lock`、`*.min.js`、`*.generated.*`
 - 二进制文件、图片、字体、压缩包、快照文件
 
-### 步骤 3. 确定审核范围
+**大变更量处理**：
+
+变更文件超过 20 个时，按以下优先级分层审核：
+
+1. 核心逻辑：组件、页面、路由、状态管理（优先审核）
+2. 支撑代码：工具函数、类型定义、配置文件
+3. 样式文件：CSS/SCSS/Less
+4. 其他：HTML 模板、静态资源引用
+
+如果变更量超出上下文窗口，告知用户变更范围过大，建议分批审核或缩小指定范围。
+
+### 步骤 2. 确定审核范围
 
 优先审查 diff 变更行，并按需读取上下文。
 
@@ -106,19 +99,72 @@ git diff --cached --name-only
 - 样式改动：读取完整样式块或样式文件
 - 跨文件影响：读取相关依赖文件
 
-### 步骤 4. 按维度审核代码
+### 步骤 3. 按维度审核代码
 
-对每个目标文件按以下规则检查。
+对每个目标文件按以下规则检查。规则按框架/语言特征自动适用，不要求预先声明。框架特定规则优先于通用规则。
 
-- **前端专项审核规则**：见 [references/frontend.md](./references/frontend.md)
-- **通用审核规则**：见 [references/general.md](./references/general.md)
+#### 框架与语言识别
 
-规则冲突时，前端专项规则优先适用。
+- **Vue2 特征**：`.vue` 文件中使用 Options API（`data`/`methods`/`computed`/`watch`）、`beforeDestroy`/`destroyed` 生命周期、`this.$emit`/`this.$refs`、`Vue.filter`/`Vue.directive`、mixin
+- **Vue3 特征**：`.vue` 文件中使用 `<script setup>`、`defineProps`/`defineEmits`、`ref`/`reactive`/`computed`/`watch`、`onUnmounted`/`onMounted`、`setup()` 函数、`provide`/`inject`
+- **React 特征**：`.jsx`/`.tsx` 文件、`useState`/`useEffect`/`useCallback`/`useMemo`、`dangerouslySetInnerHTML`、JSX 语法、函数组件、类组件
+- **原生特征**：无以上框架特征，仅使用原生 DOM API、原生事件绑定
+- **TypeScript 特征**：文件扩展名为 `.ts`、`.tsx`，或 `.vue` 文件中 `<script lang="ts">`；代码中出现 `interface`、`type`、`enum`、`as`、`<T>`、`extends`（泛型语境）
+
+同一文件同时包含多个特征时，合并适用对应规则。
+
+#### 通用规则
+
+以下规则适用于所有前端代码。
+
+**严重**：
+
+- XSS 漏洞：渲染用户输入或未转义内容（Vue：`v-html`；React：`dangerouslySetInnerHTML`；原生：`innerHTML`）
+- 敏感信息暴露：API 密钥、Token、密码等硬编码在前端代码中
+- 内存泄漏：定时器、事件监听器在组件卸载时未清理（Vue2：`beforeDestroy`；Vue3：`onUnmounted`/`onBeforeUnmount`；React：`useEffect` 清理函数）；组件卸载后仍尝试更新状态
+- 状态管理错误：直接修改 Props（Vue 中直接修改 `props` 对象属性；React 中直接修改 `props`）；异步更新导致状态竞态；未清理的订阅
+- 模板编译错误：未闭合的标签；列表渲染缺少唯一标识（Vue：`v-for` 缺少 `:key`；React：缺少 `key` 或使用数组索引作为动态列表的 `key`）
+- 运行时逻辑错误：空指针引用、数组越界、状态更新顺序错误、异步竞态、死循环
+- 模块完整性破坏：循环依赖导致初始化异常、公共 API 签名变更但消费方未同步、导出遗漏导致运行时找不到模块
+
+**中等**：
+
+- 调试代码遗留：`console.log`、`debugger` 遗留在生产代码中（`try-catch`/`catch` 块中用于记录异常的 `console.warn`/`console.error` 不视为问题）
+- 可选链无兜底：使用可选链 `a?.b?.c` 访问属性但未提供兜底值（如 `?? 默认值`、`|| 默认值`），导致链路结果为 `undefined` 可能引发下游错误
+- 渲染性能：缺少缓存计算导致不必要重渲染（Vue：模板中重复计算应提取为 `computed`；React：缺少 `useMemo`/`useCallback`）；大列表未虚拟化；图片未懒加载
+- 组件设计缺陷：组件职责过多；Props 缺少类型校验（Vue2：缺少 `type`/`default`/`validator`；Vue3：`defineProps` 缺少类型声明；React：缺少 `propTypes` 或 TypeScript 接口）或默认值；回调未做防抖/节流
+- 样式问题：`!important` 滥用；全局样式污染；z-index 层级混乱；样式隔离穿透不当（Vue：`scoped` 样式的 `/deep/`、`::v-deep`、`:deep()` 使用过宽；React：CSS Modules 命名冲突、内联样式滥用）
+- 异步处理不当：Promise 未处理；loading 状态未复位；并发请求未做竞态处理；错误状态未回滚
+- 响应式设计缺陷：硬编码像素宽度；缺少断点适配；容器溢出未处理
+- 可访问性缺失：交互元素缺少 `aria` 属性；键盘导航不可达；表单缺少 `label`；语义化标签使用不当
+- 关联变更不完整：新增组件后路由、导航、导入、样式未同步；删除组件后引用未清理
+- 资源加载风险：第三方脚本无 fallback；大资源无 loading 状态；CDN 资源无错误处理
+- 模块设计问题：导入未使用的模块、导出缺少类型声明、模块职责混杂、硬编码分叉替代配置或映射
+- 数据校验不足：空值与异常输入未处理、边界条件未覆盖、类型转换不完整、默认值缺失
+- 可维护性问题：重复代码、过度嵌套、命名无法表达语义、死代码、无效抽象
+
+**轻微**：
+
+- 低风险风格问题：临时注释、格式轻微不规范、代码缩进不一致、多余空行
+- 命名与表达：变量名过短或不够语义化；注释与代码不同步；导入排序不规范
+- 样式轻微问题：冗余样式声明；未使用的 CSS 类；颜色值格式不统一
+- 项目约定偏差但未形成行为风险：命名、目录结构、轻量约定不一致，且未破坏功能
+
+#### 专项规则
+
+识别到对应框架或语言特征时，读取并合并适用以下专项规则：
+
+- **Vue2 专项规则**：见 [references/vue2.md](./references/vue2.md)
+- **Vue3 专项规则**：见 [references/vue3.md](./references/vue3.md)
+- **React 专项规则**：见 [references/react.md](./references/react.md)
+- **TypeScript 专项规则**：见 [references/typescript.md](./references/typescript.md)
+- **状态管理规则**（Pinia/Redux Toolkit/Zustand）：见 [references/state-management.md](./references/state-management.md)
 
 报告口径：
 
 - 优先关注本次改动引入、放大或未收敛的问题
 - 优先使用可跨项目复用的前端工程原则，不把单个项目的习惯直接当成通用阻断项
+- 只有在项目约定已经形成明确契约、并且本次改动触发了该契约时，才按项目约定报告问题
 - 所有问题都要说明可验证影响，不因个人偏好、代码风格偏好或 UI 审美偏好直接报问题
 
 审核执行规则：
@@ -128,7 +174,7 @@ git diff --cached --name-only
 - 轻微问题：发现则列出，不影响审核通过结论
 - `catch` 块中用于记录异常的 `console.warn` 不视为问题
 
-### 步骤 5. 处理边界条件
+### 步骤 4. 处理边界条件
 
 | 场景           | 处理方式                                                             |
 | -------------- | -------------------------------------------------------------------- |
@@ -142,7 +188,7 @@ git diff --cached --name-only
 | 新增组件或页面 | 检查路由、导航、导入、Props 定义、样式隔离、事件注册是否同步完成     |
 | 无法确认的问题 | 标记为"需人工确认"，说明原因和建议确认方式                           |
 
-### 步骤 6. 输出审核结果
+### 步骤 5. 输出审核结果
 
 **决策分支**：
 
