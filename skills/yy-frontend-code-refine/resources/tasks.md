@@ -29,7 +29,7 @@ import { debounce } from 'lodash'
 // 2. types（仅 Vue3 / React + TypeScript 项目）
 import type { IUserInfo } from '@src/types'
 
-// 3. 内部全局依赖（@src/ 等绝对别名）
+// 3. 内部全局依赖（绝对别名路径）
 import { apiGetUserInfo } from '@src/api/user'
 import { formatDate } from '@src/utils/date'
 import { useTable } from '@src/hooks/useTable'
@@ -45,11 +45,13 @@ import SearchBar from './SearchBar.vue'
 
 > Vue2 或纯 JS 项目没有第 2 组（types），按 3 组排序。
 
+**别名检测**：项目可能使用 `@/`、`@src/`、`~/` 等不同路径别名。执行前读取 `tsconfig.json`（`compilerOptions.paths`）或 `vite.config.*` / `vue.config.*` 中的 `resolve.alias` 配置，确认第 3 组使用的别名前缀。别名路径归入第 3 组（内部全局依赖），非别名相对路径归入第 4 组。
+
 ---
 
 ## T02 · 代码结构排序（🟡 中风险 · 子代理）
 
-按文件框架分别处理，详细顺序见 `references/frameworks.md`。这里只列入口：
+按文件框架分别处理，详细顺序见 `resources/frameworks.md`。这里只列入口：
 
 - `.vue` Options API → 见 frameworks.md §Vue2
 - `.vue` `<script setup>` → 见 frameworks.md §Vue3
@@ -73,7 +75,7 @@ import SearchBar from './SearchBar.vue'
 2. **ripgrep / grep**（文本级，会误伤）：LSP 不可用时退回此方案，但在汇总里要明确标注"以下是文本匹配，可能包含同名误判，请人工复核"。
 3. **模板与字符串引用**：不论用哪种工具，都额外搜一遍 `.vue` 模板里的 `@click="名字"` / `v-if="名字"`、动态组件名、`this[name]` 字符串引用——这些 LSP 也未必能追到。
 
-命名规则与示例见 `references/naming.md`。
+命名规则与示例见 `resources/naming.md`。
 
 ### 逐项确认对话范例
 
@@ -107,7 +109,7 @@ import SearchBar from './SearchBar.vue'
 
 - 必须明确 `type` 和 `default`。
 - 命名 camelCase。
-- 每个 Prop 添加注释说明用途（已有注释保留，参见主文档"注释保护"）。
+- 每个 Prop 添加注释说明用途（已有注释保留，参见 `resources/style.md` 注释保护）。
 - 复杂类型使用 `PropType<T>` / TypeScript 接口明确指定，不要用裸 `Object` / `Array`。
 
 ### 逐项确认对话范例

@@ -4,16 +4,14 @@
 
 ---
 
-## 命名规则表
+## 命名规则
 
-| 类别     | 规则                                | 示例                              |
-| -------- | ----------------------------------- | --------------------------------- |
-| API 函数 | `api + Method + URLPath`            | `apiGetUserInfo`、`apiPostLogin`  |
-| 事件函数 | `on + EventName`                    | `onClickSubmit`、`onChangeInput`  |
-| 常量     | 全大写 + 下划线                     | `MAX_RETRY_COUNT`、`API_BASE_URL` |
-| Props    | camelCase                           | `userName`、`isVisible`           |
-| Hooks    | `use + 功能名`                      | `useTable`、`useSearchForm`       |
-| 布尔值   | `isXxx` / `hasXxx` / `showXxx` 前缀 | `isLoading`、`hasError`           |
+- API 函数：`api + Method + URLPath`（如 `apiGetUserInfo`、`apiPostLogin`）
+- 事件函数：`on + EventName`（如 `onClickSubmit`、`onChangeInput`）
+- 常量：全大写 + 下划线（如 `MAX_RETRY_COUNT`、`API_BASE_URL`）
+- Props：camelCase（如 `userName`、`isVisible`）
+- Hooks：`use + 功能名`（如 `useTable`、`useSearchForm`）
+- 布尔值：`isXxx` / `hasXxx` / `showXxx` 前缀（如 `isLoading`、`hasError`）
 
 ---
 
