@@ -11,6 +11,7 @@
 - 常量：全大写 + 下划线（如 `MAX_RETRY_COUNT`、`API_BASE_URL`）
 - Props：camelCase（如 `userName`、`isVisible`）
 - Hooks：`use + 功能名`（如 `useTable`、`useSearchForm`）
+- React 组件：PascalCase（如 `UserCard`、`SearchBar`），文件名与组件名保持一致
 - 布尔值：`isXxx` / `hasXxx` / `showXxx` 前缀（如 `isLoading`、`hasError`）
 
 ### 反例 → 正例对照
@@ -23,6 +24,7 @@
 | `Prop: user_name`            | `Prop: userName`               | Props 使用 camelCase              |
 | `function tableHook()`       | `function useTable()`          | Hooks 使用 `use` 前缀             |
 | `const loading = ref(false)` | `const isLoading = ref(false)` | 布尔值使用 `is`/`has`/`show` 前缀 |
+| `function userCard()`        | `function UserCard()`          | React 组件使用 PascalCase         |
 
 ---
 

@@ -109,6 +109,7 @@ import SearchBar from './SearchBar.vue'
 - 命名 camelCase。
 - 每个 Prop 添加注释说明用途（已有注释保留，参见 `resources/style.md` 注释保护）。
 - 复杂类型使用 `PropType<T>` / TypeScript 接口明确指定，不要用裸 `Object` / `Array`。
+- React：使用 `interface` 或 `type` 定义 Props 类型，可选属性标记 `?`，默认值通过解构参数提供。避免使用 `PropTypes` 库（TypeScript 项目）。
 
 ### Emits 增强
 
@@ -116,6 +117,7 @@ import SearchBar from './SearchBar.vue'
 - Vue3：使用 `defineEmits<{ (e: 'eventName', payload: Type): void }>()` 明确类型签名；缺失类型则补充。
 - React：函数 Props 的 `onXxx` 回调参数类型必须明确；缺失则补充。
 - 每个 Emit 添加注释说明触发时机（已有注释保留）。
+- React：`onXxx` 回调 Props 必须明确参数类型与返回值类型；使用 `useCallback` 包裹避免不必要的重渲染时，需在注释中说明原因。
 
 ### 逐项确认对话范例
 

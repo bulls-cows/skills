@@ -9,8 +9,9 @@ T02 代码结构排序按框架分别处理。本文件汇总三大框架的具�
 模板属性顺序：
 
 ```text
-is → v-for → v-if/v-else-if/v-else → v-show/v-cloak →
-id → props/attrs → v-on（含 @ 简写）→ v-html/v-text → v-slot
+is → v-for → key → v-if/v-else-if/v-else → v-show/v-cloak →
+v-model → id → ref → class → style → props/attrs →
+v-on（含 @ 简写）→ v-html/v-text → v-slot
 ```
 
 模板只负责展示，不写复杂表达式。简单逻辑内联，不过度封装。
