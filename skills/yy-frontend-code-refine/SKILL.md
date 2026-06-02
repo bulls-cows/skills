@@ -2,18 +2,17 @@
 name: yy-frontend-code-refine
 description: >
   跨框架前端代码基础精炼（Vue2/Vue3/React）。对组件与 JS/TS/JSX/TSX 文件执行清理冗余代码、整理导入排序、统一代码结构、规范命名、增强 Props/Emits。
-  不用于新增组件、修改业务逻辑、样式文件优化、CSS/BEM 规范、注释增强（这些请使用对应框架的专项优化技能）。
+  只要用户提到以下任何内容，就应使用此技能：代码精炼、清理冗余代码、整理导入排序、规范化命名、Props/Emits 增强、死代码清理、
+  清理未使用导入/变量、重构组件可读性、整理一下这个文件、代码太乱了、clean up code、organize imports、tidy up imports。
+  即使没有明确说"精炼"，只要上下文是前端代码且意图是清理/整理/规范化，也应触发。
+  不用于：新增组件、修改业务逻辑、生成 commit message、样式文件优化、CSS/BEM 规范、注释增强、async/await 转换、Hooks 抽离（这些请使用对应专项技能）。
 ---
 
 # yy-frontend-code-refine
 
-## 描述
+跨框架（Vue2/Vue3/React）前端代码的**基础精炼**技能。核心边界：不生成新组件、不改业务逻辑、不生成提交信息、不优化样式文件。涉及业务行为变更的操作必须先与用户确认。
 
-针对 Vue2/Vue3/React 组件与 JS/TS/JSX/TSX 文件的**基础精炼**技能。通过清理无效代码、整理导入排序、统一代码结构、规范命名、增强 Props 和 Emits，提升代码可读性与团队协作效率。
-
-**核心边界**：不生成新组件、不改业务逻辑、不生成提交信息、不优化样式文件。任何涉及业务行为变更的操作必须先停下来与用户确认。
-
-**定位说明**：本技能专注于跨框架的基础精炼（清理、排序、命名、Props/Emits）。如需 CSS/BEM 规范、注释增强、业务逻辑梳理、async/await 转换、Hooks 抽离等深度优化，请使用对应框架的专项优化技能（`yy-frontend-vue2-code-optimization` / `yy-frontend-vue3-code-optimization`）。
+需要深度优化（CSS/BEM 规范、注释增强、业务逻辑梳理、async/await 转换、Hooks 抽离）时，引导用户使用对应框架的专项技能（`yy-frontend-vue2-code-optimization` / `yy-frontend-vue3-code-optimization`）。
 
 ## 支持的文件类型
 
@@ -25,25 +24,6 @@ description: >
 
 - `.css`、`.scss`、`.less`、`.styl`（样式文件 → 使用 `yy-frontend-style-bem-optimizer`）
 - `.html`（纯 HTML，不含框架逻辑）
-
-## 使用场景
-
-应触发：
-
-- 用户提到代码精炼、清理冗余代码、整理导入排序
-- 用户要求规范化命名、Props 增强、Emits 增强、方法编组
-- 用户提到清理未使用导入/变量、重构组件可读性
-- 用户要求规范化代码结构、死代码清理
-- 用户提到 tidy up imports
-
-不应触发：
-
-- 用户新增组件或页面
-- 用户修改业务逻辑
-- 用户要求生成 commit message
-- 用户要求优化样式文件（`.css`、`.scss`、`.less`）
-- 用户要求 CSS/BEM 规范转换（→ `yy-frontend-style-bem-optimizer`）
-- 用户要求注释增强或业务逻辑梳理（→ 对应框架的专项优化技能）
 
 ## 指令
 
@@ -57,6 +37,16 @@ description: >
 - **用户粘贴了代码内容**：直接处理粘贴内容，不涉及文件扫描
 
 无匹配文件时回复：_"当前没有需要精炼的改动文件。你可以指定文件或文件夹让我精炼。"_
+
+### 步骤 1.5. 项目环境检测
+
+在执行任何精炼任务前，收集项目配置信息（后续步骤依赖这些信息）：
+
+- **路径别名**：读取 `tsconfig.json`（`compilerOptions.paths`）或 `vite.config.*` / `vue.config.*` 的 `resolve.alias`，确认内部全局依赖的别名前缀（如 `@/`、`@src/`、`~/`）。此信息供 T01 导入排序使用。
+- **Vue3 组件名插件**：检测 `unplugin-vue-setup-extend-plus` 是否安装（`package.json` 或 `node_modules` 目录），此信息供 T02 Vue3 结构排序使用。检测方法见 `resources/frameworks.md` §Vue3。
+- **代码格式化工具**：检测 Prettier 配置（`.prettierrc*`、`package.json#prettier` 字段），此信息供所有任务的代码风格保持使用。
+
+> 此步骤仅收集信息，不做任何文件修改。如果收集失败（如配置文件不存在），使用默认值并在汇总中提醒用户。
 
 ### 步骤 2. 生成任务清单
 
@@ -151,20 +141,7 @@ description: >
 - 每项改动单独确认。批量改名或批量修改 Props/Emits = 用户失去逐项否决权 = 高风险事故来源。
 - 不要把多项打包到一条消息里问"以下 5 项是否都执行"——那等于没确认。
 
-**确认格式**：
-
-```text
-[T03 改动 1/N]
-文件：src/api/user.ts
-建议：getInfo → apiGetUserInfo
-理由：API 函数应使用 api + Method + URLPath 命名
-影响范围：3 个调用点
-  - src/views/UserList.vue:42
-  - src/views/UserDetail.vue:18
-  - src/store/modules/user.js:67
-
-请回复："确认" / "跳过" / "全部停止"。
-```
+**确认格式**：每项改动展示文件、建议、理由、影响范围，等待用户逐项回复"确认" / "跳过" / "全部停止"。具体对话范例见 `resources/tasks.md` §T03 / §T04。
 
 **影响范围查询优先级**：
 
