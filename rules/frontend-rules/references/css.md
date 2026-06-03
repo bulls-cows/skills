@@ -123,7 +123,7 @@ maintainer: bulls-cows team
 - 组件内可定义组件级变量，命名前缀加`$组件名-变量名`，如`$user-card-avatar-size: 48px;`
 - 颜色使用语义化变量，禁止直接写色值：`$color-primary: #4080ff;` 而不是`color: #4080ff;`
 
-### 混合宏（@mixin
+### 混合宏（@mixin）
 
 - 公共样式抽取为混合宏，复用性高的放在全局，组件内专用的放在组件内
 - 混合宏命名使用动词开头，如`@mixin ellipsis($line: 1) { ... }`

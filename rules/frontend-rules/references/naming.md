@@ -79,7 +79,7 @@ maintainer: bulls-cows team
 
 ## 🎨 五、CSS 命名规范（BEM）
 
-> 所有样式必须遵循BEM命名规范，确保样式作用域清晰，避免冲突。
+> 样式命名必须遵循BEM规范，详见[css.md](./css.md#css-命名bem)
 
 ### BEM核心规则
 
