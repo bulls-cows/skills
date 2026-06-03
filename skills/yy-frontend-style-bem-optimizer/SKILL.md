@@ -1,22 +1,26 @@
 ---
 name: yy-frontend-style-bem-optimizer
 description: >
-  前端 BEM 命名规范转换与 CSS 样式优化器。将 HTML/JSX/TSX/Vue 代码中的 class/className 属性
+  前端 BEM 命名规范转换与 CSS 样式优化器。将 HTML/JSX/TSX/Vue/Svelte/Astro 代码中的 class/className 属性
   与对应的 CSS/Sass/Less/Stylus 选择器同步转换为 BEM 命名格式，将 CSS 属性按 csscomb zen 预设顺序排列，
   将扁平 CSS 规则重组为 BEM 嵌套结构，并将样式规则按逻辑域拆分为独立集合。
-  即使用户口语化表达——"这个 scss 太乱了帮我整理下"、"把 class 名改成规范格式"、
-  "CSS 属性顺序排一下"、"这个样式文件拆开吧"——也应触发此技能。
+  触发此技能的场景包括但不限于：
+  用户要求将类名转换为 BEM 规范、重构旧项目样式命名、统一团队 CSS 命名规范；
+  用户要求整理 CSS 属性的书写顺序、CSS 属性排序；
+  用户要求将扁平的 CSS/SCSS 规则重组为嵌套结构、用 & 组织选择器；
+  用户要求将臃肿的样式文件按功能模块拆分；
+  用户的口语化表达如"这个 scss 太乱了帮我整理下"、"把 class 名改成规范格式"、"把 class 改规范"、
+  "CSS 属性顺序排一下"、"这个样式文件拆开吧"、"这个组件的 class 命名不规范帮我改改"、
+  "帮我把 scss 里面的选择器整理成 BEM 格式"、"CSS 属性写得太乱了帮我排一下序"。
+  不应触发：纯理论问答不涉及代码转换；非前端类名场景（JS/TS 变量名、后端命名、数据库字段）；
+  改样式值不改命名；要求用 CSS Modules、CSS-in-JS、Tailwind 等非 BEM 方案重写样式。
 ---
 
 # yy-frontend-style-bem-optimizer
 
-## 描述
-
-将 HTML/JSX/TSX/Vue 代码中的 `class`/`className` 属性与对应的 CSS/SCSS/Less/Stylus 选择器同步转换为符合 BEM（Block Element Modifier）规范的格式，对 CSS 属性按 csscomb zen 预设顺序排列，将扁平的 CSS 规则重组为 BEM 嵌套结构，并将 SCSS/Less/Stylus 中的 CSS 规则按逻辑域拆分为独立的样式集合。
-
 ## 支持格式
 
-- **标记文件**：`.html`、`.jsx`、`.tsx`、`.vue`
+- **标记文件**：`.html`、`.jsx`、`.tsx`、`.vue`、`.svelte`、`.astro`
 - **样式文件**：`.css`、`.scss`、`.sass`、`.less`、`.styl`、`.stylus`
 
 ## 核心能力
@@ -25,25 +29,6 @@ description: >
 2. **CSS 属性排序**：将 CSS 规则中的属性按 csscomb zen 预设顺序排列
 3. **BEM 嵌套重组**（可选）：将扁平分散的 BEM 规则重组为 SCSS/Less/Stylus 的 `&` 嵌套结构
 4. **逻辑域拆分**（可选）：将 SCSS/Less/Stylus 中的 CSS 规则按业务逻辑域拆分为独立集合
-
-## 使用场景
-
-- 用户要求将类名转换为 BEM 命名规范、重构旧项目样式命名、统一团队 CSS 命名规范
-- 用户要求整理 CSS 属性的书写顺序
-- 用户要求将扁平的 CSS/SCSS 规则重组为嵌套结构
-- 用户要求将臃肿的样式文件按功能模块拆分
-- 用户口语化表达如"这个样式太乱了帮我整理下"、"把 class 改规范"、"CSS 顺序排一下"
-
-不应触发：
-
-- 用户只是询问 BEM 是什么或 BEM 规范理论（不涉及实际代码转换）
-- 用户要求创建新组件并直接使用 BEM 命名（应在编码时直接使用，无需转换）
-- 用户要求修改 CSS 属性值或样式逻辑（不涉及 class 命名转换）
-- 用户要求重命名 JavaScript/TypeScript 变量或函数名
-- 用户要求后端 API 命名、数据库字段命名或其他非前端类名转换
-- 用户要求使用 CSS Modules、CSS-in-JS（styled-components/emotion）等方案重写样式（这些方案不依赖 BEM 类名）
-- 用户要求使用 Tailwind CSS 等 utility-first 方案重写样式（utility-first 与 BEM 是不同的方法论）
-- 用户只是要求删除或合并冗余 CSS 规则（不涉及命名和结构重组）
 
 ## 指令
 
@@ -93,17 +78,7 @@ description: >
   git diff --cached --name-only
   ```
 
-  **默认处理的文件类型**：
-
-  | 类别     | 扩展名                                                |
-  | -------- | ----------------------------------------------------- |
-  | 标记文件 | `.html`、`.jsx`、`.tsx`、`.vue`                       |
-  | 样式文件 | `.css`、`.scss`、`.sass`、`.less`、`.styl`、`.stylus` |
-
-  **异常降级**：
-  - **项目无 git**：提示用户手动指定文件范围，或使用当前目录下所有匹配文件。
-  - **git diff 失败**：提示用户手动指定文件范围。
-  - **无匹配文件**：回复"当前没有需要处理的变更文件。"并终止。
+  若项目无 git 或 git 命令失败，提示用户手动指定文件范围。若过滤后无匹配文件，回复"当前没有需要处理的变更文件。"并终止。
 
 - 代码片段模式下用户仅提供了标记代码（HTML/JSX/Vue）而未提供样式代码（CSS/SCSS 等）→ 询问用户是否同时提供样式内容，以确保 BEM 命名转换在标记和样式之间保持一致。若用户明确表示只需转换标记代码，则跳过样式文件处理。
 
@@ -113,7 +88,7 @@ description: >
 
 **解析规则**：
 
-- 从 HTML/Vue 模板中提取所有 `class` 属性的值，分割为单个类名
+- 从 HTML/Vue/Svelte/Astro 模板中提取所有 `class` 属性的值，分割为单个类名
 - 从 JSX/TSX 中提取所有 `className` 属性的值，分割为单个类名
 - 从 CSS/SCSS/Less/Stylus 中提取所有选择器中的类名
 - 建立标记文件 class/className 与 CSS 选择器的映射关系
@@ -127,47 +102,13 @@ description: >
 
 > 仅在能力范围包含"BEM 命名转换"时执行。
 
-**HTML/Vue 转换**：
+**核心原则**：标记文件（HTML/JSX/Vue 等）和样式文件（CSS/SCSS 等）中的同一类名必须使用相同的 BEM 转换结果，通过维护类名映射表确保一致性。
 
-- 遍历所有 `class` 属性，将每个类名按转换策略映射为 BEM 格式
-- 保留被忽略的类名不变（包括第三方 UI 库类名和 utility-first 类名）
+- HTML/Vue/Svelte/Astro：遍历所有 `class` 属性，将每个类名按转换策略映射为 BEM 格式，保留被忽略的类名不变
+- JSX/TSX：遍历所有 `className` 属性。动态拼接的类名字符串（如 ``className={`btn-${variant}`}``）在报告中标记需人工确认，不自动转换
+- CSS/SCSS/Less/Stylus：遍历所有类选择器，按相同映射规则转换，保留被忽略的类名不变
 
-**JSX/TSX 转换**：
-
-- 遍历所有 `className` 属性（包括字符串字面量和模板字符串）
-- 对于动态拼接的类名字符串（如 ``className={`btn-${variant}`}``），在报告中标记需人工确认，不自动转换
-
-**CSS/SCSS/Less/Stylus 转换**：
-
-- 遍历所有类选择器，将选择器中的每个类名按相同映射规则转换
-- 保留被忽略的类名不变
-
-**同步约束**：HTML 和 CSS 中的同一类名必须使用相同的 BEM 转换结果，转换过程中维护类名映射表确保一致性。
-
-**示例映射**：
-
-| 原始类名             | BEM 转换结果           | 推导逻辑                         |
-| -------------------- | ---------------------- | -------------------------------- |
-| `header`             | `header`               | Block，无变化                    |
-| `header-title`       | `header__title`        | 嵌套于 header 下，识别为 Element |
-| `header-title-large` | `header__title--large` | 状态/尺寸类，识别为 Modifier     |
-| `btn`                | `btn`                  | Block，无变化                    |
-| `btn-primary`        | `btn--primary`         | 变种类，识别为 Modifier          |
-| `card-body-padding`  | `card__body--padding`  | Element + Modifier               |
-
-**转换策略判断**：
-
-- 分析类名结构，识别潜在的 Block、Element、Modifier 关系
-- 嵌套结构优先按层级推导 Element 关系
-- 状态类名（如 `active`、`disabled`、`open`）优先识别为 Modifier
-- 对于无法自动推断的类名，保留原样并在报告中标记
-
-**边界规则**（避免推导歧义和违反 BEM 规范）：
-
-- **禁止 Element 嵌套 Element**：BEM 规范不允许 `block__elem1__elem2` 格式。即使 DOM 中 `elem2` 嵌套在 `elem1` 内，也应扁平化为 `block__elem2`。例如 `card-header-title` 转换为 `card__title`（而非 `card__header__title`），因为 Element 描述的是组件的语义部分，而非 DOM 层级
-- **多段连字符歧义消解**：当类名包含多段连字符（如 `user-profile-card-body`）时，取第一段或前两段为 Block 名称，其余部分结合上下文判断 Element 或 Modifier。消解优先级：1）CSS 中是否存在匹配的 Block 选择器 → 确认 Block 边界；2）DOM 中是否嵌套在已知 Block 内 → 确认 Element 归属；3）无法消解 → 保留原样并标记
-- **已有 BEM 类名的重转换**：若项目使用不同于配置的分隔符（如当前类名为 `block_elem_mod`，但目标配置为 `__`/`--`），应识别其 BEM 结构后按新分隔符重新输出，而非当作非 BEM 类名重新推导
-- **混合 BEM 实体（Mix）**：一个 DOM 节点同时属于两个 Block（如 `class="block1 block2__elem"`）时，两个 BEM 实体独立转换，不交叉推导 Element 归属
+详细映射示例、转换策略判断、边界规则（禁止 Element 嵌套 Element、多段连字符消解、已有 BEM 重转换、混合实体）和框架特殊处理（CSS Modules、CSS-in-JS、Vue scoped、Angular、Svelte、Astro）见 `references/bem-naming.md`。
 
 ### 步骤 6. 执行 CSS 属性排序
 
@@ -230,42 +171,16 @@ original-class → bem-class
 
 ## 转换示例
 
-各示例对应的处理步骤：
-
-| 示例   | 对应步骤       | 展示内容                                                 |
-| ------ | -------------- | -------------------------------------------------------- |
-| 示例 1 | 步骤 5 + 7     | 基础 BEM 命名转换 + 嵌套重组                             |
-| 示例 2 | 步骤 5 + 7     | 带修饰符的 BEM 转换 + 嵌套                               |
-| 示例 3 | 步骤 4 + 5     | 忽略第三方类名                                           |
-| 示例 4 | 步骤 6         | CSS 属性排序                                             |
-| 示例 5 | 步骤 5 + 6 + 7 | BEM 转换 + 属性排序 + 嵌套重组（全流程）                 |
-| 示例 6 | 步骤 5 + 7 + 8 | 逻辑域拆分（单文件内注释分隔）                           |
-| 示例 7 | 步骤 5 + 7     | JSX + SCSS 同步转换 + 动态类名处理                       |
-| 示例 8 | 步骤 5 + 6     | 纯 CSS 文件：BEM 命名转换 + 属性排序，保持扁平结构不嵌套 |
-
-完整示例代码见 `references/examples.md`。
+完整示例代码见 `references/examples.md`，覆盖以下场景：基础 BEM 命名转换 + 嵌套重组、带修饰符的转换、忽略第三方类名、CSS 属性排序、全流程转换、逻辑域拆分、JSX + SCSS 同步转换、纯 CSS 文件处理。
 
 ## 限制
 
-### BEM 命名转换
-
 - 仅转换 `class`/`className` 属性值和 CSS 选择器中的类名，不转换 JavaScript/TypeScript 中的逻辑类名字符串（如变量名、对象键）
 - 不自动推断组件间继承关系，每个文件独立分析块名
-- 动态拼接的类名字符串在报告中标记需人工确认，不自动转换
 - 不处理非前端文件中的命名（如后端模板、配置文件、脚本语言类名）
 - Utility-first 框架（Tailwind CSS 等）的类名应加入忽略列表，不做转换
-- **CSS Modules**：仅处理模板中字符串形式的类名引用（如 `class="card"` 或 `className="card"`），不处理对象属性形式的引用（如 `styles.card`）。CSS Modules 的类名由构建工具自动处理，手动转换会破坏模块隔离。若项目使用对象引用方式，需手动将 `styles.xxx` 还原为字符串类名后再转换
-- **CSS-in-JS（styled-components / Emotion）**：不处理 CSS-in-JS 方案中的样式定义，因为这类方案不使用 `class`/`className` 属性，BEM 命名规范不适用
-- **Vue SFC `<style scoped>`**：转换类名后 scoped 属性（`data-v-xxx`）由 Vue 编译器自动处理，无需额外干预。scoped 样式会自动添加 `data-v-xxx` 属性选择器，BEM 转换不影响 scoped 行为，但转换后应验证样式是否仍然正确应用
-
-### BEM 嵌套重组
-
-- Sass/Less/Stylus 中的嵌套选择器展开后按 BEM 规范重组，可能改变嵌套层级
-- 纯 `.css` 文件不执行嵌套重组（除非用户明确要求且项目支持 CSS 原生嵌套）
-
-### 逻辑域拆分
-
 - 不修改构建配置或导入路径，仅处理类名和选择器文本
+- 各框架特殊处理的完整说明见 `references/bem-naming.md` 的「框架特殊处理」章节
 
 ## 相关资源
 
