@@ -14,17 +14,16 @@
 
 ## 改动检查
 
-**改动后必须执行:**
+**改动后按条件执行:**
 
-- 执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)。
-- 如果改动涉及 AI 能力模型的调整，执行技能 [@skills-internal/yy-sync-capability-model/SKILL.md](./skills-internal/yy-sync-capability-model/SKILL.md)。
-- 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)。
-- 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)。
-- 执行 `npm run lint` 检测代码和文档。
+- 如果改动涉及 AI 能力模型的调整，执行技能 [@skills-internal/yy-sync-capability-model/SKILL.md](./skills-internal/yy-sync-capability-model/SKILL.md)
+- 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)
+- 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)
 
-**检查项:**
+**改动后提示用户是否执行（默认不执行）:**
 
-- 修复上述验证过程中发现的错误
+- 执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)
+- 执行 `npm run lint` 检测代码和文档
 
 ## 交付格式
 
