@@ -1,6 +1,15 @@
-# 注释规范
+---
+title: 注释规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟢 风格指南（建议遵循）
+maintainer: bulls-cows team
+---
 
-本规范定义模板区、脚本区、样式区的注释格式及保护原则。
+# 📝 注释规范
+
+> 注释的核心目的是提升代码可读性，帮助其他开发者快速理解代码意图。注释要求简洁、准确、及时更新，避免冗余和过时的注释。
+> 总体原则：代码自解释优先，注释补充说明。能通过好的命名表达的含义，不需要额外注释。
 
 ---
 
@@ -97,5 +106,102 @@
 1. **注释明显错误**（与代码实际行为不符）
 2. **业务逻辑已发生实质性变更**（旧注释不再适用）
 3. **命名变更导致旧注释引用了不存在的标识符**
+
+---
+
+## 🔍 五、JSDoc 完整示例
+
+### 函数注释
+
+```typescript
+/**
+ * 获取用户信息
+ * @description 根据用户ID查询用户详细信息
+ * @param {number} userId - 用户唯一ID
+ * @param {boolean} [includePermission=false] - 是否包含权限信息，默认false
+ * @returns {Promise<User>} 用户信息对象
+ * @throws {Error} 用户不存在时抛出异常
+ * @example
+ * const user = await getUserInfo(123, true)
+ * console.log(user.name)
+ */
+const getUserInfo = async (userId: number, includePermission = false): Promise<User> => {
+  // 实现逻辑
+}
+```
+
+### 类型/接口注释
+
+```typescript
+/**
+ * 用户信息
+ * @description 系统用户的核心数据结构
+ */
+interface User {
+  /** 用户ID */
+  id: number
+  /** 用户名 */
+  name: string
+  /** 用户邮箱 */
+  email: string
+  /** 用户状态：1-正常 2-禁用 */
+  status: 1 | 2
+  /** 创建时间 */
+  createTime: string
+}
+```
+
+### 常量注释
+
+```typescript
+/** 分页默认每页数量 */
+const DEFAULT_PAGE_SIZE = 10
+/** 用户状态枚举 */
+const USER_STATUS = {
+  /** 正常 */
+  NORMAL: 1,
+  /** 禁用 */
+  DISABLED: 2,
+} as const
+```
+
+---
+
+## ✅ 六、注释最佳实践
+
+1. **注释与代码同步更新**：代码修改时，对应的注释必须同步修改，禁止出现过时的错误注释
+2. **注释内容准确简洁**：使用中文描述，直截了当，不要写废话，避免歧义
+3. **注释说明原因而非现象**：重点解释"为什么这么做"，而不是"代码做了什么"（代码本身已经能说明做了什么）
+4. **避免冗余注释**：不要对显而易见的代码加注释，比如`const a = 1 // 定义变量a等于1`
+5. **TODO注释规范**：临时未完成的代码使用`// TODO: 待完成内容 日期 作者`格式标注，方便后续跟进
+6. **特殊逻辑注释**：复杂的业务逻辑、踩过的坑、特殊的兼容处理必须加注释说明原因和背景
+7. **公共API必须注释**：公共组件、工具函数、全局方法必须添加完整的JSDoc注释，说明参数、返回值、使用示例
+
+---
+
+## ❌ 七、注释反例
+
+```typescript
+// ❌ 冗余注释：代码本身已经能说明含义
+const name = '张三' // 姓名是张三
+
+// ❌ 过时注释：代码已经修改，注释没有更新
+// 最大数量限制为10
+const MAX_COUNT = 20
+
+// ❌ 模糊注释：含义不明确，其他人看不懂
+// 处理数据
+const handleData = () => {}
+
+// ❌ 注释与代码矛盾
+// 新增用户
+const updateUser = () => {}
+
+// ✅ 正确注释：说明特殊逻辑的原因
+// 这里需要延迟100ms，等待弹窗动画完成，避免UI闪动
+setTimeout(() => {
+  showDialog.value = true
+}, 100)
+```
 
 > **禁止修改的常见场景**：仅因注释风格不同、表述方式有差异但含义一致、注释正确但不够详细（应追加而非覆盖）。

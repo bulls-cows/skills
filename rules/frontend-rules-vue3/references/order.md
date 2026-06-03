@@ -1,6 +1,14 @@
-# Vue3 代码组织与顺序规范
+---
+title: Vue3代码组织与顺序规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
 
-本规范定义 SFC 结构、Imports、脚本内部逻辑及模板属性的排列顺序。
+# 💚 Vue3 代码组织与顺序规范
+
+本规范定义SFC结构、Imports、脚本内部逻辑及模板属性的排列顺序，是Vue3代码可读性、可维护性的核心保障，所有Vue3项目必须严格遵守。
 
 ---
 

@@ -1,6 +1,15 @@
-# Vue3 前端项目开发规范总纲（索引）
+---
+title: Vue3前端项目开发规范总纲
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（必读，强制执行）
+maintainer: bulls-cows team
+---
 
-> 本规范整合自 `rules/frontend-rules-vue3` 与 `skills/yy-frontend-vue3-code-optimization` 中的规范部分，按优先级重新组织。点击各条目跳转至详细规则文件。
+# 💚 Vue3 前端项目开发规范总纲（索引）
+
+> 本规范是Vue3项目的核心规则索引，整合了所有Vue3相关开发规范，按优先级重新组织。点击各条目跳转至详细规则文件。
+> 所有Vue3项目必须同时遵守通用前端规则 + 本Vue3特定规则。
 
 **适用范围**：所有 `src` 目录下的 `.vue`、`.ts`、`.js`、`.css`、`.scss`、`.less` 文件。目录约束：仅允许操作 `src` 目录下的文件。
 

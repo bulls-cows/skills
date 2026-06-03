@@ -1,6 +1,14 @@
-# 代码风格与格式化
+---
+title: 代码风格与格式化规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟢 风格指南（建议遵循）
+maintainer: bulls-cows team
+---
 
-本模块确保代码外观的一致性，主要由 Prettier 接管。
+# 🎨 代码风格与格式化规范
+
+> 本规范统一前端代码外观风格，减少diff冲突，提升代码可读性。所有格式化规则由Prettier统一接管，禁止手动调整格式。
 
 ## Prettier 配置规则
 
@@ -55,4 +63,117 @@
 | `function fetchData() {}`    | `const fetchData = () => {}`    |
 | `function handleClick(e) {}` | `const handleClick = (e) => {}` |
 
-> 关于导入分组、脚本结构顺序、模板属性顺序，详见各框架具体规范。
+---
+
+## 📥 二、导入排序规范
+
+导入语句必须按以下顺序分组，组与组之间空一行分隔，组内按字母顺序排序：
+
+1. **第三方库导入**：Vue/React/Node内置模块、npm包（如`import { ref } from 'vue'`）
+2. **全局公共模块导入**：@/utils、@/hooks、@/stores等公共模块
+3. **业务模块导入**：当前业务相关的模块、组件、工具
+4. **类型导入**：TypeScript类型定义导入（`import type { XXX } from 'xxx'`）
+5. **静态资源导入**：图片、样式、JSON等资源文件
+
+```typescript
+// ✅ 正确示例
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { formatDate } from '@/utils/date'
+import { useUserStore } from '@/stores/user'
+import UserCard from './components/UserCard.vue'
+import type { User } from '@/types/user'
+import defaultAvatar from '@/assets/avatar.png'
+import './index.scss'
+```
+
+---
+
+## 🏗️ 三、代码结构约定
+
+单文件代码按以下顺序组织：
+
+1. 导入语句（按上述分组顺序）
+2. 常量定义（枚举、全局常量、配置项）
+3. 类型定义（TypeScript接口、类型别名）
+4. 状态声明（响应式状态、普通变量）
+5. 计算属性/派生状态
+6. 工具函数（内部使用的普通函数）
+7. 事件处理函数（以`on`开头的函数）
+8. 生命周期钩子（Vue）/ 副作用（React Hooks）
+9. 导出语句（默认导出/具名导出）
+
+```typescript
+// ✅ 正确示例
+// 1. 导入
+import { ref, computed, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+// 2. 常量
+const PAGE_SIZE = 10
+const STATUS_OPTIONS = [
+  { label: '正常', value: 1 },
+  { label: '禁用', value: 2 },
+]
+// 3. 类型
+type ListQuery = {
+  page: number
+  pageSize: number
+  keyword?: string
+}
+// 4. 状态
+const loading = ref(false)
+const list = ref<User[]>([])
+const query = ref<ListQuery>({ page: 1, pageSize: PAGE_SIZE })
+// 5. 计算属性
+const total = computed(() => list.value.length)
+const disableSubmit = computed(() => loading.value || !query.value.keyword)
+// 6. 工具函数
+const formatStatus = (status: number) => {
+  return STATUS_OPTIONS.find((item) => item.value === status)?.label || '-'
+}
+// 7. 事件处理
+const onSearch = async () => {
+  loading.value = true
+  // 请求逻辑
+  loading.value = false
+}
+// 8. 生命周期
+onMounted(() => {
+  onSearch()
+})
+// 9. 导出
+export { list, onSearch }
+```
+
+---
+
+## ✨ 四、其他风格规范
+
+### 变量声明
+
+- 优先使用`const`声明不可变变量，`let`声明可变变量，禁止使用`var`
+- 一次只声明一个变量，禁止一行声明多个变量
+- 变量就近声明，在使用前的最近位置声明，不要集中在文件顶部
+
+### 空行规范
+
+- 逻辑块之间空一行分隔（导入组之间、常量和类型之间、函数之间等）
+- 函数内逻辑相关的代码之间不要空行，不相关的逻辑块空一行分隔
+- 文件末尾保留一个空行
+- 禁止连续出现多个空行（最多一个空行）
+
+### 空格规范
+
+- 运算符前后必须加空格：`a + b`，`a === b`，`c > d`
+- 逗号后面必须加空格：`const arr = [1, 2, 3]`
+- 冒号后面必须加空格：`const obj = { a: 1, b: 2 }`
+- 括号内侧不要加空格：`(a + b) * c`，不要写成`( a + b ) * c`
+- 注释符号和注释内容之间必须加空格：`// 注释内容`，`/** 文档注释 */`
+
+### 函数规范
+
+- 优先使用箭头函数表达式：`const fn = () => {}`，避免使用`function`声明
+- 函数参数超过3个时，必须使用对象参数，解构使用
+- 函数名必须语义化，前缀统一：获取用`get`、设置用`set`、处理用`handle`、判断用`is/has/can`等
+
+> 框架特定的结构顺序、模板属性顺序等，详见Vue2/Vue3/React对应框架规范。

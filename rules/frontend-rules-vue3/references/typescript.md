@@ -1,6 +1,14 @@
-# Vue3 TypeScript 规范
+---
+title: Vue3 TypeScript规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
 
-本规范定义 TypeScript 在 Vue3 项目中的类型使用约定。
+# 💚 Vue3 TypeScript 规范
+
+本规范定义TypeScript在Vue3项目中的类型使用约定，是Vue3 + TS项目必须严格遵守，从类型安全的核心保障。
 
 ---
 

@@ -1,9 +1,15 @@
 ---
 description: Vue3 前端项目开发规范与架构指南
 alwaysApply: true
+version: 2.0.0
+lastUpdated: 2026-06-03
+maintainer: bulls-cows team
 ---
 
-# Vue3 前端项目开发规范
+# 💚 Vue3 前端项目开发规范
+
+> 本规则是通用前端规则的Vue3框架扩展，**通用前端规则的所有内容均适用于Vue3项目**，本规则补充Vue3特定的开发规范，包括组合式API、单文件组件、响应式、Hooks等框架专属内容。
+> 所有Vue3项目必须同时遵守通用前端规则 + 本Vue3特定规则。
 
 本规则已拆分为以下子模块，各模块独立维护，按需引用：
 

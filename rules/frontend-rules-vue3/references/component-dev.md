@@ -1,6 +1,14 @@
-# Vue3 组件开发规范
+---
+title: Vue3组件开发规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
 
-本模块整合 Vue3 组件开发的核心规范，通过引用其他模块避免重复。
+# 💚 Vue3 组件开发规范
+
+本模块是Vue3开发的核心基础规范，所有Vue3组件必须严格遵守。
 
 ## 核心要求
 

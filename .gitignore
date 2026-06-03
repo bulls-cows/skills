@@ -181,3 +181,5 @@ target/
 # 三方参考与本地调试
 skills-marketplace/
 .agents/specs/
+
+!.codegraph/*
