@@ -87,6 +87,7 @@ description: >
 - 每一步只描述一个操作
 - 最后一步描述输出格式
 - 步骤标题格式统一为 `### 步骤 N. 标题`（如 `### 步骤 1. 获取改动文件列表`）
+- 模板中至少给出 2-3 个步骤标题骨架，避免只写成笼统段落或普通编号列表
 
 ```markdown
 ## 指令
@@ -208,8 +209,9 @@ skill-name/
 │   │   ├── main.ts       # 主执行脚本
 │   │   └── package.json  # 依赖配置
 │   └── Python 方式
-│       ├── read_pdf.py   # 主执行脚本
-│       └── requirements.txt  # 依赖声明
+│       ├── read_pdf.py       # 主执行脚本
+│       ├── pyproject.toml    # 依赖配置（推荐）
+│       └── requirements.txt  # 依赖配置（兼容旧方式）
 ├── examples/         # 可选，示例目录
 │   ├── input.md      # 输入示例
 │   └── output.md     # 输出示例
@@ -224,7 +226,7 @@ skill-name/
 ### 目录说明
 
 - `SKILL.md`：**必需**，技能主文件，定义技能名称、描述、使用场景、指令
-- `scripts/`：**可选**，可执行技能需要脚本文件时使用。脚本文件遵循 kebab-case 命名规范（如 `wechat-api.ts`、`read_pdf.py`），依赖配置放在 `scripts/package.json`（Node.js）或 `scripts/requirements.txt`（Python）
+- `scripts/`：**可选**，可执行技能需要脚本文件时使用。脚本文件命名遵循目标语言的常见约定：Node.js/TypeScript 文件优先使用 kebab-case（如 `wechat-api.ts`，入口文件可使用 `main.ts` 或 `main.js`），Python 文件优先使用 snake_case（如 `read_pdf.py`）。依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
 - `examples/`：**可选**，技能使用方式不直观时提供示例说明
 - `templates/`：**可选**，需要生成特定格式文件或模板实际内容超过 20 行时使用（计数规则：只统计实际内容行，不含空行、代码块围栏标记行、YAML frontmatter 行）
 - `resources/`：**可选**，需要参考文档或素材文件时使用
@@ -298,6 +300,8 @@ skill-name/
 
 - 直接提交、立即提交、马上提交
 - 无需确认、不用确认、跳过确认
+
+仅当目标、范围和默认策略已足够明确时，才可命中快速模式；若信息仍不完整，仍需先补齐或确认。
 ```
 
 ### 交互设计检查清单
@@ -334,10 +338,13 @@ skill-name/
 ```markdown
 ## 指令
 
-1. 理解用户需求
-2. 确定技能目标
-3. 编写 SKILL.md
-4. 验证技能格式
+### 步骤 1. 理解用户需求
+
+### 步骤 2. 确定技能目标
+
+### 步骤 3. 编写 SKILL.md
+
+### 步骤 4. 验证技能格式
 ```
 
 ### 问题 2：缺少负例
@@ -380,9 +387,11 @@ skill-name/
 ```markdown
 ## 指令
 
-1. 读取项目配置文件
-2. 分析项目结构
-3. 输出结果：文件路径、变更摘要、验证结果
+### 步骤 1. 读取项目配置文件
+
+### 步骤 2. 分析项目结构
+
+### 步骤 3. 输出结果：文件路径、变更摘要、验证结果
 ```
 
 ### 问题 4：决策点模糊
@@ -426,7 +435,7 @@ skill-name/
 2. 使用中文描述
 3. 代码示例包含语言标签
 4. 如果有参考文档需求，已添加 `resources/` 目录
-5. 如有脚本文件，遵循 kebab-case 命名规范，依赖配置放在 `scripts/package.json`（Node.js）或 `scripts/requirements.txt`（Python）
+5. 如有脚本文件，Node.js/TypeScript 文件优先使用 kebab-case，入口文件可使用 `main.ts` 或 `main.js`；Python 文件优先使用 snake_case，依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
 6. 如有 evals 测试用例，格式正确
 7. SKILL.md 包含执行步骤，不是纯知识文档
 8. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/，不含空行和代码块标记行）

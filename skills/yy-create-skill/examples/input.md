@@ -36,5 +36,5 @@
 ## 示例 5：显式调用技能创建
 
 ```text
-Use the create-skill skill to help me create a new skill for database migration management.
+使用 yy-create-skill 技能，帮我创建一个用于管理数据库迁移的技能。
 ```
