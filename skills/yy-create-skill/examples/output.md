@@ -49,6 +49,8 @@
 ```text
 .agents/skills/generate-readme/
 ├── SKILL.md
+├── prompts/
+│   └── skill-prompts.md
 └── templates/
     └── readme-template.md
 ```
@@ -124,6 +126,8 @@
 ├── examples/
 │   ├── input.md
 │   └── output.md
+├── prompts/
+│   └── skill-prompts.md
 └── templates/
     └── test-report-template.md
 ```
@@ -132,6 +136,7 @@
 
 - `prompts/skill-prompts.md`：已生成
 - 处理方式：本地最小回退流程
+- 原因：用户明确要求生成提示词文件，且当前环境未安装 `yy-skill-to-prompt`
 
 ### SKILL.md 内容摘要
 
