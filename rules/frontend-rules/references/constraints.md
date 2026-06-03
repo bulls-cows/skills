@@ -16,15 +16,16 @@ maintainer: bulls-cows team
 
 > 违反会直接导致Bug、性能问题或架构混乱，代码审查时会被直接打回。
 
-| #   | 禁止项               | 说明                                                                    | 反例 ❌                                            | 正确示例 ✅                                      |
-| --- | -------------------- | ----------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
-| 1   | 连续数据解构         | 禁止多层连续解构后端响应数据，详见[network.md](./network.md#二响应处理) | -                                                  | -                                                |
-| 2   | 父组件修改子组件数据 | 禁止直接修改子组件内部状态                                              | `this.$refs.child.form.name = 'test'`              | 通过props传递数据，子组件emit事件通知父组件修改  |
-| 3   | 修改状态原始类型     | 后端返回什么类型就用什么，不可强转类型                                  | `const count = Number(res.data.count)`             | 要求后端返回正确类型，或使用转换函数明确处理     |
-| 4   | 修改 props           | 禁止直接修改props，props是只读的                                        | `props.user.name = 'new name'`                     | 通过emit事件通知父组件修改源数据                 |
-| 5   | 无意义命名           | 禁止使用无业务含义的变量名                                              | `let data1 = {}, temp2 = []`                       | `let userInfo = {}, menuList = []`               |
-| 6   | 列表与条件同元素     | 禁止同一元素同时使用v-for和v-if                                         | `<div v-for="item in list" v-if="item.show">`      | 用外层template包裹循环，内层写条件，或先过滤列表 |
-| 7   | index 作为 key       | 列表渲染必须使用唯一业务ID作为key                                       | `<div v-for="(item, index) in list" :key="index">` | `<div v-for="item in list" :key="item.id">`      |
+| #   | 禁止项               | 说明                                                                    | 反例 ❌                                                            | 正确示例 ✅                                      |
+| --- | -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------ |
+| 1   | 连续数据解构         | 禁止多层连续解构后端响应数据，详见[network.md](./network.md#二响应处理) | `const { data } = await api.getUser(); const { list } = data.data` | `const { data: { list } } = await api.getUser()` |
+| 2   | 父组件修改子组件数据 | 禁止直接修改子组件内部状态                                              | `this.$refs.child.form.name = 'test'`                              | 通过props传递数据，子组件emit事件通知父组件修改  |
+| 3   | 硬编码接口地址       | 禁止在代码中直接硬编码API URL、域名等配置                               | `const res = await fetch('https://api.example.com/user')`          | 从环境变量或配置文件读取接口地址                 |
+| 4   | 修改 props           | 禁止直接修改props，props是只读的                                        | `props.user.name = 'new name'`                                     | 通过emit事件通知父组件修改源数据                 |
+| 5   | 无意义命名           | 禁止使用无业务含义的变量名                                              | `let data1 = {}, temp2 = []`                                       | `let userInfo = {}, menuList = []`               |
+| 6   | 列表与条件同元素     | 禁止同一元素同时使用v-for和v-if                                         | `<div v-for="item in list" v-if="item.show">`                      | 用外层template包裹循环，内层写条件，或先过滤列表 |
+| 7   | index 作为 key       | 列表渲染必须使用唯一业务ID作为key                                       | `<div v-for="(item, index) in list" :key="index">`                 | `<div v-for="item in list" :key="item.id">`      |
+| 8   | 跨层级组件通信       | 禁止使用`$parent`/`$root`链式访问跨层级组件状态或方法                   | `this.$parent.$parent.$refs.form.submit()`                         | 使用provide/inject、状态管理库或事件总线实现通信 |
 
 ---
 

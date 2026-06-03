@@ -179,4 +179,4 @@ maintainer: bulls-cows team
 
 - 本索引会随规范迭代自动更新，无需手动修改
 - 若有规则缺失或建议，请提交Issue到 [GitHub 仓库](https://github.com/bulls-cows/skills)
-- 贡献规范前请阅读 [开发者须知](../../../../docs/DEVELOP.md)
+- 贡献规范前请阅读 [开发者须知](../../../docs/DEVELOP.md)

@@ -178,7 +178,7 @@ maintainer: bulls-cows team
 - 动画优先使用CSS3 transition/animation实现，避免JS动画
 - 动画属性优先使用transform和opacity，触发GPU加速，性能更好
 - 动画时长控制在0.3s以内，避免过长动画影响用户体验
-- 避免同时动画结束后及时重置will-change属性，释放内存
+- 动画结束后及时重置will-change属性，释放内存
 - 禁止使用影响性能的属性动画，如width/height/top/left等会触发重排的属性
 
 ---
