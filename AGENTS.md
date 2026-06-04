@@ -144,7 +144,7 @@
 - 无论用户使用何种语言提问，请始终使用简体中文进行解释和回答
 - 除非用户明确要求提交。否则禁止你使用git
 - 在输出最终结果前，请务必进行自我审查：你是否对既定的术语、格式或规则描述进行了任何形式的同义替换、过度解释或冗余补充？如果是，请立即撤回修改，严格保持原始定义不变。
-- 不要手动修改 marketplace.json，由 `build/lint.mts` 自动生成
+- 不要手动修改 marketplace.json，由 `build/sync-marketplace.mts` 自动生成
 - [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
@@ -155,7 +155,7 @@
 - `skills/yy-commit/SKILL.md` - Git 提交约定
 - `skills/yy-lint/SKILL.md` - 代码风格检查工作流
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
-- `build/lint.mts` - lint 入口脚本
+- `build/sync-marketplace.mts` - 技能市场配置同步脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
 - `.editorconfig` - 通用编辑器配置文件, 编写内容时需遵循
 - `README.md` - 项目说明文档
