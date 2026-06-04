@@ -3,6 +3,7 @@
   <div class="app">
     <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
     <Toolbar
+      @reset-data="handleResetData"
       @download-json="handleDownloadJson"
       @download-html="handleDownloadHtml"
       @print="printResume"
@@ -54,6 +55,7 @@ import { ref } from 'vue';
 
 // --- 状态 ---
 import { resumeData } from '@/stores/store';
+import { sampleData } from '@/data/resume-data';
 
 // --- 工具函数 ---
 import { downloadJson, downloadHtml, printResume } from '@/utils/export';
@@ -97,6 +99,10 @@ async function handleStopServer() {
   } catch {
     // 服务关闭后连接中断是预期行为
   }
+}
+
+function handleResetData() {
+  resumeData.value = JSON.parse(JSON.stringify(sampleData));
 }
 </script>
 

@@ -7,6 +7,9 @@
     </div>
     <!-- 工具栏右侧：操作按钮组 -->
     <div class="toolbar__right">
+      <button class="toolbar__btn toolbar__btn--secondary" @click="emit('resetData')">
+        重置数据
+      </button>
       <button class="toolbar__btn toolbar__btn--secondary" @click="emit('downloadJson')">
         下载 JSON
       </button>
@@ -32,6 +35,7 @@
  * - 输出: downloadJson、downloadHtml、print、stopServer
  */
 const emit = defineEmits<{
+  (e: 'resetData'): void;
   (e: 'downloadJson'): void;
   (e: 'downloadHtml'): void;
   (e: 'print'): void;
