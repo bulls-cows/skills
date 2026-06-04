@@ -58,6 +58,8 @@ export interface Project {
 export interface Education {
   /** 学校名称 */
   school: string;
+  /** 学校网址（可选） */
+  url?: string;
   /** 专业 */
   major: string;
   /** 开始日期 */
