@@ -118,6 +118,18 @@
 - 在终端中提及文件路径时，优先使用绝对路径，以方便终端/IDE 将其识别为可点击的链接
 - 使用正斜杠作为路径分隔符，路径包含空格时使用引号包裹，以确保跨平台兼容性和正确解析
 
+## 终端命令能力识别
+
+执行终端命令前，先识别当前终端能力，再选择命令写法：
+
+1. 优先用当前 shell 的内置能力判断命令是否存在，不要直接试运行可能缺失的命令。
+2. PowerShell 环境优先使用 `Get-Command` 判断命令可用性；`$PSVersionTable` 不存在时按 PowerShell v1 兼容处理。
+3. PowerShell v1/v5 使用 Windows PowerShell 兼容写法，避免依赖 PowerShell 7 专属语法。
+4. PowerShell 7 可使用现代语法，但仍需兼容当前项目命令约束。
+5. Windows Git Bash 优先使用 `command -v` 判断命令可用性，并使用 Bash 路径和转义规则。
+6. 无法确认终端类型时，使用最保守的基础命令，避免链式命令和 shell 专属语法。
+7. 搜索文件或文本时，优先按能力选择：`rg` 可用则用 `rg`；PowerShell 可用则用 `Get-ChildItem` / `Select-String`；Git Bash 可用则用 `find` / `grep`；CMD 可用则用 `dir` / `findstr`。
+
 ## 需要遵守的规则
 
 - [规则文件引用或内联规则]
