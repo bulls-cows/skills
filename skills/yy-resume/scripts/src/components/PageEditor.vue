@@ -47,7 +47,6 @@
  * 数据流向：接收完整 ResumeData，通过 emit 回传修改后的完整数据
  */
 import { ref, computed } from 'vue';
-import type { ResumeData, BlockType } from '@/types/resume';
 import PageTabs from './PageTabs.vue';
 import BlockList from './BlockList.vue';
 import BlockPropertyPanel from './BlockPropertyPanel.vue';

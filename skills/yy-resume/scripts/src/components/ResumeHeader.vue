@@ -34,7 +34,6 @@
  *
  * 展示姓名、联系信息、社交链接
  */
-import type { ResumeData } from '@/types/resume';
 
 defineProps<{
   data: ResumeData;

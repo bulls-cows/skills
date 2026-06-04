@@ -34,7 +34,6 @@
  *
  * 职责: 按时间倒序列出工作经历，SectionBox + WorkExperience 风格
  */
-import type { Experience } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

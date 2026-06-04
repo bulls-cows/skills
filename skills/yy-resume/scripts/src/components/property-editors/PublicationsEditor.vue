@@ -55,7 +55,6 @@
  *
  * 编辑出版物列表
  */
-import type { Publication } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

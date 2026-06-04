@@ -1,5 +1,5 @@
 /** 社交链接 */
-export interface Link {
+interface Link {
   /** 链接显示名称 */
   label: string;
   /** 链接 URL */
@@ -7,7 +7,7 @@ export interface Link {
 }
 
 /** 技能分类 */
-export interface SkillCategory {
+interface SkillCategory {
   /** 技能分类名称，如"前端框架" */
   category: string;
   /** 技能列表 */
@@ -15,7 +15,7 @@ export interface SkillCategory {
 }
 
 /** 工作经历 */
-export interface Experience {
+interface Experience {
   /** 公司/组织名称 */
   organization: string;
   /** 公司网址（可选） */
@@ -33,7 +33,7 @@ export interface Experience {
 }
 
 /** 项目经验 */
-export interface Project {
+interface Project {
   /** 项目名称 */
   name: string;
   /** 项目链接（可选） */
@@ -55,7 +55,7 @@ export interface Project {
 }
 
 /** 教育背景 */
-export interface Education {
+interface Education {
   /** 学校名称 */
   school: string;
   /** 学校网址（可选） */
@@ -69,7 +69,7 @@ export interface Education {
 }
 
 /** 证书 */
-export interface Cert {
+interface Cert {
   /** 证书名称 */
   name: string;
   /** 颁发机构 */
@@ -79,7 +79,7 @@ export interface Cert {
 }
 
 /** 发表论文 */
-export interface Publication {
+interface Publication {
   /** 论文标题 */
   title: string;
   /** 期刊名称 */
@@ -91,7 +91,7 @@ export interface Publication {
 }
 
 /** 区块类型 — 对应渲染组件 */
-export type BlockType =
+type BlockType =
   | 'header'
   | 'summary'
   | 'skills'
@@ -104,7 +104,7 @@ export type BlockType =
   | 'publications';
 
 /** 区块配置 */
-export interface BlockConfig {
+interface BlockConfig {
   /** 唯一标识 */
   id: string;
   /** 组件类型，决定渲染哪个组件和绑定哪个数据字段 */
@@ -116,7 +116,7 @@ export interface BlockConfig {
 }
 
 /** 页面配置 */
-export interface PageConfig {
+interface PageConfig {
   /** 唯一标识 */
   id: string;
   /** 页面标签名，如"第 1 页" */
@@ -126,7 +126,7 @@ export interface PageConfig {
 }
 
 /** 简历完整数据结构 */
-export interface ResumeData {
+interface ResumeData {
   /** 姓名 */
   name: string;
   /** 职位头衔 */

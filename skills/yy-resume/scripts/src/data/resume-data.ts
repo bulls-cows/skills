@@ -3,7 +3,6 @@
  *
  * 作为编辑器的默认加载数据。
  */
-import type { ResumeData } from '@/types/resume';
 
 export const sampleData: ResumeData = {
   name: '张三',

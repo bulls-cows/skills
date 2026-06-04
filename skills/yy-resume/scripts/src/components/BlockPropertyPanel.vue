@@ -114,7 +114,6 @@
  * 根据选中的区块类型，动态分发到对应的属性编辑器
  * 编辑 resumeData 中对应字段的数据
  */
-import type { BlockConfig, ResumeData } from '@/types/resume';
 import HeaderEditor from './property-editors/HeaderEditor.vue';
 import SummaryEditor from './property-editors/SummaryEditor.vue';
 import SkillsEditor from './property-editors/SkillsEditor.vue';

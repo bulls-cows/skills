@@ -44,7 +44,6 @@
  *
  * 编辑法规体系分类列表
  */
-import type { SkillCategory } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

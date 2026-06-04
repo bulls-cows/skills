@@ -87,7 +87,6 @@
  * 接收 data → 遍历 data.pages → 每页遍历 blocks → 按 type 分发到对应章节组件
  */
 import { nextTick, watch, type ComponentPublicInstance } from 'vue';
-import type { ResumeData } from '@/types/resume';
 import ResumeHeader from './ResumeHeader.vue';
 import ResumeSummary from './sections/ResumeSummary.vue';
 import ResumeSkills from './sections/ResumeSkills.vue';

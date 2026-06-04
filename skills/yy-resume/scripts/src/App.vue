@@ -52,9 +52,6 @@
 // --- Vue 核心 API ---
 import { ref } from 'vue';
 
-// --- 类型 ---
-import type { ResumeData } from '@/types/resume';
-
 // --- 状态 ---
 import { resumeData } from '@/stores/store';
 

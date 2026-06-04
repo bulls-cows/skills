@@ -44,7 +44,6 @@
  * 显示所有页面的标签，支持切换、增删、重命名
  */
 import { ref } from 'vue';
-import type { PageConfig } from '@/types/resume';
 
 defineProps<{
   pages: PageConfig[];

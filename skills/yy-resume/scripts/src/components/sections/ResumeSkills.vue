@@ -17,7 +17,6 @@
 /**
  * ResumeSkills - 技能列表组件（紧凑标签风格）
  */
-import type { SkillCategory } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */
