@@ -14,6 +14,7 @@
 [点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
 - [rules/file-scope-limit](./rules/file-scope-limit/RULE.md)：文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
+- [rules/frontend-rules](./rules/frontend-rules/RULE.md)：通用前端项目开发规范与架构指南
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：Vue2 前端项目开发规范与架构指南
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：Vue3 前端项目开发规范与架构指南
 - [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
