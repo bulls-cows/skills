@@ -1,0 +1,11 @@
+[project]
+name = "python-script-template"
+version = "0.1.0"
+description = "Python script project template for CSV and file processing pipelines"
+requires-python = ">=3.10"
+
+[project.scripts]
+python-script-template = "python_script_template.__main__:main"
+
+[tool.pyinstaller]
+name = "python-script-template"
