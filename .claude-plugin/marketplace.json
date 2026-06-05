@@ -22,6 +22,7 @@
         "./skills/yy-create-report",
         "./skills/yy-create-rule",
         "./skills/yy-create-skill",
+        "./skills/yy-create-template-project",
         "./skills/yy-create-vue3",
         "./skills/yy-design-ui",
         "./skills/yy-distill",
