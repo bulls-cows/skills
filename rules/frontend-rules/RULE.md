@@ -1,7 +1,7 @@
 ---
 description: 通用前端项目开发规范与架构指南
 alwaysApply: true
-version: 2.0.0
+version: 2.1.0
 lastUpdated: 2026-06-03
 maintainer: bulls-cows team
 ---
@@ -23,6 +23,12 @@ maintainer: bulls-cows team
 
 - [@rules/frontend-rules/references/spec-index.md](./references/spec-index.md) — 规范总纲（按优先级分级索引所有规则）
 - [@rules/frontend-rules/references/ai-behavior.md](./references/ai-behavior.md) — AI 行为约束（修改红线、文档生成、代码审查标准）
+
+### 跨框架通用规则
+
+- [@rules/frontend-rules/references/common-vue-template.md](./references/common-vue-template.md) — Vue 模板通用规则（Vue2/Vue3 共享：v-for/key、v-if 冲突、v-html、指令简写、属性顺序）
+- [@rules/frontend-rules/references/common-hooks.md](./references/common-hooks.md) — Hooks 通用规范（Vue3/React 共享：命名、文件组织、抽离建议、返回值、注释）
+- [@rules/frontend-rules/references/common-typescript.md](./references/common-typescript.md) — TypeScript 通用规范（Vue3/React 共享：类型注解、禁用 any、import type、类型文件组织）
 
 ### 通用规范（跨框架）
 
@@ -49,8 +55,8 @@ Vue2（Options API）：
 - [@rules/frontend-rules/references/vue2/overview.md](./references/vue2/overview.md) — 概述与适用范围
 - [@rules/frontend-rules/references/vue2/component-dev.md](./references/vue2/component-dev.md) — 组件开发规范
 - [@rules/frontend-rules/references/vue2/interaction.md](./references/vue2/interaction.md) — 组件交互与通信（Props/Emit/$refs/provide/inject）
-- [@rules/frontend-rules/references/vue2/directives.md](./references/vue2/directives.md) — 模板指令规范
-- [@rules/frontend-rules/references/vue2/order.md](./references/vue2/order.md) — SFC 结构顺序与导入分组（3 组）
+- [@rules/frontend-rules/references/vue2/directives.md](./references/vue2/directives.md) — 模板指令规范（Vue2 特有差异）
+- [@rules/frontend-rules/references/vue2/order.md](./references/vue2/order.md) — SFC 结构顺序与导入分组（通用 4 组）
 - [@rules/frontend-rules/references/vue2/reactivity.md](./references/vue2/reactivity.md) — 响应式陷阱与避坑
 
 Vue3（Composition API）：
@@ -58,21 +64,23 @@ Vue3（Composition API）：
 - [@rules/frontend-rules/references/vue3/overview.md](./references/vue3/overview.md) — 概述与适用范围
 - [@rules/frontend-rules/references/vue3/component-dev.md](./references/vue3/component-dev.md) — 组件开发规范（`<script setup>`）
 - [@rules/frontend-rules/references/vue3/interaction.md](./references/vue3/interaction.md) — 组件交互与通信（defineProps/defineEmits/defineExpose）
-- [@rules/frontend-rules/references/vue3/directives.md](./references/vue3/directives.md) — 模板指令规范
+- [@rules/frontend-rules/references/vue3/directives.md](./references/vue3/directives.md) — 模板指令规范（Vue3 特有差异）
 - [@rules/frontend-rules/references/vue3/order.md](./references/vue3/order.md) — SFC 结构顺序与导入分组（4 组）
 - [@rules/frontend-rules/references/vue3/reactivity.md](./references/vue3/reactivity.md) — 响应式状态管理（ref/reactive/computed）
 - [@rules/frontend-rules/references/vue3/watch.md](./references/vue3/watch.md) — watch/watchEffect 监听规范
-- [@rules/frontend-rules/references/vue3/hooks.md](./references/vue3/hooks.md) — Hooks 组合式函数规范
-- [@rules/frontend-rules/references/vue3/typescript.md](./references/vue3/typescript.md) — TypeScript 类型注解规范
+- [@rules/frontend-rules/references/vue3/hooks.md](./references/vue3/hooks.md) — Hooks 组合式函数规范（Vue3 特有差异）
+- [@rules/frontend-rules/references/vue3/typescript.md](./references/vue3/typescript.md) — TypeScript 规范（Vue3 特有差异）
 
 React：
 
 - [@rules/frontend-rules/references/react/overview.md](./references/react/overview.md) — 概述与适用范围
 - [@rules/frontend-rules/references/react/component-dev.md](./references/react/component-dev.md) — 函数组件开发规范
-- [@rules/frontend-rules/references/react/hooks.md](./references/react/hooks.md) — Hooks 规范
+- [@rules/frontend-rules/references/react/interaction.md](./references/react/interaction.md) — 组件交互与通信（Props/回调/状态提升/Context/Render Props/状态管理选型/事件总线）
+- [@rules/frontend-rules/references/react/order.md](./references/react/order.md) — 文件结构与代码顺序（4 组 Import、JSX 属性顺序）
+- [@rules/frontend-rules/references/react/hooks.md](./references/react/hooks.md) — Hooks 规范（调用规则、内置 Hooks）
 - [@rules/frontend-rules/references/react/state.md](./references/react/state.md) — 状态管理
 - [@rules/frontend-rules/references/react/jsx.md](./references/react/jsx.md) — JSX 规范
-- [@rules/frontend-rules/references/react/typescript.md](./references/react/typescript.md) — TypeScript 规范
+- [@rules/frontend-rules/references/react/typescript.md](./references/react/typescript.md) — TypeScript 规范（React 特有差异）
 
 ## 适用范围
 

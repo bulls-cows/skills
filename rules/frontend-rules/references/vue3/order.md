@@ -139,10 +139,10 @@ import SearchBar from './SearchBar.vue'
 
 ## 四、模板属性顺序
 
-详见 [directives.md](./directives.md#五模板属性顺序)（9 步完整顺序：`is` → `v-for` → `v-if/else` → `v-show` → `id` → `props` → `v-on` → `v-html` → `v-slot`）。
+详见 [@rules/frontend-rules/references/common-vue-template.md](../common-vue-template.md#六模板属性顺序)（通用 8 步顺序）与 [directives.md](./directives.md#一vue3-特有第-9-步动态-v-slot)（Vue3 追加第 9 步 `v-slot`）。
 
 ---
 
 ## 五、文件与目录命名
 
-详见 [naming.md](../naming.md#一文件与组件命名)。
+详见 [naming.md](../naming.md#-一文件与目录命名)。

@@ -6,9 +6,9 @@ priority: 🟢 风格指南（建议遵循）
 maintainer: bulls-cows team
 ---
 
-# 🎨 代码风格与格式化规范
+# 代码风格与格式化规范
 
-> 本规范统一前端代码外观风格，减少diff冲突，提升代码可读性。所有格式化规则由Prettier统一接管，禁止手动调整格式。
+> 本规范统一前端代码外观风格，减少 diff 冲突，提升代码可读性。所有格式化规则由 Prettier 统一接管，禁止手动调整格式。
 
 ## 一、Prettier 配置规则
 
@@ -52,7 +52,7 @@ maintainer: bulls-cows team
 | 括号同行     | `bracketSameLine: false`              | 括号不和内容同行        |
 | 散文换行     | `proseWrap: "never"`                  | 从不换行                |
 
-**关键规则**：2空格缩进 | JS单引号 | 行宽120 | 尾随逗号 | 单参数省略括号 | 对象括号保留空格
+**关键规则**：2 空格缩进 | JS 单引号 | 行宽 120 | 尾随逗号 | 单参数省略括号 | 对象括号保留空格
 
 ### 函数写法偏好
 
@@ -65,43 +65,50 @@ maintainer: bulls-cows team
 
 ---
 
-## 📥 二、导入排序规范
+## 二、导入排序规范
 
-导入语句必须按以下顺序分组，组与组之间空一行分隔，组内按字母顺序排序：
+通用约定：导入语句必须按以下顺序分组，组与组之间空一行分隔，组内按字母顺序排序。
 
-1. **第三方库导入**：Vue/React/Node内置模块、npm包（如`import { ref } from 'vue'`）
-2. **全局公共模块导入**：@/utils、@/hooks、@/stores等公共模块
-3. **业务模块导入**：当前业务相关的模块、组件、工具
-4. **类型导入**：TypeScript类型定义导入（`import type { XXX } from 'xxx'`）
-5. **静态资源导入**：图片、样式、JSON等资源文件
+| 分组 | 内容         | 示例                                |
+| ---- | ------------ | ----------------------------------- |
+| 1    | 外部依赖     | `import { ref } from 'vue'`         |
+| 2    | 类型导入     | `import type { XXX } from 'xxx'`    |
+| 3    | 内部全局依赖 | `@/utils`、`@/hooks`、`@/stores` 等 |
+| 4    | 内部相对依赖 | `./` 或 `../` 开头的相对路径        |
+
+> **框架覆盖**：Vue2 历史项目可沿用 3 组（无独立类型组），详见各框架 `order.md` / `component-dev.md`。
+> **可选第 5 组**：Vue SFC 中的静态资源（图片、样式、JSON）可视情况追加为最后一组。
 
 ```typescript
-// ✅ 正确示例
+// ✅ 正确示例（4 组）
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
+import type { User } from '@/types/user'
+
 import { formatDate } from '@/utils/date'
 import { useUserStore } from '@/stores/user'
+
 import UserCard from './components/UserCard.vue'
-import type { User } from '@/types/user'
 import defaultAvatar from '@/assets/avatar.png'
 import './index.scss'
 ```
 
 ---
 
-## 🏗️ 三、代码结构约定
+## 三、代码结构约定
 
 单文件代码按以下顺序组织：
 
 1. 导入语句（按上述分组顺序）
 2. 常量定义（枚举、全局常量、配置项）
-3. 类型定义（TypeScript接口、类型别名）
+3. 类型定义（TypeScript 接口、类型别名）
 4. 状态声明（响应式状态、普通变量）
-5. 计算属性/派生状态
+5. 计算属性 / 派生状态
 6. 工具函数（内部使用的普通函数）
-7. 事件处理函数（以`on`开头的函数）
+7. 事件处理函数（以 `on` 开头的函数）
 8. 生命周期钩子（Vue）/ 副作用（React Hooks）
-9. 导出语句（默认导出/具名导出）
+9. 导出语句（默认导出 / 具名导出）
 
 ```typescript
 // ✅ 正确示例
@@ -145,13 +152,15 @@ onMounted(() => {
 export { list, onSearch }
 ```
 
+> 框架特定的结构顺序详见 [vue2/order.md](./vue2/order.md)、[vue3/order.md](./vue3/order.md)、[react/order.md](./react/order.md)。
+
 ---
 
-## ✨ 四、其他风格规范
+## 四、其他风格规范
 
 ### 变量声明
 
-- 优先使用`const`声明不可变变量，`let`声明可变变量，禁止使用`var`
+- 优先使用 `const` 声明不可变变量，`let` 声明可变变量，禁止使用 `var`
 - 一次只声明一个变量，禁止一行声明多个变量
 - 变量就近声明，在使用前的最近位置声明，不要集中在文件顶部
 
@@ -167,13 +176,11 @@ export { list, onSearch }
 - 运算符前后必须加空格：`a + b`，`a === b`，`c > d`
 - 逗号后面必须加空格：`const arr = [1, 2, 3]`
 - 冒号后面必须加空格：`const obj = { a: 1, b: 2 }`
-- 括号内侧不要加空格：`(a + b) * c`，不要写成`( a + b ) * c`
+- 括号内侧不要加空格：`(a + b) * c`，不要写成 `( a + b ) * c`
 - 注释符号和注释内容之间必须加空格：`// 注释内容`，`/** 文档注释 */`
 
 ### 函数规范
 
-- 优先使用箭头函数表达式：`const fn = () => {}`，避免使用`function`声明
-- 函数参数超过3个时，必须使用对象参数，解构使用
-- 函数名必须语义化，前缀统一：获取用`get`、设置用`set`、处理用`handle`、判断用`is/has/can`等
-
-> 框架特定的结构顺序、模板属性顺序等，详见Vue2/Vue3/React对应框架规范。
+- 优先使用箭头函数表达式：`const fn = () => {}`，避免使用 `function` 声明
+- 函数参数超过 3 个时，必须使用对象参数，解构使用
+- 函数名必须语义化，前缀统一遵循 [naming.md](./naming.md#-二函数命名规范)

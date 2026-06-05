@@ -8,19 +8,15 @@ maintainer: bulls-cows team
 
 # React TypeScript 规范
 
-本规范定义 TypeScript 在 React 项目中的类型使用约定。
+> TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [@rules/frontend-rules/references/common-typescript.md](../common-typescript.md)，本文件仅承载 React 特有内容。
+
+## 前置阅读
+
+- [@rules/frontend-rules/references/common-typescript.md](../common-typescript.md) — TypeScript 通用规范
 
 ---
 
-## 一、类型注解要求
-
-- **参数**：函数参数必须明确类型
-- **返回值**：函数返回值必须明确类型
-- **变量**：变量声明必须明确类型（尤其初始值为空时）
-
----
-
-## 二、Props 类型定义
+## 一、Props 类型定义
 
 ### 使用 interface / type
 
@@ -59,27 +55,7 @@ const UserCard = ({ userId, userName, isActive = false }: IUserCardProps) => {
 
 ---
 
-## 三、禁止使用 `any`
-
-**禁止**使用 `any` 类型，应使用以下替代：
-
-- `unknown`：用于类型不确定的场景
-- `Record<string, unknown>`：用于动态键值对对象
-- 具体类型/接口：定义准确的数据结构
-
-```typescript
-// ✅ 正确
-const data: unknown = JSON.parse(raw)
-const userInfo: IUserInfo = { id: '1', name: 'test' }
-const config: Record<string, unknown> = { key: 'value' }
-
-// ❌ 错误
-const data: any = JSON.parse(raw) // 禁止
-```
-
----
-
-## 四、useState 类型注解
+## 二、useState 类型注解
 
 - useState 必须显式标注类型（尤其初始值为空时）
 
@@ -99,7 +75,7 @@ const [data, setData] = useState() // 推断为 undefined，应明确类型
 
 ---
 
-## 五、useRef 类型注解
+## 三、useRef 类型注解
 
 - DOM 引用必须显式标注元素类型
 - 可变值引用标注具体类型
@@ -119,7 +95,7 @@ const inputRef = useRef(null) // 推断为 RefObject<null>
 
 ---
 
-## 六、事件处理类型
+## 四、事件处理类型
 
 - 使用 React 提供的泛型事件类型
 
@@ -148,7 +124,7 @@ const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
 ---
 
-## 七、Children 类型
+## 五、Children 类型
 
 - 使用 `React.ReactNode` 作为 children 类型
 
@@ -170,7 +146,7 @@ const Card = ({ title, children }: ICardProps) => {
 
 ---
 
-## 八、组件返回类型
+## 六、组件返回类型
 
 - 优先使用显式返回类型
 - 可使用 `React.FC` 或 `JSX.Element`
@@ -194,28 +170,7 @@ const UserCard = ({ userId }: IUserCardProps) => {
 
 ---
 
-## 九、类型导入
-
-- 使用 `import type` 导入纯类型，减少运行时依赖
-
-```typescript
-// ✅ 正确：type-only 导入
-import type { IUserInfo, ITableConfig } from '@src/types'
-import { useState, useEffect } from 'react'
-
-// 值和类型同时导入时分开写
-import type { User } from '@src/types'
-import { apiGetUser } from '@src/api/user'
-```
-
-**规则**：
-
-- 仅用于类型导入时使用 `import type`
-- 值和类型同时导入时分开写（`import type` 和 `import` 分两行）
-
----
-
-## 十、泛型组件
+## 七、泛型组件
 
 - 泛型组件使用 `<T,>` 语法（末尾逗号避免 JSX 解析歧义）
 
@@ -245,52 +200,13 @@ const List = <T,>({ items, renderItem }: IListProps<T>): JSX.Element => {
 
 ---
 
-## 十一、类型文件组织
+## 八、相关模块引用
 
-- **全局类型**：放在 `src/types/` 目录下（如 `src/types/user.d.ts`）
-- **组件私有类型**：放在组件同级目录或组件文件内 `export interface`
-- **全局注入**：在 `src/types/index.ts` 中统一导出，便于项目全局引用
-- **命名规范**：类型别名和接口以 `I` 前缀 + PascalCase（详见 [../naming.md](../naming.md)）
-
-```
-src/
-├── types/
-│   ├── user.d.ts      # 全局用户类型
-│   ├── api.d.ts       # 接口响应类型
-│   └── index.ts       # 统一导出
-└── components/
-    └── UserCard/
-        ├── index.tsx
-        └── types.ts   # 组件私有类型
-```
-
----
-
-## 十二、类型压制（不推荐）
-
-**不推荐**使用 `as any`、`@ts-ignore`、`@ts-expect-error` 等类型压制操作。应优先通过完善类型定义解决类型问题，仅在特殊场景（如第三方库类型缺失、历史代码迁移过渡期）中使用。
-
-```typescript
-// ❌ 不推荐
-const data = response as any
-// @ts-ignore
-const value = obj.property
-
-// ✅ 正确：完善类型定义
-interface IApiResponse {
-  data: IUserInfo
-}
-const { data } = response as IApiResponse
-```
-
----
-
-## 十三、相关模块引用
-
-| 内容       | 详见                                   |
-| ---------- | -------------------------------------- |
-| 组件开发   | [component-dev.md](./component-dev.md) |
-| Hooks 规范 | [hooks.md](./hooks.md)                 |
-| 状态管理   | [state.md](./state.md)                 |
-| JSX 规范   | [jsx.md](./jsx.md)                     |
-| 命名规范   | [../naming.md](../naming.md)           |
+| 内容                | 详见                                               |
+| ------------------- | -------------------------------------------------- |
+| TypeScript 通用规范 | [../common-typescript.md](../common-typescript.md) |
+| 组件开发            | [component-dev.md](./component-dev.md)             |
+| Hooks 规范          | [hooks.md](./hooks.md)                             |
+| 状态管理            | [state.md](./state.md)                             |
+| JSX 规范            | [jsx.md](./jsx.md)                                 |
+| 命名规范            | [../naming.md](../naming.md)                       |

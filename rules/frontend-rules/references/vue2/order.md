@@ -109,15 +109,18 @@ export default {
 
 ---
 
-## 三、Import 分组（3 组）
+## 三、Import 分组（通用 4 组）
 
-Import 必须分为 3 组，组间空一行，组内按字母顺序排序：
+Vue2 推荐采用通用 **4 组**分组（与 Vue3、React 对齐）。组间空一行，组内按字母顺序排序：
 
 1. **外部依赖**：`vue`, `dayjs`, `lodash` 等第三方库
-2. **内部全局**：`@src/` 开头
-3. **内部相对**：`./` 或 `../` 开头
+2. **类型导入**：所有 `import type` 导入的纯类型
+3. **内部全局依赖**：`@src/` 开头的路径（API、工具、Hooks、Store、常量、组件等）
+4. **内部相对依赖**：`./` 或 `../` 开头的相对路径
 
-**排序原则**：外部优先 → 全局在前 → 相对在后 → 组内按字母顺序
+**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序排列
+
+> 历史项目若没有独立的类型导入组，可保留 3 组（合并类型导入到对应组）。通用规则详见 [@rules/frontend-rules/references/code-style.md](../code-style.md#二导入排序规范)。
 
 ```javascript
 // 1. node_modules
@@ -125,13 +128,16 @@ import Vue from 'vue'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash'
 
-// 2. 内部全局依赖（@src/）
+// 2. types（类型导入）
+import type { IUserInfo } from '@src/types/user'
+
+// 3. 内部全局依赖（@src/）
 import { apiGetUserInfo } from '@src/api/user'
 import store from '@src/store'
 import { APP_CONFIG } from '@src/constants'
 import DataTable from '@src/components/DataTable'
 
-// 3. 内部相对依赖（./）
+// 4. 内部相对依赖（./）
 import { localHelper } from './utils/helper'
 import { MAX_RETRY_COUNT } from './constants'
 import SearchBar from './SearchBar.vue'

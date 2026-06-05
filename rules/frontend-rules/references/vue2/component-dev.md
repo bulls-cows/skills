@@ -8,16 +8,23 @@ maintainer: bulls-cows team
 
 # Vue2 组件开发规范
 
-本模块整合 Vue2 组件开发的核心规范，基于 Options API 风格。
+> 本规范仅承载 Vue2 组件开发特有内容。通用规范（JSDoc、模板规则、注释等）通过引用避免重复。
 
-## 核心要求
+## 前置阅读
 
-### Options API 要求
+- [@rules/frontend-rules/references/comments.md](../comments.md) — 注释规范（含 Script 顶部 JSDoc 模板）
+- [@rules/frontend-rules/references/common-vue-template.md](../common-vue-template.md) — Vue 模板通用规则
+
+---
+
+## 一、Options API 要求
 
 - 使用 **Options API**（`data()`、`methods`、`computed`、`watch`、生命周期钩子）
 - 组件必须声明 `name` 选项
 
-### 脚本结构顺序
+---
+
+## 二、脚本结构顺序
 
 详见 [order.md](./order.md#二script-内部结构顺序)
 
@@ -25,52 +32,37 @@ maintainer: bulls-cows team
 
 1. `name` → 2. `components` → 3. `props` → 4. `data()` → 5. `computed` → 6. `watch` → 7. `methods` → 8. 生命周期钩子
 
-### 完整示例
+---
 
-详见 [order.md](./order.md#二script-内部结构顺序)（包含完整的 3 组 import 分组、Options API 结构）。
+## 三、Vue 元素特性顺序
 
-### Script 顶部 JSDoc
+详见 [../common-vue-template.md](../common-vue-template.md#六模板属性顺序)（Vue2 沿用通用 8 步）。
 
-详见 [../comments.md](../comments.md#二脚本区注释)
+---
 
-```javascript
-/**
- * 组件名称
- * @description 页面职责说明
- * @description 核心业务流程简述
- * @description 关键数据来源
- */
-export default {
-  name: 'ComponentName',
-  // ...
-}
-```
-
-### Vue 元素特性顺序
-
-详见 [directives.md](./directives.md#五模板属性顺序)（9 步完整顺序：`is` → `v-for` → `v-if/else` → `v-show` → `id` → `props/attrs` → `v-on` → `v-html/v-text`）。
-
-### v-slot 风格
+## 四、v-slot 风格
 
 - 使用动态风格（如 `v-slot:[name]`）
 - 禁止静态默认插槽写法
 
-### 模板层轻量化
+---
+
+## 五、模板层轻量化
 
 详见 [../performance.md](../performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
 
-### 注释规范
+---
 
-详见 [../comments.md](../comments.md)
-
-### 方法职责
+## 六、方法职责
 
 - 方法内部顺序：init → 网络请求 → 事件处理 → 特殊计算
 - 一个方法只做一件事，超过 **50 行**必须拆分
 - 重复逻辑抽离为公共方法
 - **不要过度封装**：简单条件判断直接写在 template 中
 
-### 页面拆分建议
+---
+
+## 七、页面拆分建议
 
 - 页面组件超过 300 行建议拆分
 - 按功能区块拆分：搜索表单、数据表格、分页器、操作按钮组
@@ -82,18 +74,24 @@ export default {
 | 表格 | 表格组件 + 业务逻辑分离 |
 | 表单 | 表单组件 + 校验逻辑分离 |
 
-### 事件处理
+---
+
+## 八、事件处理
 
 详见 [interaction.md](./interaction.md#二emit-事件规范)（事件白名单、Emit 顺序）。
 
-## 相关模块引用
+---
+
+## 九、相关模块引用
 
 | 内容           | 详见                                                    |
 | -------------- | ------------------------------------------------------- |
+| 注释规范       | [../comments.md](../comments.md)                        |
 | Props 定义     | [interaction.md](./interaction.md#一props-定义规范)     |
 | Emit 事件      | [interaction.md](./interaction.md#二emit-事件规范)      |
-| v-model        | [interaction.md](./interaction.md#二v-model-写法)       |
+| v-model        | [interaction.md](./interaction.md#2-v-model-写法)       |
 | 组件通信       | [interaction.md](./interaction.md#四组件间通信)         |
 | `$refs` 访问   | [interaction.md](./interaction.md#三对外暴露与访问)     |
-| provide/inject | [interaction.md](./interaction.md#三provideinject-规范) |
+| provide/inject | [interaction.md](./interaction.md#1-provideinject-规范) |
 | 导入顺序       | [order.md](./order.md)                                  |
+| 模板规则       | [../common-vue-template.md](../common-vue-template.md)  |

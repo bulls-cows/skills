@@ -247,59 +247,9 @@ useEffect(() => {
 
 ---
 
-## 六、状态提升
+## 六、状态提升与跨组件通信
 
-### 当多个组件需要同一状态时
-
-- 将状态提升到最近的共同父组件
-- 通过 Props 向下传递状态和回调
-
-```typescript
-// ✅ 正确：状态提升到父组件
-const Parent = () => {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div>
-      <ChildA count={count} />
-      <ChildB onIncrement={() => setCount((c) => c + 1)} />
-    </div>
-  )
-}
-```
-
-### 避免 Prop Drilling
-
-- 当层级过深时，使用 Context 或状态管理库
-- 不要逐层传递 Props
-
-```typescript
-// ❌ 错误：Prop Drilling（层级过深）
-const App = () => {
-  const [theme, setTheme] = useState('light')
-  return <Layout theme={theme} setTheme={setTheme} />
-}
-
-const Layout = ({ theme, setTheme }) => {
-  return <Header theme={theme} setTheme={setTheme} />
-}
-
-const Header = ({ theme, setTheme }) => {
-  return <ThemeToggle theme={theme} setTheme={setTheme} />
-}
-
-// ✅ 正确：使用 Context
-const ThemeContext = createContext(null)
-
-const App = () => {
-  const [theme, setTheme] = useState('light')
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Layout />
-    </ThemeContext.Provider>
-  )
-}
-```
+详见 [interaction.md](./interaction.md)（状态提升、Context 共享、Render Props、Compound Components、自定义 Hook 共享、状态管理选型、全局事件总线）。
 
 ---
 
@@ -307,6 +257,7 @@ const App = () => {
 
 | 内容       | 详见                                   |
 | ---------- | -------------------------------------- |
+| 组件交互   | [interaction.md](./interaction.md)     |
 | Hooks 规范 | [hooks.md](./hooks.md)                 |
 | 组件开发   | [component-dev.md](./component-dev.md) |
 | TypeScript | [typescript.md](./typescript.md)       |

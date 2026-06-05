@@ -8,7 +8,7 @@ maintainer: bulls-cows team
 
 # Vue2 组件交互与通信规范
 
-本规范涵盖组件对外接口（Props/Emits/$refs）及组件间数据通信约定。
+> 本规范涵盖 Vue2 组件对外接口（Props/Emits/$refs）及组件间数据通信约定。
 
 ---
 
@@ -45,7 +45,7 @@ export default {
 ### 3. 使用限制
 
 - **禁止修改 Props**：禁止在子组件内部直接修改 `props` 值
-- **数据流向**：Props 是单向数据流（父 -> 子），如需修改父级状态，必须通过 Emit 事件通知父组件
+- **数据流向**：Props 是单向数据流（父 → 子），如需修改父级状态，必须通过 Emit 事件通知父组件
 
 ---
 
