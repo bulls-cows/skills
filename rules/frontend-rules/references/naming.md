@@ -28,8 +28,6 @@ maintainer: bulls-cows team
 
 ---
 
----
-
 ## 🔧 二、函数命名规范
 
 | 类型              | 规范                               | 示例                                              | 说明                     |
@@ -40,8 +38,6 @@ maintainer: bulls-cows team
 | Vue/React Hooks   | `use` + 功能（小驼峰）             | `useUserInfo`, `useRouterQuery`, `useWindowSize`  | 符合Hooks命名规范        |
 | 计算属性/派生函数 | 名词/形容词（小驼峰）              | `fullName`, `isDisabled`, `filteredList`          | 表示是一个值而非动作     |
 | 操作函数          | 动词 + 名词（小驼峰）              | `openDialog`, `closeModal`, `loadData`            | 明确表示执行的动作       |
-
----
 
 ---
 
@@ -60,8 +56,6 @@ maintainer: bulls-cows team
 
 ---
 
----
-
 ## 🎯 四、事件命名规范
 
 | 场景                      | 规范                  | 示例                              | 说明                               |
@@ -75,11 +69,9 @@ maintainer: bulls-cows team
 
 ---
 
----
-
 ## 🎨 五、CSS 命名规范（BEM）
 
-> 样式命名必须遵循BEM规范，详见[css.md](./css.md#css-命名bem)
+> 样式命名必须遵循BEM规范，详见[css.md](./css.md#三css-命名bem)
 
 ### BEM核心规则
 

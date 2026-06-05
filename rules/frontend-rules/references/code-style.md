@@ -10,7 +10,7 @@ maintainer: bulls-cows team
 
 > 本规范统一前端代码外观风格，减少diff冲突，提升代码可读性。所有格式化规则由Prettier统一接管，禁止手动调整格式。
 
-## Prettier 配置规则
+## 一、Prettier 配置规则
 
 必须遵循 `.prettierrc.json` 的完整配置：
 
@@ -54,7 +54,7 @@ maintainer: bulls-cows team
 
 **关键规则**：2空格缩进 | JS单引号 | 行宽120 | 尾随逗号 | 单参数省略括号 | 对象括号保留空格
 
-## 函数写法偏好
+### 函数写法偏好
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 

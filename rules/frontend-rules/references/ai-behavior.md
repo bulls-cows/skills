@@ -97,7 +97,7 @@ maintainer: bulls-cows team
 
 ## 📄 输出格式要求
 
-1. 代码片段必须使用对应的语法高亮标识（`javascript, `vue, ```typescript等）
+1. 代码片段必须使用对应的语法高亮标识（`javascript`、`vue`、`typescript` 等）
 2. 列表内容必须使用统一的编号或项目符号，结构清晰
 3. 表格内容必须对齐，易于阅读
 4. 重要信息必须使用加粗或高亮标识，方便用户快速识别

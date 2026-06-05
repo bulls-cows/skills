@@ -10,14 +10,14 @@ maintainer: bulls-cows team
 
 > 本规范统一前端样式开发标准，确保样式可维护、可扩展、兼容性好。所有样式必须遵循BEM命名规范，优先使用scoped作用域。
 
-## 🛠️ CSS基础配置
+## 🛠️ 一、CSS基础配置
 
 - 预处理器：优先使用Sass/SCSS，Less为辅
 - 格式化：Prettier + stylelint统一格式化，禁止手动调整格式
 - 全局样式：统一放在`src/styles/`目录下，包括变量、混合、重置样式、公共类等
 - 组件样式：优先使用scoped作用域，避免全局样式污染
 
-## 样式区注释与作用域
+## 二、样式区注释与作用域
 
 ### 注释格式
 
@@ -33,11 +33,11 @@ maintainer: bulls-cows team
 - 非 `scoped`：需标注 `/* 全局 */`
 - 优先使用 `scoped`
 
-## CSS 命名（BEM）
+## 三、CSS 命名（BEM）
 
-详见 [naming.md](./naming.md#五css-命名bem-规范)（块/元素/修饰符命名规则）。
+详见 [naming.md](./naming.md#五css-命名规范bem)（块/元素/修饰符命名规则）。
 
-## CSS 布局推荐
+## 四、CSS 布局推荐
 
 ### 定位层级
 
@@ -50,7 +50,7 @@ maintainer: bulls-cows team
 
 **原因**：向下布局更稳定，减少相邻元素的间距叠加问题（margin collapse）。
 
-## CSS 兼容性指南
+## 五、CSS 兼容性指南
 
 ### 常见兼容性属性
 
@@ -68,7 +68,7 @@ maintainer: bulls-cows team
 
 ---
 
-## 🔢 四、CSS属性排序规范
+## 🔢 六、CSS属性排序规范
 
 属性必须按以下顺序排列，相关属性分组，组之间空一行分隔：
 
@@ -115,7 +115,7 @@ maintainer: bulls-cows team
 
 ---
 
-## 📦 五、SCSS最佳实践
+## 📦 七、SCSS最佳实践
 
 ### 变量使用
 
@@ -163,7 +163,7 @@ maintainer: bulls-cows team
 
 ---
 
-## 📏 六、单位规范
+## 📏 八、单位规范
 
 - 长度单位：优先使用`px`，响应式场景使用`rem`/`vw`，移动端适配使用`rpx`（小程序）
 - 字体单位：字体大小使用`px`，行高优先使用无单位数值，如`line-height: 1.5;`
@@ -173,7 +173,7 @@ maintainer: bulls-cows team
 
 ---
 
-## ✨ 七、动画规范
+## ✨ 九、动画规范
 
 - 动画优先使用CSS3 transition/animation实现，避免JS动画
 - 动画属性优先使用transform和opacity，触发GPU加速，性能更好
@@ -183,7 +183,7 @@ maintainer: bulls-cows team
 
 ---
 
-## 🤝 兼容性开发实践
+## 🤝 十、兼容性开发实践
 
 - **查兼容性**：使用[Can I use](https://caniuse.com/)查询属性支持情况，新属性必须做兼容性检查
 - **自动前缀**：配置Autoprefixer + PostCSS，自动补齐厂商前缀，不需要手动写-webkit-等前缀
