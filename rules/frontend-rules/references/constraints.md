@@ -42,7 +42,7 @@ maintainer: bulls-cows team
 | --- | -------------- | --------------------------------------------------- | ----------------------------------------------------------------------------- |
 | 1   | 函数 try/catch | 异步函数必须用 try/catch 包裹，catch 中必须记录错误 | `try { await api.getUser() } catch (e) { console.warn('获取用户失败', e) }`   |
 | 2   | async/await    | 优先使用 async/await，少用 `.then()` 链式写法       | `const res = await api.getUser()` 优于 `api.getUser().then(res => {})`        |
-| 3   | computed 优先  | 能用计算属性派生的状态不手动维护                    | `const fullName = computed(() => \`${firstName.value} ${lastName.value}\`)`   |
+| 3   | computed 优先  | 能用计算属性派生的状态不手动维护                    | ``const fullName = computed(() => `${firstName.value} ${lastName.value}`)``   |
 | 4   | watch 按需使用 | 合理使用深度监听和立即监听，避免不必要的执行        | `watch(user, () => { loadData() }, { deep: true, immediate: true })`          |
 | 5   | 减少状态冗余   | 优先通过 computed 派生状态，减少重复定义            | 避免同时定义 `list` 和 `filteredList` 两个状态，用 computed 派生 filteredList |
 
