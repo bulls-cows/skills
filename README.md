@@ -36,6 +36,8 @@
 | ------------------------------------------------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------- |
 | [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行规范的 Git 提交         | `npx skills add bulls-cows/skills --skill yy-commit`                       |
+| [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架         | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
+| [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架          | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档        | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
 | [yy-create-report](./skills/yy-create-report/SKILL.md)                               | 生成面向管理视角的工作报告        | `npx skills add bulls-cows/skills --skill yy-create-report`                |
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md)                                   | 创建或更新项目规则文档            | `npx skills add bulls-cows/skills --skill yy-create-rule`                  |
