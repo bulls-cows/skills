@@ -109,7 +109,19 @@ npm run test
 
 ## 环境变量
 
-默认环境变量位于 `.env`：
+请先复制 `.env.example` 为 `.env`，再按需修改：
+
+```bash
+cp .env.example .env
+```
+
+如果在 Windows PowerShell 中执行，可以使用：
+
+```powershell
+Copy-Item .env.example .env
+```
+
+`.env.example` 中提供了默认环境变量：
 
 | 变量            | 默认值 | 说明                     |
 | --------------- | ------ | ------------------------ |
