@@ -42,6 +42,7 @@
 | [yy-create-report](./skills/yy-create-report/SKILL.md)                               | 生成面向管理视角的工作报告        | `npx skills add bulls-cows/skills --skill yy-create-report`                |
 | [yy-create-rule](./skills/yy-create-rule/SKILL.md)                                   | 创建或更新项目规则文档            | `npx skills add bulls-cows/skills --skill yy-create-rule`                  |
 | [yy-create-skill](./skills/yy-create-skill/SKILL.md)                                 | 创建或更新可复用的 Skill 技能     | `npx skills add bulls-cows/skills --skill yy-create-skill`                 |
+| [yy-create-template-project](./skills/yy-create-template-project/SKILL.md)           | 提炼或完善可复用的脱敏模板项目    | `npx skills add bulls-cows/skills --skill yy-create-template-project`      |
 | [yy-create-vue3](./skills/yy-create-vue3/SKILL.md)                                   | 快速生成统一结构的 Vue 3 项目骨架 | `npx skills add bulls-cows/skills --skill yy-create-vue3`                  |
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md)                                       | 生成符合国人审美的网页界面设计    | `npx skills add bulls-cows/skills --skill yy-design-ui`                    |
 | [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容        | `npx skills add bulls-cows/skills --skill yy-distill`                      |
