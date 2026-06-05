@@ -116,12 +116,12 @@ maintainer: bulls-cows team
 
 ### React
 
-| 规则                   | 详见                                               | 说明                                                              |
-| ---------------------- | -------------------------------------------------- | ----------------------------------------------------------------- |
-| **组件结构与代码组织** | [react/order.md](./react/order.md)                 | 文件结构、组件内部顺序、Import 分组（4 组）、JSX 属性顺序         |
-| **组件交互与通信**     | [react/interaction.md](./react/interaction.md)     | 回调命名、状态提升、Context、Render Props、状态管理选型、事件总线 |
-| **Hooks React 特有**   | [react/hooks.md](./react/hooks.md)                 | 调用规则、内置 Hooks、useCallback                                 |
-| **状态管理**           | [react/state.md](./react/state.md)                 | useState/useReducer/Context 选择与使用                            |
+| 规则                   | 详见                                           | 说明                                                              |
+| ---------------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
+| **组件结构与代码组织** | [react/order.md](./react/order.md)             | 文件结构、组件内部顺序、Import 分组（4 组）、JSX 属性顺序         |
+| **组件交互与通信**     | [react/interaction.md](./react/interaction.md) | 回调命名、状态提升、Context、Render Props、状态管理选型、事件总线 |
+| **Hooks React 特有**   | [react/hooks.md](./react/hooks.md)             | 调用规则、内置 Hooks、useCallback                                 |
+| **状态管理**           | [react/state.md](./react/state.md)             | useState/useReducer/Context 选择与使用                            |
 
 ---
 
