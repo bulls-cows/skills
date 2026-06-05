@@ -1,3 +1,11 @@
+---
+title: Vue3 侦听器规范（watch/watchEffect）
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # Vue3 侦听器规范（watch/watchEffect）
 
 本规范涵盖 `watch`、`watchEffect` 的使用场景、配置选项、清理机制及与 `computed` 的选择策略。

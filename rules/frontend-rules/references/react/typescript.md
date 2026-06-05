@@ -1,3 +1,11 @@
+---
+title: React TypeScript 规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # React TypeScript 规范
 
 本规范定义 TypeScript 在 React 项目中的类型使用约定。

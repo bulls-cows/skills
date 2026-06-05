@@ -1,3 +1,11 @@
+---
+title: Vue3 组件开发规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # Vue3 组件开发规范
 
 本模块整合 Vue3 组件开发的核心规范，通过引用其他模块避免重复。
@@ -47,7 +55,7 @@
 
 ### 模板层轻量化
 
-详见 [performance.md](../performance.md#六模板层轻量化)（模板职责分离、简单逻辑内联原则）。
+详见 [performance.md](../performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
 
 ### 注释规范
 

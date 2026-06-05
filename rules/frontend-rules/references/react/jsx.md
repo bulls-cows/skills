@@ -1,3 +1,11 @@
+---
+title: React JSX 规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟢 风格指南（建议遵循）
+maintainer: bulls-cows team
+---
+
 # React JSX 规范
 
 本规范涵盖 JSX 的语法规范、条件渲染、列表渲染、事件处理、属性传递及样式使用。

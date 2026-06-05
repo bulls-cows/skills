@@ -1,3 +1,11 @@
+---
+title: Vue3 组件交互与通信规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # Vue3 组件交互与通信规范
 
 本规范涵盖组件对外接口（Props/Emits/Expose）及组件间数据通信约定。

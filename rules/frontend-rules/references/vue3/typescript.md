@@ -1,3 +1,11 @@
+---
+title: Vue3 TypeScript 规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # Vue3 TypeScript 规范
 
 本规范定义 TypeScript 在 Vue3 项目中的类型使用约定。
@@ -185,7 +193,7 @@ export const useTable = (): IUseTableReturn => {
 使用 `import type` 导入纯类型，减少运行时依赖：
 
 ```typescript
-import type { User, dataSource } from '@src/types'
+import type { IUserInfo, ITableConfig } from '@src/types'
 import { ref, computed } from 'vue'
 ```
 

@@ -1,3 +1,11 @@
+---
+title: Vue2 模板指令规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # Vue2 模板指令规范
 
 本规范涵盖 Vue2 模板指令的使用、排列、简写及安全注意事项。

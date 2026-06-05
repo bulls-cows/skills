@@ -1,3 +1,11 @@
+---
+title: Vue3 组合式函数（Hooks）规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # Vue3 组合式函数（Hooks）规范
 
 本规范涵盖 Hooks 的命名、文件组织、返回值、使用方式及抽离建议。

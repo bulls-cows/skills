@@ -1,3 +1,11 @@
+---
+title: Vue3 响应式状态规范（ref/reactive/computed）
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # Vue3 响应式状态规范（ref/reactive/computed）
 
 本规范涵盖 `ref`、`reactive`、`computed` 的选择原则、转换规则及使用规范。

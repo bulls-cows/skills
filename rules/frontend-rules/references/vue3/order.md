@@ -1,3 +1,11 @@
+---
+title: Vue3 代码组织与顺序规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # Vue3 代码组织与顺序规范
 
 本规范定义 SFC 结构、Imports、脚本内部逻辑及模板属性的排列顺序。
@@ -109,7 +117,7 @@ import dayjs from 'dayjs'
 import { debounce } from 'lodash'
 
 // 2. types（类型导入）
-import type { User, dataSource } from '@src/types'
+import type { IUserInfo, ITableConfig } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
 import { apiGetUserInfo } from '@src/api/user'

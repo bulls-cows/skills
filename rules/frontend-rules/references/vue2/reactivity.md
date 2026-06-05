@@ -1,3 +1,11 @@
+---
+title: Vue2 响应式陷阱
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # Vue2 响应式陷阱
 
 Vue2 使用 `Object.defineProperty` 实现响应式，以下场景必须使用 `$set` 或替代方案，否则新增属性或数组索引赋值不会触发视图更新。

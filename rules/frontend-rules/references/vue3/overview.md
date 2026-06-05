@@ -1,3 +1,11 @@
+---
+title: Vue3 概述与适用范围
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # Vue3 概述与适用范围
 
 ## 技术栈

@@ -1,3 +1,11 @@
+---
+title: React 状态管理规范
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🟠 强烈推荐（必须遵循）
+maintainer: bulls-cows team
+---
+
 # React 状态管理规范
 
 本规范涵盖 React 中状态的选择策略、更新方式、结构设计及共享状态管理。

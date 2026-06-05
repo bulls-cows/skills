@@ -1,3 +1,11 @@
+---
+title: React 项目概述与适用范围
+version: 2.0.0
+lastUpdated: 2026-06-03
+priority: 🔴 基础规范（强制执行）
+maintainer: bulls-cows team
+---
+
 # React 项目概述与适用范围
 
 本规范适用于使用 React 18+ 的前端项目，基于函数组件 + Hooks 的开发模式。
