@@ -11,10 +11,31 @@ export function waitUntilPositive(
       watchHandler: WatchHandle,
     ) => {
       if (newVal && !oldVal) {
-        if (callback) {
-          await callback(watchHandler);
+        if (!callback) {
+          watchHandler();
+          resolve();
+          return;
         }
-        resolve();
+
+        let stopped = false;
+        const stopWatching = () => {
+          if (stopped) {
+            return;
+          }
+
+          stopped = true;
+          watchHandler();
+          resolve();
+        };
+
+        const controlledWatchHandler = Object.assign(stopWatching, {
+          pause: watchHandler.pause.bind(watchHandler),
+          resume: watchHandler.resume.bind(watchHandler),
+          stop: stopWatching,
+        }) as WatchHandle;
+
+        await callback(controlledWatchHandler);
+        return;
       }
     };
 
@@ -37,10 +58,31 @@ export function waitUntilNegative(
       watchHandler: WatchHandle,
     ) => {
       if (!newVal && oldVal) {
-        if (callback) {
-          await callback(watchHandler);
+        if (!callback) {
+          watchHandler();
+          resolve();
+          return;
         }
-        resolve();
+
+        let stopped = false;
+        const stopWatching = () => {
+          if (stopped) {
+            return;
+          }
+
+          stopped = true;
+          watchHandler();
+          resolve();
+        };
+
+        const controlledWatchHandler = Object.assign(stopWatching, {
+          pause: watchHandler.pause.bind(watchHandler),
+          resume: watchHandler.resume.bind(watchHandler),
+          stop: stopWatching,
+        }) as WatchHandle;
+
+        await callback(controlledWatchHandler);
+        return;
       }
     };
 
