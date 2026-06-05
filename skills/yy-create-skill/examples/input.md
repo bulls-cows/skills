@@ -31,10 +31,11 @@
 2. 自动生成测试用例
 3. 执行测试并生成报告
 4. 报告格式包含：通过率、失败详情、性能指标
+5. 如果当前环境没有 yy-skill-to-prompt，我确认使用本地回退流程生成 prompts/skill-prompts.md
 ```
 
 ## 示例 5：显式调用技能创建
 
 ```text
-Use the create-skill skill to help me create a new skill for database migration management.
+使用 yy-create-skill 技能，帮我创建一个用于管理数据库迁移的技能。
 ```

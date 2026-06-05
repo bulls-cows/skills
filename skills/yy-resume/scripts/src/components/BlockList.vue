@@ -85,7 +85,6 @@
  * 显示当前页面中的所有区块，支持排序、删除、添加
  */
 import { ref } from 'vue';
-import type { BlockConfig, BlockType } from '@/types/resume';
 
 defineProps<{
   blocks: BlockConfig[];

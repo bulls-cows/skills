@@ -47,7 +47,6 @@
  *
  * 编辑证书列表
  */
-import type { Cert } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

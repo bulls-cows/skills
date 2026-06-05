@@ -51,6 +51,7 @@
       "source": "./",
       "strict": true,
       "skills": [
+        "./skills-internal/yy-check-agents-consistency",
         "./skills-internal/yy-check-rules-consistency",
         "./skills-internal/yy-check-skills-consistency",
         "./skills-internal/yy-sync-capability-model",

@@ -120,7 +120,6 @@
  *
  * 编辑项目经验列表，含 variant 选择
  */
-import type { Project } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

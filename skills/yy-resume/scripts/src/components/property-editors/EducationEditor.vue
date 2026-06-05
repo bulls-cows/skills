@@ -54,7 +54,6 @@
  *
  * 编辑教育背景列表
  */
-import type { Education } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

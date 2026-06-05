@@ -19,7 +19,6 @@
 /**
  * ResumePublications - 发表物/出版物组件
  */
-import type { Publication } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

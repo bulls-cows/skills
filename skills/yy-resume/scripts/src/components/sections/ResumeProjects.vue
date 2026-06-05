@@ -43,7 +43,6 @@
  *
  * 职责: 按时间倒序列出项目经历，支持三种变体
  */
-import type { Project } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

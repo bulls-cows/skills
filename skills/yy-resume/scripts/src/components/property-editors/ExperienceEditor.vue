@@ -83,7 +83,6 @@
  *
  * 编辑工作经历列表
  */
-import type { Experience } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

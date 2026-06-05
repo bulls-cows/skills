@@ -17,7 +17,6 @@
 /**
  * ResumeRegulatory - 监管资质/合规体系组件（紧凑标签风格）
  */
-import type { SkillCategory } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

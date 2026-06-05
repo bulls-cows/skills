@@ -3,6 +3,7 @@
   <div class="app">
     <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
     <Toolbar
+      @reset-data="handleResetData"
       @download-json="handleDownloadJson"
       @download-html="handleDownloadHtml"
       @print="printResume"
@@ -12,12 +13,12 @@
     <div class="app__main-content">
       <!-- 可视化页面编辑器 -->
       <PageEditor
-        :data="parsedData"
+        :data="resumeData"
         @update:data="handleDataUpdate"
         @select-block="handleSelectBlock"
       />
       <!-- 简历实时预览 -->
-      <ResumePreview :data="parsedData" :active-target="selectedPreviewTarget" />
+      <ResumePreview :data="resumeData" :active-target="selectedPreviewTarget" />
     </div>
     <!-- 服务停止遮罩 -->
     <StopOverlay :visible="showStopOverlay" />
@@ -33,8 +34,8 @@
  * - 管理 JSON 简历数据的加载、编辑和导出流程
  *
  * ## 数据流向
- * - 单向数据流：rawData (JSON 字符串) → JSON.parse → parsedData (ResumeData)
- * - 用户编辑 → PageEditor → handleDataUpdate → rawData 更新 → 响应式驱动预览刷新
+ * - resumeData (cacheRef) 自动缓存到 localStorage，页面刷新后恢复
+ * - 用户编辑 → PageEditor → handleDataUpdate → resumeData 更新 → 响应式驱动预览刷新
  *
  * ## 交互关系
  * - Toolbar: JSON/HTML 下载、打印、停止服务
@@ -43,17 +44,17 @@
  * - StopOverlay: 服务停止后的全屏遮罩提示
  *
  * ## 核心业务流程
- * 1. 初始化：加载 sampleData 作为默认简历数据
+ * 1. 初始化：从 localStorage 恢复缓存数据，无缓存时使用 sampleData
  * 2. 编辑：用户在 PageEditor 中编辑 → 实时更新 → 刷新预览
  * 3. 导出：下载 JSON / 下载 HTML / 打印
  * 4. 停止：点击停止服务 → 显示遮罩 → 请求 /__stop-server 接口
  */
 
 // --- Vue 核心 API ---
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
-// --- 类型与内部数据 ---
-import type { ResumeData } from '@/types/resume';
+// --- 状态 ---
+import { resumeData } from '@/stores/store';
 import { sampleData } from '@/data/resume-data';
 
 // --- 工具函数 ---
@@ -67,30 +68,16 @@ import StopOverlay from './components/StopOverlay.vue';
 
 // --- 响应式状态 ---
 
-// JSON 原始字符串，作为数据的唯一来源
-const rawData = ref(JSON.stringify(sampleData, null, 2));
-
 // 服务停止遮罩层显示控制
 const showStopOverlay = ref(false);
 
 // 当前需要在预览区突出显示的区块
 const selectedPreviewTarget = ref<{ pageId: string; blockId: string } | null>(null);
 
-// --- 计算属性 ---
-
-// 解析后的结构化简历数据
-const parsedData = computed<ResumeData>(() => {
-  try {
-    return JSON.parse(rawData.value);
-  } catch {
-    return sampleData;
-  }
-});
-
 // --- 事件处理方法 ---
 
 function handleDataUpdate(data: ResumeData) {
-  rawData.value = JSON.stringify(data, null, 2);
+  resumeData.value = data;
 }
 
 function handleSelectBlock(target: { pageId: string; blockId: string } | null) {
@@ -98,19 +85,11 @@ function handleSelectBlock(target: { pageId: string; blockId: string } | null) {
 }
 
 function handleDownloadJson() {
-  try {
-    downloadJson(JSON.parse(rawData.value));
-  } catch {
-    // ignore
-  }
+  downloadJson(resumeData.value);
 }
 
 function handleDownloadHtml() {
-  try {
-    downloadHtml(JSON.parse(rawData.value));
-  } catch {
-    // ignore
-  }
+  downloadHtml(resumeData.value);
 }
 
 async function handleStopServer() {
@@ -120,6 +99,10 @@ async function handleStopServer() {
   } catch {
     // 服务关闭后连接中断是预期行为
   }
+}
+
+function handleResetData() {
+  resumeData.value = JSON.parse(JSON.stringify(sampleData));
 }
 </script>
 

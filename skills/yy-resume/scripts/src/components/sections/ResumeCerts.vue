@@ -17,7 +17,6 @@
 /**
  * ResumeCerts - 证书/资质组件
  */
-import type { Cert } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

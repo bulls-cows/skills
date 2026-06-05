@@ -74,7 +74,6 @@
  *
  * 编辑简历头部信息：姓名、职位、城市、手机、邮箱、社交链接
  */
-import type { Link } from '@/types/resume';
 
 const props = defineProps<{
   name: string;

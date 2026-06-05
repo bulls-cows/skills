@@ -44,7 +44,6 @@
  *
  * 编辑技能分类列表（category + items）
  */
-import type { SkillCategory } from '@/types/resume';
 
 const props = defineProps<{
   blockTitle: string;

@@ -3,7 +3,8 @@
  *
  * 作为编辑器的默认加载数据。
  */
-export const sampleData = {
+
+export const sampleData: ResumeData = {
   name: '张三',
   title: '前端负责人 / 中级 Node.js 后端',
   city: '浦东周浦',

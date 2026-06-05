@@ -20,7 +20,6 @@
 /**
  * ResumeEducation - 教育经历组件
  */
-import type { Education } from '@/types/resume';
 
 defineProps<{
   /** 区块标题 */

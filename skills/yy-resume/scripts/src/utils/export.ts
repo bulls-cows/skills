@@ -1,5 +1,3 @@
-import type { ResumeData, BlockConfig } from '@/types/resume';
-
 /**
  * 创建 Blob 下载链接并触发下载
  * @param blob - 要下载的文件数据

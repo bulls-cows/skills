@@ -1,145 +1,124 @@
 # 输出示例
 
-本文档展示创建技能后的预期输出示例。
+本文档展示创建或更新技能后的预期输出格式示例。
 
 ## 示例 1：简单技能输出
 
-### 示例 1 - 创建结果
+### 创建/更新结果
 
-已成功创建技能 `format-code`。
+- 技能名称：`format-code`
+- 操作类型：创建
 
-### 示例 1 - 目录结构
+### 目录结构
 
 ```text
 .agents/skills/format-code/
 └── SKILL.md
 ```
 
-### 示例 1 - SKILL.md 内容
+### 提示词派生产物状态
 
-```markdown
----
-name: format-code
-description: >
-  在提交代码前自动格式化代码。用于：用户提到"格式化代码"、"代码格式化"、
-  "提交前格式化"时触发。
----
+- `prompts/skill-prompts.md`：未生成
+- 处理方式：跳过
+- 原因：当前环境未安装 `yy-skill-to-prompt`
 
-# format-code
+### SKILL.md 内容摘要
 
-## 描述
+- description：
 
-在提交代码前自动格式化代码，确保代码风格一致。
+  ```text
+  在提交代码前自动格式化代码。用于格式化代码风格，不用于重构代码逻辑或修改代码功能。
+  ```
 
-## 使用场景
-
-- 用户提到"格式化代码"、"代码格式化"
-- 用户要在提交前整理代码格式
-- 用户要求统一代码风格
-
-不应触发：
-
-- 用户只是查看代码
-- 用户要求重构代码逻辑
-- 用户要求修改代码功能
-
-## 指令
-
-1. 检测项目使用的语言和格式化工具
-2. 运行相应的格式化命令
-3. 输出格式化结果：工具名称、处理文件数、变更摘要
-```
+- 指令步骤概要：
+  - `步骤 1. 检测项目使用的语言和格式化工具`
+  - `步骤 2. 运行相应的格式化命令`
+  - `步骤 3. 输出格式化结果`
 
 ---
 
 ## 示例 2：带模板的技能输出
 
-### 示例 2 - 创建结果
+### 创建/更新结果
 
-已成功创建技能 `generate-readme`。
+- 技能名称：`generate-readme`
+- 操作类型：创建
 
-### 示例 2 - 目录结构
+### 目录结构
 
 ```text
 .agents/skills/generate-readme/
 ├── SKILL.md
+├── prompts/
+│   └── skill-prompts.md
 └── templates/
     └── readme-template.md
 ```
 
-### 示例 2 - SKILL.md 内容
+### 提示词派生产物状态
 
-```markdown
----
-name: generate-readme
-description: >
-  为项目生成标准 README 文档。用于：用户需要创建或更新项目的 README 文件时触发。
----
+- `prompts/skill-prompts.md`：已生成
+- 处理方式：`yy-skill-to-prompt`
 
-# generate-readme
+### SKILL.md 内容摘要
 
-## 描述
+- description：
 
-为项目生成标准 README 文档，自动从项目配置中提取信息。
+  ```text
+  为项目生成标准 README 文档。用于创建或更新 README，不用于编写其他类型文档或修改代码。
+  ```
 
-## 使用场景
-
-- 用户提到"生成 README"、"创建 README"
-- 用户需要为项目添加文档说明
-- 用户要求更新项目文档
-
-不应触发：
-
-- 用户只是查看 README 内容
-- 用户要求编写其他类型文档
-- 用户要求修改代码
-
-## 指令
-
-1. 读取项目配置文件（package.json/Cargo.toml/pyproject.toml）
-2. 分析项目结构和依赖
-3. 参考 `templates/readme-template.md` 生成文档
-4. 输出结果：README.md 文件路径、包含的章节列表、项目信息摘要
-```
+- 指令步骤概要：
+  - `步骤 1. 读取项目配置文件`
+  - `步骤 2. 分析项目结构和依赖`
+  - `步骤 3. 参考模板生成文档`
+  - `步骤 4. 输出结果`
 
 ---
 
 ## 示例 3：更新技能输出
 
-### 更新结果
+### 创建/更新结果
 
-已成功更新技能 `lint-code` 的 description。
+- 技能名称：`lint-code`
+- 操作类型：更新
 
-### 变更内容
+### 目录结构
 
-**更新前：**
-
-```yaml
-description: 检查代码质量
+```text
+.agents/skills/lint-code/
+└── SKILL.md
 ```
 
-**更新后：**
+### 提示词派生产物状态
 
-```yaml
-description: >
-  检查代码质量，包括语法错误、风格问题、潜在 bug。
-  仅在用户明确要求"检查代码质量"时触发。
-```
+- `prompts/skill-prompts.md`：未更新
+- 处理方式：跳过
+- 原因：技能目录下不存在 `prompts/skill-prompts.md`，且当前环境未安装 `yy-skill-to-prompt`
 
-### 影响说明
+### SKILL.md 内容摘要
 
-- 触发条件更加精确，避免在普通开发对话中误触发
-- 需要用户明确表达"检查代码质量"意图才会调用
+- description：
+
+  ```text
+  检查代码质量，包括语法错误、风格问题、潜在 bug。仅在用户明确要求检查代码质量时触发，不用于直接修复代码或执行格式化。
+  ```
+
+- 指令步骤概要：
+  - `步骤 1. 获取待检查范围`
+  - `步骤 2. 执行代码质量检查`
+  - `步骤 3. 输出检查结果`
 
 ---
 
 ## 示例 4：复杂技能输出
 
-### 示例 4 - 创建结果
+### 创建/更新结果
 
-已成功创建技能 `api-test`。
+- 技能名称：`api-test`
+- 操作类型：创建
 
-### 示例 4 - 目录结构
+### 目录结构
 
 ```text
 .agents/skills/api-test/
@@ -147,44 +126,30 @@ description: >
 ├── examples/
 │   ├── input.md
 │   └── output.md
+├── prompts/
+│   └── skill-prompts.md
 └── templates/
     └── test-report-template.md
 ```
 
-### 示例 4 - SKILL.md 内容
+### 提示词派生产物状态
 
-```markdown
----
-name: api-test
-description: >
-  基于 OpenAPI/Swagger 规范自动生成并执行 API 测试。
-  用于：用户需要测试 REST API、验证 API 规范、生成测试报告。
----
+- `prompts/skill-prompts.md`：已生成
+- 处理方式：本地最小回退流程
+- 原因：用户明确要求生成提示词文件，并确认使用本地最小回退流程，且当前环境未安装 `yy-skill-to-prompt`
 
-# api-test
+### SKILL.md 内容摘要
 
-## 描述
+- description：
 
-基于 OpenAPI/Swagger 规范自动生成并执行 API 测试。
+  ```text
+  基于 OpenAPI/Swagger 规范自动生成并执行 API 测试。用于测试 REST API 和验证 API 规范，不用于编写单元测试或测试前端功能。
+  ```
 
-## 使用场景
-
-- 用户提到"测试 API"、"API 测试"
-- 用户需要验证 OpenAPI/Swagger 规范
-- 用户要求生成 API 测试报告
-
-不应触发：
-
-- 用户只是查看 API 文档
-- 用户要求编写单元测试
-- 用户要求测试前端功能
-
-## 指令
-
-1. 读取 OpenAPI/Swagger 规范文件
-2. 解析 API 端点和参数定义
-3. 生成测试用例
-4. 执行测试请求
-5. 参考 `templates/test-report-template.md` 生成报告
-6. 输出测试结果：总测试数、通过数、失败数、执行时长；失败测试包含 API 端点、请求参数、预期响应、实际响应、错误信息
-```
+- 指令步骤概要：
+  - `步骤 1. 读取 OpenAPI/Swagger 规范文件`
+  - `步骤 2. 解析 API 端点和参数定义`
+  - `步骤 3. 生成测试用例`
+  - `步骤 4. 执行测试请求`
+  - `步骤 5. 生成测试报告`
+  - `步骤 6. 输出测试结果`
