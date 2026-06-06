@@ -30,7 +30,6 @@ function findPackageJsonDirs(root: string): string[] {
 }
 
 const dirs = findPackageJsonDirs(skillsDir)
-let hasError = false
 
 for (const dir of dirs) {
   const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf-8')) as {
@@ -40,11 +39,5 @@ for (const dir of dirs) {
 
   const relative = path.relative(projectRoot, dir)
   console.log(`Running lint in ${relative}...`)
-  try {
-    execSync('node --run lint', { cwd: dir, stdio: 'inherit' })
-  } catch {
-    hasError = true
-  }
+  execSync('node --run lint', { cwd: dir, stdio: 'inherit' })
 }
-
-if (hasError) process.exit(1)
