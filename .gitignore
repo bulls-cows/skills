@@ -124,6 +124,7 @@ debug-*.json
 *.tmp
 temp/
 tmp/
+TERMINAL.md
 nul
 
 # ==================== 测试与日志 ====================
