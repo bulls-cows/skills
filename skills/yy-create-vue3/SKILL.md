@@ -88,7 +88,7 @@ project-name/
 │   ├── components/
 │   ├── composables/
 │   ├── router/
-│   ├── scripts/
+│   ├── utils/
 │   ├── stores/
 │   ├── styles/
 │   ├── typings/

@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios";
-import { MOCK } from "@src/scripts/constantUtils";
-import { fetchMockData } from "@src/scripts/mockUtils";
+import { MOCK } from "@src/utils/constantUtils";
+import { fetchMockData } from "@src/utils/mockUtils";
 
 function getError(error: unknown): Error {
   if (error instanceof Error) {

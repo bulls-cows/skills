@@ -1,4 +1,4 @@
-import { doRequest } from "@src/scripts/requestUtils";
+import { doRequest } from "@src/utils/requestUtils";
 
 export const getExampleTodo = (): Promise<TReturn<ExampleTodo>> => {
   return doRequest<undefined, ExampleTodo>({

@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { cacheRef } from "@src/scripts/storageUtils";
+import { cacheRef } from "@src/utils/storageUtils";
 
 /**
  * 全局加载状态

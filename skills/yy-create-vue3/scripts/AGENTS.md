@@ -50,7 +50,7 @@
   - `src/components/`：通用组件。
   - `src/composables/`：组合式逻辑。
   - `src/router/`：路由配置。
-  - `src/scripts/`：通用工具函数。
+  - `src/utils/`：通用工具函数。
   - `src/stores/`：Pinia 状态管理。
   - `src/styles/`：全局样式。
   - `src/typings/`：全局类型声明。
@@ -103,7 +103,7 @@
 - 路由使用 `createWebHashHistory()`。
 - 路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login` 布局。
 - 新增页面时同步维护 `src/router/index.ts` 和 `src/composables/useAppNavigation.ts`。
-- 请求统一通过 `src/scripts/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
+- 请求统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
 - 开启 `MOCK=1` 后，请求路径按 Mock topic 规则映射，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码放入 `src/ugly/`，避免污染稳定业务目录。
 
@@ -114,5 +114,5 @@
 - `.nvmrc`：推荐 Node.js 版本。
 - `.editorconfig`：编辑器格式约定。
 - `vite.shared.ts`：环境变量加载和共享运行时定义。
-- `src/scripts/requestUtils.ts`：请求封装契约。
+- `src/utils/requestUtils.ts`：请求封装契约。
 - `tests/`：单元测试示例。

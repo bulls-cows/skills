@@ -154,7 +154,7 @@ Copy-Item .env.example .env
 │   ├── components/      # 通用组件
 │   ├── composables/     # 组合式逻辑
 │   ├── router/          # 路由配置
-│   ├── scripts/         # 通用工具函数
+│   ├── utils/           # 通用工具函数
 │   ├── stores/          # Pinia 状态管理
 │   ├── styles/          # 全局样式
 │   ├── typings/         # 全局类型声明
@@ -185,7 +185,7 @@ Copy-Item .env.example .env
 - 路径别名：使用 `@src` 指向 `src/`。
 - 路由模式：使用 `createWebHashHistory()`。
 - 布局控制：路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login`。
-- 请求封装：统一通过 `src/scripts/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
+- 请求封装：统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
 - Mock 规则：开启 `MOCK=1` 后，请求路径会转换为 Mock topic，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码：外部对接或赶进度产生的临时代码放入 `src/ugly/`，避免污染稳定业务目录。
 - 样式：组件样式使用 `scss`，示例页面采用 BEM 风格类名。

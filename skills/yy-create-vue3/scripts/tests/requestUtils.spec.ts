@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveMockTopic } from "@src/scripts/requestUtils";
+import { resolveMockTopic } from "@src/utils/requestUtils";
 
 describe("requestUtils", () => {
   it("resolves api path to mock topic", () => {

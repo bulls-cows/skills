@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { APP_VERSION, MOCK, MODE } from "@src/scripts/constantUtils";
+import { APP_VERSION, MOCK, MODE } from "@src/utils/constantUtils";
 
 const modeLabel = computed(() => MODE || "local");
 const mockLabel = computed(() => (MOCK === "1" ? "ON" : "OFF"));

@@ -1,4 +1,4 @@
-import { sleep } from "@src/scripts/timeUtils";
+import { sleep } from "@src/utils/timeUtils";
 
 const DEFAULT_MIN_MOCK_RESPONSE_MS = 800;
 const DEFAULT_MOCK_TIMEOUT_MS = 10_000;

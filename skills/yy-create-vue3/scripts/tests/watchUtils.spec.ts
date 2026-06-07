@@ -1,6 +1,6 @@
 import { nextTick, ref } from "vue";
 import { describe, expect, it, vi } from "vitest";
-import { waitUntilPositive } from "@src/scripts/watchUtils";
+import { waitUntilPositive } from "@src/utils/watchUtils";
 
 describe("watchUtils", () => {
   it("auto stops after becoming positive when callback is omitted", async () => {
