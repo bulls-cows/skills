@@ -2,15 +2,19 @@
   <Transition name="global-loading">
     <div v-if="globalLoading" class="global-loading" role="status" aria-live="polite">
       <div class="global-loading__panel">
-        <span class="global-loading__spinner" aria-hidden="true"></span>
-        <span>加载中...</span>
+        <span
+          v-if="globalLoadingAnimation"
+          class="global-loading__spinner"
+          aria-hidden="true"
+        ></span>
+        <span>{{ globalLoadingTip || "加载中..." }}</span>
       </div>
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
-import { globalLoading } from "@src/stores/store";
+import { globalLoading, globalLoadingAnimation, globalLoadingTip } from "@src/stores/store";
 </script>
 
 <style scoped lang="scss">

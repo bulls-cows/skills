@@ -2,14 +2,14 @@
 
 `vue3-scaffold` 是一个用于快速启动 Vue3 应用开发的模板项目，内置 Vite、TypeScript、Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier 等常用工程能力。
 
-该模板用于减少新项目初始化成本，提供统一的目录结构、运行脚本、环境变量、Mock 请求和基础工具函数，让业务开发可以直接从标准化工程骨架开始。
+该模板用于减少新项目初始化成本，提供统一的目录结构、运行脚本、环境变量、Mock 请求、全局反馈和基础工具函数，让业务开发可以直接从标准化工程骨架开始。
 
 ## 特性
 
 - ⭐ 基于 Vue3、Vite 和 TypeScript 的现代前端开发栈。
 - 🚀 内置 `test` 与 `production` 两套运行/构建模式。
 - 💡 集成 Vue Router、Pinia 和 Axios，覆盖路由、状态和请求基础能力。
-- 🧩 内置通用应用壳层，包含页头、侧边导航、内容区、页脚和全局 Loading。
+- 🧩 内置通用应用壳层，包含页头、侧边导航、内容区、页脚和全局反馈。
 - 🎯 提供 Mock 数据加载、请求封装、存储、时间、字符串、对象等常用工具函数。
 - ⚡ 集成 Vitest、ESLint、Oxlint、Prettier、类型检查和换行符检查。
 
@@ -20,7 +20,7 @@
 - 🧪 测试工具：Vitest、Vue Test Utils、jsdom
 - 🧹 代码质量：ESLint、Oxlint、Prettier、vue-tsc
 - 🌐 请求能力：Axios
-- 🧱 基础布局：`AppShell`、`AppHeader`、`AppSidebar`、`AppFooter`、`GlobalLoading`
+- 🧱 基础布局：`AppShell`、`AppHeader`、`AppSidebar`、`AppFooter`、`GlobalLoading`、`GlobalAlert`、`GlobalToast`
 
 ## 环境要求
 
@@ -154,7 +154,7 @@ Copy-Item .env.example .env
 │   ├── components/      # 通用组件
 │   ├── composables/     # 组合式逻辑
 │   ├── router/          # 路由配置
-│   ├── utils/           # 通用工具函数
+│   ├── utils/           # 通用工具函数，包含请求、日志和全局反馈封装
 │   ├── stores/          # Pinia 状态管理
 │   ├── styles/          # 全局样式
 │   ├── typings/         # 全局类型声明
@@ -172,13 +172,16 @@ Copy-Item .env.example .env
 
 模板内置一套中性、可复用的页面壳层，适合从轻量管理后台、工具台或桌面壳 WebView 页面继续扩展：
 
-- `src/App.vue`：根据路由 `meta.layout` 选择布局，并挂载全局 Loading。
+- `src/App.vue`：根据路由 `meta.layout` 选择布局，并挂载全局 Loading、Alert 和 Toast。
 - `src/components/AppShell/AppShell.vue`：组合默认布局、全屏布局和登录布局。
 - `src/components/AppHeader/AppHeader.vue`：展示模板名称、运行模式、Mock 状态和版本号。
 - `src/components/AppSidebar/AppSidebar.vue`：读取 `useAppNavigation()` 的导航配置，并持久化折叠状态。
 - `src/components/AppFooter/AppFooter.vue`：展示模板技术栈摘要。
 - `src/components/GlobalLoading/GlobalLoading.vue`：读取 `globalLoading` 状态展示全局加载层。
+- `src/components/GlobalAlert/GlobalAlert.vue`：展示全局确认弹窗。
+- `src/components/GlobalToast/GlobalToast.vue`：展示全局消息提示。
 - `src/composables/useAppNavigation.ts`：集中维护导航项，新增页面时优先同步这里和 `src/router/index.ts`。
+- `src/utils/modalUtils.ts`：提供 `doAlert`、`doToastSuccess`、`doToastError`、`doToastWarning`、`doToastInfo`、`doGlobalLoading`、`doGlobalStatic` 和 `doHideGlobalLoading`。
 
 ## 开发约定
 
@@ -186,6 +189,7 @@ Copy-Item .env.example .env
 - 路由模式：使用 `createWebHashHistory()`。
 - 布局控制：路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login`。
 - 请求封装：统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
+- 全局反馈：统一通过 `src/utils/modalUtils.ts` 调用 Alert、Toast 和 Loading，避免页面直接维护全局反馈状态。
 - Mock 规则：开启 `MOCK=1` 后，请求路径会转换为 Mock topic，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码：外部对接或赶进度产生的临时代码放入 `src/ugly/`，避免污染稳定业务目录。
 - 样式：组件样式使用 `scss`，示例页面采用 BEM 风格类名。

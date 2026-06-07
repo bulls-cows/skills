@@ -20,13 +20,25 @@
       <button class="home-view__button" type="button" @click="toggleLoading">
         演示全局 Loading
       </button>
+      <button
+        class="home-view__button home-view__button--secondary"
+        type="button"
+        @click="showFeedback"
+      >
+        演示全局反馈
+      </button>
       <code>npm run lint</code>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { globalLoading } from "@src/stores/store";
+import {
+  doAlert,
+  doGlobalLoading,
+  doHideGlobalLoading,
+  doToastSuccess,
+} from "@src/utils/modalUtils";
 
 const featureItems = [
   {
@@ -47,10 +59,18 @@ const featureItems = [
 ];
 
 function toggleLoading() {
-  globalLoading.value = true;
+  doGlobalLoading("正在加载模板示例...");
   window.setTimeout(() => {
-    globalLoading.value = false;
+    doHideGlobalLoading();
   }, 800);
+}
+
+async function showFeedback() {
+  const action = await doAlert("全局 Alert 已接入模板项目。");
+
+  if (action === "confirmed") {
+    await doToastSuccess("全局 Toast 已接入模板项目。");
+  }
 }
 </script>
 
@@ -124,7 +144,7 @@ function toggleLoading() {
   &__actions {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: var(--space-12);
     padding: var(--space-20);
   }
@@ -135,6 +155,10 @@ function toggleLoading() {
     color: #fff;
     font-weight: 800;
     background: var(--color-primary);
+  }
+
+  &__button--secondary {
+    background: var(--color-secondary);
   }
 
   code {

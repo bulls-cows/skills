@@ -4,7 +4,7 @@
 
 - 本项目是 `vue3-scaffold` 模板工程，用于快速启动 Vue3 应用开发。
 - 项目内置 Vite、TypeScript、Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier。
-- 目标是提供统一目录结构、通用应用壳层、运行脚本、环境变量、Mock 请求和常用工具函数，让业务开发从标准化工程骨架开始。
+- 目标是提供统一目录结构、通用应用壳层、运行脚本、环境变量、Mock 请求、全局反馈和常用工具函数，让业务开发从标准化工程骨架开始。
 
 ## 范围
 
@@ -47,7 +47,10 @@
   - `scripts/convert-crlf-to-lf.ts`：换行符检查脚本。
 - `src/`：应用源码。
   - `src/apis/`：接口定义。
-  - `src/components/`：通用组件。
+- `src/components/`：通用组件。
+- `src/components/GlobalAlert/GlobalAlert.vue`：全局确认弹窗。
+- `src/components/GlobalLoading/GlobalLoading.vue`：全局加载层。
+- `src/components/GlobalToast/GlobalToast.vue`：全局消息提示。
   - `src/composables/`：组合式逻辑。
   - `src/router/`：路由配置。
   - `src/utils/`：通用工具函数。
@@ -104,6 +107,7 @@
 - 路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login` 布局。
 - 新增页面时同步维护 `src/router/index.ts` 和 `src/composables/useAppNavigation.ts`。
 - 请求统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
+- 全局反馈统一通过 `src/utils/modalUtils.ts` 调用 Alert、Toast 和 Loading。
 - 开启 `MOCK=1` 后，请求路径按 Mock topic 规则映射，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码放入 `src/ugly/`，避免污染稳定业务目录。
 
@@ -115,4 +119,5 @@
 - `.editorconfig`：编辑器格式约定。
 - `vite.shared.ts`：环境变量加载和共享运行时定义。
 - `src/utils/requestUtils.ts`：请求封装契约。
+- `src/utils/modalUtils.ts`：全局反馈封装契约。
 - `tests/`：单元测试示例。
