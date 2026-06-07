@@ -68,6 +68,36 @@ your-project/
 
 - [Cursor Rules](https://docs.cursor.com/context/rules)
 
+## CodeBuddy
+
+CodeBuddy IDE 支持项目规则和用户规则。项目规则存放在代码库中，适合团队共享；用户规则在本机全局生效，适合个人偏好。
+
+### 推荐配置
+
+在项目中使用 `.codebuddy/rules/` 存放项目规则，每条规则对应一个包含 `RULE.mdc` 的文件夹：
+
+```text
+your-project/
+└── .codebuddy/
+    └── rules/
+        ├── code-style/
+        │   └── RULE.mdc
+        ├── testing/
+        │   └── RULE.mdc
+        └── security/
+            └── RULE.mdc
+```
+
+`RULE.mdc` 使用 Markdown 格式，可以在 frontmatter 中配置 `description`、`alwaysApply`、`enabled` 等字段。CodeBuddy 规则支持“总是”“智能体请求”“手动”三种应用类型。
+
+如果只需要简单项目说明，也可以在项目根目录创建 `CODEBUDDY.md`。当项目根目录存在 `AGENTS.md` 且不存在 `CODEBUDDY.md` 时，CodeBuddy 会兼容加载 `AGENTS.md`。
+
+创建或修改规则后，需要新建对话会话才能让规则生效。
+
+### 参考链接
+
+- [CodeBuddy Rules](https://www.codebuddy.cn/docs/ide/User-guide/Rules)
+
 ## Windsurf
 
 Windsurf 的 Cascade 使用 Memories 与 Rules 为 AI 提供持续上下文，项目规则建议放在工作区规则入口中。
