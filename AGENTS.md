@@ -128,19 +128,11 @@
 
 ## 终端命令能力识别
 
-执行终端命令前，先读取或识别当前终端能力，再选择命令写法：
+执行终端命令前，先读取项目根目录下的 `TERMINAL.LOCAL.md`，并优先使用其中记录的已验证 shell 启动入口、命令可用性和命令写法。
 
-1. 先检查项目根目录下是否存在 `TERMINAL.LOCAL.md` 且有内容；如果存在，优先使用其中记录的已验证 shell 启动入口、命令可用性和命令写法。
-2. 如果根据 `TERMINAL.LOCAL.md` 执行后发现记录不准确，重新识别当前终端能力，并立即更新 `TERMINAL.LOCAL.md`。
-3. 如果 `TERMINAL.LOCAL.md` 不存在或内容为空，先按能力优先级确认当前环境可调用的 shell 启动入口，优先检测 `pwsh`、`powershell.exe`、`powershell`、`bash`，最后再检测 `cmd.exe`；不要直接假设只能使用 CMD。
-4. 识别完成后创建 `TERMINAL.LOCAL.md`，并写入已验证的终端能力，供后续新会话复用。
-5. 优先用当前 shell 的内置能力判断命令是否存在，不要直接试运行可能缺失的命令。
-6. PowerShell 环境优先使用 `Get-Command` 判断命令可用性；`$PSVersionTable` 不存在时按 PowerShell v1 兼容处理。
-7. PowerShell v1/v5 使用 Windows PowerShell 兼容写法，避免依赖 PowerShell 7 专属语法。
-8. PowerShell 7 可使用现代语法，但仍需兼容当前项目命令约束。
-9. Windows Git Bash 优先使用 `command -v` 判断命令可用性，并使用 Bash 路径和转义规则。
-10. 无法确认终端类型时，使用最保守的基础命令，避免链式命令和 shell 专属语法。
-11. 搜索文件或文本时，优先按能力选择：`rg` 可用则用 `rg`；PowerShell 可用则用 `Get-ChildItem` / `Select-String`；Git Bash 可用则用 `find` / `grep`；CMD 可用则用 `dir` / `findstr`。
+- 如果 `TERMINAL.LOCAL.md` 不存在、内容为空或记录与实际执行结果不一致，优先使用 `yy-detect-terminal` 技能创建或更新该文件。
+- 如果 `yy-detect-terminal` 技能不可用，使用最小化本地回退规则：先确认可用 shell，再确认命令存在性判断方式，最后记录首选 shell、备用 shell、不可用 shell 和搜索命令选择。
+- `TERMINAL.LOCAL.md` 只描述本机环境，不代表其他开发者环境；发现记录失效时应立即更新。
 
 ## 需要遵守的规则
 

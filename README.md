@@ -45,6 +45,7 @@
 | [yy-create-template-project](./skills/yy-create-template-project/SKILL.md)           | 提炼或完善可复用的脱敏模板项目    | `npx skills add bulls-cows/skills --skill yy-create-template-project`      |
 | [yy-create-vue3](./skills/yy-create-vue3/SKILL.md)                                   | 快速生成统一结构的 Vue 3 项目骨架 | `npx skills add bulls-cows/skills --skill yy-create-vue3`                  |
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md)                                       | 生成符合国人审美的网页界面设计    | `npx skills add bulls-cows/skills --skill yy-design-ui`                    |
+| [yy-detect-terminal](./skills/yy-detect-terminal/SKILL.md)                           | 识别并记录本地终端命令能力        | `npx skills add bulls-cows/skills --skill yy-detect-terminal`              |
 | [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容        | `npx skills add bulls-cows/skills --skill yy-distill`                      |
 | [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录  | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
