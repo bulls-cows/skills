@@ -4,6 +4,7 @@
     <!-- 工具栏：导出（JSON/HTML）、打印、停止服务 -->
     <Toolbar
       @reset-data="handleResetData"
+      @import-json="handleImportJson"
       @download-json="handleDownloadJson"
       @download-html="handleDownloadHtml"
       @print="printResume"
@@ -38,7 +39,7 @@
  * - 用户编辑 → PageEditor → handleDataUpdate → resumeData 更新 → 响应式驱动预览刷新
  *
  * ## 交互关系
- * - Toolbar: JSON/HTML 下载、打印、停止服务
+ * - Toolbar: JSON 导入/导出、HTML 下载、打印、停止服务
  * - PageEditor: 可视化页面/区块编辑器
  * - ResumePreview: 简历实时预览
  * - StopOverlay: 服务停止后的全屏遮罩提示
@@ -46,7 +47,7 @@
  * ## 核心业务流程
  * 1. 初始化：从 localStorage 恢复缓存数据，无缓存时使用 sampleData
  * 2. 编辑：用户在 PageEditor 中编辑 → 实时更新 → 刷新预览
- * 3. 导出：下载 JSON / 下载 HTML / 打印
+ * 3. 导入导出：导入 JSON / 导出 JSON / 下载 HTML / 打印
  * 4. 停止：点击停止服务 → 显示遮罩 → 请求 /__stop-server 接口
  */
 
@@ -86,6 +87,30 @@ function handleSelectBlock(target: { pageId: string; blockId: string } | null) {
 
 function handleDownloadJson() {
   downloadJson(resumeData.value);
+}
+
+async function handleImportJson(file: File) {
+  try {
+    const data = JSON.parse(await file.text()) as ResumeData;
+
+    if (!isResumeData(data)) {
+      window.alert('导入失败：JSON 数据结构不正确');
+      return;
+    }
+
+    resumeData.value = data;
+  } catch {
+    window.alert('导入失败：请选择格式正确的 JSON 文件');
+  }
+}
+
+function isResumeData(data: unknown): data is ResumeData {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'pages' in data &&
+    Array.isArray((data as ResumeData).pages)
+  );
 }
 
 function handleDownloadHtml() {

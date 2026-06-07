@@ -11,8 +11,18 @@
         重置数据
       </button>
       <button class="toolbar__btn toolbar__btn--secondary" @click="emit('downloadJson')">
-        下载 JSON
+        导出 JSON
       </button>
+      <button class="toolbar__btn toolbar__btn--secondary" @click="handleImportClick">
+        导入 JSON
+      </button>
+      <input
+        ref="jsonInputRef"
+        class="toolbar__file-input"
+        type="file"
+        accept=".json,application/json"
+        @change="handleImportChange"
+      />
       <button class="toolbar__btn toolbar__btn--primary" @click="emit('downloadHtml')">
         下载简历 HTML
       </button>
@@ -29,18 +39,39 @@
  * Toolbar - 简历编辑器工具栏
  *
  * 【职责】
- * 提供文件下载（JSON/HTML）、打印、停止服务等操作入口
+ * 提供文件导入/下载（JSON/HTML）、打印、停止服务等操作入口
  *
  * 【数据流向】
- * - 输出: downloadJson、downloadHtml、print、stopServer
+ * - 输出: importJson、downloadJson、downloadHtml、print、stopServer
  */
+import { ref } from 'vue';
+
 const emit = defineEmits<{
   (e: 'resetData'): void;
+  (e: 'importJson', file: File): void;
   (e: 'downloadJson'): void;
   (e: 'downloadHtml'): void;
   (e: 'print'): void;
   (e: 'stopServer'): void;
 }>();
+
+const jsonInputRef = ref<HTMLInputElement | null>(null);
+
+function handleImportClick() {
+  jsonInputRef.value?.click();
+}
+
+function handleImportChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+
+  if (!file) {
+    return;
+  }
+
+  emit('importJson', file);
+  input.value = '';
+}
 </script>
 
 <style lang="scss" scoped>
@@ -114,5 +145,9 @@ const emit = defineEmits<{
   &:hover {
     background: #dc2626;
   }
+}
+
+.toolbar__file-input {
+  display: none;
 }
 </style>
