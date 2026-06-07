@@ -1,6 +1,10 @@
 node_modules/
 dist/
+coverage/
 .eslintcache
+.env
 .env.local
+.env.*.local
+.vite/
 .agents/
 .idea/

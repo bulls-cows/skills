@@ -9,6 +9,10 @@ const routeConfigList: RouteRecordRaw[] = [
     path: "/home",
     name: "home",
     component: () => import("@src/views/HomeView/HomeView.vue"),
+    meta: {
+      layout: "default",
+      requireAuth: false,
+    },
   },
 ];
 

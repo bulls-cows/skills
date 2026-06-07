@@ -4,7 +4,7 @@
 
 - 本项目是 `vue3-scaffold` 模板工程，用于快速启动 Vue3 应用开发。
 - 项目内置 Vite、TypeScript、Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier。
-- 目标是提供统一目录结构、运行脚本、环境变量、Mock 请求和常用工具函数，让业务开发从标准化工程骨架开始。
+- 目标是提供统一目录结构、通用应用壳层、运行脚本、环境变量、Mock 请求和常用工具函数，让业务开发从标准化工程骨架开始。
 
 ## 范围
 
@@ -101,6 +101,8 @@
 - 文件统一使用 LF 换行，提交前通过 `npm run lint:lf` 检查。
 - 组件样式使用 `scss`，页面示例优先采用 BEM 风格类名。
 - 路由使用 `createWebHashHistory()`。
+- 路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login` 布局。
+- 新增页面时同步维护 `src/router/index.ts` 和 `src/composables/useAppNavigation.ts`。
 - 请求统一通过 `src/scripts/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
 - 开启 `MOCK=1` 后，请求路径按 Mock topic 规则映射，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码放入 `src/ugly/`，避免污染稳定业务目录。
