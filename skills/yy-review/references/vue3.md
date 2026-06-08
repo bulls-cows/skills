@@ -54,19 +54,23 @@ Vue3 模板中应避免书写多行函数逻辑，模板只保留声明式绑定
 **反例：**
 
 ```vue
-<PageTabs
-  @select="
-    currentPageId = $event
-    selectedBlockId = null
-    emit('select-block', null)
-  "
-/>
+<template>
+  <PageTabs
+    @select="
+      currentPageId = $event
+      selectedBlockId = null
+      emit('select-block', null)
+    "
+  />
+</template>
 ```
 
 **正例：**
 
 ```vue
-<PageTabs @select="selectPage" />
+<template>
+  <PageTabs @select="selectPage" />
+</template>
 
 <script lang="ts" setup>
 function selectPage(pageId: string) {
