@@ -82,7 +82,8 @@ async function showToast() {
 <style scoped lang="scss">
 .home-view {
   display: grid;
-  gap: var(--space-20);
+  gap: var(--space-16);
+  border-radius: var(--radius-lg);
 
   &__card,
   &__actions {

@@ -52,7 +52,8 @@ const componentNavigationItems = [
 <style scoped lang="scss">
 .ui-view {
   display: grid;
-  gap: var(--space-20);
+  gap: var(--space-16);
+  border-radius: var(--radius-lg);
 
   &__tabs {
     display: flex;
