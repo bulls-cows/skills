@@ -20,7 +20,7 @@
 - 🧪 测试工具：Vitest、Vue Test Utils、jsdom
 - 🧹 代码质量：ESLint、Oxlint、Prettier、vue-tsc
 - 🌐 请求能力：Axios
-- 🧱 基础布局：`AppShell`、`AppHeader`、`AppSidebar`、`AppFooter`、`GlobalLoading`、`GlobalAlert`、`GlobalToast`
+- 🧱 基础布局：`AppShell`、`MainPageLayout`、`AppHeader`、`AppSidebar`、`AppFooter`、`GlobalLoading`、`GlobalAlert`、`GlobalToast`
 
 ## 环境要求
 
@@ -174,6 +174,7 @@ Copy-Item .env.example .env
 
 - `src/App.vue`：根据路由 `meta.layout` 选择布局，并挂载全局 Loading、Alert 和 Toast。
 - `src/components/AppShell/AppShell.vue`：组合默认布局、全屏布局和登录布局。
+- `src/components/MainPageLayout/MainPageLayout.vue`：提供标题、返回、描述、右侧操作区和滚动内容区的通用页面结构。
 - `src/components/AppHeader/AppHeader.vue`：展示模板名称、运行模式、Mock 状态和版本号。
 - `src/components/AppSidebar/AppSidebar.vue`：读取 `useAppNavigation()` 的导航配置，并持久化折叠状态。
 - `src/components/AppFooter/AppFooter.vue`：展示模板技术栈摘要。

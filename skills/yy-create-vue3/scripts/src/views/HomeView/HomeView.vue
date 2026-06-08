@@ -1,45 +1,43 @@
 <template>
-  <section class="home-view">
-    <div class="home-view__hero">
-      <p class="home-view__eyebrow">Starter Template</p>
-      <h1 class="home-view__title">Vue 3 应用骨架已就绪</h1>
-      <p class="home-view__description">
-        该页面演示路由、布局、状态、Mock 请求和工程脚本的最小闭环，可在此基础上替换为业务页面。
-      </p>
-    </div>
+  <MainPageLayout
+    title="Vue 3 应用骨架已就绪"
+    description="该页面演示路由、布局、状态、Mock 请求和工程脚本的最小闭环，可在此基础上替换为业务页面。"
+  >
+    <div class="home-view">
+      <div class="home-view__grid">
+        <article v-for="item in featureItems" :key="item.title" class="home-view__card">
+          <span class="home-view__card-index">{{ item.index }}</span>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+        </article>
+      </div>
 
-    <div class="home-view__grid">
-      <article v-for="item in featureItems" :key="item.title" class="home-view__card">
-        <span class="home-view__card-index">{{ item.index }}</span>
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.description }}</p>
-      </article>
+      <div class="home-view__actions">
+        <button class="home-view__button" type="button" @click="toggleLoading">
+          演示全局 Loading
+        </button>
+        <button
+          class="home-view__button home-view__button--secondary"
+          type="button"
+          @click="showAlert"
+        >
+          全局 Alert
+        </button>
+        <button
+          class="home-view__button home-view__button--secondary"
+          type="button"
+          @click="showToast"
+        >
+          全局 Toast
+        </button>
+        <code>npm run lint</code>
+      </div>
     </div>
-
-    <div class="home-view__actions">
-      <button class="home-view__button" type="button" @click="toggleLoading">
-        演示全局 Loading
-      </button>
-      <button
-        class="home-view__button home-view__button--secondary"
-        type="button"
-        @click="showAlert"
-      >
-        全局 Alert
-      </button>
-      <button
-        class="home-view__button home-view__button--secondary"
-        type="button"
-        @click="showToast"
-      >
-        全局 Toast
-      </button>
-      <code>npm run lint</code>
-    </div>
-  </section>
+  </MainPageLayout>
 </template>
 
 <script setup lang="ts">
+import MainPageLayout from "@src/components/MainPageLayout/MainPageLayout.vue";
 import {
   doAlert,
   doGlobalLoading,
@@ -86,39 +84,12 @@ async function showToast() {
   display: grid;
   gap: var(--space-20);
 
-  &__hero,
   &__card,
   &__actions {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: rgba(255, 255, 255, 0.92);
     box-shadow: var(--shadow-panel);
-  }
-
-  &__hero {
-    padding: var(--space-32);
-  }
-
-  &__eyebrow {
-    margin: 0 0 var(--space-8);
-    color: var(--color-primary);
-    font-size: 0.12rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  &__title {
-    margin: 0;
-    font-size: 0.32rem;
-    font-weight: 800;
-  }
-
-  &__description {
-    max-width: 7.2rem;
-    margin: var(--space-12) 0 0;
-    color: var(--color-text-muted);
-    font-size: 0.15rem;
   }
 
   &__grid {
