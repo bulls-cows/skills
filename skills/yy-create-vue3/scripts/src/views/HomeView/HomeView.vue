@@ -23,9 +23,16 @@
       <button
         class="home-view__button home-view__button--secondary"
         type="button"
-        @click="showFeedback"
+        @click="showAlert"
       >
-        演示全局反馈
+        全局 Alert
+      </button>
+      <button
+        class="home-view__button home-view__button--secondary"
+        type="button"
+        @click="showToast"
+      >
+        全局 Toast
       </button>
       <code>npm run lint</code>
     </div>
@@ -65,12 +72,12 @@ function toggleLoading() {
   }, 800);
 }
 
-async function showFeedback() {
-  const action = await doAlert("全局 Alert 已接入模板项目。");
+async function showAlert() {
+  await doAlert("全局 Alert 已接入模板项目。");
+}
 
-  if (action === "confirmed") {
-    await doToastSuccess("全局 Toast 已接入模板项目。");
-  }
+async function showToast() {
+  await doToastSuccess("全局 Toast 已接入模板项目。");
 }
 </script>
 

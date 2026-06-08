@@ -53,6 +53,8 @@ defineEmits<{
 <style scoped lang="scss">
 .global-alert {
   position: fixed;
+  width: 100%;
+  height: 100%;
   inset: 0;
   z-index: 1010;
   display: flex;
