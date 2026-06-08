@@ -1,13 +1,13 @@
 <template>
   <Transition name="global-loading">
-    <div v-if="globalLoading" class="global-loading" role="status" aria-live="polite">
+    <div v-if="isLoading" class="global-loading" role="status" aria-live="polite">
       <div class="global-loading__panel">
-        <div v-if="globalLoadingAnimation" class="global-loading__circle" aria-hidden="true">
+        <div v-if="showAnimation" class="global-loading__circle" aria-hidden="true">
           <div class="global-loading__outer-ring"></div>
         </div>
         <span class="global-loading__tip">
-          <span>{{ globalLoadingTip || "加载中" }}</span>
-          <span v-if="globalLoadingAnimation" class="global-loading__point">{{ pointStr }}</span>
+          <span>{{ loadingTip || "加载中" }}</span>
+          <span v-if="showAnimation" class="global-loading__point">{{ pointStr }}</span>
         </span>
       </div>
     </div>
@@ -16,17 +16,19 @@
 
 <script setup lang="ts">
 import { watch } from "vue";
-import { globalLoading, globalLoadingAnimation, globalLoadingTip } from "@src/stores/store";
+import { useGlobalLoading } from "@src/composables/useGlobalLoading";
 import { useLoadingPoints } from "@src/composables/useLoadingPoints";
+
+const { isLoading, loadingTip, showAnimation } = useGlobalLoading();
 
 const { pointStr, start, stop } = useLoadingPoints({
   interval: 300,
 });
 
 watch(
-  [globalLoading, globalLoadingAnimation],
-  ([isLoading, showAnimation]) => {
-    if (isLoading && showAnimation) {
+  [isLoading, showAnimation],
+  ([loading, animation]) => {
+    if (loading && animation) {
       start();
       return;
     }

@@ -1,30 +1,34 @@
-import { globalLoading, globalLoadingAnimation, globalLoadingTip } from "@src/stores/store";
+import { ref } from "vue";
+
+const isLoading = ref<boolean>(false);
+const loadingTip = ref<string>("");
+const showAnimation = ref<boolean>(true);
 
 export function useGlobalLoading() {
-  const showGlobalLoading = (tip: string) => {
-    globalLoading.value = !!tip;
-    globalLoadingTip.value = tip;
-    globalLoadingAnimation.value = !!tip;
+  const globalLoading = (tip: string) => {
+    isLoading.value = !!tip;
+    loadingTip.value = tip;
+    showAnimation.value = !!tip;
   };
 
-  const showGlobalStatic = (tip: string) => {
-    globalLoading.value = !!tip;
-    globalLoadingTip.value = tip;
-    globalLoadingAnimation.value = false;
+  const globalStatic = (tip: string) => {
+    isLoading.value = !!tip;
+    loadingTip.value = tip;
+    showAnimation.value = false;
   };
 
   const hideGlobalLoading = () => {
-    globalLoading.value = false;
-    globalLoadingTip.value = "";
-    globalLoadingAnimation.value = true;
+    isLoading.value = false;
+    loadingTip.value = "";
+    showAnimation.value = true;
   };
 
   return {
-    isLoading: globalLoading,
-    loadingTip: globalLoadingTip,
-    showAnimation: globalLoadingAnimation,
-    globalLoading: showGlobalLoading,
-    globalStatic: showGlobalStatic,
+    isLoading,
+    loadingTip,
+    showAnimation,
+    globalLoading,
+    globalStatic,
     hideGlobalLoading,
   };
 }
