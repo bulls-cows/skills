@@ -17,7 +17,7 @@
 **改动后按条件执行:**
 
 - 如果改动涉及 AI 能力模型的调整，执行技能 [@skills-internal/yy-sync-capability-model/SKILL.md](./skills-internal/yy-sync-capability-model/SKILL.md)
-- 如果改动涉及 `路径格式规范` 或 `终端命令能力识别` 的调整，执行技能 [@skills-internal/yy-check-agents-consistency/SKILL.md](./skills-internal/yy-check-agents-consistency/SKILL.md)
+- 如果改动涉及 `交互确认格式`、`路径格式规范` 或 `终端命令能力识别` 的调整，执行技能 [@skills-internal/yy-check-agents-consistency/SKILL.md](./skills-internal/yy-check-agents-consistency/SKILL.md)
 - 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)
 - 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)
 - 当有技能名的变更、技能描述的变更、技能的增删时，执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)
