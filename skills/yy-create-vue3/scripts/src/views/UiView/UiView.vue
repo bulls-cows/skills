@@ -43,6 +43,10 @@ const componentNavigationItems = [
     path: "/ui/tag",
   },
   {
+    label: "表格",
+    path: "/ui/table",
+  },
+  {
     label: "空状态",
     path: "/ui/empty",
   },

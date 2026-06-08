@@ -15,24 +15,14 @@
 
     <section class="ui-demo__section">
       <h3>参数说明</h3>
-      <div class="ui-demo__table">
-        <div>参数</div>
-        <div>说明</div>
-        <div>可选值</div>
-        <div>默认值</div>
-        <template v-for="row in propRows" :key="row.name">
-          <div>{{ row.name }}</div>
-          <div>{{ row.description }}</div>
-          <div>{{ row.optionalValues }}</div>
-          <div>{{ row.defaultValue }}</div>
-        </template>
-      </div>
+      <BaseTable :columns="propColumns" :rows="propRows" row-key="name" />
     </section>
   </article>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
+import BaseTable from "@src/components/BaseTable/BaseTable.vue";
 
 type UiDemoPreviewVariant = "" | "inline" | "grid" | "form";
 
@@ -63,6 +53,27 @@ const previewClassName = computed<string>(() => {
 
   return `ui-demo__preview--${props.previewVariant}`;
 });
+
+const propColumns = [
+  {
+    key: "name",
+    title: "参数",
+    width: "0.9rem",
+  },
+  {
+    key: "description",
+    title: "说明",
+  },
+  {
+    key: "optionalValues",
+    title: "可选值",
+  },
+  {
+    key: "defaultValue",
+    title: "默认值",
+    width: "0.9rem",
+  },
+];
 </script>
 
 <style scoped lang="scss">
@@ -121,34 +132,10 @@ const previewClassName = computed<string>(() => {
   &__code code {
     user-select: text;
   }
-
-  &__table {
-    display: grid;
-    grid-template-columns: 0.9rem 1.5fr 2fr 0.9rem;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-  }
-
-  &__table > div {
-    padding: var(--space-8) var(--space-12);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  &__table > div:nth-child(-n + 4) {
-    color: var(--color-text);
-    font-weight: 900;
-    background: var(--color-surface-muted);
-  }
-
-  &__table > div:nth-last-child(-n + 4) {
-    border-bottom: none;
-  }
 }
 
 @media (max-width: 760px) {
-  .ui-demo__preview--grid,
-  .ui-demo__table {
+  .ui-demo__preview--grid {
     grid-template-columns: 1fr;
   }
 }

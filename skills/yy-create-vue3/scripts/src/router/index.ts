@@ -44,6 +44,11 @@ const routeConfigList: RouteRecordRaw[] = [
         component: () => import("@src/views/UiView/TagDemoView.vue"),
       },
       {
+        path: "table",
+        name: "ui-table",
+        component: () => import("@src/views/UiView/TableDemoView.vue"),
+      },
+      {
         path: "empty",
         name: "ui-empty",
         component: () => import("@src/views/UiView/EmptyDemoView.vue"),
