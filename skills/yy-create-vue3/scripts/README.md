@@ -10,7 +10,9 @@
 - 🚀 内置 `test` 与 `production` 两套运行/构建模式。
 - 💡 集成 Vue Router、Pinia 和 Axios，覆盖路由、状态和请求基础能力。
 - 🧩 内置通用应用壳层，包含页头、侧边导航、内容区、页脚和全局反馈。
-- 🎯 提供 Mock 数据加载、请求封装、存储、时间、字符串、对象等常用工具函数。
+- 🧱 提供按钮、表格、选择器、结果展示、输入框、卡片、标签和空状态等基础组件。
+- 🎯 提供 Mock 数据加载、请求封装、存储、时间、字符串、对象、定时器和加载点动画等常用工具函数。
+- 🌐 内置最小 i18n 骨架，提供中英文示例词典、语言状态和 `t()` 翻译函数。
 - ⚡ 集成 Vitest、ESLint、Oxlint、Prettier、类型检查和换行符检查。
 
 ## 技术栈
@@ -153,6 +155,7 @@ Copy-Item .env.example .env
 │   ├── apis/            # 接口定义
 │   ├── components/      # 通用组件
 │   ├── composables/     # 组合式逻辑
+│   ├── i18n/            # 最小国际化词典与翻译函数
 │   ├── router/          # 路由配置
 │   ├── utils/           # 通用工具函数，包含请求、日志和全局反馈封装
 │   ├── stores/          # Pinia 状态管理
@@ -184,6 +187,13 @@ Copy-Item .env.example .env
 - `src/composables/useAppNavigation.ts`：集中维护导航项，新增页面时优先同步这里和 `src/router/index.ts`。
 - `src/utils/modalUtils.ts`：提供 `doAlert`、`doToastSuccess`、`doToastError`、`doToastWarning`、`doToastInfo`、`doGlobalLoading`、`doGlobalStatic` 和 `doHideGlobalLoading`。
 
+## 通用能力
+
+- 基础组件：`src/components/BaseButton/` 支持视觉类型、尺寸、图标和加载态；`src/components/BaseTable/` 支持列配置、骨架屏和插槽扩展；`src/components/BaseSelect/` 和 `src/components/BaseResult/` 提供选择器和结果展示骨架。
+- 组合式逻辑：`src/composables/useInterval.ts`、`src/composables/useTimeout.ts` 和 `src/composables/useLoadingPoints.ts` 提供可自动清理的定时器与加载点动画。
+- 最小 i18n：`src/i18n/messages.ts` 维护中性示例词典，`src/i18n/index.ts` 暴露 `currentLocale`、`setLocale` 和 `t()`。
+- 示例页面：`src/views/UiView/` 展示基础组件、插槽和 i18n 的最小使用方式。
+
 ## 开发约定
 
 - 路径别名：使用 `@src` 指向 `src/`。
@@ -191,6 +201,7 @@ Copy-Item .env.example .env
 - 布局控制：路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login`。
 - 请求封装：统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
 - 全局反馈：统一通过 `src/utils/modalUtils.ts` 调用 Alert、Toast 和 Loading，避免页面直接维护全局反馈状态。
+- 国际化：通用文案优先放入 `src/i18n/messages.ts`，业务项目接入后再替换为真实词典或成熟 i18n 方案。
 - Mock 规则：开启 `MOCK=1` 后，请求路径会转换为 Mock topic，例如 `/api/example/todo` 对应 `example.todo`。
 - 临时代码：外部对接或赶进度产生的临时代码放入 `src/ugly/`，避免污染稳定业务目录。
 - 样式：组件样式使用 `scss`，示例页面采用 BEM 风格类名。
@@ -205,6 +216,7 @@ Copy-Item .env.example .env
 - `index.html` 中的页面标题。
 - `src/composables/useAppNavigation.ts` 中的导航配置。
 - `src/router/index.ts` 中的路由配置。
+- `src/i18n/messages.ts` 中的中性示例词典。
 - `public/mock/` 中的中性 Mock 示例数据。
 
 ## 清理产物

@@ -1,11 +1,12 @@
 <template>
   <UiDemoLayout
     title="表格 BaseTable"
-    description="用于展示结构化列表数据，支持列宽配置、空状态和自定义单元格内容。"
+    description="用于展示结构化列表数据，支持列宽、对齐、加载态、骨架屏、空状态和自定义表头/单元格。"
     :usage-code="usageCode"
     :prop-rows="propRows"
   >
     <BaseTable :columns="tableColumns" :rows="tableRows" row-key="id">
+      <template #header-status="{ column }">{{ column.title }} / 标签</template>
       <template #cell-status="{ value }">
         <BaseTag :type="value === '已上线' ? 'success' : 'warning'">
           {{ value }}
@@ -34,6 +35,7 @@ const tableColumns = [
     key: "status",
     title: "状态",
     width: "1rem",
+    align: "center" as const,
   },
 ];
 
@@ -59,6 +61,7 @@ const tableRows = [
 ];
 
 const usageCode = `<BaseTable :columns="tableColumns" :rows="tableRows" row-key="id">
+  <template #header-status="{ column }">{{ column.title }} / 标签</template>
   <template #cell-status="{ value }">
     <BaseTag :type="value === '已上线' ? 'success' : 'warning'">
       {{ value }}
@@ -82,8 +85,20 @@ const propRows = [
   {
     name: "rowKey",
     description: "行唯一标识字段",
-    optionalValues: "string",
+    optionalValues: "string / function",
     defaultValue: "空字符串",
+  },
+  {
+    name: "loading",
+    description: "是否展示骨架屏加载态",
+    optionalValues: "boolean",
+    defaultValue: "false",
+  },
+  {
+    name: "skeletonRows",
+    description: "加载态骨架屏行数",
+    optionalValues: "number",
+    defaultValue: "4",
   },
   {
     name: "emptyText",

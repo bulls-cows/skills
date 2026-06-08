@@ -4,7 +4,7 @@
 
 - 本项目是 `vue3-scaffold` 模板工程，用于快速启动 Vue3 应用开发。
 - 项目内置 Vite、TypeScript、Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier。
-- 目标是提供统一目录结构、通用应用壳层、运行脚本、环境变量、Mock 请求、全局反馈和常用工具函数，让业务开发从标准化工程骨架开始。
+- 目标是提供统一目录结构、通用应用壳层、基础组件、组合式逻辑、最小 i18n、运行脚本、环境变量、Mock 请求、全局反馈和常用工具函数，让业务开发从标准化工程骨架开始。
 
 ## 范围
 
@@ -48,10 +48,18 @@
 - `src/`：应用源码。
   - `src/apis/`：接口定义。
 - `src/components/`：通用组件。
+- `src/components/BaseButton/BaseButton.vue`：基础按钮，支持视觉类型、尺寸、图标、加载态和禁用态。
+- `src/components/BaseTable/BaseTable.vue`：基础表格，支持列配置、骨架屏、空状态和插槽扩展。
+- `src/components/BaseSelect/BaseSelect.vue`：基础选择器，支持受控值、选项禁用、占位文本和清空操作。
+- `src/components/BaseResult/BaseResult.vue`：结果展示，支持成功、失败、警告和提示状态。
 - `src/components/GlobalAlert/GlobalAlert.vue`：全局确认弹窗。
 - `src/components/GlobalLoading/GlobalLoading.vue`：全局加载层。
 - `src/components/GlobalToast/GlobalToast.vue`：全局消息提示。
-  - `src/composables/`：组合式逻辑。
+- `src/composables/`：组合式逻辑。
+- `src/composables/useInterval.ts`：自动清理的 interval 控制器。
+- `src/composables/useTimeout.ts`：自动清理的 timeout 控制器。
+- `src/composables/useLoadingPoints.ts`：加载点动画状态封装。
+  - `src/i18n/`：最小国际化词典与翻译函数。
   - `src/router/`：路由配置。
   - `src/utils/`：通用工具函数。
   - `src/stores/`：Pinia 状态管理。
@@ -106,6 +114,8 @@
 - 路由使用 `createWebHashHistory()`。
 - 路由通过 `meta.layout` 指定 `default`、`fullscreen` 或 `login` 布局。
 - 新增页面时同步维护 `src/router/index.ts` 和 `src/composables/useAppNavigation.ts`。
+- 新增通用组件时同步维护 `src/views/UiView/` 示例页和 README 使用说明。
+- 通用文案优先放入 `src/i18n/messages.ts`，保持词条中性，不写入业务名称、客户名称、真实接口或私有路径。
 - 请求统一通过 `src/utils/requestUtils.ts` 的 `doRequest` 返回 `[error, data]` 结构。
 - 全局反馈统一通过 `src/utils/modalUtils.ts` 调用 Alert、Toast 和 Loading。
 - 开启 `MOCK=1` 后，请求路径按 Mock topic 规则映射，例如 `/api/example/todo` 对应 `example.todo`。
@@ -120,4 +130,5 @@
 - `vite.shared.ts`：环境变量加载和共享运行时定义。
 - `src/utils/requestUtils.ts`：请求封装契约。
 - `src/utils/modalUtils.ts`：全局反馈封装契约。
+- `src/i18n/index.ts`：最小国际化入口。
 - `tests/`：单元测试示例。

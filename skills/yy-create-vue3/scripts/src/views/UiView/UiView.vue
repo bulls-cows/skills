@@ -47,6 +47,14 @@ const componentNavigationItems = [
     path: "/ui/table",
   },
   {
+    label: "选择器",
+    path: "/ui/select",
+  },
+  {
+    label: "结果展示",
+    path: "/ui/result",
+  },
+  {
     label: "空状态",
     path: "/ui/empty",
   },
