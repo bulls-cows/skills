@@ -16,6 +16,7 @@
       "skills": [
         "./skills/yy-comment",
         "./skills/yy-commit",
+        "./skills/yy-commit-directly",
         "./skills/yy-create-node-script",
         "./skills/yy-create-python-script",
         "./skills/yy-create-readme",
