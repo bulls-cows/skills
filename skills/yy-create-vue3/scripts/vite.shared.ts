@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
@@ -33,9 +33,17 @@ function resolveLogLevel(): LogLevel {
   return process.env.LOG_LEVEL ?? "INFO";
 }
 
+function resolveAppVersion(): string {
+  const packageJson = JSON.parse(readFileSync(resolve(currentDir, "package.json"), "utf8")) as {
+    version: string;
+  };
+
+  return packageJson.version;
+}
+
 export function createRuntimeDefines() {
   return {
-    __APP_VERSION__: JSON.stringify("0.1.0"),
+    __APP_VERSION__: JSON.stringify(resolveAppVersion()),
     __NODE_ENV__: JSON.stringify(NODE_ENV),
     __MODE__: JSON.stringify(MODE),
     __ENABLE_REPORT__: JSON.stringify(resolveEnableReport()),
