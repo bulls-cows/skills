@@ -1,25 +1,13 @@
 <template>
   <div class="app-shell" :class="`app-shell--${layout}`">
-    <template v-if="layout === 'fullscreen'">
-      <slot />
-    </template>
-
-    <template v-else-if="layout === 'login'">
-      <main class="app-shell__login">
+    <AppHeader />
+    <div class="app-shell__body">
+      <AppSidebar v-if="layout !== 'fullscreen'" />
+      <main class="app-shell__content">
         <slot />
       </main>
-    </template>
-
-    <template v-else>
-      <AppHeader />
-      <div class="app-shell__body">
-        <AppSidebar />
-        <main class="app-shell__content">
-          <slot />
-        </main>
-      </div>
-      <AppFooter />
-    </template>
+    </div>
+    <AppFooter />
   </div>
 </template>
 
@@ -35,51 +23,50 @@ defineProps<{
 
 <style scoped lang="scss">
 .app-shell {
-  width: min(12.8rem, calc(100% - 0.48rem));
-  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
-  padding: var(--space-24) 0 var(--space-40);
-
-  &--default {
-    display: grid;
-    gap: var(--space-20);
-  }
+  padding: var(--space-16);
+  gap: var(--space-16);
 
   &--fullscreen {
     width: 100%;
     padding: 0;
-  }
 
-  &--login {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    padding: var(--space-24);
+    .app-shell__body {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   &__body {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: var(--space-20);
-    align-items: start;
+    gap: var(--space-16);
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+    overflow: hidden;
   }
 
   &__content {
+    height: 100%;
     min-width: 0;
+    min-height: 0;
+    overflow: auto;
   }
 
-  &__login {
-    width: min(4.8rem, 100%);
+  &__body :deep(.app-sidebar) {
+    height: 100%;
+    min-height: 0;
+    overflow: auto;
   }
 }
 
 @media (max-width: 960px) {
   .app-shell {
     width: min(100% - 0.24rem, 12.8rem);
-
-    &__body {
-      grid-template-columns: 1fr;
-    }
   }
 }
 </style>

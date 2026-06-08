@@ -112,8 +112,8 @@ const hasHeader = computed(
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
-  padding: var(--space-24);
+  height: 100%;
+  padding: var(--space-16);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background:
