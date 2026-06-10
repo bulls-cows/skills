@@ -40,7 +40,7 @@ description: >
 
 - **范围**：识别主要编程语言、允许修改目录（如 src/、tests/）、禁止修改目录（如 dist/、node_modules/）
 - **改动检查**：检测常见工程配置文件和已定义脚本，包括 `package.json` 中的 lint、test、build 脚本，以及 `pyproject.toml`、`requirements.txt` 等能表明项目检查方式的配置文件
-- **终端能力信息**：检查项目根目录是否存在 `TERMINAL.LOCAL.md`，但只用于判断本机终端记录是否已建立；不得用一次性终端探测结果替代 `终端命令能力识别` 通用章节
+- **终端能力信息**：检查项目根目录是否存在 `TERMINAL.LOCAL.md`；若目标项目缺少该文件，按“终端能力记录处理要求”处理；不得用一次性终端探测结果替代 `终端命令能力识别` 通用章节
 - **项目结构**：分析目录结构，最多 4 级
 
 **决策分支**：
@@ -50,6 +50,11 @@ description: >
   1. 项目主要使用什么编程语言？
   2. 有哪些目录禁止修改？
 
+**终端能力记录处理要求：**
+
+- **目标项目缺少 `TERMINAL.LOCAL.md`，且当前环境可用 `yy-detect-terminal`**：直接触发 `yy-detect-terminal` 技能为目标项目创建本机终端能力记录，再继续生成或更新 `AGENTS.md`
+- **目标项目缺少 `TERMINAL.LOCAL.md`，且当前环境不可用 `yy-detect-terminal`**：仅记录缺失状态，继续在 `终端命令能力识别` 章节保留通用创建/更新机制；不得自行固化未验证的终端结论
+
 ### 3. 生成 AGENTS.md
 
 参考 `templates/agents-minimal-template.md` 的结构，根据收集的项目信息生成 AGENTS.md 文档。
@@ -58,8 +63,9 @@ description: >
 
 - `交互确认格式`、`路径格式规范`、`终端命令能力识别` 属于通用代理行为章节，必须直接复用 `templates/agents-minimal-template.md` 中对应章节的核心内容
 - 生成 `终端命令能力识别` 章节时，必须保留 `TERMINAL.LOCAL.md` 优先机制和 `yy-detect-terminal` 创建/更新机制
+- 添加或更新 `终端命令能力识别` 章节前，如目标项目缺少 `TERMINAL.LOCAL.md` 且当前环境可用 `yy-detect-terminal`，必须先按步骤 2 直接触发 `yy-detect-terminal` 技能
 - 禁止把当前机器、当前 shell、当前编码问题、一次性命令探测结果或临时回退写法替代为 `终端命令能力识别` 章节主体内容
-- 如目标项目缺少 `TERMINAL.LOCAL.md`，只能在生成内容中保留“优先使用 `yy-detect-terminal` 创建或更新该文件”的通用说明，不得自行固化未验证的终端结论
+- 如目标项目缺少 `TERMINAL.LOCAL.md` 且当前环境不可用 `yy-detect-terminal`，只能在生成内容中保留“优先使用 `yy-detect-terminal` 创建或更新该文件”的通用说明，不得自行固化未验证的终端结论
 
 **改动检查章节生成要求：**
 
