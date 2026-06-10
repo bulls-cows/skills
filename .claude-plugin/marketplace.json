@@ -41,6 +41,7 @@
         "./skills/yy-post-to-wechat",
         "./skills/yy-read-pdf",
         "./skills/yy-read-project",
+        "./skills/yy-read-xlsx",
         "./skills/yy-refresh",
         "./skills/yy-resume",
         "./skills/yy-review",
