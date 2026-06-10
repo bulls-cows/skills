@@ -86,7 +86,8 @@ description: >
 
 **建议处理方式**：
 
-- `pyproject.toml`、`requirements.txt`、`build.ps1`、`.gitignore`、`.editorconfig`、`README.md` 直接以 `scripts/` 同名文件为基准
+- `package.json`、`pyproject.toml`、`requirements.txt`、`build.ps1`、`.gitignore`、`.editorconfig`、`README.md` 直接以 `scripts/` 同名文件为基准
+- `package.json` 必须包含 `npm run lint` 和 `npm run ready` 对应脚本，其中 `npm run lint` 用于格式化代码和执行测试用例，`npm run ready` 用于安装依赖包
 - `*.spec` 保留为 PyInstaller 打包入口，并根据项目名称做最小重命名
 - `main.py` 保留为可冻结入口，确保 Windows 打包时执行 `multiprocessing.freeze_support()`
 - `resources/` 只保留 `.gitkeep` 或用户明确需要的模板资源，不写入真实业务数据
@@ -98,6 +99,7 @@ description: >
 ```text
 project-name/
 ├── main.py
+├── package.json
 ├── pyproject.toml
 ├── requirements.txt
 ├── build.ps1
@@ -110,6 +112,7 @@ project-name/
 配置文件处理规则：
 
 - 复制 `scripts/pyproject.toml` 后，仅调整项目名称、描述、脚本入口和用户明确要求的元数据
+- 复制 `scripts/package.json` 后，仅调整包名，并保留 `lint` 与 `ready` 两个命令；`lint` 必须执行代码格式化和测试用例，`ready` 必须安装依赖包
 - 项目名称使用 kebab-case，包目录和导入路径使用 snake_case
 - 复制 `scripts/requirements.txt`，默认保留 PyInstaller 构建依赖
 - 复制 `scripts/build.ps1` 和 `scripts/*.spec` 后，同步替换可执行文件名称、入口路径和包目录名称
@@ -143,7 +146,8 @@ project-name/
 
 **决策分支**：
 
-- **用户未禁止安装与验证**：执行 `python -m unittest discover -s tests`
+- **用户未禁止安装与验证**：优先执行 `npm run lint`，用统一命令完成格式化和测试
+- **用户要求安装依赖或准备环境**：执行 `npm run ready` 安装依赖包
 - **用户要求验证打包能力**：先执行依赖安装，再执行 `./build.ps1` 或等价 PyInstaller 命令
 - **用户明确要求跳过安装或当前环境不适合创建虚拟环境**：跳过命令执行，并在结果中说明未验证项
 
@@ -152,7 +156,7 @@ project-name/
 - 不默认执行真实业务输入文件
 - 不默认运行外部命令、部署、发布或推送操作
 - 不为验证而写入真实业务数据、真实密钥或机器专属路径
-- 测试优先使用 `unittest`，不强制引入额外测试依赖
+- `npm run lint` 是统一验证入口，必须包含格式化代码和执行测试用例；无法执行 npm 命令时，回退执行 `python -m unittest discover -s tests` 并说明原因
 
 ### 步骤 7. 输出结果
 

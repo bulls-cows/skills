@@ -8,6 +8,7 @@ project-name/
 ├── .gitignore
 ├── build.ps1
 ├── main.py
+├── package.json
 ├── pyproject.toml
 ├── python-script-template.spec
 ├── README.md
@@ -25,6 +26,7 @@ project-name/
 - `src/python_script_template/__init__.py`：包版本占位
 - `tests/`：`unittest` 测试用例，覆盖 CSV 处理、运行路径解析和并发批次分配
 - `resources/`：本地运行资源占位目录，模板只保留 `.gitkeep`
+- `package.json`：npm 命令入口，包含 `lint` 和 `ready` 命令
 - `pyproject.toml`：项目元数据、脚本入口和基础构建说明
 - `requirements.txt`：打包依赖，默认包含 PyInstaller
 - `build.ps1`：Windows PowerShell 打包脚本，负责创建虚拟环境、安装依赖并执行 PyInstaller

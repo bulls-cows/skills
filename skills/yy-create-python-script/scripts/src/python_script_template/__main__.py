@@ -15,7 +15,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 STATUS_COLUMN = "Status"
 MESSAGE_COLUMN = "Message"
@@ -338,7 +337,6 @@ def resolve_csv_path(csv_dir: Path, value: str) -> Path:
     path = Path(value)
     if not path.is_absolute():
         path = csv_dir / path
-
 
     return path.resolve()
 

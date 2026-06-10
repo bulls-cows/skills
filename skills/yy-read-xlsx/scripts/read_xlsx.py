@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import posixpath
 import re
 import sys
 import zipfile
@@ -42,13 +43,22 @@ def read_shared_strings(workbook: zipfile.ZipFile) -> list[str]:
     return [shared_string_text(item) for item in root.findall(MAIN_NS + "si")]
 
 
+def worksheet_zip_path(target: str) -> str:
+    if target.startswith("/"):
+        normalized_path = posixpath.normpath(target.lstrip("/"))
+    else:
+        normalized_path = posixpath.normpath(posixpath.join("xl", target))
+
+    if normalized_path == ".." or normalized_path.startswith("../"):
+        raise ValueError(f"工作表路径不合法：{target}")
+
+    return normalized_path
+
+
 def workbook_sheets(workbook: zipfile.ZipFile) -> list[tuple[str, str]]:
     workbook_root = ET.fromstring(workbook.read("xl/workbook.xml"))
     rels_root = ET.fromstring(workbook.read("xl/_rels/workbook.xml.rels"))
-    rel_map = {
-        rel.attrib["Id"]: rel.attrib["Target"]
-        for rel in rels_root.findall(PKG_REL_NS + "Relationship")
-    }
+    rel_map = {rel.attrib["Id"]: rel.attrib["Target"] for rel in rels_root.findall(PKG_REL_NS + "Relationship")}
 
     sheets: list[tuple[str, str]] = []
     sheets_root = workbook_root.find(MAIN_NS + "sheets")
@@ -59,9 +69,7 @@ def workbook_sheets(workbook: zipfile.ZipFile) -> list[tuple[str, str]]:
         name = sheet.attrib["name"]
         relation_id = sheet.attrib[REL_NS + "id"]
         target = rel_map[relation_id]
-        file_path = target[1:] if target.startswith("/") else "xl/" + target
-        file_path = file_path.replace("xl/worksheets/../", "xl/")
-        sheets.append((name, file_path))
+        sheets.append((name, worksheet_zip_path(target)))
 
     return sheets
 
@@ -110,6 +118,9 @@ def read_sheet(
     sheet_path: str,
     shared_strings: list[str],
 ) -> list[list[str]]:
+    if sheet_path not in workbook.namelist():
+        raise ValueError(f"工作表文件不存在：{sheet_path}")
+
     root = ET.fromstring(workbook.read(sheet_path))
     rows: list[list[str]] = []
 
@@ -210,7 +221,17 @@ def render_text(data: dict[str, Any]) -> str:
 def parse_fill_columns(value: str) -> list[int]:
     if not value:
         return []
-    return [int(item.strip()) for item in value.split(",") if item.strip()]
+
+    columns: list[int] = []
+    for item in value.split(","):
+        column = item.strip()
+        if not column:
+            continue
+        if not column.isdigit():
+            raise argparse.ArgumentTypeError(f"列索引必须是非负整数：{column}")
+        columns.append(int(column))
+
+    return columns
 
 
 def main() -> int:
@@ -219,7 +240,12 @@ def main() -> int:
     parser.add_argument("--sheet", help="Only read the named worksheet")
     parser.add_argument("--format", choices=["markdown", "json", "text"], default="markdown")
     parser.add_argument("--forward-fill", action="store_true", help="Forward fill selected columns")
-    parser.add_argument("--fill-columns", default="", help="0-based column indexes, for example: 0,1")
+    parser.add_argument(
+        "--fill-columns",
+        default=[],
+        type=parse_fill_columns,
+        help="0-based column indexes, for example: 0,1",
+    )
     args = parser.parse_args()
 
     path = Path(args.file)
@@ -230,11 +256,14 @@ def main() -> int:
         print(f"仅支持 .xlsx 文件：{path}", file=sys.stderr)
         return 1
 
-    data = read_xlsx(path, args.sheet)
-    if args.forward_fill:
-        columns = parse_fill_columns(args.fill_columns)
-        for sheet in data["sheets"]:
-            sheet["rows"] = forward_fill_rows(sheet["rows"], columns)
+    try:
+        data = read_xlsx(path, args.sheet)
+        if args.forward_fill:
+            for sheet in data["sheets"]:
+                sheet["rows"] = forward_fill_rows(sheet["rows"], args.fill_columns)
+    except (KeyError, ValueError, zipfile.BadZipFile, ET.ParseError) as error:
+        print(f"读取失败：{error}", file=sys.stderr)
+        return 1
 
     if args.format == "json":
         print(json.dumps(data, ensure_ascii=False, indent=2))

@@ -6,14 +6,13 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = PROJECT_ROOT / "src"
 
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from python_script_template.__main__ import process_csv, ScriptConfig
+from python_script_template.__main__ import ScriptConfig, process_csv
 
 
 class CsvPipelineTests(unittest.TestCase):

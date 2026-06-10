@@ -73,6 +73,7 @@
 ```text
 project-name/
 ├── main.py
+├── package.json
 ├── pyproject.toml
 ├── requirements.txt
 ├── build.ps1
@@ -82,7 +83,7 @@ project-name/
 └── tests/
 ```
 
-配置文件处理规则：复制并最小定制 `pyproject.toml`、`requirements.txt`、`build.ps1`、`*.spec`、`.gitignore`、`.editorconfig`、`README.md`；项目名称使用 kebab-case，包目录和导入路径使用 snake_case。
+配置文件处理规则：复制并最小定制 `package.json`、`pyproject.toml`、`requirements.txt`、`build.ps1`、`*.spec`、`.gitignore`、`.editorconfig`、`README.md`；项目名称使用 kebab-case，包目录和导入路径使用 snake_case。`package.json` 必须包含 `npm run lint` 和 `npm run ready` 对应脚本，其中 `npm run lint` 用于格式化代码和执行测试用例，`npm run ready` 用于安装依赖包。
 
 ### 阶段五：生成脚本流水线源码
 
@@ -94,7 +95,8 @@ project-name/
 
 **决策分支**：
 
-- **用户未禁止安装与验证**：执行 `python -m unittest discover -s tests`
+- **用户未禁止安装与验证**：优先执行 `npm run lint`，用统一命令完成格式化和测试
+- **用户要求安装依赖或准备环境**：执行 `npm run ready` 安装依赖包
 - **用户要求验证打包能力**：先执行依赖安装，再执行 `./build.ps1` 或等价 PyInstaller 命令
 - **用户明确要求跳过安装或当前环境不适合创建虚拟环境**：跳过命令执行，并在结果中说明未验证项
 
@@ -106,14 +108,15 @@ project-name/
 
 ## 3. 📜 核心通用规范
 
-| 类型     | 规范                                                      | 示例                                   |
-| -------- | --------------------------------------------------------- | -------------------------------------- |
-| 项目命名 | 项目名称使用 kebab-case                                   | `my-python-script`                     |
-| 包命名   | 包目录和导入路径使用 snake_case                           | `my_python_script`                     |
-| 权威来源 | 以当前技能 `scripts/` 为唯一权威参考                      | `scripts/pyproject.toml`               |
-| 入口约定 | `main.py` 作为可冻结入口，包内 `__main__.py` 作为业务入口 | `src/<package_name>/__main__.py`       |
-| 测试约定 | 优先使用 `unittest`，不强制引入额外测试依赖               | `python -m unittest discover -s tests` |
-| 数据约束 | 模板只保留占位资源，不写入真实业务数据                    | `resources/.gitkeep`                   |
+| 类型     | 规范                                                      | 示例                             |
+| -------- | --------------------------------------------------------- | -------------------------------- |
+| 项目命名 | 项目名称使用 kebab-case                                   | `my-python-script`               |
+| 包命名   | 包目录和导入路径使用 snake_case                           | `my_python_script`               |
+| 权威来源 | 以当前技能 `scripts/` 为唯一权威参考                      | `scripts/pyproject.toml`         |
+| 入口约定 | `main.py` 作为可冻结入口，包内 `__main__.py` 作为业务入口 | `src/<package_name>/__main__.py` |
+| 验证约定 | `npm run lint` 用于格式化代码和执行测试用例               | `npm run lint`                   |
+| 安装约定 | `npm run ready` 用于安装依赖包                            | `npm run ready`                  |
+| 数据约束 | 模板只保留占位资源，不写入真实业务数据                    | `resources/.gitkeep`             |
 
 ---
 

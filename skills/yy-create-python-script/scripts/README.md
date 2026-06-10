@@ -18,6 +18,8 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests
 .\.venv\Scripts\python.exe main.py .\resources\input.csv --output .\resources\output.csv
+npm run ready
+npm run lint
 ```
 
 ## 常用命令
@@ -26,6 +28,8 @@ python -m venv .venv
 python main.py resources/input.csv --output resources/output.csv
 python main.py resources/input.csv --workers 4
 python main.py resources/input.csv --command "python helper.py" --timeout 30
+npm run ready
+npm run lint
 ./build.ps1
 ```
 
@@ -34,6 +38,7 @@ python main.py resources/input.csv --command "python helper.py" --timeout 30
 ```text
 python-script-template/
 ├── main.py
+├── package.json
 ├── pyproject.toml
 ├── requirements.txt
 ├── build.ps1

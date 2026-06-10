@@ -1,0 +1,8 @@
+{
+  "name": "yy-read-xlsx-scripts",
+  "private": true,
+  "scripts": {
+    "lint": "python -m ruff check . --fix && python -m ruff format . && python -m unittest discover -s tests",
+    "ready": "python -m pip install -e \".[dev]\""
+  }
+}

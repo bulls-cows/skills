@@ -3,9 +3,34 @@ name = "python-script-template"
 version = "0.1.0"
 description = "Python script project template for CSV and file processing pipelines"
 requires-python = ">=3.10"
+dependencies = [
+    "pyinstaller>=6.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
 [project.scripts]
 python-script-template = "python_script_template.__main__:main"
 
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+]
+
 [tool.pyinstaller]
 name = "python-script-template"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+"main.py" = ["E402"]
+"tests/*.py" = ["E402"]
