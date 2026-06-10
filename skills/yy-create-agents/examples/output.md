@@ -2,7 +2,7 @@
 
 ## 输入
 
-用户在一个 Vue3 + TypeScript 前端项目中执行 `/yy-init`。
+用户在一个 Vue3 + TypeScript 前端项目中执行 `/yy-create-agents`。
 
 ## 输出
 

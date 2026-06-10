@@ -1,14 +1,14 @@
 ---
-name: yy-init
+name: yy-create-agents
 description: >
-  初始化或更新项目的 AGENTS.md 文档。用于：用户提到"初始化项目"、"创建 AGENTS.md"、"项目规范文档"时触发。
+  创建或更新项目的 AGENTS.md 文档。用于：用户提到"初始化项目"、"创建 AGENTS.md"、"项目规范文档"时触发。
 ---
 
-# yy-init
+# yy-create-agents
 
 ## 描述
 
-初始化或更新项目的 AGENTS.md 文档，确保 AI 助手能够理解项目的规范、范围和结构，并主动应用体系化思考方式。
+创建或更新项目的 AGENTS.md 文档，确保 AI 助手能够理解项目的规范、范围和结构，并主动应用体系化思考方式。
 
 ## 使用场景
 
@@ -114,5 +114,5 @@ description: >
 本技能包含以下辅助资源：
 
 - `examples/input.md`：输入示例，展示用户如何请求初始化项目
-- `examples/output.md`：输出示例，展示初始化后的预期结果
+- `examples/output.md`：输出示例，展示创建或更新后的预期结果
 - `templates/agents-minimal-template.md`：AGENTS.md 基础模板

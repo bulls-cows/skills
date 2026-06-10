@@ -29,5 +29,5 @@
 ## 示例 5：显式调用
 
 ```text
-/yy-init
+/yy-create-agents
 ```

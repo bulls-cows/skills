@@ -26,7 +26,7 @@ description: >
 "AI 能力模型"分布在以下 3 处，修改时必须同步：
 
 - `AGENTS.md`（`## AI 能力模型` 章节）— 权威来源
-- `skills/yy-init/templates/agents-minimal-template.md`（`## AI 能力模型` 章节）— 模板副本，内容应与 AGENTS.md 完全一致
+- `skills/yy-create-agents/templates/agents-minimal-template.md`（`## AI 能力模型` 章节）— 模板副本，内容应与 AGENTS.md 完全一致
 - `skills/yy-optimize/SKILL.md`（步骤 2、3）— 适配版本，将能力模型转化为具体分析方法
 
 ## 同步规则
@@ -58,7 +58,7 @@ yy-optimize 中是能力模型的**应用适配**，非直接复制。同步检�
 
 ### 步骤 3. 同步模板文件
 
-- 将 `AGENTS.md` 的 `## AI 能力模型` 章节完整复制到 `skills/yy-init/templates/agents-minimal-template.md` 对应位置
+- 将 `AGENTS.md` 的 `## AI 能力模型` 章节完整复制到 `skills/yy-create-agents/templates/agents-minimal-template.md` 对应位置
 
 ### 步骤 4. 同步 yy-optimize
 
@@ -85,7 +85,7 @@ yy-optimize 中是能力模型的**应用适配**，非直接复制。同步检�
 ### 已更新文件
 
 - AGENTS.md: [具体变更]
-- skills/yy-init/templates/agents-minimal-template.md: [具体变更]
+- skills/yy-create-agents/templates/agents-minimal-template.md: [具体变更]
 - skills/yy-optimize/SKILL.md: [具体变更 / 无需变更]
 
 ### 一致性验证
