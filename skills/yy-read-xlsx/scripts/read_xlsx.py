@@ -10,13 +10,18 @@ import re
 import sys
 import zipfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol, cast
 from xml.etree import ElementTree as ET
 
+
+class TextStreamWithReconfigure(Protocol):
+    def reconfigure(self, **kwargs: object) -> None: ...
+
+
 if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
+    cast(TextStreamWithReconfigure, sys.stdout).reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8")
+    cast(TextStreamWithReconfigure, sys.stderr).reconfigure(encoding="utf-8")
 
 MAIN_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"

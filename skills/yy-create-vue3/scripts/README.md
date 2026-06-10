@@ -1,6 +1,7 @@
 # Vue3 Scaffold
 
-`vue3-scaffold` 是一个用于快速启动 Vue3 应用开发的模板项目，内置 Vite、TypeScript、Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier 等常用工程能力。
+`vue3-scaffold` 是一个用于快速启动 Vue3 应用开发的模板项目，内置 Vite、TypeScript、
+Vue Router、Pinia、Axios、Vitest、ESLint、Oxlint 和 Prettier 等常用工程能力。
 
 该模板用于减少新项目初始化成本，提供统一的目录结构、运行脚本、环境变量、Mock 请求、全局反馈和基础工具函数，让业务开发可以直接从标准化工程骨架开始。
 
@@ -185,13 +186,19 @@ Copy-Item .env.example .env
 - `src/components/GlobalAlert/GlobalAlert.vue`：展示全局确认弹窗。
 - `src/components/GlobalToast/GlobalToast.vue`：展示全局消息提示。
 - `src/composables/useAppNavigation.ts`：集中维护导航项，新增页面时优先同步这里和 `src/router/index.ts`。
-- `src/utils/modalUtils.ts`：提供 `doAlert`、`doToastSuccess`、`doToastError`、`doToastWarning`、`doToastInfo`、`doGlobalLoading`、`doGlobalStatic` 和 `doHideGlobalLoading`。
+- `src/utils/modalUtils.ts`：提供 `doAlert`、`doToastSuccess`、`doToastError`、
+  `doToastWarning`、`doToastInfo`、`doGlobalLoading`、`doGlobalStatic` 和
+  `doHideGlobalLoading`。
 
 ## 通用能力
 
-- 基础组件：`src/components/BaseButton/` 支持视觉类型、尺寸、图标和加载态；`src/components/BaseTable/` 支持列配置、骨架屏和插槽扩展；`src/components/BaseSelect/` 和 `src/components/BaseResult/` 提供选择器和结果展示骨架。
-- 组合式逻辑：`src/composables/useInterval.ts`、`src/composables/useTimeout.ts` 和 `src/composables/useLoadingPoints.ts` 提供可自动清理的定时器与加载点动画。
-- 最小 i18n：`src/i18n/messages.ts` 维护中性示例词典，`src/i18n/index.ts` 暴露 `currentLocale`、`setLocale` 和 `t()`。
+- 基础组件：`src/components/BaseButton/` 支持视觉类型、尺寸、图标和加载态；
+  `src/components/BaseTable/` 支持列配置、骨架屏和插槽扩展；
+  `src/components/BaseSelect/` 和 `src/components/BaseResult/` 提供选择器和结果展示骨架。
+- 组合式逻辑：`src/composables/useInterval.ts`、`src/composables/useTimeout.ts` 和
+  `src/composables/useLoadingPoints.ts` 提供可自动清理的定时器与加载点动画。
+- 最小 i18n：`src/i18n/messages.ts` 维护中性示例词典，`src/i18n/index.ts` 暴露
+  `currentLocale`、`setLocale` 和 `t()`。
 - 示例页面：`src/views/UiView/` 展示基础组件、插槽和 i18n 的最小使用方式。
 
 ## 开发约定

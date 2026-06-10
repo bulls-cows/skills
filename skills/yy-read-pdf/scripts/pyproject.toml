@@ -11,7 +11,7 @@ dev = ["pyright>=1.1.400", "ruff>=0.11"]
 pythonVersion = "3.10"
 typeCheckingMode = "basic"
 include = ["read_pdf.py", "tests"]
-exclude = [".ruff_cache", "build", "dist"]
+exclude = [".ruff_cache", "build", "dist", "node_modules"]
 reportMissingTypeStubs = "none"
 
 [tool.ruff]

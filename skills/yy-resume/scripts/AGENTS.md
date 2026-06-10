@@ -96,10 +96,13 @@
 
 执行终端命令前，先读取项目根目录下的 `TERMINAL.LOCAL.md`，并优先使用其中记录的已验证 shell 启动入口、命令可用性和命令写法。
 
-- 在读取 `TERMINAL.LOCAL.md` 前，优先使用 Agent 原生文件读取能力；若不可用，则直接使用 `node` 进程读取文件内容，不通过 shell 包装
-- 只有原生读取与 `node` 读取均不可用时，才按固定优先级执行最小 shell 读取探测；该阶段只用于判断文件是否存在并读取内容，不代表终端能力结论
+- 在读取 `TERMINAL.LOCAL.md` 前，优先使用 Agent 原生文件读取能力；若不可用，
+  则直接使用 `node` 进程读取文件内容，不通过 shell 包装
+- 只有原生读取与 `node` 读取均不可用时，才按固定优先级执行最小 shell 读取探测；
+  该阶段只用于判断文件是否存在并读取内容，不代表终端能力结论
 - 如果 `TERMINAL.LOCAL.md` 不存在、内容为空或记录与实际执行结果不一致，优先使用 `yy-detect-terminal` 技能创建或更新该文件
-- 如果 `yy-detect-terminal` 技能不可用，使用最小化本地回退规则：先确认可用 shell，再确认命令存在性判断方式，最后记录首选 shell、备用 shell、不可用 shell 和搜索命令选择
+- 如果 `yy-detect-terminal` 技能不可用，使用最小化本地回退规则：先确认可用 shell，
+  再确认命令存在性判断方式，最后记录首选 shell、备用 shell、不可用 shell 和搜索命令选择
 - `TERMINAL.LOCAL.md` 只描述本机环境，不代表其他开发者环境；发现记录失效时应立即更新
 
 ## 需要遵守的规则
@@ -109,7 +112,8 @@
 - 除非用户明确要求提交，否则禁止使用 git 提交相关命令
 - 不要手动修改 `node_modules/`、`dist/` 和 `.idea/`
 - 修改前端代码时保持组件职责清晰，避免把状态管理、展示逻辑和导出逻辑混在同一层
-- 新增或调整简历区块时，同步检查 `src/types/`、`src/data/`、`src/components/property-editors/` 和 `src/components/sections/` 的契约一致性
+- 新增或调整简历区块时，同步检查 `src/types/`、`src/data/`、
+  `src/components/property-editors/` 和 `src/components/sections/` 的契约一致性
 - 调整本地缓存或导入导出逻辑时，同步检查 `src/stores/` 和 `src/utils/` 中的数据读写路径
 
 ## 关键参考

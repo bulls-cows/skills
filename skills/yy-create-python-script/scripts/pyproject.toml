@@ -24,7 +24,7 @@ dev = [
 pythonVersion = "3.10"
 typeCheckingMode = "basic"
 include = ["main.py", "src", "tests"]
-exclude = [".ruff_cache", "build", "dist"]
+exclude = [".ruff_cache", "build", "dist", "node_modules"]
 reportMissingTypeStubs = "none"
 
 [tool.pyinstaller]

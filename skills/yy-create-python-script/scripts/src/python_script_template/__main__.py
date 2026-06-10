@@ -347,18 +347,32 @@ def run_process_with_cleanup(
     timeout_seconds: int,
     env: dict[str, str] | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    process = subprocess.Popen(
-        command,
-        cwd=cwd,
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        stdin=subprocess.DEVNULL,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        **build_popen_process_group_kwargs(),
-    )
+    if os.name == "nt":
+        process = subprocess.Popen(
+            command,
+            cwd=cwd,
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.DEVNULL,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+        )
+    else:
+        process = subprocess.Popen(
+            command,
+            cwd=cwd,
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.DEVNULL,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            start_new_session=True,
+        )
     register_active_child_process(process.pid)
 
     try:
@@ -373,12 +387,6 @@ def run_process_with_cleanup(
         unregister_active_child_process(process.pid)
 
     return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
-
-
-def build_popen_process_group_kwargs() -> dict[str, int | bool]:
-    if os.name == "nt":
-        return {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
-    return {"start_new_session": True}
 
 
 def kill_process_and_collect_output(

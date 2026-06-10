@@ -3,8 +3,26 @@
 import argparse
 import json
 import sys
+from collections.abc import Iterable
+from typing import Protocol, cast
 
-sys.stdout.reconfigure(encoding="utf-8")
+
+class StdoutWithReconfigure(Protocol):
+    def reconfigure(self, **kwargs: object) -> None: ...
+
+
+class PdfTable(Protocol):
+    def extract(self) -> list[list[object]]: ...
+
+
+class PdfPage(Protocol):
+    def get_text(self) -> str: ...
+
+    def find_tables(self) -> Iterable[PdfTable]: ...
+
+
+if hasattr(sys.stdout, "reconfigure"):
+    cast(StdoutWithReconfigure, sys.stdout).reconfigure(encoding="utf-8")
 
 
 def main():
@@ -43,7 +61,7 @@ def main():
     }
 
     for i in range(args.start, min(end, doc.page_count)):
-        page = doc[i]
+        page = cast(PdfPage, doc[i])
         text = page.get_text()
         tables = [t.extract() for t in page.find_tables()]
         result["pages"].append({"page_num": i + 1, "text": text, "tables": tables})

@@ -9,7 +9,8 @@ npm run ready
 npm run lint
 python read_xlsx.py --file "workbook.xlsx" --format markdown
 python read_xlsx.py --file "workbook.xlsx" --sheet "Sheet1" --format json
-python read_xlsx.py --file "workbook.xlsx" --format markdown --forward-fill --fill-columns "0,1"
+python read_xlsx.py --file "workbook.xlsx" --format markdown ``
+  --forward-fill --fill-columns "0,1"
 ```
 
 ## 说明
