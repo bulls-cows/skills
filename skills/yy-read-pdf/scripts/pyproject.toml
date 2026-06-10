@@ -5,7 +5,14 @@ requires-python = ">=3.10"
 dependencies = ["pymupdf"]
 
 [project.optional-dependencies]
-dev = ["ruff>=0.11"]
+dev = ["pyright>=1.1.400", "ruff>=0.11"]
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "basic"
+include = ["read_pdf.py", "tests"]
+exclude = [".ruff_cache", "build", "dist"]
+reportMissingTypeStubs = "none"
 
 [tool.ruff]
 line-length = 88

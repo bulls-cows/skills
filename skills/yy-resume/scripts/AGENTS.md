@@ -29,7 +29,7 @@
 - `npm run dev`：启动 Vite 开发服务
 - `npm run build`：执行类型检查并构建生产产物
 - `npm run preview`：预览生产构建结果
-- `npm run lint`：依次执行 Prettier、ESLint 和 vue-tsc 检查
+- `npm run lint`：依次执行 Prettier、ESLint、Markdown 检查、vue-tsc 检查和 smoke test
 - `npm run lint:prettier`：格式化 `src/**/*.ts` 和 `src/**/*.vue`
 - `npm run lint:eslint`：检查 `src/**/*.{ts,vue}`
 - `npm run lint:type`：执行 Vue TypeScript 类型检查

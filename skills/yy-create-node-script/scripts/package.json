@@ -15,7 +15,9 @@
     "start": "node ./src/main.ts",
     "start:example": "cross-env INPUT_FILE=./resources/input.json OUTPUT_FILE=./resources/output.json npm run start",
     "test": "node --test test/**/*.test.ts",
-    "lint": "node --run format && node --run eslint && node --run typecheck",
+    "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
+    "lint:code": "eslint . --fix",
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
     "eslint": "eslint . --fix",
     "format": "prettier . --write",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -30,6 +32,7 @@
     "cross-env": "10.1.0",
     "eslint": "10.4.1",
     "eslint-config-prettier": "10.1.8",
+    "markdownlint-cli2": "^0.22.1",
     "prettier": "3.8.3",
     "typescript": "6.0.3",
     "typescript-eslint": "8.60.1"

@@ -16,8 +16,16 @@ python-script-template = "python_script_template.__main__:main"
 
 [project.optional-dependencies]
 dev = [
+    "pyright>=1.1.400",
     "ruff>=0.8.0",
 ]
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "basic"
+include = ["main.py", "src", "tests"]
+exclude = [".ruff_cache", "build", "dist"]
+reportMissingTypeStubs = "none"
 
 [tool.pyinstaller]
 name = "python-script-template"

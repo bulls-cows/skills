@@ -10,8 +10,16 @@ build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = [
+    "pyright>=1.1.400",
     "ruff>=0.8.0",
 ]
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "basic"
+include = ["read_xlsx.py", "tests"]
+exclude = [".ruff_cache", "build", "dist"]
+reportMissingTypeStubs = "none"
 
 [tool.setuptools]
 py-modules = ["read_xlsx"]

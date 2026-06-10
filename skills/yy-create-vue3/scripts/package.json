@@ -17,6 +17,7 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" \"#coverage\" --fix",
     "format": "prettier --write --experimental-cli src/ public/mock"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "eslint-plugin-vue": "^10.8.0",
     "jiti": "2.6.1",
     "jsdom": "^29.0.1",
+    "markdownlint-cli2": "^0.22.1",
     "npm-run-all2": "8.0.4",
     "oxlint": "^1.51.0",
     "prettier": "^3.8.1",

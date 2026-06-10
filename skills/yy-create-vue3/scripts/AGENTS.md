@@ -28,7 +28,7 @@
 - 生产模式构建：`npm run build:production`。
 - 清理产物：`npm run clean`。
 
-`npm run lint` 会依次执行格式化、Oxlint、ESLint、换行符检查、类型检查和 Vitest 测试。
+`npm run lint` 会依次执行格式化、Oxlint、ESLint、换行符检查、Markdown 检查、类型检查和 Vitest 测试。
 
 ## 交付格式
 
