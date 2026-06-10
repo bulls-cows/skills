@@ -40,6 +40,7 @@ description: >
 
 - **范围**：识别主要编程语言、允许修改目录（如 src/、tests/）、禁止修改目录（如 dist/、node_modules/）
 - **改动检查**：检测 package.json 中的 lint、test 脚本
+- **终端能力信息**：检查项目根目录是否存在 `TERMINAL.LOCAL.md`，但只用于判断本机终端记录是否已建立；不得用一次性终端探测结果替代 `终端命令能力识别` 通用章节
 - **项目结构**：分析目录结构，最多 4 级
 
 **决策分支**：
@@ -52,6 +53,13 @@ description: >
 ### 3. 生成 AGENTS.md
 
 参考 `templates/agents-minimal-template.md` 的结构，根据收集的项目信息生成 AGENTS.md 文档。
+
+**通用章节复用要求：**
+
+- `交互确认格式`、`路径格式规范`、`终端命令能力识别` 属于通用代理行为章节，必须直接复用 `templates/agents-minimal-template.md` 中对应章节的核心内容
+- 生成 `终端命令能力识别` 章节时，必须保留 `TERMINAL.LOCAL.md` 优先机制和 `yy-detect-terminal` 创建/更新机制
+- 禁止把当前机器、当前 shell、当前编码问题、一次性命令探测结果或临时回退写法替代为 `终端命令能力识别` 章节主体内容
+- 如目标项目缺少 `TERMINAL.LOCAL.md`，只能在生成内容中保留“优先使用 `yy-detect-terminal` 创建或更新该文件”的通用说明，不得自行固化未验证的终端结论
 
 **必须包含的章节**：
 
@@ -68,6 +76,13 @@ description: >
 11. 关键参考
 
 ### 4. 保存并输出结果
+
+保存前必须校验生成内容：
+
+- `终端命令能力识别` 章节必须包含 `TERMINAL.LOCAL.md`
+- `终端命令能力识别` 章节必须包含 `yy-detect-terminal`
+- `终端命令能力识别` 章节必须包含“执行终端命令前，先读取项目根目录下的 `TERMINAL.LOCAL.md`”
+- 若上述任一内容缺失，必须先从 `templates/agents-minimal-template.md` 复用对应章节修正后，才能写入 `AGENTS.md`
 
 使用 Write 工具保存文件，输出结果：
 
