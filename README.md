@@ -37,6 +37,7 @@
 | [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行规范的 Git 提交         | `npx skills add bulls-cows/skills --skill yy-commit`                       |
 | [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
+| [yy-create-lint](./skills/yy-create-lint/SKILL.md)                                   | 为项目接入 npm lint 流程          | `npx skills add bulls-cows/skills --skill yy-create-lint`                  |
 | [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架         | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
 | [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架          | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档        | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
