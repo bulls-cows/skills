@@ -1,7 +1,7 @@
 {
   "globs": ["**/*.md"],
   "gitignore": true,
-  "ignores": ["CLAUDE.md"],
+  "ignores": ["CLAUDE.md", "skills/*/scripts/**"],
   "fix": true,
   "config": {
     "default": true,
