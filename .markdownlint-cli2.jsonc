@@ -1,0 +1,5 @@
+{
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules", "**/node_modules/**", "CLAUDE.md"],
+  "fix": true
+}

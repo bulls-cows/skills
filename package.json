@@ -11,7 +11,7 @@
     "lint:prettier": "prettier --write .",
     "lint:skills": "node ./build/lint-skills.mts",
     "check:skill": "node ./build/check-skill.mts",
-    "lint:markdown": "markdownlint \"**/*.md\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "lint:lf": "node ./build/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./build/sync-marketplace.mts",
@@ -41,7 +41,7 @@
     "eslint": "10.4.0",
     "eslint-config-prettier": "10.1.8",
     "js-yaml": "4.1.1",
-    "markdownlint-cli": "0.48.0",
+    "markdownlint-cli2": "0.22.1",
     "prettier": "3.8.3",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.3"
