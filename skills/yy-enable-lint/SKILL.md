@@ -123,7 +123,9 @@ description: >
 **EditorConfig 文件**：
 
 - 如果项目根目录不存在 `.editorconfig`，新增 `.editorconfig`，为后续格式化工具提供基础编辑器约定
-- 新增 `.editorconfig` 时，优先使用以下配置：`root = true`，`[*]` 下设置 `charset = utf-8`、`indent_style = space`、`indent_size = 2`、`end_of_line = lf`、`insert_final_newline = true`、`trim_trailing_whitespace = true`
+- 新增 `.editorconfig` 时，优先使用以下配置：
+  - 顶部：`root = true`
+  - `[*]` 段：`charset = utf-8`、`indent_style = space`、`indent_size = 2`、`end_of_line = lf`、`insert_final_newline = true`、`trim_trailing_whitespace = true`
 - 如果项目根目录已存在 `.editorconfig`，只读取并遵守，不为统一风格而重写已有配置
 - 如果目标项目已有明确缩进、换行或字符集约定，新增 `.editorconfig` 时按项目约定调整对应字段，并在输出中说明依据
 
