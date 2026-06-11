@@ -1,8 +1,10 @@
 ---
 name: yy-comment
 description: >
-  为代码添加注释。当用户要求"加注释"、"添加 JSDoc"、"补充注释"、"给模板加注释"、"给样式加注释"时触发。
-  支持 JS/TS/Vue/HTML/CSS/SCSS/LESS 文件。
+  为代码添加注释。当用户要求"加注释"、"添加 JSDoc"、"补充注释"、
+  "给模板加注释"、"给样式加注释"时触发。
+  支持 JS/TS/JSX/TSX/Vue/HTML/CSS/SCSS/LESS 文件。
+  不适用于：实现新功能、修改代码逻辑、删除代码，或为每个标签/每条规则强制加注释。
 ---
 
 # yy-comment
@@ -42,15 +44,16 @@ description: >
 
 Vue SFC 中三个区块各自使用对应语法，互不干扰。
 
-## 执行流程
+## 指令
 
-### 1. 确定范围
+### 步骤 1. 确定范围
 
 - 用户指定文件 → 读取目标文件
 - 用户指定函数 → 定位目标函数
 - 用户未指定 → 通过 `git diff` 查找变更文件，并按项目类型确定扫描范围：
   - 前端项目（存在 `package.json`）：扫描 `src/` 目录下的改动文件
   - Java 项目（存在 `pom.xml` 或 `build.gradle`）：扫描项目根目录下的改动文件
+  - 其他或未识别项目：扫描 `git diff` 中所有受支持类型（JS/TS/JSX/TSX/Vue/HTML/CSS/SCSS/LESS）的改动文件
 
 识别文件中的内容类型：
 
@@ -60,9 +63,9 @@ Vue SFC 中三个区块各自使用对应语法，互不干扰。
 
 对于超过 500 行的文件，先告知用户文件规模，确认后再执行。
 
-### 2. 添加脚本注释
+### 步骤 2. 添加脚本注释
 
-按 `references/script.md` 的规范执行：
+按 `resources/script.md` 的规范执行：
 
 - 为函数/类/方法添加 JSDoc 文档注释（`@param`、`@returns`、`@throws` 等）
 - 为 TypeScript interface/type/enum 添加文档注释
@@ -70,25 +73,25 @@ Vue SFC 中三个区块各自使用对应语法，互不干扰。
 - 在关键逻辑步骤前添加内部注释（解释"为什么"）
 - 跳过自解释代码和显而易见的逻辑
 
-### 3. 添加模板注释
+### 步骤 3. 添加模板注释
 
-按 `references/template-style.md` 的规范执行：
+按 `resources/template-style.md` 的规范执行：
 
 - 识别语义化区块（header/nav/main/footer/aside/section）和功能性 div 区域
 - 识别复杂交互组件（表单组、模态框、下拉菜单、标签页、抽屉等）
 - 在关键节点上方添加注释，说明业务用途
 - 不为每个标签添加注释，不为自解释的语义标签添加注释
 
-### 4. 添加样式注释
+### 步骤 4. 添加样式注释
 
-按 `references/template-style.md` 的规范执行：
+按 `resources/template-style.md` 的规范执行：
 
 - 使用 `/* ========== 区块名称 ========== */` 格式分隔样式区块
 - 对魔术数字、Hack、兼容性处理添加行内说明注释
 - 对复杂选择器添加说明
 - 不为每条规则添加注释，不为自解释属性添加注释
 
-### 5. 输出结果
+### 步骤 5. 输出结果
 
 修改目标文件后，报告：
 
@@ -99,5 +102,5 @@ Vue SFC 中三个区块各自使用对应语法，互不干扰。
 
 ## 相关资源
 
-- `references/script.md` - 脚本代码注释规范（JSDoc、内部注释、TypeScript 和 Vue 组件规则）
-- `references/template-style.md` - 模板和样式注释规范（HTML/Vue 模板关键节点注释和 CSS 区块注释）
+- `resources/script.md` - 脚本代码注释规范（JSDoc、内部注释、TypeScript 和 Vue 组件规则）
+- `resources/template-style.md` - 模板和样式注释规范（HTML/Vue 模板关键节点注释和 CSS 区块注释）
