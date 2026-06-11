@@ -113,8 +113,9 @@ description: >
 
 - 优先使用 `markdownlint-cli2`
 - 优先使用 `.markdownlint-cli2.jsonc` 配置 `globs`、`ignores`、`fix` 和 `config`，把可配置参数写入配置文件
+- 在配置中设置 `"gitignore": true`，自动排除 `.gitignore` 中的文件，无需手动维护两套忽略列表
+- `ignores` 字段仅保留 `.gitignore` 未覆盖的额外忽略项（如项目特有的非 git 忽略文件）
 - `package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`，避免在命令中传递 glob、忽略项或 `--fix` 等参数
-- 检查范围应排除依赖目录、构建产物、虚拟环境和缓存目录
 - 格式化可由 Prettier 覆盖 Markdown 文件
 
 ### 步骤 5. 补齐最小测试

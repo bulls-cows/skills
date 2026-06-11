@@ -93,7 +93,8 @@ exclude = [".ruff_cache", "build", "dist", "node_modules"]
 ## Markdown 检查范围
 
 Markdown 检查应排除依赖目录、构建产物、虚拟环境和缓存目录。可优先复用项目已有 Markdown lint 配置；
-缺失配置时再新增 `.markdownlint-cli2.jsonc`，并优先把 `globs`、`ignores`、`fix` 和规则 `config` 写入配置文件。
+缺失配置时再新增 `.markdownlint-cli2.jsonc`，并优先把 `globs`、`gitignore`、`ignores`、`fix` 和规则 `config` 写入配置文件。
+设置 `"gitignore": true` 可自动排除 `.gitignore` 中的文件，`ignores` 仅用于补充 `.gitignore` 未覆盖的额外忽略项。
 `package.json` 中的 `lint:markdown` 脚本优先保持为轻量入口，不在命令中传递 glob、忽略项或 `--fix` 等参数。
 
 ```json
@@ -107,7 +108,8 @@ Markdown 检查应排除依赖目录、构建产物、虚拟环境和缓存目�
 ```jsonc
 {
   "globs": ["**/*.md"],
-  "ignores": ["node_modules", "**/node_modules/**", "dist", "build", ".venv"],
+  "gitignore": true,
+  "ignores": [],
   "fix": true,
   "config": {
     "default": true,

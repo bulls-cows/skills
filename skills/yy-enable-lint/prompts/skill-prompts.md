@@ -89,7 +89,7 @@
 
 - 前端与 Node.js 项目：优先复用 ESLint，缺失时补齐最小 ESLint 配置；格式化优先使用 Prettier；TypeScript 项目使用 `tsc -p tsconfig.json --noEmit`，Vue 项目优先使用 `vue-tsc --build`；JavaScript 项目只有在已有 `jsconfig.json`、`tsconfig.json` 或 `checkJs` 约定时接入类型检测；测试优先复用 Vitest、Jest、Playwright 或 Node.js test runner
 - Python 项目：代码检查优先使用 Ruff；格式化优先使用 Ruff format，存在 Black 配置时可复用 Black；类型检测优先复用已有 mypy 或 pyright 配置，缺失时根据项目依赖和类型标注规模补齐最小 typecheck 入口；测试优先复用 pytest 或 unittest；通过 `package.json` 脚本调用 Python 工具
-- Markdown 文件：优先使用 `markdownlint-cli2`；优先通过 `.markdownlint-cli2.jsonc` 配置 `globs`、`ignores`、`fix` 和规则 `config`；`package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`；检查范围排除依赖目录、构建产物、虚拟环境和缓存目录；格式化可由 Prettier 覆盖 Markdown 文件
+- Markdown 文件：优先使用 `markdownlint-cli2`；优先通过 `.markdownlint-cli2.jsonc` 配置 `globs`、`gitignore`、`ignores`、`fix` 和规则 `config`；设置 `"gitignore": true` 自动排除 `.gitignore` 中的文件，`ignores` 仅用于补充 `.gitignore` 未覆盖的额外忽略项；`package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`；格式化可由 Prettier 覆盖 Markdown 文件
 
 ### 步骤 5. 补齐最小测试
 

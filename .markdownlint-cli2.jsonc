@@ -1,6 +1,7 @@
 {
   "globs": ["**/*.md"],
-  "ignores": ["node_modules", "**/node_modules/**", "CLAUDE.md"],
+  "gitignore": true,
+  "ignores": ["CLAUDE.md"],
   "fix": true,
   "config": {
     "default": true,
