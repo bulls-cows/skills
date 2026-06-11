@@ -13,6 +13,6 @@
     "no-hard-tabs": false,
     "whitespace": false,
     "MD013": false,
-    "MD060": false
-  }
+    "MD060": false,
+  },
 }

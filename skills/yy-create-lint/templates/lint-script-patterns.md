@@ -20,7 +20,7 @@
     "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
     "format": "prettier . --write",
     "lint:code": "eslint . --fix",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test test/**/*.test.ts"
   }
@@ -37,7 +37,7 @@
     "lint": "node --run format && run-s lint:* && node --run type-check && node --run test",
     "format": "prettier --write src public",
     "lint:eslint": "eslint . --fix --cache",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "type-check": "vue-tsc --build",
     "test": "vitest run"
   }
@@ -55,7 +55,7 @@ Python 依赖仍优先放在 `pyproject.toml`。
     "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
     "format": "python -m ruff format .",
     "lint:code": "python -m ruff check . --fix",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "typecheck": "python -m pyright .",
     "test": "python -m unittest discover -s tests"
   }
@@ -83,7 +83,7 @@ exclude = [".ruff_cache", "build", "dist", "node_modules"]
     "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
     "format": "prettier . --write && python -m ruff format .",
     "lint:code": "eslint . --fix && python -m ruff check . --fix",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "typecheck": "tsc -p tsconfig.json --noEmit && python -m pyright .",
     "test": "node --test test/**/*.test.ts && python -m unittest discover -s tests"
   }
@@ -93,13 +93,25 @@ exclude = [".ruff_cache", "build", "dist", "node_modules"]
 ## Markdown 检查范围
 
 Markdown 检查应排除依赖目录、构建产物、虚拟环境和缓存目录。可优先复用项目已有 Markdown lint 配置；
-缺失配置时再新增最小配置，并优先使用 `markdownlint-cli2`。
+缺失配置时再新增 `.markdownlint-cli2.jsonc`，并优先把 `globs`、`ignores`、`fix` 和规则 `config` 写入配置文件。
+`package.json` 中的 `lint:markdown` 脚本优先保持为轻量入口，不在命令中传递 glob、忽略项或 `--fix` 等参数。
 
 ```json
 {
   "scripts": {
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" \"#build\" \"#.venv\" --fix"
+    "lint:markdown": "markdownlint-cli2"
   }
+}
+```
+
+```jsonc
+{
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules", "**/node_modules/**", "dist", "build", ".venv"],
+  "fix": true,
+  "config": {
+    "default": true,
+  },
 }
 ```
 

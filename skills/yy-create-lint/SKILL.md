@@ -82,7 +82,7 @@ description: >
 
 - **已有同名脚本且语义一致**：优先复用原脚本，只补齐缺失的子脚本或串联关系
 - **已有同名脚本但语义冲突**：保留原脚本，新增更具体的子脚本名称，并将 `lint` 调整为统一入口
-- **缺少 Markdown 检查**：新增 `markdownlint-cli2` 配置或脚本
+- **缺少 Markdown 检查**：新增 `markdownlint-cli2` 依赖、配置文件和轻量脚本入口
 - **缺少格式化**：新增 Prettier、Ruff 或项目已有格式化工具入口
 - **缺少类型检测**：按项目类型新增 `typecheck` 脚本和必要配置
 - **缺少测试脚本**：按步骤 5 创建最小化测试用例和测试入口
@@ -112,7 +112,9 @@ description: >
 **Markdown 文件**：
 
 - 优先使用 `markdownlint-cli2`
-- 检查范围应排除依赖目录、构建产物、虚拟环境和缓存目录，脚本写法参考 `markdownlint-cli2 "**/*.md" "#node_modules" "#dist" --fix`
+- 优先使用 `.markdownlint-cli2.jsonc` 配置 `globs`、`ignores`、`fix` 和 `config`，把可配置参数写入配置文件
+- `package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`，避免在命令中传递 glob、忽略项或 `--fix` 等参数
+- 检查范围应排除依赖目录、构建产物、虚拟环境和缓存目录
 - 格式化可由 Prettier 覆盖 Markdown 文件
 
 ### 步骤 5. 补齐最小测试
