@@ -33,6 +33,7 @@ description: >
 **必须检查的文件或目录**：
 
 - `package.json`
+- `.editorconfig`
 - `pyproject.toml`、`requirements.txt`、`setup.cfg`、`tox.ini`
 - `tsconfig.json`、`tsconfig.*.json`、`jsconfig.json`
 - `src/`、`test/`、`tests/`、`__tests__/`
@@ -41,6 +42,7 @@ description: >
 **决策分支**：
 
 - **存在项目规范文件**：先读取并遵守项目规范，再继续后续步骤
+- **不存在 `.editorconfig`**：新增 `.editorconfig`，使用通用 UTF-8、两个空格缩进、LF 换行、文件末尾换行和清理行尾空白配置
 - **不存在 `package.json`**：创建最小化 `package.json`，用于承载 `npm run lint` 统一入口
 - **项目类型无法判断**：只创建通用 Markdown 检查和格式化入口，并明确标记代码检查、类型检测和测试流程需要用户补充技术栈信息
 
@@ -118,6 +120,13 @@ description: >
 - `package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`，避免在命令中传递 glob、忽略项或 `--fix` 等参数
 - 格式化可由 Prettier 覆盖 Markdown 文件
 
+**EditorConfig 文件**：
+
+- 如果项目根目录不存在 `.editorconfig`，新增 `.editorconfig`，为后续格式化工具提供基础编辑器约定
+- 新增 `.editorconfig` 时，优先使用以下配置：`root = true`，`[*]` 下设置 `charset = utf-8`、`indent_style = space`、`indent_size = 2`、`end_of_line = lf`、`insert_final_newline = true`、`trim_trailing_whitespace = true`
+- 如果项目根目录已存在 `.editorconfig`，只读取并遵守，不为统一风格而重写已有配置
+- 如果目标项目已有明确缩进、换行或字符集约定，新增 `.editorconfig` 时按项目约定调整对应字段，并在输出中说明依据
+
 ### 步骤 5. 补齐最小测试
 
 检查项目是否已有可由命令执行的测试用例。
@@ -138,6 +147,7 @@ description: >
 **允许修改的文件类型**：
 
 - `package.json` 和必要的锁文件
+- `.editorconfig`
 - ESLint、Prettier、markdownlint、Ruff、pytest 或测试框架配置文件
 - TypeScript、Vue、mypy、pyright 或其他类型检测配置文件
 - 最小化测试文件
@@ -157,9 +167,10 @@ description: >
 
 1. 修改原因和影响范围
 2. 新增或更新的文件列表
-3. `npm run lint` 覆盖的流程，必须说明类型检测入口
-4. 测试用例处理方式
-5. 后续验证建议和注意事项
+3. `.editorconfig` 处理方式，必须说明是新增、复用还是按项目约定调整
+4. `npm run lint` 覆盖的流程，必须说明类型检测入口
+5. 测试用例处理方式
+6. 后续验证建议和注意事项
 
 ## 安全边界
 
