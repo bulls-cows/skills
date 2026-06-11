@@ -22,6 +22,8 @@ const agents = [
   'zencoder',
 ]
 
+const oldSkillNamesToDelete = ['yy-frontend-commit', 'yy-skills-reverse-analysis', 'yy-init', 'yy-create-init']
+
 function readSkillNames(dir: string): string[] {
   if (!fs.existsSync(dir)) return []
 
@@ -93,7 +95,7 @@ async function main() {
   )
 
   // 已删除或重命名的旧技能，确保能从全局卸载
-  skillNames.push('yy-frontend-commit', 'yy-skills-reverse-analysis', 'yy-init')
+  skillNames.push(...oldSkillNamesToDelete)
 
   if (skillNames.length === 0) {
     console.log('未找到需要移除的本地技能。')
