@@ -105,13 +105,14 @@ description: >
 - 代码检查优先使用 Ruff
 - 格式化优先使用 Ruff format；存在 Black 配置时可复用 Black
 - 类型检测优先复用已有 mypy 或 pyright 配置；缺失时根据项目依赖和类型标注规模补齐最小 typecheck 入口
+- Python 项目中只要存在 `package.json` 文件，pyright 配置就必须排除 `node_modules`，不以目录是否已存在作为判断条件
 - 测试优先复用已有 pytest 或 unittest
 - 通过 `package.json` 脚本调用 Python 工具，保持 `npm run lint` 作为统一入口
 
 **Markdown 文件**：
 
 - 优先使用 `markdownlint-cli2`
-- 检查范围应排除依赖目录、构建产物、虚拟环境和缓存目录
+- 检查范围应排除依赖目录、构建产物、虚拟环境和缓存目录，脚本写法参考 `markdownlint-cli2 "**/*.md" "#node_modules" "#dist" --fix`
 - 格式化可由 Prettier 覆盖 Markdown 文件
 
 ### 步骤 5. 补齐最小测试
