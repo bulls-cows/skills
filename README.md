@@ -54,6 +54,7 @@
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
 | [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构       | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
+| [yy-git-commit](./skills/yy-git-commit/SKILL.md)                                     | 生成并执行通用规范的 Git 提交     | `npx skills add bulls-cows/skills --skill yy-git-commit`                   |
 | [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档            | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
 | [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                | `npx skills add bulls-cows/skills --skill yy-lint`                         |
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划      | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |
