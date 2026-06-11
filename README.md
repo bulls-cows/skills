@@ -38,7 +38,6 @@
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行规范的 Git 提交         | `npx skills add bulls-cows/skills --skill yy-commit`                       |
 | [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
 | [yy-create-agents](./skills/yy-create-agents/SKILL.md)                               | 创建或更新项目 AGENTS.md          | `npx skills add bulls-cows/skills --skill yy-create-agents`                |
-| [yy-create-lint](./skills/yy-create-lint/SKILL.md)                                   | 为项目接入 npm lint 流程          | `npx skills add bulls-cows/skills --skill yy-create-lint`                  |
 | [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架         | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
 | [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架          | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档        | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
@@ -50,6 +49,7 @@
 | [yy-design-ui](./skills/yy-design-ui/SKILL.md)                                       | 生成符合国人审美的网页界面设计    | `npx skills add bulls-cows/skills --skill yy-design-ui`                    |
 | [yy-detect-terminal](./skills/yy-detect-terminal/SKILL.md)                           | 识别并记录本地终端命令能力        | `npx skills add bulls-cows/skills --skill yy-detect-terminal`              |
 | [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容        | `npx skills add bulls-cows/skills --skill yy-distill`                      |
+| [yy-enable-lint](./skills/yy-enable-lint/SKILL.md)                                   | 为项目接入 npm lint 流程          | `npx skills add bulls-cows/skills --skill yy-enable-lint`                  |
 | [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录  | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |

@@ -1,10 +1,10 @@
 ---
-name: yy-create-lint
+name: yy-enable-lint
 description: >
   为项目添加可通过 npm run lint 执行的 lint 支持。用于需要为前端、Node.js 或 Python 项目接入格式化、代码检查、Markdown 检查、类型检测和测试流程时触发；不用于只运行已有 lint 命令或只修复 lint 报错。
 ---
 
-# yy-create-lint
+# yy-enable-lint
 
 ## 描述
 
