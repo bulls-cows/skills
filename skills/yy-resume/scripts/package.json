@@ -7,7 +7,7 @@
     "lint": "npm run format && npm run lint:eslint && npm run lint:markdown && npm run lint:type && npm run test",
     "lint:prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\"",
     "lint:eslint": "eslint \"src/**/*.{ts,vue}\"",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" \"#.idea\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "lint:type": "vue-tsc --build",
     "test": "node -e \"const fs = require('node:fs'); if (!fs.existsSync('index.html')) throw new Error('index.html is missing');\"",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\" \"*.md\"",

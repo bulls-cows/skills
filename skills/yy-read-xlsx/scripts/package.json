@@ -5,7 +5,7 @@
     "lint": "npm run format && npm run lint:code && npm run lint:markdown && npm run typecheck && npm run test",
     "format": "python -m ruff format .",
     "lint:code": "python -m ruff check . --fix",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" \"#.venv\" \"#.ruff_cache\" \"#*.egg-info\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "typecheck": "python -m pyright .",
     "test": "python -m unittest discover -s tests",
     "ready": "npm install && python -m pip install -e \".[dev]\""

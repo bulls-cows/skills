@@ -10,7 +10,7 @@
     "lint": "npm run format && npm run lint:eslint && npm run lint:markdown && npm run lint:type && npm run test",
     "lint:prettier": "prettier --check \"src/**/*.ts\"",
     "lint:eslint": "eslint \"src/**/*.ts\"",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "lint:type": "tsc --noEmit",
     "test": "node --test tests/**/*.test.mjs",
     "format": "prettier --write \"src/**/*.ts\"",

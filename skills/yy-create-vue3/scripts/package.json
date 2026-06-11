@@ -17,7 +17,7 @@
     "lint:oxlint": "oxlint . --fix",
     "lint:eslint": "eslint . --fix --cache",
     "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" \"#coverage\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "format": "prettier --write --experimental-cli src/ public/mock"
   },
   "dependencies": {

@@ -17,7 +17,7 @@
     "test": "node --test test/**/*.test.ts",
     "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
     "lint:code": "eslint . --fix",
-    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\" --fix",
+    "lint:markdown": "markdownlint-cli2",
     "eslint": "eslint . --fix",
     "format": "prettier . --write",
     "typecheck": "tsc -p tsconfig.json --noEmit"
@@ -25,7 +25,6 @@
   "keywords": [],
   "author": "",
   "private": true,
-  "dependencies": {},
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "22.19.19",
