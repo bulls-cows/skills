@@ -56,7 +56,7 @@ pub enum OrderStatus {
 
 ### 函数
 
-```rust
+````rust
 /// 计算订单折扣金额
 ///
 /// 根据客户等级和促销码计算最终折扣，
@@ -73,7 +73,7 @@ pub enum OrderStatus {
 ///
 /// 当客户等级不在 1-5 范围内时 panic。
 pub fn calculate_discount(price: f64, level: u32, promo_code: Option<&str>) -> f64 {
-```
+````
 
 ### 标准章节
 

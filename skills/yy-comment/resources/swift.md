@@ -124,14 +124,14 @@ let requestTimeout: TimeInterval = 30
 
 文档注释中可包含代码块示例：
 
-```swift
+````swift
 /// 格式化金额
 ///
 /// ```swift
 /// let formatted = formatAmount(99.5)  // "¥99.50"
 /// ```
 func formatAmount(_ amount: Double) -> String {
-```
+````
 
 ## 避免的注释
 
