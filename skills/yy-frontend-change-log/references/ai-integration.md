@@ -35,15 +35,15 @@
 
 配置后，在 OpenCode 中输入 `/changelog` 即可触发。
 
-### 方式三：配合 yy-commit 技能联动
+### 方式三：配合 yy-git-commit 技能联动
 
-如果项目已安装 `yy-commit` 提交技能，可在 instructions 中配置联动：
+如果项目已安装 `yy-git-commit` 提交技能，可在 instructions 中配置联动：
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
   "instructions": [
-    "提交前端代码前，先使用 yy-frontend-change-log 技能生成变更记录，再使用 yy-commit 技能提交。"
+    "提交前端代码前，先使用 yy-frontend-change-log 技能生成变更记录，再使用 yy-git-commit 技能提交。"
   ]
 }
 ```

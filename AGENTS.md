@@ -159,7 +159,7 @@
 ## 关键参考
 
 - `skills/yy-review/SKILL.md` - 代码质量检查工作流
-- `skills/yy-commit/SKILL.md` - Git 提交约定
+- `skills/yy-git-commit/SKILL.md` - Git 提交约定
 - `skills/yy-lint/SKILL.md` - 代码风格检查工作流
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
 - `build/sync-marketplace.mts` - 技能市场配置同步脚本
