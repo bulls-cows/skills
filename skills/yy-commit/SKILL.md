@@ -1,5 +1,5 @@
 ---
-name: yy-commit
+name: yy-git-commit
 description: >
   帮助用户创建规范的 Git 提交。当用户想要提交代码、创建 commit、
   保存改动并提交，或说"提交一下"、"commit 一下"时触发。
@@ -7,7 +7,7 @@ description: >
   执行 push/pull/merge 等非提交操作、修改代码或实现功能。
 ---
 
-# yy-commit
+# yy-git-commit
 
 此技能帮助用户创建高质量的 Git 提交，生成规范的中文提交信息。
 
@@ -88,14 +88,6 @@ git log --oneline -5
 - 文档文件（.md, .txt 等）
 - 样式文件（.css, .scss 等）
 - 测试文件
-
-**默认不暂存的文件（仅在用户明确授权时放行）：**
-
-1. 构建与工具配置文件（包括但不限于 vite.config.ts、vite.config.js、vue.config.js、webpack.config.js、rollup.config.js、tsconfig.json、jsconfig.json、babel.config.js、postcss.config.js、eslint.config.js 等）
-2. 环境配置文件（包括但不限于 .env、.env.test、.env.production、.env.local 等）
-3. 敏感文件（包括但不限于 credentials.json、secrets.\*、\*.key、\*.pem、token、password、secret 等命名特征）
-4. AI 工具生成文件（包括但不限于 .cursor/、.aider/、.claude/ 等目录下的非项目文件）
-
 **文件放行规则：**
 
 - **用户明确点名具体文件**：仅暂存用户点名的文件，例如"提交 vite.config.ts"或"提交 .env.production"；若点名文件包含敏感文件，只在展示阶段给出警告提醒，不再二次确认
@@ -177,38 +169,9 @@ refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 4. 关键变更摘要（从 diff 提取的主要改动）
 5. 生成的完整提交信息（默认含 body）
 
-**代码注释检查：**
-
-在展示确认信息的同时，检查暂存文件中是否包含代码文件（`.vue`、`.jsx`、`.tsx`、`.js`、`.ts`、`.mjs`、`.cjs`、`.html`、`.css`、`.scss`、`.less` 等），评估这些文件的 diff 中是否存在缺少合理注释的变更（如新增函数无 JSDoc、新增逻辑块无内部注释、新增样式区块无分隔注释等），并检查当前环境是否可用 `yy-comment`。只有同时满足"包含代码文件"和"diff 中存在缺少合理注释的变更"和"`yy-comment` 可用"时，才在确认信息末尾追加提示：
-
-```text
-🔍 本次提交包含缺少合理注释的代码变更，是否需要先触发 yy-comment 补充注释？
-1. 先补充注释再提交
-0. 直接提交
-```
-
-- **`yy-comment` 可用且用户选择补充注释**：先执行该技能，完成后再回到本提交流程继续执行
-- **暂存文件包含代码文件但 diff 中注释合理**：不追加注释确认提示，直接按本提交流程继续执行
-- **暂存文件包含代码文件但 `yy-comment` 不可用**：不追加注释确认提示，直接按本提交流程继续执行
-- **用户选择直接提交或使用快速提交模式**：跳过注释补充，直接执行提交
-
-**前端变更日志检查：**
-
-在展示确认信息的同时，检查暂存文件中是否包含前端文件（`.vue`、`.jsx`、`.tsx`、`.js`、`.ts`、`.css`、`.scss`、`.less` 等），并检查当前环境是否可用 `yy-frontend-change-log`。只有同时满足"包含前端文件"和"`yy-frontend-change-log` 可用"时，才在确认信息末尾追加提示：
-
-```text
-🔍 本次提交包含前端文件，是否需要先触发 yy-frontend-change-log 生成变更日志？
-1. 先生成变更日志再提交
-0. 直接提交
-```
-
-- **`yy-frontend-change-log` 可用且用户选择生成变更日志**：先执行该技能，完成后再回到本提交流程继续执行
-- **暂存文件包含前端文件但 `yy-frontend-change-log` 不可用**：不追加变更日志确认提示，直接按本提交流程继续执行
-- **用户选择直接提交或使用快速提交模式**：跳过变更日志生成，直接执行提交
-
 **快速提交模式判断：**
 
-如果用户在请求中使用了以下关键词，则跳过确认步骤（同时跳过代码注释检查和前端变更日志检查）：
+如果用户在请求中使用了以下关键词，则跳过确认步骤：
 
 - 直接提交、立即提交、马上提交
 - 无需确认、不用确认、跳过确认
