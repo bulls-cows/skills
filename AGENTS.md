@@ -75,11 +75,11 @@
 - 除非用户明确要求提交。否则禁止你使用git
 - 在输出最终结果前，请务必进行自我审查：你是否对既定的术语、格式或规则描述进行了任何形式的同义替换、过度解释或冗余补充？如果是，请立即撤回修改，严格保持原始定义不变。
 - 不要手动修改 marketplace.json，由 `scripts/sync-marketplace.ts` 自动生成
-- [NPM 使用规范 @rules/npm/RULE.md](./rules/npm/RULE.md)：依赖安装、文件修改、脚本管理
-- [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
-- [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
-- [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
-- [AI 通用操作规范 @rules/ai-agent-rules/RULE.md](./rules/ai-agent-rules/RULE.md)：分析问题、执行变更、维护一致性时遵守
+- [NPM 使用规范 @rules/npm/RULE.md](./rules/npm/RULE.md)：npm依赖安装、package.json 修改、npm脚本管理时需要遵守
+- [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)：修改文件前、跨目录操作时需要遵守
+- [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)：编写或修改 Markdown 文件时需要遵守
+- [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)：输出文本、生成文档时需要遵守
+- [AI 通用操作规范 @rules/ai-agent-rules/RULE.md](./rules/ai-agent-rules/RULE.md)：分析问题、执行变更、维护一致性时需要遵守
 
 ## 关键参考
 
