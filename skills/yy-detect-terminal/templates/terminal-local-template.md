@@ -1,4 +1,4 @@
-# TERMINAL.LOCAL.md
+# .terminal.local.md
 
 ## 用途
 

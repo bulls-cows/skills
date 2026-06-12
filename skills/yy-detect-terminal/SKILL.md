@@ -1,7 +1,7 @@
 ---
 name: yy-detect-terminal
 description: >
-  识别并记录本地终端命令能力。用于创建或更新项目根目录 TERMINAL.LOCAL.md，或在执行终端命令前确认 shell、命令可用性和搜索命令；
+  识别并记录本地终端命令能力。用于创建或更新项目根目录 .terminal.local.md，或在执行终端命令前确认 shell、命令可用性和搜索命令；
   不用于执行 lint、测试、构建、部署等业务命令。
 ---
 
@@ -9,14 +9,14 @@ description: >
 
 ## 描述
 
-识别当前环境可用的终端启动入口、命令判断方式、搜索工具和常用运行时，并将已验证结果记录到项目根目录 `TERMINAL.LOCAL.md`，供后续 AI 会话优先复用。
+识别当前环境可用的终端启动入口、命令判断方式、搜索工具和常用运行时，并将已验证结果记录到项目根目录 `.terminal.local.md`，供后续 AI 会话优先复用。
 
 ## 使用场景
 
-- 用户要求创建或更新 `TERMINAL.LOCAL.md`
+- 用户要求创建或更新 `.terminal.local.md`
 - 用户要求识别终端命令能力、shell 能力或本地命令可用性
 - 项目规范要求执行终端命令前先读取或确认终端能力
-- 已有 `TERMINAL.LOCAL.md` 与实际执行结果不一致，需要重新识别并修正
+- 已有 `.terminal.local.md` 与实际执行结果不一致，需要重新识别并修正
 
 不应触发：
 
@@ -28,7 +28,7 @@ description: >
 
 ### 步骤 1. 定位项目根目录
 
-确定需要写入 `TERMINAL.LOCAL.md` 的项目根目录。
+确定需要写入 `.terminal.local.md` 的项目根目录。
 
 **决策分支**：
 
@@ -39,11 +39,11 @@ description: >
 
 ### 步骤 2. 读取现有记录
 
-检查项目根目录下是否存在 `TERMINAL.LOCAL.md`。
+检查项目根目录下是否存在 `.terminal.local.md`。
 
 **读取方式**：
 
-- 优先使用 Agent 原生文件读取能力读取 `TERMINAL.LOCAL.md`
+- 优先使用 Agent 原生文件读取能力读取 `.terminal.local.md`
 - 若原生读取不可用，直接使用 `node` 进程读取文件内容，不通过 shell 包装
 - 只有原生读取与 `node` 读取均不可用时，才按固定优先级执行最小 shell 读取探测
 - 启动读取阶段只用于判断文件是否存在并读取内容，不代表终端能力结论
@@ -106,14 +106,14 @@ description: >
 - 用户指定需要验证的命令
 - 项目文档明确要求的工具
 
-### 步骤 5. 创建或更新 TERMINAL.LOCAL.md
+### 步骤 5. 创建或更新 .terminal.local.md
 
-将识别结果写入项目根目录 `TERMINAL.LOCAL.md`。
+将识别结果写入项目根目录 `.terminal.local.md`。
 
 **写入规则**：
 
 - 章节顺序和字段名称必须与 `templates/terminal-local-template.md` 保持一致
-- 使用 Markdown 编写，标题为 `# TERMINAL.LOCAL.md`
+- 使用 Markdown 编写，标题为 `# .terminal.local.md`
 - 标明记录用途、更新时间、工作目录、当前终端能力和命令选择建议
 - 明确区分首选 shell、备用 shell、不可用 shell 和待确认 shell
 - 记录首选 shell 时必须使用步骤 3 中固定优先级的验证结果，不能使用”当前命令刚好在哪个 shell 成功执行”作为依据
@@ -123,7 +123,7 @@ description: >
 
 ### 步骤 6. 保护本地记录文件
 
-写入 `TERMINAL.LOCAL.md` 后，检查目标项目是否位于 Git 仓库中，并在允许范围内避免该本地记录文件被误提交。
+写入 `.terminal.local.md` 后，检查目标项目是否位于 Git 仓库中，并在允许范围内避免该本地记录文件被误提交。
 
 **仓库判断规则**：
 
@@ -140,12 +140,12 @@ description: >
 
 **忽略项格式**：
 
-- 输出文件位于仓库根目录时，使用 `TERMINAL.LOCAL.md`
-- 输出文件位于仓库子目录时，使用相对仓库根目录的路径，如 `subdir/TERMINAL.LOCAL.md`
+- 输出文件位于仓库根目录时，使用 `.terminal.local.md`
+- 输出文件位于仓库子目录时，使用相对仓库根目录的路径，如 `subdir/.terminal.local.md`
 
 ### 步骤 7. 选择后续命令写法
 
-根据 `TERMINAL.LOCAL.md` 中已验证的能力选择后续终端命令写法。
+根据 `.terminal.local.md` 中已验证的能力选择后续终端命令写法。
 
 **决策分支**：
 
@@ -161,7 +161,7 @@ description: >
 
 1. **识别结果**：检测入口、首选 shell、备用 shell、不可用 shell、待确认 shell、可用搜索工具
 2. **验证证据**：说明首选 shell 是按固定优先级完整枚举并通过启动验证后确定的
-3. **文件状态**：`TERMINAL.LOCAL.md` 是新建、更新还是无需修改，`.gitignore` 是已追加、无需修改、未找到还是不适用
+3. **文件状态**：`.terminal.local.md` 是新建、更新还是无需修改，`.gitignore` 是已追加、无需修改、未找到还是不适用
 4. **后续命令建议**：推荐的 shell 启动入口和搜索命令写法
 5. **异常说明**：如有无法确认的命令能力，明确标记待确认
 
@@ -169,12 +169,12 @@ description: >
 
 - 不执行 lint、测试、构建、部署、安装依赖等业务命令
 - 不读取或输出密钥、令牌、私有配置等敏感内容
-- 不为识别命令能力而修改 `TERMINAL.LOCAL.md` 以外的文件；唯一例外是目标项目位于 Git 仓库且仓库根目录已有 `.gitignore` 时，只可追加 `TERMINAL.LOCAL.md` 对应忽略项
-- 不删除已有 `TERMINAL.LOCAL.md`，只在确认失效信息后更新内容
-- 无法判断项目根目录时，不主动创建 `TERMINAL.LOCAL.md`
+- 不为识别命令能力而修改 `.terminal.local.md` 以外的文件；唯一例外是目标项目位于 Git 仓库且仓库根目录已有 `.gitignore` 时，只可追加 `.terminal.local.md` 对应忽略项
+- 不删除已有 `.terminal.local.md`，只在确认失效信息后更新内容
+- 无法判断项目根目录时，不主动创建 `.terminal.local.md`
 
 ## 相关资源
 
 本技能包含以下辅助资源：
 
-- `templates/terminal-local-template.md`：`TERMINAL.LOCAL.md` 输出格式模板，步骤 5 写入文件时必须参照此模板
+- `templates/terminal-local-template.md`：`.terminal.local.md` 输出格式模板，步骤 5 写入文件时必须参照此模板
