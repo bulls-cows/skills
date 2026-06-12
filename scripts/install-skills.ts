@@ -33,6 +33,8 @@ const oldSkillNamesToDelete = [
   'yy-git-commit',
   'yy-git-commit-directly',
   'yy-sync-capability-model',
+  'yy-create-lint',
+  'yy-create-comment',
 ]
 
 function readSkillNames(dir: string): string[] {
