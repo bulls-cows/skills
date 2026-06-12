@@ -36,7 +36,6 @@
 | ------------------------------------------------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------- |
 | [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行规范的 Git 提交         | `npx skills add bulls-cows/skills --skill yy-commit`                       |
-| [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
 | [yy-create-agents](./skills/yy-create-agents/SKILL.md)                               | 创建或更新项目 AGENTS.md          | `npx skills add bulls-cows/skills --skill yy-create-agents`                |
 | [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架         | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
 | [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架          | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
@@ -55,6 +54,7 @@
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
 | [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构       | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
 | [yy-git-commit](./skills/yy-git-commit/SKILL.md)                                     | 生成并执行通用规范的 Git 提交     | `npx skills add bulls-cows/skills --skill yy-git-commit`                   |
+| [yy-git-commit-directly](./skills/yy-git-commit-directly/SKILL.md)                   | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-git-commit-directly`          |
 | [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档            | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
 | [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                | `npx skills add bulls-cows/skills --skill yy-lint`                         |
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划      | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |

@@ -16,7 +16,6 @@
       "skills": [
         "./skills/yy-comment",
         "./skills/yy-commit",
-        "./skills/yy-commit-directly",
         "./skills/yy-create-agents",
         "./skills/yy-create-node-script",
         "./skills/yy-create-python-script",
@@ -35,6 +34,7 @@
         "./skills/yy-frontend-review",
         "./skills/yy-frontend-style-bem-optimizer",
         "./skills/yy-git-commit",
+        "./skills/yy-git-commit-directly",
         "./skills/yy-handoff",
         "./skills/yy-lint",
         "./skills/yy-mode-plan",
