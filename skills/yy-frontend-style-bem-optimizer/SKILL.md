@@ -18,6 +18,24 @@ description: >
 
 # yy-frontend-style-bem-optimizer
 
+## 描述
+
+前端 BEM 命名规范转换与 CSS 样式优化器。将 HTML/JSX/TSX/Vue/Svelte/Astro 代码中的 class/className 属性与对应的 CSS/Sass/Less/Stylus 选择器同步转换为 BEM 命名格式，支持 CSS 属性排序、BEM 嵌套重组和逻辑域拆分。
+
+## 使用场景
+
+- 用户要求将类名转换为 BEM 规范、统一团队 CSS 命名规范
+- 用户要求整理 CSS 属性的书写顺序
+- 用户要求将扁平的 CSS/SCSS 规则重组为嵌套结构
+- 用户要求将臃肿的样式文件按功能模块拆分
+
+不应触发：
+
+- 纯理论问答不涉及代码转换
+- 非前端类名场景（JS/TS 变量名、后端命名、数据库字段）
+- 改样式值不改命名
+- 要求用 CSS Modules、CSS-in-JS、Tailwind 等非 BEM 方案重写样式
+
 ## 支持格式
 
 - **标记文件**：`.html`、`.jsx`、`.tsx`、`.vue`、`.svelte`、`.astro`
