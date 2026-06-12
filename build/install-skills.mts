@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { minimatch } from 'minimatch'
 import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
 
@@ -89,6 +90,28 @@ async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
   })
 }
 
+function readSkillIgnore(): string[] {
+  const ignorePath = path.join(projectRoot, '.skillignore')
+  if (!fs.existsSync(ignorePath)) return []
+  return fs
+    .readFileSync(ignorePath, 'utf-8')
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+}
+
+function isSkillIgnored(skillName: string, patterns: string[]): boolean {
+  let ignored = false
+  for (const pattern of patterns) {
+    if (pattern.startsWith('!')) {
+      if (minimatch(skillName, pattern.slice(1))) ignored = false
+    } else {
+      if (minimatch(skillName, pattern)) ignored = true
+    }
+  }
+  return ignored
+}
+
 async function main() {
   const skillNames = [...new Set(skillDirs.flatMap((dir) => readSkillNames(dir)))].sort((a, b) =>
     a.localeCompare(b),
@@ -127,6 +150,30 @@ async function main() {
   }
 
   await installSkills()
+
+  const ignorePatterns = readSkillIgnore()
+  const ignoredSkills = skillNames.filter((name) => isSkillIgnored(name, ignorePatterns))
+  if (ignoredSkills.length > 0) {
+    console.log(`忽略技能: ${ignoredSkills.join(', ')}`)
+    const removePromises = ignoredSkills.map((name) =>
+      removeSkillFromGlobal(name).then((result) => {
+        if (result.missing) {
+          console.log(`跳过未安装的忽略技能: ${result.skillName}`)
+          return result
+        }
+        if (result.success) {
+          console.log(`已移除忽略技能: ${result.skillName}`)
+          return result
+        }
+        console.error(`移除忽略技能失败: ${result.skillName}`)
+        return result
+      }),
+    )
+    const removeResults = await Promise.all(removePromises)
+    if (removeResults.some((r) => !r.success && !r.missing)) {
+      process.exit(1)
+    }
+  }
 }
 
 async function installSkills(): Promise<void> {

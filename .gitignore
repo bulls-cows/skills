@@ -171,6 +171,7 @@ target/
 
 # AI 助手与自动化工具目录
 .agents/
+.skillignore
 .sisyphus/
 .opencode/
 .claude/

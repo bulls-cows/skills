@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "front-matter": "4.0.2",
-    "marked": "18.0.0"
+    "marked": "18.0.0",
+    "minimatch": "10.2.5"
   }
 }
