@@ -29,6 +29,7 @@ const oldSkillNamesToDelete = [
   'yy-init',
   'yy-create-init',
   'yy-commit',
+  'yy-commit-directly',
 ]
 
 function readSkillNames(dir: string): string[] {

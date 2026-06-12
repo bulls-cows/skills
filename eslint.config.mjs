@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    files: ['scripts/**/*.ts', 'scripts/**/*.mts'],
+    files: ['scripts/**/*.ts'],
     extends: [eslint.configs.recommended, ...tseslint.configs.strictTypeChecked],
     languageOptions: {
       parserOptions: {
@@ -17,7 +17,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['node_modules/', 'skills/', 'skills/*/scripts/', 'skills-internal/'],
+    ignores: ['node_modules/', 'skills/', 'skills/*/scripts/', 'skills-internal/*/scripts/'],
   },
   eslintConfigPrettier,
 )
