@@ -20,6 +20,7 @@
 - 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)
 - 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)
 - 当有技能名的变更、技能描述的变更、技能的增删时，执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)
+- 当 `skills/yy-create-agents`、`skills/yy-create-readme` 或 `skills/yy-enable-lint` 技能发生变更时，执行技能 [@skills-internal/yy-check-skills-scripts/SKILL.md](./skills-internal/yy-check-skills-scripts/SKILL.md)
 
 **改动后提示用户是否执行（默认不执行）:**
 
