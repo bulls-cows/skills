@@ -51,3 +51,30 @@ npm install --save-dev <package-name>
 - 错误地将运行时依赖安装为开发依赖会导致服务器部署后运行失败
 - 部署时通常使用 `npm install --production` 或类似命令，不会安装 devDependencies
 - 如果不确定某个依赖是否在运行时使用，优先安装为正式依赖
+
+## 文件修改规范
+
+### 禁止手动修改 package.json 和 package-lock.json
+
+**规则**：增删或更新 npm 依赖时，禁止直接手动修改 `package.json` 和 `package-lock.json`；必须执行 `npm install`、`npm uninstall`、`npm update` 等 npm 命令，由 npm 自动更新相关文件。
+
+**原因**：
+
+- 手动修改可能导致依赖树不一致
+- npm 命令会自动处理版本锁定和依赖解析
+- 避免因格式错误导致安装失败
+
+### 优先使用 npm 命令修改脚本
+
+**规则**：修改 `package.json` 中的 npm 脚本时，优先使用 `npm pkg set` 等 npm 命令，由 npm 自动更新文件。
+
+**示例**：
+
+```bash
+# 设置脚本
+npm pkg set scripts.build="tsc && vite build"
+npm pkg set scripts.lint="eslint . --ext .ts"
+
+# 删除脚本
+npm pkg delete scripts.old-script
+```

@@ -75,8 +75,7 @@
 - 除非用户明确要求提交。否则禁止你使用git
 - 在输出最终结果前，请务必进行自我审查：你是否对既定的术语、格式或规则描述进行了任何形式的同义替换、过度解释或冗余补充？如果是，请立即撤回修改，严格保持原始定义不变。
 - 不要手动修改 marketplace.json，由 `scripts/sync-marketplace.ts` 自动生成
-- 增删或更新 npm 依赖时，禁止直接手动修改 `package.json` 和 `package-lock.json`；必须执行 `npm install`、`npm uninstall`、`npm update` 等 npm 命令，由 npm 自动更新相关文件
-- 修改 `package.json` 中的 npm 脚本时，优先使用 `npm pkg set` 等 npm 命令，由 npm 自动更新文件
+- [NPM 使用规范 @rules/npm/RULE.md](./rules/npm/RULE.md)：依赖安装、文件修改、脚本管理
 - [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
