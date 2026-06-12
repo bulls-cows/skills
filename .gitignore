@@ -185,3 +185,6 @@ skills-marketplace/
 .agents/specs/
 
 !.codegraph/*
+
+# 临时忽略本地创建的yy-create-comment，等 yy-comment 技能可用后再更新到那边去
+skills/yy-create-comment
