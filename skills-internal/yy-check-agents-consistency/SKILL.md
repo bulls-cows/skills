@@ -110,7 +110,6 @@ description: >
 
 ## 注意事项
 
-- 不修改 AI 能力模型内容，相关同步由专用能力模型同步流程处理
 - 不修改 `.claude-plugin/marketplace.json`
 - 不检查 README.md 中的技能列表一致性
 - 只同步 `AGENTS.md` 中指定通用章节到 `skills/yy-create-agents`
