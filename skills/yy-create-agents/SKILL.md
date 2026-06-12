@@ -25,7 +25,7 @@ description: >
 
 ## 指令
 
-### 1. 检查 AGENTS.md 状态
+### 步骤 1. 检查 AGENTS.md 状态
 
 检查项目根目录下是否存在 `AGENTS.md` 文件：
 
@@ -34,7 +34,7 @@ description: >
   - **默认策略**：补充缺失部分，保留现有内容
   - **用户明确要求"完全重写"**：覆盖生成
 
-### 2. 收集项目信息
+### 步骤 2. 收集项目信息
 
 分析项目结构，自动识别以下信息：
 
@@ -55,7 +55,7 @@ description: >
 - **目标项目缺少 `.terminal.local.md`，且当前环境可用 `yy-detect-terminal`**：直接触发 `yy-detect-terminal` 技能为目标项目创建本机终端能力记录，再继续生成或更新 `AGENTS.md`
 - **目标项目缺少 `.terminal.local.md`，且当前环境不可用 `yy-detect-terminal`**：仅记录缺失状态，继续在 `终端命令能力识别` 章节保留通用创建/更新机制；不得自行固化未验证的终端结论
 
-### 3. 生成 AGENTS.md
+### 步骤 3. 生成 AGENTS.md
 
 参考 `templates/agents-minimal-template.md` 的结构，根据收集的项目信息生成 AGENTS.md 文档。
 
@@ -87,7 +87,7 @@ description: >
 9. 需要遵守的规则（如有规则目录或内联规则）
 10. 关键参考
 
-### 4. 保存并输出结果
+### 步骤 4. 保存并输出结果
 
 保存前必须校验生成内容：
 

@@ -29,9 +29,9 @@ description: >
 - 用户要求直接执行 `git log`
 - 用户要求提交代码
 
-## 操作步骤
+## 指令
 
-### 1. 获取当前 Git 账号信息
+### 步骤 1. 获取当前 Git 账号信息
 
 ```bash
 git config user.name
@@ -40,7 +40,7 @@ git config user.email
 
 如果未配置 Git 用户信息，提示用户先配置。
 
-### 2. 解析指定账号参数
+### 步骤 2. 解析指定账号参数
 
 检查用户输入中是否包含指定账号的信息，支持以下格式：
 
@@ -52,7 +52,7 @@ git config user.email
 
 最终确定的账号值将用于步骤 4 的 `--author` 参数。
 
-### 3. 确定日期范围
+### 步骤 3. 确定日期范围
 
 - 本周：从本周一到今天
 - 上周：从上周一到上周日
@@ -60,7 +60,7 @@ git config user.email
 
 用户未指定时，默认查询本周（从本周一到今天）。
 
-### 4. 读取 Git 提交记录
+### 步骤 4. 读取 Git 提交记录
 
 ```bash
 git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=format:"%h | %ad | %s" --date=short --no-merges
@@ -73,7 +73,7 @@ git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=
 - `--author`：只统计指定作者的提交（来源：步骤 2 确定的账号，默认为当前 Git 账号）
 - `--no-merges`：排除合并提交
 
-### 5. 分类归纳
+### 步骤 5. 分类归纳
 
 **决策分支**：
 
@@ -92,7 +92,7 @@ git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --author="用户名" --pretty=
 - 使用中文输出，避免技术术语
 - 每个条目突出业务价值和影响
 
-### 6. 输出结构化工作报告
+### 步骤 6. 输出结构化工作报告
 
 **决策分支**：
 
