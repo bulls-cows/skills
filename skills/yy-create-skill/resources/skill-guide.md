@@ -509,23 +509,25 @@ skill-name/
 1. 文件命名符合规范（kebab-case）
 2. 使用中文描述
 3. 代码示例包含语言标签
-4. 如果有参考文档需求，已添加 `resources/` 目录
-5. 如有脚本文件，Node.js/TypeScript 文件优先使用 kebab-case，入口文件可使用 `main.ts` 或 `main.js`；Python 文件优先使用 snake_case，依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
-6. 如有 evals 测试用例，格式正确
-7. SKILL.md 包含执行步骤，不是纯知识文档
-8. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/，不含空行和代码块标记行）
-9. 如需生成提示词派生产物，默认不手写 `prompts/skill-prompts.md`，优先由 `yy-skill-to-prompt` 生成
-10. 当前环境已安装 `yy-skill-to-prompt` 时，默认生成或更新 `prompts/skill-prompts.md`；未安装时，允许跳过但需说明原因
-11. 未安装 `yy-skill-to-prompt` 且使用本地最小回退流程时，必须同时满足“用户明确要求生成提示词文件”和“用户已确认使用回退流程”
-12. 未在 SKILL.md 中罗列对执行技能无意义的底层实现细节（如模块/组件文件清单、源代码文件逐项列举等）
+4. **目录名称合规**：所有子目录名称必须在规范列表中（`scripts/`、`examples/`、`templates/`、`resources/`、`prompts/`），不得使用非规范目录名（如 `references/`、`docs/`、`lib/` 等）
+5. 如果有参考文档需求，已添加 `resources/` 目录
+6. 如有脚本文件，Node.js/TypeScript 文件优先使用 kebab-case，入口文件可使用 `main.ts` 或 `main.js`；Python 文件优先使用 snake_case，依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
+7. 如有 evals 测试用例，格式正确
+8. SKILL.md 包含执行步骤，不是纯知识文档
+9. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/，不含空行和代码块标记行）
+10. 如需生成提示词派生产物，默认不手写 `prompts/skill-prompts.md`，优先由 `yy-skill-to-prompt` 生成
+11. 当前环境已安装 `yy-skill-to-prompt` 时，默认生成或更新 `prompts/skill-prompts.md`；未安装时，允许跳过但需说明原因
+12. 未安装 `yy-skill-to-prompt` 且使用本地最小回退流程时，必须同时满足“用户明确要求生成提示词文件”和“用户已确认使用回退流程”
+13. 未在 SKILL.md 中罗列对执行技能无意义的底层实现细节（如模块/组件文件清单、源代码文件逐项列举等）
 
 ### 更新技能后检查项
 
 1. description 只保留触发判断所需信息，没有混入执行细节
-2. 默认只修改 `SKILL.md` 和必要的派生产物；如本次变更导致辅助文件失配，则同步更新相关辅助文件
-3. 步骤编号、章节名称、术语是否与辅助文件一致
-4. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
-5. 未安装 `yy-skill-to-prompt` 且使用本地最小回退流程时，必须同时满足“用户明确要求生成提示词文件”和“用户已确认使用回退流程”
+2. **目录名称合规**：所有子目录名称必须在规范列表中（`scripts/`、`examples/`、`templates/`、`resources/`、`prompts/`），不得使用非规范目录名（如 `references/`、`docs/`、`lib/` 等）
+3. 默认只修改 `SKILL.md` 和必要的派生产物；如本次变更导致辅助文件失配，则同步更新相关辅助文件
+4. 步骤编号、章节名称、术语是否与辅助文件一致
+5. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
+6. 未安装 `yy-skill-to-prompt` 且使用本地最小回退流程时，必须同时满足“用户明确要求生成提示词文件”和“用户已确认使用回退流程”
 
 ## 质量要求
 

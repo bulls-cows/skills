@@ -102,9 +102,9 @@ git diff --cached --name-only
 
 对每个目标文件按以下规则检查。
 
-- **通用审核规则**：见 [references/general.md](./references/general.md)
-- **Vue3 专项规则**：见 [references/vue3.md](./references/vue3.md)
-- **Rust 专项规则**：见 [references/rust.md](./references/rust.md)
+- **通用审核规则**：见 [resources/general.md](./resources/general.md)
+- **Vue3 专项规则**：见 [resources/vue3.md](./resources/vue3.md)
+- **Rust 专项规则**：见 [resources/rust.md](./resources/rust.md)
 
 规则冲突时，专项规则优先适用。专项规则之间冲突时，按文件列表顺序靠后的优先。若专项规则中引用了其他技能，且其他技能内容与本技能规则冲突时，以本技能为准。
 

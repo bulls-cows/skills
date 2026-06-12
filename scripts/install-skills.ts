@@ -30,6 +30,8 @@ const oldSkillNamesToDelete = [
   'yy-create-init',
   'yy-commit',
   'yy-commit-directly',
+  'yy-git-commit',
+  'yy-git-commit-directly',
   'yy-sync-capability-model',
 ]
 

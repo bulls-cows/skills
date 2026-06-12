@@ -277,15 +277,17 @@ SKILL.md 的读者是执行技能的 AI 助手，内容应服务于完成任务�
 1. 文件命名符合规范（kebab-case）
 2. 使用中文描述
 3. 代码示例包含语言标签
-4. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/）
-5. 如有脚本文件，Node.js/TypeScript 文件优先使用 kebab-case，入口文件可使用 `main.ts` 或 `main.js`；Python 文件优先使用 snake_case
-6. 如有脚本文件，依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
+4. **目录名称合规**：所有子目录名称必须在规范列表中（`scripts/`、`examples/`、`templates/`、`resources/`、`prompts/`），不得使用非规范目录名（如 `references/`、`docs/`、`lib/` 等）
+5. 未在 SKILL.md 中内嵌过长模板代码（实际内容超过 20 行应移至 templates/）
+6. 如有脚本文件，Node.js/TypeScript 文件优先使用 kebab-case，入口文件可使用 `main.ts` 或 `main.js`；Python 文件优先使用 snake_case
+7. 如有脚本文件，依赖配置放在 `scripts/package.json`（Node.js）；Python 依赖配置优先使用 `scripts/pyproject.toml`，也兼容 `scripts/requirements.txt`
 
 #### 更新技能后检查项
 
 1. description 只保留触发判断所需信息，没有混入执行细节
-2. 如有辅助文件，检查是否需要同步更新；若本次变更导致失配，已同步修正相关辅助文件
-3. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
+2. **目录名称合规**：所有子目录名称必须在规范列表中（`scripts/`、`examples/`、`templates/`、`resources/`、`prompts/`），不得使用非规范目录名（如 `references/`、`docs/`、`lib/` 等）
+3. 如有辅助文件，检查是否需要同步更新；若本次变更导致失配，已同步修正相关辅助文件
+4. 如有 prompts/skill-prompts.md，检查其内容是否需要根据 SKILL.md 的更新同步重新生成
 
 #### 范围一致性验证
 

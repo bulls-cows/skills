@@ -1,5 +1,5 @@
 ---
-name: yy-git-commit
+name: yy-commit
 description: >
   帮助用户创建规范的 Git 提交。当用户想要提交代码、创建 commit、
   保存改动并提交，或说"提交一下"、"commit 一下"时触发。
@@ -7,7 +7,7 @@ description: >
   执行 push/pull/merge 等非提交操作、修改代码或实现功能。
 ---
 
-# yy-git-commit
+# yy-commit
 
 此技能帮助用户创建高质量的 Git 提交，生成规范的中文提交信息。
 
