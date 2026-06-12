@@ -125,11 +125,11 @@ description: >
 
 优先参考以下文件：
 
-- `references/content_methodology.md`：选题方法论、HKR 质检法、内容节奏和创意案例工作法
-- `references/style_examples.md`：开头、转场、句式、情绪表达、结尾等风格示例
+- `resources/content_methodology.md`：选题方法论、HKR 质检法、内容节奏和创意案例工作法
+- `resources/style_examples.md`：开头、转场、句式、情绪表达、结尾等风格示例
 
 **使用规则**：
 
-- 选题判断优先参考 `references/content_methodology.md`
-- 风格细节优先参考 `references/style_examples.md`
+- 选题判断优先参考 `resources/content_methodology.md`
+- 风格细节优先参考 `resources/style_examples.md`
 - 资源中的示例只用于辅助理解，不用于机械套写

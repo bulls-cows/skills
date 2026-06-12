@@ -96,7 +96,7 @@ description: >
 
 ### 步骤 4. 确定配置
 
-详细配置项、配置文件示例、Tailwind/Windi CSS/UnoCSS 忽略配置见 `references/config-reference.md`。该文件包含 `.bemrc` 完整示例和 utility-first 框架忽略配置模板。
+详细配置项、配置文件示例、Tailwind/Windi CSS/UnoCSS 忽略配置见 `resources/config-reference.md`。该文件包含 `.bemrc` 完整示例和 utility-first 框架忽略配置模板。
 
 ### 步骤 5. 执行 BEM 命名转换
 
@@ -108,25 +108,25 @@ description: >
 - JSX/TSX：遍历所有 `className` 属性。动态拼接的类名字符串（如 ``className={`btn-${variant}`}``）在报告中标记需人工确认，不自动转换
 - CSS/SCSS/Less/Stylus：遍历所有类选择器，按相同映射规则转换，保留被忽略的类名不变
 
-详细映射示例、转换策略判断、边界规则（禁止 Element 嵌套 Element、多段连字符消解、已有 BEM 重转换、混合实体）和框架特殊处理（CSS Modules、CSS-in-JS、Vue scoped、Angular、Svelte、Astro）见 `references/bem-naming.md`。
+详细映射示例、转换策略判断、边界规则（禁止 Element 嵌套 Element、多段连字符消解、已有 BEM 重转换、混合实体）和框架特殊处理（CSS Modules、CSS-in-JS、Vue scoped、Angular、Svelte、Astro）见 `resources/bem-naming.md`。
 
 ### 步骤 6. 执行 CSS 属性排序
 
 > 仅在能力范围包含"CSS 属性排序"时执行。
 
-详细排序规则、兼容性检查和浏览器前缀处理见 `references/css-property-order.md`。
+详细排序规则、兼容性检查和浏览器前缀处理见 `resources/css-property-order.md`。
 
 ### 步骤 7. 执行 BEM 嵌套重组
 
 > 仅在用户明确要求"嵌套"或"用 & 组织"时执行。嵌套是 SCSS/Less/Stylus 的语法糖，不是 BEM 规范的一部分。纯 `.css` 文件不执行（除非用户明确要求且项目支持 CSS 原生嵌套）。
 
-详细嵌套层级结构、执行规则、约束和特异性验证见 `references/bem-nesting.md`。
+详细嵌套层级结构、执行规则、约束和特异性验证见 `resources/bem-nesting.md`。
 
 ### 步骤 8. 执行逻辑域拆分
 
 > 仅在用户明确要求"拆分文件"或"按功能分组"时执行。且仅适用于 SCSS/Less/Stylus 文件。
 
-详细拆分触发条件、逻辑域识别方式、分类表和拆分执行规则见 `references/domain-splitting.md`。
+详细拆分触发条件、逻辑域识别方式、分类表和拆分执行规则见 `resources/domain-splitting.md`。
 
 ### 步骤 9. 预览、确认、应用
 
@@ -171,7 +171,7 @@ original-class → bem-class
 
 ## 转换示例
 
-完整示例代码见 `references/examples.md`，覆盖以下场景：基础 BEM 命名转换 + 嵌套重组、带修饰符的转换、忽略第三方类名、CSS 属性排序、全流程转换、逻辑域拆分、JSX + SCSS 同步转换、纯 CSS 文件处理。
+完整示例代码见 `resources/examples.md`，覆盖以下场景：基础 BEM 命名转换 + 嵌套重组、带修饰符的转换、忽略第三方类名、CSS 属性排序、全流程转换、逻辑域拆分、JSX + SCSS 同步转换、纯 CSS 文件处理。
 
 ## 限制
 
@@ -180,7 +180,7 @@ original-class → bem-class
 - 不处理非前端文件中的命名（如后端模板、配置文件、脚本语言类名）
 - Utility-first 框架（Tailwind CSS 等）的类名应加入忽略列表，不做转换
 - 不修改构建配置或导入路径，仅处理类名和选择器文本
-- 各框架特殊处理的完整说明见 `references/bem-naming.md` 的「框架特殊处理」章节
+- 各框架特殊处理的完整说明见 `resources/bem-naming.md` 的「框架特殊处理」章节
 
 ## 相关资源
 

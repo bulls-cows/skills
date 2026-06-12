@@ -70,13 +70,13 @@ description: >
 
 ### 步骤 3. 分析文件业务结构
 
-对每个目标文件执行结构化业务分析。详细的分析工作流、基础分析项、扩展逻辑梳理项和通用规则详见 `references/analysis-workflow.md`。
+对每个目标文件执行结构化业务分析。详细的分析工作流、基础分析项、扩展逻辑梳理项和通用规则详见 `resources/analysis-workflow.md`。
 
 识别为具体框架类型后，按对应框架专属规则执行分析：
 
-- **Vue2 专属规则**：详见 `references/vue2-rules.md`
-- **Vue3 专属规则**：详见 `references/vue3-rules.md`
-- **React 专属规则**：详见 `references/react-rules.md`
+- **Vue2 专属规则**：详见 `resources/vue2-rules.md`
+- **Vue3 专属规则**：详见 `resources/vue3-rules.md`
+- **React 专属规则**：详见 `resources/react-rules.md`
 
 **Reference 加载时机**：仅在需要执行对应分析时才读取 reference 文件——如果目标文件全部为 Vue3，则无需读取 `vue2-rules.md` 和 `react-rules.md`；如果用户仅需要变更记录而非逻辑梳理，则无需读取 `output-template.md`。
 
@@ -96,7 +96,7 @@ description: >
 
 ### 步骤 5. 生成注释块并注入
 
-按文件类型生成 JSDoc 注释块并注入文件头部。详细的注释格式、注入位置、改动类型分类、Scope 推断规则和历史记录合并规则详见 `references/annotation-format.md`。
+按文件类型生成 JSDoc 注释块并注入文件头部。详细的注释格式、注入位置、改动类型分类、Scope 推断规则和历史记录合并规则详见 `resources/annotation-format.md`。
 
 **核心原则再次强调**：注入注释时仅追加，绝不修改业务逻辑、原有代码结构或 `import` 语句。
 
@@ -122,7 +122,7 @@ description: >
    变更记录: 2025-01-15 14:00:00 | feat(user): 新增搜索过滤功能
 ```
 
-当用户需求侧重逻辑梳理（而非变更记录）时，按 `references/output-template.md` 的结构输出分析结果。图表仅在依赖关系或状态流转较复杂时生成（Mermaid 语法仅用于流程图、时序图和状态图），简单场景用列表即可。
+当用户需求侧重逻辑梳理（而非变更记录）时，按 `resources/output-template.md` 的结构输出分析结果。图表仅在依赖关系或状态流转较复杂时生成（Mermaid 语法仅用于流程图、时序图和状态图），简单场景用列表即可。
 
 ## 安全边界
 
@@ -154,13 +154,13 @@ description: >
 
 ## 相关资源
 
-- `references/analysis-workflow.md` - 逻辑梳理工作流、基础分析项与通用规则
-- `references/vue2-rules.md` - Vue2 专属分析规则
-- `references/vue3-rules.md` - Vue3 专属分析规则
-- `references/react-rules.md` - React 专属分析规则
-- `references/annotation-format.md` - 注释格式、注入位置与历史记录合并规则
-- `references/output-template.md` - 逻辑梳理输出模板
+- `resources/analysis-workflow.md` - 逻辑梳理工作流、基础分析项与通用规则
+- `resources/vue2-rules.md` - Vue2 专属分析规则
+- `resources/vue3-rules.md` - Vue3 专属分析规则
+- `resources/react-rules.md` - React 专属分析规则
+- `resources/annotation-format.md` - 注释格式、注入位置与历史记录合并规则
+- `resources/output-template.md` - 逻辑梳理输出模板
 
 ## 用户参考（非执行指令）
 
-本技能可集成到 AI 编码助手中，在提交代码前自动为变更文件生成业务说明和变更记录。集成方式详见 `references/ai-integration.md`。该文件仅供用户参考，不影响技能执行流程。
+本技能可集成到 AI 编码助手中，在提交代码前自动为变更文件生成业务说明和变更记录。集成方式详见 `resources/ai-integration.md`。该文件仅供用户参考，不影响技能执行流程。

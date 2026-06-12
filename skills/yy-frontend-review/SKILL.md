@@ -168,11 +168,11 @@ git diff --cached --name-only
 
 识别到对应框架或语言特征时，读取并合并适用以下专项规则：
 
-- **Vue2 专项规则**：见 [references/vue2.md](./references/vue2.md)
-- **Vue3 专项规则**：见 [references/vue3.md](./references/vue3.md)
-- **React 专项规则**：见 [references/react.md](./references/react.md)
-- **TypeScript 专项规则**：见 [references/typescript.md](./references/typescript.md)
-- **状态管理规则**（Pinia/Redux Toolkit/Zustand）：见 [references/state-management.md](./references/state-management.md)
+- **Vue2 专项规则**：见 [resources/vue2.md](./resources/vue2.md)
+- **Vue3 专项规则**：见 [resources/vue3.md](./resources/vue3.md)
+- **React 专项规则**：见 [resources/react.md](./resources/react.md)
+- **TypeScript 专项规则**：见 [resources/typescript.md](./resources/typescript.md)
+- **状态管理规则**（Pinia/Redux Toolkit/Zustand）：见 [resources/state-management.md](./resources/state-management.md)
 
 ### 步骤 4. 处理边界条件
 
