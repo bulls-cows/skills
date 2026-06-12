@@ -155,6 +155,7 @@
 - [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)
+- [AI 通用操作规范 @rules/ai-agent-rules/RULE.md](./rules/ai-agent-rules/RULE.md)：分析问题、执行变更、维护一致性时遵守
 
 ## 关键参考
 
