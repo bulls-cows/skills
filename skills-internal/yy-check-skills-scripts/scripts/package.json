@@ -1,0 +1,33 @@
+{
+  "name": "yy-check-skills-scripts",
+  "version": "1.0.0",
+  "description": "扫描 skills 目录下所有含 scripts/ 子目录的技能",
+  "main": "src/main.ts",
+  "type": "module",
+  "imports": {
+    "#steps/*": "./src/steps/*.ts",
+    "#utils/*": "./src/utils/*.ts",
+    "#src/*": "./src/*.ts"
+  },
+  "scripts": {
+    "start": "node ./src/main.ts",
+    "test": "node --test test/**/*.test.ts",
+    "lint": "node --run format && node --run lint:code && node --run typecheck && node --run test",
+    "lint:code": "eslint . --fix",
+    "eslint": "eslint . --fix",
+    "format": "prettier . --write",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.19.19",
+    "eslint": "10.4.1",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.60.1"
+  }
+}

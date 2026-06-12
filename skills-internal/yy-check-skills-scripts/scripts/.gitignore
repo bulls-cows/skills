@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+logs/
+.eslintcache
+.env
+package-lock.json

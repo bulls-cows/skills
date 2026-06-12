@@ -27,11 +27,27 @@ description: >
 
 ### 步骤 1. 扫描 scripts 目录
 
-遍历 `skills/` 和 `skills-internal/` 目录，找出所有含 `scripts/` 子目录的技能目录：
+运行脚本获取所有含 `scripts/` 子目录的技能列表：
 
-- 列出 `skills/` 和 `skills-internal/` 下的所有子目录
-- 检查每个子目录是否包含 `scripts/` 子目录
-- 记录所有符合条件的技能目录路径
+```bash
+cd scripts && npm install && npm run start
+```
+
+脚本输出格式示例：
+
+```text
+Found 5 skill(s) with scripts/ directory:
+
+- skills/create-node-script
+  scripts: skills/create-node-script/scripts
+- skills-internal/check-skills-scripts
+  scripts: skills-internal/check-skills-scripts/scripts
+```
+
+**决策分支**：
+
+- **脚本执行成功**：解析输出结果，提取技能目录路径列表
+- **脚本执行失败**：回退到手动扫描方式，遍历 `skills/` 和 `skills-internal/` 目录检查每个子目录是否包含 `scripts/` 子目录
 
 ### 步骤 2. 检测变更的技能
 
