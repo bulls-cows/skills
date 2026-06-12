@@ -23,7 +23,7 @@ const agents = [
   'zencoder',
 ]
 
-const oldSkillNamesToDelete = ['yy-frontend-commit', 'yy-skills-reverse-analysis', 'yy-init', 'yy-create-init']
+const oldSkillNamesToDelete = ['yy-frontend-commit', 'yy-skills-reverse-analysis', 'yy-init', 'yy-create-init', 'yy-commit']
 
 function readSkillNames(dir: string): string[] {
   if (!fs.existsSync(dir)) return []

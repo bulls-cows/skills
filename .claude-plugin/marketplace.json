@@ -15,7 +15,6 @@
       "strict": true,
       "skills": [
         "./skills/yy-comment",
-        "./skills/yy-commit",
         "./skills/yy-create-agents",
         "./skills/yy-create-comment",
         "./skills/yy-create-node-script",
