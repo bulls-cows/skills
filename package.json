@@ -4,18 +4,21 @@
   "description": "本仓库维护了一些实用的规则和 AI 技能。",
   "main": "README.md",
   "type": "module",
+  "imports": {
+    "#scripts/*": "./scripts/*.ts"
+  },
   "scripts": {
-    "ready": "npm install && node ./build/install-skills-deps.mts",
+    "ready": "npm install && node ./scripts/install-skills-deps.ts",
     "lint": "node --run lint:prettier && node --run check:skill && node --run lint:skills && node --run lint:markdown && node --run check:type && node --run lint:lf && node --run sync:marketplace && node --run lint:eslint",
-    "lint:eslint": "eslint build/ --fix",
+    "lint:eslint": "eslint scripts/ --fix",
     "lint:prettier": "prettier --write .",
-    "lint:skills": "node ./build/lint-skills.mts",
-    "check:skill": "node ./build/check-skill.mts",
+    "lint:skills": "node ./scripts/lint-skills.ts",
+    "check:skill": "node ./scripts/check-skill.ts",
     "lint:markdown": "markdownlint-cli2",
-    "lint:lf": "node ./build/convert-crlf-to-lf.ts --check",
+    "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
-    "sync:marketplace": "node ./build/sync-marketplace.mts",
-    "install:skills": "node ./build/install-skills.mts"
+    "sync:marketplace": "node ./scripts/sync-marketplace.ts",
+    "install:skills": "node ./scripts/install-skills.ts"
   },
   "repository": {
     "type": "git",

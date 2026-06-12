@@ -13,6 +13,6 @@
     "strict": true,
     "noEmit": true
   },
-  "include": ["**/*.mts", "**/*.ts"],
+  "include": ["scripts/**/*.ts", "types/**/*.d.ts"],
   "exclude": ["node_modules", "skills", "skills-internal"]
 }

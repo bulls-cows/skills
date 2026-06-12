@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import { minimatch } from 'minimatch'
 import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
+import { readSkillIgnore, isSkillIgnored } from '#scripts/skill-ignore'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -23,7 +23,13 @@ const agents = [
   'zencoder',
 ]
 
-const oldSkillNamesToDelete = ['yy-frontend-commit', 'yy-skills-reverse-analysis', 'yy-init', 'yy-create-init', 'yy-commit']
+const oldSkillNamesToDelete = [
+  'yy-frontend-commit',
+  'yy-skills-reverse-analysis',
+  'yy-init',
+  'yy-create-init',
+  'yy-commit',
+]
 
 function readSkillNames(dir: string): string[] {
   if (!fs.existsSync(dir)) return []
@@ -88,28 +94,6 @@ async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
       }
     })
   })
-}
-
-function readSkillIgnore(): string[] {
-  const ignorePath = path.join(projectRoot, '.skillignore')
-  if (!fs.existsSync(ignorePath)) return []
-  return fs
-    .readFileSync(ignorePath, 'utf-8')
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith('#'))
-}
-
-function isSkillIgnored(skillName: string, patterns: string[]): boolean {
-  let ignored = false
-  for (const pattern of patterns) {
-    if (pattern.startsWith('!')) {
-      if (minimatch(skillName, pattern.slice(1))) ignored = false
-    } else {
-      if (minimatch(skillName, pattern)) ignored = true
-    }
-  }
-  return ignored
 }
 
 async function main() {

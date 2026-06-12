@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { readSkillIgnore, isSkillIgnored } from '#scripts/skill-ignore'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -45,7 +46,10 @@ const skillNames = fs
   })
   .sort()
 
-const skillsList = skillNames.map((name) => `./skills/${name}`)
+const ignorePatterns = readSkillIgnore()
+const filteredSkillNames = skillNames.filter((name) => !isSkillIgnored(name, ignorePatterns))
+
+const skillsList = filteredSkillNames.map((name) => `./skills/${name}`)
 
 const openSkillsPlugin = marketplaceJson.plugins.find((plugin) => plugin.name === 'open-skills')
 if (openSkillsPlugin) {

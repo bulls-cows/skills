@@ -9,7 +9,7 @@
 ## 范围
 
 - 本仓库默认语言: Markdown, JSON
-- 允许修改目录: .claude-plugin/, build/, docs/, rules/, skills/, AGENTS.md, README.md
+- 允许修改目录: .claude-plugin/, scripts/, docs/, rules/, skills/, AGENTS.md, README.md
 - 禁止修改目录: 无
 
 ## 改动检查
@@ -44,7 +44,7 @@
 - `skills/`：对外发布的所有技能的根目录
 - `skills-internal/`：内部技能目录，不对外发布
 - `rules/`：自定义规则目录
-- `build/`：构建脚本目录
+- `scripts/`：构建脚本目录
 - `docs/`：项目文档目录
 - `types/`：TypeScript 类型定义目录(不适用于 `skills/` 和 `skills-internal/` 目录下的脚本)
 - `.claude-plugin/`：claude code 插件市场配置目录
@@ -149,7 +149,7 @@
 - 无论用户使用何种语言提问，请始终使用简体中文进行解释和回答
 - 除非用户明确要求提交。否则禁止你使用git
 - 在输出最终结果前，请务必进行自我审查：你是否对既定的术语、格式或规则描述进行了任何形式的同义替换、过度解释或冗余补充？如果是，请立即撤回修改，严格保持原始定义不变。
-- 不要手动修改 marketplace.json，由 `build/sync-marketplace.mts` 自动生成
+- 不要手动修改 marketplace.json，由 `scripts/sync-marketplace.ts` 自动生成
 - 增删或更新 npm 依赖时，禁止直接手动修改 `package.json` 和 `package-lock.json`；必须执行 `npm install`、`npm uninstall`、`npm update` 等 npm 命令，由 npm 自动更新相关文件
 - 修改 `package.json` 中的 npm 脚本时，优先使用 `npm pkg set` 等 npm 命令，由 npm 自动更新文件
 - [文件修改范围限制规范 @rules/file-scope-limit/RULE.md](./rules/file-scope-limit/RULE.md)
@@ -162,7 +162,7 @@
 - `skills/yy-git-commit/SKILL.md` - Git 提交约定
 - `skills/yy-lint/SKILL.md` - 代码风格检查工作流
 - `skills/yy-create-skill/SKILL.md` - 技能创建指南
-- `build/sync-marketplace.mts` - 技能市场配置同步脚本
+- `scripts/sync-marketplace.ts` - 技能市场配置同步脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
 - `.editorconfig` - 通用编辑器配置文件, 编写内容时需遵循
 - `README.md` - 项目说明文档

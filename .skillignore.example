@@ -1,8 +1,7 @@
 # 忽略安装特定技能，一行一个技能名
 #
 # 支持通配符:
-#   *  匹配任意非 / 字符（如 yy-review-* 匹配 yy-review-vue2）
-#   ** 匹配任意字符包括 / （如 yy-**-review 匹配 yy-frontend-review）
+#   *  匹配任意字符（如 yy-review-* 匹配 yy-review-vue2）
 #   !  否定模式，取消之前的忽略（如 !yy-review 取消忽略 yy-review）
 #
 # 示例:
