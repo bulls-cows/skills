@@ -112,10 +112,11 @@ description: >
 
 **写入规则**：
 
+- 章节顺序和字段名称必须与 `templates/terminal-local-template.md` 保持一致
 - 使用 Markdown 编写，标题为 `# TERMINAL.LOCAL.md`
 - 标明记录用途、更新时间、工作目录、当前终端能力和命令选择建议
-- 明确区分检测入口、首选 shell、备用 shell、不可用 shell 和待确认 shell
-- 记录首选 shell 时必须使用步骤 3 中固定优先级的验证结果，不能使用“当前命令刚好在哪个 shell 成功执行”作为依据
+- 明确区分首选 shell、备用 shell、不可用 shell 和待确认 shell
+- 记录首选 shell 时必须使用步骤 3 中固定优先级的验证结果，不能使用”当前命令刚好在哪个 shell 成功执行”作为依据
 - 使用相对稳定的命令名称和路径信息，路径优先使用正斜杠
 - 记录只描述本机环境，不声明适用于其他开发者环境
 - 如果已有文件存在，保留仍准确的信息，更新失效或缺失的信息
@@ -171,3 +172,9 @@ description: >
 - 不为识别命令能力而修改 `TERMINAL.LOCAL.md` 以外的文件；唯一例外是目标项目位于 Git 仓库且仓库根目录已有 `.gitignore` 时，只可追加 `TERMINAL.LOCAL.md` 对应忽略项
 - 不删除已有 `TERMINAL.LOCAL.md`，只在确认失效信息后更新内容
 - 无法判断项目根目录时，不主动创建 `TERMINAL.LOCAL.md`
+
+## 相关资源
+
+本技能包含以下辅助资源：
+
+- `templates/terminal-local-template.md`：`TERMINAL.LOCAL.md` 输出格式模板，步骤 5 写入文件时必须参照此模板
