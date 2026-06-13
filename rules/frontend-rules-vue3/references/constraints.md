@@ -36,12 +36,12 @@
 async function onClickSupervise(row: RowData) {
   try {
     if (!row.regulatedEntityId) {
-      ElMessage.warning('缺少单位信息，无法督办');
-      return;
+      ElMessage.warning('缺少单位信息，无法督办')
+      return
     }
     // 业务逻辑...
   } catch (error) {
-    console.warn(error);
+    console.warn(error)
   }
 }
 ```
