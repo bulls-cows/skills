@@ -9,10 +9,15 @@
 ## 范围
 
 - 本仓库默认语言: Markdown, JSON
-- 允许修改目录: .claude-plugin/, scripts/, docs/, rules/, skills/, AGENTS.md, README.md
+- 允许修改目录: .claude-plugin/, scripts/, docs/, rules/, skills/, skills-internal/, types/, AGENTS.md, README.md
 - 禁止修改目录: 无
 
 ## 改动检查
+
+**已定义的检查命令:**
+
+- `npm run lint`：依次执行 prettier、check-skill、lint-skills、markdownlint、CRLF 检查、tsc 类型检查、sync-marketplace、eslint
+- 当前未定义 `test`、`build` 脚本
 
 **改动后按条件执行:**
 
@@ -51,6 +56,7 @@
   - `marketplace.json`：技能市场配置文件，定义插件和技能分组
 - `README.md`：项目说明文档
 - `AGENTS.md`：AI 代理的项目规范说明文档
+- `GUIDELINES.md`：编码行为准则，规避 LLM 常见编码通病
 - `LICENSE.txt`：开源许可证文件
 
 ## 路径格式规范
@@ -91,4 +97,5 @@
 - `scripts/sync-marketplace.ts` - 技能市场配置同步脚本
 - `.claude-plugin/marketplace.json` - 技能市场配置
 - `.editorconfig` - 通用编辑器配置文件, 编写内容时需遵循
+- `GUIDELINES.md` - 编码行为准则，编码、审查或重构代码时需遵循
 - `README.md` - 项目说明文档
