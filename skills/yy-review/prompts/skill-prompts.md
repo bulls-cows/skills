@@ -22,17 +22,24 @@
 - 用户要求生成 git 提交信息。
 - 用户要求运行构建、测试、部署或自动修复流程。
 
-支持的代码文件类型：
+支持的文件范围：
 
-- 前端：`.js`、`.jsx`、`.ts`、`.tsx`、`.vue`、`.css`、`.scss`、`.less`
-- 后端与通用：`.py`、`.go`、`.java`、`.kt`、`.cs`、`.php`、`.rb`、`.rs`、`.swift`、`.c`、`.cpp`、`.h`、`.hpp`
-- 配置与脚本：`.json`、`.yaml`、`.yml`、`.toml`、`.sh`、`.ps1`
+作为通用代码审核技能，默认收录所有可读的纯文本源文件，包括但不限于：
+
+- 各类编程语言的源代码文件（如 `.js`、`.ts`、`.vue`、`.py`、`.go`、`.rs`、`.java`、`.kt`、`.cs`、`.php`、`.rb`、`.swift`、`.c`、`.cpp`、`.dart`、`.scala`、`.lua`、`.sql` 等）
+- 样式与模板文件（如 `.css`、`.scss`、`.less`、`.html`、`.tsx`、`.jsx`）
+- 配置与脚本文件（如 `.json`、`.yaml`、`.toml`、`.sh`、`.ps1`、`Dockerfile`、`Makefile`、`.tf`）
+
+以上仅为示例。**未列出但属于源代码、配置或脚本类的纯文本文件同样在收录范围内**；具体语言/框架的审核规则由步骤 1、3 的路由结果决定，未匹配到专项规则时仅使用通用层规则。
 
 默认排除以下文件和目录：
 
 - 依赖与构建产物：`node_modules/`、`dist/`、`build/`、`coverage/`、`.next/`、`.nuxt/`、`.output/`、`target/`、`Cargo.lock`
 - 锁文件与生成文件：`package-lock.json`、`pnpm-lock.yaml`、`yarn.lock`、`*.min.js`、`*.generated.*`
 - 二进制文件、图片、字体、压缩包、快照文件
+- 当前仓库 `.gitignore` 匹配的文件和目录（含嵌套 `.gitignore`）
+
+**覆盖规则**：用户显式指定的文件路径优先级高于上述默认排除——即使该文件被 `.gitignore` 匹配或属于上述排除类型，只要用户显式指定，仍纳入审核。
 
 ---
 
