@@ -26,6 +26,29 @@
 | 5   | computed try/catch  | 必须 try/catch 包裹，避免计算属性报错       |
 | 6   | 减少 data 冗余      | 优先 computed 派生，减少 data 属性          |
 
+## 2.5、🔵 方法函数规范（强制）
+
+所有 `methods` 中的函数必须遵守以下两条规则：
+
+1. **前置参数校验**：依赖的数据（props/row/query 等）在使用前必须做非空判断，缺失时通过 `this.$message.warning` 提示用户并 `return` 终止执行
+2. **try-catch 错误保底**：方法体必须包裹在 try-catch 中，catch 中使用 `console.warn(error)` 记录异常，避免未捕获错误导致页面崩溃
+
+```js
+async onClickSupervise(row) {
+  try {
+    if (!row.regulatedEntityId) {
+      this.$message.warning('缺少单位信息，无法督办');
+      return;
+    }
+    // 业务逻辑...
+  } catch (error) {
+    console.warn(error);
+  }
+}
+```
+
+**例外**：仅含单行逻辑的简单方法（如纯赋值、纯 emit）可省略，但涉及异步操作、API 调用、路由跳转的方法必须严格遵守。
+
 ## 三、🟡 不推荐项（尽量避免）
 
 | #   | 不推荐项            | 说明                                                        |
