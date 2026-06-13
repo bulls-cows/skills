@@ -25,6 +25,29 @@
 | 4   | watch 深度/立即监听 | 按需使用 `deep: true` 和 `immediate: true`      |
 | 5   | Hooks 抽离          | 可复用逻辑超过 30 行或跨 2+ 组件必须抽离为 Hook |
 
+## 2.5、🔵 函数规范（强制）
+
+所有 `<script setup>` 中的业务函数必须遵守以下两条规则：
+
+1. **前置参数校验**：依赖的数据（props/row/query 等）在使用前必须做非空判断，缺失时通过 `ElMessage.warning` 提示用户并 `return` 终止执行
+2. **try-catch 错误保底**：函数体必须包裹在 try-catch 中，catch 中使用 `console.warn(error)` 记录异常，避免未捕获错误导致页面崩溃
+
+```ts
+async function onClickSupervise(row: RowData) {
+  try {
+    if (!row.regulatedEntityId) {
+      ElMessage.warning('缺少单位信息，无法督办');
+      return;
+    }
+    // 业务逻辑...
+  } catch (error) {
+    console.warn(error);
+  }
+}
+```
+
+**例外**：仅含单行逻辑的简单函数（如纯赋值、纯 emit）可省略，但涉及异步操作、API 调用、路由跳转的函数必须严格遵守。
+
 ## 三、🟡 不推荐项（尽量避免）
 
 | #   | 不推荐项            | 说明                                                        |
