@@ -13,14 +13,13 @@
 
 [点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
-- [rules/ai-agent-rules](./rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护的行为准则
+- [rules/ai-agent-rules](./rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护、文本输出的行为准则
 - [rules/file-scope-limit](./rules/file-scope-limit/RULE.md)：文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
 - [rules/frontend-rules](./rules/frontend-rules/RULE.md)：通用前端项目开发规范与架构指南
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：Vue2 前端项目开发规范与架构指南
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：Vue3 前端项目开发规范与架构指南
 - [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
 - [rules/npm](./rules/npm/RULE.md)：NPM 使用规范
-- [rules/text](./rules/text/RULE.md)：文本表达规范
 
 ## Skills 技能
 

@@ -91,5 +91,5 @@ React：
 
 ## 与其他规则的关系
 
-- 本规则优先于通用 [Markdown 规范](../markdown/RULE.md)、[文本表达规范](../text/RULE.md) 中与前端相关的内容
+- 本规则优先于通用 [Markdown 规范](../markdown/RULE.md)、[AI 通用操作规范的文本输出层](../ai-agent-rules/references/text-output.md) 中与前端相关的内容
 - 若存在冲突，以本规则为准

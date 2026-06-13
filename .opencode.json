@@ -8,7 +8,7 @@
     "AGENTS.md",
     "./rules/file-scope-limit/RULE.md",
     "./rules/markdown/RULE.md",
-    "./rules/text/RULE.md"
+    "./rules/ai-agent-rules/RULE.md"
   ],
   "mcp": {
     "codegraph": {
