@@ -3,6 +3,7 @@ name: yy-wechat-to-markdown
 description: >
   将微信公众号文章链接转换为 Markdown 格式。当用户提供微信公众号文章链接、
   要求转换微信文章为 Markdown 时触发。
+  不用于转换非微信公众号域名的网页、抓取需登录或付费可见的文章，也不用于将本地 Markdown 反向发布到公众号。
 ---
 
 # yy-wechat-to-markdown

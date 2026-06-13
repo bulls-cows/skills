@@ -3,6 +3,7 @@ name: yy-sync-instructions-from-opencode
 description: >
   将 .opencode.json 中的非 OpenCode 专属规则同步到 AGENTS.md。当 .opencode.json 文件发生改动时触发，
   确保通用规则不会仅存在于 .opencode.json 而缺失于 AGENTS.md。
+  不用于反向修改 .opencode.json、生成 AGENTS.md 主框架，也不用于检查 README 或规则列表一致性。
 ---
 
 # yy-sync-instructions-from-opencode

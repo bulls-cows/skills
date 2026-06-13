@@ -2,6 +2,7 @@
 name: yy-create-agents
 description: >
   创建或更新项目的 AGENTS.md 文档。用于：用户提到"初始化项目"、"创建 AGENTS.md"、"项目规范文档"时触发。
+  不用于创建 README、规则文件或其他普通文档，也不用于读取或解释已有项目结构。
 ---
 
 # yy-create-agents

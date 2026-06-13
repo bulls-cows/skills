@@ -3,6 +3,7 @@ name: yy-check-skills-scripts
 description: >
   同步技能源码变更到所有含 scripts/ 子目录的技能项目。当 yy-create-agents、yy-create-readme 或 yy-enable-lint 技能发生变更时触发，
   遍历 skills/ 和 skills-internal/ 目录下所有 scripts/ 子目录，逐个触发对应技能更新项目文件。
+  不用于检查 README 或 AGENTS.md 的章节一致性、不用于校验技能列表，也不用于创建新的 scripts/ 目录。
 ---
 
 # yy-check-skills-scripts

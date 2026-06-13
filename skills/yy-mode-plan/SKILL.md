@@ -2,6 +2,7 @@
 name: yy-mode-plan
 description: >
   计划优先执行模式。当用户输入 /yy-mode-plan 命令或希望在实施变更前先制定计划时调用。
+  不用于撰写完整规格说明文档、直接实施代码变更，也不用于针对单个问题给出一次性答复。
 ---
 
 # yy-mode-plan

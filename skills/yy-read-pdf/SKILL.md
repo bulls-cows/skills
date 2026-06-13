@@ -3,6 +3,7 @@ name: yy-read-pdf
 description: >
   读取并解析PDF文件内容，提取文本、表格和结构化信息。
   用于：用户需要读取PDF文件、提取PDF内容、分析PDF文档结构。
+  不用于编辑或创建 PDF、合并/拆分 PDF、对扫描型 PDF 做 OCR，也不用于读取 Word、Excel 等其他文档格式。
 ---
 
 # yy-read-pdf

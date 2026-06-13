@@ -2,6 +2,7 @@
 name: yy-check-rules-consistency
 description: >
   检查 README.md 中的规则列表与实际 rules/ 目录内容的一致性。当需要验证规则列表排序和内容是否与目录一致时触发。
+  不用于检查 README 中的技能列表或 AGENTS.md 章节一致性，也不用于创建或修改具体规则文档内容。
 ---
 
 # yy-check-rules-consistency

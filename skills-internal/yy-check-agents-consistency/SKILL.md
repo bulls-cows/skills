@@ -2,6 +2,7 @@
 name: yy-check-agents-consistency
 description: >
   检查 AGENTS.md 中的通用章节与 yy-create-agents 生成模板的一致性。当交互确认格式、路径格式规范或终端命令能力识别发生改动时使用，确保 yy-create-agents 后续生成的 AGENTS.md 同步包含相同内容。
+  不用于检查 README、规则列表或技能列表的一致性，也不用于初次生成或重写 AGENTS.md。
 ---
 
 # yy-check-agents-consistency

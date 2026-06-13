@@ -3,6 +3,7 @@ name: yy-create-rule
 description: >
   创建或更新规则文档，并更新 AGENTS.md 中的引用关系。
   用于：用户想要创建规则、记录最佳实践、记录 bug 修复经验、记录架构决策。
+  不用于创建技能、AGENTS.md 主文件或普通项目文档，也不用于直接修改代码以实施规则。
 ---
 
 # yy-create-rule
