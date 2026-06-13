@@ -6,7 +6,7 @@ description: >
   触发场景包括但不限于：代码精炼、清理冗余代码、整理导入排序、规范化命名、Props/Emits 增强、死代码清理、清理未使用导入/变量、
   "整理一下这个文件"、"代码太乱了"、"帮我看看这个文件有什么问题"、"导入太乱了"、"这个文件能优化吗"（不含深度优化项）、
   "整理代码结构"、"规范一下命名"、clean up code、organize imports、tidy up imports、refactor for readability。
-  不用于：新增组件、修改业务逻辑、生成 commit message、样式文件优化、CSS/BEM 规范（使用 yy-frontend-style-bem-optimizer）。
+  不用于：新增组件、修改业务逻辑、生成提交信息、样式文件优化、CSS/BEM 规范转换。
 ---
 
 # yy-frontend-code-refine
@@ -25,8 +25,8 @@ description: >
 不应触发：
 
 - 新增组件、修改业务逻辑
-- 生成 commit message（应使用 yy-commit）
-- 样式文件优化、CSS/BEM 规范（应使用 yy-frontend-style-bem-optimizer）
+- 生成提交信息
+- 样式文件优化、CSS/BEM 规范
 
 跨框架（Vue2/Vue3/React）前端代码的**基础精炼**技能。核心边界：不生成新组件、不改业务逻辑、不生成提交信息、不优化样式文件。涉及业务行为变更的操作必须先与用户确认。
 

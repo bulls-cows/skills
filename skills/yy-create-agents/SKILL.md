@@ -22,7 +22,7 @@ description: >
 
 - 用户只是查看 AGENTS.md 内容
 - 用户要求创建普通文档（如 README.md）
-- 用户要求创建规则文件（应使用 yy-create-rule）
+- 用户要求创建规则文件
 
 ## 指令
 
