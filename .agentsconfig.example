@@ -1,0 +1,14 @@
+# 一行一个 agent 名，支持 # 开头的注释。
+# 使用本文件时，将其复制为项目根目录下的 .agentsconfig 后按需修改。
+# 当 .agentsconfig 存在且非空时，npm run install:skills 会使用其中的列表
+# 替代 scripts/install-skills.ts 中默认的 agents 数组。
+claude-code
+codex
+opencode
+trae-cn
+codebuddy
+openclaw
+qoder
+qwen-code
+windsurf
+zencoder

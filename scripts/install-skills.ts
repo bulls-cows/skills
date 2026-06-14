@@ -10,7 +10,7 @@ const skillDirs = [path.join(projectRoot, 'skills'), path.join(projectRoot, 'ski
 const npxCommand = process.platform === 'win32' ? 'npx.cmd' : 'npx'
 
 // 列出常用的 agent, 注意对于安装目录相同的 agent 不要重复列出, 比如 Codex 和 Antigravity 的全局技能安装目录都是 `.agents/skills/`, 所以写一个就可以了
-const agents = [
+const defaultAgents = [
   'claude-code',
   'codex',
   'opencode',
@@ -22,6 +22,19 @@ const agents = [
   'windsurf',
   'zencoder',
 ]
+
+function readAgentsConfig(): string[] {
+  const configPath = path.join(projectRoot, '.agentsconfig')
+  if (!fs.existsSync(configPath)) return []
+  return fs
+    .readFileSync(configPath, 'utf-8')
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+}
+
+const configuredAgents = readAgentsConfig()
+const agents = configuredAgents.length > 0 ? configuredAgents : defaultAgents
 
 const oldSkillNamesToDelete = [
   'yy-frontend-commit',

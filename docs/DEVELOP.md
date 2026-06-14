@@ -22,6 +22,18 @@
 
 该文件已通过 `.gitignore` 忽略，不提交到 Git。
 
+## 自定义安装的 Agent 列表
+
+项目根目录下可创建 `.agentsconfig` 文件，自定义 `npm run install:skills` 命令安装技能时支持的 agent 列表。
+
+文件格式：一行一个 agent 名，支持 `#` 开头的注释，空行会被忽略。
+
+文件存在且读取到的列表非空时，会替代 [`scripts/install-skills.ts`](../scripts/install-skills.ts) 中默认的 `defaultAgents` 数组；文件不存在或内容为空时使用默认列表。
+
+示例参考项目根目录下的 [`.agentsconfig.example`](../.agentsconfig.example) 文件。
+
+该文件已通过 `.gitignore` 忽略，不提交到 Git。
+
 ## 本地终端能力记录
 
 项目根目录下的 `.terminal.local.md` 用于记录本机终端命令能力（首选 shell、备用 shell、命令判断方式、搜索工具），供 AI 会话优先复用。
