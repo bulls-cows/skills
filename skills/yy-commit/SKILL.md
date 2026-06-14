@@ -83,36 +83,10 @@ git log --oneline -5
 
 先检查项目 AGENTS.md、README 或其他明确规则中的提交规范。
 
-- **项目已定义提交标题规范**：必须优先使用项目约定，不得继续默认套用 Conventional Commits
-- **项目未定义提交标题规范**：回退到 Conventional Commits 规范：`type(scope): description`，type/scope 通用概念详见 [resources/conventional-commits.md](./resources/conventional-commits.md)
+- **项目已定义提交标题规范**：必须优先使用项目约定，不得继续默认套用定制版 Conventional Commits 规范
+- **项目未定义提交标题规范**：回退到定制版 Conventional Commits 规范：`type(scope): description`，Scope/Description 项目要求与示例详见 [resources/conventional-commits.md](./resources/conventional-commits.md)
 
 例如，项目若明确要求使用 `功能: ...`、`重构: ...`、`文档: ...` 这类中文前缀，则提交标题必须直接按该规范生成。
-
-**Scope（范围）项目要求：**
-
-- 优先使用具体的组件/模块名称，而不是泛化的类型名称
-  - ✅ `DialogInstallationOptions`（具体组件名）
-  - ❌ `dialog`（泛化类型）
-
-**Description（描述）：**
-
-- 使用中文（代码标识符、专有名词除外）
-- 使用动词开头的祈使语气
-- 精炼，不超过 50 个字符，一句话
-- 句末不加句号
-- 优先说明”为什么”或”为了解决什么问题”，而不只是”做了什么”
-- 精确性原则：当改动内容不多时，要具体描述变更的细节
-- 避免使用”统一”、”所有”等绝对性词汇：基于实际修改的文件来描述
-
-**示例：**
-
-```text
-feat(auth): 添加 JWT 用户认证功能
-fix(editor): 修复文件保存时的编码错误
-docs(readme): 更新安装说明和环境要求
-refactor(api): 简化请求拦截器逻辑
-refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
-```
 
 **复杂改动提供候选选项：**
 

@@ -1,6 +1,6 @@
-# Conventional Commits 规范参考
+# 定制版 Conventional Commits 规范
 
-本文件作为 `yy-commit` 技能的通用参考资料，介绍 Conventional Commits 的基础格式与常用 type 类型。仅在项目未定义自有提交规范时使用本规范作为兜底。
+本文件是 `yy-commit` 技能在通用 Conventional Commits 基础上的定制版规范，在保留通用基础格式与 type 类型的同时，覆盖本仓库特有的 Scope 与 Description 要求。仅在项目未定义自有提交规范时使用本规范作为兜底。
 
 ## 基础格式
 
@@ -29,21 +29,35 @@
 - `chore` - 其他杂项变更（不属于上述类型）
 - `revert` - 回滚提交
 
-## Scope（范围）
+## Scope（范围）— 项目定制要求
 
 - 用于标识受影响的模块、组件或功能区域
 - 可省略；保留时应能帮助快速定位变更范围
+- 优先使用具体的组件/模块名称，而不是泛化的类型名称
+  - ✅ `DialogInstallationOptions`（具体组件名）
+  - ❌ `dialog`（泛化类型）
 
-## 通用示例
+## Description（描述）— 项目定制要求
+
+- 使用中文（代码标识符、专有名词除外）
+- 使用动词开头的祈使语气
+- 精炼，不超过 50 个字符，一句话
+- 句末不加句号
+- 优先说明"为什么"或"为了解决什么问题"，而不只是"做了什么"
+- 精确性原则：当改动内容不多时，要具体描述变更的细节
+- 避免使用"统一"、"所有"等绝对性词汇：基于实际修改的文件来描述
+
+## 示例
 
 ```text
-feat(auth): add JWT user authentication
-fix(editor): handle encoding error on file save
-docs(readme): update install instructions
-refactor(api): simplify request interceptor
+feat(auth): 添加 JWT 用户认证功能
+fix(editor): 修复文件保存时的编码错误
+docs(readme): 更新安装说明和环境要求
+refactor(api): 简化请求拦截器逻辑
+refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 ```
 
 ## 与项目规范的优先级
 
 - 项目若已定义自有提交标题规范（如中文前缀 `功能:`、`重构:`、`文档:`），必须优先使用项目规范
-- 项目未定义自有规范时，才回退到本文件描述的 Conventional Commits 规范
+- 项目未定义自有规范时，才回退到本文件描述的定制版 Conventional Commits 规范
