@@ -15,3 +15,13 @@ export function logError(...args: unknown[]): void {
 export function logSuccess(...args: unknown[]): void {
   console.log(chalk.green(...args))
 }
+
+export function timeStart(label: string): () => void {
+  logWarn(`${label}: 已开始`)
+  const start = Date.now()
+  return (): number => {
+    const elapsed = Date.now() - start
+    logSuccess(`${label}: 已结束，耗时 ${elapsed}ms.`)
+    return elapsed
+  }
+}

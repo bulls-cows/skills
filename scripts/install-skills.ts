@@ -3,7 +3,7 @@ import path from 'path'
 import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
 import { readSkillIgnore, isSkillIgnored } from '#scripts/skill-ignore'
-import { logError, logInfo, logSuccess } from '#scripts/utils'
+import { logError, logInfo, logSuccess, timeStart } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -115,6 +115,7 @@ async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
 }
 
 async function main() {
+  const stopTotal = timeStart('整体流程')
   const skillNames = [...new Set(skillDirs.flatMap((dir) => readSkillNames(dir)))].sort((a, b) =>
     a.localeCompare(b),
   )
@@ -145,13 +146,18 @@ async function main() {
     }),
   )
 
+  const stopRemove = timeStart('删除旧技能')
   const results = await Promise.all(promises)
+  stopRemove()
 
   if (results.some((r) => !r.success)) {
+    stopTotal()
     process.exit(1)
   }
 
+  const stopInstall = timeStart('安装技能')
   await installSkills()
+  stopInstall()
 
   const ignorePatterns = readSkillIgnore()
   const ignoredSkills = skillNames.filter((name) => isSkillIgnored(name, ignorePatterns))
@@ -173,9 +179,12 @@ async function main() {
     )
     const removeResults = await Promise.all(removePromises)
     if (removeResults.some((r) => !r.success && !r.missing)) {
+      stopTotal()
       process.exit(1)
     }
   }
+
+  stopTotal()
 }
 
 async function installSkills(): Promise<void> {
