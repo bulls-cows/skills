@@ -64,7 +64,6 @@
 | [yy-read-project](./skills/yy-read-project/SKILL.md)                                 | 快速梳理项目结构、职责与技术边界  | `npx skills add bulls-cows/skills --skill yy-read-project`                 |
 | [yy-read-xlsx](./skills/yy-read-xlsx/SKILL.md)                                       | 读取并解析 Excel 表格内容         | `npx skills add bulls-cows/skills --skill yy-read-xlsx`                    |
 | [yy-refresh](./skills/yy-refresh/SKILL.md)                                           | 刷新 AI 对当前代码的最新理解      | `npx skills add bulls-cows/skills --skill yy-refresh`                      |
-| [yy-resume](./skills/yy-resume/SKILL.md)                                             | 生成可打印的 HTML 简历            | `npx skills add bulls-cows/skills --skill yy-resume`                       |
 | [yy-review](./skills/yy-review/SKILL.md)                                             | 审核代码改动中的质量问题          | `npx skills add bulls-cows/skills --skill yy-review`                       |
 | [yy-run-skills](./skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能            | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
 | [yy-skill-to-prompt](./skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词        | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |

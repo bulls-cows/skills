@@ -47,6 +47,7 @@ const oldSkillNamesToDelete = [
   'yy-sync-capability-model',
   'yy-create-lint',
   'yy-create-comment',
+  'yy-resume',
 ]
 
 function readSkillNames(dir: string): string[] {
