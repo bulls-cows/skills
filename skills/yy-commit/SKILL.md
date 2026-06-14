@@ -84,27 +84,12 @@ git log --oneline -5
 先检查项目 AGENTS.md、README 或其他明确规则中的提交规范。
 
 - **项目已定义提交标题规范**：必须优先使用项目约定，不得继续默认套用 Conventional Commits
-- **项目未定义提交标题规范**：再使用 Conventional Commits 规范：`type(scope): description`
+- **项目未定义提交标题规范**：回退到 Conventional Commits 规范：`type(scope): description`，type/scope 通用概念详见 [resources/conventional-commits.md](./resources/conventional-commits.md)
 
 例如，项目若明确要求使用 `功能: ...`、`重构: ...`、`文档: ...` 这类中文前缀，则提交标题必须直接按该规范生成。
 
-**Type（类型）：**
+**Scope（范围）项目要求：**
 
-- `feat` - 新功能
-- `fix` - 修复 bug
-- `docs` - 文档更新
-- `style` - 代码格式调整（不影响功能）
-- `refactor` - 重构（既非新功能也非修复）
-- `perf` - 性能优化
-- `test` - 测试相关
-- `build` - 构建系统或外部依赖变更
-- `ci` - CI 配置文件和脚本变更
-- `chore` - 其他杂项变更（不属于上述类型）
-- `revert` - 回滚提交
-
-**Scope（范围）- 可选：**
-
-- 受影响的模块、组件或功能区域
 - 优先使用具体的组件/模块名称，而不是泛化的类型名称
   - ✅ `DialogInstallationOptions`（具体组件名）
   - ❌ `dialog`（泛化类型）
