@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import yaml from 'js-yaml'
+import { logError, logInfo, logWarn } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -184,7 +185,7 @@ function validateMetadataJson(
  * 主函数
  */
 function main() {
-  console.log('开始检查 skills 目录下的 SKILL.md 文件...\n')
+  logInfo('开始检查 skills 目录下的 SKILL.md 文件...\n')
 
   // 读取 skills 目录
   const skillDirs = fs
@@ -206,34 +207,34 @@ function main() {
 
     if (result.hasErrors) {
       totalErrors += result.errors.length
-      console.log(`❌ ${skillName}:`)
+      logError(`❌ ${skillName}:`)
       result.errors.forEach((error) => {
-        console.log(`   - ${error}`)
+        logError(`   - ${error}`)
       })
     }
 
     // 输出警告信息
     if (result.warnings.length > 0) {
       totalWarnings += result.warnings.length
-      console.log(`⚠️  ${skillName} 警告:`)
+      logWarn(`⚠️  ${skillName} 警告:`)
       result.warnings.forEach((warning) => {
-        console.log(`   - ${warning}`)
-        console.log('')
+        logWarn(`   - ${warning}`)
+        logInfo('')
       })
     }
   }
 
-  console.log(
+  logInfo(
     `\n检查完成: ${String(results.length)} 个技能，${String(totalErrors)} 个错误，${String(totalWarnings)} 个警告`,
   )
 
   if (totalErrors > 0) {
-    console.log('\n请修复上述错误后重试。')
+    logError('\n请修复上述错误后重试。')
     process.exit(1)
   }
 
   if (totalWarnings > 0) {
-    console.log('\n发现警告信息，请根据建议处理 metadata.json 文件。')
+    logWarn('\n发现警告信息，请根据建议处理 metadata.json 文件。')
   }
 }
 

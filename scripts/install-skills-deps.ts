@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
+import { logError, logInfo } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -40,7 +41,7 @@ function hasReadyScript(dir: string): boolean {
 const dirs = findPackageJsonDirs(skillsDir)
 
 if (dirs.length === 0) {
-  console.log('No skill directories with package.json found.')
+  logInfo('No skill directories with package.json found.')
   process.exit(0)
 }
 
@@ -50,15 +51,15 @@ for (const dir of dirs) {
   const relative = path.relative(projectRoot, dir)
 
   if (!hasReadyScript(dir)) {
-    console.log(`Skipping ${relative} (no "ready" script defined)`)
+    logInfo(`Skipping ${relative} (no "ready" script defined)`)
     continue
   }
 
-  console.log(`Running ready script in ${relative}...`)
+  logInfo(`Running ready script in ${relative}...`)
   execSync('npm run ready', { cwd: dir, stdio: 'inherit' })
   readyCount++
 }
 
-console.log(
+logInfo(
   `\nDone. Ran ready scripts in ${String(readyCount)} of ${String(dirs.length)} skill directories.`,
 )

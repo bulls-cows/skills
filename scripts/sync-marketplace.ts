@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { readSkillIgnore, isSkillIgnored } from '#scripts/skill-ignore'
+import { logSuccess } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -39,7 +40,7 @@ const skillNames = fs
     const files = fs.readdirSync(skillPath)
     if (files.length === 0) {
       fs.rmdirSync(skillPath)
-      console.log(`✓ 已删除空目录: ${name}`)
+      logSuccess(`✓ 已删除空目录: ${name}`)
       return false
     }
     return true
@@ -68,7 +69,7 @@ const internalSkillNames = fs
     const files = fs.readdirSync(skillPath)
     if (files.length === 0) {
       fs.rmdirSync(skillPath)
-      console.log(`✓ 已删除空目录: ${name}`)
+      logSuccess(`✓ 已删除空目录: ${name}`)
       return false
     }
     return true
@@ -86,4 +87,4 @@ if (internalSkillsPlugin) {
 // 写入 marketplace.json
 fs.writeFileSync(marketplaceJsonPath, JSON.stringify(marketplaceJson, null, 2) + '\n', 'utf-8')
 
-console.log('✓ 已同步 marketplace.json')
+logSuccess('✓ 已同步 marketplace.json')

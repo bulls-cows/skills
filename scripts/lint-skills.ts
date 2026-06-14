@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process'
+import { logInfo } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -38,6 +39,6 @@ for (const dir of dirs) {
   if (!pkg.scripts?.lint) continue
 
   const relative = path.relative(projectRoot, dir)
-  console.log(`Running lint in ${relative}...`)
+  logInfo(`Running lint in ${relative}...`)
   execSync('node --run lint', { cwd: dir, stdio: 'inherit' })
 }

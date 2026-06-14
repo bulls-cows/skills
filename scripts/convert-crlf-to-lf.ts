@@ -1,6 +1,7 @@
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises'
 import { extname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { logInfo } from '#scripts/utils'
 
 const scriptDir = fileURLToPath(new URL('.', import.meta.url))
 const projectRoot = resolve(scriptDir, '..')
@@ -89,10 +90,10 @@ async function convertDirectory(directoryPath: string): Promise<ConvertResult> {
     const relativePath = relative(projectRoot, targetPath).replaceAll('\\', '/')
 
     if (checkOnly) {
-      console.log(`[check] ${relativePath}`)
+      logInfo(`[check] ${relativePath}`)
     } else {
       await writeFile(targetPath, normalizedContent, 'utf8')
-      console.log(`[updated] ${relativePath}`)
+      logInfo(`[updated] ${relativePath}`)
     }
 
     convertedFileCount += 1
@@ -107,6 +108,6 @@ async function convertDirectory(directoryPath: string): Promise<ConvertResult> {
 const result = await convertDirectory(projectRoot)
 const actionLabel = checkOnly ? '可转换' : '已转换'
 
-console.log(
+logInfo(
   `${actionLabel}文件 ${String(result.convertedFileCount)} 个，已扫描文本文件 ${String(result.scannedFileCount)} 个`,
 )

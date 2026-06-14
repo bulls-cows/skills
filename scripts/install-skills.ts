@@ -3,6 +3,7 @@ import path from 'path'
 import { spawn } from 'child_process'
 import { fileURLToPath } from 'url'
 import { readSkillIgnore, isSkillIgnored } from '#scripts/skill-ignore'
+import { logError, logInfo, logSuccess } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
@@ -122,24 +123,24 @@ async function main() {
   skillNames.push(...oldSkillNamesToDelete)
 
   if (skillNames.length === 0) {
-    console.log('未找到需要移除的本地技能。')
+    logInfo('未找到需要移除的本地技能。')
     return
   }
 
   const promises = skillNames.map((name) =>
     removeSkillFromGlobal(name).then((result) => {
       if (result.missing) {
-        console.log(`跳过未安装的全局技能: ${result.skillName}`)
+        logInfo(`跳过未安装的全局技能: ${result.skillName}`)
         return result
       }
 
       if (result.success) {
-        console.log(`已移除全局技能: ${result.skillName}`)
+        logSuccess(`已移除全局技能: ${result.skillName}`)
         return result
       }
 
-      console.error(`移除全局技能失败: ${result.skillName}`)
-      if (result.output) console.error(result.output)
+      logError(`移除全局技能失败: ${result.skillName}`)
+      if (result.output) logError(result.output)
       return result
     }),
   )
@@ -155,18 +156,18 @@ async function main() {
   const ignorePatterns = readSkillIgnore()
   const ignoredSkills = skillNames.filter((name) => isSkillIgnored(name, ignorePatterns))
   if (ignoredSkills.length > 0) {
-    console.log(`忽略技能: ${ignoredSkills.join(', ')}`)
+    logInfo(`忽略技能: ${ignoredSkills.join(', ')}`)
     const removePromises = ignoredSkills.map((name) =>
       removeSkillFromGlobal(name).then((result) => {
         if (result.missing) {
-          console.log(`跳过未安装的忽略技能: ${result.skillName}`)
+          logInfo(`跳过未安装的忽略技能: ${result.skillName}`)
           return result
         }
         if (result.success) {
-          console.log(`已移除忽略技能: ${result.skillName}`)
+          logSuccess(`已移除忽略技能: ${result.skillName}`)
           return result
         }
-        console.error(`移除忽略技能失败: ${result.skillName}`)
+        logError(`移除忽略技能失败: ${result.skillName}`)
         return result
       }),
     )
@@ -188,10 +189,10 @@ async function installSkills(): Promise<void> {
     })
     child.on('close', (code) => {
       if (code === 0) {
-        console.log('技能安装完成。')
+        logSuccess('技能安装完成。')
         resolve()
       } else {
-        console.error(`技能安装失败，退出码: ${String(code ?? 'unknown')}`)
+        logError(`技能安装失败，退出码: ${String(code ?? 'unknown')}`)
         process.exit(1)
       }
     })
