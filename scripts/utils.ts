@@ -21,7 +21,7 @@ export function timeStart(label: string): () => void {
   const start = Date.now()
   return (): number => {
     const elapsed = Date.now() - start
-    logSuccess(`${label}: 已结束，耗时 ${elapsed}ms.`)
+    logSuccess(`${label}: 已结束，耗时 ${elapsed.toString()}ms.`)
     return elapsed
   }
 }
