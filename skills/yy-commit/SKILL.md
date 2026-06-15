@@ -76,11 +76,11 @@ git log --oneline -5
 
 ### 步骤 3. 生成提交信息
 
-**确定提交规范的优先级**：
+**确定提交信息生成规范**：
 
-- **项目已定义提交标题规范**（在 AGENTS.md、README 或其他明确规则中声明）：必须优先使用项目约定，不得继续默认套用定制版 Conventional Commits 规范
+- **项目已定义提交规范**（在 AGENTS.md、README 或其他明确规则中声明）：必须优先使用项目约定的规范
 - **项目未显式定义但 git log 呈现一致风格**：参考最近 5 条提交的实际前缀风格（如普遍使用 `功能:`、`重构:` 等中文前缀），按该风格生成
-- **项目未定义且 git log 风格不一致**：回退到定制版 Conventional Commits 规范：`type(scope): description`，Scope/Description 项目要求与示例详见 [resources/conventional-commits.md](./resources/conventional-commits.md)
+- **项目未定义且 git log 风格不一致**：回退到[定制版 Conventional Commits 规范](./resources/conventional-commits.md)
 
 **复杂改动提供候选选项：**
 
