@@ -79,8 +79,7 @@ git log --oneline -5
 **确定提交信息生成规范**：
 
 - **项目已定义提交规范**（在 AGENTS.md、README 或其他明确规则中声明）：必须优先使用项目约定的规范
-- **项目未显式定义但 git log 呈现一致风格**：参考最近 5 条提交的实际前缀风格（如普遍使用 `功能:`、`重构:` 等中文前缀），按该风格生成
-- **项目未定义且 git log 风格不一致**：回退到[定制版 Conventional Commits 规范](./resources/conventional-commits.md)
+- **项目未定义提交规范**：使用[定制版 Conventional Commits 规范](./resources/conventional-commits.md)
 
 **复杂改动提供候选选项：**
 
@@ -91,8 +90,6 @@ git log --oneline -5
 - 在候选列表中提供"重新生成"和"自填提交信息"两个出口
 - 用户选定候选后进入步骤 4 的最终确认；用户选择"重新生成"时回到本步骤重新生成候选；用户选择"自填提交信息"时直接收集用户输入并跳到步骤 4
 - **快速提交模式（步骤 1 已判定）**：直接生成 1 个候选并进入步骤 4 展示，跳过候选展示与选择交互
-
-**body 生成规则**：按 [resources/conventional-commits.md](./resources/conventional-commits.md) 中"Body 生成规范"章节执行
 
 ### 步骤 4. 展示并确认
 
