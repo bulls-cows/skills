@@ -33,6 +33,12 @@ alwaysApply: true
 - 内容：语言优先级、表达风格、信息密度、语气约束、面向执行的写法
 - 详见 [references/text-output.md](./references/text-output.md)
 
+### 文档精简
+
+- 触发时机：文档行数超过 300 行预警线或 500 行硬限制时
+- 内容：精简策略优先级、引用替代重复、删除冗余示例、条目合并、简化表述
+- 详见 [references/document-simplification.md](./references/document-simplification.md)
+
 ## 快速检查清单
 
 执行任务时，按以下阶段自检：
