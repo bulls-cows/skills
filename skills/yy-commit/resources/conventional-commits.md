@@ -49,13 +49,56 @@
 
 ## 示例
 
+### ✅ 正确示例
+
+带 body 的完整提交：
+
 ```text
-feat(auth): 添加 JWT 用户认证功能
-fix(editor): 修复文件保存时的编码错误
-docs(readme): 更新安装说明和环境要求
-refactor(api): 简化请求拦截器逻辑
+feat(auth): 添加 JWT 认证以支持无状态会话管理
+
+移除服务端 session 存储，改用 JWT token 验证，
+降低横向扩展时的会话同步开销
+```
+
+不带 body 的简洁提交：
+
+```text
+fix(utf8-editor): 修复 UTF-8 文件保存乱码导致内容丢失
+```
+
+```text
+docs(readme): 补充 Node 20 要求以解决安装报错
+```
+
+```text
+refactor(request-interceptor): 抽离公共拦截器以减少重复逻辑
+```
+
+```text
 refactor: 重命名 plan/spec 技能避免与 trae 编辑器命令冲突
 ```
+
+### ❌ 反面示例
+
+```text
+feat(auth): 添加 JWT 用户认证功能。
+```
+
+- description 句末不应加句号
+- 只说明了"做了什么"，未说明"为什么"或"解决什么问题"
+
+```text
+fix(editor): 修复文件保存时的编码错误
+```
+
+- scope `editor` 是泛化类型名称，应使用具体组件名如 `utf8-editor`
+
+```text
+refactor(api): 简化请求拦截器逻辑
+```
+
+- scope `api` 是泛化类型名称，应使用具体模块名如 `request-interceptor`
+- description 只说明了"做了什么"，未说明"为什么"
 
 ## 与项目规范的优先级
 

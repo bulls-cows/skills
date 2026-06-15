@@ -203,6 +203,20 @@ git commit -m "<title>"
 - 提交信息
 - 提交哈希值
 
+输出内容参考示例如下：
+
+```text
+✓ 提交成功
+
+提交文件：
+  - skills/yy-create-rule/SKILL.md
+  - skills/yy-create-rule/resources/rule-best-practices.md
+
+提交哈希：7660360
+提交信息：refactor(yy-create-rule): 添加规则内容通用性约束
+变更统计：2 files changed, 2 insertions(+)
+```
+
 ## 特殊情况处理
 
 ### 无变更内容
