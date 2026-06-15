@@ -9,7 +9,7 @@
     "lint:markdown": "markdownlint-cli2",
     "typecheck": "node scripts/run-python.mjs -m pyright .",
     "test": "node scripts/run-python.mjs -m unittest discover -s tests",
-    "ready": "node scripts/detect-python.mjs && npm install && node scripts/run-python.mjs -m pip install -e \".[dev]\""
+    "ready": "npm install && node scripts/run-python.mjs -m pip install -e \".[dev]\""
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.22.1"

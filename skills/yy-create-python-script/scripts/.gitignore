@@ -11,4 +11,3 @@ htmlcov/
 *.pyd
 *.log
 .env
-python_cmd.txt
