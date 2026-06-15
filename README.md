@@ -1,14 +1,14 @@
 # bulls-cows/skills
 
 <div align="center">
-  <img width="200" src="https://cdn.verysites.com/verysites/static/img/logo.svg" alt="牛气腾腾的logo" />
+  <img width="120" src="./logo.svg" alt="牛气腾腾的logo" />
 </div>
 
 > 面向 AI 编程助手的规则与技能集合，帮助团队统一编码规范、自动化开发流程，让 AI 成为真正的生产力工具。
 
 **解决什么问题：** AI 编程助手的行为不一致、输出质量参差不齐、重复配置成本高。
 
-**适合谁用：** 使用 Claude Code、OpenCode 等 AI 编程工具的开发团队和个人。
+**适合谁用：** 使用 Claude Code、OpenCode、Trae、CodeBuddy 等 AI 编程工具的开发团队和个人。
 
 ## ⭐ 特性
 
