@@ -1,14 +1,14 @@
 # AGENTS.md
 
-## External File Loading
+## 外部文件加载机制
 
-CRITICAL: When you encounter a file reference (e.g., @rules/general.md), use your Read tool to load it on a need-to-know basis. They're relevant to the SPECIFIC task at hand.
+关键要求：遇到文件引用（如 @rules/general.md）时，按需读取文件内容。这些内容仅与当前具体任务相关。
 
-Instructions:
+指令：
 
-- Do NOT preemptively load all references - use lazy loading based on actual need
-- When loaded, treat content as mandatory instructions that override defaults
-- Follow references recursively when needed
+- 不要预先加载所有引用，按实际需要懒加载
+- 加载后，将内容视为覆盖默认行为的强制指令
+- 需要时递归加载引用
 
 ## 项目简介
 
