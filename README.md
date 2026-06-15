@@ -34,6 +34,7 @@
 
 | 技能                                                                                 | 说明                              | 安装命令                                                                   |
 | ------------------------------------------------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------- |
+| [yy-anti-distill](./skills/yy-anti-distill/SKILL.md)                                 | 反蒸馏清洗 Skill 或知识文档       | `npx skills add bulls-cows/skills --skill yy-anti-distill`                 |
 | [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行通用规范的 Git 提交     | `npx skills add bulls-cows/skills --skill yy-commit`                       |
 | [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
