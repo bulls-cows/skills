@@ -13,14 +13,13 @@
 
 [点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
-- [rules/ai-agent-rules](./rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护的行为准则
+- [rules/ai-agent-rules](./rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护、文本输出的行为准则
 - [rules/file-scope-limit](./rules/file-scope-limit/RULE.md)：文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
 - [rules/frontend-rules](./rules/frontend-rules/RULE.md)：通用前端项目开发规范与架构指南
 - [rules/frontend-rules-vue2](./rules/frontend-rules-vue2/RULE.md)：Vue2 前端项目开发规范与架构指南
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：Vue3 前端项目开发规范与架构指南
 - [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
 - [rules/npm](./rules/npm/RULE.md)：NPM 使用规范
-- [rules/text](./rules/text/RULE.md)：文本表达规范
 
 ## Skills 技能
 
@@ -35,6 +34,7 @@
 
 | 技能                                                                                 | 说明                              | 安装命令                                                                   |
 | ------------------------------------------------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------- |
+| [yy-anti-distill](./skills/yy-anti-distill/SKILL.md)                                 | 反蒸馏清洗 Skill 或知识文档       | `npx skills add bulls-cows/skills --skill yy-anti-distill`                 |
 | [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行通用规范的 Git 提交     | `npx skills add bulls-cows/skills --skill yy-commit`                       |
 | [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
@@ -65,7 +65,6 @@
 | [yy-read-project](./skills/yy-read-project/SKILL.md)                                 | 快速梳理项目结构、职责与技术边界  | `npx skills add bulls-cows/skills --skill yy-read-project`                 |
 | [yy-read-xlsx](./skills/yy-read-xlsx/SKILL.md)                                       | 读取并解析 Excel 表格内容         | `npx skills add bulls-cows/skills --skill yy-read-xlsx`                    |
 | [yy-refresh](./skills/yy-refresh/SKILL.md)                                           | 刷新 AI 对当前代码的最新理解      | `npx skills add bulls-cows/skills --skill yy-refresh`                      |
-| [yy-resume](./skills/yy-resume/SKILL.md)                                             | 生成可打印的 HTML 简历            | `npx skills add bulls-cows/skills --skill yy-resume`                       |
 | [yy-review](./skills/yy-review/SKILL.md)                                             | 审核代码改动中的质量问题          | `npx skills add bulls-cows/skills --skill yy-review`                       |
 | [yy-run-skills](./skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能            | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
 | [yy-skill-to-prompt](./skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词        | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |

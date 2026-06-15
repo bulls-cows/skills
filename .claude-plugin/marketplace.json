@@ -14,6 +14,7 @@
       "source": "./",
       "strict": true,
       "skills": [
+        "./skills/yy-anti-distill",
         "./skills/yy-comment",
         "./skills/yy-commit",
         "./skills/yy-commit-directly",
@@ -44,7 +45,6 @@
         "./skills/yy-read-project",
         "./skills/yy-read-xlsx",
         "./skills/yy-refresh",
-        "./skills/yy-resume",
         "./skills/yy-review",
         "./skills/yy-run-skills",
         "./skills/yy-skill-to-prompt",
