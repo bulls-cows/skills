@@ -106,6 +106,8 @@ git log --oneline -5
 
 ### 步骤 4. 展示并确认
 
+**警告样式规则**：所有 ⚠️ 开头的警告类内容必须使用 `<span style="color:red;"></span>` 标签包裹，使警告在 markdown 渲染中更显眼。
+
 向用户展示：
 
 1. **暂存区副作用提示**（仅当步骤 1 检测到 `git diff --staged` 非空，且本次提交的暂存范围与已有暂存内容不一致时）：明确告知"执行提交前会先 `git reset HEAD` 清空当前暂存区，仅暂存以下文件"，并在用户确认前等待用户明确同意
@@ -153,16 +155,16 @@ git log --oneline -5
 ```text
 即将提交以下更改：
 
-⚠️ 检测到当前暂存区已有改动，提交前将先清空暂存区，仅保留以下文件（仅在副作用场景出现）
+<span style="color:red;">⚠️ 检测到当前暂存区已有改动，提交前将先清空暂存区，仅保留以下文件（仅在副作用场景出现）</span>
 
 📝 暂存文件：
   - src/auth/login.ts
   - src/components/LoginForm.vue
   - vite.config.ts
 
-⚠️ 敏感文件警告：
+<span style="color:red;">⚠️ 敏感文件警告：
   - [新增] .env（环境变量文件）
-  - [修改] config/credentials.json（凭据文件）
+  - [修改] config/credentials.json（凭据文件）</span>
 
 📊 主要变更：
   - 新增 JWT token 生成逻辑
