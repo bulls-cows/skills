@@ -50,6 +50,14 @@ git diff --staged
 git log --oneline -5
 ```
 
+**git status 输出解读规则**：
+
+- `Changes not staged for commit` + `modified:` 开头的行 → 有已修改文件，需要提交
+- `Untracked files:` + 文件名 → 有新增文件，需要提交
+- `Changes to be committed:` + 文件名 → 有已暂存文件，需要提交
+- `nothing to commit, working tree clean` → 无改动，告知用户并终止流程
+- `no changes added to commit` → 仅表示暂存区为空，不代表无改动；需结合上述条目判断
+
 收集以下信息供后续步骤使用：
 
 - 哪些文件已修改
