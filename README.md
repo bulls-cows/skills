@@ -4,12 +4,43 @@
   <img width="200" src="https://cdn.verysites.com/verysites/static/img/logo.svg" alt="牛气腾腾的logo" />
 </div>
 
-> 本仓库维护了一些实用的规则和AI技能。
+> 面向 AI 编程助手的规则与技能集合，帮助团队统一编码规范、自动化开发流程，让 AI 成为真正的生产力工具。
+
+**解决什么问题：** AI 编程助手的行为不一致、输出质量参差不齐、重复配置成本高。
+
+**适合谁用：** 使用 Claude Code、OpenCode 等 AI 编程工具的开发团队和个人。
+
+## ⭐ 特性
+
+- 🎯 **规则驱动**：通过规则文件统一 AI 行为，确保输出一致性
+- 🚀 **即装即用**：37 个实用技能覆盖常见开发场景，一键安装
+- 🔧 **高度可定制**：支持按项目配置规则，灵活适配不同团队需求
+- 📦 **开箱即规范**：内置前端、Git、Markdown 等编码规范，开箱即用
+- 🔄 **持续演进**：活跃维护，定期更新技能和规则
+
+## 📦 环境要求
+
+- **Node.js** >= 22.18.0
+- **AI 编程助手**：Claude Code、OpenCode 或其他支持技能的 AI 工具
+
+## 🚀 快速开始
+
+```bash
+# 安装所有技能
+npx skills add bulls-cows/skills
+
+# 或安装单个技能
+npx skills add bulls-cows/skills --skill yy-commit
+```
+
+安装后，在 AI 编程助手中使用 `/` 或 `$` 命令即可调用技能，例如 `/yy-commit`。
+
+## 📚 仓库链接
 
 - GitHub 仓库：[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
-- Gitee 仓库：[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
+- Gitee 仓库（仅作为镜像）：[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
 
-## Rules 规则
+## 📋 Rules 规则
 
 [点击这里](./docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
@@ -21,14 +52,14 @@
 - [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
 - [rules/npm](./rules/npm/RULE.md)：NPM 使用规范
 
-## Skills 技能
+## 🛠️ Skills 技能
 
 提示：
 
 - 推荐使用 `npx skills add` 命令安装技能。关于 `skills` 命令的详细说明，请查看 [官方文档](https://github.com/vercel-labs/skills)
 - 该网站收录了大量的技能，可以搜索查找：[The Agent Skills Directory](https://skills.sh/)
 
-### 本仓库技能
+### 📦 本仓库技能
 
 执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
 
@@ -71,19 +102,19 @@
 | [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown   | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
 | [yy-write](./skills/yy-write/SKILL.md)                                               | 撰写或续写公众号长文              | `npx skills add bulls-cows/skills --skill yy-write`                        |
 
-### 推荐外部技能
+### 🌐 推荐外部技能
 
 详见 [推荐外部技能](./docs/RECOMMEND_SKILLS.md)。
 
-## 开发者须知
+## 👨‍💻 开发者须知
 
 [开发者须知](./docs/DEVELOP.md)。
 
-## 协议
+## 📄 协议
 
 本项目采用 [Apache 2.0](./LICENSE.txt) 开源协议。
 
-## 免责声明
+## ⚠️ 免责声明
 
 本软件按"原样"（AS-IS）提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是由于合同、侵权或其他方式引起的，由本软件或其使用或其他交易引起、产生或与之相关的。
 
