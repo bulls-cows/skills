@@ -230,7 +230,9 @@ git commit -m "<title>"
   - skills/yy-create-rule/resources/rule-best-practices.md
 
 提交哈希：7660360
+
 提交信息：refactor(yy-create-rule): 添加规则内容通用性约束
+
 变更统计：2 files changed, 2 insertions(+)
 ```
 
