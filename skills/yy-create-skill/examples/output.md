@@ -49,16 +49,15 @@
 ```text
 .agents/skills/generate-readme/
 ├── SKILL.md
-├── prompts/
-│   └── skill-prompts.md
 └── templates/
     └── readme-template.md
 ```
 
 ### 提示词派生产物状态
 
-- `prompts/skill-prompts.md`：已生成
-- 处理方式：`yy-skill-to-prompt`
+- `prompts/skill-prompts.md`：未生成
+- 处理方式：跳过
+- 原因：创建新技能时默认不生成 `prompts/` 目录，用户未明确要求
 
 ### SKILL.md 内容摘要
 
@@ -94,7 +93,7 @@
 
 - `prompts/skill-prompts.md`：未更新
 - 处理方式：跳过
-- 原因：技能目录下不存在 `prompts/skill-prompts.md`，且当前环境未安装 `yy-skill-to-prompt`
+- 原因：技能目录下不存在 `prompts/` 目录，更新场景下不新增
 
 ### SKILL.md 内容摘要
 

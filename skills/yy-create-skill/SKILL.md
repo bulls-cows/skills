@@ -137,7 +137,7 @@ Skill 本质上是"可按需加载的任务说明书"，用于复用复杂流程
   - **templates/**：需要生成特定格式文件，或模板实际内容超过 20 行（计数规则：只统计实际内容行，不含空行、代码块围栏标记行 ` ``` `、YAML frontmatter 行）
   - **resources/**：需要独立的参考文档，且内容不适合放在 SKILL.md 正文
   - **examples/**：用户明确要求提供示例
-  - **prompts/**：可选派生产物目录，仅用于存放由 SKILL.md 派生出的系统提示词文件；当前环境已安装 `yy-skill-to-prompt` 时默认生成，未安装时默认跳过；默认不手写，优先由 `yy-skill-to-prompt` 生成
+  - **prompts/**：可选派生产物目录，仅用于存放由 SKILL.md 派生出的系统提示词文件；**创建新技能时默认不生成**，除非用户明确要求；更新现有技能时，仅当 `prompts/` 目录已存在且 `yy-skill-to-prompt` 可用时才更新，不存在则不新增；默认不手写，优先由 `yy-skill-to-prompt` 生成
 - 当技能指令中存在"生成特定格式的输出文件"步骤时，必须在对应步骤中提供格式模板（章节结构、字段名称、占位符说明），确保不同 AI 生成的文件结构一致；模板内容不超过 20 行时内嵌在步骤中，超过 20 行时移至 `templates/` 目录并引用
 
 #### 通用技能结构指导
@@ -208,10 +208,17 @@ Skill 本质上是"可按需加载的任务说明书"，用于复用复杂流程
 
 创建或更新 SKILL.md 后，按以下决策分支处理 `prompts/skill-prompts.md`：
 
-- **当前环境已安装 `yy-skill-to-prompt`**：优先使用 `yy-skill-to-prompt` 将当前技能转换为系统提示词，并生成或更新 `prompts/skill-prompts.md`
-- **当前环境未安装 `yy-skill-to-prompt`**：跳过 `prompts/skill-prompts.md` 生成，不阻塞技能创建或更新
-- **用户明确要求必须生成提示词文件，但 `yy-skill-to-prompt` 不可用**：提示用户安装 `yy-skill-to-prompt`，或确认是否使用本技能内的最小回退流程手动生成
-- **用户已确认使用最小回退流程时**：根据 SKILL.md 的描述、使用场景、指令、限制和输出格式，生成结构化系统提示词，并写入 `prompts/skill-prompts.md`
+**创建新技能时**：
+
+- **用户未明确要求**：默认跳过 `prompts/` 目录生成，不创建该目录
+- **用户明确要求且 `yy-skill-to-prompt` 可用**：使用 `yy-skill-to-prompt` 生成 `prompts/skill-prompts.md`
+- **用户明确要求但 `yy-skill-to-prompt` 不可用**：提示用户安装 `yy-skill-to-prompt`，或确认是否使用本技能内的最小回退流程手动生成
+
+**更新现有技能时**：
+
+- **`prompts/` 目录已存在且 `yy-skill-to-prompt` 可用**：使用 `yy-skill-to-prompt` 更新 `prompts/skill-prompts.md`
+- **`prompts/` 目录已存在但 `yy-skill-to-prompt` 不可用**：跳过更新，不阻塞技能更新流程
+- **`prompts/` 目录不存在**：不新增该目录，即使 `yy-skill-to-prompt` 可用也不生成
 
 ### 步骤 7. 验收
 
