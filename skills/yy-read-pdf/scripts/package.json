@@ -1,14 +1,15 @@
 {
   "name": "yy-read-pdf-scripts",
   "private": true,
+  "type": "module",
   "scripts": {
     "lint": "npm run format && npm run lint:code && npm run lint:markdown && npm run typecheck && npm run test",
-    "format": "python -m ruff format .",
-    "lint:code": "python -m ruff check . --fix",
+    "format": "node scripts/run-python.mjs -m ruff format .",
+    "lint:code": "node scripts/run-python.mjs -m ruff check . --fix",
     "lint:markdown": "markdownlint-cli2",
-    "typecheck": "python -m pyright .",
-    "test": "python -m unittest discover -s tests",
-    "ready": "npm install && python -m pip install -e \".[dev]\""
+    "typecheck": "node scripts/run-python.mjs -m pyright .",
+    "test": "node scripts/run-python.mjs -m unittest discover -s tests",
+    "ready": "node scripts/detect-python.mjs && npm install && node scripts/run-python.mjs -m pip install -e \".[dev]\""
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.22.1"
