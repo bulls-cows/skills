@@ -118,10 +118,10 @@ git log --oneline -5
 
 1. **暂存区副作用提示**（仅当步骤 1 检测到 `git diff --staged` 非空，且本次提交的暂存范围与已有暂存内容不一致时）：明确告知"执行提交前会先 `git reset HEAD` 清空当前暂存区，仅暂存以下文件"，并在用户确认前等待用户明确同意
 2. 将要暂存的文件列表
-3. **主分支保护提醒**（当步骤 1 检测到 `git status` 输出包含 `On branch main` 或 `On branch master` 时，始终执行）：提示用户当前位于主分支，建议在功能分支工作
-4. 敏感文件警告（如暂存列表中存在敏感命名特征文件，详见 [resources/sensitive-file-patterns.md](./resources/sensitive-file-patterns.md)；新增文件触发强制阻塞，修改/删除文件仅警告）
-5. 关键变更摘要（从 diff 提取的主要改动）
-6. 生成的完整提交信息（含 body）
+3. 敏感文件警告（如暂存列表中存在敏感命名特征文件，详见 [resources/sensitive-file-patterns.md](./resources/sensitive-file-patterns.md)；新增文件触发强制阻塞，修改/删除文件仅警告）
+4. 关键变更摘要（从 diff 提取的主要改动）
+5. 生成的完整提交信息（含 body）
+6. **主分支保护提醒**（当步骤 1 检测到 `git status` 输出包含 `On branch main` 或 `On branch master` 时，始终执行）：提示用户当前位于主分支，建议在功能分支工作
 
 **快速提交模式的限制：**
 
