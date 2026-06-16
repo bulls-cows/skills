@@ -24,11 +24,6 @@
 
 ## 改动检查
 
-**已定义的检查命令:**
-
-- `npm run lint`：依次执行 prettier、check-skill、lint-skills、markdownlint、CRLF 检查、tsc 类型检查、sync-marketplace、eslint
-- 当前未定义 `test`、`build` 脚本
-
 **改动后按条件执行:**
 
 - 如果改动涉及 AGENTS.md 中的 `路径格式规范` 或 `终端命令能力识别` 的调整，或者涉及 AGENTS.LOCAL.md 中的 `交互确认格式` 的调整，执行技能 [@skills-internal/yy-check-agents-consistency/SKILL.md](./skills-internal/yy-check-agents-consistency/SKILL.md)
