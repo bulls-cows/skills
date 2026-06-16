@@ -18,27 +18,20 @@
 - 📦 **开箱即规范**：内置前端、Git、Markdown 等编码规范，开箱即用
 - 🔄 **持续演进**：活跃维护，定期更新技能和规则
 
-## 📦 环境要求
-
-- **Node.js** >= 22.18.0
-- **AI 编程助手**：Claude Code、OpenCode 或其他支持技能的 AI 工具
-
-## 🚀 快速开始
-
-```bash
-# 安装所有技能
-npx skills add bulls-cows/skills
-
-# 或安装单个技能
-npx skills add bulls-cows/skills --skill yy-commit
-```
-
-安装后，在 AI 编程助手中使用 `/` 或 `$` 命令即可调用技能，例如 `/yy-commit`。
-
 ## 📚 仓库链接
 
 - GitHub 仓库：[https://github.com/bulls-cows/skills](https://github.com/bulls-cows/skills)
 - Gitee 仓库（仅作为镜像）：[https://gitee.com/bulls-cows/skills](https://gitee.com/bulls-cows/skills)
+
+说明：Gitee 仓库仅作为镜像，提 issue 请访问 [https://github.com/bulls-cows/skills/issues](https://github.com/bulls-cows/skills/issues)。
+
+## 📦 环境要求
+
+- **Node.js** >= 22.18.0
+- **Python** >= 3
+- **AI 编程助手**：Claude Code、OpenCode 或其他支持技能的 AI 工具
+
+安装后，在 AI 编程助手中使用 `/` 或 `$` 命令即可调用技能，例如 `/yy-commit`。
 
 ## 📋 Rules 规则
 
