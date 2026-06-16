@@ -114,13 +114,11 @@ git log --oneline -5
 
 ### 步骤 4. 展示并确认
 
-**警告样式规则**：所有 ⚠️ 开头的警告类内容必须使用 `<div style="color:red;"></div>` 标签包裹，使警告在 markdown 渲染中更显眼。
-
 向用户展示：
 
 1. **暂存区副作用提示**（仅当步骤 1 检测到 `git diff --staged` 非空，且本次提交的暂存范围与已有暂存内容不一致时）：明确告知"执行提交前会先 `git reset HEAD` 清空当前暂存区，仅暂存以下文件"，并在用户确认前等待用户明确同意
 2. 将要暂存的文件列表
-3. **主分支保护提醒**（当步骤 1 检测到 `git status` 输出包含 `On branch main` 或 `On branch master` 时，始终执行）：使用 `<div style="color:red;"></div>` 展示警告，提示用户当前位于主分支，建议在功能分支工作
+3. **主分支保护提醒**（当步骤 1 检测到 `git status` 输出包含 `On branch main` 或 `On branch master` 时，始终执行）：提示用户当前位于主分支，建议在功能分支工作
 4. 敏感文件警告（如暂存列表中存在敏感命名特征文件，详见 [resources/sensitive-file-patterns.md](./resources/sensitive-file-patterns.md)；新增文件触发强制阻塞，修改/删除文件仅警告）
 5. 关键变更摘要（从 diff 提取的主要改动）
 6. 生成的完整提交信息（含 body）
@@ -164,16 +162,16 @@ git log --oneline -5
 ```text
 即将提交以下更改：
 
-<div style="color:red;">⚠️ 检测到当前暂存区已有改动，提交前将先清空暂存区，仅保留以下文件（仅在副作用场景出现）</div>
+⚠️ 检测到当前暂存区已有改动，提交前将先清空暂存区，仅保留以下文件（仅在副作用场景出现）
 
 📝 暂存文件：
   - src/auth/login.ts
   - src/components/LoginForm.vue
   - vite.config.ts
 
-<div style="color:red;">⚠️ 敏感文件警告：
+⚠️ 敏感文件警告：
   - [新增] .env（环境变量文件）
-  - [修改] config/credentials.json（凭据文件）</div>
+  - [修改] config/credentials.json（凭据文件）
 
 📊 主要变更：
   - 新增 JWT token 生成逻辑
@@ -187,7 +185,7 @@ feat(auth): 添加 JWT 用户认证功能
 - 添加登录表单验证
 - 补充登录失败场景的错误提示
 
-<div style="color:red;">⚠️ 当前位于 main 分支，建议在功能分支工作。</div>
+⚠️ 当前位于 main 分支，建议在功能分支工作。
 
 是否确认提交？
 ```
