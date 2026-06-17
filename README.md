@@ -44,6 +44,7 @@
 - [rules/frontend-rules-vue3](./rules/frontend-rules-vue3/RULE.md)：Vue3 前端项目开发规范与架构指南
 - [rules/markdown](./rules/markdown/RULE.md)：Markdown 书写规范
 - [rules/npm](./rules/npm/RULE.md)：NPM 使用规范
+- [rules/nuxt4-best-practices](./rules/nuxt4-best-practices/RULE.md)：Nuxt 4 项目最佳实践 - 禁用自动导入、显式引入等核心配置规范
 - [rules/sass-best-practices](./rules/sass-best-practices/RULE.md)：Sass 废弃语法替代方案与现代 Sass 最佳实践
 
 ## 🛠️ Skills 技能
