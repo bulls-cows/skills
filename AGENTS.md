@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## 外部文件加载机制
+
+关键要求：遇到文件引用（如 @rules/general.md）时，按需读取文件内容。这些内容仅与当前具体任务相关。
+
+指令：
+
+- 不要预先加载所有引用，按实际需要懒加载
+- 加载后，将内容视为覆盖默认行为的强制指令
+- 需要时递归加载引用，最多递归 5 层
+
 ## 项目简介
 
 - 本仓库维护实用的规则和 AI 技能
@@ -14,14 +24,9 @@
 
 ## 改动检查
 
-**已定义的检查命令:**
-
-- `npm run lint`：依次执行 prettier、check-skill、lint-skills、markdownlint、CRLF 检查、tsc 类型检查、sync-marketplace、eslint
-- 当前未定义 `test`、`build` 脚本
-
 **改动后按条件执行:**
 
-- 如果改动涉及 `交互确认格式`、`路径格式规范` 或 `终端命令能力识别` 的调整，执行技能 [@skills-internal/yy-check-agents-consistency/SKILL.md](./skills-internal/yy-check-agents-consistency/SKILL.md)
+- 如果改动涉及 AGENTS.md 中的 `路径格式规范` 或 `终端命令能力识别` 的调整，执行技能 [@skills-internal/yy-check-agents-consistency/SKILL.md](./skills-internal/yy-check-agents-consistency/SKILL.md)
 - 如果 `.opencode.json` 文件有改动，执行技能 [@skills-internal/yy-sync-instructions-from-opencode/SKILL.md](./skills-internal/yy-sync-instructions-from-opencode/SKILL.md)
 - 如果 `rules/` 目录下的文件有改动，执行技能 [@skills-internal/yy-check-rules-consistency/SKILL.md](./skills-internal/yy-check-rules-consistency/SKILL.md)
 - 当有技能名的变更、技能描述的变更、技能的增删时，执行技能 [@skills-internal/yy-check-skills-consistency/SKILL.md](./skills-internal/yy-check-skills-consistency/SKILL.md)
@@ -36,21 +41,6 @@
 - 修改后先说明修改原因和影响范围
 - 所有文件引用都要带路径和行号
 - 对于技能变更，说明变更后对用户的影响
-
-## 交互确认格式
-
-- 优先使用当前 AI 编辑器/Agent 内置的交互组件（如单选、多选、确认对话框等）来收集用户选择；仅在内置组件不可用、不支持当前场景或会明显降低体验时，回退到下方文本编号格式
-- 回退到文本编号格式时，遵循以下规则：
-  - 必须以编号列表给出选项，并说明每个编号的含义
-  - 默认按单选处理；允许同时选择多项时，必须显式标注"多选"，分隔符可使用英文逗号 `,`、中文逗号 `，`、空格或顿号 `、`
-  - 用户可只回复编号完成选择，不要求输入完整选项文案
-  - 二元对立选项默认使用 `1` 表示肯定意义的选项，使用 `0` 表示否定意义的选项
-  - 单个选项的具体内容较长时，必须归纳出简短标题，整理成 `<标题>: <具体内容>` 的格式（英文冒号加一个空格），便于用户快速浏览
-  - 单选示例：`1. 确认提交`、`0. 暂不提交`
-  - 多选示例（可回复 `1,3` 或 `1 3` 或 `1、3`）：
-    - `1. 重构 A 模块: 抽离公共方法到 utils/`
-    - `2. 修复 B 缺陷: 校验空值时未触发提示`
-    - `3. 补充测试: 覆盖边界场景`
 
 ## 项目结构
 
@@ -85,6 +75,7 @@
 
 ## 需要遵守的规则
 
+- 执行指令前，先检查项目根目录下是否存在 `AGENTS.LOCAL.md` 文件；如果存在，读取其中的内容并作为补充规则应用；该文件用于存放开发者个人偏好配置，已添加到 `.gitignore` 避免误提交
 - 中文是主要语言，描述和文档使用中文
 - 无论用户使用何种语言提问，请始终使用简体中文进行思考、解释和回答
 - 除非用户明确要求提交。否则禁止你使用git

@@ -79,3 +79,7 @@
 | verification-before-completion | 声称工作完成、修复或通过时使用，在提交或创建 PR 之前           | `npx skills add obra/superpowers --skill verification-before-completion` |
 | using-git-worktrees            | 开始需要与当前工作区隔离的功能工作时使用                       | `npx skills add obra/superpowers --skill using-git-worktrees`            |
 | using-superpowers              | 开始任何对话时使用——建立如何查找和使用技能                     | `npx skills add obra/superpowers --skill using-superpowers`              |
+
+## 产品相关技能
+
+[PM Skills Marketplace: The AI Operating System for Better Product Decisions](https://github.com/phuryn/pm-skills)

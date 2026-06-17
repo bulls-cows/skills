@@ -36,6 +36,7 @@ function readAgentsConfig(): string[] {
 
 const configuredAgents = readAgentsConfig()
 const agents = configuredAgents.length > 0 ? configuredAgents : defaultAgents
+const allAgents = [...new Set([...configuredAgents, ...defaultAgents])]
 
 const oldSkillNamesToDelete = [
   'yy-frontend-commit',
@@ -81,7 +82,7 @@ async function removeSkillFromGlobal(skillName: string): Promise<RemoveResult> {
   return new Promise((resolve, reject) => {
     const child = spawn(
       npxCommand,
-      ['skills', 'remove', skillName, '-g', '-y', ...agents.flatMap((a) => ['-a', a])],
+      ['skills', 'remove', skillName, '-g', '-y', ...allAgents.flatMap((a) => ['-a', a])],
       {
         shell: true,
       },

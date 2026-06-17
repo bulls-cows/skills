@@ -125,6 +125,7 @@ debug-*.json
 temp/
 tmp/
 .terminal.local.md
+AGENTS.LOCAL.md
 nul
 
 # ==================== 测试与日志 ====================
