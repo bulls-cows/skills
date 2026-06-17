@@ -28,7 +28,7 @@ body {
 }
 
 // ✅ 正确
-@use 'variables' as *;  // as * 取消命名空间，保持原有用法
+@use 'variables' as *; // as * 取消命名空间，保持原有用法
 @use 'mixins';
 
 body {
@@ -63,27 +63,27 @@ a:hover {
 }
 
 // ✅ 正确
-@use "sass:color";
+@use 'sass:color';
 
 a:hover {
-  color: color.adjust($primary-color, $lightness: -10%);  // darken = 减少亮度
+  color: color.adjust($primary-color, $lightness: -10%); // darken = 减少亮度
 }
 .bg {
-  background: color.adjust($bg-color, $lightness: 5%);     // lighten = 增加亮度
+  background: color.adjust($bg-color, $lightness: 5%); // lighten = 增加亮度
 }
 ```
 
 **常用对照表**
 
-| 废弃函数 | 替代方案 |
-| --- | --- |
-| `darken($color, 10%)` | `color.adjust($color, $lightness: -10%)` |
-| `lighten($color, 10%)` | `color.adjust($color, $lightness: 10%)` |
-| `saturate($color, 20%)` | `color.adjust($color, $saturation: 20%)` |
-| `desaturate($color, 20%)` | `color.adjust($color, $saturation: -20%)` |
-| `adjust-hue($color, 30deg)` | `color.adjust($color, $hue: 30deg)` |
-| `opacify($color, 0.3)` | `color.adjust($color, $alpha: -0.3)` |
-| `transparentize($color, 0.3)` | `color.adjust($color, $alpha: -0.3)` |
+| 废弃函数                      | 替代方案                                  |
+| ----------------------------- | ----------------------------------------- |
+| `darken($color, 10%)`         | `color.adjust($color, $lightness: -10%)`  |
+| `lighten($color, 10%)`        | `color.adjust($color, $lightness: 10%)`   |
+| `saturate($color, 20%)`       | `color.adjust($color, $saturation: 20%)`  |
+| `desaturate($color, 20%)`     | `color.adjust($color, $saturation: -20%)` |
+| `adjust-hue($color, 30deg)`   | `color.adjust($color, $hue: 30deg)`       |
+| `opacify($color, 0.3)`        | `color.adjust($color, $alpha: -0.3)`      |
+| `transparentize($color, 0.3)` | `color.adjust($color, $alpha: -0.3)`      |
 
 **注意事项**
 
@@ -108,11 +108,11 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/css/variables" as *;'
-        }
-      }
-    }
-  }
+          additionalData: '@use "~/assets/css/variables" as *;',
+        },
+      },
+    },
+  },
 })
 ```
 
@@ -132,3 +132,59 @@ export default defineNuxtConfig({
 
 - 修改 `additionalData` 配置后，检查所有 SCSS 入口文件是否有重复导入
 - 如果某个模块仅部分文件使用，考虑在具体文件中按需 `@use`，而非注入 `additionalData`
+
+## additionalData 对子模块不生效
+
+**问题**
+
+在 Vite / Nuxt 项目中，`vite.css.preprocessorOptions.scss.additionalData` 会将指定内容注入到每个 SCSS 文件头部。但 Sass 的 `@use` 模块系统有严格的私有作用域，**通过 `@use` 导入的子模块无法继承父模块的变量作用域**。
+
+这意味着即使 `additionalData` 在父模块中注入了变量导入，子模块仍需显式导入才能使用这些变量。
+
+**错误示例**
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/css/variables" as *;',
+        },
+      },
+    },
+  },
+})
+```
+
+```scss
+// main.scss
+@use 'reset'; // additionalData 已注入变量导入
+
+// _reset.scss
+// ❌ 错误：子模块无法访问父模块的变量
+body {
+  font-family: $font-family-base; // Undefined variable
+}
+```
+
+**正确做法**
+
+子模块必须显式导入所需的变量模块：
+
+```scss
+// _reset.scss
+// ✅ 正确：子模块显式导入变量
+@use 'variables' as *;
+
+body {
+  font-family: $font-family-base; // 正常工作
+}
+```
+
+**判断规则**
+
+- `additionalData` 只对**当前文件**生效，对通过 `@use` 导入的子模块不生效
+- 如果子模块需要使用变量，必须在子模块中显式 `@use` 变量模块
+- 入口文件（如 `main.scss`）无需重复导入 `additionalData` 已注入的模块
