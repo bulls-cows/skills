@@ -93,15 +93,28 @@ description: >
 
 - `终端命令能力识别` 章节必须包含 `.terminal.local.md`
 - `终端命令能力识别` 章节必须包含 `yy-detect-terminal`
-- `终端命令能力识别` 章节必须包含“执行终端命令前，先读取项目根目录下的 `.terminal.local.md`”
+- `终端命令能力识别` 章节必须包含”执行终端命令前，先读取项目根目录下的 `.terminal.local.md`”
 - 若上述任一内容缺失，必须先从 `templates/agents-minimal-template.md` 复用对应章节修正后，才能写入 `AGENTS.md`
 
-使用 Write 工具保存文件，输出结果：
+使用 Write 工具保存 `AGENTS.md` 文件。
+
+**AGENTS.LOCAL.md 初始化：**
+
+- 检查目标项目根目录下是否存在 `.gitignore` 文件
+  - **存在**：检查其中是否包含 `AGENTS.LOCAL.md` 条目，若未包含则追加一行 `AGENTS.LOCAL.md`
+  - **不存在**：跳过 `.gitignore` 修改
+- 检查目标项目根目录下是否存在 `AGENTS.LOCAL.md` 文件
+  - **不存在**：从 `templates/AGENTS.LOCAL.example.md` 复制内容创建 `AGENTS.LOCAL.md`
+  - **已存在**：跳过，不修改用户现有内容
+
+输出结果：
 
 ```text
 ✓ 已创建/更新 AGENTS.md
 ✓ 文件路径: [项目根目录]/AGENTS.md
 ✓ 包含章节: 项目简介, 范围, 改动检查, 交付格式, 项目结构, 路径格式规范, 终端命令能力识别, 需要遵守的规则, 关键参考
+✓ AGENTS.LOCAL.md: 已创建 / 已存在（跳过）
+✓ .gitignore: 已更新 / 不需要修改
 ```
 
 ## 注意事项
