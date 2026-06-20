@@ -2,7 +2,7 @@
 description: Vue3 前端项目开发规范与架构指南
 alwaysApply: true
 version: 2.0.0
-lastUpdated: 2026-06-03
+lastUpdated: 2026-06-20
 maintainer: bulls-cows team
 ---
 
