@@ -75,6 +75,11 @@ description: >
 - 如果不存在常见工程配置文件，写明“当前未包含 `package.json`、`requirements.txt`、`pyproject.toml` 等工程配置文件，因此没有已定义的 lint、test 或 build 命令；如后续新增工程配置文件，应同步更新本节”
 - 不要为了补齐检查命令而建议新增工具链或生成临时工程配置文件
 
+**通用生成原则：**
+
+- 生成的 AGENTS.md 中只描述"做什么"（如执行 lint 检查、读取文件内容、安装依赖），不指定"用什么 AI agent 内置工具做"
+- 禁止在生成的 AGENTS.md 中出现 `Write 工具`、`Edit 工具`、`Read 工具`、`WebFetch 工具` 等具体工具名；工具选择是 AI agent/编辑器的实现细节，不应写入项目规范文档
+
 **必须包含的章节**：
 
 1. 项目简介
