@@ -45,7 +45,7 @@ description: >
   node scripts/ <url> [output-path]
   ```
 
-- **脚本不可用**：使用 WebFetch 工具手动获取网页内容，进入步骤 3
+- **脚本不可用**：手动获取网页内容，进入步骤 3
 
 **脚本不可用时的决策分支**：
 

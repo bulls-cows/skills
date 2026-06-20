@@ -42,7 +42,7 @@ description: >
 
 按优先级尝试以下方式读取 PDF 文件：
 
-1. **Read 工具**：使用 Read 工具读取 PDF 文件
+1. 使用内置文件读取能力读取 PDF 文件（不可用时进入下一项）
 2. **Python 工具**：使用 `pymupdf` 提取文本（通过 `python -c "import fitz"` 检测是否已安装）
 3. **未安装 pymupdf**：请求用户授权后执行 `pip install -e skills/yy-read-pdf/scripts` 安装，安装后重试
 
@@ -65,8 +65,8 @@ python skills/yy-read-pdf/scripts/read_pdf.py --file "文件路径" --start 0 --
 **决策分支**：
 
 - **10 页以内的 PDF**：直接读取全部内容（不传 `--start`/`--end`）
-- **超过 10 页的 PDF**：分段读取，每次最多 20 页（Read 工具使用 `pages` 参数；pymupdf 传入 `--start` 和 `--end` 参数）
-- **Read 工具失败（非加密、非扫描）**：降级到 pymupdf 方式重试
+- **超过 10 页的 PDF**：分段读取，每次最多 20 页（内置读取能力支持 `pages` 参数时使用该参数；pymupdf 传入 `--start` 和 `--end` 参数）
+- **内置读取失败（非加密、非扫描）**：降级到 pymupdf 方式重试
 - **读取失败（加密 PDF）**：提示用户需要先解密，退出执行
 - **读取内容为空或乱码（扫描版 PDF）**：提示用户该 PDF 为扫描版，需要 OCR 工具处理，退出执行
 

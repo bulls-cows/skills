@@ -96,7 +96,7 @@ description: >
 - `终端命令能力识别` 章节必须包含”执行终端命令前，先读取项目根目录下的 `.terminal.local.md`”
 - 若上述任一内容缺失，必须先从 `templates/agents-minimal-template.md` 复用对应章节修正后，才能写入 `AGENTS.md`
 
-使用 Write 工具保存 `AGENTS.md` 文件。
+将内容保存到 `AGENTS.md` 文件中。
 
 **AGENTS.LOCAL.md 初始化：**
 
