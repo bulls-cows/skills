@@ -333,190 +333,58 @@ async handleSubmit() {
 }
 ```
 
-### 💚 Vue3：useRequest 前置检查
+### 💚💙 Vue3 / React：useRequest（统一模式）
 
-**在编写网络请求代码前，先检查项目是否安装了以下任一库：**
+两个框架的 `useRequest` API 几乎一致，仅在以下两点不同：
 
-- `ahooks-vue`
-- `vue-hooks-plus`
+| 差异点   | Vue3                            | React               |
+| -------- | ------------------------------- | ------------------- |
+| 包名     | `ahooks-vue` / `vue-hooks-plus` | `ahooks`            |
+| 状态声明 | `ref()`                         | `useState()`        |
+| 执行方法 | `run`（推荐）                   | `runAsync`（推荐）  |
 
-**检查方式**：查看项目 `package.json` 的 `dependencies` 是否包含上述包名。
+**检查方式**：查看 `package.json` 的 `dependencies` 是否包含对应包名。
 
-**决策分支**：
+**决策分支**：已安装 → 使用 `useRequest`；未安装 → 使用手动 `async/await` + `try/catch/finally`
 
-- **已安装** → 使用 `useRequest`（自动管理 `loading`/`data`）
-- **未安装** → 使用手动 `async/await` + `try/catch/finally`
-
-#### useRequest 标准模板（已安装时）
-
-手动执行（按钮点击/表单提交等场景）：
+#### useRequest 标准模板
 
 ```typescript
-import { useRequest } from 'ahooks-vue'
+// 💚 Vue3: import { useRequest } from 'ahooks-vue'
+// 💙 React: import { useRequest } from 'ahooks'
 
-const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    console.log('登录成功')
-  } else {
-    console.warn(msg)
-  }
-}
-
-const { loading, run: runLogin } = useRequest(() => apiPostLogin(loginForm.value), {
+const { loading, run } = useRequest(() => apiSubmit(formData), {
   manual: true,
-  onSuccess: onLoginSuccess,
-  onError: () => {
-    console.warn('网络异常，请重试')
+  onSuccess: ({ code, data, msg }) => {
+    if (code === 0) {
+      // 成功处理
+      // 💚 Vue3: dataSource.value = data.list
+      // 💙 React: setDataSource(data.list)
+    } else {
+      console.warn(msg)
+    }
+  },
+  onError: (error) => {
+    console.warn(error)
   },
 })
 
-const handleSubmit = async () => {
-  await runLogin()
-}
-```
-
-带参数（分页场景）：
-
-```typescript
-import { useRequest } from 'ahooks-vue'
-import { ref } from 'vue'
-
-const pagination = ref({ page: 1, limit: 20 })
-const total = ref(0)
-const dataSource = ref<IUserItem[]>([])
-
-const onListSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    dataSource.value = data.list ?? []
-    total.value = data.total ?? 0
-  } else {
-    console.warn(msg)
-  }
-}
-
-const { loading, run: getList } = useRequest(
-  (params) => apiGetList(Object.assign({}, pagination.value, params)),
-  {
-    manual: true,
-    onSuccess: onListSuccess,
-    onError: (error) => {
-      console.warn(error)
-    },
-  },
-)
+// 💚 Vue3: await run()
+// 💙 React: await runAsync()（推荐用 runAsync 获取 Promise）
 ```
 
 #### 手动执行模板（未安装 useRequest 时）
 
 ```typescript
-import { ref } from 'vue'
-
-const loading = ref(false)
-
-const handleSubmit = async () => {
-  if (loading.value) return // 防重复提交
-
-  loading.value = true
-  try {
-    const { code, msg } = await apiSubmit(formData.value)
-    if (code === 0) {
-      console.log('提交成功')
-    } else {
-      console.warn(msg)
-    }
-  } catch (error) {
-    console.warn(error)
-  } finally {
-    loading.value = false
-  }
-}
-```
-
-### 💙 React：useRequest（ahooks）
-
-**在编写网络请求代码前，先检查项目是否安装了 `ahooks`**（查看 `package.json` 的 `dependencies`）。
-
-**决策分支**：
-
-- **已安装** → 使用 `useRequest`（自动管理 `loading`/`data`，API 与 Vue3 的 ahooks-vue 一致）
-- **未安装** → 使用手动 `async/await` + `try/catch/finally` + `useState`/`useEffect`
-
-#### useRequest 标准模板（已安装 ahooks 时）
-
-手动执行（按钮点击/表单提交等场景）：
-
-```typescript
-import { useRequest } from 'ahooks'
-
-interface IApiResponse {
-  code: number
-  data: ILoginResult
-  msg: string
-}
-
-const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    console.log('登录成功')
-  } else {
-    console.warn(msg)
-  }
-}
-
-const { loading, runAsync: runLogin } = useRequest(() => apiPostLogin(loginForm), {
-  manual: true,
-  onSuccess: onLoginSuccess,
-  onError: () => {
-    console.warn('网络异常，请重试')
-  },
-})
+// 💚 Vue3: const loading = ref(false)
+// 💙 React: const [loading, setLoading] = useState(false)
 
 const handleSubmit = async () => {
-  await runLogin()
-}
-```
+  // 💚 Vue3: if (loading.value) return
+  // 💙 React: if (loading) return
 
-带参数（分页场景）：
-
-```typescript
-import { useRequest } from 'ahooks'
-import { useState } from 'react'
-
-const [pagination, setPagination] = useState({ page: 1, limit: 20 })
-const [total, setTotal] = useState(0)
-const [dataSource, setDataSource] = useState<IUserItem[]>([])
-
-const onListSuccess = ({ code, data, msg }: IApiResponse) => {
-  if (code === 0) {
-    setDataSource(data.list ?? [])
-    setTotal(data.total ?? 0)
-  } else {
-    console.warn(msg)
-  }
-}
-
-const { loading, runAsync: getList } = useRequest(
-  (params) => apiGetList(Object.assign({}, pagination, params)),
-  {
-    manual: true,
-    onSuccess: onListSuccess,
-    onError: (error) => {
-      console.warn(error)
-    },
-  },
-)
-```
-
-#### 手动执行模板（未安装 ahooks 时）
-
-```typescript
-import { useState } from 'react'
-
-const [loading, setLoading] = useState(false)
-
-const handleSubmit = async () => {
-  if (loading) return // 防重复提交
-
-  setLoading(true)
+  // 💚 Vue3: loading.value = true
+  // 💙 React: setLoading(true)
   try {
     const { code, msg } = await apiSubmit(formData)
     if (code === 0) {
@@ -527,12 +395,13 @@ const handleSubmit = async () => {
   } catch (error) {
     console.warn(error)
   } finally {
-    setLoading(false)
+    // 💚 Vue3: loading.value = false
+    // 💙 React: setLoading(false)
   }
 }
 ```
 
-> 💙 React 的 `useRequest` 来自 `ahooks`，Vue3 的来自 `ahooks-vue` 或 `vue-hooks-plus`，两者 API 几乎一致（都支持 `manual`/`run`/`runAsync`/`onSuccess`/`onError`）。React 推荐使用 `runAsync` 获取 Promise，便于 `await` 与 try/catch。
+> 💙 React 推荐使用 `runAsync` 获取 Promise，便于 `await` 与 try/catch。Vue3 的 `ahooks-vue` 使用 `run`。
 
 ---
 

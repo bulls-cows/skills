@@ -54,17 +54,4 @@
 
 ## 四、通用规范引用
 
-| 模块             | 路径                                       |
-| ---------------- | ------------------------------------------ |
-| Vue 模板通用规则 | [vue-template.md](../common/vue-template.md) |
-| Vue 侦听器通用规则 | [vue-watch.md](../common/vue-watch.md)   |
-| Hooks 通用规范   | [hooks.md](../common/hooks.md)             |
-| TypeScript 通用  | [typescript.md](../common/typescript.md)   |
-| 命名规范         | [naming.md](../common/naming.md)           |
-| 网络请求（通用） | [network.md](../common/network.md)         |
-| 注释规范         | [comments.md](../common/comments.md)       |
-| CSS 样式（通用） | [css.md](../common/css.md)                 |
-| 性能优化（通用） | [performance.md](../common/performance.md) |
-| 约束清单（通用） | [constraints.md](../common/constraints.md) |
-| 代码风格         | [code-style.md](../common/code-style.md)   |
-| AI 行为约束      | [ai-behavior.md](../ai-behavior.md)        |
+通用规范（命名、网络请求、CSS、TypeScript、Hooks、约束清单等）详见 [总纲索引](../index.md)。

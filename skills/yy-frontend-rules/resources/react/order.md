@@ -124,39 +124,11 @@ export const UserCard = ({ userId, showAvatar = true }: IUserCardProps) => {
 
 ---
 
-## 三、Import 分组排序（4 组）
+## 三、Import 分组
 
-将 `import` 分为四组，**组间空一行，组内按字母顺序排列**：
+Import 分组规则详见 [code-style.md](../common/code-style.md#二导入排序规范)。
 
-1. **node_modules（外部依赖）**：`react`, `dayjs`, `lodash` 等第三方库。
-2. **types（类型导入）**：所有 `import type` 导入的纯类型。
-3. **内部全局依赖**：`@src/` 开头的路径（包括 API、工具、Hooks、Store、常量、组件等）。
-4. **内部相对依赖**：`./` 或 `../` 开头的相对路径（包括工具、Hooks、常量、组件、样式等）。
-
-**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序排列。
-
-```tsx
-// 1. node_modules（外部依赖）
-import { useState, useEffect } from 'react'
-import dayjs from 'dayjs'
-import { debounce } from 'lodash'
-
-// 2. types（类型导入）
-import type { IUserInfo, ITableConfig } from '@src/types'
-
-// 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user'
-import { formatDate } from '@src/utils/date'
-import { useTable } from '@src/hooks/useTable'
-import UserAvatar from '@src/components/UserAvatar'
-
-// 4. 内部相对依赖（./）
-import { localHelper } from './utils/helper'
-import { MAX_RETRY_COUNT } from './constants'
-import styles from './UserCard.module.scss'
-```
-
-> 通用导入分组规则详见 [code-style.md](../common/code-style.md#二导入排序规范)
+React 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖（@src/）→ 内部相对依赖（./），组间空一行，组内按字母顺序。
 
 ---
 

@@ -89,43 +89,11 @@ defineExpose({ validateForm, resetForm, getDataSourceTotal });
 
 ---
 
-## 三、Import 分组排序（4 组）
+## 三、Import 分组
 
-将 `import` 分为四组，**组间空一行，组内按字母顺序排列**：
+Import 分组规则详见 [code-style.md](../common/code-style.md#二导入排序规范)。
 
-1. **node_modules（外部依赖）**：`vue`, `dayjs`, `lodash` 等第三方库。
-2. **types（类型导入）**：所有 `import type` 导入的纯类型。
-3. **内部全局依赖**：`@src/` 开头的路径（包括 API、工具、Hooks、Store、常量、组件等）。
-4. **内部相对依赖**：`./` 或 `../` 开头的相对路径（包括工具、Hooks、常量、组件等）。
-
-**排序原则**：外部优先 → 类型次之 → 全局在前 → 相对在后 → 组内按字母顺序排列。
-
-**示例**：
-
-```typescript
-// 1. node_modules（外部依赖）
-import { ref, computed, onMounted } from 'vue'
-import dayjs from 'dayjs'
-import { debounce } from 'lodash'
-
-// 2. types（类型导入）
-import type { IUserInfo, ITableConfig } from '@src/types'
-
-// 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user'
-import { formatDate } from '@src/utils/date'
-import { useTable } from '@src/hooks/useTable'
-import { useSearchForm } from '@src/hooks/useSearchForm'
-import store from '@src/store'
-import { APP_CONFIG } from '@src/constants'
-import DataTable from '@src/components/DataTable.vue'
-
-// 4. 内部相对依赖（./）
-import { localHelper } from './utils/helper'
-import { useFormValidate } from './hooks/useFormValidate'
-import { MAX_RETRY_COUNT } from './constants'
-import SearchBar from './SearchBar.vue'
-```
+Vue3 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖（@src/）→ 内部相对依赖（./），组间空一行，组内按字母顺序。
 
 ---
 
