@@ -91,19 +91,20 @@
 | **组件交互与通信**       | [vue2/interaction.md](./vue2/interaction.md)                          | Props 定义、Emit 事件白名单、`$refs` 访问、provide/inject |
 | **模板属性顺序**         | [vue-template.md](./common/vue-template.md#六模板属性顺序)            | HTML 元素上属性的统一排列顺序（Vue2 沿用 8 步）           |
 | **方法函数规范**         | [constraints.md](./common/constraints.md#四方法函数规范强制)         | 前置参数校验 + try-catch 错误保底                         |
-| **Vue2 网络请求差异**    | [vue2/network.md](./vue2/network.md)                                  | `==` 偏好、`this.$message` 提示                           |
+| **watch 规范**           | [common/vue-watch.md](./common/vue-watch.md)                         | watch 通用规范（Vue2 特有写法见 vue2/watch.md）、清理机制、与 computed 选择策略 |
+| **Vue2 网络请求（🟦）**  | [network.md](./common/network.md#十一框架请求库选型与标准模板)       | `==` 偏好、`this.$message` 提示                           |
 
 ### Vue3
 
 | 规则                                | 详见                                                                  | 说明                                                       |
 | ----------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------- |
 | **ref/reactive/computed 原则**      | [vue3/reactivity.md](./vue3/reactivity.md)                            | ref/reactive 选择原则、reactive 转 ref 规则、computed 规范 |
-| **watch 规范**                      | [vue3/watch.md](./vue3/watch.md)                                      | watch/watchEffect 使用规范、清理机制、与 computed 选择策略 |
+| **watch 规范**                      | [common/vue-watch.md](./common/vue-watch.md)                          | watch 通用规范（Vue3 特有差异见 vue3/watch.md）、清理机制、与 computed 选择策略 |
 | **Hooks Vue3 特有差异**             | [vue3/hooks.md](./vue3/hooks.md)                                      | setup 限制、toRefs、内置 Hooks                             |
 | **`<script setup>` 结构与代码组织** | [vue3/order.md](./vue3/order.md)                                      | SFC 块顺序、Import 分组、脚本内部声明顺序                  |
 | **模板属性顺序**                    | [vue-template.md](./common/vue-template.md#六模板属性顺序)            | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）   |
 | **组件交互与通信**                  | [vue3/interaction.md](./vue3/interaction.md)                          | Props、v-model 兼容、Emit 事件白名单、defineExpose         |
-| **Vue3 网络请求差异**               | [vue3/network.md](./vue3/network.md)                                  | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
+| **Vue3 网络请求（💚）**             | [network.md](./common/network.md#十一框架请求库选型与标准模板)       | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
 
 ### React
 
@@ -126,7 +127,7 @@
 | -------------------- | ------------------------------------------ | ----------------------------------------------- |
 | **格式化与工具链**   | [code-style.md](./common/code-style.md)    | Prettier 配置、函数写法偏好                     |
 | **注释规范**         | [comments.md](./common/comments.md)        | 模板区、脚本区、样式区注释格式，注释保护原则    |
-| **样式命名与作用域** | [css.md](./common/css.md)                  | BEM 规范、`scoped` 优先、全局样式标注、兼容性   |
+| **样式命名与作用域** | [css.md](./common/css.md)                  | BEM 规范、局部作用域优先、全局样式标注、兼容性、作用域穿透（Vue2/Vue3/React）   |
 | **性能优化**         | [performance.md](./common/performance.md)  | 懒加载、KeepAlive、虚拟滚动、防抖节流、图片优化 |
 | **约束清单**         | [constraints.md](./common/constraints.md)  | 禁止/推荐/不推荐/注意事项速查                   |
 
@@ -137,6 +138,7 @@
 | **Vue2 特有规则: computed** | [vue2/reactivity.md](./vue2/reactivity.md)                      | computed 优先、try/catch 包裹                |
 | **Vue2 约束（并入通用）**   | [constraints.md](./common/constraints.md)                       | 禁止项/推荐项/方法规范/过滤器（🟦 为 Vue2 特有） |
 | **指令简写**                | [vue-template.md](./common/vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
+| **Vue2 CSS 差异**           | [vue2/css.md](./vue2/css.md)                                    | Vue2 指令钩子（`inserted`/`unbind`）、`::v-deep` 穿透写法 |
 
 ### Vue3
 
@@ -145,7 +147,7 @@
 | **TypeScript 类型注解** | [vue3/typescript.md](./vue3/typescript.md)                      | defineProps/ref/reactive/Emits 泛型               |
 | **TypeScript 约束**     | [typescript.md](./common/typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error` |
 | **指令简写**            | [vue-template.md](./common/vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`      |
-| **Vue3 CSS 差异**       | [vue3/css.md](./vue3/css.md)                                    | scoped 与 v-html `:deep()` 穿透、指令清理         |
+| **Vue3 CSS 差异**       | [vue3/css.md](./vue3/css.md)                                    | Vue3 指令钩子（`mounted`/`unmounted`）、`:deep()` 穿透写法 |
 | **Vue3 性能差异**       | [vue3/performance.md](./vue3/performance.md)                    | defineAsyncComponent、shallowRef、unmounted 钩子 |
 
 ### React
@@ -155,6 +157,7 @@
 | **TypeScript 类型注解** | [react/typescript.md](./react/typescript.md)                    | Props、useState、useRef、事件、泛型组件           |
 | **TypeScript 约束**     | [typescript.md](./common/typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error` |
 | **JSX 规范**            | [react/jsx.md](./react/jsx.md)                                  | 条件渲染、列表渲染、事件处理、属性传递            |
+| **React CSS 差异**      | [react/css.md](./react/css.md)                                  | CSS Modules、className、clsx、`:global()` 穿透、方案选型 |
 
 ---
 

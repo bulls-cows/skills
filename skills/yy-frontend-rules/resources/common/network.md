@@ -2,6 +2,8 @@
 # 🌐 网络请求规范
 
 > 本规范是前端API请求的统一标准，涵盖异步处理、响应解析、错误处理、安全规范、拦截器、取消请求等全流程，必须严格遵守。
+>
+> 框架特有条目以 🟦（Vue2）或 💚（Vue3）标注。
 
 ---
 
@@ -137,7 +139,43 @@ if (code === 0) {
 
 ## 四、防止重复提交
 
-- 对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，防止用户重复点击
+对于表单提交、支付等写操作，在请求进行中**必须**通过 `loading` 状态禁用提交按钮，防止用户重复点击。
+
+### 通用写法（手动 loading）
+
+```vue
+<button @click="handleSubmit" :disabled="loading">
+  {{ loading ? '提交中...' : '提交' }}
+</button>
+```
+
+### 💚 Vue3：useRequest 方式
+
+Vue3 项目若已安装 `ahooks-vue` 或 `vue-hooks-plus`，优先使用 `useRequest`，其 `loading` 自动控制，按钮直接用 `:disabled="loading"` 禁用：
+
+```typescript
+import { useRequest } from 'ahooks-vue'
+
+const { loading, run } = useRequest(() => apiSubmit(formData.value), {
+  manual: true,
+  onSuccess: (res) => {
+    if (res.code === 0) {
+      console.log('提交成功')
+    } else {
+      console.warn(res.msg)
+    }
+  },
+  onError: (error) => {
+    console.warn(error)
+  },
+})
+
+const handleSubmit = async () => {
+  await run()
+}
+```
+
+未安装 `useRequest` 时，使用互斥锁（`if (loading.value) return`）防止重复提交。
 
 ---
 
@@ -147,6 +185,17 @@ if (code === 0) {
 - **敏感数据**：禁止在URL中传递token、密码、身份证号等敏感信息；禁止`console.log`输出用户凭证、接口密钥等敏感内容
 - **跨域配置**：优先使用后端CORS配置，禁止使用线上代理转发请求；开发环境代理仅用于本地调试
 - **CSRF防护**：根据后端要求自动携带CSRF Token，禁止关闭CSRF校验
+
+### 💚 Vue3：全局错误捕获
+
+Vue3 项目建议配置 `app.config.errorHandler`，配合 Sentry 上报未捕获异常：
+
+```typescript
+app.config.errorHandler = (err, instance, info) => {
+  console.warn(err)
+  Sentry.captureException(err)
+}
+```
 
 ---
 
@@ -203,6 +252,8 @@ onUnmounted(() => {
 })
 ```
 
+> Vue2 对应 `beforeDestroy` 生命周期，Vue3 对应 `onUnmounted`/`onBeforeUnmount`，React 在 `useEffect` 清理函数中调用。
+
 ---
 
 ## 📎 八、文件上传/下载规范
@@ -237,7 +288,260 @@ onUnmounted(() => {
 
 ## ⚡ 十、其他注意事项
 
-- 等于运算符：优先使用 `===`（严格相等），仅在明确需要隐式类型转换时使用 `==`，若改为 `===` 无需额外确认，若改为 `==` 需提醒用户确认
-- 注释问题：与请求逻辑相关的注释默认保留，不需要强制检查，通用注释规范详见 [comments.md](./comments.md)
-- 超时设置：全局请求超时时间统一配置为 10-30 秒，特殊场景可单独调整
-- 重试机制：网络错误、超时等非业务错误可自动重试 2-3 次，业务错误禁止重试
+- **等于运算符**：默认优先使用 `===`（严格相等）
+  - 🟦 **Vue2 历史项目偏好 `==`**：若将 `===` 改为 `==`，需提醒用户手动确认；新项目应遵循 `===`
+  - 💚 Vue3/React 优先 `===`，若将 `==` 改为 `===` 需提醒用户确认
+- **注释问题**：与请求逻辑相关的注释默认保留，不需要强制检查，通用注释规范详见 [comments.md](./comments.md)
+- **超时设置**：全局请求超时时间统一配置为 10-30 秒，特殊场景可单独调整
+- **重试机制**：网络错误、超时等非业务错误可自动重试 2-3 次，业务错误禁止重试
+- **🟦 Vue2 注释默认忽略**：Vue2 项目中注释相关问题默认忽略，不进行检查
+
+---
+
+## 🧩 十一、框架请求库选型与标准模板
+
+### 🟦 Vue2：手动 async/await + `this.$message`
+
+Vue2（Options API）统一通过 `this.$message` 进行用户反馈提示：
+
+```javascript
+const { code, data, msg } = await apiXXX()
+if (code === 0) {
+  this.$message.success(msg || '操作成功')
+} else {
+  this.$message.error(msg)
+}
+```
+
+完整方法示例（含防重复提交）：
+
+```javascript
+async handleSubmit() {
+  if (this.loading) return
+  this.loading = true
+  try {
+    const { code, msg } = await apiSubmit(this.formData)
+    if (code === 0) {
+      this.$message.success('操作成功')
+    } else {
+      console.warn(msg)
+    }
+  } catch (error) {
+    console.warn(error)
+  } finally {
+    this.loading = false
+  }
+}
+```
+
+### 💚 Vue3：useRequest 前置检查
+
+**在编写网络请求代码前，先检查项目是否安装了以下任一库：**
+
+- `ahooks-vue`
+- `vue-hooks-plus`
+
+**检查方式**：查看项目 `package.json` 的 `dependencies` 是否包含上述包名。
+
+**决策分支**：
+
+- **已安装** → 使用 `useRequest`（自动管理 `loading`/`data`）
+- **未安装** → 使用手动 `async/await` + `try/catch/finally`
+
+#### useRequest 标准模板（已安装时）
+
+手动执行（按钮点击/表单提交等场景）：
+
+```typescript
+import { useRequest } from 'ahooks-vue'
+
+const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    console.log('登录成功')
+  } else {
+    console.warn(msg)
+  }
+}
+
+const { loading, run: runLogin } = useRequest(() => apiPostLogin(loginForm.value), {
+  manual: true,
+  onSuccess: onLoginSuccess,
+  onError: () => {
+    console.warn('网络异常，请重试')
+  },
+})
+
+const handleSubmit = async () => {
+  await runLogin()
+}
+```
+
+带参数（分页场景）：
+
+```typescript
+import { useRequest } from 'ahooks-vue'
+import { ref } from 'vue'
+
+const pagination = ref({ page: 1, limit: 20 })
+const total = ref(0)
+const dataSource = ref<IUserItem[]>([])
+
+const onListSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    dataSource.value = data.list ?? []
+    total.value = data.total ?? 0
+  } else {
+    console.warn(msg)
+  }
+}
+
+const { loading, run: getList } = useRequest(
+  (params) => apiGetList(Object.assign({}, pagination.value, params)),
+  {
+    manual: true,
+    onSuccess: onListSuccess,
+    onError: (error) => {
+      console.warn(error)
+    },
+  },
+)
+```
+
+#### 手动执行模板（未安装 useRequest 时）
+
+```typescript
+import { ref } from 'vue'
+
+const loading = ref(false)
+
+const handleSubmit = async () => {
+  if (loading.value) return // 防重复提交
+
+  loading.value = true
+  try {
+    const { code, msg } = await apiSubmit(formData.value)
+    if (code === 0) {
+      console.log('提交成功')
+    } else {
+      console.warn(msg)
+    }
+  } catch (error) {
+    console.warn(error)
+  } finally {
+    loading.value = false
+  }
+}
+```
+
+### 💙 React：useRequest（ahooks）
+
+**在编写网络请求代码前，先检查项目是否安装了 `ahooks`**（查看 `package.json` 的 `dependencies`）。
+
+**决策分支**：
+
+- **已安装** → 使用 `useRequest`（自动管理 `loading`/`data`，API 与 Vue3 的 ahooks-vue 一致）
+- **未安装** → 使用手动 `async/await` + `try/catch/finally` + `useState`/`useEffect`
+
+#### useRequest 标准模板（已安装 ahooks 时）
+
+手动执行（按钮点击/表单提交等场景）：
+
+```typescript
+import { useRequest } from 'ahooks'
+
+interface IApiResponse {
+  code: number
+  data: ILoginResult
+  msg: string
+}
+
+const onLoginSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    console.log('登录成功')
+  } else {
+    console.warn(msg)
+  }
+}
+
+const { loading, runAsync: runLogin } = useRequest(() => apiPostLogin(loginForm), {
+  manual: true,
+  onSuccess: onLoginSuccess,
+  onError: () => {
+    console.warn('网络异常，请重试')
+  },
+})
+
+const handleSubmit = async () => {
+  await runLogin()
+}
+```
+
+带参数（分页场景）：
+
+```typescript
+import { useRequest } from 'ahooks'
+import { useState } from 'react'
+
+const [pagination, setPagination] = useState({ page: 1, limit: 20 })
+const [total, setTotal] = useState(0)
+const [dataSource, setDataSource] = useState<IUserItem[]>([])
+
+const onListSuccess = ({ code, data, msg }: IApiResponse) => {
+  if (code === 0) {
+    setDataSource(data.list ?? [])
+    setTotal(data.total ?? 0)
+  } else {
+    console.warn(msg)
+  }
+}
+
+const { loading, runAsync: getList } = useRequest(
+  (params) => apiGetList(Object.assign({}, pagination, params)),
+  {
+    manual: true,
+    onSuccess: onListSuccess,
+    onError: (error) => {
+      console.warn(error)
+    },
+  },
+)
+```
+
+#### 手动执行模板（未安装 ahooks 时）
+
+```typescript
+import { useState } from 'react'
+
+const [loading, setLoading] = useState(false)
+
+const handleSubmit = async () => {
+  if (loading) return // 防重复提交
+
+  setLoading(true)
+  try {
+    const { code, msg } = await apiSubmit(formData)
+    if (code === 0) {
+      console.log('提交成功')
+    } else {
+      console.warn(msg)
+    }
+  } catch (error) {
+    console.warn(error)
+  } finally {
+    setLoading(false)
+  }
+}
+```
+
+> 💙 React 的 `useRequest` 来自 `ahooks`，Vue3 的来自 `ahooks-vue` 或 `vue-hooks-plus`，两者 API 几乎一致（都支持 `manual`/`run`/`runAsync`/`onSuccess`/`onError`）。React 推荐使用 `runAsync` 获取 Promise，便于 `await` 与 try/catch。
+
+---
+
+## ⚠️ 十二、风险提示
+
+网络请求相关改造需特别注意：
+
+- 原代码可能使用不同响应结构
+- 原有错误处理可能不同
+- `async/await` 改变执行时机
+- 💚 **Vue3：转换前必须展示 diff 预览并获用户确认**

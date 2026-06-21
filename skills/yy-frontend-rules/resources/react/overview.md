@@ -19,7 +19,7 @@
 | TypeScript | 推荐                  | 类型安全，优先使用 TS           |
 | 组件模式   | 函数组件              | 禁止使用 Class 组件             |
 | 状态管理   | Hooks                 | useState / useReducer / Context |
-| 样式方案   | CSS Modules / SCSS 等 | 详见 [JSX 规范](./jsx.md)       |
+| 样式方案   | CSS Modules / SCSS 等 | 详见 [CSS 规范](./css.md)       |
 
 ---
 
@@ -66,10 +66,12 @@ class UserList extends React.Component {
 | Hooks 规范      | [hooks.md](./hooks.md)                     | Hook 调用规则、内置 Hooks                                         |
 | 状态管理        | [state.md](./state.md)                     | useState / useReducer                                             |
 | JSX 规范        | [jsx.md](./jsx.md)                         | 条件渲染、列表、事件处理                                          |
+| CSS 规范        | [css.md](./css.md)                         | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |
 | TypeScript      | [typescript.md](./typescript.md)           | 类型注解、Props 定义                                              |
 | Hooks 通用规范  | [hooks.md](../common/hooks.md)             | 命名、抽离、返回值                                                |
 | TypeScript 通用 | [typescript.md](../common/typescript.md)   | 类型注解、import type、类型文件                                   |
 | 命名规范        | [naming.md](../common/naming.md)           | 文件/组件/变量命名                                                |
+| CSS 样式（通用） | [css.md](../common/css.md)                | BEM、局部作用域、兼容性、作用域穿透                              |
 | 网络请求        | [network.md](../common/network.md)         | async/await、错误处理                                             |
 | 代码风格        | [code-style.md](../common/code-style.md)   | Prettier 配置                                                     |
 | 注释规范        | [comments.md](../common/comments.md)       | JSDoc、注释格式                                                   |

@@ -268,19 +268,15 @@ const UserList = () => {
 
 ## 九、样式使用
 
-### 禁止使用内联样式
-
-- 使用 CSS Modules、styled-components 或 SCSS 等方案
-- 使用 `className` 替代 `class`
+- **禁止**使用内联样式（`style={{...}}`），动态计算的单个属性除外
+- **禁止**使用 HTML 的 `class` 属性，必须用 `className`
+- 样式方案选型、CSS Modules 用法、动态类名、穿透第三方组件详见 [css.md](./css.md)
 
 ```tsx
-// ✅ 正确：CSS Modules
+// ✅ 正确：className + CSS Modules
 import styles from './UserCard.module.scss'
 
 <div className={styles.userCard}>...</div>
-
-// ✅ 正确：条件类名
-<div className={`user-card ${isActive ? 'user-card--active' : ''}`}>...</div>
 
 // ❌ 错误：内联样式
 <div style={{ color: 'red', fontSize: 14 }}>...</div>
@@ -298,5 +294,5 @@ import styles from './UserCard.module.scss'
 | 组件开发   | [component-dev.md](./component-dev.md) |
 | Hooks 规范 | [hooks.md](./hooks.md)                 |
 | 状态管理   | [state.md](./state.md)                 |
-| CSS 规范   | [css.md](../common/css.md)                 |
+| CSS 规范   | [css.md](./css.md)                 |
 | 命名规范   | [naming.md](../common/naming.md)           |

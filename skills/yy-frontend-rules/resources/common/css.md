@@ -1,14 +1,13 @@
-
 # 🎨 CSS样式规范
 
-> 本规范统一前端样式开发标准，确保样式可维护、可扩展、兼容性好。所有样式必须遵循BEM命名规范，优先使用scoped作用域。
+> 本规范统一前端样式开发标准，确保样式可维护、可扩展、兼容性好。所有样式必须遵循BEM命名规范，组件样式优先使用局部作用域（Vue 用 `scoped`、React 用 CSS Modules），避免全局污染。
 
 ## 🛠️ 一、CSS基础配置
 
 - 预处理器：优先使用Sass/SCSS，Less为辅
 - 格式化：Prettier + stylelint统一格式化，禁止手动调整格式
 - 全局样式：统一放在`src/styles/`目录下，包括变量、混合、重置样式、公共类等
-- 组件样式：优先使用scoped作用域，避免全局样式污染
+- 组件样式：优先使用局部作用域（Vue 的 `scoped`、React 的 CSS Modules），避免全局样式污染
 
 ## 二、样式区注释与作用域
 
@@ -22,9 +21,8 @@
 
 ### 作用域
 
-- `scoped`：仅作用于当前组件
-- 非 `scoped`：需标注 `/* 全局 */`
-- 优先使用 `scoped`
+- **局部作用域**：仅作用于当前组件，优先使用（Vue 用 `<style scoped>`，React 用 `*.module.scss`）
+- **全局作用域**：会影响其他组件，必须在文件/区块顶部标注 `/* 全局 */`，并收敛到 `src/styles/` 统一管理
 
 ## 三、CSS 命名（BEM）
 
@@ -52,8 +50,6 @@
 | 属性                 | 问题                           | 降级方案                            |
 | -------------------- | ------------------------------ | ----------------------------------- |
 | `gap` (Flexbox)      | Safari 14.4及以下、IE11 不支持 | margin 负边距                       |
-| `aspect-ratio`       | iOS 15.6及以下 Safari 支持不全 | `padding-bottom` 百分比 Hack        |
-| `100vh`              | iOS Safari 地址栏导致高度偏差  | JS 动态计算或 `dvh` 单位            |
 | `inset`              | 旧浏览器不识别                 | 先写 `top/right/bottom/left` 再覆盖 |
 | `will-change`        | 动画结束不重置会占用内存       | 动画结束后设为 `auto`               |
 | `content-visibility` | 仅 Chromium 支持               | 仅作性能增强，不影响核心布局        |
@@ -183,3 +179,107 @@
 - **渐进增强**：使用`@supports`包裹新属性，不支持的浏览器自动忽略，不影响核心功能
 - **降级方案**：新属性必须提供降级方案，确保在低版本浏览器中布局正常
 - **浏览器支持**：最低兼容到Chrome 90+、Safari 14+、Edge 90+，不需要兼容IE浏览器
+
+---
+
+## 🔄 十一、作用域穿透（Vue2/Vue3/React 共享理念）
+
+> 局部作用域（scoped / CSS Modules）会给选择器追加作用域标识（Vue 的 `[data-v-xxx]`、React 的哈希类名），导致**作用域外的节点**（如 `v-html` 注入内容、第三方组件内部 DOM、富文本渲染输出）样式失效。此时需要"穿透"作用域。
+
+### 通用原则
+
+- **能不穿透就不穿透**：穿透会破坏封装，优先通过 props/插槽/配置项让目标组件自带样式
+- **收窄穿透范围**：必须穿透时，精确到具体子元素（如 `:deep(.rich-content a)`），**禁止**对整个容器穿透
+- **穿透只穿一层**：作用域标识只追加一层，嵌套组件根节点需评估是否真有必要继续穿透
+- **安全前提**：若穿透目标是用户输入（`v-html`、接口返回 HTML），必须先做 XSS 过滤，穿透本身不解决安全问题
+
+### 三框架写法对比
+
+| 框架  | 局部作用域机制    | 穿透写法                         | 典型场景                       |
+| ----- | ----------------- | -------------------------------- | ------------------------------ |
+| Vue2  | `<style scoped>`  | `::v-deep` 或 `/deep/` 或 `>>>`  | 穿透 `v-html` 注入内容         |
+| Vue3  | `<style scoped>`  | `:deep()`                        | 穿透 `v-html` 注入内容         |
+| React | `*.module.scss`   | `:global()` 或全局类名           | 穿透第三方组件内部 DOM         |
+
+### Vue2 写法（`::v-deep`）
+
+```vue
+<template>
+  <div class="rich-content" v-html="htmlString" />
+</template>
+
+<style scoped lang="scss">
+/* ✅ 正确：用 ::v-deep 穿透，作用于 v-html 注入的 <a> */
+.rich-content {
+  ::v-deep a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+}
+
+/* ❌ 错误：直接写 a，编译后为 a[data-v-xxx]，无法匹配 v-html 注入的 <a> */
+.rich-content {
+  a {
+    color: #3b82f6;
+  }
+}
+</style>
+```
+
+> Vue2 的 `::v-deep`、`/deep/`、`>>>` 三种写法等价，推荐统一用 `::v-deep`（`>>>` 在 SCSS 等预处理器中无法解析）。
+
+### Vue3 写法（`:deep()`）
+
+```vue
+<template>
+  <div class="rich-content" v-html="htmlString" />
+</template>
+
+<style scoped lang="scss">
+/* ✅ 正确：用 :deep() 穿透 */
+.rich-content {
+  :deep(a) {
+    color: #3b82f6;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+</style>
+```
+
+> Vue3 废弃了 Vue2 的 `::v-deep`/`/deep/`/`>>>`，统一使用函数式 `:deep()`。
+
+### React 写法（`:global()`）
+
+React 无 `scoped`，靠 CSS Modules 的哈希类名隔离。穿透第三方组件内部 DOM 时，用 `:global()` 声明全局类名：
+
+```scss
+/* UserCard.module.scss */
+/* ✅ 正确：用 :global() 穿透 antd Tooltip 内部类名 */
+.card {
+  :global(.ant-tooltip-inner) {
+    background: #1f2937;
+    color: #fff;
+  }
+}
+
+/* ❌ 错误：直接写 .ant-tooltip-inner 会被编译成哈希类名，匹配不到 */
+.card {
+  .ant-tooltip-inner {
+    background: #1f2937;
+  }
+}
+```
+
+> React 中若第三方组件类名本身就是全局的（如 antd 的 `.ant-btn`），也可直接在全局样式文件中写，无需 `:global()`。
+
+### 框架特定补充
+
+各框架自定义指令清理、Vue2 与 Vue3 指令钩子命名差异等与样式相关的特有内容，详见各自框架文档：
+
+- Vue2：[vue2/css.md](../vue2/css.md)
+- Vue3：[vue3/css.md](../vue3/css.md)
+- React：[react/css.md](../react/css.md)

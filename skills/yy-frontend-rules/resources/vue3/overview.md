@@ -43,12 +43,13 @@
 | 模板指令   | Vue3 特有差异（动态 v-slot 第 9 步、v-model 写法）     | [directives.md](./directives.md)       |
 | 结构顺序   | 4 组 import 排序、`<script setup>` 内部 5 段结构       | [order.md](./order.md)                 |
 | 响应式     | ref/reactive/computed 选择与转换                       | [reactivity.md](./reactivity.md)       |
-| 侦听器     | watch/watchEffect 使用规范、资源清理                   | [watch.md](./watch.md)                 |
+| 侦听器     | Vue3 特有差异（watchEffect、watch vs watchEffect、flush） | [watch.md](./watch.md)                 |
 | Hooks      | Vue3 特有差异（setup 限制、toRefs、内置 Hooks）        | [hooks.md](./hooks.md)                 |
 | TypeScript | Vue3 特有差异（defineProps/ref/reactive/Emits 泛型）   | [typescript.md](./typescript.md)       |
-| 网络请求   | useRequest 前置检查、`===` 偏好、diff 预览             | [network.md](./network.md)             |
 | CSS 样式   | scoped 与 v-html `:deep()` 穿透、自定义指令清理        | [css.md](./css.md)                     |
 | 性能优化   | defineAsyncComponent、shallowRef、unmounted 钩子       | [performance.md](./performance.md)     |
+
+> Vue3 网络请求差异（useRequest 前置检查、`===` 偏好、Sentry/errorHandler、diff 预览）已并入 [common/network.md](../common/network.md)，以 💚 标注。
 
 ---
 
@@ -57,6 +58,7 @@
 | 模块             | 路径                                       |
 | ---------------- | ------------------------------------------ |
 | Vue 模板通用规则 | [vue-template.md](../common/vue-template.md) |
+| Vue 侦听器通用规则 | [vue-watch.md](../common/vue-watch.md)   |
 | Hooks 通用规范   | [hooks.md](../common/hooks.md)             |
 | TypeScript 通用  | [typescript.md](../common/typescript.md)   |
 | 命名规范         | [naming.md](../common/naming.md)           |

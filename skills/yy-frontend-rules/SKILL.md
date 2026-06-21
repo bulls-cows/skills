@@ -39,14 +39,15 @@ yy-frontend-rules/
     ├── index.md              # 规范总纲索引（三级优先级 × 框架矩阵）
     ├── ai-behavior.md        # AI 行为约束（红线、审查标准、输出格式）
     ├── common/               # 跨框架通用规则
-    │   ├── network.md        # 网络请求与安全
-    │   ├── constraints.md    # 约束清单速查
+    │   ├── network.md        # 网络请求与安全（含 🟦Vue2/💚Vue3/💙React 差异）
+    │   ├── constraints.md    # 约束清单速查（含 🟦Vue2 特有条目）
     │   ├── naming.md         # 命名规范
     │   ├── css.md            # CSS 样式规范
     │   ├── performance.md    # 性能优化
     │   ├── code-style.md     # 代码风格与 Prettier
     │   ├── comments.md       # 注释规范
     │   ├── vue-template.md   # Vue 模板通用规则（Vue2/Vue3 共享）
+    │   ├── vue-watch.md      # Vue 侦听器通用规则（Vue2/Vue3 共享）
     │   ├── hooks.md          # Hooks 通用规范（Vue3/React 共享）
     │   └── typescript.md     # TypeScript 通用规范（Vue3/React 共享）
     ├── vue2/                 # Vue2 框架规则（含 Vue2 独有差异）
@@ -56,8 +57,8 @@ yy-frontend-rules/
     │   ├── directives.md     # 模板指令差异
     │   ├── order.md          # 结构顺序（3 组 import）
     │   ├── reactivity.md     # 响应式陷阱（$set）
-    │   ├── network.md        # Vue2 网络差异（==偏好/$message）
-    │   └── constraints.md    # Vue2 约束差异（方法规范/过滤器）
+    │   ├── watch.md          # 侦听器（watch 选项特有写法）
+    │   └── css.md            # Vue2 CSS 差异（指令钩子、::v-deep）
     ├── vue3/                 # Vue3 框架规则（含 Vue3 独有差异）
     │   ├── overview.md       # 概述与适用范围
     │   ├── component-dev.md  # 组件开发（<script setup>）
@@ -65,11 +66,10 @@ yy-frontend-rules/
     │   ├── directives.md     # 模板指令差异（动态 v-slot）
     │   ├── order.md          # 结构顺序（4 组 import）
     │   ├── reactivity.md     # 响应式（ref/reactive/computed）
-    │   ├── watch.md          # 侦听器（watch/watchEffect）
+    │   ├── watch.md          # 侦听器（watchEffect、flush 等 Vue3 特有差异）
     │   ├── hooks.md          # 组合式函数
     │   ├── typescript.md     # Vue3 TypeScript 规范
-    │   ├── network.md        # Vue3 网络差异（useRequest/===）
-    │   ├── css.md            # Vue3 CSS 差异（:deep() 穿透）
+    │   ├── css.md            # Vue3 CSS 差异（指令钩子、:deep() 写法）
     │   └── performance.md    # Vue3 性能差异（defineAsyncComponent）
     └── react/                # React 框架规则
         ├── overview.md       # 概述与适用范围
@@ -79,6 +79,7 @@ yy-frontend-rules/
         ├── hooks.md          # Hooks 规范
         ├── state.md          # 状态管理
         ├── jsx.md            # JSX 规范
+        ├── css.md            # React CSS 规范（CSS Modules、clsx、:global()）
         └── typescript.md     # React TypeScript 规范
 ```
 
@@ -114,7 +115,8 @@ yy-frontend-rules/
 
 - 通用规则始终从 [resources/common/](./resources/common/) 读取
 - 框架特定差异从对应 `resources/vue2/`、`resources/vue3/`、`resources/react/` 读取
-- 框架差异文件（如 `vue2/network.md`、`vue3/css.md`）只承载与通用规范不同的内容，需配合通用文件一起解读，相关模块引用见各文件末尾
+- 框架差异文件（如 `vue3/css.md`、`vue3/performance.md`）只承载与通用规范不同的内容，需配合通用文件一起解读，相关模块引用见各文件末尾
+- 网络请求与约束清单的框架差异已并入通用 `common/network.md`、`common/constraints.md`，以 🟦（Vue2）/💚（Vue3）/💙（React）标注，无需额外加载框架文件
 
 **主题到文件的映射**：
 
@@ -125,11 +127,11 @@ yy-frontend-rules/
 | 模板/JSX    | common/vue-template.md            | vue2/directives.md         | vue3/directives.md         | react/jsx.md              |
 | 结构顺序    | common/code-style.md              | vue2/order.md              | vue3/order.md              | react/order.md            |
 | 响应式/状态 | —                                 | vue2/reactivity.md         | vue3/reactivity.md         | react/state.md            |
-| 侦听器      | —                                 | —                          | vue3/watch.md              | —                         |
+| 侦听器      | common/vue-watch.md               | vue2/watch.md              | vue3/watch.md              | —                         |
 | Hooks       | common/hooks.md                   | —                          | vue3/hooks.md              | react/hooks.md            |
 | TypeScript  | common/typescript.md              | —                          | vue3/typescript.md         | react/typescript.md       |
-| 网络请求    | common/network.md                 | vue2/network.md            | vue3/network.md            | —                         |
-| CSS 样式    | common/css.md                     | —                          | vue3/css.md                | —                         |
+| 网络请求    | common/network.md（含 🟦/💚/💙 框架差异） | —                  | —                          | —                         |
+| CSS 样式    | common/css.md                     | vue2/css.md                | vue3/css.md                | react/css.md              |
 | 性能优化    | common/performance.md             | —                          | vue3/performance.md        | —                         |
 | 命名规范    | common/naming.md                  | —                          | —                          | —                         |
 | 注释规范    | common/comments.md                | —                          | —                          | —                         |
@@ -209,7 +211,7 @@ yy-frontend-rules/
 
 - [resources/index.md](./resources/index.md) — 规范总纲索引（三级优先级 × 框架矩阵，整体速查入口）
 - [resources/ai-behavior.md](./resources/ai-behavior.md) — AI 行为约束（红线、审查标准、输出格式）
-- [resources/common/](./resources/common/) — 跨框架通用规则（10 个文件）
+- [resources/common/](./resources/common/) — 跨框架通用规则（11 个文件）
 - [resources/vue2/](./resources/vue2/) — Vue2 框架规则（8 个文件）
-- [resources/vue3/](./resources/vue3/) — Vue3 框架规则（12 个文件）
-- [resources/react/](./resources/react/) — React 框架规则（8 个文件）
+- [resources/vue3/](./resources/vue3/) — Vue3 框架规则（11 个文件）
+- [resources/react/](./resources/react/) — React 框架规则（9 个文件）
