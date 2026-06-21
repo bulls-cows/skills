@@ -1,4 +1,3 @@
-
 # Vue 侦听器通用规则（Vue2/Vue3 共享）
 
 > 本规范涵盖 Vue2 与 Vue3 通用的 watch 理念：深度监听、立即执行、资源清理、与 computed 的选择策略。每个理念点并列给出 Vue2（Options API `watch` 选项）与 Vue3（`watch()` 函数）写法。框架特定差异（如 Vue3 的 `watchEffect`、Vue2 的字符串路径监听）详见各自框架文档。

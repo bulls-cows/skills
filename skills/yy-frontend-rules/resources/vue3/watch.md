@@ -1,4 +1,3 @@
-
 # Vue3 侦听器规范（watch/watchEffect）
 
 > 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [vue-watch.md](../common/vue-watch.md)，本文件仅承载 Vue3 特有内容：`watchEffect`、`watch` 与 `watchEffect` 的选择、`flush` 选项。

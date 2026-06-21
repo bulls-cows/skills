@@ -1,4 +1,3 @@
-
 # Vue2 模板指令规范
 
 > Vue2 与 Vue3 共享的模板规则（v-for/key、v-if 冲突、v-html、指令简写、模板属性顺序）详见 [vue-template.md](../common/vue-template.md)，本文件仅承载 Vue2 特有内容。

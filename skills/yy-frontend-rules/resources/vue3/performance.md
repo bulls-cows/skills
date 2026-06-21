@@ -1,4 +1,3 @@
-
 # Vue3 性能优化差异（Vue3 特有）
 
 > 通用性能优化规范（加载/运行/构建三阶段、Web Vitals 指标、性能检测工具等）详见 [performance.md](../common/performance.md)，本文件仅承载 Vue3 与通用规范不同的内容。

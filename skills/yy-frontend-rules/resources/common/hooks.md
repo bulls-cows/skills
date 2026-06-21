@@ -1,4 +1,3 @@
-
 # Hooks 通用规范（Vue3/React 共享）
 
 > 本规范涵盖 Vue3 组合式函数与 React Hooks 的共享约定。Hooks 调用规则、内置 Hooks 用法等框架特定差异详见各自框架文档。
@@ -117,7 +116,7 @@ const { dataSource, loading, total, fetchList } = useTable()
 
 | 内容                 | Vue3 详见                                                | React 详见                                                         |
 | -------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
-| Hooks 调用规则       | [vue3/overview.md](../vue3/overview.md)（setup 顶层约束） | [react/hooks.md](../react/hooks.md#二hooks-调用规则)                |
+| Hooks 调用规则       | [vue3/hooks.md](../vue3/hooks.md#一vue3-特有-setup-限制) | [react/hooks.md](../react/hooks.md#二hooks-调用规则)                |
 | 内置 Hooks 用法      | [vue3/hooks.md](../vue3/hooks.md#三vue3-特有内置-hooks)   | [react/hooks.md](../react/hooks.md#三react-特有内置-hooks)          |
 | setup / 函数组件限制 | [vue3/hooks.md](../vue3/hooks.md#一vue3-特有-setup-限制)  | [react/hooks.md](../react/hooks.md#一react-特有函数组件限制)        |
 | toRefs / 解构要求    | [vue3/hooks.md](../vue3/hooks.md#二vue3-特有-torefs-要求) | 不适用                                                             |

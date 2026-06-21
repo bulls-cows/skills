@@ -1,4 +1,3 @@
-
 # React TypeScript 规范
 
 > TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [typescript.md](../common/typescript.md)，本文件仅承载 React 特有内容。

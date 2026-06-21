@@ -1,4 +1,3 @@
-
 # React CSS 样式规范（React 特有）
 
 > 通用 CSS 规范（预处理器、注释、作用域、BEM 命名、布局、兼容性、属性排序、SCSS、单位、动画等）详见 [css.md](../common/css.md)。

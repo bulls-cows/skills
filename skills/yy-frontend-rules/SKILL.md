@@ -1,9 +1,9 @@
 ---
 name: yy-frontend-rules
 description: >
-  前端开发规范速查与项目规则路由。按项目技术栈（Vue2/Vue3/React/通用）、规则主题或优先级检索对应规范，输出结构化规则清单与文件引用。
-  用于用户要求查询前端规范、确认某场景该怎么做、梳理某个框架的约束清单、编写代码前确认规范、统一团队约定时触发。
-  不用于审核既有代码、生成业务说明文档、直接修改或重构代码、执行格式化或构建。
+  查询与梳理前端开发规范（通用 + Vue2/Vue3/React 框架特定）的速查与规则路由工具。
+  用于：用户要求查询/确认前端规范、梳理某框架约束清单、编写代码前确认规范、统一团队约定。
+  不用于：审核既有代码、生成业务说明或组件文档、直接修改或重构代码、执行 lint/格式化/构建。
 ---
 
 # yy-frontend-rules
@@ -34,54 +34,18 @@ description: >
 
 ```text
 yy-frontend-rules/
-├── SKILL.md                  # 本文件：规则速查工作流
+├── SKILL.md               # 规则速查工作流
 └── resources/
-    ├── index.md              # 规范总纲索引（三级优先级 × 框架矩阵）
-    ├── ai-behavior.md        # AI 行为约束（红线、审查标准、输出格式）
-    ├── common/               # 跨框架通用规则
-    │   ├── network.md        # 网络请求与安全（含 🟦Vue2/💚Vue3/💙React 差异）
-    │   ├── constraints.md    # 约束清单速查（含 🟦Vue2 特有条目）
-    │   ├── naming.md         # 命名规范
-    │   ├── css.md            # CSS 样式规范
-    │   ├── performance.md    # 性能优化
-    │   ├── code-style.md     # 代码风格与 Prettier
-    │   ├── comments.md       # 注释规范
-    │   ├── vue-template.md   # Vue 模板通用规则（Vue2/Vue3 共享）
-    │   ├── vue-watch.md      # Vue 侦听器通用规则（Vue2/Vue3 共享）
-    │   ├── hooks.md          # Hooks 通用规范（Vue3/React 共享）
-    │   └── typescript.md     # TypeScript 通用规范（Vue3/React 共享）
-    ├── vue2/                 # Vue2 框架规则（含 Vue2 独有差异）
-    │   ├── overview.md       # 概述与适用范围
-    │   ├── component-dev.md  # 组件开发（Options API）
-    │   ├── interaction.md    # 交互通信
-    │   ├── directives.md     # 模板指令差异
-    │   ├── order.md          # 结构顺序（3 组 import）
-    │   ├── reactivity.md     # 响应式陷阱（$set）
-    │   ├── watch.md          # 侦听器（watch 选项特有写法）
-    │   └── css.md            # Vue2 CSS 差异（指令钩子、::v-deep）
-    ├── vue3/                 # Vue3 框架规则（含 Vue3 独有差异）
-    │   ├── overview.md       # 概述与适用范围
-    │   ├── component-dev.md  # 组件开发（<script setup>）
-    │   ├── interaction.md    # 交互通信
-    │   ├── directives.md     # 模板指令差异（动态 v-slot）
-    │   ├── order.md          # 结构顺序（4 组 import）
-    │   ├── reactivity.md     # 响应式（ref/reactive/computed）
-    │   ├── watch.md          # 侦听器（watchEffect、flush 等 Vue3 特有差异）
-    │   ├── hooks.md          # 组合式函数
-    │   ├── typescript.md     # Vue3 TypeScript 规范
-    │   ├── css.md            # Vue3 CSS 差异（指令钩子、:deep() 写法）
-    │   └── performance.md    # Vue3 性能差异（defineAsyncComponent）
-    └── react/                # React 框架规则
-        ├── overview.md       # 概述与适用范围
-        ├── component-dev.md  # 函数组件开发
-        ├── interaction.md    # 交互通信（含状态管理选型）
-        ├── order.md          # 代码组织与顺序
-        ├── hooks.md          # Hooks 规范
-        ├── state.md          # 状态管理
-        ├── jsx.md            # JSX 规范
-        ├── css.md            # React CSS 规范（CSS Modules、clsx、:global()）
-        └── typescript.md     # React TypeScript 规范
+    ├── index.md           # 规范总纲（三级优先级 × 框架矩阵）
+    ├── ai-behavior.md     # AI 行为约束
+    ├── common/            # 跨框架通用规则（11 个文件）
+    │   └── 见下方"主题到文件映射"表
+    ├── vue2/              # Vue2 框架规则（8 个文件）
+    ├── vue3/              # Vue3 框架规则（11 个文件）
+    └── react/             # React 框架规则（9 个文件）
 ```
+
+各子目录的具体文件名见 [index.md](./resources/index.md) 的资源索引与下方步骤 3 的"主题到文件映射"表。
 
 ## 指令
 
@@ -107,7 +71,9 @@ yy-frontend-rules/
 - **Vue3 特征**：`.vue` 文件使用 `<script setup>`、`defineProps`/`defineEmits`、`ref`/`reactive`/`computed`、`onMounted`/`onUnmounted` → 加载 `resources/vue3/`
 - **React 特征**：`.jsx`/`.tsx` 文件、`useState`/`useEffect`/`useCallback`、函数组件、JSX 语法 → 加载 `resources/react/`
 - **未限定框架/多框架**：仅加载 `resources/common/` 与 `resources/index.md`
-- **无法确定**：主动询问用户当前项目技术栈
+- **无法确定**：使用以下引导问题询问用户
+
+  > 你想查询的是哪个前端技术栈的规范？Vue2 / Vue3 / React / 通用（不限框架） / 多框架混合项目？
 
 ### 步骤 3. 按需加载规则文件
 
@@ -206,12 +172,3 @@ yy-frontend-rules/
 - 会改变 git 状态的命令（commit、push、merge、rebase）
 - 删除文件或重置分支等破坏性操作
 - 网络请求命令
-
-## 相关资源
-
-- [resources/index.md](./resources/index.md) — 规范总纲索引（三级优先级 × 框架矩阵，整体速查入口）
-- [resources/ai-behavior.md](./resources/ai-behavior.md) — AI 行为约束（红线、审查标准、输出格式）
-- [resources/common/](./resources/common/) — 跨框架通用规则（11 个文件）
-- [resources/vue2/](./resources/vue2/) — Vue2 框架规则（8 个文件）
-- [resources/vue3/](./resources/vue3/) — Vue3 框架规则（11 个文件）
-- [resources/react/](./resources/react/) — React 框架规则（9 个文件）

@@ -1,4 +1,3 @@
-
 # Vue3 响应式状态规范（ref/reactive/computed）
 
 本规范涵盖 `ref`、`reactive`、`computed` 的选择原则、转换规则及使用规范。

@@ -1,4 +1,3 @@
-
 # TypeScript 通用规范（Vue3/React 共享）
 
 > 本规范涵盖 Vue3 与 React 项目共享的 TypeScript 类型使用约定。框架特定的类型定义（如 `defineProps<T>`、`useState<T>`、事件类型、泛型组件）详见各自框架文档。

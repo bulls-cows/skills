@@ -1,4 +1,3 @@
-
 # React 组件交互与通信规范
 
 > 本规范涵盖 React 组件对外接口（Props/回调）及组件间数据通信约定，结构与 Vue2/Vue3 `interaction.md` 对齐。

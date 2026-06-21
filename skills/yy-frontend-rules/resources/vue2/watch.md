@@ -1,4 +1,3 @@
-
 # Vue2 侦听器规范（watch 选项）
 
 > 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [vue-watch.md](../common/vue-watch.md)，本文件仅承载 Vue2 特有内容。
