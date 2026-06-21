@@ -81,9 +81,9 @@
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
 | [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构       | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
-| [yy-goal](./skills/yy-goal/SKILL.md)                                                 | 条件驱动的目标自主执行            | `npx skills add bulls-cows/skills --skill yy-goal`                         |
 | [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档            | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
 | [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                | `npx skills add bulls-cows/skills --skill yy-lint`                         |
+| [yy-mode-goal](./skills/yy-mode-goal/SKILL.md)                                       | 条件驱动的自主执行模式            | `npx skills add bulls-cows/skills --skill yy-mode-goal`                    |
 | [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划      | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |
 | [yy-mode-spec](./skills/yy-mode-spec/SKILL.md)                                       | 在编码前先制定详细规格说明        | `npx skills add bulls-cows/skills --skill yy-mode-spec`                    |
 | [yy-optimize](./skills/yy-optimize/SKILL.md)                                         | 输出可选的优化方案                | `npx skills add bulls-cows/skills --skill yy-optimize`                     |
