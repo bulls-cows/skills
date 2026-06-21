@@ -80,6 +80,7 @@
 | [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录  | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
+| [yy-frontend-rules](./skills/yy-frontend-rules/SKILL.md)                             | 前端开发规范速查与项目规则路由    | `npx skills add bulls-cows/skills --skill yy-frontend-rules`              |
 | [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构       | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
 | [yy-goal](./skills/yy-goal/SKILL.md)                                                 | 条件驱动的目标自主执行            | `npx skills add bulls-cows/skills --skill yy-goal`                         |
 | [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档            | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
