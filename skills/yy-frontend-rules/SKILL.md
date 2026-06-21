@@ -4,16 +4,14 @@ description: >
   前端开发规范速查。当用户询问前端编码规范、命名约定、网络请求写法、样式规范、
   TypeScript 类型要求、Hooks/组件/状态管理的最佳实践、Vue2/Vue3/React 特定约束、
   性能优化建议，或需要确认某个编码场景该遵循什么规则、统一团队约定时使用。
-  即使没说“规范”二字，只要是“怎么写才对”“有什么要求”“应该怎么处理”类的前端编码问题，
+  即使没说"规范"二字，只要是"怎么写才对""有什么要求""应该怎么处理"类的前端编码问题，
   都应考虑使用本技能。
-  不用于：执行具体的代码修改/重构、审核既有代码、跑 lint/构建命令、生成业务文档。
+  不用于：代码修改/重构、代码审核、lint/构建命令、业务文档生成。
 ---
 
 # yy-frontend-rules
 
-整合通用前端规范与 Vue2/Vue3/React 框架特定规范的前端开发规范速查工具。按项目技术栈、规则主题或三级优先级（🔴 基础/🟠 强烈推荐/🟢 风格指南）检索对应规范，输出结构化规则清单与文件引用。
-
-本技能只读不写——读取规范文件并输出指引，不修改任何代码。
+按项目技术栈、规则主题或三级优先级（🔴 基础/🟠 强烈推荐/🟢 风格指南）检索对应规范，输出结构化规则清单与文件引用。本技能只读不写——读取规范文件并输出指引，不修改任何代码。
 
 ## 目录结构
 
@@ -23,10 +21,10 @@ yy-frontend-rules/
 └── resources/
     ├── index.md           # 规范总纲（三级优先级 × 框架矩阵）
     ├── ai-behavior.md     # AI 行为约束（红线、代码生成规范、交互规范）
-    ├── common/            # 跨框架通用规则（11 个文件）
-    ├── vue2/              # Vue2 框架规则（8 个文件）
-    ├── vue3/              # Vue3 框架规则（11 个文件）
-    └── react/             # React 框架规则（9 个文件）
+    ├── common/            # 跨框架通用规则
+    ├── vue2/              # Vue2 框架规则
+    ├── vue3/              # Vue3 框架规则
+    └── react/             # React 框架规则
 ```
 
 各子目录的具体文件名与主题映射见 [index.md](./resources/index.md) 及下方步骤 3 的映射表。
@@ -66,27 +64,27 @@ yy-frontend-rules/
 - 通用规则从 [resources/common/](./resources/common/) 读取
 - 框架特定差异从对应 `resources/vue2/`、`resources/vue3/`、`resources/react/` 读取
 - 框架差异文件（如 `vue3/css.md`、`vue3/performance.md`）只承载与通用规范不同的内容，需配合通用文件一起解读
-- 网络请求与约束清单的框架差异已并入通用 `common/network.md`、`common/constraints.md`，以 🟦（Vue2）/💚（Vue3）/💙（React）标注，无需额外加载框架文件
+- 网络请求与约束清单的框架差异已并入通用 `common/network.md`、`common/constraints.md`，以 🟦（Vue2）、💚（Vue3）、💙（React）标注，无需额外加载框架文件
 
-**主题到文件的映射**：
+**主题到文件的映射**（仅作路由提示，完整规则索引见 [resources/index.md](./resources/index.md)）：
 
-| 主题        | 通用文件                          | Vue2 文件                  | Vue3 文件                  | React 文件                |
-| ----------- | --------------------------------- | -------------------------- | -------------------------- | ------------------------- |
-| 组件开发    | —                                 | vue2/component-dev.md      | vue3/component-dev.md      | react/component-dev.md    |
-| 交互通信    | —                                 | vue2/interaction.md        | vue3/interaction.md        | react/interaction.md      |
-| 模板/JSX    | common/vue-template.md            | vue2/directives.md         | vue3/directives.md         | react/jsx.md              |
-| 结构顺序    | common/code-style.md              | vue2/order.md              | vue3/order.md              | react/order.md            |
-| 响应式/状态 | —                                 | vue2/reactivity.md         | vue3/reactivity.md         | react/state.md            |
-| 侦听器      | common/vue-watch.md               | vue2/watch.md              | vue3/watch.md              | —                         |
-| Hooks       | common/hooks.md                   | —                          | vue3/hooks.md              | react/hooks.md            |
-| TypeScript  | common/typescript.md              | —                          | vue3/typescript.md         | react/typescript.md       |
-| 网络请求    | common/network.md（含 🟦/💚/💙 框架差异） | —                  | —                          | —                         |
-| CSS 样式    | common/css.md                     | vue2/css.md                | vue3/css.md                | react/css.md              |
-| 性能优化    | common/performance.md             | —                          | vue3/performance.md        | —                         |
-| 命名规范    | common/naming.md                  | —                          | —                          | —                         |
-| 注释规范    | common/comments.md                | —                          | —                          | —                         |
-| 约束清单    | common/constraints.md（含 Vue2 🟦 特有条目） | —              | —                          | —                         |
-| 框架概述    | —                                 | vue2/overview.md           | vue3/overview.md           | react/overview.md         |
+| 主题         | 通用                   | Vue2                  | Vue3                  | React                   |
+| ------------ | ---------------------- | --------------------- | --------------------- | ----------------------- |
+| 框架概述     | —                      | vue2/overview.md      | vue3/overview.md      | react/overview.md       |
+| 组件开发     | —                      | vue2/component-dev.md | vue3/component-dev.md | react/component-dev.md  |
+| 交互通信     | —                      | vue2/interaction.md   | vue3/interaction.md   | react/interaction.md    |
+| 模板/JSX     | common/vue-template.md | vue2/directives.md    | vue3/directives.md    | react/jsx.md            |
+| 结构顺序     | —                      | vue2/order.md         | vue3/order.md         | react/order.md          |
+| 响应式/状态  | —                      | vue2/reactivity.md    | vue3/reactivity.md    | react/state.md          |
+| 侦听器       | common/vue-watch.md    | vue2/watch.md         | vue3/watch.md         | —                       |
+| Hooks        | common/hooks.md        | —                     | vue3/hooks.md         | react/hooks.md          |
+| TypeScript   | common/typescript.md   | —                     | vue3/typescript.md    | react/typescript.md     |
+| CSS 样式     | common/css.md          | vue2/css.md           | vue3/css.md           | react/css.md            |
+| 性能优化     | common/performance.md  | —                     | vue3/performance.md   | —                       |
+| 命名规范     | common/naming.md       | —                     | —                     | —                       |
+| 注释规范     | common/comments.md     | —                     | —                     | —                       |
+| 网络请求     | common/network.md      | —                     | —                     | —                       |
+| 约束清单     | common/constraints.md  | —                     | —                     | —                       |
 
 ### 步骤 4. 输出结构化规则速查清单
 

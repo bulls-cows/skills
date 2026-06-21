@@ -27,7 +27,7 @@ const UserCard = ({ userId, userName }: IUserCardProps) => {
   )
 }
 
-// ✅ 正确：函数声明
+// ❌ 不推荐：函数声明
 function UserCard({ userId, userName }: IUserCardProps) {
   return (
     <div className="user-card">
@@ -150,16 +150,16 @@ Import 分组排序规则详见 [order.md](./order.md#三import-分组排序4-�
 
 ## 九、相关模块引用
 
-| 内容                | 详见                                               |
-| ------------------- | -------------------------------------------------- |
-| 代码组织与顺序      | [order.md](./order.md)                             |
-| 注释规范            | [comments.md](../common/comments.md)                   |
-| Hooks 规范          | [hooks.md](./hooks.md)                             |
+| 内容                | 详见                                     |
+| ------------------- | ---------------------------------------- |
+| 代码组织与顺序      | [order.md](./order.md)                   |
+| 注释规范            | [comments.md](../common/comments.md)     |
+| Hooks 规范          | [hooks.md](./hooks.md)                   |
 | Hooks 通用规范      | [hooks.md](../common/hooks.md)           |
-| 状态管理            | [state.md](./state.md)                             |
-| JSX 规范            | [jsx.md](./jsx.md)                                 |
-| TypeScript          | [typescript.md](./typescript.md)                   |
+| 状态管理            | [state.md](./state.md)                   |
+| JSX 规范            | [jsx.md](./jsx.md)                       |
+| TypeScript          | [typescript.md](./typescript.md)         |
 | TypeScript 通用规范 | [typescript.md](../common/typescript.md) |
-| 命名规范            | [naming.md](../common/naming.md)                       |
-| 网络请求            | [network.md](../common/network.md)                     |
-| 代码风格            | [code-style.md](../common/code-style.md)               |
+| 命名规范            | [naming.md](../common/naming.md)         |
+| 网络请求            | [network.md](../common/network.md)       |
+| 代码风格            | [code-style.md](../common/code-style.md) |
