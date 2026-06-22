@@ -1,5 +1,5 @@
 ---
-name: yy-frontend-rules
+name: frontend-rules
 description: >
   速查并输出前端开发规范的结构化清单（按 🔴 基础 / 🟠 强烈推荐 / 🟢 风格指南 三级优先级分组，
   覆盖 Vue2 / Vue3 / React 及跨框架通用主题）。当用户询问前端编码规范、命名/网络/样式/类型写法、
@@ -7,14 +7,14 @@ description: >
   即使没说"规范"二字也应触发。不用于：代码修改/重构、代码审查、执行 lint/构建命令、生成业务文档。
 ---
 
-# yy-frontend-rules
+# frontend-rules
 
 按主题、技术栈或优先级检索前端规范，输出结构化清单与文件引用。本技能**只读不写**——读取 `resources/` 下的规范文件并输出指引，不修改任何代码或文件。
 
 ## 目录结构
 
 ```text
-yy-frontend-rules/
+frontend-rules/
 ├── SKILL.md              # 本文件：检索与输出工作流
 └── resources/
     ├── index.md          # 规范总纲（按优先级 × 框架矩阵组织）
@@ -58,23 +58,23 @@ yy-frontend-rules/
 
 **主题到文件的路由表**（完整优先级索引见 [resources/index.md](./resources/index.md)；路径前缀：通用列 → `resources/common/`，框架列 → `resources/<框架名>/`）：
 
-| 主题         | 通用            | Vue2            | Vue3            | React           |
-| ------------ | --------------- | --------------- | --------------- | --------------- |
-| 框架概述     | —               | overview.md     | overview.md     | overview.md     |
-| 组件开发     | —               | component-dev.md | component-dev.md | component-dev.md |
-| 交互通信     | —               | interaction.md  | interaction.md  | interaction.md  |
-| 模板/JSX     | vue-template.md | directives.md   | directives.md   | jsx.md          |
-| 结构顺序     | —               | order.md        | order.md        | order.md        |
-| 响应式/状态  | —               | reactivity.md   | reactivity.md   | state.md        |
-| 侦听器       | vue-watch.md    | watch.md        | watch.md        | —               |
-| Hooks        | hooks.md        | —               | hooks.md        | hooks.md        |
-| TypeScript   | typescript.md   | —               | typescript.md   | typescript.md   |
-| CSS 样式     | css.md          | css.md          | css.md          | css.md          |
-| 性能优化     | performance.md  | —               | performance.md  | —               |
-| 命名规范     | naming.md       | —               | —               | —               |
-| 注释规范     | comments.md     | —               | —               | —               |
-| 网络请求     | network.md      | —               | —               | —               |
-| 约束清单     | constraints.md  | —               | —               | —               |
+| 主题        | 通用            | Vue2             | Vue3             | React            |
+| ----------- | --------------- | ---------------- | ---------------- | ---------------- |
+| 框架概述    | —               | overview.md      | overview.md      | overview.md      |
+| 组件开发    | —               | component-dev.md | component-dev.md | component-dev.md |
+| 交互通信    | —               | interaction.md   | interaction.md   | interaction.md   |
+| 模板/JSX    | vue-template.md | directives.md    | directives.md    | jsx.md           |
+| 结构顺序    | —               | order.md         | order.md         | order.md         |
+| 响应式/状态 | —               | reactivity.md    | reactivity.md    | state.md         |
+| 侦听器      | vue-watch.md    | watch.md         | watch.md         | —                |
+| Hooks       | hooks.md        | —                | hooks.md         | hooks.md         |
+| TypeScript  | typescript.md   | —                | typescript.md    | typescript.md    |
+| CSS 样式    | css.md          | css.md           | css.md           | css.md           |
+| 性能优化    | performance.md  | —                | performance.md   | —                |
+| 命名规范    | naming.md       | —                | —                | —                |
+| 注释规范    | comments.md     | —                | —                | —                |
+| 网络请求    | network.md      | —                | —                | —                |
+| 约束清单    | constraints.md  | —                | —                | —                |
 
 例如查询"Vue3 命名规范"：通用列指向 `resources/common/naming.md`，Vue3 列为空说明 Vue3 无独立命名文件，直接读通用文件即可。
 
