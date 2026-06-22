@@ -112,7 +112,7 @@ frontend-rules/
 | **模板属性顺序**         | [vue-template.md](./resources/common-vue-template.md#六模板属性顺序)    | HTML 元素上属性的统一排列顺序（Vue2 沿用 8 步）           |
 | **方法函数规范**         | [constraints.md](./resources/common-constraints.md#四方法函数规范强制) | 前置参数校验 + try-catch 错误保底                         |
 | **watch 规范**           | [common-vue-watch.md](./resources/common-vue-watch.md)                  | watch 通用规范（Vue2 特有写法见 vue2-watch.md）、清理机制、与 computed 选择策略 |
-| **Vue2 网络请求（🟦）**  | [network.md](./resources/common-network.md#-十一框架请求库选型与标准模板) | `==` 偏好、`this.$message` 提示                           |
+| **Vue2 网络请求（🟦）**  | [network.md](./resources/common-network.md#十一框架请求库选型与标准模板) | `==` 偏好、`this.$message` 提示                           |
 
 ### Vue3
 
@@ -124,7 +124,7 @@ frontend-rules/
 | **`<script setup>` 结构与代码组织** | [vue3-order.md](./resources/vue3-order.md)                              | SFC 块顺序、Import 分组、脚本内部声明顺序                  |
 | **模板属性顺序**                    | [vue-template.md](./resources/common-vue-template.md#六模板属性顺序)    | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）   |
 | **组件交互与通信**                  | [vue3-interaction.md](./resources/vue3-interaction.md)                  | Props、v-model 兼容、Emit 事件白名单、defineExpose         |
-| **Vue3 网络请求（💚）**             | [network.md](./resources/common-network.md#-十一框架请求库选型与标准模板) | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
+| **Vue3 网络请求（💚）**             | [network.md](./resources/common-network.md#十一框架请求库选型与标准模板) | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
 
 ### React
 

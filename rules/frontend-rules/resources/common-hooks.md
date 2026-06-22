@@ -5,7 +5,7 @@
 ## 一、命名规则
 
 - **必须**以 `use` 开头（如 `useTable`、`useForm`、`useSearchForm`）
-- 后接功能描述，使用 PascalCase 命名风格
+- 后接功能描述，使用 camelCase 命名风格
 - 文件名与函数名一致
 
 ```typescript

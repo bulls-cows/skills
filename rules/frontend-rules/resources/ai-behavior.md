@@ -47,9 +47,9 @@
 
 ### 框架特定要求
 
-- Vue2 代码必须使用 Options API，符合 Vue2 规范
-- Vue3 代码必须使用 `<script setup>`，符合 Vue3 组合式 API 规范
-- React 代码必须使用函数组件和 Hooks，符合 React 规范
+- Vue2 代码必须使用 Options API，符合 Vue2 规范（详见 [vue2-overview.md](./vue2-overview.md)）
+- Vue3 代码必须使用 `<script setup>`，符合 Vue3 组合式 API 规范（详见 [vue3-overview.md](./vue3-overview.md)）
+- React 代码必须使用函数组件和 Hooks，符合 React 规范（详见 [react-overview.md](./react-overview.md)）
 
 ---
 

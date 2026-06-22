@@ -178,4 +178,4 @@ JSX 元素上的多个属性建议按以下顺序排列（同一元素出现多�
 
 ## 五、文件与目录命名
 
-详见 [naming.md](./common-naming.md#-一文件与目录命名)。
+详见 [naming.md](./common-naming.md#一文件与目录命名)。

@@ -38,52 +38,52 @@ Vue3 单文件组件内部块顺序必须保持一致：
 <script setup lang="ts">
 // --- 导入（4 组）---
 // 1. node_modules（外部依赖）
-import { ref, computed, reactive, onMounted } from 'vue';
-import dayjs from 'dayjs';
+import { ref, computed, reactive, onMounted } from 'vue'
+import dayjs from 'dayjs'
 
 // 2. types（类型导入）
-import type { IUserInfo, ITableConfig } from '@src/types';
+import type { IUserInfo, ITableConfig } from '@src/types'
 
 // 3. 内部全局依赖（@src/）
-import { apiGetUserInfo } from '@src/api/user';
-import { formatDate } from '@src/utils/date';
-import { useTable } from '@src/hooks/useTable';
-import { useSearchForm } from '@src/hooks/useSearchForm';
-import store from '@src/store';
-import { APP_CONFIG } from '@src/constants';
-import DataTable from '@src/components/DataTable.vue';
+import { apiGetUserInfo } from '@src/api/user'
+import { formatDate } from '@src/utils/date'
+import { useTable } from '@src/hooks/useTable'
+import { useSearchForm } from '@src/hooks/useSearchForm'
+import store from '@src/store'
+import { APP_CONFIG } from '@src/constants'
+import DataTable from '@src/components/DataTable.vue'
 
 // 4. 内部相对依赖（./、../）
-import { localHelpers } from './utils/helpers';
-import { useLocalForm } from './hooks/useLocalForm';
-import { MODULE_CONFIG } from './constants';
-import SearchBar from './SearchBar.vue';
-import UserCard from './UserCard.vue';
+import { localHelpers } from './utils/helpers'
+import { useLocalForm } from './hooks/useLocalForm'
+import { MODULE_CONFIG } from './constants'
+import SearchBar from './SearchBar.vue'
+import UserCard from './UserCard.vue'
 
 // --- 交互定义 ---
-const props = defineProps<{ userId: string }>();
-const emit = defineEmits<{ change: [value: string] }>();
+const props = defineProps<{ userId: string }>()
+const emit = defineEmits<{ change: [value: string] }>()
 
 // --- Hooks ---
 // hook: useTable
-const { dataSource, getDataSourceTotal } = useTable();
+const { dataSource, getDataSourceTotal } = useTable()
 
 // --- 业务逻辑：搜索模块 ---
-const searchQuery = ref<string>('');
-const isSearchActive = computed(() => searchQuery.value.length > 0);
-const handleSearch = () => { /* ... */ };
-watch(searchQuery, (newVal) => { /* ... */ });
+const searchQuery = ref<string>('')
+const isSearchActive = computed(() => searchQuery.value.length > 0)
+const handleSearch = () => { /* ... */ }
+watch(searchQuery, (newVal) => { /* ... */ })
 
 // --- 业务逻辑：表单模块 ---
-const formRef = ref<HTMLFormElement | null>(null);
-const form = reactive({ name: '', age: 0 });
-const validateForm = async () => { /* ... */ };
-const resetForm = () => { /* ... */ };
-const onSubmit = async () => { /* ... */ };
-onMounted(() => { /* ... */ });
+const formRef = ref<HTMLFormElement | null>(null)
+const form = reactive({ name: '', age: 0 })
+const validateForm = async () => { /* ... */ }
+const resetForm = () => { /* ... */ }
+const onSubmit = async () => { /* ... */ }
+onMounted(() => { /* ... */ })
 
 // --- 对外暴露 ---
-defineExpose({ validateForm, resetForm, getDataSourceTotal });
+defineExpose({ validateForm, resetForm, getDataSourceTotal })
 </script>
 ```
 
@@ -105,4 +105,4 @@ Vue3 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖�
 
 ## 五、文件与目录命名
 
-详见 [naming.md](./common-naming.md#-一文件与目录命名)。
+详见 [naming.md](./common-naming.md#一文件与目录命名)。

@@ -32,7 +32,7 @@ const data: any = JSON.parse(raw) // 禁止
 
 ## 三、类型命名规范
 
-- 类型别名和接口统一使用 **`I` 前缀 + PascalCase** 命名（详见 [naming.md](./common-naming.md)）
+- 类型别名和接口统一使用 **`I` 前缀 + PascalCase** 命名（详见 [naming.md](./common-naming.md#三变量与常量规范)）
 
 ```typescript
 // ✅ 正确

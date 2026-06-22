@@ -1,7 +1,7 @@
 # Vue2 CSS 样式差异（Vue2 特有）
 
 > 通用 CSS 规范（预处理器、注释、作用域、BEM 命名、布局、兼容性、属性排序、SCSS、单位、动画等）详见 [css.md](./common-css.md)。
-> 作用域穿透的通用理念与三框架写法对比（Vue2 `::v-deep` / Vue3 `:deep()` / React `:global()`）详见 [css.md 作用域穿透章节](./common-css.md#-十一作用域穿透vue2vue3react-共享理念)，本文件仅承载 Vue2 特有内容。
+> 作用域穿透的通用理念与三框架写法对比（Vue2 `::v-deep` / Vue3 `:deep()` / React `:global()`）详见 [css.md 作用域穿透章节](./common-css.md#十一作用域穿透vue2vue3react-共享理念)，本文件仅承载 Vue2 特有内容。
 
 ## 前置阅读
 
@@ -57,5 +57,5 @@ export default {
 | 模块             | 路径                                  |
 | ---------------- | ------------------------------------- |
 | 通用 CSS 规范    | [css.md](./common-css.md)            |
-| 作用域穿透（通用） | [css.md 穿透章节](./common-css.md#-十一作用域穿透vue2vue3react-共享理念) |
+| 作用域穿透（通用） | [css.md 穿透章节](./common-css.md#十一作用域穿透vue2vue3react-共享理念) |
 | Vue2 模板指令    | [directives.md](./vue2-directives.md)      |

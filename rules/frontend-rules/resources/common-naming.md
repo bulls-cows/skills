@@ -1,71 +1,71 @@
-# 🏷️ 前端命名规范
+# 前端命名规范
 
 > 本规范是前端开发的统一命名约定，涵盖所有开发场景，必须严格遵守，确保代码可读性和一致性。
-> 命名总原则：见名知意，语义优先，简洁准确，避免缩写（通用缩写除外，如`id`, `url`, `api`, `utils`等）。
+> 命名总原则：见名知意，语义优先，简洁准确，避免缩写（通用缩写除外，如 `id`、`url`、`api`、`utils` 等）。
 
 ---
 
-## 📁 一、文件与目录命名
+## 一、文件与目录命名
 
 ---
 
-| 类型                | 规范                     | 示例                                                     | 说明                                       |
-| ------------------- | ------------------------ | -------------------------------------------------------- | ------------------------------------------ |
-| Vue/React组件文件名 | 多单词 + PascalCase      | `UserList.vue`, `UserCard.tsx`                           | 组件名必须多个单词，避免与HTML原生元素冲突 |
-| 目录命名            | kebab-case（短横线小写） | `src/components/user-profile/`, `src/utils/date-format/` | 所有目录均使用短横线分隔                   |
-| 普通JS/TS文件       | 小驼峰camelCase          | `user-api.ts`, `date-utils.ts`                           | 工具函数、API封装等普通文件                |
-| 类型定义文件        | 小驼峰 + .d.ts后缀       | `user-type.d.ts`, `api.d.ts`                             | TypeScript类型定义文件                     |
-| 配置文件            | 小驼峰或短横线           | `vite.config.ts`, `.prettierrc`                          | 项目配置文件                               |
-| 组件使用            | PascalCase               | `<UserCard />`, `<UserList />`                           | 模板中组件名使用大驼峰                     |
+| 类型                 | 规范                     | 示例                                                     | 说明                                       |
+| -------------------- | ------------------------ | -------------------------------------------------------- | ------------------------------------------ |
+| Vue/React 组件文件名 | 多单词 + PascalCase      | `UserList.vue`、`UserCard.tsx`                           | 组件名必须多个单词，避免与 HTML 原生元素冲突 |
+| 目录命名            | kebab-case（短横线小写） | `src/components/user-profile/`、`src/utils/date-format/` | 所有目录均使用短横线分隔                   |
+| 普通 JS/TS 文件       | 小驼峰 camelCase          | `user-api.ts`、`date-utils.ts`                           | 工具函数、API 封装等普通文件                |
+| 类型定义文件        | 小驼峰 + .d.ts 后缀       | `user-type.d.ts`、`api.d.ts`                             | TypeScript 类型定义文件                     |
+| 配置文件            | 小驼峰或短横线           | `vite.config.ts`、`.prettierrc`                          | 项目配置文件                               |
+| 组件使用            | PascalCase               | `<UserCard />`、`<UserList />`                           | 模板中组件名使用大驼峰                     |
 
 ---
 
-## 🔧 二、函数命名规范
+## 二、函数命名规范
 
 | 类型              | 规范                               | 示例                                              | 说明                     |
 | ----------------- | ---------------------------------- | ------------------------------------------------- | ------------------------ |
-| API 函数          | `api` + 方法 + 业务含义（小驼峰）  | `apiGetUserInfo`, `apiPostLogin`, `apiDeleteUser` | 前缀明确标识是API请求    |
-| 事件处理函数      | `on` + 触发元素 + 事件名（小驼峰） | `onSubmitBtnClick`, `onUserNameInputChange`       | 清晰说明触发源和事件类型 |
-| 工具函数          | 动词 + 名词（小驼峰）              | `formatDate`, `getUuid`, `parseQuery`             | 明确表示函数的作用       |
-| Vue/React Hooks   | `use` + 功能（小驼峰）             | `useUserInfo`, `useRouterQuery`, `useWindowSize`  | 符合Hooks命名规范        |
-| 计算属性/派生函数 | 名词/形容词（小驼峰）              | `fullName`, `isDisabled`, `filteredList`          | 表示是一个值而非动作     |
-| 操作函数          | 动词 + 名词（小驼峰）              | `openDialog`, `closeModal`, `loadData`            | 明确表示执行的动作       |
+| API 函数          | `api` + 方法 + 业务含义（小驼峰）  | `apiGetUserInfo`、`apiPostLogin`、`apiDeleteUser` | 前缀明确标识是 API 请求    |
+| 事件处理函数      | `on` + 触发元素 + 事件名（小驼峰） | `onSubmitBtnClick`、`onUserNameInputChange`       | 清晰说明触发源和事件类型 |
+| 工具函数          | 动词 + 名词（小驼峰）              | `formatDate`、`getUuid`、`parseQuery`             | 明确表示函数的作用       |
+| Vue/React Hooks   | `use` + 功能（小驼峰）             | `useUserInfo`、`useRouterQuery`、`useWindowSize`  | 符合 Hooks 命名规范        |
+| 计算属性/派生函数 | 名词/形容词（小驼峰）              | `fullName`、`isDisabled`、`filteredList`          | 表示是一个值而非动作     |
+| 操作函数          | 动词 + 名词（小驼峰）              | `openDialog`、`closeModal`、`loadData`            | 明确表示执行的动作       |
 
 ---
 
-## 📊 三、变量与常量规范
+## 三、变量与常量规范
 
 | 类型                | 规范                                       | 示例                                                                      | 说明                                   |
 | ------------------- | ------------------------------------------ | ------------------------------------------------------------------------- | -------------------------------------- |
-| 全局常量            | 全大写 + 下划线分隔                        | `MAX_RETRY_COUNT = 3`, `APP_CONFIG = { ... }`                             | 常量值不可修改                         |
-| 枚举类型            | PascalCase，成员全大写                     | `enum UserStatus { ACTIVE = 'ACTIVE', DISABLED = 'DISABLED' }`            | TypeScript枚举命名规范                 |
-| TypeScript类型/接口 | PascalCase，前缀I可选                      | `interface IUser { id: number; name: string }`, `type UserInfo = { ... }` | 类型定义使用大驼峰                     |
-| Props/Emits         | 小驼峰camelCase，必须语义化                | `userId`, `userInfo`, `onUserChange`                                      | 与变量命名规范一致                     |
-| 布尔值变量          | 前缀必须是`is`/`has`/`can`/`show`/`need`等 | `isVisible`, `hasPermission`, `canEdit`, `showDialog`                     | 从变量名直接判断是布尔类型             |
-| 普通变量            | 小驼峰camelCase，语义优先                  | `userInfo`, `menuList`, `totalCount`                                      | 禁止使用无意义的`data1`、`temp2`等命名 |
-| 路由参数            | 小驼峰或短横线                             | `userId`, `user-id`                                                       | 保持前后端一致即可                     |
-| 状态管理变量        | 小驼峰，语义清晰                           | `userState`, `menuState`                                                  | Pinia/Vuex/Redux等状态管理中的变量     |
+| 全局常量            | 全大写 + 下划线分隔                        | `MAX_RETRY_COUNT = 3`、`APP_CONFIG = { ... }`                             | 常量值不可修改                         |
+| 枚举类型            | PascalCase，成员全大写                     | `enum UserStatus { ACTIVE = 'ACTIVE', DISABLED = 'DISABLED' }`            | TypeScript 枚举命名规范                 |
+| TypeScript 类型/接口 | PascalCase，前缀 I 可选                      | `interface IUser { id: number; name: string }`、`type UserInfo = { ... }` | 类型定义使用大驼峰                     |
+| Props/Emits         | 小驼峰 camelCase，必须语义化                | `userId`、`userInfo`、`onUserChange`                                      | 与变量命名规范一致                     |
+| 布尔值变量          | 前缀必须是 `is`/`has`/`can`/`show`/`need` 等 | `isVisible`、`hasPermission`、`canEdit`、`showDialog`                     | 从变量名直接判断是布尔类型             |
+| 普通变量            | 小驼峰 camelCase，语义优先                  | `userInfo`、`menuList`、`totalCount`                                      | 禁止使用无意义的 `data1`、`temp2` 等命名 |
+| 路由参数            | 小驼峰或短横线                             | `userId`、`user-id`                                                       | 保持前后端一致即可                     |
+| 状态管理变量        | 小驼峰，语义清晰                           | `userState`、`menuState`                                                  | Pinia/Vuex/Redux 等状态管理中的变量     |
 
 ---
 
-## 🎯 四、事件命名规范
+## 四、事件命名规范
 
 | 场景                      | 规范                  | 示例                              | 说明                               |
 | ------------------------- | --------------------- | --------------------------------- | ---------------------------------- |
-| Vue自定义事件             | 小驼峰camelCase       | `@user-change`, `@form-submit`    | 模板中使用短横线，定义时使用小驼峰 |
-| React自定义事件           | 小驼峰camelCase       | `onUserChange`, `onFormSubmit`    | 与原生事件命名保持一致             |
-| 全局事件（EventBus/Mitt） | 小驼峰 + 业务模块前缀 | `user:change`, `form:submit`      | 避免全局事件名冲突                 |
-| 原生事件                  | 遵循W3C标准           | `onClick`, `onChange`, `onSubmit` | 与原生事件名保持一致               |
+| Vue 自定义事件             | 小驼峰 camelCase       | `@user-change`、`@form-submit`    | 模板中使用短横线，定义时使用小驼峰 |
+| React 自定义事件           | 小驼峰 camelCase       | `onUserChange`、`onFormSubmit`    | 与原生事件命名保持一致             |
+| 全局事件（EventBus/Mitt） | 小驼峰 + 业务模块前缀 | `user:change`、`form:submit`      | 避免全局事件名冲突                 |
+| 原生事件                  | 遵循 W3C 标准           | `onClick`、`onChange`、`onSubmit` | 与原生事件名保持一致               |
 
 > 统一原则：事件名使用动词或"名词+动词"结构，清晰表达事件的含义和触发时机。
 
 ---
 
-## 🎨 五、CSS 命名规范（BEM）
+## 五、CSS 命名规范（BEM）
 
-> 样式命名必须遵循BEM规范，详见[css.md](./common-css.md#三css-命名bem)
+> 样式命名必须遵循 BEM 规范，详见 [css.md](./common-css.md#三css-命名bem)
 
-### BEM核心规则
+### BEM 核心规则
 
 | 类型               | 说明                   | 示例                                                        | 规则                                           |
 | ------------------ | ---------------------- | ----------------------------------------------------------- | ---------------------------------------------- |
@@ -101,13 +101,13 @@
 
 ### 其他约定
 
-1. 全局公共样式：前缀`g-`，如`.g-container`, `.g-text-center`
-2. 工具类样式：前缀`u-`，如`.u-mt-10`, `.u-text-red`
-3. 页面级样式：前缀`p-页面名-`，如`.p-user-list__container`
-4. 状态类：前缀`is-`/`has-`，如`.is-active`, `.has-error`
+1. 全局公共样式：前缀 `g-`，如 `.g-container`、`.g-text-center`
+2. 工具类样式：前缀 `u-`，如 `.u-mt-10`、`.u-text-red`
+3. 页面级样式：前缀 `p-页面名-`，如 `.p-user-list__container`
+4. 状态类：前缀 `is-`/`has-`，如 `.is-active`、`.has-error`
 
-### Vue/React样式注意
+### Vue/React 样式注意
 
-- 优先使用scoped样式，避免全局污染
+- 优先使用 scoped 样式，避免全局污染
 - 全局样式必须在专门的全局样式文件中定义
-- 深度选择器使用`:deep()`/`::v-deep()`，避免使用`/deep/`等已废弃写法
+- 深度选择器使用 `:deep()`/`::v-deep()`，避免使用 `/deep/` 等已废弃写法

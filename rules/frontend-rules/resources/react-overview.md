@@ -57,6 +57,8 @@ class UserList extends React.Component {
 
 ## 三、相关规范索引
 
+### React 特有规范
+
 | 规范            | 详见                                       | 说明                                                              |
 | --------------- | ------------------------------------------ | ----------------------------------------------------------------- |
 | 组件开发规范    | [component-dev.md](./react-component-dev.md)     | 函数组件、Props、导出规范                                         |
@@ -67,12 +69,17 @@ class UserList extends React.Component {
 | JSX 规范        | [jsx.md](./react-jsx.md)                         | 条件渲染、列表、事件处理                                          |
 | CSS 规范        | [css.md](./react-css.md)                         | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |
 | TypeScript      | [typescript.md](./react-typescript.md)           | 类型注解、Props 定义                                              |
-| Hooks 通用规范  | [hooks.md](./common-hooks.md)             | 命名、抽离、返回值                                                |
-| TypeScript 通用 | [typescript.md](./common-typescript.md)   | 类型注解、import type、类型文件                                   |
-| 命名规范        | [naming.md](./common-naming.md)           | 文件/组件/变量命名                                                |
-| CSS 样式（通用） | [css.md](./common-css.md)                | BEM、局部作用域、兼容性、作用域穿透                              |
-| 网络请求        | [network.md](./common-network.md)         | async/await、错误处理                                             |
-| 代码风格        | [code-style.md](./common-code-style.md)   | Prettier 配置                                                     |
-| 注释规范        | [comments.md](./common-comments.md)       | JSDoc、注释格式                                                   |
-| 性能优化        | [performance.md](./common-performance.md) | 懒加载、防抖节流                                                  |
-| 约束清单        | [constraints.md](./common-constraints.md) | 禁止/推荐/注意事项                                                |
+
+### 通用规范引用
+
+| 规范            | 详见                                             | 说明                                  |
+| --------------- | ------------------------------------------------ | ------------------------------------- |
+| Hooks 通用规范  | [hooks.md](./common-hooks.md)                    | 命名、抽离、返回值                    |
+| TypeScript 通用 | [typescript.md](./common-typescript.md)          | 类型注解、import type、类型文件       |
+| 命名规范        | [naming.md](./common-naming.md)                  | 文件/组件/变量命名                    |
+| CSS 样式（通用） | [css.md](./common-css.md)                        | BEM、局部作用域、兼容性、作用域穿透   |
+| 网络请求        | [network.md](./common-network.md)                | async/await、错误处理                 |
+| 代码风格        | [code-style.md](./common-code-style.md)          | Prettier 配置                         |
+| 注释规范        | [comments.md](./common-comments.md)              | JSDoc、注释格式                       |
+| 性能优化        | [performance.md](./common-performance.md)        | 懒加载、防抖节流                      |
+| 约束清单        | [constraints.md](./common-constraints.md)        | 禁止/推荐/注意事项                    |
