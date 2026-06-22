@@ -112,13 +112,13 @@ const { data } = response as IApiResponse
 
 ## 七、框架特定差异
 
-| 内容             | Vue3 详见                                                        | React 详见                                                       |
-| ---------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| 内容             | Vue3 详见                                                         | React 详见                                                        |
+| ---------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | Props 类型定义   | [vue3/typescript.md](../vue3/typescript.md#一组件-props-类型定义) | [react/typescript.md](../react/typescript.md#一props-类型定义)    |
 | 响应式状态泛型   | [vue3/typescript.md](../vue3/typescript.md#二响应式类型标注)      | [react/typescript.md](../react/typescript.md#二usestate-类型注解) |
-| Emits 类型定义   | [vue3/typescript.md](../vue3/typescript.md#三emits-类型定义)      | 不适用                                                           |
-| 事件处理类型     | 不适用（Vue 模板自动推导）                                       | [react/typescript.md](../react/typescript.md#四事件处理类型)      |
-| Children 类型    | 不适用（Vue 用 slot）                                            | [react/typescript.md](../react/typescript.md#五children-类型)     |
-| 组件返回类型     | 不适用                                                           | [react/typescript.md](../react/typescript.md#六组件返回类型)      |
+| Emits 类型定义   | [vue3/typescript.md](../vue3/typescript.md#三emits-类型定义)      | 不适用                                                            |
+| 事件处理类型     | 不适用（Vue 模板自动推导）                                        | [react/typescript.md](../react/typescript.md#四事件处理类型)      |
+| Children 类型    | 不适用（Vue 用 slot）                                             | [react/typescript.md](../react/typescript.md#五children-类型)     |
+| 组件返回类型     | 不适用                                                            | [react/typescript.md](../react/typescript.md#六组件返回类型)      |
 | Hooks 返回值类型 | [vue3/typescript.md](../vue3/typescript.md#四hooks-返回值类型)    | [react/hooks.md](../react/hooks.md#五react-标准模板)              |
-| 泛型组件         | 不适用（Vue 用 `generic` 属性）                                  | [react/typescript.md](../react/typescript.md#七泛型组件)          |
+| 泛型组件         | 不适用（Vue 用 `generic` 属性）                                   | [react/typescript.md](../react/typescript.md#七泛型组件)          |

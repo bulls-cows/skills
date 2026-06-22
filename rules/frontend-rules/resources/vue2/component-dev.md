@@ -78,7 +78,7 @@
 
 | 内容           | 详见                                                    |
 | -------------- | ------------------------------------------------------- |
-| 注释规范       | [comments.md](../common/comments.md)                        |
+| 注释规范       | [comments.md](../common/comments.md)                    |
 | Props 定义     | [interaction.md](./interaction.md#一props-定义规范)     |
 | Emit 事件      | [interaction.md](./interaction.md#二emit-事件规范)      |
 | v-model        | [interaction.md](./interaction.md#2-v-model-写法)       |
@@ -86,4 +86,4 @@
 | `$refs` 访问   | [interaction.md](./interaction.md#三对外暴露与访问)     |
 | provide/inject | [interaction.md](./interaction.md#1-provideinject-规范) |
 | 导入顺序       | [order.md](./order.md)                                  |
-| 模板规则       | [vue-template.md](../common/vue-template.md)  |
+| 模板规则       | [vue-template.md](../common/vue-template.md)            |

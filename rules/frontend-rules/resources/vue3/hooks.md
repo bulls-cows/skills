@@ -175,7 +175,7 @@ export const useTable = () => {
 
 | 内容            | 详见                                                |
 | --------------- | --------------------------------------------------- |
-| Hooks 通用规范  | [hooks.md](../common/hooks.md)            |
+| Hooks 通用规范  | [hooks.md](../common/hooks.md)                      |
 | 响应式状态      | [reactivity.md](./reactivity.md)                    |
 | watch 监听      | [watch.md](./watch.md)                              |
 | TypeScript 类型 | [typescript.md](./typescript.md#四hooks-返回值类型) |

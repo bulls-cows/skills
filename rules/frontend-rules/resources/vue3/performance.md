@@ -67,8 +67,8 @@ app.directive('focus', {
 
 ## 四、相关模块引用
 
-| 模块           | 路径                                  |
-| -------------- | ------------------------------------- |
-| 通用性能优化   | [performance.md](../common/performance.md) |
-| Vue3 响应式    | [reactivity.md](./reactivity.md)      |
-| Vue3 CSS 差异  | [css.md](./css.md)                     |
+| 模块          | 路径                                       |
+| ------------- | ------------------------------------------ |
+| 通用性能优化  | [performance.md](../common/performance.md) |
+| Vue3 响应式   | [reactivity.md](./reactivity.md)           |
+| Vue3 CSS 差异 | [css.md](./css.md)                         |

@@ -114,10 +114,10 @@ const { dataSource, loading, total, fetchList } = useTable()
 
 ## 六、框架特定差异
 
-| 内容                 | Vue3 详见                                                | React 详见                                                         |
-| -------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
-| Hooks 调用规则       | [vue3/hooks.md](../vue3/hooks.md#一vue3-特有-setup-限制) | [react/hooks.md](../react/hooks.md#二hooks-调用规则)                |
+| 内容                 | Vue3 详见                                                 | React 详见                                                          |
+| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------- |
+| Hooks 调用规则       | [vue3/hooks.md](../vue3/hooks.md#一vue3-特有-setup-限制)  | [react/hooks.md](../react/hooks.md#二hooks-调用规则)                |
 | 内置 Hooks 用法      | [vue3/hooks.md](../vue3/hooks.md#三vue3-特有内置-hooks)   | [react/hooks.md](../react/hooks.md#三react-特有内置-hooks)          |
 | setup / 函数组件限制 | [vue3/hooks.md](../vue3/hooks.md#一vue3-特有-setup-限制)  | [react/hooks.md](../react/hooks.md#一react-特有函数组件限制)        |
-| toRefs / 解构要求    | [vue3/hooks.md](../vue3/hooks.md#二vue3-特有-torefs-要求) | 不适用                                                             |
-| useCallback/useMemo  | 不适用                                                   | [react/hooks.md](../react/hooks.md#四react-特有-usecallbackusememo) |
+| toRefs / 解构要求    | [vue3/hooks.md](../vue3/hooks.md#二vue3-特有-torefs-要求) | 不适用                                                              |
+| useCallback/useMemo  | 不适用                                                    | [react/hooks.md](../react/hooks.md#四react-特有-usecallbackusememo) |

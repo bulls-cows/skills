@@ -22,8 +22,8 @@ Vue2 沿用通用规则的 **8 步顺序**，不含 Vue3 特有的第 9 步 `v-s
 
 ## 三、相关模块引用
 
-| 内容                 | 详见                                                   |
-| -------------------- | ------------------------------------------------------ |
+| 内容                 | 详见                                         |
+| -------------------- | -------------------------------------------- |
 | Vue 模板通用规则     | [vue-template.md](../common/vue-template.md) |
-| Props 定义与 v-model | [interaction.md](./interaction.md)                     |
-| 组件开发规范         | [component-dev.md](./component-dev.md)                 |
+| Props 定义与 v-model | [interaction.md](./interaction.md)           |
+| 组件开发规范         | [component-dev.md](./component-dev.md)       |

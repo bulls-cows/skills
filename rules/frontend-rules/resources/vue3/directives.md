@@ -46,8 +46,8 @@ Vue3 模板属性顺序在通用 8 步基础上，追加第 9 步动态 `v-slot`
 
 ## 三、相关模块引用
 
-| 内容                 | 详见                                                   |
-| -------------------- | ------------------------------------------------------ |
+| 内容                 | 详见                                         |
+| -------------------- | -------------------------------------------- |
 | Vue 模板通用规则     | [vue-template.md](../common/vue-template.md) |
-| Props 定义与 v-model | [interaction.md](./interaction.md)                     |
-| 组件开发规范         | [component-dev.md](./component-dev.md)                 |
+| Props 定义与 v-model | [interaction.md](./interaction.md)           |
+| 组件开发规范         | [component-dev.md](./component-dev.md)       |

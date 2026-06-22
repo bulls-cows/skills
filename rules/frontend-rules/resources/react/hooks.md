@@ -200,10 +200,10 @@ export const useTable = () => {
 
 ## 六、相关模块引用
 
-| 内容            | 详见                                     |
-| --------------- | ---------------------------------------- |
-| Hooks 通用规范  | [hooks.md](../common/hooks.md) |
-| 状态管理        | [state.md](./state.md)                   |
-| 组件开发        | [component-dev.md](./component-dev.md)   |
-| TypeScript 类型 | [typescript.md](./typescript.md)         |
-| 命名规范        | [naming.md](../common/naming.md)             |
+| 内容            | 详见                                   |
+| --------------- | -------------------------------------- |
+| Hooks 通用规范  | [hooks.md](../common/hooks.md)         |
+| 状态管理        | [state.md](./state.md)                 |
+| 组件开发        | [component-dev.md](./component-dev.md) |
+| TypeScript 类型 | [typescript.md](./typescript.md)       |
+| 命名规范        | [naming.md](../common/naming.md)       |

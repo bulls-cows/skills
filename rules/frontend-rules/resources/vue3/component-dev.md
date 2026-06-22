@@ -68,14 +68,14 @@
 
 ## 九、相关模块引用
 
-| 内容       | 详见                                                   |
-| ---------- | ------------------------------------------------------ |
-| 注释规范   | [comments.md](../common/comments.md)                       |
-| Props 定义 | [interaction.md](./interaction.md#一props-定义规范)    |
-| Emit 事件  | [interaction.md](./interaction.md#1-事件白名单19-种)   |
-| 组件通信   | [interaction.md](./interaction.md#四组件间通信)        |
-| 响应式状态 | [reactivity.md](./reactivity.md)                       |
-| watch 监听 | [watch.md](./watch.md)                                 |
-| Hooks 规范 | [hooks.md](./hooks.md)                                 |
-| 导入顺序   | [order.md](./order.md)                                 |
-| 模板规则   | [vue-template.md](../common/vue-template.md) |
+| 内容       | 详见                                                 |
+| ---------- | ---------------------------------------------------- |
+| 注释规范   | [comments.md](../common/comments.md)                 |
+| Props 定义 | [interaction.md](./interaction.md#一props-定义规范)  |
+| Emit 事件  | [interaction.md](./interaction.md#1-事件白名单19-种) |
+| 组件通信   | [interaction.md](./interaction.md#四组件间通信)      |
+| 响应式状态 | [reactivity.md](./reactivity.md)                     |
+| watch 监听 | [watch.md](./watch.md)                               |
+| Hooks 规范 | [hooks.md](./hooks.md)                               |
+| 导入顺序   | [order.md](./order.md)                               |
+| 模板规则   | [vue-template.md](../common/vue-template.md)         |

@@ -194,11 +194,11 @@ const List = <T,>({ items, renderItem }: IListProps<T>): JSX.Element => {
 
 ## 八、相关模块引用
 
-| 内容                | 详见                                               |
-| ------------------- | -------------------------------------------------- |
+| 内容                | 详见                                     |
+| ------------------- | ---------------------------------------- |
 | TypeScript 通用规范 | [typescript.md](../common/typescript.md) |
-| 组件开发            | [component-dev.md](./component-dev.md)             |
-| Hooks 规范          | [hooks.md](./hooks.md)                             |
-| 状态管理            | [state.md](./state.md)                             |
-| JSX 规范            | [jsx.md](./jsx.md)                                 |
-| 命名规范            | [naming.md](../common/naming.md)                       |
+| 组件开发            | [component-dev.md](./component-dev.md)   |
+| Hooks 规范          | [hooks.md](./hooks.md)                   |
+| 状态管理            | [state.md](./state.md)                   |
+| JSX 规范            | [jsx.md](./jsx.md)                       |
+| 命名规范            | [naming.md](../common/naming.md)         |

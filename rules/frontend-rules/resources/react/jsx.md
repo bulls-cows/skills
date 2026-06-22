@@ -293,5 +293,5 @@ import styles from './UserCard.module.scss'
 | 组件开发   | [component-dev.md](./component-dev.md) |
 | Hooks 规范 | [hooks.md](./hooks.md)                 |
 | 状态管理   | [state.md](./state.md)                 |
-| CSS 规范   | [css.md](./css.md)                 |
-| 命名规范   | [naming.md](../common/naming.md)           |
+| CSS 规范   | [css.md](./css.md)                     |
+| 命名规范   | [naming.md](../common/naming.md)       |

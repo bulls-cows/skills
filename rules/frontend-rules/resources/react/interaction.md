@@ -219,15 +219,15 @@ Tabs.TabPane = TabPane
 
 ## 五、状态管理选型决策树
 
-| 场景                     | 推荐方案                            | 说明                         |
-| ------------------------ | ----------------------------------- | ---------------------------- |
-| 单组件内部状态           | `useState` / `useReducer`           | 简单、零开销                 |
-| 父子通信                 | Props + 回调                        | 显式数据流，最易追踪         |
-| 兄弟 / 2 层以内          | 状态提升                            | 提升到共同父组件             |
-| 跨 3 层以上、中等复杂度  | Context                             | 主题、用户、权限等"全局"语义 |
-| 跨多组件、状态逻辑复杂   | Context + `useReducer`              | 集中状态管理                 |
-| 跨模块、大型应用         | Zustand / Jotai / Redux Toolkit     | 选其一，团队保持一致         |
-| 服务端状态（API 数据）   | TanStack Query (React Query) / SWR  | 区分客户端状态与服务端状态   |
+| 场景                    | 推荐方案                           | 说明                         |
+| ----------------------- | ---------------------------------- | ---------------------------- |
+| 单组件内部状态          | `useState` / `useReducer`          | 简单、零开销                 |
+| 父子通信                | Props + 回调                       | 显式数据流，最易追踪         |
+| 兄弟 / 2 层以内         | 状态提升                           | 提升到共同父组件             |
+| 跨 3 层以上、中等复杂度 | Context                            | 主题、用户、权限等"全局"语义 |
+| 跨多组件、状态逻辑复杂  | Context + `useReducer`             | 集中状态管理                 |
+| 跨模块、大型应用        | Zustand / Jotai / Redux Toolkit    | 选其一，团队保持一致         |
+| 服务端状态（API 数据）  | TanStack Query (React Query) / SWR | 区分客户端状态与服务端状态   |
 
 **选型原则**：
 
@@ -300,14 +300,14 @@ eventBus.emit('user:login', { id: '1', name: '张三' })
 
 ## 七、相关模块引用
 
-| 内容                | 详见                                     |
-| ------------------- | ---------------------------------------- |
-| TypeScript 类型     | [typescript.md](./typescript.md)         |
-| 组件开发规范        | [component-dev.md](./component-dev.md)   |
-| React Hooks 规范    | [hooks.md](./hooks.md)                   |
-| 状态管理 API        | [state.md](./state.md)                   |
-| JSX 规范            | [jsx.md](./jsx.md)                       |
-| Hooks 通用规范      | [hooks.md](../common/hooks.md)           |
-| TypeScript 通用规范 | [typescript.md](../common/typescript.md) |
-| 命名规范            | [naming.md](../common/naming.md)         |
+| 内容                | 详见                                       |
+| ------------------- | ------------------------------------------ |
+| TypeScript 类型     | [typescript.md](./typescript.md)           |
+| 组件开发规范        | [component-dev.md](./component-dev.md)     |
+| React Hooks 规范    | [hooks.md](./hooks.md)                     |
+| 状态管理 API        | [state.md](./state.md)                     |
+| JSX 规范            | [jsx.md](./jsx.md)                         |
+| Hooks 通用规范      | [hooks.md](../common/hooks.md)             |
+| TypeScript 通用规范 | [typescript.md](../common/typescript.md)   |
+| 命名规范            | [naming.md](../common/naming.md)           |
 | 约束清单            | [constraints.md](../common/constraints.md) |

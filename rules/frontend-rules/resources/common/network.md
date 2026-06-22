@@ -17,7 +17,9 @@ const fetchData = async () => {
   isLoading.value = true
   try {
     const res = await getUserInfo(userId)
-    if (res.code === 200) { /* 数据处理 */ }
+    if (res.code === 200) {
+      /* 数据处理 */
+    }
   } catch (error) {
     console.warn(error)
   } finally {
@@ -40,7 +42,9 @@ const fetchData = async () => {
 const { code, data, msg } = await api.getUserList()
 
 // ❌ 错误：连续解构
-const { data: { data: list } } = await api.getUserList()
+const {
+  data: { data: list },
+} = await api.getUserList()
 ```
 
 ### 先判断成功后使用数据
@@ -66,10 +70,18 @@ if (code === 0) {
 
 ```javascript
 // ❌ 错误：空 catch
-try { await apiGetData() } catch (error) { /* 禁止空 catch */ }
+try {
+  await apiGetData()
+} catch (error) {
+  /* 禁止空 catch */
+}
 
 // ✅ 正确：catch 中 console.warn
-try { await apiGetData() } catch (error) { console.warn(error) }
+try {
+  await apiGetData()
+} catch (error) {
+  console.warn(error)
+}
 ```
 
 ### 业务错误处理
@@ -106,7 +118,9 @@ const { loading, run } = useRequest(() => apiSubmit(formData.value), {
   onError: (error) => console.warn(error),
 })
 
-const handleSubmit = async () => { await run() }
+const handleSubmit = async () => {
+  await run()
+}
 ```
 
 未安装 `useRequest` 时，使用互斥锁（`if (loading.value) return`）防止重复提交。

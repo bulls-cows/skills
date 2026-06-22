@@ -157,10 +157,10 @@ export const useTable = (): IUseTableReturn => {
 
 ## 五、相关模块引用
 
-| 内容                | 详见                                               |
-| ------------------- | -------------------------------------------------- |
+| 内容                | 详见                                     |
+| ------------------- | ---------------------------------------- |
 | TypeScript 通用规范 | [typescript.md](../common/typescript.md) |
-| Props 与 v-model    | [interaction.md](./interaction.md)                 |
-| 响应式状态          | [reactivity.md](./reactivity.md)                   |
-| Hooks 规范          | [hooks.md](./hooks.md)                             |
-| 命名规范            | [naming.md](../common/naming.md)                       |
+| Props 与 v-model    | [interaction.md](./interaction.md)       |
+| 响应式状态          | [reactivity.md](./reactivity.md)         |
+| Hooks 规范          | [hooks.md](./hooks.md)                   |
+| 命名规范            | [naming.md](../common/naming.md)         |

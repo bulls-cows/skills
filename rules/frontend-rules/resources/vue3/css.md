@@ -19,12 +19,12 @@ Vue3 废弃了 Vue2 的 `::v-deep`/`/deep/`/`>>>`，统一使用函数式 `:deep
 
 Vue3 自定义指令的钩子名与 Vue2 不同，样式/事件相关的清理必须放在 `unmounted`：
 
-| 时机           | Vue3 钩子     | Vue2 钩子             | 说明                         |
-| -------------- | ------------- | --------------------- | ---------------------------- |
-| 绑定到 DOM 时  | `mounted` 之前 | `bind`                | 元素插入前（`beforeMount`）  |
-| 插入 DOM 时    | `mounted`     | `inserted`            | 可访问父节点，常用于聚焦     |
-| 更新完成时     | `updated`     | `componentUpdated`    | VNode 及其子级都更新后       |
-| 解绑时（清理） | `unmounted`   | `unbind`              | **必须在此清理监听器/定时器** |
+| 时机           | Vue3 钩子      | Vue2 钩子          | 说明                          |
+| -------------- | -------------- | ------------------ | ----------------------------- |
+| 绑定到 DOM 时  | `mounted` 之前 | `bind`             | 元素插入前（`beforeMount`）   |
+| 插入 DOM 时    | `mounted`      | `inserted`         | 可访问父节点，常用于聚焦      |
+| 更新完成时     | `updated`      | `componentUpdated` | VNode 及其子级都更新后        |
+| 解绑时（清理） | `unmounted`    | `unbind`           | **必须在此清理监听器/定时器** |
 
 ```typescript
 // Vue3 自定义指令：在 unmounted 清理资源
@@ -44,9 +44,9 @@ const vFocus = {
 
 ## 三、相关模块引用
 
-| 模块             | 路径                                  |
-| ---------------- | ------------------------------------- |
-| 通用 CSS 规范    | [css.md](../common/css.md)            |
+| 模块               | 路径                                                                      |
+| ------------------ | ------------------------------------------------------------------------- |
+| 通用 CSS 规范      | [css.md](../common/css.md)                                                |
 | 作用域穿透（通用） | [css.md 穿透章节](../common/css.md#-十一作用域穿透vue2vue3react-共享理念) |
-| Vue3 性能        | [performance.md](./performance.md)    |
-| Vue3 模板指令    | [directives.md](./directives.md)      |
+| Vue3 性能          | [performance.md](./performance.md)                                        |
+| Vue3 模板指令      | [directives.md](./directives.md)                                          |
