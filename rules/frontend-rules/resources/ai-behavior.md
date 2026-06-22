@@ -2,7 +2,7 @@
 
 > 本规范定义 AI 在前端开发辅助中的所有"红线"和行为模式，所有 AI 操作必须严格遵守。
 >
-> 适用范围与目录约束详见 [总纲索引](./index.md)。
+> 适用范围与目录约束详见 [总纲索引](../RULE.md)。
 
 ---
 
@@ -13,7 +13,7 @@
 3. **禁止生成有安全风险的代码**：不得生成包含 XSS 漏洞、明文存储敏感信息、硬编码密钥、CSRF 防护缺失等安全问题的代码
 4. **禁止违反前端规范**：所有生成的代码必须严格遵守当前项目的前端规范，不得引入不符合团队约定的写法
 5. **禁止自动创建文档**：未经用户明确要求，不得创建 README、说明文档、CHANGELOG、接口文档等文件
-6. **禁止使用 `any` 类型**：TypeScript 代码中不得使用 `any`、`@ts-ignore`、`@ts-expect-error`，除非用户明确允许（详见 [typescript.md](./common/typescript.md#二禁用-any)）
+6. **禁止使用 `any` 类型**：TypeScript 代码中不得使用 `any`、`@ts-ignore`、`@ts-expect-error`，除非用户明确允许（详见 [typescript.md](./common-typescript.md#二禁用-any)）
 7. **禁止主动重构**：未经用户明确要求，不得对现有代码进行大规模重构、结构调整或写法优化
 
 ---
@@ -21,7 +21,7 @@
 ## 二、允许行为
 
 1. **代码生成**：根据用户需求生成符合规范的前端代码
-2. **注释优化**：修改、补充代码中的注释和 JSDoc，提升可读性（遵循 [comments.md](./common/comments.md#四注释保护原则)）
+2. **注释优化**：修改、补充代码中的注释和 JSDoc，提升可读性（遵循 [comments.md](./common-comments.md#四注释保护原则)）
 3. **代码审查**：对现有代码进行审查，提出优化建议和问题修复方案
 4. **问题解答**：回答前端开发相关的技术问题，提供最佳实践建议
 5. **直接输出**：对话中可以直接输出文字说明、总结或代码片段，无需总是生成文件
@@ -32,18 +32,18 @@
 
 ### 通用要求
 
-1. 所有生成的代码必须符合当前项目的命名规范（[naming.md](./common/naming.md)）、代码风格（[code-style.md](./common/code-style.md)）、架构模式
-2. 必须包含必要的注释，说明代码的用途、参数、返回值、注意事项（[comments.md](./common/comments.md)）
-3. 必须考虑异常处理，避免出现空指针、未捕获异常等问题（[network.md](./common/network.md#三错误处理)）
-4. 必须考虑性能优化，避免出现内存泄漏、不必要的重渲染等问题（[performance.md](./common/performance.md)）
-5. 必须考虑兼容性，支持项目要求的浏览器版本（[css.md](./common/css.md#五css-兼容性指南)）
+1. 所有生成的代码必须符合当前项目的命名规范（[naming.md](./common-naming.md)）、代码风格（[code-style.md](./common-code-style.md)）、架构模式
+2. 必须包含必要的注释，说明代码的用途、参数、返回值、注意事项（[comments.md](./common-comments.md)）
+3. 必须考虑异常处理，避免出现空指针、未捕获异常等问题（[network.md](./common-network.md#三错误处理)）
+4. 必须考虑性能优化，避免出现内存泄漏、不必要的重渲染等问题（[performance.md](./common-performance.md)）
+5. 必须考虑兼容性，支持项目要求的浏览器版本（[css.md](./common-css.md#五css-兼容性指南)）
 
 ### TypeScript 要求
 
-详见 [typescript.md](./common/typescript.md)（类型注解、禁用 any、import type、类型文件组织等通用规则）以及框架特定 TypeScript 规范：
+详见 [typescript.md](./common-typescript.md)（类型注解、禁用 any、import type、类型文件组织等通用规则）以及框架特定 TypeScript 规范：
 
-- Vue3：[vue3/typescript.md](./vue3/typescript.md)
-- React：[react/typescript.md](./react/typescript.md)
+- Vue3：[vue3-typescript.md](./vue3-typescript.md)
+- React：[react-typescript.md](./react-typescript.md)
 
 ### 框架特定要求
 
