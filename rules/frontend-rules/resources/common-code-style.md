@@ -175,4 +175,4 @@ export { list, onSearch }
 
 - 优先使用箭头函数表达式：`const fn = () => {}`，避免使用 `function` 声明
 - 函数参数超过 3 个时，必须使用对象参数，解构使用
-- 函数名必须语义化，前缀统一遵循 [naming.md](./common-naming.md#二函数命名规范)
+- 函数名必须语义化，前缀统一遵循 [naming.md](./common-naming.md#-二函数命名规范)

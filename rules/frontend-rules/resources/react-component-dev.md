@@ -144,7 +144,7 @@ export const UserCard = ({ userId }: IUserCardProps) => {
 
 ## 八、Import 分组
 
-Import 分组排序规则详见 [order.md](./react-order.md#三import-分组排序4-组)。
+Import 分组排序规则详见 [order.md](./react-order.md#三import-分组)。
 
 ---
 

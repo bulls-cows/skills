@@ -27,7 +27,7 @@ React 无 Vue 的 `scoped`，靠以下方案实现样式隔离。**默认首选 
 
 ### 2.1 文件命名与导入
 
-样式文件必须以 `.module.scss`（或 `.module.css`）为后缀，导入语句归在 import 第 4 组「相对依赖」（详见 [order.md](./react-order.md#三import-分组排序4-组)）：
+样式文件必须以 `.module.scss`（或 `.module.css`）为后缀，导入语句归在 import 第 4 组「相对依赖」（详见 [order.md](./react-order.md#三import-分组)）：
 
 ```tsx
 import styles from './UserCard.module.scss'
@@ -92,4 +92,4 @@ React 的 CSS Modules 通过哈希类名隔离，无法直接选中第三方组�
 | 通用 CSS 规范    | [css.md](./common-css.md)            |
 | 作用域穿透（通用） | [css.md 穿透章节](./common-css.md#-十一作用域穿透vue2vue3react-共享理念) |
 | 样式使用（jsx）  | [jsx.md](./react-jsx.md#九样式使用)         |
-| 导入顺序         | [order.md](./react-order.md#三import-分组排序4-组) |
+| 导入顺序         | [order.md](./react-order.md#三import-分组) |

@@ -56,7 +56,7 @@ const UserCard = ({ showAvatar = true, maxCount = 10 }: IUserCardProps) => {
 ### 1. 命名规范
 
 - 回调 Props 用 `on` + 事件名（PascalCase），与原生事件命名保持一致
-- 内部事件处理函数用 `handle` + 事件名
+- 内部事件处理函数用 `on` + 事件名 或 `handle` + 事件名，团队内保持一致
 
 ```typescript
 // ✅ 对外：onSelect / onRemove；对内：handleClick

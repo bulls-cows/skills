@@ -83,7 +83,7 @@ const emit = defineEmits<{
 
 ---
 
-## 三、对外暴露 (DefineExpose)
+## 三、对外暴露（defineExpose）
 
 - **明确声明**：必须显式通过 `defineExpose` 向父组件暴露需要访问的属性或方法。
 - **父组件访问**：父组件通过 `ref` 访问子组件暴露的内容。

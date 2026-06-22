@@ -18,8 +18,8 @@
 // ✅ 正确：泛型定义
 const props = defineProps<{
   userId: string | number // userId: 用户ID
-  isLoading?: boolean // isLoading: 加载状态，默认 false
-  maxItems?: number // maxItems: 最大条目数，默认 10
+  isLoading?: boolean // isLoading: 加载状态
+  maxItems?: number // maxItems: 最大条目数
 }>()
 
 // ❌ 错误：运行时对象形式（不推荐）

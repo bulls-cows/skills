@@ -162,7 +162,7 @@ const isSelected = computed(() => selectedItems.value.length === totalItems.valu
 // 正确：使用 is 前缀命名
 const hasData = computed(() => dataSource.value.length > 0)
 
-// 正确：使用 meaningful 名称
+// 正确：使用语义化名称
 const formattedDate = computed(() => formatDate(rawDate.value))
 ```
 

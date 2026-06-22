@@ -168,23 +168,27 @@ const UserCard = ({ userId }: IUserCardProps) => {
 
 ```typescript
 // ✅ 正确：泛型组件语法
-interface IListProps<T> {
-  items: T[]
-  renderItem: (item: T) => React.ReactNode
+interface IListItem {
+  id: string | number
 }
 
-const List = <T,>({ items, renderItem }: IListProps<T>): JSX.Element => {
+interface IListProps<T extends IListItem> {
+  items: T[]
+  renderItem: (item: T, index: number) => React.ReactNode
+}
+
+const List = <T extends IListItem>({ items, renderItem }: IListProps<T>): JSX.Element => {
   return (
     <ul>
       {items.map((item, index) => (
-        <li key={index}>{renderItem(item)}</li>
+        <li key={item.id}>{renderItem(item, index)}</li>
       ))}
     </ul>
   )
 }
 
 // 使用
-<List<IUserInfo>
+<List<IUserInfo & IListItem>
   items={userList}
   renderItem={(user) => <span>{user.name}</span>}
 />

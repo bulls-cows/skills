@@ -65,6 +65,7 @@ frontend-rules/
 | **数据修改限制**          | [vue2-interaction.md](./resources/vue2-interaction.md#3-使用限制)                | 禁止修改 props、禁止父组件直接修改子组件内部状态                  |
 | **禁止 $parent 链式访问** | [vue2-interaction.md](./resources/vue2-interaction.md#五禁用-parentchildren)     | 禁止 `$parent.$parent`                                            |
 | **Vue2 响应式陷阱**       | [vue2-reactivity.md](./resources/vue2-reactivity.md)                             | 新增对象属性用 `$set`、数组索引赋值用 `$set`、数组长度用 `splice` |
+| **禁止使用 any**          | [typescript.md](./resources/common-typescript.md#二禁用-any)                     | 使用 unknown/Record/具体类型替代（通用规则，全框架适用）         |
 | **$nextTick 强制**        | [constraints.md](./resources/common-constraints.md#一绝对禁止项100-必须遵守)     | DOM 更新操作必须用 `$nextTick`，禁止 setTimeout 替代              |
 
 ### Vue3
@@ -76,7 +77,6 @@ frontend-rules/
 | **数据修改限制**              | [vue3-interaction.md](./resources/vue3-interaction.md#3-使用限制)                | 禁止修改 props、禁止父组件直接修改子组件内部状态 |
 | **v-for 与 key**              | [vue-template.md](./resources/common-vue-template.md#一v-for-与-key)             | 唯一 ID 作为 key，禁止使用 index                 |
 | **v-if 与 v-for 冲突**        | [vue-template.md](./resources/common-vue-template.md#二v-if-与-v-for-冲突)       | 禁止同时使用在同一个元素上                       |
-| **禁止使用 any**              | [typescript.md](./resources/common-typescript.md#二禁用-any)                     | 使用 unknown/Record/具体类型替代                 |
 
 ### React
 
@@ -87,7 +87,6 @@ frontend-rules/
 | **Hooks 调用规则**     | [react-hooks.md](./resources/react-hooks.md#二hooks-调用规则)     | 仅在组件顶层或自定义 Hook 中调用，禁止条件/循环中调用 |
 | **key 使用规范**       | [react-jsx.md](./resources/react-jsx.md)                          | 列表渲染必须使用唯一 key，禁止使用 index              |
 | **禁止直接修改 state** | [react-state.md](./resources/react-state.md)                      | 使用 setState/useState 更新函数                       |
-| **禁止使用 any**       | [typescript.md](./resources/common-typescript.md#二禁用-any)      | 使用 unknown/Record/具体类型替代                      |
 
 ---
 
@@ -108,12 +107,12 @@ frontend-rules/
 | 规则                     | 详见                                                                    | 说明                                                      |
 | ------------------------ | ----------------------------------------------------------------------- | --------------------------------------------------------- |
 | **SFC 块顺序与脚本结构** | [vue2-order.md](./resources/vue2-order.md)                              | 模板/脚本/样式顺序、Options API 内部 8 段结构             |
-| **Import 分组**          | [vue2-order.md](./resources/vue2-order.md#三import-分组通用-4-组)       | 通用 4 组分组（外部/类型/全局/相对），组内按字母          |
+| **Import 分组**          | [vue2-order.md](./resources/vue2-order.md#三import-分组)               | 通用 4 组分组（外部/类型/全局/相对），组内按字母          |
 | **组件交互与通信**       | [vue2-interaction.md](./resources/vue2-interaction.md)                  | Props 定义、Emit 事件白名单、`$refs` 访问、provide/inject |
 | **模板属性顺序**         | [vue-template.md](./resources/common-vue-template.md#六模板属性顺序)    | HTML 元素上属性的统一排列顺序（Vue2 沿用 8 步）           |
 | **方法函数规范**         | [constraints.md](./resources/common-constraints.md#四方法函数规范强制) | 前置参数校验 + try-catch 错误保底                         |
 | **watch 规范**           | [common-vue-watch.md](./resources/common-vue-watch.md)                  | watch 通用规范（Vue2 特有写法见 vue2-watch.md）、清理机制、与 computed 选择策略 |
-| **Vue2 网络请求（🟦）**  | [network.md](./resources/common-network.md#十一框架请求库选型与标准模板) | `==` 偏好、`this.$message` 提示                           |
+| **Vue2 网络请求（🟦）**  | [network.md](./resources/common-network.md#-十一框架请求库选型与标准模板) | `==` 偏好、`this.$message` 提示                           |
 
 ### Vue3
 
@@ -125,7 +124,7 @@ frontend-rules/
 | **`<script setup>` 结构与代码组织** | [vue3-order.md](./resources/vue3-order.md)                              | SFC 块顺序、Import 分组、脚本内部声明顺序                  |
 | **模板属性顺序**                    | [vue-template.md](./resources/common-vue-template.md#六模板属性顺序)    | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）   |
 | **组件交互与通信**                  | [vue3-interaction.md](./resources/vue3-interaction.md)                  | Props、v-model 兼容、Emit 事件白名单、defineExpose         |
-| **Vue3 网络请求（💚）**             | [network.md](./resources/common-network.md#十一框架请求库选型与标准模板) | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
+| **Vue3 网络请求（💚）**             | [network.md](./resources/common-network.md#-十一框架请求库选型与标准模板) | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览         |
 
 ### React
 
@@ -156,7 +155,7 @@ frontend-rules/
 
 | 规则                        | 详见                                                            | 说明                                         |
 | --------------------------- | --------------------------------------------------------------- | -------------------------------------------- |
-| **Vue2 特有规则: computed** | [vue2-reactivity.md](./resources/vue2-reactivity.md)            | computed 优先、try/catch 包裹                |
+| **Vue2 响应式陷阱进阶**     | [vue2-reactivity.md](./resources/vue2-reactivity.md)            | `$set`/数组索引/数组长度修改的三类陷阱与速查表 |
 | **Vue2 约束（并入通用）**   | [constraints.md](./resources/common-constraints.md)             | 禁止项/推荐项/方法规范/过滤器（🟦 为 Vue2 特有） |
 | **指令简写**                | [vue-template.md](./resources/common-vue-template.md#四指令简写) | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#` |
 | **Vue2 CSS 差异**           | [vue2-css.md](./resources/vue2-css.md)                          | Vue2 指令钩子（`inserted`/`unbind`）、`::v-deep` 穿透写法 |

@@ -62,7 +62,7 @@
 
 ## 八、defineExpose
 
-详见 [interaction.md](./vue3-interaction.md#三对外暴露-defineexpose)（明确声明、父组件访问、禁止滥用规则）。
+详见 [interaction.md](./vue3-interaction.md#三对外暴露defineexpose)（明确声明、父组件访问、禁止滥用规则）。
 
 ---
 

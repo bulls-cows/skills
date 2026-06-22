@@ -91,30 +91,24 @@ return <div>{renderContent()}</div>
 
 ### 命名规范
 
-- 使用 `on` + 事件名（PascalCase）命名
+- **对外回调 Props**：`on` + 事件名（PascalCase），如 `onSelect`、`onUserChange`，与原生事件命名保持一致
+- **组件内部处理函数**：`on` + 事件名 或 `handle` + 事件名（PascalCase），团队内保持一致即可
 - 优先使用箭头函数定义事件处理函数
 
 ```tsx
-// ✅ 正确：onXxx 命名
-const onClickSubmit = () => {
-  /* ... */
-}
-const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  /* ... */
-}
-const onMouseEnterCard = () => {
-  /* ... */
+// ✅ 正确：对外 onXxx，对内 onXxx / handleXxx 均可
+interface IUserListProps {
+  onSelect?: (userId: string) => void
 }
 
-;<button onClick={onClickSubmit}>提交</button>
+const UserList = ({ onSelect }: IUserListProps) => {
+  const handleSelect = (userId: string) => onSelect?.(userId)
+  return <button onClick={() => handleSelect('123')}>选择</button>
+}
 
-// ❌ 错误：不清晰的命名
-const handleClick = () => {
-  /* ... */
-}
-const clickBtn = () => {
-  /* ... */
-}
+// ❌ 错误：命名模糊、缺少动作动词
+const click = () => { /* ... */ }
+const clickBtn = () => { /* ... */ }
 ```
 
 ### 传递参数
@@ -207,8 +201,8 @@ const Card = ({ title, children }: ICardProps) => {
   )
 }
 
-// 使用
-;<Card title="用户信息">
+// 使用：通过 children 组合，而非继承
+<Card title="用户信息">
   <UserInfo userId="123" />
 </Card>
 ```
@@ -252,15 +246,16 @@ const UserList = () => {
 - 使用 `{/* 注释 */}` 格式
 
 ```tsx
-{
-  /* 用户卡片组件 */
+const UserCard = ({ userName, avatar }: IUserCardProps) => {
+  return (
+    <div className="user-card">
+      {/* 头像区域 */}
+      <img src={avatar} alt="头像" />
+      {/* 信息区域 */}
+      <span>{userName}</span>
+    </div>
+  )
 }
-;<div className="user-card">
-  {/* 头像区域 */}
-  <img src={avatar} alt="头像" />
-  {/* 信息区域 */}
-  <span>{userName}</span>
-</div>
 ```
 
 ---

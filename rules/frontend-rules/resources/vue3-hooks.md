@@ -167,7 +167,7 @@ export const useTable = () => {
 
 - 组件中通过 `const { ... } = useXxx()` 解构使用
 - 组件引入后按注释规范标注：`// hook: Hook名`（详见 [comments.md](./common-comments.md)）
-- 导入顺序详见 [order.md](./vue3-order.md#三import-分组排序4-组)
+- 导入顺序详见 [order.md](./vue3-order.md#三import-分组)
 
 ---
 

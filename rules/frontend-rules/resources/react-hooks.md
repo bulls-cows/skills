@@ -79,7 +79,7 @@ const [user, setUser] = useState({ name: '', age: 0, address: { city: '' } })
 
 ### useEffect
 
-- **必须**提供清理函数（cleanup）when needed
+- **必须**在涉及副作用资源（定时器、订阅、事件监听等）时提供清理函数（cleanup）
 - 依赖数组 **必须**完整，包含所有外部依赖
 
 ```typescript
