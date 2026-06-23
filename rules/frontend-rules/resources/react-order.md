@@ -18,13 +18,11 @@
 
 函数组件内部必须按以下宏观顺序排列：
 
-| 步骤 | 内容          | 说明                                         |
-| ---- | ------------- | -------------------------------------------- |
-| 1    | Hooks 调用    | 自定义 Hook / `useState` / `useRef` 等       |
-| 2    | 派生值        | `useMemo` / 渲染时计算的变量                 |
-| 3    | 副作用        | `useEffect`（含清理函数）                    |
-| 4    | 事件处理函数  | `onXxx` 命名的方法（必要时用 `useCallback`） |
-| 5    | render（JSX） | 返回 JSX                                     |
+1. **Hooks 调用**：自定义 Hook / `useState` / `useRef` 等
+2. **派生值**：`useMemo` / 渲染时计算的变量
+3. **副作用**：`useEffect`（含清理函数）
+4. **事件处理函数**：`onXxx` 命名的方法（必要时用 `useCallback`）
+5. **render（JSX）**：返回 JSX
 
 ### 功能模块分组
 
@@ -33,8 +31,6 @@
 `useState` → `useMemo` → `useEffect` → 事件处理
 
 ### 完整示例
-
-> **注意**：第 1~4 步之间可根据功能模块分组，每组内部遵循 `useState` → `useMemo` → `useEffect` → 事件处理的顺序。
 
 ```tsx
 import { useState, useEffect, useMemo, useCallback } from 'react'

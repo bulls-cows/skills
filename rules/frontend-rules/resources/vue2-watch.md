@@ -10,7 +10,7 @@
 
 ## 一、Vue2 watch 选项写法
 
-Vue2 使用 Options API 的 `watch` 选项对象声明侦听器，`key` 为被监听的 `data`/`computed`/`props` 字段名，`value` 为处理逻辑。
+Vue2 通过 Options API 的 `watch` 选项声明侦听器：`key` 为 `data`/`computed`/`props` 字段名，`value` 为处理逻辑。
 
 ### 1.1 三种 value 形式
 
@@ -51,8 +51,6 @@ export default {
 }
 ```
 
-> 监听对象深层属性时需用字符串路径，详见 [第三节](#三vue2-特有字符串路径监听)。
-
 ---
 
 ## 二、Vue2 特有：handler 规范
@@ -89,7 +87,7 @@ export default {
 
 ## 三、Vue2 特有：字符串路径监听
 
-Vue2 的 `watch` 选项 `key` 是字段名，监听对象深层属性或数组元素时**必须使用字符串路径**（Vue2 `watch` 选项不支持 getter 函数，这是与 Vue3 `watch()` 的关键差异）。
+监听对象深层属性或数组元素时**必须使用字符串路径**——Vue2 `watch` 选项不支持 getter 函数，这是与 Vue3 `watch()` 的关键差异。
 
 ```javascript
 export default {
@@ -121,9 +119,9 @@ export default {
 
 ## 四、相关模块引用
 
-| 内容               | 详见                                       |
-| ------------------ | ------------------------------------------ |
-| 通用 watch 理念    | [common-vue-watch.md](./common-vue-watch.md)     |
-| 注释规范           | [common-comments.md](./common-comments.md)       |
+| 内容               | 详见                                                   |
+| ------------------ | ------------------------------------------------------ |
+| 通用 watch 理念    | [common-vue-watch.md](./common-vue-watch.md)           |
+| 注释规范           | [common-comments.md](./common-comments.md)             |
 | 脚本结构顺序       | [vue2-order.md](./vue2-order.md#二script-内部结构顺序) |
-| 响应式陷阱（$set） | [vue2-reactivity.md](./vue2-reactivity.md)           |
+| 响应式陷阱（$set） | [vue2-reactivity.md](./vue2-reactivity.md)             |

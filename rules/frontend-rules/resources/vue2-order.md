@@ -34,14 +34,11 @@ export default {
   name: 'UserListPage',
 
   components: {
-    // component: UserCard
     UserCard,
-    // component: SearchBar
     SearchBar,
   },
 
   props: {
-    // userId: 用户ID
     userId: {
       type: [String, Number],
       required: true,
@@ -50,41 +47,33 @@ export default {
 
   data() {
     return {
-      // searchQuery: 搜索查询参数
       searchQuery: '',
-      // dataSource: 数据源列表
       dataSource: [],
-      // loading: 加载状态
       loading: false,
     }
   },
 
   computed: {
-    // computed: 是否显示搜索按钮
     isShowSearch() {
       return this.searchQuery.length > 0
     },
   },
 
   watch: {
-    // watch: 监听用户输入变化
     searchQuery(newVal) {
       this.fetchSuggestions(newVal)
     },
   },
 
   methods: {
-    // methods: 获取数据
     fetchData() {
       // ...
     },
-    // methods: 搜索处理
     handleSearch() {
       // ...
     },
   },
 
-  // 生命周期钩子
   created() {
     this.fetchData()
   },

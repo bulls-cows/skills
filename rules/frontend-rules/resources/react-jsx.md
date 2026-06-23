@@ -1,6 +1,6 @@
 # React JSX 规范
 
-本规范涵盖 JSX 的语法规范、条件渲染、列表渲染、事件处理、属性传递及样式使用。
+本规范涵盖条件渲染、列表渲染、事件处理、属性传递、组合与样式使用。
 
 ---
 
@@ -47,7 +47,7 @@
 
 ### 复杂条件提前返回
 
-- 当条件复杂时，使用提前返回或抽离为变量
+- 复杂条件使用提前返回或抽离为变量
 
 ```tsx
 // ✅ 正确：提前返回抽离
@@ -92,7 +92,7 @@ return <div>{renderContent()}</div>
 ### 命名规范
 
 - **对外回调 Props**：`on` + 事件名（PascalCase），如 `onSelect`、`onUserChange`，与原生事件命名保持一致
-- **组件内部处理函数**：`on` + 事件名 或 `handle` + 事件名（PascalCase），团队内保持一致即可
+- **组件内部处理函数**：`on` + 事件名 或 `handle` + 事件名（PascalCase）
 - 优先使用箭头函数定义事件处理函数
 
 ```tsx
@@ -107,8 +107,12 @@ const UserList = ({ onSelect }: IUserListProps) => {
 }
 
 // ❌ 错误：命名模糊、缺少动作动词
-const click = () => { /* ... */ }
-const clickBtn = () => { /* ... */ }
+const click = () => {
+  /* ... */
+}
+const clickBtn = () => {
+  /* ... */
+}
 ```
 
 ### 传递参数
@@ -202,7 +206,7 @@ const Card = ({ title, children }: ICardProps) => {
 }
 
 // 使用：通过 children 组合，而非继承
-<Card title="用户信息">
+;<Card title="用户信息">
   <UserInfo userId="123" />
 </Card>
 ```
@@ -283,10 +287,10 @@ import styles from './UserCard.module.scss'
 
 ## 十、相关模块引用
 
-| 内容       | 详见                                   |
-| ---------- | -------------------------------------- |
-| 组件开发   | [react-component-dev.md](./react-component-dev.md) |
-| Hooks 规范 | [common-hooks.md](./common-hooks.md)               |
-| 状态管理   | [react-state.md](./react-state.md)                 |
+| 内容       | 详见                                                |
+| ---------- | --------------------------------------------------- |
+| 组件开发   | [react-component-dev.md](./react-component-dev.md)  |
+| Hooks 规范 | [common-hooks.md](./common-hooks.md)                |
+| 状态管理   | [react-state.md](./react-state.md)                  |
 | CSS 规范   | [common-css.md](./common-css.md#十二react-css-补充) |
-| 命名规范   | [common-naming.md](./common-naming.md)           |
+| 命名规范   | [common-naming.md](./common-naming.md)              |

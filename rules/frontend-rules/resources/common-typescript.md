@@ -2,8 +2,6 @@
 
 <!-- 锚点保护：章节标题不可重命名（外部引用：#二禁用-any、#六类型压制不推荐、#八组件-props-类型定义、#十事件与交互类型、#十二hooks-返回值类型） -->
 
-> Vue3/React 共享的 TypeScript 约定：通用规则 + 框架特定差异。
-
 ## 一、类型注解要求
 
 - **参数/返回值**：必须明确类型
@@ -34,7 +32,9 @@ const isUserInfo = (v: unknown): v is IUserInfo =>
 if (isUserInfo(data)) console.log(data.name)
 
 // catch 子句 err 默认为 unknown（TS 4.4+）
-try { await fetchData() } catch (err) {
+try {
+  await fetchData()
+} catch (err) {
   const message = err instanceof Error ? err.message : String(err)
 }
 ```
@@ -70,11 +70,13 @@ import { IUserInfo, apiGetUser } from '@src/user' // ❌ 混合导入
 
 ## 六、类型压制（不推荐）
 
-**优先完善类型定义**（如让 API 函数返回准确类型）；第三方库类型缺陷等过渡场景可用受控断言。
+**优先完善类型定义**；第三方库类型缺陷等过渡场景可用受控断言。
 
 ```typescript
 // ✅ 优先：API 层声明准确返回类型，消费端自动推断
-const apiGetUser = async (userId: string): Promise<{ data: IUserInfo }> => { /* ... */ }
+const apiGetUser = async (userId: string): Promise<{ data: IUserInfo }> => {
+  /* ... */
+}
 const { data } = await apiGetUser('1')
 
 // ✅ 过渡期：定义最小接口后断言（比 as any 安全）
@@ -88,14 +90,14 @@ const { data } = response as { data: IUserInfo }
 
 ## 七、工具类型与类型派生
 
-| 工具类型       | 用途         | 示例                                        |
-| -------------- | ------------ | ------------------------------------------- |
-| `Pick<T, K>`   | 选取属性     | `Pick<IUserInfo, 'id' \| 'name'>`           |
-| `Omit<T, K>`   | 排除属性     | `Omit<IUserInfo, 'address'>`                |
-| `Partial<T>`   | 全部可选     | `Partial<IUserInfo>`                        |
-| `Required<T>`  | 全部必选     | `Required<IUserInfo>`                       |
-| `Readonly<T>`  | 全部只读     | `Readonly<IUserInfo>`                       |
-| `Record<K, V>` | 键值对       | `Record<string, IUserInfo>`                 |
+| 工具类型       | 用途     | 示例                              |
+| -------------- | -------- | --------------------------------- |
+| `Pick<T, K>`   | 选取属性 | `Pick<IUserInfo, 'id' \| 'name'>` |
+| `Omit<T, K>`   | 排除属性 | `Omit<IUserInfo, 'address'>`      |
+| `Partial<T>`   | 全部可选 | `Partial<IUserInfo>`              |
+| `Required<T>`  | 全部必选 | `Required<IUserInfo>`             |
+| `Readonly<T>`  | 全部只读 | `Readonly<IUserInfo>`             |
+| `Record<K, V>` | 键值对   | `Record<string, IUserInfo>`       |
 
 ```typescript
 // ❌ 错误：interface IUserBrief { id: string; name: string } 重复定义
@@ -152,10 +154,10 @@ type TUserCardProps = IUserCardProps & { extra?: string } // ✅ 派生
 const props = defineProps<{ userId: string | number; isLoading?: boolean }>()
 
 // 可选 Props 用 withDefaults 设默认值
-const props = withDefaults(
-  defineProps<{ title?: string; size?: 'small' | 'medium' | 'large' }>(),
-  { title: '默认标题', size: 'medium' },
-)
+const props = withDefaults(defineProps<{ title?: string; size?: 'small' | 'medium' | 'large' }>(), {
+  title: '默认标题',
+  size: 'medium',
+})
 ```
 
 v-model 兼容模式详见 [vue3-interaction.md](./vue3-interaction.md#2-v-model-写法)。
@@ -181,8 +183,6 @@ export const USER_INFO_KEY: InjectionKey<Ref<IUserInfo | null>> = Symbol('userIn
 
 ## 九、响应式状态类型
 
-**初始值为空或字面量会被收窄时必须显式标注**：
-
 ```typescript
 // React useState
 const [isLoading, setIsLoading] = useState<boolean>(false) // 避免 false 字面量收窄
@@ -207,11 +207,15 @@ const formRef = ref<HTMLFormElement | null>(null) // 模板 ref
 ### Vue3 reactive
 
 ```typescript
-interface IUserState { name: string; age: number; roles: string[] }
+interface IUserState {
+  name: string
+  age: number
+  roles: string[]
+}
 const state = reactive<IUserState>({ name: '', age: 0, roles: [] })
 ```
 
-> **⚠️ ref 解包陷阱**：显式 `reactive<T>()` 会禁用 ref 自动 unwrap 推断。若 state 内需嵌套 ref，`T` 内字段必须显式声明为 `Ref<X>`，或依赖类型推断省略泛型。
+> **⚠️ ref 解包陷阱**：显式 `reactive<T>()` 会禁用 ref 自动 unwrap 推断。若 state 内需嵌套 ref，`T` 内字段必须显式声明为 `Ref<X>`，或省略泛型依赖类型推断。
 
 ### Vue3 computed
 
@@ -305,16 +309,24 @@ interface IUseTableReturn {
 export const useTable = (): IUseTableReturn => {
   const dataSource = ref<IUserInfo[]>([])
   const loading = ref<boolean>(false)
-  const fetchList = async (): Promise<void> => { /* ... */ }
+  const fetchList = async (): Promise<void> => {
+    /* ... */
+  }
   return { dataSource, loading, fetchList }
 }
 
 // React
-interface IUseFetchReturn<T> { data: T | null; loading: boolean; refetch: () => Promise<void> }
+interface IUseFetchReturn<T> {
+  data: T | null
+  loading: boolean
+  refetch: () => Promise<void>
+}
 export const useFetch = <T>(url: string): IUseFetchReturn<T> => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const refetch = async (): Promise<void> => { /* ... */ }
+  const refetch = async (): Promise<void> => {
+    /* ... */
+  }
   return { data, loading, refetch }
 }
 ```

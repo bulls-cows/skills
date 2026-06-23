@@ -9,7 +9,7 @@
 ### 1. 基础定义
 
 - 必须使用 `<script setup>` + TypeScript 类型注解，**类型规范详见** `./common-typescript.md`。
-- 定义应尽量详细，至少指定类型，推荐使用对象形式，包含 `required`/`default`/`validator`。
+- 推荐使用对象形式，包含 `required`/`default`/`validator`。
 - 命名必须 `camelCase`。
 - **必须添加注释**说明参数含义（**注释规范详见** `./common-comments.md`）。
 
@@ -85,7 +85,7 @@ const emit = defineEmits<{
 
 ## 三、对外暴露（defineExpose）
 
-- **明确声明**：必须显式通过 `defineExpose` 向父组件暴露需要访问的属性或方法。
+- **明确声明**：必须通过 `defineExpose` 向父组件暴露需要访问的属性或方法。
 - **父组件访问**：父组件通过 `ref` 访问子组件暴露的内容。
 - **禁止滥用**：仅暴露父组件业务必须调用的方法（如表单校验 `validate`、弹窗开启 `open`），不应暴露内部状态实现。
 

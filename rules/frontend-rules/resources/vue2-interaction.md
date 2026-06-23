@@ -1,7 +1,5 @@
 # Vue2 组件交互与通信规范
 
-> 本规范涵盖 Vue2 组件对外接口（Props/Emits/$refs）及组件间数据通信约定。
-
 ---
 
 ## 一、Props 定义规范
@@ -36,8 +34,8 @@ export default {
 
 ### 3. 使用限制
 
-- **禁止修改 Props**：禁止在子组件内部直接修改 `props` 值
-- **数据流向**：Props 是单向数据流（父 → 子），如需修改父级状态，必须通过 Emit 事件通知父组件
+- **禁止修改 Props**：子组件内不得直接修改 `props` 值
+- **数据流向**：单向数据流（父 → 子），修改父级状态须通过 Emit 事件通知
 
 ---
 
@@ -104,7 +102,7 @@ this.$refs.childRef.someMethod()
 
 ### 1. provide/inject 规范
 
-- **使用场景**：仅用于 3 层以上深层组件传参，避免逐层传递 props
+- **使用场景**：仅用于 3 层以上深层传参，避免逐层传递 props
 - **兄弟组件通信**：使用 Vuex 或 eventBus，禁止通过 provide/inject 跨层级滥用
 - **响应式传递**：`provide() { return { xxx: this.xxx } }` 保持响应式
 

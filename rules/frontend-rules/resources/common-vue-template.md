@@ -1,11 +1,11 @@
 # Vue 模板通用规则（Vue2/Vue3 共享）
 
-> 本规范涵盖 Vue2 与 Vue3 通用的模板规则，包括指令使用、安全约束、简写约定与属性顺序。框架特定差异（如 `v-model` 写法）详见各自框架文档。
+> Vue2 与 Vue3 通用的模板规则；框架特定差异（如 `v-model` 写法）详见各自框架文档。
 
 ## 一、v-for 与 key
 
 - 在组件上**必须**使用 `key` 属性配合 `v-for`，以维护组件内部状态
-- `key` 必须用唯一 ID，**禁止**使用 `index` 作为 key
+- `key` 必须为唯一 ID，**禁止**使用 `index`
 
 ```vue
 <!-- ✅ 正确：使用唯一 ID -->
@@ -68,7 +68,7 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value))
 
 ## 四、指令简写
 
-统一使用指令简写形式，使模板更简洁：
+统一使用指令简写形式：
 
 | 完整写法      | 简写     | 示例                   |
 | ------------- | -------- | ---------------------- |
@@ -95,7 +95,7 @@ const safeHtml = computed(() => DOMPurify.sanitize(rawHtml.value))
 
 ## 六、模板属性顺序
 
-HTML 元素上的属性顺序应保持统一，基础 8 步顺序如下：
+HTML 元素属性顺序应保持统一，基础 8 步如下：
 
 1. 定义（`is`）
 2. `v-for`
@@ -125,7 +125,7 @@ HTML 元素上的属性顺序应保持统一，基础 8 步顺序如下：
 
 ## 七、框架特定差异
 
-| 内容                | Vue2 详见                                                     | Vue3 详见                                                                    |
-| ------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `v-model` 写法      | [vue2-directives.md](./vue2-directives.md#一v-model-写法)    | [vue3-directives.md](./vue3-directives.md#二v-model-写法)                   |
-| 模板属性顺序第 9 步 | 无                                                            | [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)    |
+| 内容                | Vue2 详见                                                 | Vue3 详见                                                                |
+| ------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `v-model` 写法      | [vue2-directives.md](./vue2-directives.md#一v-model-写法) | [vue3-directives.md](./vue3-directives.md#二v-model-写法)                |
+| 模板属性顺序第 9 步 | 无                                                        | [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot) |

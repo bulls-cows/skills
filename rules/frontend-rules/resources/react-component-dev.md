@@ -1,6 +1,6 @@
 # React 组件开发规范
 
-> 本规范仅承载 React 组件开发特有内容。通用规范（JSDoc、命名、注释等）通过引用避免重复。
+> 本规范聚焦 React 组件开发特有内容；通用规范（JSDoc、命名、注释等）见下方引用。
 
 ## 前置阅读
 
@@ -14,10 +14,10 @@
 
 ### 必须使用函数组件
 
-- 使用箭头函数或函数声明定义组件
+- 使用箭头函数定义组件
 - **禁止**使用 Class 组件
 
-```typescript
+```tsx
 // ✅ 正确：箭头函数
 const UserCard = ({ userId, userName }: IUserCardProps) => {
   return (
@@ -79,7 +79,7 @@ Props 的 TypeScript 类型定义详见 [common-typescript.md](./common-typescri
 - **禁止**使用默认导出（`export default`）
 - 统一使用命名导出（`export { ComponentName }`）
 
-```typescript
+```tsx
 // ✅ 正确：命名导出
 export { UserCard }
 
@@ -101,7 +101,7 @@ export default UserCard
 - 每个文件只导出一个主要组件
 - 小型关联组件可放在同一文件
 
-```typescript
+```tsx
 // ✅ 正确：主组件 + 小型子组件
 interface IIconProps {
   name: string
@@ -150,13 +150,13 @@ Import 分组排序规则详见 [react-order.md](./react-order.md#三import-分�
 
 ## 九、相关模块引用
 
-| 内容                | 详见                                     |
-| ------------------- | ---------------------------------------- |
-| 代码组织与顺序      | [react-order.md](./react-order.md)                   |
+| 内容                | 详见                                           |
+| ------------------- | ---------------------------------------------- |
+| 代码组织与顺序      | [react-order.md](./react-order.md)             |
 | 注释规范            | [common-comments.md](./common-comments.md)     |
 | Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
-| 状态管理            | [react-state.md](./react-state.md)                   |
-| JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
+| 状态管理            | [react-state.md](./react-state.md)             |
+| JSX 规范            | [react-jsx.md](./react-jsx.md)                 |
 | TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
 | 命名规范            | [common-naming.md](./common-naming.md)         |
 | 网络请求            | [common-network.md](./common-network.md)       |

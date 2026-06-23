@@ -28,8 +28,7 @@ const [isVisible, setIsVisible] = useState(false)
 
 ### 扁平化状态结构
 
-- 保持状态扁平，避免深层嵌套
-- 相关状态可分组，但不宜过深
+- 保持状态扁平，避免深层嵌套；相关状态可分组，但层级不宜过深
 
 ```typescript
 // ✅ 正确：扁平状态
@@ -83,8 +82,7 @@ const [data, setData] = useState(expensiveComputation())
 
 ### 用于复杂状态逻辑
 
-- 当状态包含多个子值或下一个状态依赖前一个状态时
-- 当状态逻辑复杂时
+- 当状态包含多个关联子值，或下一状态依赖前一状态时使用
 
 ```typescript
 // ✅ 正确：useReducer 处理复杂表单状态
@@ -205,7 +203,9 @@ setUser((prev) => ({ ...prev, name: '张三' }))
 // ❌ 错误：直接修改状态
 user.name = '张三'
 setUser(user)
+```
 
+```typescript
 // ✅ 正确：数组不可变更新
 setList((prev) => [...prev, newItem])
 setList((prev) => prev.filter((item) => item.id !== id))
@@ -247,9 +247,7 @@ useEffect(() => {
 
 ## 七、相关模块引用
 
-| 内容       | 详见                                   |
-| ---------- | -------------------------------------- |
-| 组件交互   | [react-interaction.md](./react-interaction.md)     |
-| Hooks 规范 | [common-hooks.md](./common-hooks.md)               |
-| 组件开发   | [react-component-dev.md](./react-component-dev.md) |
-| TypeScript | [common-typescript.md](./common-typescript.md) |
+- 组件交互：[react-interaction.md](./react-interaction.md)
+- Hooks 规范：[common-hooks.md](./common-hooks.md)
+- 组件开发：[react-component-dev.md](./react-component-dev.md)
+- TypeScript：[common-typescript.md](./common-typescript.md)

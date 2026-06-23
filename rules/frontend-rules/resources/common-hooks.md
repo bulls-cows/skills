@@ -1,8 +1,8 @@
 # Hooks 规范（Vue3 / React 通用）
 
-> 本规范涵盖 Vue3 组合式函数与 React Hooks 的共享约定与框架差异。命名、文件组织、抽离、返回值、注释等通用约定在本文件统一说明，框架特有内容用子小节区分。
+> 本规范涵盖 Vue3 组合式函数与 React Hooks 的共享约定与框架差异，框架特有内容以子小节区分。
 >
-> **优先级说明**：本文件含"Hooks 调用规则"等违反即导致运行时崩溃的强制约束，**第六章属于基础规范（强制）**；其他章节为强烈推荐 / 风格指南。
+> **优先级说明**：**第六章属于基础规范（强制）**，违反将导致运行时崩溃；其他章节为强烈推荐 / 风格指南。
 
 ---
 
@@ -237,8 +237,6 @@ const timerRef = useRef<number | null>(null) // 持久化可变值（修改不�
 
 ### 8.2 Vue3 特有内置 Hooks
 
-Vue3 的内置 Hooks（组合式 API）包括：
-
 - 响应式：`ref`、`reactive`、`computed`、`toRef`、`toRefs`
 - 工具：`unref`、`isRef`、`isReactive`
 - 副作用：`watch`、`watchEffect`、`watchPostEffect`
@@ -250,7 +248,7 @@ Vue3 的内置 Hooks（组合式 API）包括：
 
 ## 九、性能优化 Hooks
 
-仅 React 适用。用于性能优化，**不要**过早使用；当函数/值传递给子组件且子组件有 memo 优化时使用。
+仅 React 适用。**不要**过早使用；当函数/值传递给 memo 子组件时使用。
 
 ```typescript
 // ✅ 正确：传递给 memo 子组件的回调使用 useCallback

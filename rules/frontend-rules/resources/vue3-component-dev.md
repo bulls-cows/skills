@@ -1,6 +1,6 @@
 # Vue3 组件开发规范
 
-> 本规范仅承载 Vue3 组件开发特有内容。通用规范（JSDoc、模板规则、注释等）通过引用避免重复。
+> 本规范仅承载 Vue3 组件开发特有内容，通用规范通过引用避免重复。
 
 ## 前置阅读
 
@@ -12,7 +12,7 @@
 ## 一、`<script setup>` 要求
 
 - **必须使用** `<script setup>` 语法
-- **禁止**使用 Options API 写法（如 `data()`、`methods: {}`、`mounted() {}` 等）
+- **禁止**使用 Options API（如 `data()`、`methods: {}`、`mounted()`）
 - **禁止**在 `<script setup>` 中使用 `this`
 
 ---
@@ -21,7 +21,7 @@
 
 详见 [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序)
 
-`<script setup>` 内部内容必须按以下宏观顺序排列：
+`<script setup>` 内部按以下顺序排列：
 
 1. `imports` → 2. `defineProps` / `defineEmits` → 3. Hooks (useXxx) → 4. 业务逻辑（按功能模块分组，组内顺序：`ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子）→ 5. `defineExpose`
 
@@ -68,14 +68,14 @@
 
 ## 九、相关模块引用
 
-| 内容       | 详见                                                   |
-| ---------- | ------------------------------------------------------ |
-| 注释规范   | [common-comments.md](./common-comments.md)                       |
-| Props 定义 | [vue3-interaction.md](./vue3-interaction.md#一props-定义规范)    |
-| Emit 事件  | [vue3-interaction.md](./vue3-interaction.md#1-事件白名单19-种)   |
-| 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)        |
-| 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                       |
-| watch 监听 | [vue3-watch.md](./vue3-watch.md)                                 |
-| Hooks 规范 | [common-hooks.md](./common-hooks.md)                             |
-| 导入顺序   | [vue3-order.md](./vue3-order.md)                                 |
-| 模板规则   | [common-vue-template.md](./common-vue-template.md) |
+| 内容       | 详见                                                           |
+| ---------- | -------------------------------------------------------------- |
+| 注释规范   | [common-comments.md](./common-comments.md)                     |
+| Props 定义 | [vue3-interaction.md](./vue3-interaction.md#一props-定义规范)  |
+| Emit 事件  | [vue3-interaction.md](./vue3-interaction.md#1-事件白名单19-种) |
+| 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)      |
+| 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                     |
+| watch 监听 | [vue3-watch.md](./vue3-watch.md)                               |
+| Hooks 规范 | [common-hooks.md](./common-hooks.md)                           |
+| 导入顺序   | [vue3-order.md](./vue3-order.md)                               |
+| 模板规则   | [common-vue-template.md](./common-vue-template.md)             |

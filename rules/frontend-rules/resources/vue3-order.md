@@ -26,15 +26,13 @@ Vue3 单文件组件内部块顺序必须保持一致：
 
 ### 功能模块分组
 
-第 4 步中，**同一类别的逻辑应尽可能按功能模块分组**，避免杂乱堆砌。**每个模块内部**通常遵循：
+第 4 步中，**同一类别逻辑按功能模块分组**，**每个模块内部**通常遵循：
 
 `ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子
 
 #### 完整示例
 
-> **注意**：第 4 步"业务逻辑"内部，每个功能模块应遵循 `ref`/`reactive` → `computed` → 方法 → `watch` → 生命周期钩子的顺序。
-
-```typescript
+```vue
 <script setup lang="ts">
 // --- 导入（4 组）---
 // 1. node_modules（外部依赖）
@@ -71,16 +69,28 @@ const { dataSource, getDataSourceTotal } = useTable()
 // --- 业务逻辑：搜索模块 ---
 const searchQuery = ref<string>('')
 const isSearchActive = computed(() => searchQuery.value.length > 0)
-const handleSearch = () => { /* ... */ }
-watch(searchQuery, (newVal) => { /* ... */ })
+const handleSearch = () => {
+  /* ... */
+}
+watch(searchQuery, (newVal) => {
+  /* ... */
+})
 
 // --- 业务逻辑：表单模块 ---
 const formRef = ref<HTMLFormElement | null>(null)
 const form = reactive({ name: '', age: 0 })
-const validateForm = async () => { /* ... */ }
-const resetForm = () => { /* ... */ }
-const onSubmit = async () => { /* ... */ }
-onMounted(() => { /* ... */ })
+const validateForm = async () => {
+  /* ... */
+}
+const resetForm = () => {
+  /* ... */
+}
+const onSubmit = async () => {
+  /* ... */
+}
+onMounted(() => {
+  /* ... */
+})
 
 // --- 对外暴露 ---
 defineExpose({ validateForm, resetForm, getDataSourceTotal })

@@ -19,14 +19,6 @@
 | 批量更新     | `reactive`            | 需要一次性更新多个相关属性                          |
 | 对象解构     | `reactive` + `toRefs` | 解构后仍需保持响应式                                |
 
-### 使用 `reactive` 的场景
-
-仅在以下场景考虑使用 `reactive`：
-
-- **复杂对象结构**：需要管理多层嵌套的对象数据
-- **批量属性更新**：需要一次性更新多个相关属性
-- **对象解构场景**：需要解构后仍保持响应式（配合 `toRefs`）
-
 ---
 
 ## 二、Reactive 转 Ref 规则
@@ -75,7 +67,7 @@ const total = ref(0)
 
 ### Hooks 中的规范
 
-**禁止直接返回 reactive 对象**，必须使用 `toRefs` 解构后返回：
+**禁止直接返回 reactive 对象**：优先用 `ref` 独立声明返回；若使用 `reactive`，必须用 `toRefs` 转换后返回：
 
 ```typescript
 // 错误：直接返回 reactive
@@ -100,14 +92,14 @@ export const useForm = () => {
 
 ### 转换风险
 
-- **解构丢失响应式**：reactive 解构后会丢失响应式，需要配合 `toRefs`
+- **解构丢失响应式**：reactive 解构后需配合 `toRefs`
 - **访问方式变更**：ref 需要 `.value` 访问，reactive 直接访问属性
 - **类型推断差异**：ref 的类型推断更明确，reactive 可能需要额外类型定义
 - **批量更新影响**：reactive 的批量属性更新更简洁，ref 需要逐个更新
 
 ### 变更预览格式
 
-展示给用户确认时，**必须使用 diff 格式展示变更前后对比**：
+展示给用户确认时，**必须使用 diff 格式**：
 
 ```diff
 - // 优化前：使用 reactive
@@ -133,7 +125,7 @@ export const useForm = () => {
 
 ### 核心原则
 
-- 除后端交互数据和部分定时器外，**一律尽可能使用 `computed`**
+- 除后端交互数据和部分定时器外，**尽可能使用 `computed`**
 - 减少冗余 ref 属性，优先派生计算
 - 命名使用 `is` / `has` / `visible` 或有意义的名称
 - **computed 是纯同步 getter**，不应处理异步逻辑或副作用

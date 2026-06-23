@@ -16,13 +16,13 @@
 
 ## 二、模板属性顺序（Vue2 = 8 步）
 
-Vue2 沿用通用规则的 **8 步顺序**，不含 Vue3 特有的第 9 步 `v-slot`。完整顺序详见 [common-vue-template.md](./common-vue-template.md#六模板属性顺序)。
+不含 Vue3 特有的第 9 步 `v-slot`，完整顺序详见 [common-vue-template.md](./common-vue-template.md#六模板属性顺序)。
 
 ---
 
 ## 三、Vue2 自定义指令钩子（与 Vue3 命名不同）
 
-Vue2 自定义指令的钩子名与 Vue3 不同，资源清理必须放在 `unbind`：
+资源清理必须放在 `unbind`：
 
 | 时机           | Vue2 钩子          | Vue3 钩子      | 说明                          |
 | -------------- | ------------------ | -------------- | ----------------------------- |
@@ -41,21 +41,19 @@ export default {
         el.focus()
       },
       unbind(el) {
-        // 清理逻辑（事件监听、定时器等），避免内存泄漏
+        // 清理事件监听、定时器等，避免内存泄漏
       },
     },
   },
 }
 ```
 
-> Vue3 用 `mounted`/`unmounted`，Vue2 用 `inserted`/`unbind`，迁移时需逐一替换。
-
 ---
 
 ## 四、相关模块引用
 
-| 内容                 | 详见                                                   |
-| -------------------- | ------------------------------------------------------ |
+| 内容                 | 详见                                               |
+| -------------------- | -------------------------------------------------- |
 | Vue 模板通用规则     | [common-vue-template.md](./common-vue-template.md) |
-| Props 定义与 v-model | [vue2-interaction.md](./vue2-interaction.md)                     |
-| 组件开发规范         | [vue2-component-dev.md](./vue2-component-dev.md)                 |
+| Props 定义与 v-model | [vue2-interaction.md](./vue2-interaction.md)       |
+| 组件开发规范         | [vue2-component-dev.md](./vue2-component-dev.md)   |

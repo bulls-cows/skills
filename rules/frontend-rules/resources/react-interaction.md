@@ -1,6 +1,6 @@
 # React 组件交互与通信规范
 
-> 本规范涵盖 React 组件对外接口（Props/回调）及组件间数据通信约定，结构与 Vue2/Vue3 `interaction.md` 对齐。
+> 本规范涵盖 React 组件对外接口（Props/回调）及组件间数据通信约定。
 >
 > TypeScript 类型定义详见 [common-typescript.md](./common-typescript.md#八组件-props-类型定义)；状态管理 API（useState/useReducer）详见 [react-state.md](./react-state.md)。
 
@@ -14,7 +14,7 @@
 - 数据流向：父 → 子（props），子 → 父（回调函数）
 - 如需修改父级状态，必须通过回调通知父组件修改
 
-```typescript
+```tsx
 // ❌ 错误：直接修改 props
 const UserCard = ({ user }: IUserCardProps) => {
   user.name = '张三' // 禁止
@@ -23,9 +23,7 @@ const UserCard = ({ user }: IUserCardProps) => {
 
 // ✅ 正确：通过回调通知父组件修改
 const UserCard = ({ user, onUserChange }: IUserCardProps) => (
-  <button onClick={() => onUserChange?.({ ...user, name: '张三' })}>
-    {user.name}
-  </button>
+  <button onClick={() => onUserChange?.({ ...user, name: '张三' })}>{user.name}</button>
 )
 ```
 
@@ -55,10 +53,10 @@ const UserCard = ({ showAvatar = true, maxCount = 10 }: IUserCardProps) => {
 
 ### 1. 命名规范
 
-- 回调 Props 用 `on` + 事件名（PascalCase），与原生事件命名保持一致
+- 回调 Props 用 `on` + 事件名（camelCase），与 React 原生事件（如 `onClick`）保持一致
 - 内部事件处理函数用 `on` + 事件名 或 `handle` + 事件名，团队内保持一致
 
-```typescript
+```tsx
 // ✅ 对外：onSelect / onRemove；对内：handleClick
 interface IUserCardProps {
   onSelect?: (userId: string) => void
@@ -71,7 +69,10 @@ const UserList = ({ onSelect }: IUserListProps) => {
 }
 
 // ❌ 错误：命名不规范
-interface IBadProps { click: (id: string) => void; remove: () => void }
+interface IBadProps {
+  click: (id: string) => void
+  remove: () => void
+}
 ```
 
 ### 2. 事件回调传递
@@ -107,7 +108,7 @@ const Parent = () => {
 
 `useImperativeHandle` 仅用于声明式 API 无法覆盖的场景：表单 `validate()` / `reset()`、弹窗 `open()` / `close()`、滚动容器 `scrollTo()`。
 
-```typescript
+```tsx
 import { useRef, useImperativeHandle, forwardRef } from 'react'
 
 interface IUserFormHandle {
@@ -115,15 +116,17 @@ interface IUserFormHandle {
   reset: () => void
 }
 
-const UserForm = forwardRef<IUserFormHandle, IUserFormProps>(
-  ({ initialValues }, ref) => {
-    const validate = async () => { /* ... */ return true }
-    const reset = () => { /* ... */ }
+const UserForm = forwardRef<IUserFormHandle, IUserFormProps>(({ initialValues }, ref) => {
+  const validate = async () => {
+    /* ... */ return true
+  }
+  const reset = () => {
+    /* ... */
+  }
 
-    useImperativeHandle(ref, () => ({ validate, reset }))
-    return <form>...</form>
-  },
-)
+  useImperativeHandle(ref, () => ({ validate, reset }))
+  return <form>...</form>
+})
 
 UserForm.displayName = 'UserForm' // forwardRef 必须显式声明
 ```
@@ -141,7 +144,7 @@ UserForm.displayName = 'UserForm' // forwardRef 必须显式声明
 
 ### 1. 状态提升（Parent Lifting）
 
-**适用场景**：兄弟组件或跨 2 层以内组件共享状态。将状态提升到最近的共同父组件，父组件通过 Props 向下传递状态和回调，子组件通过回调向上通知。详见 [react-state.md](./react-state.md#六状态提升与跨组件通信)。
+**适用场景**：兄弟组件或跨 2 层以内组件共享状态，将状态提升到最近的共同父组件管理。详见 [react-state.md](./react-state.md#六状态提升与跨组件通信)。
 
 ### 2. Context（跨层级共享）
 
@@ -162,7 +165,7 @@ UserForm.displayName = 'UserForm' // forwardRef 必须显式声明
 
 **适用场景**：跨组件复用渲染逻辑，而非复用状态。
 
-```typescript
+```tsx
 interface IListProps<T> {
   items: T[]
   renderItem: (item: T, index: number) => React.ReactNode
@@ -183,7 +186,7 @@ const List = <T,>({ items, renderItem }: IListProps<T>) => (
 
 **适用场景**：组件 API 复杂、需要灵活组合（如 Tabs、Select、Form、Table）。通过 Context 让子组件隐式获取父组件状态。
 
-```typescript
+```tsx
 const TabsContext = createContext<ITabsContext | null>(null)
 
 const Tabs = ({ defaultActiveKey, children }: ITabsProps) => {
@@ -219,21 +222,21 @@ Tabs.TabPane = TabPane
 
 ## 五、状态管理选型决策树
 
-| 场景                     | 推荐方案                            | 说明                         |
-| ------------------------ | ----------------------------------- | ---------------------------- |
-| 单组件内部状态           | `useState` / `useReducer`           | 简单、零开销                 |
-| 父子通信                 | Props + 回调                        | 显式数据流，最易追踪         |
-| 兄弟 / 2 层以内          | 状态提升                            | 提升到共同父组件             |
-| 跨 3 层以上、中等复杂度  | Context                             | 主题、用户、权限等"全局"语义 |
-| 跨多组件、状态逻辑复杂   | Context + `useReducer`              | 集中状态管理                 |
-| 跨模块、大型应用         | Zustand / Jotai / Redux Toolkit     | 选其一，团队保持一致         |
-| 服务端状态（API 数据）   | TanStack Query (React Query) / SWR  | 区分客户端状态与服务端状态   |
+| 场景                    | 推荐方案                           | 说明                         |
+| ----------------------- | ---------------------------------- | ---------------------------- |
+| 单组件内部状态          | `useState` / `useReducer`          | 简单、零开销                 |
+| 父子通信                | Props + 回调                       | 显式数据流，最易追踪         |
+| 兄弟 / 2 层以内         | 状态提升                           | 提升到共同父组件             |
+| 跨 3 层以上、中等复杂度 | Context                            | 主题、用户、权限等"全局"语义 |
+| 跨多组件、状态逻辑复杂  | Context + `useReducer`             | 集中状态管理                 |
+| 跨模块、大型应用        | Zustand / Jotai / Redux Toolkit    | 选其一，团队保持一致         |
+| 服务端状态（API 数据）  | TanStack Query (React Query) / SWR | 区分客户端状态与服务端状态   |
 
 **选型原则**：
 
 - **优先 useState/useReducer + Props**：能不引入 Context 就不引入
 - **服务端状态与客户端状态分离**：API 缓存、loading、error 用 TanStack Query；UI 状态用 useState/全局状态库
-- **避免过早抽象**：状态管理库是为解决复杂度而生的，简单场景引入反而增加复杂度
+- **避免过早抽象**：简单场景引入状态管理库反而增加复杂度
 - **团队一致性优先**：选定一个库（如 Zustand）就坚持用，不要混用 Redux + Zustand + Jotai
 
 ### Zustand 简单示例
@@ -300,13 +303,13 @@ eventBus.emit('user:login', { id: '1', name: '张三' })
 
 ## 七、相关模块引用
 
-| 内容                | 详见                                     |
-| ------------------- | ---------------------------------------- |
-| TypeScript 类型     | [common-typescript.md](./common-typescript.md)       |
-| 组件开发规范        | [react-component-dev.md](./react-component-dev.md)   |
-| 状态管理 API        | [react-state.md](./react-state.md)                   |
-| JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
-| Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
-| TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
-| 命名规范            | [common-naming.md](./common-naming.md)         |
-| 约束清单            | [common-constraints.md](./common-constraints.md) |
+| 内容                | 详见                                               |
+| ------------------- | -------------------------------------------------- |
+| TypeScript 类型     | [common-typescript.md](./common-typescript.md)     |
+| 组件开发规范        | [react-component-dev.md](./react-component-dev.md) |
+| 状态管理 API        | [react-state.md](./react-state.md)                 |
+| JSX 规范            | [react-jsx.md](./react-jsx.md)                     |
+| Hooks 通用规范      | [common-hooks.md](./common-hooks.md)               |
+| TypeScript 通用规范 | [common-typescript.md](./common-typescript.md)     |
+| 命名规范            | [common-naming.md](./common-naming.md)             |
+| 约束清单            | [common-constraints.md](./common-constraints.md)   |

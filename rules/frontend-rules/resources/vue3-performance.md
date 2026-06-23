@@ -4,7 +4,7 @@
 
 ## 一、组件懒加载使用 `defineAsyncComponent`
 
-Vue3 中大组件懒加载使用 `defineAsyncComponent` 动态导入，路由页面使用 `() => import()` 惰性加载：
+大组件用 `defineAsyncComponent` 动态导入，路由页面用 `() => import()` 惰性加载：
 
 ```typescript
 import { defineAsyncComponent } from 'vue'
@@ -21,8 +21,6 @@ const routes = [
   },
 ]
 ```
-
----
 
 ## 二、响应式性能使用 `shallowRef`
 
@@ -44,11 +42,9 @@ const loadList = async () => {
 }
 ```
 
----
-
 ## 三、自定义指令清理（`unmounted` 钩子）
 
-Vue3 自定义指令在 `unmounted` 钩子中必须清理事件监听器和定时器：
+自定义指令必须在 `unmounted` 钩子中清理事件监听器和定时器：
 
 ```typescript
 app.directive('focus', {
@@ -63,12 +59,8 @@ app.directive('focus', {
 
 > Vue3 指令钩子名与 Vue2 不同：Vue3 使用 `mounted`/`unmounted`，Vue2 使用 `inserted`/`unbind`。
 
----
-
 ## 四、相关模块引用
 
-| 模块           | 路径                                  |
-| -------------- | ------------------------------------- |
-| 通用性能优化   | [common-performance.md](./common-performance.md) |
-| Vue3 响应式    | [vue3-reactivity.md](./vue3-reactivity.md)      |
-| Vue3 指令钩子  | [vue3-directives.md](./vue3-directives.md) |
+- 通用性能优化：[common-performance.md](./common-performance.md)
+- Vue3 响应式：[vue3-reactivity.md](./vue3-reactivity.md)
+- Vue3 指令钩子：[vue3-directives.md](./vue3-directives.md)
