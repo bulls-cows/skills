@@ -32,16 +32,7 @@ const data: any = JSON.parse(raw) // 禁止
 
 ## 三、类型命名规范
 
-- 类型别名和接口统一使用 **`I` 前缀 + PascalCase** 命名（详见 [common-naming.md](./common-naming.md#三变量与常量规范)）
-
-```typescript
-// ✅ 正确
-interface IUserInfo {
-  id: string
-  name: string
-}
-type TUserList = IUserInfo[]
-```
+类型命名（接口 `I` 前缀、类型别名 `T` 前缀）的统一规则与代码示例详见 [common-naming.md](./common-naming.md#类型命名代码示例)。
 
 ---
 
