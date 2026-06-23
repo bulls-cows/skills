@@ -39,11 +39,10 @@
 | ------------------------------------------ | ------------------------------------------------- |
 | [vue2-component-dev.md](./vue2-component-dev.md) | 组件开发规范（Options API）                       |
 | [vue2-interaction.md](./vue2-interaction.md)     | 组件交互与通信（Props/Emit/$refs/provide/inject） |
-| [vue2-directives.md](./vue2-directives.md)       | 模板指令规范（Vue2 特有差异）                     |
+| [vue2-directives.md](./vue2-directives.md)       | 模板指令规范（指令钩子等 Vue2 特有差异）          |
 | [vue2-order.md](./vue2-order.md)                 | SFC 结构顺序与导入分组（3 组 import）             |
 | [vue2-reactivity.md](./vue2-reactivity.md)       | Vue2 响应式陷阱（$set/数组/对象）                 |
 | [vue2-watch.md](./vue2-watch.md)                 | Vue2 侦听器（watch 选项特有写法）                 |
-| [vue2-css.md](./vue2-css.md)                     | Vue2 CSS 差异（指令钩子、`::v-deep` 穿透写法）    |
 
 > Vue2 特有约束（修改 data 原始类型、mixins、`$nextTick`、方法函数规范、filters 过滤器等）已并入 [common-constraints.md](./common-constraints.md)。
 > Vue2 网络请求差异（Options API 写法、loading 互斥锁）已并入 [common-network.md](./common-network.md)。

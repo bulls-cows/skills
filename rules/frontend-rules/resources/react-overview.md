@@ -18,7 +18,7 @@
 | TypeScript | 推荐                  | 类型安全，优先使用 TS           |
 | 组件模式   | 函数组件              | 禁止使用 Class 组件             |
 | 状态管理   | Hooks                 | useState / useReducer / Context |
-| 样式方案   | CSS Modules / SCSS 等 | 详见 [CSS 规范](./react-css.md)       |
+| 样式方案   | CSS Modules / SCSS 等 | 详见 [CSS 规范](./common-css.md#十二react-css-补充)       |
 
 ---
 
@@ -67,7 +67,7 @@ class UserList extends React.Component {
 | Hooks 规范      | [common-hooks.md](./common-hooks.md)                   | Hook 调用规则、内置 Hooks                                         |
 | 状态管理        | [react-state.md](./react-state.md)                     | useState / useReducer                                             |
 | JSX 规范        | [react-jsx.md](./react-jsx.md)                         | 条件渲染、列表、事件处理                                          |
-| CSS 规范        | [react-css.md](./react-css.md)                         | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |
+| CSS 规范        | [common-css.md](./common-css.md#十二react-css-补充)    | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |
 | TypeScript      | [common-typescript.md](./common-typescript.md)        | 类型注解、Props 定义                                              |
 
 ### 通用规范引用

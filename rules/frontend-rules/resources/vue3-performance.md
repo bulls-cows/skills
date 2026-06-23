@@ -71,4 +71,4 @@ app.directive('focus', {
 | -------------- | ------------------------------------- |
 | 通用性能优化   | [common-performance.md](./common-performance.md) |
 | Vue3 响应式    | [vue3-reactivity.md](./vue3-reactivity.md)      |
-| Vue3 CSS 差异  | [vue3-css.md](./vue3-css.md)                     |
+| Vue3 指令钩子  | [vue3-directives.md](./vue3-directives.md) |

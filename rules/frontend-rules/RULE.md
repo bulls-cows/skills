@@ -87,7 +87,7 @@ frontend-rules/
 | **Vue2 响应式陷阱进阶**   | 🟢     | [vue2-reactivity.md](./resources/vue2-reactivity.md)                      | `$set`/数组索引/数组长度修改的三类陷阱与速查表                         |
 | **Vue2 约束（并入通用）** | 🟢     | [common-constraints.md](./resources/common-constraints.md)                       | 禁止项/推荐项/方法规范/过滤器（Vue2 特有）                             |
 | **指令简写**              | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
-| **Vue2 CSS 差异**         | 🟢     | [vue2-css.md](./resources/vue2-css.md)                                    | Vue2 指令钩子（`inserted`/`unbind`）、`::v-deep` 穿透写法              |
+| **Vue2 指令钩子**         | 🟢     | [vue2-directives.md](./resources/vue2-directives.md)                      | Vue2 指令钩子（`inserted`/`unbind`）、与 Vue3 命名差异                 |
 
 ### Vue3
 
@@ -111,7 +111,7 @@ frontend-rules/
 | **TypeScript 类型注解**           | 🟢     | [common-typescript.md](./resources/common-typescript.md)                 | defineProps/ref/reactive/Emits 泛型                                    |
 | **TypeScript 约束**               | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`                      |
 | **指令简写**                      | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
-| **Vue3 CSS 差异**                 | 🟢     | [vue3-css.md](./resources/vue3-css.md)                                    | Vue3 指令钩子（`mounted`/`unmounted`）、`:deep()` 穿透写法             |
+| **Vue3 指令钩子**                 | 🟢     | [vue3-directives.md](./resources/vue3-directives.md)                      | Vue3 指令钩子（`mounted`/`unmounted`）、与 Vue2 命名差异               |
 | **Vue3 性能差异**                 | 🟢     | [vue3-performance.md](./resources/vue3-performance.md)                    | defineAsyncComponent、shallowRef、unmounted 钩子                       |
 
 ### React
@@ -132,7 +132,7 @@ frontend-rules/
 | **TypeScript 类型注解**  | 🟢     | [common-typescript.md](./resources/common-typescript.md)   | Props、useState、useRef、事件、泛型组件                                |
 | **TypeScript 约束**      | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐) | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`               |
 | **JSX 规范**             | 🟢     | [react-jsx.md](./resources/react-jsx.md)                   | 条件渲染、列表渲染、事件处理、属性传递                                 |
-| **React CSS 差异**       | 🟢     | [react-css.md](./resources/react-css.md)                   | CSS Modules、className、clsx、`:global()` 穿透、方案选型              |
+| **React CSS 差异**       | 🟢     | [common-css.md](./resources/common-css.md#十二react-css-补充)             | CSS Modules、className、clsx、`:global()` 穿透、方案选型              |
 
 ---
 

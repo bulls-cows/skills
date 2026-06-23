@@ -4,7 +4,7 @@
 
 ## 一、CSS 基础配置
 
-- 预处理器：优先使用 Sass/SCSS，Less 为辅
+- 预处理器：优先使用 Sass/SCSS/Less
 - 格式化：Prettier + stylelint 统一格式化，禁止手动调整格式
 - 全局样式：统一放在 `src/styles/` 目录下，包括变量、混合、重置样式、公共类等
 - 组件样式：优先使用局部作用域（Vue 的 `scoped`、React 的 CSS Modules），避免全局样式污染
@@ -195,11 +195,12 @@
 
 ### 三框架写法对比
 
-| 框架  | 局部作用域机制    | 穿透写法                         | 典型场景                       |
-| ----- | ----------------- | -------------------------------- | ------------------------------ |
-| Vue2  | `<style scoped>`  | `::v-deep` 或 `/deep/` 或 `>>>`  | 穿透 `v-html` 注入内容         |
-| Vue3  | `<style scoped>`  | `:deep()`                        | 穿透 `v-html` 注入内容         |
-| React | `*.module.scss`   | `:global()` 或全局类名           | 穿透第三方组件内部 DOM         |
+| 框架  | 局部作用域机制   | 穿透写法                        | 典型场景               |
+| ----- | ---------------- | ------------------------------- | ---------------------- |
+| Vue2  | `<style scoped>` | `::v-deep` 或 `/deep/` 或 `>>>` | 穿透 `v-html` 注入内容 |
+| Vue3  | `<style scoped>` | `:deep()`                       | 穿透 `v-html` 注入内容 |
+| React | `*.module.scss`  | `:global()` 或全局类名          | 穿透第三方组件内部 DOM |
+
 ### Vue2 写法（`::v-deep`）
 
 ```vue
@@ -275,10 +276,70 @@ React 无 `scoped`，靠 CSS Modules 的哈希类名隔离。穿透第三方组�
 
 > React 中若第三方组件类名本身就是全局的（如 antd 的 `.ant-btn`），也可直接在全局样式文件中写，无需 `:global()`。
 
-### 框架特定补充
+---
 
-各框架自定义指令清理、Vue2 与 Vue3 指令钩子命名差异等与样式相关的特有内容，详见各自框架文档：
+## 十二、React CSS 补充
 
-- Vue2：[vue2-css.md](./vue2-css.md)
-- Vue3：[vue3-css.md](./vue3-css.md)
-- React：[react-css.md](./react-css.md)
+> 作用域穿透的通用理念与 React `:global()` 写法详见 [十一、作用域穿透](#十一作用域穿透vue2vue3react-共享理念)；本节仅承载 React 框架特有内容。
+
+### 作用域隔离方案选型
+
+React 无 Vue 的 `scoped`，靠以下方案实现样式隔离。**默认首选 CSS Modules**：
+
+| 方案                                     | 适用场景                                    | 推荐度                                                  |
+| ---------------------------------------- | ------------------------------------------- | ------------------------------------------------------- |
+| **CSS Modules**（`*.module.scss`）       | 默认首选，天然哈希类名隔离，对应 Vue scoped | ⭐⭐⭐ 推荐                                             |
+| **Sass/SCSS**                            | 预处理器，与 CSS Modules 搭配               | ⭐⭐⭐ 推荐                                             |
+| styled-components / Emotion（CSS-in-JS） | 动态样式、强主题化场景                      | ⭐⭐ 按需                                               |
+| Tailwind CSS（原子化）                   | 工具类优先、快速布局                        | ⭐⭐ 按需                                               |
+| 内联 `style`                             | 仅动态计算的单个属性                        | ❌ 禁止（见 [react-jsx.md](./react-jsx.md#九样式使用)） |
+
+### CSS Modules 基本用法
+
+#### 文件命名与导入
+
+样式文件必须以 `.module.scss`（或 `.module.css`）为后缀，导入语句归在 import 第 4 组「相对依赖」（详见 [react-order.md](./react-order.md#三import-分组)）：
+
+```tsx
+import styles from './UserCard.module.scss'
+```
+
+#### 类名引用
+
+用 `className`（**禁止**用 HTML 的 `class`），通过 `styles.类名` 引用：
+
+```tsx
+// ✅ 正确：CSS Modules
+<div className={styles.userCard}>...</div>
+
+// ❌ 错误：内联样式
+<div style={{ color: 'red', fontSize: 14 }}>...</div>
+
+// ❌ 错误：使用 class（HTML 属性）
+<div class="user-card">...</div>
+```
+
+### 动态类名（clsx）
+
+条件类名**优先使用 `clsx`**（或 `classnames`）库，避免模板字符串拼接带来的可读性问题：
+
+```tsx
+import clsx from 'clsx'
+
+// ✅ 正确：clsx 管理条件类名
+<div className={clsx(styles.userCard, {
+  [styles.active]: isActive,
+  [styles.disabled]: isDisabled,
+})}>...</div>
+
+// ⚠️ 不推荐：模板字符串拼接（简单场景可用，条件多了难维护）
+<div className={`user-card ${isActive ? 'user-card--active' : ''}`}>...</div>
+```
+
+### 相关模块引用
+
+| 模块               | 路径                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| 作用域穿透（通用） | [common-css.md 穿透章节](./common-css.md#十一作用域穿透vue2vue3react-共享理念) |
+| 样式使用（jsx）    | [react-jsx.md](./react-jsx.md#九样式使用)                                      |
+| 导入顺序           | [react-order.md](./react-order.md#三import-分组)                               |
