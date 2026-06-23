@@ -51,7 +51,7 @@
 | 原写法                       | 推荐写法                        |
 | ---------------------------- | ------------------------------- |
 | `function fetchData() {}`    | `const fetchData = () => {}`    |
-| `function handleClick(e) {}` | `const handleClick = (e) => {}` |
+| `function onBtnClick(e) {}`  | `const onBtnClick = (e) => {}`  |
 
 ---
 
@@ -74,7 +74,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import type { User } from '@/types/user'
+import type { IUser } from '@/types/user'
 
 import { formatDate } from '@/utils/date'
 import { useUserStore } from '@/stores/user'
@@ -93,53 +93,77 @@ import './index.scss'
 1. 导入语句（按上述分组顺序）
 2. 常量定义（枚举、全局常量、配置项）
 3. 类型定义（TypeScript 接口、类型别名）
-4. 状态声明（响应式状态、普通变量）
-5. 计算属性 / 派生状态
-6. 工具函数（内部使用的普通函数）
-7. 事件处理函数（以 `on` 开头的函数）
-8. 生命周期钩子（Vue）/ 副作用（React Hooks）
-9. 导出语句（默认导出 / 具名导出）
+4. 业务逻辑（按功能模块分组，模块内部按「状态 → 计算属性 → 工具函数 → 事件处理函数」顺序书写）
+5. 生命周期钩子（Vue）/ 副作用（React Hooks）
+6. 导出语句（默认导出 / 具名导出）
+
+> **功能模块分组原则**：第 4 步是核心，按业务功能（如「列表查询」「状态筛选」「表单」等）将相关的状态、计算属性、工具函数、事件处理聚拢到同一模块，模块之间用空行或注释分隔；避免把所有状态、所有函数分别堆在一起。逻辑单一时只写一个模块即可。
+>
+> **生命周期 / 副作用**：通用规范将其作为独立的尾部区块；框架项目以各框架 `order.md` 为准（如 Vue3 / React 建议把 `watch` / `onMounted` / `useEffect` 就近放入对应功能模块）。
 
 ```typescript
 // ✅ 正确示例
 // 1. 导入
 import { ref, computed, onMounted } from 'vue'
-import { useUserStore } from '@/stores/user'
+
+import type { IUser } from '@/types/user'
+
 // 2. 常量
 const PAGE_SIZE = 10
 const STATUS_OPTIONS = [
   { label: '正常', value: 1 },
   { label: '禁用', value: 2 },
 ]
+
 // 3. 类型
-type ListQuery = {
+type TListQuery = {
   page: number
   pageSize: number
   keyword?: string
 }
-// 4. 状态
+
+// 4. 业务逻辑（按功能模块分组）
+
+// --- 功能模块：列表查询 ---
+// 状态
 const loading = ref(false)
-const list = ref<User[]>([])
-const query = ref<ListQuery>({ page: 1, pageSize: PAGE_SIZE })
-// 5. 计算属性
+const list = ref<IUser[]>([])
+const query = ref<TListQuery>({ page: 1, pageSize: PAGE_SIZE })
+// 计算属性
 const total = computed(() => list.value.length)
-const disableSubmit = computed(() => loading.value || !query.value.keyword)
-// 6. 工具函数
-const formatStatus = (status: number) => {
-  return STATUS_OPTIONS.find((item) => item.value === status)?.label || '-'
-}
-// 7. 事件处理
-const onSearch = async () => {
+const isSubmitDisabled = computed(() => loading.value || !query.value.keyword)
+// 事件处理
+const onSearchBtnClick = async () => {
   loading.value = true
   // 请求逻辑
   loading.value = false
 }
-// 8. 生命周期
-onMounted(() => {
-  onSearch()
+
+// --- 功能模块：状态筛选 ---
+// 状态
+const currentStatus = ref<number>()
+// 计算属性
+const isFilterActive = computed(() => currentStatus.value !== undefined)
+const filteredList = computed(() => {
+  if (!isFilterActive.value) return list.value
+  return list.value.filter((item) => item.status === currentStatus.value)
 })
-// 9. 导出
-export { list, onSearch }
+// 工具函数
+const formatStatus = (status: number) => {
+  return STATUS_OPTIONS.find((item) => item.value === status)?.label || '-'
+}
+// 事件处理
+const onStatusSelect = (value: number) => {
+  currentStatus.value = value
+}
+
+// 5. 生命周期
+onMounted(() => {
+  onSearchBtnClick()
+})
+
+// 6. 导出
+export { list, filteredList, onSearchBtnClick }
 ```
 
 > 框架特定的结构顺序详见 [vue2-order.md](./vue2-order.md)、[vue3-order.md](./vue3-order.md)、[react-order.md](./react-order.md)。
