@@ -12,7 +12,7 @@
 
 | #   | 禁止项                      | 说明                                                                                                                                             | 反例 ❌                                                            | 正确示例 ✅                                          |
 | --- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ | ---------------------------------------------------- |
-| 1   | 连续数据解构                | 禁止多层连续解构后端响应数据，详见 [common-network.md](./common-network.md#二响应处理)                                                                         | `const { data } = await api.getUser(); const { list } = data.data` | `const { data: { list } } = await api.getUser()`     |
+| 1   | 连续数据解构                | 禁止多层连续解构后端响应数据，详见 [common-network.md](./common-network.md#强制原则)                                                                         | `const { data } = await api.getUser(); const { list } = data.data` | `const { data: { list } } = await api.getUser()`     |
 | 2   | 父组件修改子组件数据        | 禁止直接修改子组件内部状态                                                                                                                       | `this.$refs.child.form.name = 'test'`                              | 通过 props 传递数据，子组件 emit 事件通知父组件修改  |
 | 3   | 硬编码接口地址              | 禁止在代码中直接硬编码 API URL、域名等配置                                                                                                       | `const res = await fetch('https://api.example.com/user')`          | 从环境变量或配置文件读取接口地址                     |
 | 4   | 修改 props                  | 禁止直接修改 props，props 是只读的                                                                                                               | `props.user.name = 'new name'`                                     | 通过 emit 事件通知父组件修改源数据                   |
@@ -20,7 +20,7 @@
 | 6   | 列表与条件同元素            | 禁止同一元素同时使用 `v-for` 和 `v-if`，详见 [common-vue-template.md](./common-vue-template.md#二v-if-与-v-for-冲突)                                           | `<div v-for="item in list" v-if="item.show">`                      | 用外层 template 包裹循环，内层写条件，或先过滤列表   |
 | 7   | index 作为 key              | 列表渲染必须使用唯一业务 ID 作为 key，详见 [common-vue-template.md](./common-vue-template.md#一v-for-与-key)（Vue）与 [react-jsx.md](./react-jsx.md)（React） | `<div v-for="(item, index) in list" :key="index">`                 | `<div v-for="item in list" :key="item.id">`          |
 | 8   | 跨层级组件通信              | 禁止使用 `$parent` / `$root` 链式访问跨层级组件状态或方法                                                                                        | `this.$parent.$parent.$refs.form.submit()`                         | 使用 provide/inject、状态管理库或事件总线实现通信    |
-| 9   | 空的 `catch`                | 捕获错误后必须记录，详见 [common-network.md](./common-network.md#三错误处理)                                                                                   | `try { ... } catch (e) { /* 空 */ }`                               | `try { ... } catch (e) { console.warn(e) }`          |
+| 9   | 空的 `catch`                | 捕获错误后必须记录，详见 [common-network.md](./common-network.md#错误处理)                                                                                   | `try { ... } catch (e) { /* 空 */ }`                               | `try { ... } catch (e) { console.warn(e) }`          |
 | 10  | 使用 `any` 类型             | 禁止使用 `any`，详见 [common-typescript.md](./common-typescript.md#二禁用-any)                                                                                 | `const data: any = ...`                                            | `const data: unknown = ...`                          |
 | 11  | 未过滤的 `v-html`           | 富文本必须用 DOMPurify 过滤，详见 [common-vue-template.md](./common-vue-template.md#三v-html-安全)                                                             | `<div v-html="rawHtml">`                                           | `<div v-html="DOMPurify.sanitize(rawHtml)">`         |
 | 12  | 修改 data 原始类型          | Vue2：后端给什么类型用什么，不可修改原始类型                                                                                                     | `this.formData.count = String(this.formData.count)`                | 保持原始类型，需要转换时另存变量                     |
@@ -92,7 +92,7 @@ async onClickSupervise(row) {
 | **未使用变量** | ESLint 已关闭未使用变量检查，开发者需自行清理无用代码，保持代码整洁                                                             |
 | **动态 HTML**  | 允许使用 `v-html` / `dangerouslySetInnerHTML`，但必须使用 DOMPurify 过滤内容，防范 XSS 风险                                     |
 | **props 解构** | 允许解构 props，但必须注意响应式丢失问题，解构后的值不会随 props 更新而更新                                                     |
-| **等于运算符** | Vue2 项目偏好 `==`（详见 [common-network.md](./common-network.md#十其他注意事项)），Vue3/React 通用规范偏好 `===`；改动等号时需提醒用户确认 |
+| **等于运算符** | 项目偏好 `==`，网络请求时使用 `===`；改动等号时需提醒用户确认 |
 | **注释检查**   | 注释相关问题默认忽略，开发者自行维护注释的准确性和完整性，详见 [common-comments.md](./common-comments.md)                                     |
 | **过度封装**   | 避免过度封装，简单逻辑直接写在模板中，提高可读性                                                                                |
 | **魔法数字**   | 避免在代码中直接使用无意义的数字，如 `if (status === 3)`，需定义为常量 `const STATUS_AUDIT_PASS = 3`                            |

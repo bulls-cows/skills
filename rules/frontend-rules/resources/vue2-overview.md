@@ -46,7 +46,7 @@
 | [vue2-css.md](./vue2-css.md)                     | Vue2 CSS 差异（指令钩子、`::v-deep` 穿透写法）    |
 
 > Vue2 特有约束（修改 data 原始类型、mixins、`$nextTick`、方法函数规范、filters 过滤器等）已并入 [common-constraints.md](./common-constraints.md)。
-> Vue2 网络请求差异（`==` 偏好、`this.$message` 提示）已并入 [common-network.md](./common-network.md)。
+> Vue2 网络请求差异（Options API 写法、loading 互斥锁）已并入 [common-network.md](./common-network.md)。
 
 ---
 

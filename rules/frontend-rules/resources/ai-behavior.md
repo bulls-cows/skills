@@ -34,7 +34,7 @@
 
 1. 所有生成的代码必须符合当前项目的命名规范（[common-naming.md](./common-naming.md)）、代码风格（[common-code-style.md](./common-code-style.md)）、架构模式
 2. 必须包含必要的注释，说明代码的用途、参数、返回值、注意事项（[common-comments.md](./common-comments.md)）
-3. 必须考虑异常处理，避免出现空指针、未捕获异常等问题（[common-network.md](./common-network.md#三错误处理)）
+3. 必须考虑异常处理，避免出现空指针、未捕获异常等问题（[common-network.md](./common-network.md#错误处理)）
 4. 必须考虑性能优化，避免出现内存泄漏、不必要的重渲染等问题（[common-performance.md](./common-performance.md)）
 5. 必须考虑兼容性，支持项目要求的浏览器版本（[common-css.md](./common-css.md#五css-兼容性指南)）
 

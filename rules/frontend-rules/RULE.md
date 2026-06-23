@@ -50,12 +50,12 @@ frontend-rules/
 | ------------------------- | ------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **网络请求规范**          | 🔴     | [common-network.md](./resources/common-network.md)                               | async/await、响应解构、错误处理、防重复提交                                                  |
 | **v-html 安全**           | 🔴     | [common-vue-template.md](./resources/common-vue-template.md#三v-html-安全)       | 必须用 DOMPurify 过滤 HTML                                                                   |
-| **禁止空 catch**          | 🔴     | [common-network.md](./resources/common-network.md#三错误处理)                    | 捕获错误后必须记录                                                                           |
-| **禁止连续数据解构**      | 🔴     | [common-network.md](./resources/common-network.md#二响应处理)                    | 禁止 `...data.data`                                                                          |
+| **禁止空 catch**          | 🔴     | [common-network.md](./resources/common-network.md#错误处理)                      | 捕获错误后必须记录                                                                           |
+| **禁止连续数据解构**      | 🔴     | [common-network.md](./resources/common-network.md#强制原则)                      | 禁止 `...data.data`                                                                          |
 | **禁止无意义命名**        | 🔴     | [common-naming.md](./resources/common-naming.md)                                 | 禁止 `data1`、`temp2`                                                                        |
 | **禁止使用 any**          | 🔴     | [common-typescript.md](./resources/common-typescript.md#二禁用-any)              | 使用 unknown/Record/具体类型替代                                                             |
 | **文件与标识符命名**      | 🟠     | [common-naming.md](./resources/common-naming.md)                                 | 组件、文件、API、事件、常量、布尔值、CSS BEM 等                                              |
-| **响应处理**              | 🟠     | [common-network.md](./resources/common-network.md#二响应处理)                    | 单次解构、先判断成功后使用数据                                                               |
+| **响应处理**              | 🟠     | [common-network.md](./resources/common-network.md#强制原则)                      | 单次解构、先判断成功后使用数据                                                               |
 | **Hooks 命名/抽离/返回值** | 🟠     | [common-hooks.md](./resources/common-hooks.md)                                   | use 开头、30 行/2 组件抽离、返回对象                                                         |
 | **格式化与工具链**        | 🟢     | [common-code-style.md](./resources/common-code-style.md)                         | Prettier 配置、函数写法偏好                                                                  |
 | **注释规范**              | 🟢     | [common-comments.md](./resources/common-comments.md)                             | 模板区、脚本区、样式区注释格式，注释保护原则                                                 |
@@ -83,7 +83,7 @@ frontend-rules/
 | **模板属性顺序**          | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue2 沿用 8 步）                        |
 | **方法函数规范**          | 🟠     | [common-constraints.md](./resources/common-constraints.md#四方法函数规范强制)    | 前置参数校验 + try-catch 错误保底                                      |
 | **watch 规范**            | 🟠     | [common-vue-watch.md](./resources/common-vue-watch.md)                    | watch 通用规范（Vue2 特有写法见 vue2-watch.md）、清理机制、与 computed 选择策略 |
-| **Vue2 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | `==` 偏好、`this.$message` 提示                                        |
+| **Vue2 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#一网络请求处理规范)  | Options API 写法、loading 互斥锁                                        |
 | **Vue2 响应式陷阱进阶**   | 🟢     | [vue2-reactivity.md](./resources/vue2-reactivity.md)                      | `$set`/数组索引/数组长度修改的三类陷阱与速查表                         |
 | **Vue2 约束（并入通用）** | 🟢     | [common-constraints.md](./resources/common-constraints.md)                       | 禁止项/推荐项/方法规范/过滤器（Vue2 特有）                             |
 | **指令简写**              | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
@@ -107,7 +107,7 @@ frontend-rules/
 | **`<script setup>` 结构与代码组织** | 🟠   | [vue3-order.md](./resources/vue3-order.md)                                | SFC 块顺序、Import 分组、脚本内部声明顺序                              |
 | **模板属性顺序**                  | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）                |
 | **组件交互与通信**                | 🟠     | [vue3-interaction.md](./resources/vue3-interaction.md)                    | Props、v-model 兼容、Emit 事件白名单、defineExpose                     |
-| **Vue3 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览                     |
+| **Vue3 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#一网络请求处理规范)  | useRequest 前置检查、互斥锁                                |
 | **TypeScript 类型注解**           | 🟢     | [vue3-typescript.md](./resources/vue3-typescript.md)                      | defineProps/ref/reactive/Emits 泛型                                    |
 | **TypeScript 约束**               | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`                      |
 | **指令简写**                      | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |

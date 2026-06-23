@@ -169,7 +169,7 @@ OpenCode 支持通过项目配置文件指定要加载的指令文件。
 
 ```json
 {
-  "instructions": ["AGENTS.md", ".opencode/rules/frontend-rules-vue2/RULE.md"]
+  "instructions": ["AGENTS.md", ".opencode/rules/frontend-rules/RULE.md"]
 }
 ```
 
