@@ -104,6 +104,20 @@ const { fetch, loading } = useApi()
 </script>
 ```
 
+## 常见的遗漏导入场景
+
+**原则**：禁用自动导入后，所有 Nuxt composables 都需要显式导入，不存在任何特例。以下是在实际开发中容易遗漏导入的 Nuxt API：
+
+| Nuxt API                                      | 导入来源   | 常见用途             |
+| --------------------------------------------- | ---------- | -------------------- |
+| `useHead` / `useSeoMeta` / `useServerSeoMeta` | `nuxt/app` | 页面标题、SEO 元数据 |
+| `useRuntimeConfig`                            | `nuxt/app` | 读取运行时配置       |
+| `useRoute` / `navigateTo`                     | `nuxt/app` | 路由操作             |
+| `useFetch` / `useLazyFetch`                   | `nuxt/app` | 数据请求             |
+| `useCookie`                                   | `nuxt/app` | Cookie 操作          |
+
+这些 API 在 IDE 中可能因为 Nuxt 类型声明而显示"可用"，但构建时会报错。
+
 ## 总结
 
 | 场景                       | 做法                         |
