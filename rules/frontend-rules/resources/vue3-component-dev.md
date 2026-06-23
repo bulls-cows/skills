@@ -4,8 +4,8 @@
 
 ## 前置阅读
 
-- [comments.md](./common-comments.md) — 注释规范（含 Script 顶部 JSDoc 模板）
-- [vue-template.md](./common-vue-template.md) — Vue 模板通用规则
+- [common-comments.md](./common-comments.md) — 注释规范（含 Script 顶部 JSDoc 模板）
+- [common-vue-template.md](./common-vue-template.md) — Vue 模板通用规则
 
 ---
 
@@ -19,7 +19,7 @@
 
 ## 二、脚本结构顺序
 
-详见 [order.md](./vue3-order.md#二script-setup-内部结构顺序)
+详见 [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序)
 
 `<script setup>` 内部内容必须按以下宏观顺序排列：
 
@@ -29,7 +29,7 @@
 
 ## 三、Vue 元素特性顺序
 
-详见 [directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)（Vue3 在通用 8 步基础上追加第 9 步动态 `v-slot`）。
+详见 [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)（Vue3 在通用 8 步基础上追加第 9 步动态 `v-slot`）。
 
 ---
 
@@ -42,7 +42,7 @@
 
 ## 五、模板层轻量化
 
-详见 [performance.md](./common-performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
+详见 [common-performance.md](./common-performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
 
 ---
 
@@ -62,7 +62,7 @@
 
 ## 八、defineExpose
 
-详见 [interaction.md](./vue3-interaction.md#三对外暴露defineexpose)（明确声明、父组件访问、禁止滥用规则）。
+详见 [vue3-interaction.md](./vue3-interaction.md#三对外暴露defineexpose)（明确声明、父组件访问、禁止滥用规则）。
 
 ---
 
@@ -70,12 +70,12 @@
 
 | 内容       | 详见                                                   |
 | ---------- | ------------------------------------------------------ |
-| 注释规范   | [comments.md](./common-comments.md)                       |
-| Props 定义 | [interaction.md](./vue3-interaction.md#一props-定义规范)    |
-| Emit 事件  | [interaction.md](./vue3-interaction.md#1-事件白名单19-种)   |
-| 组件通信   | [interaction.md](./vue3-interaction.md#四组件间通信)        |
-| 响应式状态 | [reactivity.md](./vue3-reactivity.md)                       |
-| watch 监听 | [watch.md](./vue3-watch.md)                                 |
-| Hooks 规范 | [hooks.md](./vue3-hooks.md)                                 |
-| 导入顺序   | [order.md](./vue3-order.md)                                 |
-| 模板规则   | [vue-template.md](./common-vue-template.md) |
+| 注释规范   | [common-comments.md](./common-comments.md)                       |
+| Props 定义 | [vue3-interaction.md](./vue3-interaction.md#一props-定义规范)    |
+| Emit 事件  | [vue3-interaction.md](./vue3-interaction.md#1-事件白名单19-种)   |
+| 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)        |
+| 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                       |
+| watch 监听 | [vue3-watch.md](./vue3-watch.md)                                 |
+| Hooks 规范 | [vue3-hooks.md](./vue3-hooks.md)                                 |
+| 导入顺序   | [vue3-order.md](./vue3-order.md)                                 |
+| 模板规则   | [common-vue-template.md](./common-vue-template.md) |

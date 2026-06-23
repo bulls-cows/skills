@@ -1,10 +1,10 @@
 # Vue3 侦听器规范（watch/watchEffect）
 
-> 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [vue-watch.md](./common-vue-watch.md)，本文件仅承载 Vue3 特有内容：`watchEffect`、`watch` 与 `watchEffect` 的选择、`flush` 选项。
+> 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [common-vue-watch.md](./common-vue-watch.md)，本文件仅承载 Vue3 特有内容：`watchEffect`、`watch` 与 `watchEffect` 的选择、`flush` 选项。
 
 ## 前置阅读
 
-- [vue-watch.md](./common-vue-watch.md) — Vue 侦听器通用规则（Vue2/Vue3 共享）
+- [common-vue-watch.md](./common-vue-watch.md) — Vue 侦听器通用规则（Vue2/Vue3 共享）
 
 ---
 
@@ -69,7 +69,7 @@ watch(
 
 | 内容              | 详见                                                  |
 | ----------------- | ----------------------------------------------------- |
-| 通用 watch 理念   | [vue-watch.md](./common-vue-watch.md)                |
-| 注释规范          | [comments.md](./common-comments.md)                  |
-| computed 选择策略 | [reactivity.md](./vue3-reactivity.md#三computed-规范)      |
-| 代码组织位置      | [order.md](./vue3-order.md#二script-setup-内部结构顺序)    |
+| 通用 watch 理念   | [common-vue-watch.md](./common-vue-watch.md)                |
+| 注释规范          | [common-comments.md](./common-comments.md)                  |
+| computed 选择策略 | [vue3-reactivity.md](./vue3-reactivity.md#三computed-规范)      |
+| 代码组织位置      | [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序)    |

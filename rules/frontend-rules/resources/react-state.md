@@ -241,7 +241,7 @@ useEffect(() => {
 
 ## 六、状态提升与跨组件通信
 
-详见 [interaction.md](./react-interaction.md)（状态提升、Context 共享、Render Props、Compound Components、自定义 Hook 共享、状态管理选型、全局事件总线）。
+详见 [react-interaction.md](./react-interaction.md)（状态提升、Context 共享、Render Props、Compound Components、自定义 Hook 共享、状态管理选型、全局事件总线）。
 
 ---
 
@@ -249,7 +249,7 @@ useEffect(() => {
 
 | 内容       | 详见                                   |
 | ---------- | -------------------------------------- |
-| 组件交互   | [interaction.md](./react-interaction.md)     |
-| Hooks 规范 | [hooks.md](./react-hooks.md)                 |
-| 组件开发   | [component-dev.md](./react-component-dev.md) |
-| TypeScript | [typescript.md](./react-typescript.md)       |
+| 组件交互   | [react-interaction.md](./react-interaction.md)     |
+| Hooks 规范 | [react-hooks.md](./react-hooks.md)                 |
+| 组件开发   | [react-component-dev.md](./react-component-dev.md) |
+| TypeScript | [react-typescript.md](./react-typescript.md)       |

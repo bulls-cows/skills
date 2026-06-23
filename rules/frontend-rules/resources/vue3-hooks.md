@@ -1,10 +1,10 @@
 # Vue3 组合式函数（Hooks）规范
 
-> Hooks 通用规则（命名、文件组织、抽离建议、返回值、注释规范）详见 [hooks.md](./common-hooks.md)，本文件仅承载 Vue3 特有内容。
+> Hooks 通用规则（命名、文件组织、抽离建议、返回值、注释规范）详见 [common-hooks.md](./common-hooks.md)，本文件仅承载 Vue3 特有内容。
 
 ## 前置阅读
 
-- [hooks.md](./common-hooks.md) — Hooks 通用规范
+- [common-hooks.md](./common-hooks.md) — Hooks 通用规范
 
 ---
 
@@ -166,8 +166,8 @@ export const useTable = () => {
 ## 六、Vue3 特有使用规范
 
 - 组件中通过 `const { ... } = useXxx()` 解构使用
-- 组件引入后按注释规范标注：`// hook: Hook名`（详见 [comments.md](./common-comments.md)）
-- 导入顺序详见 [order.md](./vue3-order.md#三import-分组)
+- 组件引入后按注释规范标注：`// hook: Hook名`（详见 [common-comments.md](./common-comments.md)）
+- 导入顺序详见 [vue3-order.md](./vue3-order.md#三import-分组)
 
 ---
 
@@ -175,8 +175,8 @@ export const useTable = () => {
 
 | 内容            | 详见                                                |
 | --------------- | --------------------------------------------------- |
-| Hooks 通用规范  | [hooks.md](./common-hooks.md)            |
-| 响应式状态      | [reactivity.md](./vue3-reactivity.md)                    |
-| watch 监听      | [watch.md](./vue3-watch.md)                              |
-| TypeScript 类型 | [typescript.md](./vue3-typescript.md#四hooks-返回值类型) |
-| 导入顺序        | [order.md](./vue3-order.md)                              |
+| Hooks 通用规范  | [common-hooks.md](./common-hooks.md)            |
+| 响应式状态      | [vue3-reactivity.md](./vue3-reactivity.md)                    |
+| watch 监听      | [vue3-watch.md](./vue3-watch.md)                              |
+| TypeScript 类型 | [vue3-typescript.md](./vue3-typescript.md#四hooks-返回值类型) |
+| 导入顺序        | [vue3-order.md](./vue3-order.md)                              |

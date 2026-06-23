@@ -126,7 +126,7 @@ export const UserCard = ({ userId, showAvatar = true }: IUserCardProps) => {
 
 ## 三、Import 分组
 
-Import 分组规则详见 [code-style.md](./common-code-style.md#二导入排序规范)。
+Import 分组规则详见 [common-code-style.md](./common-code-style.md#二导入排序规范)。
 
 React 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖（@src/）→ 内部相对依赖（./），组间空一行，组内按字母顺序。
 
@@ -172,10 +172,10 @@ JSX 元素上的多个属性建议按以下顺序排列（同一元素出现多�
 </li>
 ```
 
-> 通用 Props 传递规则（camelCase、布尔简写、字符串引号等）详见 [jsx.md](./react-jsx.md#五props-传递)。
+> 通用 Props 传递规则（camelCase、布尔简写、字符串引号等）详见 [react-jsx.md](./react-jsx.md#五props-传递)。
 
 ---
 
 ## 五、文件与目录命名
 
-详见 [naming.md](./common-naming.md#一文件与目录命名)。
+详见 [common-naming.md](./common-naming.md#一文件与目录命名)。

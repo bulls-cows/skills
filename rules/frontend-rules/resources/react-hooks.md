@@ -1,12 +1,12 @@
 # React Hooks 规范
 
-> Hooks 通用规则（命名、文件组织、抽离建议、返回值、注释规范）详见 [hooks.md](./common-hooks.md)，本文件仅承载 React 特有内容。
+> Hooks 通用规则（命名、文件组织、抽离建议、返回值、注释规范）详见 [common-hooks.md](./common-hooks.md)，本文件仅承载 React 特有内容。
 >
 > **优先级说明**：React Hooks 文件为 🔴 基础规范，是因为本文件包含"Hooks 调用规则"等违反即导致运行时崩溃的强制约束。
 
 ## 前置阅读
 
-- [hooks.md](./common-hooks.md) — Hooks 通用规范
+- [common-hooks.md](./common-hooks.md) — Hooks 通用规范
 
 ---
 
@@ -202,8 +202,8 @@ export const useTable = () => {
 
 | 内容            | 详见                                     |
 | --------------- | ---------------------------------------- |
-| Hooks 通用规范  | [hooks.md](./common-hooks.md) |
-| 状态管理        | [state.md](./react-state.md)                   |
-| 组件开发        | [component-dev.md](./react-component-dev.md)   |
-| TypeScript 类型 | [typescript.md](./react-typescript.md)         |
-| 命名规范        | [naming.md](./common-naming.md)             |
+| Hooks 通用规范  | [common-hooks.md](./common-hooks.md) |
+| 状态管理        | [react-state.md](./react-state.md)                   |
+| 组件开发        | [react-component-dev.md](./react-component-dev.md)   |
+| TypeScript 类型 | [react-typescript.md](./react-typescript.md)         |
+| 命名规范        | [common-naming.md](./common-naming.md)             |

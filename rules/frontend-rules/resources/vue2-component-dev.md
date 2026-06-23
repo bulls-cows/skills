@@ -4,8 +4,8 @@
 
 ## 前置阅读
 
-- [comments.md](./common-comments.md) — 注释规范（含 Script 顶部 JSDoc 模板）
-- [vue-template.md](./common-vue-template.md) — Vue 模板通用规则
+- [common-comments.md](./common-comments.md) — 注释规范（含 Script 顶部 JSDoc 模板）
+- [common-vue-template.md](./common-vue-template.md) — Vue 模板通用规则
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## 二、脚本结构顺序
 
-详见 [order.md](./vue2-order.md#二script-内部结构顺序)
+详见 [vue2-order.md](./vue2-order.md#二script-内部结构顺序)
 
 `<script>` 内部内容必须按以下宏观顺序排列：
 
@@ -28,7 +28,7 @@
 
 ## 三、Vue 元素特性顺序
 
-详见 [vue-template.md](./common-vue-template.md#六模板属性顺序)（Vue2 沿用通用 8 步）。
+详见 [common-vue-template.md](./common-vue-template.md#六模板属性顺序)（Vue2 沿用通用 8 步）。
 
 ---
 
@@ -41,7 +41,7 @@
 
 ## 五、模板层轻量化
 
-详见 [performance.md](./common-performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
+详见 [common-performance.md](./common-performance.md#渲染性能优化)（模板职责分离、简单逻辑内联原则）。
 
 ---
 
@@ -70,7 +70,7 @@
 
 ## 八、事件处理
 
-详见 [interaction.md](./vue2-interaction.md#二emit-事件规范)（事件白名单、Emit 顺序）。
+详见 [vue2-interaction.md](./vue2-interaction.md#二emit-事件规范)（事件白名单、Emit 顺序）。
 
 ---
 
@@ -78,12 +78,12 @@
 
 | 内容           | 详见                                                    |
 | -------------- | ------------------------------------------------------- |
-| 注释规范       | [comments.md](./common-comments.md)                        |
-| Props 定义     | [interaction.md](./vue2-interaction.md#一props-定义规范)     |
-| Emit 事件      | [interaction.md](./vue2-interaction.md#二emit-事件规范)      |
-| v-model        | [interaction.md](./vue2-interaction.md#2-v-model-写法)       |
-| 组件通信       | [interaction.md](./vue2-interaction.md#四组件间通信)         |
-| `$refs` 访问   | [interaction.md](./vue2-interaction.md#三对外暴露与访问)     |
-| provide/inject | [interaction.md](./vue2-interaction.md#1-provideinject-规范) |
-| 导入顺序       | [order.md](./vue2-order.md)                                  |
-| 模板规则       | [vue-template.md](./common-vue-template.md)  |
+| 注释规范       | [common-comments.md](./common-comments.md)                        |
+| Props 定义     | [vue2-interaction.md](./vue2-interaction.md#一props-定义规范)     |
+| Emit 事件      | [vue2-interaction.md](./vue2-interaction.md#二emit-事件规范)      |
+| v-model        | [vue2-interaction.md](./vue2-interaction.md#2-v-model-写法)       |
+| 组件通信       | [vue2-interaction.md](./vue2-interaction.md#四组件间通信)         |
+| `$refs` 访问   | [vue2-interaction.md](./vue2-interaction.md#三对外暴露与访问)     |
+| provide/inject | [vue2-interaction.md](./vue2-interaction.md#1-provideinject-规范) |
+| 导入顺序       | [vue2-order.md](./vue2-order.md)                                  |
+| 模板规则       | [common-vue-template.md](./common-vue-template.md)  |

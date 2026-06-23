@@ -91,7 +91,7 @@ defineExpose({ validateForm, resetForm, getDataSourceTotal })
 
 ## 三、Import 分组
 
-Import 分组规则详见 [code-style.md](./common-code-style.md#二导入排序规范)。
+Import 分组规则详见 [common-code-style.md](./common-code-style.md#二导入排序规范)。
 
 Vue3 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖（@src/）→ 内部相对依赖（./），组间空一行，组内按字母顺序。
 
@@ -99,10 +99,10 @@ Vue3 采用 4 组分组：外部依赖 → 类型导入 → 内部全局依赖�
 
 ## 四、模板属性顺序
 
-详见 [vue-template.md](./common-vue-template.md#六模板属性顺序)（通用 8 步顺序）与 [directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)（Vue3 追加第 9 步 `v-slot`）。
+详见 [common-vue-template.md](./common-vue-template.md#六模板属性顺序)（通用 8 步顺序）与 [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)（Vue3 追加第 9 步 `v-slot`）。
 
 ---
 
 ## 五、文件与目录命名
 
-详见 [naming.md](./common-naming.md#一文件与目录命名)。
+详见 [common-naming.md](./common-naming.md#一文件与目录命名)。

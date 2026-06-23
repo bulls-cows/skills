@@ -26,7 +26,7 @@
 
 ## 三、CSS 命名（BEM）
 
-详见 [naming.md](./common-naming.md#五css-命名规范bem)（块/元素/修饰符命名规则）。
+详见 [common-naming.md](./common-naming.md#五css-命名规范bem)（块/元素/修饰符命名规则）。
 
 ## 四、CSS 布局推荐
 

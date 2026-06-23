@@ -264,7 +264,7 @@ const UserCard = ({ userName, avatar }: IUserCardProps) => {
 
 - **禁止**使用内联样式（`style={{...}}`），动态计算的单个属性除外
 - **禁止**使用 HTML 的 `class` 属性，必须用 `className`
-- 样式方案选型、CSS Modules 用法、动态类名、穿透第三方组件详见 [css.md](./react-css.md)
+- 样式方案选型、CSS Modules 用法、动态类名、穿透第三方组件详见 [react-css.md](./react-css.md)
 
 ```tsx
 // ✅ 正确：className + CSS Modules
@@ -285,8 +285,8 @@ import styles from './UserCard.module.scss'
 
 | 内容       | 详见                                   |
 | ---------- | -------------------------------------- |
-| 组件开发   | [component-dev.md](./react-component-dev.md) |
-| Hooks 规范 | [hooks.md](./react-hooks.md)                 |
-| 状态管理   | [state.md](./react-state.md)                 |
-| CSS 规范   | [css.md](./react-css.md)                 |
-| 命名规范   | [naming.md](./common-naming.md)           |
+| 组件开发   | [react-component-dev.md](./react-component-dev.md) |
+| Hooks 规范 | [react-hooks.md](./react-hooks.md)                 |
+| 状态管理   | [react-state.md](./react-state.md)                 |
+| CSS 规范   | [react-css.md](./react-css.md)                 |
+| 命名规范   | [common-naming.md](./common-naming.md)           |

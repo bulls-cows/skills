@@ -1,10 +1,10 @@
 # Vue3 模板指令规范
 
-> Vue2 与 Vue3 共享的模板规则（v-for/key、v-if 冲突、v-html、指令简写）详见 [vue-template.md](./common-vue-template.md)，本文件仅承载 Vue3 特有内容。
+> Vue2 与 Vue3 共享的模板规则（v-for/key、v-if 冲突、v-html、指令简写）详见 [common-vue-template.md](./common-vue-template.md)，本文件仅承载 Vue3 特有内容。
 
 ## 前置阅读
 
-- [vue-template.md](./common-vue-template.md) — Vue 模板通用规则
+- [common-vue-template.md](./common-vue-template.md) — Vue 模板通用规则
 
 ---
 
@@ -40,7 +40,7 @@ Vue3 模板属性顺序在通用 8 步基础上，追加第 9 步动态 `v-slot`
 
 ## 二、v-model 写法
 
-详见 [interaction.md](./vue3-interaction.md#2-v-model-写法)（Vue 3 标准、Ant Design Vue 风格）。
+详见 [vue3-interaction.md](./vue3-interaction.md#2-v-model-写法)（Vue 3 标准、Ant Design Vue 风格）。
 
 ---
 
@@ -48,6 +48,6 @@ Vue3 模板属性顺序在通用 8 步基础上，追加第 9 步动态 `v-slot`
 
 | 内容                 | 详见                                                   |
 | -------------------- | ------------------------------------------------------ |
-| Vue 模板通用规则     | [vue-template.md](./common-vue-template.md) |
-| Props 定义与 v-model | [interaction.md](./vue3-interaction.md)                     |
-| 组件开发规范         | [component-dev.md](./vue3-component-dev.md)                 |
+| Vue 模板通用规则     | [common-vue-template.md](./common-vue-template.md) |
+| Props 定义与 v-model | [vue3-interaction.md](./vue3-interaction.md)                     |
+| 组件开发规范         | [vue3-component-dev.md](./vue3-component-dev.md)                 |

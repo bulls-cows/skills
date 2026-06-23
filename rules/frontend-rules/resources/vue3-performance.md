@@ -1,6 +1,6 @@
 # Vue3 性能优化差异（Vue3 特有）
 
-> 通用性能优化规范（加载/运行/构建三阶段、Web Vitals 指标、性能检测工具等）详见 [performance.md](./common-performance.md)，本文件仅承载 Vue3 与通用规范不同的内容。
+> 通用性能优化规范（加载/运行/构建三阶段、Web Vitals 指标、性能检测工具等）详见 [common-performance.md](./common-performance.md)，本文件仅承载 Vue3 与通用规范不同的内容。
 
 ## 一、组件懒加载使用 `defineAsyncComponent`
 
@@ -69,6 +69,6 @@ app.directive('focus', {
 
 | 模块           | 路径                                  |
 | -------------- | ------------------------------------- |
-| 通用性能优化   | [performance.md](./common-performance.md) |
-| Vue3 响应式    | [reactivity.md](./vue3-reactivity.md)      |
-| Vue3 CSS 差异  | [css.md](./vue3-css.md)                     |
+| 通用性能优化   | [common-performance.md](./common-performance.md) |
+| Vue3 响应式    | [vue3-reactivity.md](./vue3-reactivity.md)      |
+| Vue3 CSS 差异  | [vue3-css.md](./vue3-css.md)                     |

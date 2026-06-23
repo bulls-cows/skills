@@ -63,7 +63,7 @@
 
 ## 五、CSS 命名规范（BEM）
 
-> 样式命名必须遵循 BEM 规范，详见 [css.md](./common-css.md#三css-命名bem)
+> 样式命名必须遵循 BEM 规范，详见 [common-css.md](./common-css.md#三css-命名bem)
 
 ### BEM 核心规则
 

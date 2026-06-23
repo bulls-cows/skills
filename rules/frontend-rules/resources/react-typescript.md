@@ -1,10 +1,10 @@
 # React TypeScript 规范
 
-> TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [typescript.md](./common-typescript.md)，本文件仅承载 React 特有内容。
+> TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [common-typescript.md](./common-typescript.md)，本文件仅承载 React 特有内容。
 
 ## 前置阅读
 
-- [typescript.md](./common-typescript.md) — TypeScript 通用规范
+- [common-typescript.md](./common-typescript.md) — TypeScript 通用规范
 
 ---
 
@@ -200,9 +200,9 @@ const List = <T extends IListItem>({ items, renderItem }: IListProps<T>): JSX.El
 
 | 内容                | 详见                                               |
 | ------------------- | -------------------------------------------------- |
-| TypeScript 通用规范 | [typescript.md](./common-typescript.md) |
-| 组件开发            | [component-dev.md](./react-component-dev.md)             |
-| Hooks 规范          | [hooks.md](./react-hooks.md)                             |
-| 状态管理            | [state.md](./react-state.md)                             |
-| JSX 规范            | [jsx.md](./react-jsx.md)                                 |
-| 命名规范            | [naming.md](./common-naming.md)                       |
+| TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
+| 组件开发            | [react-component-dev.md](./react-component-dev.md)             |
+| Hooks 规范          | [react-hooks.md](./react-hooks.md)                             |
+| 状态管理            | [react-state.md](./react-state.md)                             |
+| JSX 规范            | [react-jsx.md](./react-jsx.md)                                 |
+| 命名规范            | [common-naming.md](./common-naming.md)                       |

@@ -1,10 +1,10 @@
 # Vue3 TypeScript 规范
 
-> TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [typescript.md](./common-typescript.md)，本文件仅承载 Vue3 特有内容。
+> TypeScript 通用规则（类型注解、禁用 any、类型命名、import type、类型文件组织、类型压制）详见 [common-typescript.md](./common-typescript.md)，本文件仅承载 Vue3 特有内容。
 
 ## 前置阅读
 
-- [typescript.md](./common-typescript.md) — TypeScript 通用规范
+- [common-typescript.md](./common-typescript.md) — TypeScript 通用规范
 
 ---
 
@@ -50,7 +50,7 @@ const props = withDefaults(
 
 ### v-model 兼容模式
 
-详见 [interaction.md](./vue3-interaction.md#2-v-model-写法)（Vue 3 标准 `modelValue` + Ant Design Vue 风格 `value` 双模式）。
+详见 [vue3-interaction.md](./vue3-interaction.md#2-v-model-写法)（Vue 3 标准 `modelValue` + Ant Design Vue 风格 `value` 双模式）。
 
 ---
 
@@ -159,8 +159,8 @@ export const useTable = (): IUseTableReturn => {
 
 | 内容                | 详见                                               |
 | ------------------- | -------------------------------------------------- |
-| TypeScript 通用规范 | [typescript.md](./common-typescript.md) |
-| Props 与 v-model    | [interaction.md](./vue3-interaction.md)                 |
-| 响应式状态          | [reactivity.md](./vue3-reactivity.md)                   |
-| Hooks 规范          | [hooks.md](./vue3-hooks.md)                             |
-| 命名规范            | [naming.md](./common-naming.md)                       |
+| TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
+| Props 与 v-model    | [vue3-interaction.md](./vue3-interaction.md)                 |
+| 响应式状态          | [vue3-reactivity.md](./vue3-reactivity.md)                   |
+| Hooks 规范          | [vue3-hooks.md](./vue3-hooks.md)                             |
+| 命名规范            | [common-naming.md](./common-naming.md)                       |

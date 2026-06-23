@@ -2,7 +2,7 @@
 
 > 本规范涵盖 React 组件对外接口（Props/回调）及组件间数据通信约定，结构与 Vue2/Vue3 `interaction.md` 对齐。
 >
-> TypeScript 类型定义详见 [typescript.md](./react-typescript.md#一props-类型定义)；状态管理 API（useState/useReducer）详见 [state.md](./react-state.md)。
+> TypeScript 类型定义详见 [react-typescript.md](./react-typescript.md#一props-类型定义)；状态管理 API（useState/useReducer）详见 [react-state.md](./react-state.md)。
 
 ---
 
@@ -99,7 +99,7 @@ const Parent = () => {
 
 ### 3. 事件处理类型
 
-详见 [typescript.md](./react-typescript.md#四事件处理类型)（`React.ChangeEvent`、`React.MouseEvent` 等泛型事件类型）。
+详见 [react-typescript.md](./react-typescript.md#四事件处理类型)（`React.ChangeEvent`、`React.MouseEvent` 等泛型事件类型）。
 
 ---
 
@@ -141,7 +141,7 @@ UserForm.displayName = 'UserForm' // forwardRef 必须显式声明
 
 ### 1. 状态提升（Parent Lifting）
 
-**适用场景**：兄弟组件或跨 2 层以内组件共享状态。将状态提升到最近的共同父组件，父组件通过 Props 向下传递状态和回调，子组件通过回调向上通知。详见 [state.md](./react-state.md#六状态提升与跨组件通信)。
+**适用场景**：兄弟组件或跨 2 层以内组件共享状态。将状态提升到最近的共同父组件，父组件通过 Props 向下传递状态和回调，子组件通过回调向上通知。详见 [react-state.md](./react-state.md#六状态提升与跨组件通信)。
 
 ### 2. Context（跨层级共享）
 
@@ -156,7 +156,7 @@ UserForm.displayName = 'UserForm' // forwardRef 必须显式声明
 - ❌ 用 Context 共享高频变化的状态（会导致所有消费组件重渲染）
 - ❌ 用 Context 替代 props 传递业务数据（业务数据应保持显式数据流）
 
-详见 [state.md](./react-state.md#四context--usereducer-共享状态)。
+详见 [react-state.md](./react-state.md#四context--usereducer-共享状态)。
 
 ### 3. Render Props（动态组件渲染）
 
@@ -213,7 +213,7 @@ Tabs.TabPane = TabPane
 
 ### 5. 自定义 Hook 共享逻辑
 
-**适用场景**：跨组件复用有状态逻辑（而非 UI）。每个组件独立持有状态，但共享逻辑实现。详见 [hooks.md](./common-hooks.md)。
+**适用场景**：跨组件复用有状态逻辑（而非 UI）。每个组件独立持有状态，但共享逻辑实现。详见 [common-hooks.md](./common-hooks.md)。
 
 ---
 
@@ -302,12 +302,12 @@ eventBus.emit('user:login', { id: '1', name: '张三' })
 
 | 内容                | 详见                                     |
 | ------------------- | ---------------------------------------- |
-| TypeScript 类型     | [typescript.md](./react-typescript.md)         |
-| 组件开发规范        | [component-dev.md](./react-component-dev.md)   |
-| React Hooks 规范    | [hooks.md](./react-hooks.md)                   |
-| 状态管理 API        | [state.md](./react-state.md)                   |
-| JSX 规范            | [jsx.md](./react-jsx.md)                       |
-| Hooks 通用规范      | [hooks.md](./common-hooks.md)           |
-| TypeScript 通用规范 | [typescript.md](./common-typescript.md) |
-| 命名规范            | [naming.md](./common-naming.md)         |
-| 约束清单            | [constraints.md](./common-constraints.md) |
+| TypeScript 类型     | [react-typescript.md](./react-typescript.md)         |
+| 组件开发规范        | [react-component-dev.md](./react-component-dev.md)   |
+| React Hooks 规范    | [react-hooks.md](./react-hooks.md)                   |
+| 状态管理 API        | [react-state.md](./react-state.md)                   |
+| JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
+| Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
+| TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
+| 命名规范            | [common-naming.md](./common-naming.md)         |
+| 约束清单            | [common-constraints.md](./common-constraints.md) |

@@ -5,9 +5,9 @@
 ## 前置阅读
 
 - [总纲索引](../RULE.md) — 规范总入口、适用范围与三级优先级体系
-- [vue-template.md](./common-vue-template.md) — Vue 模板通用规则（Vue2/Vue3 共享）
-- [hooks.md](./common-hooks.md) — Hooks 通用规范（Vue3/React 共享）
-- [typescript.md](./common-typescript.md) — TypeScript 通用规范（Vue3/React 共享）
+- [common-vue-template.md](./common-vue-template.md) — Vue 模板通用规则（Vue2/Vue3 共享）
+- [common-hooks.md](./common-hooks.md) — Hooks 通用规范（Vue3/React 共享）
+- [common-typescript.md](./common-typescript.md) — TypeScript 通用规范（Vue3/React 共享）
 
 ---
 
@@ -37,16 +37,16 @@
 
 | 模块       | 说明                                                   | 路径                                   |
 | ---------- | ------------------------------------------------------ | -------------------------------------- |
-| 组件开发   | `<script setup>` 脚本结构、JSDoc、元素顺序、方法职责   | [component-dev.md](./vue3-component-dev.md) |
-| 交互通信   | Props/Emit/defineExpose/provide/inject                 | [interaction.md](./vue3-interaction.md)     |
-| 模板指令   | Vue3 特有差异（动态 v-slot 第 9 步、v-model 写法）     | [directives.md](./vue3-directives.md)       |
-| 结构顺序   | 4 组 import 排序、`<script setup>` 内部 5 段结构       | [order.md](./vue3-order.md)                 |
-| 响应式     | ref/reactive/computed 选择与转换                       | [reactivity.md](./vue3-reactivity.md)       |
-| 侦听器     | Vue3 特有差异（watchEffect、watch vs watchEffect、flush） | [watch.md](./vue3-watch.md)                 |
-| Hooks      | Vue3 特有差异（setup 限制、toRefs、内置 Hooks）        | [hooks.md](./vue3-hooks.md)                 |
-| TypeScript | Vue3 特有差异（defineProps/ref/reactive/Emits 泛型）   | [typescript.md](./vue3-typescript.md)       |
-| CSS 样式   | scoped 与 v-html `:deep()` 穿透、自定义指令清理        | [css.md](./vue3-css.md)                     |
-| 性能优化   | defineAsyncComponent、shallowRef、unmounted 钩子       | [performance.md](./vue3-performance.md)     |
+| 组件开发   | `<script setup>` 脚本结构、JSDoc、元素顺序、方法职责   | [vue3-component-dev.md](./vue3-component-dev.md) |
+| 交互通信   | Props/Emit/defineExpose/provide/inject                 | [vue3-interaction.md](./vue3-interaction.md)     |
+| 模板指令   | Vue3 特有差异（动态 v-slot 第 9 步、v-model 写法）     | [vue3-directives.md](./vue3-directives.md)       |
+| 结构顺序   | 4 组 import 排序、`<script setup>` 内部 5 段结构       | [vue3-order.md](./vue3-order.md)                 |
+| 响应式     | ref/reactive/computed 选择与转换                       | [vue3-reactivity.md](./vue3-reactivity.md)       |
+| 侦听器     | Vue3 特有差异（watchEffect、watch vs watchEffect、flush） | [vue3-watch.md](./vue3-watch.md)                 |
+| Hooks      | Vue3 特有差异（setup 限制、toRefs、内置 Hooks）        | [vue3-hooks.md](./vue3-hooks.md)                 |
+| TypeScript | Vue3 特有差异（defineProps/ref/reactive/Emits 泛型）   | [vue3-typescript.md](./vue3-typescript.md)       |
+| CSS 样式   | scoped 与 v-html `:deep()` 穿透、自定义指令清理        | [vue3-css.md](./vue3-css.md)                     |
+| 性能优化   | defineAsyncComponent、shallowRef、unmounted 钩子       | [vue3-performance.md](./vue3-performance.md)     |
 
 > Vue3 网络请求差异（useRequest 前置检查、`===` 偏好、Sentry/errorHandler、diff 预览）已并入 [common-network.md](./common-network.md)。
 

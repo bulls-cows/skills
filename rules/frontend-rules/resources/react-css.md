@@ -1,11 +1,11 @@
 # React CSS 样式规范（React 特有）
 
-> 通用 CSS 规范（预处理器、注释、作用域、BEM 命名、布局、兼容性、属性排序、SCSS、单位、动画等）详见 [css.md](./common-css.md)。
+> 通用 CSS 规范（预处理器、注释、作用域、BEM 命名、布局、兼容性、属性排序、SCSS、单位、动画等）详见 [common-css.md](./common-css.md)。
 > 作用域穿透的通用理念与三框架写法对比（Vue2 `::v-deep` / Vue3 `:deep()` / React `:global()`）详见 [css.md 作用域穿透章节](./common-css.md#十一作用域穿透vue2vue3react-共享理念)，本文件仅承载 React 特有内容。
 
 ## 前置阅读
 
-- [css.md](./common-css.md) — 通用 CSS 规范
+- [common-css.md](./common-css.md) — 通用 CSS 规范
 
 ---
 
@@ -19,7 +19,7 @@ React 无 Vue 的 `scoped`，靠以下方案实现样式隔离。**默认首选 
 | **Sass/SCSS**           | 预处理器，与 CSS Modules 搭配 | ⭐⭐⭐ 推荐 |
 | styled-components / Emotion（CSS-in-JS） | 动态样式、强主题化场景       | ⭐⭐ 按需 |
 | Tailwind CSS（原子化）  | 工具类优先、快速布局         | ⭐⭐ 按需 |
-| 内联 `style`            | 仅动态计算的单个属性         | ❌ 禁止（见 [jsx.md](./react-jsx.md#九样式使用)） |
+| 内联 `style`            | 仅动态计算的单个属性         | ❌ 禁止（见 [react-jsx.md](./react-jsx.md#九样式使用)） |
 
 ---
 
@@ -27,7 +27,7 @@ React 无 Vue 的 `scoped`，靠以下方案实现样式隔离。**默认首选 
 
 ### 2.1 文件命名与导入
 
-样式文件必须以 `.module.scss`（或 `.module.css`）为后缀，导入语句归在 import 第 4 组「相对依赖」（详见 [order.md](./react-order.md#三import-分组)）：
+样式文件必须以 `.module.scss`（或 `.module.css`）为后缀，导入语句归在 import 第 4 组「相对依赖」（详见 [react-order.md](./react-order.md#三import-分组)）：
 
 ```tsx
 import styles from './UserCard.module.scss'
@@ -89,7 +89,7 @@ React 的 CSS Modules 通过哈希类名隔离，无法直接选中第三方组�
 
 | 模块             | 路径                                  |
 | ---------------- | ------------------------------------- |
-| 通用 CSS 规范    | [css.md](./common-css.md)            |
+| 通用 CSS 规范    | [common-css.md](./common-css.md)            |
 | 作用域穿透（通用） | [css.md 穿透章节](./common-css.md#十一作用域穿透vue2vue3react-共享理念) |
-| 样式使用（jsx）  | [jsx.md](./react-jsx.md#九样式使用)         |
-| 导入顺序         | [order.md](./react-order.md#三import-分组) |
+| 样式使用（jsx）  | [react-jsx.md](./react-jsx.md#九样式使用)         |
+| 导入顺序         | [react-order.md](./react-order.md#三import-分组) |

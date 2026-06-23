@@ -100,7 +100,7 @@ watch(
 
 ### 2.3 注释规范
 
-Vue2/Vue3 的 watch 注释格式一致，按 [comments.md](./common-comments.md) 标注：
+Vue2/Vue3 的 watch 注释格式一致，按 [common-comments.md](./common-comments.md) 标注：
 
 **Vue2**：
 

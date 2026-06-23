@@ -1,10 +1,10 @@
 # Vue2 侦听器规范（watch 选项）
 
-> 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [vue-watch.md](./common-vue-watch.md)，本文件仅承载 Vue2 特有内容。
+> 通用 watch 理念（深度监听、立即执行、资源清理、与 computed 的选择策略）详见 [common-vue-watch.md](./common-vue-watch.md)，本文件仅承载 Vue2 特有内容。
 
 ## 前置阅读
 
-- [vue-watch.md](./common-vue-watch.md) — Vue 侦听器通用规则（Vue2/Vue3 共享）
+- [common-vue-watch.md](./common-vue-watch.md) — Vue 侦听器通用规则（Vue2/Vue3 共享）
 
 ---
 
@@ -123,7 +123,7 @@ export default {
 
 | 内容               | 详见                                       |
 | ------------------ | ------------------------------------------ |
-| 通用 watch 理念    | [vue-watch.md](./common-vue-watch.md)     |
-| 注释规范           | [comments.md](./common-comments.md)       |
-| 脚本结构顺序       | [order.md](./vue2-order.md#二script-内部结构顺序) |
-| 响应式陷阱（$set） | [reactivity.md](./vue2-reactivity.md)           |
+| 通用 watch 理念    | [common-vue-watch.md](./common-vue-watch.md)     |
+| 注释规范           | [common-comments.md](./common-comments.md)       |
+| 脚本结构顺序       | [vue2-order.md](./vue2-order.md#二script-内部结构顺序) |
+| 响应式陷阱（$set） | [vue2-reactivity.md](./vue2-reactivity.md)           |

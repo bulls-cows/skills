@@ -103,6 +103,6 @@ export default {
 
 ## 三、Import 分组
 
-Import 分组规则详见 [code-style.md](./common-code-style.md#二导入排序规范)。
+Import 分组规则详见 [common-code-style.md](./common-code-style.md#二导入排序规范)。
 
 Vue2 推荐采用 4 组分组（与 Vue3、React 对齐）：外部依赖 → 类型导入 → 内部全局依赖 → 内部相对依赖，组间空一行，组内按字母顺序。历史项目若无独立类型导入组，可保留 3 组（合并类型导入到对应组）。
