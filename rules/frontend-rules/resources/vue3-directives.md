@@ -73,8 +73,8 @@ const vFocus = {
 
 ## 四、相关模块引用
 
-| 内容                 | 详见                                                   |
-| -------------------- | ------------------------------------------------------ |
+| 内容                 | 详见                                               |
+| -------------------- | -------------------------------------------------- |
 | Vue 模板通用规则     | [common-vue-template.md](./common-vue-template.md) |
-| Props 定义与 v-model | [vue3-interaction.md](./vue3-interaction.md)                     |
-| 组件开发规范         | [vue3-component-dev.md](./vue3-component-dev.md)                 |
+| Props 定义与 v-model | [vue3-interaction.md](./vue3-interaction.md)       |
+| 组件开发规范         | [vue3-component-dev.md](./vue3-component-dev.md)   |

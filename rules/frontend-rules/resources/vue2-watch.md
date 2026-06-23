@@ -121,9 +121,9 @@ export default {
 
 ## 四、相关模块引用
 
-| 内容               | 详见                                       |
-| ------------------ | ------------------------------------------ |
-| 通用 watch 理念    | [common-vue-watch.md](./common-vue-watch.md)     |
-| 注释规范           | [common-comments.md](./common-comments.md)       |
+| 内容               | 详见                                                   |
+| ------------------ | ------------------------------------------------------ |
+| 通用 watch 理念    | [common-vue-watch.md](./common-vue-watch.md)           |
+| 注释规范           | [common-comments.md](./common-comments.md)             |
 | 脚本结构顺序       | [vue2-order.md](./vue2-order.md#二script-内部结构顺序) |
-| 响应式陷阱（$set） | [vue2-reactivity.md](./vue2-reactivity.md)           |
+| 响应式陷阱（$set） | [vue2-reactivity.md](./vue2-reactivity.md)             |

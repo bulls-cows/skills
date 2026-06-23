@@ -68,14 +68,14 @@
 
 ## 九、相关模块引用
 
-| 内容       | 详见                                                   |
-| ---------- | ------------------------------------------------------ |
-| 注释规范   | [common-comments.md](./common-comments.md)                       |
-| Props 定义 | [vue3-interaction.md](./vue3-interaction.md#一props-定义规范)    |
-| Emit 事件  | [vue3-interaction.md](./vue3-interaction.md#1-事件白名单19-种)   |
-| 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)        |
-| 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                       |
-| watch 监听 | [vue3-watch.md](./vue3-watch.md)                                 |
-| Hooks 规范 | [common-hooks.md](./common-hooks.md)                             |
-| 导入顺序   | [vue3-order.md](./vue3-order.md)                                 |
-| 模板规则   | [common-vue-template.md](./common-vue-template.md) |
+| 内容       | 详见                                                           |
+| ---------- | -------------------------------------------------------------- |
+| 注释规范   | [common-comments.md](./common-comments.md)                     |
+| Props 定义 | [vue3-interaction.md](./vue3-interaction.md#一props-定义规范)  |
+| Emit 事件  | [vue3-interaction.md](./vue3-interaction.md#1-事件白名单19-种) |
+| 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)      |
+| 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                     |
+| watch 监听 | [vue3-watch.md](./vue3-watch.md)                               |
+| Hooks 规范 | [common-hooks.md](./common-hooks.md)                           |
+| 导入顺序   | [vue3-order.md](./vue3-order.md)                               |
+| 模板规则   | [common-vue-template.md](./common-vue-template.md)             |

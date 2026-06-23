@@ -125,7 +125,7 @@ HTML 元素上的属性顺序应保持统一，基础 8 步顺序如下：
 
 ## 七、框架特定差异
 
-| 内容                | Vue2 详见                                                     | Vue3 详见                                                                    |
-| ------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `v-model` 写法      | [vue2-directives.md](./vue2-directives.md#一v-model-写法)    | [vue3-directives.md](./vue3-directives.md#二v-model-写法)                   |
-| 模板属性顺序第 9 步 | 无                                                            | [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot)    |
+| 内容                | Vue2 详见                                                 | Vue3 详见                                                                |
+| ------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `v-model` 写法      | [vue2-directives.md](./vue2-directives.md#一v-model-写法) | [vue3-directives.md](./vue3-directives.md#二v-model-写法)                |
+| 模板属性顺序第 9 步 | 无                                                        | [vue3-directives.md](./vue3-directives.md#一vue3-特有第-9-步动态-v-slot) |

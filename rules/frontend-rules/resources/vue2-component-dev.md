@@ -76,8 +76,8 @@
 
 ## 九、相关模块引用
 
-| 内容           | 详见                                                    |
-| -------------- | ------------------------------------------------------- |
+| 内容           | 详见                                                              |
+| -------------- | ----------------------------------------------------------------- |
 | 注释规范       | [common-comments.md](./common-comments.md)                        |
 | Props 定义     | [vue2-interaction.md](./vue2-interaction.md#一props-定义规范)     |
 | Emit 事件      | [vue2-interaction.md](./vue2-interaction.md#二emit-事件规范)      |
@@ -86,4 +86,4 @@
 | `$refs` 访问   | [vue2-interaction.md](./vue2-interaction.md#三对外暴露与访问)     |
 | provide/inject | [vue2-interaction.md](./vue2-interaction.md#1-provideinject-规范) |
 | 导入顺序       | [vue2-order.md](./vue2-order.md)                                  |
-| 模板规则       | [common-vue-template.md](./common-vue-template.md)  |
+| 模板规则       | [common-vue-template.md](./common-vue-template.md)                |

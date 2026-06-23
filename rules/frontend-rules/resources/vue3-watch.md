@@ -57,19 +57,19 @@ watch(
 )
 ```
 
-| `flush` 值 | 执行时机        | 适用场景                  |
-| ---------- | --------------- | ------------------------- |
-| `'pre'`（默认） | DOM 更新前      | 大多数场景                |
-| `'post'`        | DOM 更新后      | 需要访问更新后 DOM 的副作用 |
-| `'sync'`        | 同步执行        | 需要极高时效性（慎用）    |
+| `flush` 值      | 执行时机   | 适用场景                    |
+| --------------- | ---------- | --------------------------- |
+| `'pre'`（默认） | DOM 更新前 | 大多数场景                  |
+| `'post'`        | DOM 更新后 | 需要访问更新后 DOM 的副作用 |
+| `'sync'`        | 同步执行   | 需要极高时效性（慎用）      |
 
 ---
 
 ## 四、相关模块引用
 
-| 内容              | 详见                                                  |
-| ----------------- | ----------------------------------------------------- |
-| 通用 watch 理念   | [common-vue-watch.md](./common-vue-watch.md)                |
-| 注释规范          | [common-comments.md](./common-comments.md)                  |
-| computed 选择策略 | [vue3-reactivity.md](./vue3-reactivity.md#三computed-规范)      |
-| 代码组织位置      | [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序)    |
+| 内容              | 详见                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| 通用 watch 理念   | [common-vue-watch.md](./common-vue-watch.md)                 |
+| 注释规范          | [common-comments.md](./common-comments.md)                   |
+| computed 选择策略 | [vue3-reactivity.md](./vue3-reactivity.md#三computed-规范)   |
+| 代码组织位置      | [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序) |

@@ -150,13 +150,13 @@ Import 分组排序规则详见 [react-order.md](./react-order.md#三import-分�
 
 ## 九、相关模块引用
 
-| 内容                | 详见                                     |
-| ------------------- | ---------------------------------------- |
-| 代码组织与顺序      | [react-order.md](./react-order.md)                   |
+| 内容                | 详见                                           |
+| ------------------- | ---------------------------------------------- |
+| 代码组织与顺序      | [react-order.md](./react-order.md)             |
 | 注释规范            | [common-comments.md](./common-comments.md)     |
 | Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
-| 状态管理            | [react-state.md](./react-state.md)                   |
-| JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
+| 状态管理            | [react-state.md](./react-state.md)             |
+| JSX 规范            | [react-jsx.md](./react-jsx.md)                 |
 | TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
 | 命名规范            | [common-naming.md](./common-naming.md)         |
 | 网络请求            | [common-network.md](./common-network.md)       |

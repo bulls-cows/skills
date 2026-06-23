@@ -54,8 +54,8 @@ export default {
 
 ## 四、相关模块引用
 
-| 内容                 | 详见                                                   |
-| -------------------- | ------------------------------------------------------ |
+| 内容                 | 详见                                               |
+| -------------------- | -------------------------------------------------- |
 | Vue 模板通用规则     | [common-vue-template.md](./common-vue-template.md) |
-| Props 定义与 v-model | [vue2-interaction.md](./vue2-interaction.md)                     |
-| 组件开发规范         | [vue2-component-dev.md](./vue2-component-dev.md)                 |
+| Props 定义与 v-model | [vue2-interaction.md](./vue2-interaction.md)       |
+| 组件开发规范         | [vue2-component-dev.md](./vue2-component-dev.md)   |

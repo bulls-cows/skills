@@ -247,9 +247,9 @@ useEffect(() => {
 
 ## 七、相关模块引用
 
-| 内容       | 详见                                   |
-| ---------- | -------------------------------------- |
+| 内容       | 详见                                               |
+| ---------- | -------------------------------------------------- |
 | 组件交互   | [react-interaction.md](./react-interaction.md)     |
 | Hooks 规范 | [common-hooks.md](./common-hooks.md)               |
 | 组件开发   | [react-component-dev.md](./react-component-dev.md) |
-| TypeScript | [common-typescript.md](./common-typescript.md) |
+| TypeScript | [common-typescript.md](./common-typescript.md)     |
