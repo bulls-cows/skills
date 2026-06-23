@@ -51,7 +51,7 @@ class UserList extends React.Component {
 ### TypeScript 优先
 
 - 新项目优先使用 TypeScript
-- Props、State、Refs 必须显式标注类型（详见 [react-typescript.md](./react-typescript.md)）
+- Props、State、Refs 必须显式标注类型（详见 [common-typescript.md](./common-typescript.md)）
 
 ---
 
@@ -68,7 +68,7 @@ class UserList extends React.Component {
 | 状态管理        | [react-state.md](./react-state.md)                     | useState / useReducer                                             |
 | JSX 规范        | [react-jsx.md](./react-jsx.md)                         | 条件渲染、列表、事件处理                                          |
 | CSS 规范        | [react-css.md](./react-css.md)                         | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |
-| TypeScript      | [react-typescript.md](./react-typescript.md)           | 类型注解、Props 定义                                              |
+| TypeScript      | [common-typescript.md](./common-typescript.md)        | 类型注解、Props 定义                                              |
 
 ### 通用规范引用
 

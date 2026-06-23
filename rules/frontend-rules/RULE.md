@@ -108,7 +108,7 @@ frontend-rules/
 | **模板属性顺序**                  | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）                |
 | **组件交互与通信**                | 🟠     | [vue3-interaction.md](./resources/vue3-interaction.md)                    | Props、v-model 兼容、Emit 事件白名单、defineExpose                     |
 | **Vue3 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#一网络请求处理规范)  | useRequest 前置检查、互斥锁                                |
-| **TypeScript 类型注解**           | 🟢     | [vue3-typescript.md](./resources/vue3-typescript.md)                      | defineProps/ref/reactive/Emits 泛型                                    |
+| **TypeScript 类型注解**           | 🟢     | [common-typescript.md](./resources/common-typescript.md)                 | defineProps/ref/reactive/Emits 泛型                                    |
 | **TypeScript 约束**               | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`                      |
 | **指令简写**                      | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
 | **Vue3 CSS 差异**                 | 🟢     | [vue3-css.md](./resources/vue3-css.md)                                    | Vue3 指令钩子（`mounted`/`unmounted`）、`:deep()` 穿透写法             |
@@ -129,7 +129,7 @@ frontend-rules/
 | **组件交互与通信**       | 🟠     | [react-interaction.md](./resources/react-interaction.md)   | 回调命名、状态提升、Context、Render Props、状态管理选型、事件总线     |
 | **Hooks React 特有**     | 🟠     | [react-hooks.md](./resources/react-hooks.md)               | 调用规则、内置 Hooks、useCallback                                      |
 | **状态管理**             | 🟠     | [react-state.md](./resources/react-state.md)               | useState/useReducer/Context 选择与使用                                 |
-| **TypeScript 类型注解**  | 🟢     | [react-typescript.md](./resources/react-typescript.md)     | Props、useState、useRef、事件、泛型组件                                |
+| **TypeScript 类型注解**  | 🟢     | [common-typescript.md](./resources/common-typescript.md)   | Props、useState、useRef、事件、泛型组件                                |
 | **TypeScript 约束**      | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐) | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`               |
 | **JSX 规范**             | 🟢     | [react-jsx.md](./resources/react-jsx.md)                   | 条件渲染、列表渲染、事件处理、属性传递                                 |
 | **React CSS 差异**       | 🟢     | [react-css.md](./resources/react-css.md)                   | CSS Modules、className、clsx、`:global()` 穿透、方案选型              |

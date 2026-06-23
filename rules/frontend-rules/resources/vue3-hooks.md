@@ -178,5 +178,5 @@ export const useTable = () => {
 | Hooks 通用规范  | [common-hooks.md](./common-hooks.md)            |
 | 响应式状态      | [vue3-reactivity.md](./vue3-reactivity.md)                    |
 | watch 监听      | [vue3-watch.md](./vue3-watch.md)                              |
-| TypeScript 类型 | [vue3-typescript.md](./vue3-typescript.md#四hooks-返回值类型) |
+| TypeScript 类型 | [common-typescript.md](./common-typescript.md#十二hooks-返回值类型) |
 | 导入顺序        | [vue3-order.md](./vue3-order.md)                              |

@@ -205,5 +205,5 @@ export const useTable = () => {
 | Hooks 通用规范  | [common-hooks.md](./common-hooks.md) |
 | 状态管理        | [react-state.md](./react-state.md)                   |
 | 组件开发        | [react-component-dev.md](./react-component-dev.md)   |
-| TypeScript 类型 | [react-typescript.md](./react-typescript.md)         |
+| TypeScript 类型 | [common-typescript.md](./common-typescript.md)       |
 | 命名规范        | [common-naming.md](./common-naming.md)             |

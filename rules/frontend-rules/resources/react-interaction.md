@@ -2,7 +2,7 @@
 
 > 本规范涵盖 React 组件对外接口（Props/回调）及组件间数据通信约定，结构与 Vue2/Vue3 `interaction.md` 对齐。
 >
-> TypeScript 类型定义详见 [react-typescript.md](./react-typescript.md#一props-类型定义)；状态管理 API（useState/useReducer）详见 [react-state.md](./react-state.md)。
+> TypeScript 类型定义详见 [common-typescript.md](./common-typescript.md#八组件-props-类型定义)；状态管理 API（useState/useReducer）详见 [react-state.md](./react-state.md)。
 
 ---
 
@@ -99,7 +99,7 @@ const Parent = () => {
 
 ### 3. 事件处理类型
 
-详见 [react-typescript.md](./react-typescript.md#四事件处理类型)（`React.ChangeEvent`、`React.MouseEvent` 等泛型事件类型）。
+详见 [common-typescript.md](./common-typescript.md#十事件与交互类型)（`React.ChangeEvent`、`React.MouseEvent` 等泛型事件类型）。
 
 ---
 
@@ -302,7 +302,7 @@ eventBus.emit('user:login', { id: '1', name: '张三' })
 
 | 内容                | 详见                                     |
 | ------------------- | ---------------------------------------- |
-| TypeScript 类型     | [react-typescript.md](./react-typescript.md)         |
+| TypeScript 类型     | [common-typescript.md](./common-typescript.md)       |
 | 组件开发规范        | [react-component-dev.md](./react-component-dev.md)   |
 | React Hooks 规范    | [react-hooks.md](./react-hooks.md)                   |
 | 状态管理 API        | [react-state.md](./react-state.md)                   |

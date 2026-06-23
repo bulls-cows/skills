@@ -68,7 +68,7 @@ class UserCard extends React.Component {
 
 详见 [react-interaction.md](./react-interaction.md#一props-规范)（单向数据流、参数解构、默认值、布尔简写、字符串 props）。
 
-Props 的 TypeScript 类型定义详见 [react-typescript.md](./react-typescript.md#一props-类型定义)。
+Props 的 TypeScript 类型定义详见 [common-typescript.md](./common-typescript.md#八组件-props-类型定义)。
 
 ---
 
@@ -158,7 +158,6 @@ Import 分组排序规则详见 [react-order.md](./react-order.md#三import-分�
 | Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
 | 状态管理            | [react-state.md](./react-state.md)                   |
 | JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
-| TypeScript          | [react-typescript.md](./react-typescript.md)         |
 | TypeScript 通用规范 | [common-typescript.md](./common-typescript.md) |
 | 命名规范            | [common-naming.md](./common-naming.md)         |
 | 网络请求            | [common-network.md](./common-network.md)       |

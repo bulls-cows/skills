@@ -8,7 +8,7 @@
 
 ### 1. 基础定义
 
-- 必须使用 `<script setup>` + TypeScript 类型注解，**类型规范详见** `./vue3-typescript.md`。
+- 必须使用 `<script setup>` + TypeScript 类型注解，**类型规范详见** `./common-typescript.md`。
 - 定义应尽量详细，至少指定类型，推荐使用对象形式，包含 `required`/`default`/`validator`。
 - 命名必须 `camelCase`。
 - **必须添加注释**说明参数含义（**注释规范详见** `./common-comments.md`）。

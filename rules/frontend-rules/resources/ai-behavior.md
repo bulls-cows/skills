@@ -40,10 +40,7 @@
 
 ### TypeScript 要求
 
-详见 [common-typescript.md](./common-typescript.md)（类型注解、禁用 any、import type、类型文件组织等通用规则）以及框架特定 TypeScript 规范：
-
-- Vue3：[vue3-typescript.md](./vue3-typescript.md)
-- React：[react-typescript.md](./react-typescript.md)
+详见 [common-typescript.md](./common-typescript.md)（类型注解、禁用 any、import type、类型文件组织等通用规则，以及 Props、响应式状态、事件、组件渲染、Hooks 返回值等框架特定差异）。
 
 ### 框架特定要求
 

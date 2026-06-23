@@ -252,4 +252,4 @@ useEffect(() => {
 | 组件交互   | [react-interaction.md](./react-interaction.md)     |
 | Hooks 规范 | [react-hooks.md](./react-hooks.md)                 |
 | 组件开发   | [react-component-dev.md](./react-component-dev.md) |
-| TypeScript | [react-typescript.md](./react-typescript.md)       |
+| TypeScript | [common-typescript.md](./common-typescript.md) |
