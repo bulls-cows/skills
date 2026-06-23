@@ -1,8 +1,6 @@
 # 网络请求规范
 
 > 本规范是前端 API 请求的统一标准，涵盖异步处理、响应解析、错误处理、安全规范、拦截器、取消请求等全流程，必须严格遵守。
->
-> 框架特有条目以 🟦（Vue2）或 💚（Vue3）标注。
 
 ---
 
@@ -90,7 +88,7 @@ try { await apiGetData() } catch (error) { console.warn(error) }
 </button>
 ```
 
-### 💚 Vue3：useRequest 方式
+### Vue3：useRequest 方式
 
 若已安装 `ahooks-vue` 或 `vue-hooks-plus`，优先使用 `useRequest`，`loading` 自动控制：
 
@@ -120,7 +118,7 @@ const handleSubmit = async () => { await run() }
 - **跨域配置**：优先使用后端 CORS 配置，禁止使用线上代理转发；开发环境代理仅用于本地调试
 - **CSRF 防护**：根据后端要求自动携带 CSRF Token，禁止关闭 CSRF 校验
 
-### 💚 Vue3：全局错误捕获
+### Vue3：全局错误捕获
 
 建议配置 `app.config.errorHandler`，配合 Sentry 上报未捕获异常：
 
@@ -201,18 +199,18 @@ onUnmounted(() => controller.abort())
 ## 十、其他注意事项
 
 - **等于运算符**：默认优先 `===`（严格相等）
-  - 🟦 **Vue2 历史项目偏好 `==`**：若将 `===` 改为 `==`，需提醒用户手动确认；新项目应遵循 `===`
-  - 💚 Vue3 / React 优先 `===`，若将 `==` 改为 `===` 需提醒用户确认
+  - **Vue2 历史项目偏好 `==`**：若将 `===` 改为 `==`，需提醒用户手动确认；新项目应遵循 `===`
+  - Vue3 / React 优先 `===`，若将 `==` 改为 `===` 需提醒用户确认
 - **注释问题**：与请求逻辑相关的注释默认保留，不强制检查（通用注释规范见 [comments.md](./common-comments.md)）
 - **超时设置**：全局请求超时统一配置为 10-30 秒，特殊场景可单独调整
 - **重试机制**：网络错误、超时等非业务错误可自动重试 2-3 次，业务错误禁止重试
-- **🟦 Vue2 注释默认忽略**：Vue2 项目中注释相关问题默认忽略，不进行检查
+- **Vue2 注释默认忽略**：Vue2 项目中注释相关问题默认忽略，不进行检查
 
 ---
 
 ## 十一、框架请求库选型与标准模板
 
-### 🟦 Vue2：手动 async/await + `this.$message`
+### Vue2：手动 async/await + `this.$message`
 
 Vue2（Options API）统一通过 `this.$message` 进行用户反馈提示：
 
@@ -235,13 +233,13 @@ async handleSubmit() {
 }
 ```
 
-### 💚💙 Vue3 / React：useRequest（统一模式）
+### Vue3 / React：useRequest（统一模式）
 
 两个框架的 `useRequest` API 几乎一致，差异点：
 
-- 包名：💚 Vue3 用 `ahooks-vue` / `vue-hooks-plus`；💙 React 用 `ahooks`
-- 状态声明：💚 `ref()`；💙 `useState()`
-- 执行方法：💚 `run`（推荐）；💙 `runAsync`（推荐，便于 `await`）
+- 包名：Vue3 用 `ahooks-vue` / `vue-hooks-plus`；React 用 `ahooks`
+- 状态声明：Vue3 `ref()`；React `useState()`
+- 执行方法：Vue3 `run`（推荐）；React `runAsync`（推荐，便于 `await`）
 
 **检查方式**：查看 `package.json` 的 `dependencies` 是否包含对应包名。
 
@@ -250,15 +248,15 @@ async handleSubmit() {
 #### useRequest 标准模板
 
 ```typescript
-// 💚 Vue3: import { useRequest } from 'ahooks-vue'
-// 💙 React: import { useRequest } from 'ahooks'
+// Vue3: import { useRequest } from 'ahooks-vue'
+// React: import { useRequest } from 'ahooks'
 
 const { loading, run } = useRequest(() => apiSubmit(formData), {
   manual: true,
   onSuccess: ({ code, data, msg }) => {
     if (code === 0) {
-      // 💚 Vue3: dataSource.value = data.list
-      // 💙 React: setDataSource(data.list)
+      // Vue3: dataSource.value = data.list
+      // React: setDataSource(data.list)
     } else {
       console.warn(msg)
     }
@@ -266,18 +264,18 @@ const { loading, run } = useRequest(() => apiSubmit(formData), {
   onError: (error) => console.warn(error),
 })
 
-// 💚 Vue3: await run()
-// 💙 React: await runAsync()
+// Vue3: await run()
+// React: await runAsync()
 ```
 
 #### 手动执行模板（未安装 useRequest 时）
 
 ```typescript
-// 💚 Vue3: const loading = ref(false)        💙 React: const [loading, setLoading] = useState(false)
+// Vue3: const loading = ref(false)        React: const [loading, setLoading] = useState(false)
 
 const handleSubmit = async () => {
-  // 💚 Vue3: if (loading.value) return       💙 React: if (loading) return
-  // 💚 Vue3: loading.value = true            💙 React: setLoading(true)
+  // Vue3: if (loading.value) return       React: if (loading) return
+  // Vue3: loading.value = true            React: setLoading(true)
   try {
     const { code, msg } = await apiSubmit(formData)
     if (code === 0) console.log('提交成功')
@@ -285,12 +283,12 @@ const handleSubmit = async () => {
   } catch (error) {
     console.warn(error)
   } finally {
-    // 💚 Vue3: loading.value = false         💙 React: setLoading(false)
+    // Vue3: loading.value = false         React: setLoading(false)
   }
 }
 ```
 
-> 💙 React 推荐使用 `runAsync` 获取 Promise，便于 `await` 与 try/catch。Vue3 的 `ahooks-vue` 使用 `run`。
+> React 推荐使用 `runAsync` 获取 Promise，便于 `await` 与 try/catch。Vue3 的 `ahooks-vue` 使用 `run`。
 
 ---
 
@@ -301,4 +299,4 @@ const handleSubmit = async () => {
 - 原代码可能使用不同响应结构
 - 原有错误处理可能不同
 - `async/await` 改变执行时机
-- 💚 **Vue3：转换前必须展示 diff 预览并获用户确认**
+- **Vue3：转换前必须展示 diff 预览并获用户确认**

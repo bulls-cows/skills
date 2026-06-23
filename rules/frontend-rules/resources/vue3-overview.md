@@ -48,7 +48,7 @@
 | CSS 样式   | scoped 与 v-html `:deep()` 穿透、自定义指令清理        | [css.md](./vue3-css.md)                     |
 | 性能优化   | defineAsyncComponent、shallowRef、unmounted 钩子       | [performance.md](./vue3-performance.md)     |
 
-> Vue3 网络请求差异（useRequest 前置检查、`===` 偏好、Sentry/errorHandler、diff 预览）已并入 [common-network.md](./common-network.md)，以 💚 标注。
+> Vue3 网络请求差异（useRequest 前置检查、`===` 偏好、Sentry/errorHandler、diff 预览）已并入 [common-network.md](./common-network.md)。
 
 ---
 

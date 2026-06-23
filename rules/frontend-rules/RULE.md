@@ -83,9 +83,9 @@ frontend-rules/
 | **模板属性顺序**          | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue2 沿用 8 步）                        |
 | **方法函数规范**          | 🟠     | [common-constraints.md](./resources/common-constraints.md#四方法函数规范强制)    | 前置参数校验 + try-catch 错误保底                                      |
 | **watch 规范**            | 🟠     | [common-vue-watch.md](./resources/common-vue-watch.md)                    | watch 通用规范（Vue2 特有写法见 vue2-watch.md）、清理机制、与 computed 选择策略 |
-| **Vue2 网络请求（🟦）**   | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | `==` 偏好、`this.$message` 提示                                        |
+| **Vue2 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | `==` 偏好、`this.$message` 提示                                        |
 | **Vue2 响应式陷阱进阶**   | 🟢     | [vue2-reactivity.md](./resources/vue2-reactivity.md)                      | `$set`/数组索引/数组长度修改的三类陷阱与速查表                         |
-| **Vue2 约束（并入通用）** | 🟢     | [common-constraints.md](./resources/common-constraints.md)                       | 禁止项/推荐项/方法规范/过滤器（🟦 为 Vue2 特有）                       |
+| **Vue2 约束（并入通用）** | 🟢     | [common-constraints.md](./resources/common-constraints.md)                       | 禁止项/推荐项/方法规范/过滤器（Vue2 特有）                             |
 | **指令简写**              | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
 | **Vue2 CSS 差异**         | 🟢     | [vue2-css.md](./resources/vue2-css.md)                                    | Vue2 指令钩子（`inserted`/`unbind`）、`::v-deep` 穿透写法              |
 
@@ -107,7 +107,7 @@ frontend-rules/
 | **`<script setup>` 结构与代码组织** | 🟠   | [vue3-order.md](./resources/vue3-order.md)                                | SFC 块顺序、Import 分组、脚本内部声明顺序                              |
 | **模板属性顺序**                  | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）                |
 | **组件交互与通信**                | 🟠     | [vue3-interaction.md](./resources/vue3-interaction.md)                    | Props、v-model 兼容、Emit 事件白名单、defineExpose                     |
-| **Vue3 网络请求（💚）**           | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览                     |
+| **Vue3 网络请求**         | 🟠     | [common-network.md](./resources/common-network.md#十一框架请求库选型与标准模板)  | useRequest 前置检查、`===` 偏好、互斥锁、diff 预览                     |
 | **TypeScript 类型注解**           | 🟢     | [vue3-typescript.md](./resources/vue3-typescript.md)                      | defineProps/ref/reactive/Emits 泛型                                    |
 | **TypeScript 约束**               | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐)        | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`                      |
 | **指令简写**                      | 🟢     | [common-vue-template.md](./resources/common-vue-template.md#四指令简写)          | `v-bind` → `:`、`v-on` → `@`、`v-slot` → `#`                           |
@@ -200,7 +200,7 @@ frontend-rules/
 
 - 通用规则：所有 `common-*.md` 前缀文件（如 [common-naming.md](./resources/common-naming.md)、[common-network.md](./resources/common-network.md)）
 - 框架差异：对应 `vue2-*.md`、`vue3-*.md`、`react-*.md` 前缀文件
-- 网络请求、约束清单的框架差异已并入通用 `common-network.md`、`common-constraints.md`，以 🟦（Vue2）/💚（Vue3）/💙（React）标注，无需额外加载框架文件
+- 网络请求、约束清单的框架差异已并入通用 `common-network.md`、`common-constraints.md`，以文字（Vue2 / Vue3 / React）标注，无需额外加载框架文件
 
 借助上方「主题速查表」按主题定位文件。
 

@@ -2,7 +2,7 @@
 
 > 本清单是前端开发的快速参考手册，所有规则必须严格遵守，避免常见错误和代码质量问题。
 >
-> 本清单只列出关键速查项，详细规则与示例请参阅对应链接文档。Vue2 特有条目以 🟦 标注。
+> 本清单只列出关键速查项，详细规则与示例请参阅对应链接文档。Vue2 特有条目在「说明」列以 "Vue2：" 前缀标注。
 
 ---
 
@@ -23,9 +23,9 @@
 | 9   | 空的 `catch`                | 捕获错误后必须记录，详见 [network.md](./common-network.md#三错误处理)                                                                                   | `try { ... } catch (e) { /* 空 */ }`                               | `try { ... } catch (e) { console.warn(e) }`          |
 | 10  | 使用 `any` 类型             | 禁止使用 `any`，详见 [typescript.md](./common-typescript.md#二禁用-any)                                                                                 | `const data: any = ...`                                            | `const data: unknown = ...`                          |
 | 11  | 未过滤的 `v-html`           | 富文本必须用 DOMPurify 过滤，详见 [vue-template.md](./common-vue-template.md#三v-html-安全)                                                             | `<div v-html="rawHtml">`                                           | `<div v-html="DOMPurify.sanitize(rawHtml)">`         |
-| 12  | 🟦 修改 data 原始类型       | Vue2：后端给什么类型用什么，不可修改原始类型                                                                                                     | `this.formData.count = String(this.formData.count)`                | 保持原始类型，需要转换时另存变量                     |
-| 13  | 🟦 使用 mixins              | Vue2：改用组合式函数或组件组合                                                                                                                   | `mixins: [sharedMixin]`                                            | 提取为独立的函数或组件复用                           |
-| 14  | 🟦 setTimeout 替代 nextTick | Vue2：DOM 更新操作必须用 `$nextTick`，禁止 `setTimeout` 替代                                                                                     | `setTimeout(() => { this.$refs.input.focus() }, 0)`                | `this.$nextTick(() => { this.$refs.input.focus() })` |
+| 12  | 修改 data 原始类型          | Vue2：后端给什么类型用什么，不可修改原始类型                                                                                                     | `this.formData.count = String(this.formData.count)`                | 保持原始类型，需要转换时另存变量                     |
+| 13  | 使用 mixins                 | Vue2：改用组合式函数或组件组合                                                                                                                   | `mixins: [sharedMixin]`                                            | 提取为独立的函数或组件复用                           |
+| 14  | setTimeout 替代 nextTick    | Vue2：DOM 更新操作必须用 `$nextTick`，禁止 `setTimeout` 替代                                                                                     | `setTimeout(() => { this.$refs.input.focus() }, 0)`                | `this.$nextTick(() => { this.$refs.input.focus() })` |
 
 ---
 
@@ -40,7 +40,7 @@
 | 3   | computed 优先         | 能用计算属性派生的状态不手动维护                                   | ``const fullName = computed(() => `${firstName.value} ${lastName.value}`)``     |
 | 4   | watch 按需使用        | 合理使用深度监听和立即监听，避免不必要的执行                       | `watch(user, () => { loadData() }, { deep: true, immediate: true })`            |
 | 5   | 减少状态冗余          | 优先通过 computed 派生状态，减少重复定义                           | 避免同时定义 `list` 和 `filteredList` 两个状态，用 computed 派生 filteredList   |
-| 6   | 🟦 computed try/catch | Vue2：computed 必须用 try/catch 包裹，避免计算属性报错导致页面崩溃 | `computed: { fullName() { try { return ... } catch (e) { console.warn(e) } } }` |
+| 6   | computed try/catch    | Vue2：computed 必须用 try/catch 包裹，避免计算属性报错导致页面崩溃 | `computed: { fullName() { try { return ... } catch (e) { console.warn(e) } } }` |
 
 ---
 
