@@ -113,3 +113,79 @@ const { fetch, loading } = useApi()
 | Composables                | 显式导入，使用 `@` 别名      |
 | 工具函数                   | 显式导入，使用 `@` 别名      |
 | Nuxt API (useNuxtApp 等)   | 显式从 `#app` 或 `nuxt` 导入 |
+
+## 页面标题管理
+
+**原则**：使用 `useHead` 的 `titleTemplate` 统一管理页面标题，各页面只设置简短标题，避免重复写网站名称后缀。
+
+**为什么**：
+
+- 消除重复代码：各页面只需关注自身标题，网站名称由 `titleTemplate` 自动拼接
+- 统一变更点：修改网站名称时只需改一处，无需遍历所有页面
+- 符合直觉：页面标题格式通常为"页面标题 - 网站名称"，`titleTemplate` 天然支持此模式
+
+**配置方式**：
+
+在 `app/app.vue` 中设置 `titleTemplate`：
+
+```typescript
+// app/app.vue
+useHead({
+  titleTemplate: (titleChunk?: string) => {
+    return titleChunk ? `${titleChunk} - {网站名称}` : '{网站名称} - {网站副标题}'
+  },
+})
+```
+
+- `titleChunk` 有值：返回 `"页面标题 - 网站名称"`
+- `titleChunk` 为空：返回默认标题（首页无需设置时的回退值）
+
+> `{网站名称}` 和 `{网站副标题}` 替换为实际值，或从 `runtimeConfig` 中读取动态设置。
+
+**移除 `nuxt.config.ts` 中的 `title`**：
+
+```typescript
+// nuxt.config.ts — 移除 title 配置
+app: {
+  head: {
+    // ❌ 不要在这里设置 title
+    title: "xxx", // [!code --]
+    meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
+    // ...
+  },
+}
+```
+
+标题配置统一由 `app/app.vue` 管理，`nuxt.config.ts` 的 `app.head` 中不应再设置 `title`。
+
+**页面中使用**：
+
+各页面只需设置简短标题：
+
+```vue
+<!-- app/pages/example.vue -->
+<script setup lang="ts">
+import { useHead } from 'nuxt/app'
+
+useHead({
+  title: '页面标题',
+})
+</script>
+```
+
+**首页不需要设置**：首页默认走 `titleTemplate` 的空值分支，自动使用默认标题，无需额外设置。
+
+**新增页面时**：
+
+只需一行，自动获得完整标题：
+
+```typescript
+useHead({ title: '页面名' })
+// 浏览器标签页显示: "页面名 - 网站名称"
+```
+
+**注意事项**：
+
+- `titleTemplate` 在 `app/app.vue` 中设置，全局生效
+- 各页面仍通过 `useHead({ title })` 设置，由 `titleTemplate` 自动拼接
+- 使用 `useHead` 时需从 `"nuxt/app"` 显式导入（遵循禁用自动导入原则）
