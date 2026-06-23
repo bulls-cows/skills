@@ -76,6 +76,6 @@
 | 组件通信   | [vue3-interaction.md](./vue3-interaction.md#四组件间通信)        |
 | 响应式状态 | [vue3-reactivity.md](./vue3-reactivity.md)                       |
 | watch 监听 | [vue3-watch.md](./vue3-watch.md)                                 |
-| Hooks 规范 | [vue3-hooks.md](./vue3-hooks.md)                                 |
+| Hooks 规范 | [common-hooks.md](./common-hooks.md)                             |
 | 导入顺序   | [vue3-order.md](./vue3-order.md)                                 |
 | 模板规则   | [common-vue-template.md](./common-vue-template.md) |

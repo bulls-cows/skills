@@ -46,7 +46,7 @@ class UserList extends React.Component {
 ### 必须使用 Hooks
 
 - 使用 Hooks 管理状态和副作用
-- **禁止**在条件、循环或嵌套函数中调用 Hooks（详见 [react-hooks.md](./react-hooks.md#二hooks-调用规则)）
+- **禁止**在条件、循环或嵌套函数中调用 Hooks（详见 [common-hooks.md](./common-hooks.md#六hooks-调用规则)）
 
 ### TypeScript 优先
 
@@ -64,7 +64,7 @@ class UserList extends React.Component {
 | 组件开发规范    | [react-component-dev.md](./react-component-dev.md)     | 函数组件、Props、导出规范                                         |
 | 组件交互与通信  | [react-interaction.md](./react-interaction.md)         | Props 单向流、回调、状态提升、Context、Render Props、状态管理选型 |
 | 代码组织与顺序  | [react-order.md](./react-order.md)                     | 文件结构、组件内部顺序、Import 分组（4 组）、JSX 属性顺序         |
-| Hooks 规范      | [react-hooks.md](./react-hooks.md)                     | Hook 调用规则、内置 Hooks                                         |
+| Hooks 规范      | [common-hooks.md](./common-hooks.md)                   | Hook 调用规则、内置 Hooks                                         |
 | 状态管理        | [react-state.md](./react-state.md)                     | useState / useReducer                                             |
 | JSX 规范        | [react-jsx.md](./react-jsx.md)                         | 条件渲染、列表、事件处理                                          |
 | CSS 规范        | [react-css.md](./react-css.md)                         | CSS Modules、className、clsx、`:global()` 穿透、方案选型          |

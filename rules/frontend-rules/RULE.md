@@ -98,12 +98,12 @@ frontend-rules/
 | **必须使用 `<script setup>`**     | 🔴     | [vue3-overview.md](./resources/vue3-overview.md)                          | 禁止使用 Options API 写法                                              |
 | **Props 定义规范**                | 🔴     | [vue3-interaction.md](./resources/vue3-interaction.md#一props-定义规范)   | 类型注解、v-model 兼容、使用限制                                       |
 | **数据修改限制**                  | 🔴     | [vue3-interaction.md](./resources/vue3-interaction.md#3-使用限制)         | 禁止修改 props、禁止父组件直接修改子组件内部状态                       |
-| **Hooks 调用规则**                | 🔴     | [vue3-hooks.md](./resources/vue3-hooks.md#一vue3-特有-setup-限制)         | 仅在组件顶层或 `<script setup>` 顶层调用，禁止在条件/循环中调用        |
+| **Hooks 调用规则**                | 🔴     | [common-hooks.md](./resources/common-hooks.md#六hooks-调用规则) | 仅在组件顶层或 `<script setup>` 顶层调用，禁止在条件/循环中调用        |
 | **v-for 与 key**                  | 🔴     | [common-vue-template.md](./resources/common-vue-template.md#一v-for-与-key)      | 唯一 ID 作为 key，禁止使用 index                                       |
 | **v-if 与 v-for 冲突**            | 🔴     | [common-vue-template.md](./resources/common-vue-template.md#二v-if-与-v-for-冲突) | 禁止同时使用在同一个元素上                                            |
 | **ref/reactive/computed 原则**    | 🟠     | [vue3-reactivity.md](./resources/vue3-reactivity.md)                      | ref/reactive 选择原则、reactive 转 ref 规则、computed 规范             |
 | **watch 规范**                    | 🟠     | [common-vue-watch.md](./resources/common-vue-watch.md)                    | watch 通用规范（Vue3 特有差异见 vue3-watch.md）、清理机制、与 computed 选择策略 |
-| **Hooks Vue3 特有差异**           | 🟠     | [vue3-hooks.md](./resources/vue3-hooks.md)                                | setup 限制、toRefs、内置 Hooks                                         |
+| **Hooks Vue3 特有差异**           | 🟠     | [common-hooks.md](./resources/common-hooks.md)                       | setup 限制、toRefs、内置 Hooks                                         |
 | **`<script setup>` 结构与代码组织** | 🟠   | [vue3-order.md](./resources/vue3-order.md)                                | SFC 块顺序、Import 分组、脚本内部声明顺序                              |
 | **模板属性顺序**                  | 🟠     | [common-vue-template.md](./resources/common-vue-template.md#六模板属性顺序)      | HTML 元素上属性的统一排列顺序（Vue3 追加第 9 步 v-slot）                |
 | **组件交互与通信**                | 🟠     | [vue3-interaction.md](./resources/vue3-interaction.md)                    | Props、v-model 兼容、Emit 事件白名单、defineExpose                     |
@@ -122,12 +122,12 @@ frontend-rules/
 | ------------------------ | ------ | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
 | **必须使用函数组件**     | 🔴     | [react-overview.md](./resources/react-overview.md)         | 禁止使用 Class 组件                                                    |
 | **Props 单向数据流**     | 🔴     | [react-interaction.md](./resources/react-interaction.md#一props-规范) | 禁止修改 props、参数解构、默认值、布尔简写                           |
-| **Hooks 调用规则**       | 🔴     | [react-hooks.md](./resources/react-hooks.md#二hooks-调用规则) | 仅在组件顶层或自定义 Hook 中调用，禁止条件/循环中调用                |
+| **Hooks 调用规则**       | 🔴     | [common-hooks.md](./resources/common-hooks.md#六hooks-调用规则) | 仅在组件顶层或自定义 Hook 中调用，禁止条件/循环中调用                |
 | **key 使用规范**         | 🔴     | [react-jsx.md](./resources/react-jsx.md)                   | 列表渲染必须使用唯一 key，禁止使用 index                               |
 | **禁止直接修改 state**   | 🔴     | [react-state.md](./resources/react-state.md)               | 使用 setState/useState 更新函数                                        |
 | **组件结构与代码组织**   | 🟠     | [react-order.md](./resources/react-order.md)               | 文件结构、组件内部顺序、Import 分组（4 组）、JSX 属性顺序             |
 | **组件交互与通信**       | 🟠     | [react-interaction.md](./resources/react-interaction.md)   | 回调命名、状态提升、Context、Render Props、状态管理选型、事件总线     |
-| **Hooks React 特有**     | 🟠     | [react-hooks.md](./resources/react-hooks.md)               | 调用规则、内置 Hooks、useCallback                                      |
+| **Hooks React 特有**     | 🟠     | [common-hooks.md](./resources/common-hooks.md)              | 调用规则、内置 Hooks、useCallback                                      |
 | **状态管理**             | 🟠     | [react-state.md](./resources/react-state.md)               | useState/useReducer/Context 选择与使用                                 |
 | **TypeScript 类型注解**  | 🟢     | [common-typescript.md](./resources/common-typescript.md)   | Props、useState、useRef、事件、泛型组件                                |
 | **TypeScript 约束**      | 🟢     | [common-typescript.md](./resources/common-typescript.md#六类型压制不推荐) | 不推荐 `as any`、`@ts-ignore`、`@ts-expect-error`               |

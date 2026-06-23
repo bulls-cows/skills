@@ -154,7 +154,6 @@ Import 分组排序规则详见 [react-order.md](./react-order.md#三import-分�
 | ------------------- | ---------------------------------------- |
 | 代码组织与顺序      | [react-order.md](./react-order.md)                   |
 | 注释规范            | [common-comments.md](./common-comments.md)     |
-| Hooks 规范          | [react-hooks.md](./react-hooks.md)                   |
 | Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
 | 状态管理            | [react-state.md](./react-state.md)                   |
 | JSX 规范            | [react-jsx.md](./react-jsx.md)                       |

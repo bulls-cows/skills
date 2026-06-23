@@ -286,7 +286,7 @@ import styles from './UserCard.module.scss'
 | 内容       | 详见                                   |
 | ---------- | -------------------------------------- |
 | 组件开发   | [react-component-dev.md](./react-component-dev.md) |
-| Hooks 规范 | [react-hooks.md](./react-hooks.md)                 |
+| Hooks 规范 | [common-hooks.md](./common-hooks.md)               |
 | 状态管理   | [react-state.md](./react-state.md)                 |
 | CSS 规范   | [react-css.md](./react-css.md)                 |
 | 命名规范   | [common-naming.md](./common-naming.md)           |

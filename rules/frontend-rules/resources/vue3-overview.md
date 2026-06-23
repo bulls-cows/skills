@@ -43,7 +43,7 @@
 | 结构顺序   | 4 组 import 排序、`<script setup>` 内部 5 段结构       | [vue3-order.md](./vue3-order.md)                 |
 | 响应式     | ref/reactive/computed 选择与转换                       | [vue3-reactivity.md](./vue3-reactivity.md)       |
 | 侦听器     | Vue3 特有差异（watchEffect、watch vs watchEffect、flush） | [vue3-watch.md](./vue3-watch.md)                 |
-| Hooks      | Vue3 特有差异（setup 限制、toRefs、内置 Hooks）        | [vue3-hooks.md](./vue3-hooks.md)                 |
+| Hooks      | Vue3 特有差异（setup 限制、toRefs、内置 Hooks）        | [common-hooks.md](./common-hooks.md)             |
 | TypeScript | Vue3 特有差异（defineProps/ref/reactive/Emits 泛型）   | [common-typescript.md](./common-typescript.md)   |
 | CSS 样式   | scoped 与 v-html `:deep()` 穿透、自定义指令清理        | [vue3-css.md](./vue3-css.md)                     |
 | 性能优化   | defineAsyncComponent、shallowRef、unmounted 钩子       | [vue3-performance.md](./vue3-performance.md)     |

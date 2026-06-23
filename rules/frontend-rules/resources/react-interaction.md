@@ -304,7 +304,6 @@ eventBus.emit('user:login', { id: '1', name: '张三' })
 | ------------------- | ---------------------------------------- |
 | TypeScript 类型     | [common-typescript.md](./common-typescript.md)       |
 | 组件开发规范        | [react-component-dev.md](./react-component-dev.md)   |
-| React Hooks 规范    | [react-hooks.md](./react-hooks.md)                   |
 | 状态管理 API        | [react-state.md](./react-state.md)                   |
 | JSX 规范            | [react-jsx.md](./react-jsx.md)                       |
 | Hooks 通用规范      | [common-hooks.md](./common-hooks.md)           |
