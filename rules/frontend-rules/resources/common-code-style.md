@@ -48,10 +48,10 @@
 
 **优先使用 `const 函数名 = () => {}` 箭头函数写法，避免使用 `function` 声明。**
 
-| 原写法                       | 推荐写法                        |
-| ---------------------------- | ------------------------------- |
-| `function fetchData() {}`    | `const fetchData = () => {}`    |
-| `function onBtnClick(e) {}`  | `const onBtnClick = (e) => {}`  |
+| 原写法                      | 推荐写法                       |
+| --------------------------- | ------------------------------ |
+| `function fetchData() {}`   | `const fetchData = () => {}`   |
+| `function onBtnClick(e) {}` | `const onBtnClick = (e) => {}` |
 
 ---
 

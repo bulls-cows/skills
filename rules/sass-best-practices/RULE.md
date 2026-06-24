@@ -1,6 +1,7 @@
 ---
 description: Sass 废弃语法替代方案与现代 Sass 最佳实践
 alwaysApply: true
+trigger: always_on
 ---
 
 # Sass 最佳实践

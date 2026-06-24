@@ -1,6 +1,7 @@
 ---
 description: Markdown 书写规范
 alwaysApply: true
+trigger: always_on
 ---
 
 # Markdown 书写规范

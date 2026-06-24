@@ -105,11 +105,13 @@ description: >
 ---
 description: [规则简要描述，与 README.md 中该规则的说明一致]
 alwaysApply: true
+trigger: always_on
 ---
 ```
 
 - `description`：规则的简要描述，用于 README.md 等处展示
 - `alwaysApply`：是否始终应用，默认为 `true`
+- `trigger`：触发条件，固定为 `always_on` 以保持兼容性
 
 更新现有规则文档时，不修改已有的 frontmatter。
 

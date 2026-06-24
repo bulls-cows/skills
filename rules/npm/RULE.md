@@ -1,6 +1,7 @@
 ---
 description: NPM 使用规范
 alwaysApply: true
+trigger: always_on
 ---
 
 # NPM 使用规范

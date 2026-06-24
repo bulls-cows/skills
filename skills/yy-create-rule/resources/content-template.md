@@ -10,6 +10,7 @@
 ---
 description: [规则简要描述]
 alwaysApply: true
+trigger: always_on
 ---
 ```
 
