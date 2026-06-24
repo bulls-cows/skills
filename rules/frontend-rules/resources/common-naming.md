@@ -12,7 +12,7 @@
 | 类型                 | 规范                     | 示例                                                     | 说明                                         |
 | -------------------- | ------------------------ | -------------------------------------------------------- | -------------------------------------------- |
 | Vue/React 组件文件名 | 多单词 + PascalCase      | `UserList.vue`、`UserCard.tsx`                           | 组件名必须多个单词，避免与 HTML 原生元素冲突 |
-| 目录命名             | kebab-case（短横线小写） | `src/components/user-profile/`、`src/utils/date-format/` | 所有目录使用短横线分隔                       |
+| 目录命名             | kebab-case（短横线小写） | `src/components/user-profile/`、`src/utils/date-format/` | 所有目录均使用短横线分隔                     |
 | 普通 JS/TS 文件      | 小驼峰 camelCase         | `userApi.ts`、`dateUtils.ts`                             | 工具函数、API 封装等普通文件                 |
 | 类型定义文件         | 小驼峰 + .d.ts 后缀      | `userType.d.ts`、`api.d.ts`                              | TypeScript 类型定义文件                      |
 | 组件使用             | PascalCase               | `<UserCard />`、`<UserList />`                           | 模板中组件名使用大驼峰                       |
@@ -40,12 +40,12 @@
 | 全局常量             | 全大写 + 下划线分隔                                | `MAX_RETRY_COUNT = 3`、`APP_CONFIG = { ... }`                              | 常量值不可修改                                      |
 | 枚举类型             | PascalCase，成员全大写                             | `enum UserStatus { ACTIVE = 'ACTIVE', DISABLED = 'DISABLED' }`             | TypeScript 枚举命名规范                             |
 | TypeScript 类型/接口 | PascalCase，接口 `I` 前缀 / 类型别名 `T` 前缀      | `interface IUser { id: number; name: string }`、`type TUserInfo = { ... }` | 代码示例见下方[类型命名代码示例](#类型命名代码示例) |
-| 组件传参（Props）    | 小驼峰 camelCase，必须语义化                       | `userId`、`userInfo`、`menuList`                                           | 父组件向子组件传递数据，与变量命名一致              |
+| 组件传参（Props）    | 小驼峰 camelCase，必须语义化                       | `userId`、`userInfo`、`menuList`                                           | 父组件向子组件传递数据，与变量命名规范一致          |
 | 组件事件（Emits）    | 小驼峰 camelCase，`on` + 事件名                    | `onUserChange`、`onFormSubmit`                                             | 子组件向父组件抛出事件                              |
-| 布尔值变量           | `is`/`has` 前缀，或 `isCan`/`visible` 等布尔语义词 | `isVisible`、`hasPermission`、`isCanEdit`、`visibleDialog`                 | 从名称直接判断为布尔类型                            |
-| 普通变量             | 小驼峰 camelCase，语义优先                         | `userInfo`、`menuList`、`totalCount`                                       | 禁止 `data1`、`temp2` 等无意义命名                  |
+| 布尔值变量           | `is`/`has` 前缀，或 `isCan`/`visible` 等布尔语义词 | `isVisible`、`hasPermission`、`isCanEdit`、`visibleDialog`                 | 从变量名直接判断是布尔类型                          |
+| 普通变量             | 小驼峰 camelCase，语义优先                         | `userInfo`、`menuList`、`totalCount`                                       | 禁止使用无意义的 `data1`、`temp2` 等命名            |
 | 路由参数             | 优先小驼峰，短横线兜底                             | `userId`（优先）、`user-id`（兜底）                                        | 与后端接口保持一致，无特殊要求时使用小驼峰          |
-| 状态管理变量         | 小驼峰，语义清晰                                   | `userState`、`menuState`                                                   | Pinia/Vuex/Redux 等状态管理变量                     |
+| 状态管理变量         | 小驼峰，语义清晰                                   | `userState`、`menuState`                                                   | Pinia/Vuex/Redux 等状态管理中的变量                 |
 
 ### 类型命名代码示例
 
@@ -68,12 +68,12 @@ type UserList = IUserInfo[]
 
 ## 四、事件命名规范
 
-| 场景                      | 规范                        | 示例                                 | 说明                       |
-| ------------------------- | --------------------------- | ------------------------------------ | -------------------------- |
-| Vue 自定义事件            | 事件名（小驼峰）            | `@userChange`、`@formSubmit`         | 模板监听与 emit 统一小驼峰 |
-| React 自定义事件          | `on` + 事件名（小驼峰）     | `onUserChange`、`onFormSubmit`       | 与原生事件保持一致         |
-| 全局事件（EventBus/Mitt） | 业务模块前缀 + 小驼峰事件名 | `user:infoChange`、`form:itemSubmit` | 避免全局事件名冲突         |
-| 原生事件                  | 遵循 W3C 标准               | `onClick`、`onChange`、`onSubmit`    | 与原生事件名保持一致       |
+| 场景                      | 规范                        | 示例                                 | 说明                               |
+| ------------------------- | --------------------------- | ------------------------------------ | ---------------------------------- |
+| Vue 自定义事件            | 事件名（小驼峰）            | `@userChange`、`@formSubmit`         | 模板监听与 emit 定义统一使用小驼峰 |
+| React 自定义事件          | `on` + 事件名（小驼峰）     | `onUserChange`、`onFormSubmit`       | 与原生事件命名保持一致             |
+| 全局事件（EventBus/Mitt） | 业务模块前缀 + 小驼峰事件名 | `user:infoChange`、`form:itemSubmit` | 避免全局事件名冲突                 |
+| 原生事件                  | 遵循 W3C 标准               | `onClick`、`onChange`、`onSubmit`    | 与原生事件名保持一致               |
 
 > 统一原则：事件名使用动词或"名词+动词"结构，表达事件含义与触发时机。
 

@@ -15,7 +15,7 @@
 | 技术       | 版本/要求             | 说明                                                |
 | ---------- | --------------------- | --------------------------------------------------- |
 | React      | 18+                   | 必须使用 React 18 及以上版本                        |
-| TypeScript | 推荐                  | 类型安全                                            |
+| TypeScript | 推荐                  | 类型安全，优先使用 TS                               |
 | 组件模式   | 函数组件              | 禁止使用 Class 组件                                 |
 | 状态管理   | Hooks                 | useState / useReducer / Context                     |
 | 样式方案   | CSS Modules / SCSS 等 | 详见 [CSS 规范](./common-css.md#十二react-css-补充) |

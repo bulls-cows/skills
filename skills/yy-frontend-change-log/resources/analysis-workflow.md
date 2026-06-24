@@ -80,9 +80,9 @@
   - 组件依赖的子组件、第三方库、API接口
   - 使用的状态管理方案（Vuex/Pinia/Redux/Context等）
 - **框架专属特性**：
-  - **Vue2**：详见 `references/vue2-rules.md`
-  - **Vue3**：详见 `references/vue3-rules.md`
-  - **React**：详见 `references/react-rules.md`
+  - **Vue2**：详见 `resources/vue2-rules.md`
+  - **Vue3**：详见 `resources/vue3-rules.md`
+  - **React**：详见 `resources/react-rules.md`
 - **状态流转**：
   - 组件内部的状态变化（如涉及状态机）
   - 所有可能的状态、触发事件和流转规则

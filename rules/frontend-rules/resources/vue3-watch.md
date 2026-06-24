@@ -67,7 +67,9 @@ watch(
 
 ## 四、相关模块引用
 
-- 通用 watch 理念：[common-vue-watch.md](./common-vue-watch.md)
-- 注释规范：[common-comments.md](./common-comments.md)
-- computed 选择策略：[vue3-reactivity.md](./vue3-reactivity.md#三computed-规范)
-- 代码组织位置：[vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序)
+| 内容              | 详见                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| 通用 watch 理念   | [common-vue-watch.md](./common-vue-watch.md)                 |
+| 注释规范          | [common-comments.md](./common-comments.md)                   |
+| computed 选择策略 | [vue3-reactivity.md](./vue3-reactivity.md#三computed-规范)   |
+| 代码组织位置      | [vue3-order.md](./vue3-order.md#二script-setup-内部结构顺序) |

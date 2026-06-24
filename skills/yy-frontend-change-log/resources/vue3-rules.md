@@ -28,6 +28,7 @@
 - `<Suspense>` 的异步加载组件和回退内容。
 - `<KeepAlive>` 的缓存组件和 `include / exclude / max` 配置。
 - `<Transition>` 的过渡动画配置。
+- `async` 组件：动态导入组件。
 
 ## 渲染优化
 
@@ -55,12 +56,6 @@
 - `useRoute()`：获取路由参数
 - `useRouter()`：编程式导航
 - 路由守卫：`router.beforeEach`、`beforeResolve`、`afterEach`，关注守卫中访问 store 或执行异步逻辑的场景
-
-## 特殊特性依赖
-
-- `Teleport`：目标 DOM 节点
-- `Suspense`：异步组件加载状态
-- `async` 组件：动态导入组件
 
 ## 异常处理
 
