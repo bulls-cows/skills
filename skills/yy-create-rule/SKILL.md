@@ -36,6 +36,7 @@ description: >
 - **内容类型**：根据用户描述自动判断（最佳实践 / 规范约定 / bug 修复 / 架构决策 / 其他）
 - **适用范围**：默认为全局，若用户指定特定模块则按指定范围
 - **核心要点**：从用户描述中提取
+- **触发模式**：初步判断规则应如何被加载（详见步骤 5.1）。默认 `always_on`；仅特定文件/技术栈相关时考虑 `glob`；属于按需查阅的专业知识时考虑 `model_decision`；临时或低频场景考虑 `manual`
 
 若用户描述不清晰，只询问核心问题：这条规则要解决什么问题？
 
@@ -99,19 +100,98 @@ description: >
 
 语言规范详见 `resources/rule-best-practices.md`。
 
-**新建规则文档时**，必须在文件开头添加 frontmatter：
+#### 5.1 选择触发模式
+
+参考 Cursor Rules 设计，根据规则的适用范围选择触发模式：
+
+| 模式 | 适用场景 | 何时加载 | 典型示例 |
+|------|---------|---------|---------|
+| `always_on` | 项目级通用规范，所有任务都应遵守 | 每次对话自动加载 | 代码风格、命名约定、错误处理 |
+| `glob` | 仅特定文件/技术栈相关 | 匹配文件进入上下文时加载 | Vue 组件规范、API 路由规范 |
+| `model_decision` | 特定领域专业知识 | AI 根据 `description` 判断相关性后加载 | 性能优化策略、复杂 bug 解决方案 |
+| `manual` | 临时性、调试性或低频使用 | 仅显式 `@` 引用时加载 | 临时 workaround、调试技巧 |
+
+**选择建议**：
+
+1. 默认使用 `always_on`
+2. 规则只涉及特定文件类型时用 `glob`（避免污染无关任务的上下文）
+3. 规则属于"按需查阅"的专业知识时用 `model_decision`（必须精心编写 `description`）
+4. 规则属于临时方案或低频场景时用 `manual`
+
+#### 5.2 编写 frontmatter
+
+按字段固定顺序填写：`name → description → trigger → alwaysApply → globs`。
+
+**模式 `always_on`（默认推荐）**
 
 ```yaml
 ---
-description: [规则简要描述，与 README.md 中该规则的说明一致]
-alwaysApply: true
+name: [kebab-case，与目录名一致]
+description: [规则简要描述]
 trigger: always_on
+alwaysApply: true
 ---
 ```
 
-- `description`：规则的简要描述，用于 README.md 等处展示
-- `alwaysApply`：是否始终应用，默认为 `true`
-- `trigger`：触发条件，固定为 `always_on` 以保持兼容性
+**模式 `glob`**
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [规则简要描述]
+trigger: glob
+alwaysApply: false
+globs: "[文件匹配模式，如 src/**/*.vue 或 **/*.{ts,tsx}]"
+---
+```
+
+**模式 `model_decision`**
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [详细说明规则的适用场景和主题，供 AI 决策]
+trigger: model_decision
+alwaysApply: false
+---
+```
+
+**模式 `manual`**
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [规则简要描述]
+trigger: manual
+alwaysApply: false
+---
+```
+
+#### 5.3 字段说明
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|:----:|------|
+| `name` | string | 是 | 规则唯一标识，kebab-case（如 `vue-component-norms`），与所在目录名保持一致 |
+| `description` | string | 是 | 规则描述；`model_decision` 模式下是 AI 判断是否触发的关键依据，需明确写清适用场景 |
+| `trigger` | enum | 是 | 触发模式，四选一：`always_on` / `glob` / `model_decision` / `manual` |
+| `alwaysApply` | boolean | 是 | 是否始终应用；仅 `always_on` 为 `true`，其余模式为 `false` |
+| `globs` | string \| string[] | 否 | 文件匹配模式；仅 `trigger: glob` 时必填，支持标准 glob 语法，多模式用逗号分隔或 YAML 数组 |
+
+#### 5.4 `description` 写作指南
+
+`description` 在所有模式下用于展示，在 `model_decision` 模式下还承担"触发依据"职责。参考 Cursor Rules 最佳实践：
+
+- **明确具体**：清晰说明规则涵盖的主题和适用场景，像写检索关键词
+- **长度适中**：1-2 句话
+- **避免笼统**：不要写成模糊的名称
+
+写作对比：
+
+| ❌ 避免 | ✅ 推荐 |
+|--------|--------|
+| `Vue 规则` | `Vue 组件规范：props 单向数据流、生命周期钩子顺序、组件拆分原则` |
+| `错误处理` | `API 错误处理：统一错误码、错误响应体结构、异常处理器模式` |
+| `样式规范` | `CSS 命名规范：BEM 命名约定、模块化样式、避免全局选择器` |
 
 更新现有规则文档时，不修改已有的 frontmatter。
 
@@ -143,16 +223,22 @@ trigger: always_on
 
 ### 创建规则文档后检查项
 
-1. 规则文档有明确的章节标题，具有描述性
-2. 内容结构清晰，使用标准的 Markdown 层级结构
-3. 提供具体的代码示例（如有适用场景）
-4. 代码示例包含语言标签
-5. 说明"为什么"而不仅仅是"怎么做"
-6. 包含反例说明（如有适用场景）
-7. 文件命名符合规范（kebab-case）
-8. 使用中文编写内容
-9. AGENTS.md 中已添加对新规则文档的引用
-10. **通用性检查**：内容必须是可复用的指导原则，不包含特定项目的具体数据（如具体行数、具体版本号、具体项目名等）；示例应使用占位符或通用场景，而非真实项目数据
+1. frontmatter 完整且字段顺序正确：`name → description → trigger → alwaysApply → globs`
+2. `name` 使用 kebab-case，与所在目录名一致
+3. `trigger` 取值为 `always_on` / `glob` / `model_decision` / `manual` 之一
+4. `alwaysApply` 值与 `trigger` 匹配（仅 `always_on` 为 `true`）
+5. `trigger: glob` 时 `globs` 字段已填写且语法正确
+6. `trigger: model_decision` 时 `description` 写清了适用场景（非模糊名称）
+7. 规则文档有明确的章节标题，具有描述性
+8. 内容结构清晰，使用标准的 Markdown 层级结构
+9. 提供具体的代码示例（如有适用场景）
+10. 代码示例包含语言标签
+11. 说明"为什么"而不仅仅是"怎么做"
+12. 包含反例说明（如有适用场景）
+13. 文件命名符合规范（kebab-case）
+14. 使用中文编写内容
+15. AGENTS.md 中已添加对新规则文档的引用
+16. **通用性检查**：内容必须是可复用的指导原则，不包含特定项目的具体数据（如具体行数、具体版本号、具体项目名等）；示例应使用占位符或通用场景，而非真实项目数据
 
 ### 更新规则文档后检查项
 

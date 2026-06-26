@@ -4,15 +4,98 @@
 
 ## Frontmatter
 
-新建规则文档时，必须在文件开头添加 frontmatter：
+新建规则文档时，必须在文件开头添加 frontmatter。字段固定顺序：`name → description → trigger → alwaysApply → globs`。
+
+根据规则的适用范围，从以下四种触发模式中选择其一。
+
+### 模式 `always_on`（默认推荐）
+
+项目级通用规范，每次对话自动加载。
 
 ```yaml
 ---
+name: [kebab-case，与目录名一致]
 description: [规则简要描述]
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 ```
+
+### 模式 `glob`
+
+仅当匹配文件进入上下文时加载，避免污染无关任务。
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [规则简要描述]
+trigger: glob
+alwaysApply: false
+globs: "[文件匹配模式，如 src/**/*.vue 或 **/*.{ts,tsx}]"
+---
+```
+
+### 模式 `model_decision`
+
+由 AI 根据 `description` 判断相关性后加载，适用于按需查阅的专业知识。
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [详细说明规则的适用场景和主题，供 AI 决策]
+trigger: model_decision
+alwaysApply: false
+---
+```
+
+### 模式 `manual`
+
+仅显式 `@` 引用时加载，适用于临时或低频场景。
+
+```yaml
+---
+name: [kebab-case，与目录名一致]
+description: [规则简要描述]
+trigger: manual
+alwaysApply: false
+---
+```
+
+### 字段说明
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|:----:|------|
+| `name` | string | 是 | 规则唯一标识，kebab-case，与所在目录名保持一致 |
+| `description` | string | 是 | 规则描述；`model_decision` 模式下是 AI 判断触发的关键依据，需明确写清适用场景 |
+| `trigger` | enum | 是 | 触发模式，四选一：`always_on` / `glob` / `model_decision` / `manual` |
+| `alwaysApply` | boolean | 是 | 是否始终应用；仅 `always_on` 为 `true`，其余为 `false` |
+| `globs` | string \| string[] | 否 | 文件匹配模式；仅 `trigger: glob` 时必填，支持标准 glob 语法，多模式用逗号分隔或 YAML 数组 |
+
+### `globs` 语法
+
+遵循标准 glob 语法：
+
+| 模式 | 匹配范围 |
+|------|---------|
+| `*.ts` | 当前目录所有 `.ts` 文件 |
+| `**/*.ts` | 任意层级目录下所有 `.ts` 文件 |
+| `src/**` | `src/` 下所有文件 |
+| `src/**/*.vue` | `src/` 下所有 `.vue` 文件 |
+| `**/*.{ts,tsx}` | 任意层级下 `.ts` 和 `.tsx` 文件 |
+| `src/**/*.vue, docs/**/*.md` | 多模式用逗号分隔 |
+
+### `description` 写作指南
+
+`description` 在所有模式下用于展示，在 `model_decision` 模式下还承担"触发依据"职责。
+
+- **明确具体**：清晰说明规则涵盖的主题和适用场景，像写检索关键词
+- **长度适中**：1-2 句话
+- **避免笼统**：不要写成模糊的名称
+
+| ❌ 避免 | ✅ 推荐 |
+|--------|--------|
+| `Vue 规则` | `Vue 组件规范：props 单向数据流、生命周期钩子顺序、组件拆分原则` |
+| `错误处理` | `API 错误处理：统一错误码、错误响应体结构、异常处理器模式` |
 
 ## 基础结构
 

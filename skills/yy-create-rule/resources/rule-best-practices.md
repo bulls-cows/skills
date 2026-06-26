@@ -51,6 +51,7 @@
 5. 提供具体的代码示例
 6. 说明"为什么"而不仅仅是"怎么做"
 7. 包含反例说明（如果适用）
+8. 根据规则适用范围选择合适的触发模式（`always_on` / `glob` / `model_decision` / `manual`），详见 `content-template.md`
 
 ### 保持一致性
 
