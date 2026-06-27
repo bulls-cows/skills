@@ -75,6 +75,7 @@
 | [yy-detect-terminal](./skills/yy-detect-terminal/SKILL.md)                           | 识别并记录本地终端命令能力        | `npx skills add bulls-cows/skills --skill yy-detect-terminal`              |
 | [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容        | `npx skills add bulls-cows/skills --skill yy-distill`                      |
 | [yy-enable-lint](./skills/yy-enable-lint/SKILL.md)                                   | 为项目接入 npm lint 流程          | `npx skills add bulls-cows/skills --skill yy-enable-lint`                  |
+| [yy-enable-memory](./skills/yy-enable-memory/SKILL.md)                               | 一键启用项目分层记忆管理系统      | `npx skills add bulls-cows/skills --skill yy-enable-memory`                |
 | [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录  | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
