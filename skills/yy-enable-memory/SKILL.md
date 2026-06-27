@@ -10,6 +10,7 @@ description: >
 ## 描述
 
 在目标项目根目录下创建分层记忆管理系统，包括：
+
 - 项目私有技能 `.agents/skills/yy-memory/SKILL.md`
 - 记忆库结构 `.agents/skills/yy-memory/resources/memory/`
 - 容量修剪脚本 `.agents/skills/yy-memory/scripts/memory-trim.mjs`

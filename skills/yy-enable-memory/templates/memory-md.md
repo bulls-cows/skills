@@ -24,13 +24,13 @@ memory/
 
 ## 快速索引
 
-| 主题 | Hub 文件 | 描述 |
-|------|----------|------|
-| 项目知识 | [hub-1](hubs/hub-1-project-knowledge.md) | 项目背景、技术栈、目录结构 |
-| 架构决策 | [hub-2](hubs/hub-2-architecture-decisions.md) | 重要架构选择和设计决策 |
-| 用户偏好 | [hub-3](hubs/hub-3-user-preferences.md) | 用户习惯、偏好设置 |
-| 业务规则 | [hub-4](hubs/hub-4-business-rules.md) | 业务逻辑、领域规则 |
-| 工具用法 | [hub-5](hubs/hub-5-tool-usage.md) | 工具配置、命令习惯 |
+| 主题     | Hub 文件                                      | 描述                       |
+| -------- | --------------------------------------------- | -------------------------- |
+| 项目知识 | [hub-1](hubs/hub-1-project-knowledge.md)      | 项目背景、技术栈、目录结构 |
+| 架构决策 | [hub-2](hubs/hub-2-architecture-decisions.md) | 重要架构选择和设计决策     |
+| 用户偏好 | [hub-3](hubs/hub-3-user-preferences.md)       | 用户习惯、偏好设置         |
+| 业务规则 | [hub-4](hubs/hub-4-business-rules.md)         | 业务逻辑、领域规则         |
+| 工具用法 | [hub-5](hubs/hub-5-tool-usage.md)             | 工具配置、命令习惯         |
 
 ## 最近更新
 

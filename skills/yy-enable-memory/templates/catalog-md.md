@@ -9,6 +9,7 @@
 路径：`memory/hubs/hub-1-project-knowledge.md`
 
 包含 Leaf：
+
 - {leaf-id-1} - {叶子记忆标题}
 - {leaf-id-2} - {叶子记忆标题}
 
@@ -21,6 +22,7 @@
 路径：`memory/hubs/hub-2-architecture-decisions.md`
 
 包含 Leaf：
+
 - {leaf-id-3} - {叶子记忆标题}
 - {leaf-id-4} - {叶子记忆标题}
 
@@ -33,6 +35,7 @@
 路径：`memory/hubs/hub-3-user-preferences.md`
 
 包含 Leaf：
+
 - {leaf-id-5} - {叶子记忆标题}
 
 ---
@@ -44,6 +47,7 @@
 路径：`memory/hubs/hub-4-business-rules.md`
 
 包含 Leaf：
+
 - {leaf-id-6} - {叶子记忆标题}
 
 ---
@@ -55,6 +59,7 @@
 路径：`memory/hubs/hub-5-tool-usage.md`
 
 包含 Leaf：
+
 - {leaf-id-7} - {叶子记忆标题}
 
 ---
