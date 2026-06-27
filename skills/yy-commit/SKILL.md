@@ -219,9 +219,15 @@ git commit -m "<title>" -m "<body>"
 git commit -m "<title>"
 ```
 
+**提交命令约束：**
+
+- 提交信息必须使用 `-m` 参数传递，禁止使用 heredoc（`cat <<'EOF'`）、here-string（`@'...'@`）或其他 shell 特定语法
+- 多行提交信息使用多个 `-m` 参数：`git commit -m "<title>" -m "<body line 1>" -m "<body line 2>"`，此写法在 bash、pwsh、zsh 等主流 shell 中均兼容
+
 **禁止事项：**
 
 - 禁止添加 `Co-Authored-By:` 等署名备注
+- 禁止使用 heredoc、here-string 或其他 shell 特定语法传递提交信息，必须使用 `-m` 参数
 
 ### 步骤 6. 输出结果
 
