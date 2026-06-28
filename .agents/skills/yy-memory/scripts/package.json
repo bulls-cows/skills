@@ -1,0 +1,36 @@
+{
+  "name": "memory-trim",
+  "version": "1.0.0",
+  "description": "记忆系统容量检查与修剪脚本",
+  "main": "src/main.ts",
+  "type": "module",
+  "imports": {
+    "#typings/*": "./src/typings/*.ts",
+    "#utils/*": "./src/utils/*.ts",
+    "#src/*": "./src/*.ts"
+  },
+  "scripts": {
+    "ready": "npm install",
+    "start": "node ./src/main.ts",
+    "test": "node --test test/**/*.test.ts",
+    "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
+    "lint:code": "eslint . --fix",
+    "lint:markdown": "markdownlint-cli2",
+    "eslint": "eslint . --fix",
+    "format": "prettier . --write",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.19.19",
+    "eslint": "10.4.1",
+    "eslint-config-prettier": "10.1.8",
+    "markdownlint-cli2": "^0.22.1",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.60.1"
+  }
+}

@@ -171,7 +171,8 @@ target/
 *.out
 
 # AI 助手与自动化工具目录
-.agents/
+.agents/plans/
+.agents/specs/
 .skillignore
 .agentsconfig
 .sisyphus/
@@ -183,8 +184,10 @@ target/
 .joycode/
 .omo/
 
+# 个人记忆库（不提交到仓库）
+.memory/
+
 # 三方参考与本地调试
 skills-marketplace/
-.agents/specs/
 
 !.codegraph/*

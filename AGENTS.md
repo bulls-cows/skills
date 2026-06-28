@@ -101,6 +101,7 @@
 - [Markdown书写规范 @rules/markdown/RULE.md](./rules/markdown/RULE.md)：编写或修改 Markdown 文件时需要遵守
 - [文本表达规范 @rules/text/RULE.md](./rules/text/RULE.md)：输出文本、生成文档时需要遵守
 - [AI 通用操作规范 @rules/ai-agent-rules/RULE.md](./rules/ai-agent-rules/RULE.md)：分析问题、执行变更、维护一致性、精简文档时需要遵守
+- [记忆管理规则 @.agents/rules/memory/RULE.md](./.agents/rules/memory/RULE.md)：对话启动时自动加载 MEMORY.md，commit 后自动更新记忆
 
 ## 关键参考
 

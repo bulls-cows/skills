@@ -99,9 +99,9 @@ description: >
 
 ### 步骤 7. 创建修剪脚本
 
-将 `scripts/src/` 目录复制到目标项目：
+将 `scripts/` 目录复制到目标项目：
 
-- 目标路径：`.agents/skills/yy-memory/scripts/src/`
+- 目标路径：`.agents/skills/yy-memory/scripts/`
 - 运行方式：`node .agents/skills/yy-memory/scripts/src/main.ts`
 
 ### 步骤 8. 将 .memory/ 添加到 .gitignore
@@ -148,4 +148,4 @@ description: >
 - `templates/hub-template.md`：hub 主题枢纽模板
 - `templates/leaf-template.md`：leaf 叶子记忆模板
 - `resources/agentes-rule-snippet.md`：AGENTS.md 注入片段
-- `scripts/src/`：容量修剪脚本源码（TypeScript）
+- `scripts/`：容量修剪脚本项目（含 TypeScript 源码、package.json、tsconfig.json 等配置）
