@@ -16,12 +16,12 @@ const HUB_SIZE_LIMIT = 50 * 1024; // 单个 hub 50KB
 const LEAF_SIZE_LIMIT = 5 * 1024; // 单个 leaf 5KB
 const INACTIVE_DAYS = 30; // 30 天未访问视为可归档
 
-// 脚本位于 scripts/，记忆库位于项目根目录 .memory/
+// 脚本位于 .agents/skills/yy-memory/scripts/src/main.ts
+// 记忆库位于项目根目录 .memory/，需要上溯 4 级
 function getMemoryDir(): string {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
-  const scriptsDir = resolve(__dirname);
-  const projectRoot = resolve(scriptsDir, "..");
+  const projectRoot = resolve(__dirname, "..", "..", "..", "..");
   return resolve(projectRoot, ".memory");
 }
 

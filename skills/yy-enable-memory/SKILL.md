@@ -14,7 +14,7 @@ description: >
 - 记忆管理规则 `.agents/rules/memory/RULE.md`（项目共享，可提交）
 - 项目私有技能 `.agents/skills/yy-memory/SKILL.md`（项目共享，可提交）
 - 记忆库结构 `.memory/`（个人私有，不提交）
-- 容量修剪脚本 `.agents/skills/yy-memory/scripts/memory-trim.mjs`
+- 容量修剪脚本 `.agents/skills/yy-memory/scripts/src/main.ts`
 - 在 `AGENTS.md` 中注入记忆管理规则引用
 
 ## 使用场景
@@ -99,9 +99,10 @@ description: >
 
 ### 步骤 7. 创建修剪脚本
 
-从 `scripts/memory-trim.mjs` 复制到目标项目：
+将 `scripts/src/` 目录复制到目标项目：
 
-- 目标路径：`.agents/skills/yy-memory/scripts/memory-trim.mjs`
+- 目标路径：`.agents/skills/yy-memory/scripts/src/`
+- 运行方式：`node .agents/skills/yy-memory/scripts/src/main.ts`
 
 ### 步骤 8. 将 .memory/ 添加到 .gitignore
 
@@ -147,4 +148,4 @@ description: >
 - `templates/hub-template.md`：hub 主题枢纽模板
 - `templates/leaf-template.md`：leaf 叶子记忆模板
 - `resources/agentes-rule-snippet.md`：AGENTS.md 注入片段
-- `scripts/memory-trim.mjs`：容量修剪脚本
+- `scripts/src/`：容量修剪脚本源码（TypeScript）

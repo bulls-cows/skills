@@ -98,7 +98,7 @@ description: >
 
 ### 步骤 6. 运行容量检查
 
-执行 `scripts/memory-trim.mjs` 脚本，检查各层容量：
+执行 `scripts/src/main.ts` 脚本，检查各层容量：
 
 - MEMORY.md 是否超过 8KB
 - 各 hub 和 leaf 的大小分布
@@ -133,4 +133,4 @@ description: >
 - `.memory/ARCHIVE.md`：归档库
 - `.memory/hubs/`：主题枢纽目录
 - `.memory/leaf/`：叶子记忆目录
-- `scripts/memory-trim.mjs`：容量检查脚本
+- `scripts/src/main.ts`：容量检查脚本

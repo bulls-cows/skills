@@ -104,7 +104,7 @@ alwaysApply: true
 
 ### 步骤 5. 容量检查
 
-执行 `.agents/skills/yy-memory/scripts/memory-trim.mjs`：
+执行 `.agents/skills/yy-memory/scripts/src/main.ts`：
 
 - 检查 MEMORY.md 是否 ≤8KB
 - 检查各 hub 和 leaf 的活跃度
@@ -171,5 +171,5 @@ alwaysApply: true
 ## 相关资源
 
 - 技能：[.agents/skills/yy-memory/SKILL.md](../.agents/skills/yy-memory/SKILL.md)
-- 脚本：[.agents/skills/yy-memory/scripts/memory-trim.mjs](../.agents/skills/yy-memory/scripts/memory-trim.mjs)
+- 脚本：[.agents/skills/yy-memory/scripts/src/main.ts](../.agents/skills/yy-memory/scripts/src/main.ts)
 - 记忆库：`.memory/`（个人私有）
