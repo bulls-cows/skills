@@ -1,7 +1,8 @@
 ---
+name: ai-agent-rules
 description: AI 通用操作规范 - 问题分析、变更执行、一致性维护、文本输出的行为准则
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # AI 通用操作规范

@@ -1,7 +1,8 @@
 ---
+name: npm
 description: NPM 使用规范
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # NPM 使用规范

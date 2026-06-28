@@ -1,7 +1,8 @@
 ---
+name: sass-best-practices
 description: Sass 废弃语法替代方案与现代 Sass 最佳实践
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # Sass 最佳实践

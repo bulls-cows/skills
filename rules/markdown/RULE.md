@@ -1,7 +1,8 @@
 ---
+name: markdown
 description: Markdown 书写规范
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # Markdown 书写规范

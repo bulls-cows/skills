@@ -1,7 +1,8 @@
 ---
+name: nuxt4-best-practices
 description: Nuxt 4 项目最佳实践，包含禁用自动导入、显式引入等核心配置规范
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # Nuxt 4 最佳实践

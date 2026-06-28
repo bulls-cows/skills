@@ -1,7 +1,8 @@
 ---
+name: file-scope-limit
 description: 文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
-alwaysApply: true
 trigger: always_on
+alwaysApply: true
 ---
 
 # 文件修改范围限制规范
