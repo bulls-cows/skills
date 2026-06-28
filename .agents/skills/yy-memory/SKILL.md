@@ -32,6 +32,17 @@ description: >
 
 ## 指令
 
+### 步骤 0. 初始化记忆库
+
+检查 `.memory/` 目录是否存在：
+
+- **存在**：跳过初始化，继续步骤 1
+- **不存在**：自动创建完整记忆库结构
+  - 创建目录：`.memory/`、`.memory/hubs/`、`.memory/leaf/`
+  - 创建核心文件：`MEMORY.md`、`CATALOG.md`、`ARCHIVE.md`、`work-log.md`（空白模板）
+  - 创建 5 个 hub 文件（`hub-1-project-knowledge.md` ~ `hub-5-tool-usage.md`，空白模板）
+  - 初始文件内容为占位符模板，不含具体记忆数据
+
 ### 步骤 1. 获取提交信息
 
 执行 git 命令获取最近一次提交的信息：
