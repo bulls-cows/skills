@@ -17,11 +17,11 @@ const LEAF_SIZE_LIMIT = 5 * 1024; // 单个 leaf 5KB
 const INACTIVE_DAYS = 30; // 30 天未访问视为可归档
 
 // 脚本位于 .agents/skills/yy-memory/scripts/src/main.ts
-// 记忆库位于项目根目录 .memory/，需要上溯 4 级
+// 记忆库位于项目根目录 .memory/，需要上溯 5 级
 function getMemoryDir(): string {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
-  const projectRoot = resolve(__dirname, "..", "..", "..", "..");
+  const projectRoot = resolve(__dirname, "..", "..", "..", "..", "..");
   return resolve(projectRoot, ".memory");
 }
 
