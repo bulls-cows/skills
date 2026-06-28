@@ -6,7 +6,9 @@ import { logInfo } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
-const skillsDir = path.join(projectRoot, 'skills')
+const skillDirs = ['skills', 'skills-internal', '.agents/skills'].map(d =>
+  path.join(projectRoot, d),
+)
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', '.cache'])
 
@@ -38,7 +40,7 @@ function hasReadyScript(dir: string): boolean {
   return pkg.scripts?.ready !== undefined
 }
 
-const dirs = findPackageJsonDirs(skillsDir)
+const dirs = skillDirs.flatMap(d => findPackageJsonDirs(d))
 
 if (dirs.length === 0) {
   logInfo('No skill directories with package.json found.')
