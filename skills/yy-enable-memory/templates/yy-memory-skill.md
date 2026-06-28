@@ -11,7 +11,7 @@ description: >
 
 分层记忆管理系统的项目私有技能，负责在代码提交后自动更新和维护项目记忆。
 
-**记忆库位置**：`resources/memory/`
+**记忆库位置**：`.memory/`（项目根目录，个人私有）
 
 **容量限制**：
 
@@ -51,14 +51,14 @@ description: >
 
 ### 步骤 3. 更新 work-log
 
-在 `resources/memory/work-log.md` 中追加新条目：
+在 `.memory/work-log.md` 中追加新条目：
 
 ```markdown
 ## {YYYY-MM-DD}
 
 - [{提交类型}] {提交消息摘要}
   - 文件变更：{变更文件数} 个
-  - 新增行数：{新增行数}，删除行数：{删除行数}
+  - 提交哈希：{短哈希}
 ```
 
 如 work-log.md 不存在，从模板生成。
@@ -89,10 +89,10 @@ description: >
 如步骤 4 评估认为值得记录：
 
 1. 确定应归属的 hub
-2. 在 `resources/memory/hubs/` 下找到对应 hub 文件
-3. 在 `resources/memory/leaf/` 创建新的 leaf 文件
+2. 在 `.memory/hubs/` 下找到对应 hub 文件
+3. 在 `.memory/leaf/` 创建新的 leaf 文件
 4. 更新 hub 文件中的 leaf 引用
-5. 更新 `resources/memory/CATALOG.md`
+5. 更新 `.memory/CATALOG.md`
 
 **Leaf 文件命名**：`leaf-{主题}-{日期}.md`
 
@@ -128,9 +128,9 @@ description: >
 
 ## 相关资源
 
-- `resources/memory/MEMORY.md`：核心路由
-- `resources/memory/CATALOG.md`：完整目录
-- `resources/memory/ARCHIVE.md`：归档库
-- `resources/memory/hubs/`：主题枢纽目录
-- `resources/memory/leaf/`：叶子记忆目录
+- `.memory/MEMORY.md`：核心路由
+- `.memory/CATALOG.md`：完整目录
+- `.memory/ARCHIVE.md`：归档库
+- `.memory/hubs/`：主题枢纽目录
+- `.memory/leaf/`：叶子记忆目录
 - `scripts/memory-trim.mjs`：容量检查脚本

@@ -1,9 +1,9 @@
 ---
-title: { 叶子记忆标题 }
-created: { YYYY-MM-DD }
-updated: { YYYY-MM-DD }
+title: {叶子记忆标题}
+created: {YYYY-MM-DD}
+updated: {YYYY-MM-DD}
 hub: hub-{N}-{主题}
-tags: [{ 标签1 }, { 标签2 }]
+tags: [{标签1}, {标签2}]
 ---
 
 # {叶子记忆标题}

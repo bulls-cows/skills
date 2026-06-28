@@ -25,9 +25,14 @@ const LEAF_SIZE_LIMIT = 5 * 1024;   // 单个 leaf 5KB
 const INACTIVE_DAYS = 30;           // 30 天未访问视为可归档
 
 // 路径配置
+// 记忆库位于项目根目录 .memory/（个人私有）
 const getMemoryDir = () => {
+  // 脚本位于 .agents/skills/yy-memory/scripts/
+  // 记忆库位于项目根目录 .memory/
   const skillDir = path.resolve(__dirname, '..');
-  const memoryDir = path.join(skillDir, 'resources', 'memory');
+  const agentsDir = path.resolve(skillDir, '..');
+  const projectRoot = path.resolve(agentsDir, '..');
+  const memoryDir = path.join(projectRoot, '.memory');
   return memoryDir;
 };
 
