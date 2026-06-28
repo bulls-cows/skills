@@ -56,47 +56,47 @@
 
 执行 `npx skills add bulls-cows/skills` 可安装以下所有技能。
 
-| 技能                                                                                 | 说明                              | 安装命令                                                                   |
-| ------------------------------------------------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------- |
-| [yy-anti-distill](./skills/yy-anti-distill/SKILL.md)                                 | 反蒸馏清洗 Skill 或知识文档       | `npx skills add bulls-cows/skills --skill yy-anti-distill`                 |
-| [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释        | `npx skills add bulls-cows/skills --skill yy-comment`                      |
-| [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行通用规范的 Git 提交     | `npx skills add bulls-cows/skills --skill yy-commit`                       |
-| [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动       | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
-| [yy-create-agents](./skills/yy-create-agents/SKILL.md)                               | 创建或更新项目 AGENTS.md          | `npx skills add bulls-cows/skills --skill yy-create-agents`                |
-| [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架         | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
-| [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架          | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
-| [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档        | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
-| [yy-create-report](./skills/yy-create-report/SKILL.md)                               | 生成面向管理视角的工作报告        | `npx skills add bulls-cows/skills --skill yy-create-report`                |
-| [yy-create-rule](./skills/yy-create-rule/SKILL.md)                                   | 创建或更新项目规则文档            | `npx skills add bulls-cows/skills --skill yy-create-rule`                  |
-| [yy-create-skill](./skills/yy-create-skill/SKILL.md)                                 | 创建或更新可复用的 Skill 技能     | `npx skills add bulls-cows/skills --skill yy-create-skill`                 |
-| [yy-create-template-project](./skills/yy-create-template-project/SKILL.md)           | 提炼或完善可复用的脱敏模板项目    | `npx skills add bulls-cows/skills --skill yy-create-template-project`      |
-| [yy-create-vue3](./skills/yy-create-vue3/SKILL.md)                                   | 快速生成统一结构的 Vue 3 项目骨架 | `npx skills add bulls-cows/skills --skill yy-create-vue3`                  |
-| [yy-design-ui](./skills/yy-design-ui/SKILL.md)                                       | 生成符合国人审美的网页界面设计    | `npx skills add bulls-cows/skills --skill yy-design-ui`                    |
-| [yy-detect-terminal](./skills/yy-detect-terminal/SKILL.md)                           | 识别并记录本地终端命令能力        | `npx skills add bulls-cows/skills --skill yy-detect-terminal`              |
-| [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容        | `npx skills add bulls-cows/skills --skill yy-distill`                      |
-| [yy-enable-lint](./skills/yy-enable-lint/SKILL.md)                                   | 为项目接入 npm lint 流程          | `npx skills add bulls-cows/skills --skill yy-enable-lint`                  |
+| 技能                                                                                 | 说明                                                 | 安装命令                                                                   |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| [yy-anti-distill](./skills/yy-anti-distill/SKILL.md)                                 | 反蒸馏清洗 Skill 或知识文档                          | `npx skills add bulls-cows/skills --skill yy-anti-distill`                 |
+| [yy-comment](./skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释                           | `npx skills add bulls-cows/skills --skill yy-comment`                      |
+| [yy-commit](./skills/yy-commit/SKILL.md)                                             | 生成并执行通用规范的 Git 提交                        | `npx skills add bulls-cows/skills --skill yy-commit`                       |
+| [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动                          | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
+| [yy-create-agents](./skills/yy-create-agents/SKILL.md)                               | 创建或更新项目 AGENTS.md                             | `npx skills add bulls-cows/skills --skill yy-create-agents`                |
+| [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架                            | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
+| [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架                             | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
+| [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档                           | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
+| [yy-create-report](./skills/yy-create-report/SKILL.md)                               | 生成面向管理视角的工作报告                           | `npx skills add bulls-cows/skills --skill yy-create-report`                |
+| [yy-create-rule](./skills/yy-create-rule/SKILL.md)                                   | 创建或更新项目规则文档                               | `npx skills add bulls-cows/skills --skill yy-create-rule`                  |
+| [yy-create-skill](./skills/yy-create-skill/SKILL.md)                                 | 创建或更新可复用的 Skill 技能                        | `npx skills add bulls-cows/skills --skill yy-create-skill`                 |
+| [yy-create-template-project](./skills/yy-create-template-project/SKILL.md)           | 提炼或完善可复用的脱敏模板项目                       | `npx skills add bulls-cows/skills --skill yy-create-template-project`      |
+| [yy-create-vue3](./skills/yy-create-vue3/SKILL.md)                                   | 快速生成统一结构的 Vue 3 项目骨架                    | `npx skills add bulls-cows/skills --skill yy-create-vue3`                  |
+| [yy-design-ui](./skills/yy-design-ui/SKILL.md)                                       | 生成符合国人审美的网页界面设计                       | `npx skills add bulls-cows/skills --skill yy-design-ui`                    |
+| [yy-detect-terminal](./skills/yy-detect-terminal/SKILL.md)                           | 识别并记录本地终端命令能力                           | `npx skills add bulls-cows/skills --skill yy-detect-terminal`              |
+| [yy-distill](./skills/yy-distill/SKILL.md)                                           | 提炼或重构 AI 能力模型内容                           | `npx skills add bulls-cows/skills --skill yy-distill`                      |
+| [yy-enable-lint](./skills/yy-enable-lint/SKILL.md)                                   | 为项目接入 npm lint 流程                             | `npx skills add bulls-cows/skills --skill yy-enable-lint`                  |
 | [yy-enable-memory](./skills/yy-enable-memory/SKILL.md)                               | 一键启用项目分层记忆管理系统，生成规则、技能和记忆库 | `npx skills add bulls-cows/skills --skill yy-enable-memory`                |
-| [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录  | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
-| [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名      | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
-| [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题        | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
-| [yy-frontend-rules](./skills/yy-frontend-rules/SKILL.md)                             | 前端开发规范速查与项目规则路由    | `npx skills add bulls-cows/skills --skill yy-frontend-rules`               |
-| [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构       | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
-| [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档            | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
-| [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                | `npx skills add bulls-cows/skills --skill yy-lint`                         |
-| [yy-mode-goal](./skills/yy-mode-goal/SKILL.md)                                       | 条件驱动的自主执行模式            | `npx skills add bulls-cows/skills --skill yy-mode-goal`                    |
-| [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划      | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |
-| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md)                                       | 在编码前先制定详细规格说明        | `npx skills add bulls-cows/skills --skill yy-mode-spec`                    |
-| [yy-optimize](./skills/yy-optimize/SKILL.md)                                         | 输出可选的优化方案                | `npx skills add bulls-cows/skills --skill yy-optimize`                     |
-| [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md)                             | 将本地文章发布到微信公众号草稿箱  | `npx skills add bulls-cows/skills --skill yy-post-to-wechat`               |
-| [yy-read-pdf](./skills/yy-read-pdf/SKILL.md)                                         | 读取并解析 PDF 文档内容           | `npx skills add bulls-cows/skills --skill yy-read-pdf`                     |
-| [yy-read-project](./skills/yy-read-project/SKILL.md)                                 | 快速梳理项目结构、职责与技术边界  | `npx skills add bulls-cows/skills --skill yy-read-project`                 |
-| [yy-read-xlsx](./skills/yy-read-xlsx/SKILL.md)                                       | 读取并解析 Excel 表格内容         | `npx skills add bulls-cows/skills --skill yy-read-xlsx`                    |
-| [yy-refresh](./skills/yy-refresh/SKILL.md)                                           | 刷新 AI 对当前代码的最新理解      | `npx skills add bulls-cows/skills --skill yy-refresh`                      |
-| [yy-review](./skills/yy-review/SKILL.md)                                             | 审核代码改动中的质量问题          | `npx skills add bulls-cows/skills --skill yy-review`                       |
-| [yy-run-skills](./skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能            | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
-| [yy-skill-to-prompt](./skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词        | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |
-| [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown   | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
-| [yy-write](./skills/yy-write/SKILL.md)                                               | 撰写或续写公众号长文              | `npx skills add bulls-cows/skills --skill yy-write`                        |
+| [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录                     | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
+| [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名                         | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
+| [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题                           | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
+| [yy-frontend-rules](./skills/yy-frontend-rules/SKILL.md)                             | 前端开发规范速查与项目规则路由                       | `npx skills add bulls-cows/skills --skill yy-frontend-rules`               |
+| [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构                          | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
+| [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档                               | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
+| [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                                   | `npx skills add bulls-cows/skills --skill yy-lint`                         |
+| [yy-mode-goal](./skills/yy-mode-goal/SKILL.md)                                       | 条件驱动的自主执行模式                               | `npx skills add bulls-cows/skills --skill yy-mode-goal`                    |
+| [yy-mode-plan](./skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划                         | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |
+| [yy-mode-spec](./skills/yy-mode-spec/SKILL.md)                                       | 在编码前先制定详细规格说明                           | `npx skills add bulls-cows/skills --skill yy-mode-spec`                    |
+| [yy-optimize](./skills/yy-optimize/SKILL.md)                                         | 输出可选的优化方案                                   | `npx skills add bulls-cows/skills --skill yy-optimize`                     |
+| [yy-post-to-wechat](./skills/yy-post-to-wechat/SKILL.md)                             | 将本地文章发布到微信公众号草稿箱                     | `npx skills add bulls-cows/skills --skill yy-post-to-wechat`               |
+| [yy-read-pdf](./skills/yy-read-pdf/SKILL.md)                                         | 读取并解析 PDF 文档内容                              | `npx skills add bulls-cows/skills --skill yy-read-pdf`                     |
+| [yy-read-project](./skills/yy-read-project/SKILL.md)                                 | 快速梳理项目结构、职责与技术边界                     | `npx skills add bulls-cows/skills --skill yy-read-project`                 |
+| [yy-read-xlsx](./skills/yy-read-xlsx/SKILL.md)                                       | 读取并解析 Excel 表格内容                            | `npx skills add bulls-cows/skills --skill yy-read-xlsx`                    |
+| [yy-refresh](./skills/yy-refresh/SKILL.md)                                           | 刷新 AI 对当前代码的最新理解                         | `npx skills add bulls-cows/skills --skill yy-refresh`                      |
+| [yy-review](./skills/yy-review/SKILL.md)                                             | 审核代码改动中的质量问题                             | `npx skills add bulls-cows/skills --skill yy-review`                       |
+| [yy-run-skills](./skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能                               | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
+| [yy-skill-to-prompt](./skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词                           | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |
+| [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown                      | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
+| [yy-write](./skills/yy-write/SKILL.md)                                               | 撰写或续写公众号长文                                 | `npx skills add bulls-cows/skills --skill yy-write`                        |
 
 ### 🌐 推荐外部技能
 

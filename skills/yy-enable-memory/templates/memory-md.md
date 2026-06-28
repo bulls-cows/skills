@@ -8,7 +8,7 @@
 
 ## 记忆系统结构
 
-```
+```text
 .memory/
 ├── work-log.md          # 工作日志（短期记忆）
 ├── MEMORY.md            # 本文件，核心路由
