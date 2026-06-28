@@ -1,12 +1,10 @@
 {
-  "name": "node-script-template",
+  "name": "memory-trim",
   "version": "1.0.0",
-  "description": "脱敏的 Node.js TypeScript 脚本模板项目",
+  "description": "记忆系统容量检查与修剪脚本",
   "main": "src/main.ts",
   "type": "module",
   "imports": {
-    "#constants/*": "./src/constants/*.ts",
-    "#steps/*": "./src/steps/*.ts",
     "#typings/*": "./src/typings/*.ts",
     "#utils/*": "./src/utils/*.ts",
     "#src/*": "./src/*.ts"
@@ -14,7 +12,6 @@
   "scripts": {
     "ready": "npm install",
     "start": "node ./src/main.ts",
-    "start:example": "cross-env INPUT_FILE=./resources/input.json OUTPUT_FILE=./resources/output.json npm run start",
     "test": "node --test test/**/*.test.ts",
     "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
     "lint:code": "eslint . --fix",
@@ -29,7 +26,6 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "22.19.19",
-    "cross-env": "10.1.0",
     "eslint": "10.4.1",
     "eslint-config-prettier": "10.1.8",
     "markdownlint-cli2": "^0.22.1",
