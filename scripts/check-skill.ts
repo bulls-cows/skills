@@ -6,7 +6,6 @@ import { logError, logInfo, logWarn } from '#scripts/utils'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
-const skillsDir = path.join(projectRoot, 'skills')
 
 interface SkillMetadata {
   name?: string
@@ -182,23 +181,30 @@ function validateMetadataJson(
 }
 
 /**
- * 主函数
+ * 扫描单个技能目录，返回该目录下的所有技能验证结果
  */
-function main() {
-  logInfo('开始检查 skills 目录下的 SKILL.md 文件...\n')
+function scanSkillDir(
+  dirPath: string,
+  label: string,
+  results: ValidationResult[],
+): { errors: number; warnings: number } {
+  if (!fs.existsSync(dirPath)) {
+    logWarn(`目录不存在，跳过: ${dirPath}`)
+    return { errors: 0, warnings: 0 }
+  }
 
-  // 读取 skills 目录
+  logInfo(`\n--- 检查 ${label} ---`)
+
   const skillDirs = fs
-    .readdirSync(skillsDir, { withFileTypes: true })
+    .readdirSync(dirPath, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
 
   let totalErrors = 0
   let totalWarnings = 0
-  const results: ValidationResult[] = []
 
   for (const skillName of skillDirs) {
-    const skillPath = path.join(skillsDir, skillName)
+    const skillPath = path.join(dirPath, skillName)
     const skillMdPath = path.join(skillPath, 'SKILL.md')
     const metadataJsonPath = path.join(skillPath, 'metadata.json')
 
@@ -224,8 +230,35 @@ function main() {
     }
   }
 
+  return { errors: totalErrors, warnings: totalWarnings }
+}
+
+/**
+ * 主函数
+ */
+function main() {
+  logInfo('开始检查 SKILL.md 文件...\n')
+
+  const scanTargets = [
+    { path: path.join(projectRoot, 'skills'), label: 'skills/' },
+    { path: path.join(projectRoot, 'skills-internal'), label: 'skills-internal/' },
+    { path: path.join(projectRoot, '.agents', 'skills'), label: '.agents/skills/' },
+  ]
+
+  let totalErrors = 0
+  let totalWarnings = 0
+  const results: ValidationResult[] = []
+
+  for (const target of scanTargets) {
+    const { errors, warnings } = scanSkillDir(target.path, target.label, results)
+    totalErrors += errors
+    totalWarnings += warnings
+  }
+
+  const totalSkills = results.length
+
   logInfo(
-    `\n检查完成: ${String(results.length)} 个技能，${String(totalErrors)} 个错误，${String(totalWarnings)} 个警告`,
+    `\n检查完成: ${String(totalSkills)} 个技能，${String(totalErrors)} 个错误，${String(totalWarnings)} 个警告`,
   )
 
   if (totalErrors > 0) {
