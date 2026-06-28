@@ -3,3 +3,5 @@ package-lock.json
 .claude-plugin
 **/assets
 skills/*/scripts/
+skills-internal/*/scripts/
+.agents/skills/*/scripts/

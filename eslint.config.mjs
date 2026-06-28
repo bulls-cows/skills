@@ -17,7 +17,12 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['node_modules/', 'skills/', 'skills/*/scripts/', 'skills-internal/*/scripts/'],
+    ignores: [
+      'node_modules/',
+      'skills/*/scripts/',
+      'skills-internal/*/scripts/',
+      '.agents/skills/*/scripts/',
+    ],
   },
   eslintConfigPrettier,
 )

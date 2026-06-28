@@ -1,7 +1,12 @@
 {
   "globs": ["**/*.md"],
   "gitignore": true,
-  "ignores": ["CLAUDE.md", "skills/*/scripts/**"],
+  "ignores": [
+    "CLAUDE.md",
+    "skills/*/scripts/**",
+    "skills-internal/*/scripts/**",
+    ".agents/skills/*/scripts/**",
+  ],
   "fix": true,
   "config": {
     "default": true,
