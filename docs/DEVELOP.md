@@ -10,6 +10,14 @@
 - `npm run lint`：执行全量检查（格式化、技能校验、Markdown 规范、类型检查、行尾符、市场配置同步、ESLint）
 - `npm run install:skills`：将所有技能安装到全局，使其可在任意项目中使用 (不影响其他安装的全局技能,除非技能重名了)
 
+## 记忆管理
+
+项目使用分层记忆系统管理长期记忆，记忆库位于项目根目录 `.memory/`（个人私有，不提交到仓库）。
+
+- **读取**：对话启动时自动加载 `.memory/MEMORY.md` 作为核心上下文
+- **更新**：手动执行 [`yy-memory`](./.agents/skills/yy-memory) 技能后自动更新 work-log 和长期记忆
+- **位置**：`.agents/skills/yy-memory/SKILL.md`（项目私有技能）
+
 ## 忽略安装特定技能
 
 项目根目录下可创建 `.skillignore` 文件，配置使用 `npm run install:skills` 命令时不希望安装到全局的技能。

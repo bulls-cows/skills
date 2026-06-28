@@ -1,6 +1,6 @@
 ---
 name: memory
-description: 记忆管理规则 - 对话启动时自动加载 MEMORY.md，commit 后自动更新记忆
+description: 记忆管理规则 - 对话启动时自动加载 MEMORY.md，手动执行 yy-memory 技能后更新记忆
 trigger: always_on
 alwaysApply: true
 ---
@@ -19,9 +19,9 @@ alwaysApply: true
 - **遇到不熟悉的问题时**：根据问题关键词，从 CATALOG.md 查找相关 hub
 - **需要深入理解时**：读取相关 hub 和 leaf，获取详细记忆
 
-### 写入触发（commit 后）
+### 写入触发（手动执行 yy-memory 技能）
 
-- **代码提交完成后**：自动执行记忆更新流程
+- **手动执行 [yy-memory](./.agents/skills/yy-memory) 技能后**：自动执行记忆更新流程
 - **用户明确要求时**："更新记忆"、"记录这次提交"
 
 ## 读取流程
