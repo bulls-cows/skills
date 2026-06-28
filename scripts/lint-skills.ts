@@ -7,6 +7,8 @@ import { logInfo } from '#scripts/utils'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.dirname(__dirname)
 const skillsDir = path.join(projectRoot, 'skills')
+const skillsInternalDir = path.join(projectRoot, 'skills-internal')
+const agentsSkillsDir = path.join(projectRoot, '.agents', 'skills')
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', '.cache'])
 
@@ -30,7 +32,11 @@ function findPackageJsonDirs(root: string): string[] {
   return results
 }
 
-const dirs = findPackageJsonDirs(skillsDir)
+const dirs = [
+  ...findPackageJsonDirs(skillsDir),
+  ...findPackageJsonDirs(skillsInternalDir),
+  ...findPackageJsonDirs(agentsSkillsDir),
+]
 
 for (const dir of dirs) {
   const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf-8')) as {
