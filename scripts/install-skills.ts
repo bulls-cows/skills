@@ -49,6 +49,7 @@ const oldSkillNamesToDelete = [
   'yy-sync-capability-model',
   'yy-create-lint',
   'yy-create-comment',
+  'yy-frontend-rules',
   'yy-resume',
 ]
 

@@ -13,7 +13,7 @@
 ## ⭐ 特性
 
 - 🎯 **规则驱动**：通过规则文件统一 AI 行为，确保输出一致性
-- 🚀 **即装即用**：37 个实用技能覆盖常见开发场景，一键安装
+- 🚀 **即装即用**：39 个实用技能覆盖常见开发场景，一键安装
 - 🔧 **高度可定制**：支持按项目配置规则，灵活适配不同团队需求
 - 📦 **开箱即规范**：内置前端、Git、Markdown 等编码规范，开箱即用
 - 🔄 **持续演进**：活跃维护，定期更新技能和规则
@@ -64,6 +64,7 @@
 | [yy-commit-directly](./skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动                          | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
 | [yy-create-agents](./skills/yy-create-agents/SKILL.md)                               | 创建或更新项目 AGENTS.md                             | `npx skills add bulls-cows/skills --skill yy-create-agents`                |
 | [yy-create-node-script](./skills/yy-create-node-script/SKILL.md)                     | 生成 Node.js 脚本项目骨架                            | `npx skills add bulls-cows/skills --skill yy-create-node-script`           |
+| [yy-create-prd](./skills/yy-create-prd/SKILL.md)                                     | 创建或更新 AI 全栈 Web 项目的 PRD 产品需求文档       | `npx skills add bulls-cows/skills --skill yy-create-prd`                   |
 | [yy-create-python-script](./skills/yy-create-python-script/SKILL.md)                 | 生成 Python 脚本项目骨架                             | `npx skills add bulls-cows/skills --skill yy-create-python-script`         |
 | [yy-create-readme](./skills/yy-create-readme/SKILL.md)                               | 创建或完善项目 README 文档                           | `npx skills add bulls-cows/skills --skill yy-create-readme`                |
 | [yy-create-report](./skills/yy-create-report/SKILL.md)                               | 生成面向管理视角的工作报告                           | `npx skills add bulls-cows/skills --skill yy-create-report`                |
@@ -79,7 +80,6 @@
 | [yy-frontend-change-log](./skills/yy-frontend-change-log/SKILL.md)                   | 为前端文件补充业务说明与改动记录                     | `npx skills add bulls-cows/skills --skill yy-frontend-change-log`          |
 | [yy-frontend-code-refine](./skills/yy-frontend-code-refine/SKILL.md)                 | 清理并规范前端代码结构与命名                         | `npx skills add bulls-cows/skills --skill yy-frontend-code-refine`         |
 | [yy-frontend-review](./skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题                           | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
-| [yy-frontend-rules](./skills/yy-frontend-rules/SKILL.md)                             | 前端开发规范速查与项目规则路由                       | `npx skills add bulls-cows/skills --skill yy-frontend-rules`               |
 | [yy-frontend-style-bem-optimizer](./skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构                          | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
 | [yy-handoff](./skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档                               | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
 | [yy-lint](./skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                                   | `npx skills add bulls-cows/skills --skill yy-lint`                         |
