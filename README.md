@@ -96,7 +96,7 @@
 | [yy-run-skills](./skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能                               | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
 | [yy-skill-to-prompt](./skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词                           | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |
 | [yy-wechat-to-markdown](./skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown                      | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
-| [yy-write](./skills/yy-write/SKILL.md)                                               | 撰写或续写公众号长文                                 | `npx skills add bulls-cows/skills --skill yy-write`                        |
+| [yy-write](./skills/yy-write/SKILL.md)                                               | 撰写技术文章或经验总结类长文                         | `npx skills add bulls-cows/skills --skill yy-write`                        |
 
 ### 🌐 推荐外部技能
 
