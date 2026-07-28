@@ -7,6 +7,7 @@
 - **凭据与密钥类**：`credentials.*`、`secrets.*`、`*.key`、`*.pem`、`*.pfx`、`*.p12`
 - **含敏感命名的文件**：文件名包含 `password`、`token`、`secret`、`apikey` 等关键词
 - **环境变量文件**：`.env`、`.env.*`（仅在文件未被 `.gitignore` 忽略时才会出现在改动列表中，提示仍有价值）
+- **环境变量示例或模板文件**：`.env.example`、`.env.sample`、`.env.template`、`.env.*.example`、`.env.*.sample`、`.env.*.template` 不按敏感文件处理
 
 ## 处理规则
 
