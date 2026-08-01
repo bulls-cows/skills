@@ -9,7 +9,7 @@
 ## ⭐ 特性
 
 - 🎯 **规则驱动**：通过规则文件统一 AI 行为，确保输出一致性
-- 🚀 **即装即用**：39 个实用技能覆盖常见开发场景，一键安装
+- 🚀 **即装即用**：40 个实用技能覆盖常见开发场景，一键安装
 - 🔧 **高度可定制**：支持按项目配置规则，灵活适配不同团队需求
 - 📦 **开箱即规范**：内置前端、Git、Markdown 等编码规范，开箱即用
 - 🔄 **持续演进**：活跃维护，定期更新技能和规则
@@ -78,6 +78,7 @@
 | [yy-frontend-review](https://github.com/bulls-cows/skills/blob/main/skills/yy-frontend-review/SKILL.md)                           | 审核前端代码改动的质量问题                           | `npx skills add bulls-cows/skills --skill yy-frontend-review`              |
 | [yy-frontend-style-bem-optimizer](https://github.com/bulls-cows/skills/blob/main/skills/yy-frontend-style-bem-optimizer/SKILL.md) | 统一前端 BEM 类名与样式结构                          | `npx skills add bulls-cows/skills --skill yy-frontend-style-bem-optimizer` |
 | [yy-handoff](https://github.com/bulls-cows/skills/blob/main/skills/yy-handoff/SKILL.md)                                           | 创建或更新项目交接文档                               | `npx skills add bulls-cows/skills --skill yy-handoff`                      |
+| [yy-learn-project](https://github.com/bulls-cows/skills/blob/main/skills/yy-learn-project/SKILL.md)                               | 阅读陌生代码库，生成带源码路径的学习文档             | `npx skills add bulls-cows/skills --skill yy-learn-project`                |
 | [yy-lint](https://github.com/bulls-cows/skills/blob/main/skills/yy-lint/SKILL.md)                                                 | 执行项目 lint 检查                                   | `npx skills add bulls-cows/skills --skill yy-lint`                         |
 | [yy-mode-goal](https://github.com/bulls-cows/skills/blob/main/skills/yy-mode-goal/SKILL.md)                                       | 条件驱动的自主执行模式                               | `npx skills add bulls-cows/skills --skill yy-mode-goal`                    |
 | [yy-mode-plan](https://github.com/bulls-cows/skills/blob/main/skills/yy-mode-plan/SKILL.md)                                       | 在实施前先制定并确认执行计划                         | `npx skills add bulls-cows/skills --skill yy-mode-plan`                    |
