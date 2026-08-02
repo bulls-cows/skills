@@ -9,7 +9,7 @@
 ## ⭐ 特性
 
 - 🎯 **规则驱动**：通过规则文件统一 AI 行为，确保输出一致性
-- 🚀 **即装即用**：40 个实用技能覆盖常见开发场景，一键安装
+- 🚀 **即装即用**：40+ 个实用技能覆盖常见开发场景，一键安装
 - 🔧 **高度可定制**：支持按项目配置规则，灵活适配不同团队需求
 - 📦 **开箱即规范**：内置前端、Git、Markdown 等编码规范，开箱即用
 - 🔄 **持续演进**：活跃维护，定期更新技能和规则
@@ -92,6 +92,7 @@
 | [yy-review](https://github.com/bulls-cows/skills/blob/main/skills/yy-review/SKILL.md)                                             | 审核代码改动中的质量问题                             | `npx skills add bulls-cows/skills --skill yy-review`                       |
 | [yy-run-skills](https://github.com/bulls-cows/skills/blob/main/skills/yy-run-skills/SKILL.md)                                     | 按顺序串行执行多个技能                               | `npx skills add bulls-cows/skills --skill yy-run-skills`                   |
 | [yy-skill-to-prompt](https://github.com/bulls-cows/skills/blob/main/skills/yy-skill-to-prompt/SKILL.md)                           | 将技能文件转换为系统提示词                           | `npx skills add bulls-cows/skills --skill yy-skill-to-prompt`              |
+| [yy-vitepress](https://github.com/bulls-cows/skills/blob/main/skills/yy-vitepress/SKILL.md)                                       | 处理 VitePress 2 文档的特殊语法与格式约定            | `npx skills add bulls-cows/skills --skill yy-vitepress`                    |
 | [yy-wechat-to-markdown](https://github.com/bulls-cows/skills/blob/main/skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown                      | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
 | [yy-write](https://github.com/bulls-cows/skills/blob/main/skills/yy-write/SKILL.md)                                               | 撰写技术文章或经验总结类长文                         | `npx skills add bulls-cows/skills --skill yy-write`                        |
 
