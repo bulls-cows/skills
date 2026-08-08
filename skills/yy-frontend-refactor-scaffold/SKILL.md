@@ -220,7 +220,7 @@ PLAN.md 生成后，**立即停止后续动作**，用 `question` 工具向用�
 **允许**：
 
 - 在目标文件夹内创建目录、写入占位文件、写入 PLAN.md
-- 读取原始文件夹与目标项目的配置（package.json / tsconfig.json / vite.config.* / vue.config.*）用于框架识别与别名检测
+- 读取原始文件夹与目标项目的配置（package.json / tsconfig.json / vite.config._ / vue.config._）用于框架识别与别名检测
 - 目标文件夹已存在时，跳过同名文件（默认不覆盖）
 
 ## 边界条件

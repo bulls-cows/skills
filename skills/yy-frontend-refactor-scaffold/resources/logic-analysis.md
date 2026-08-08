@@ -6,14 +6,14 @@
 
 每个组件产出以下 6 项，缺项标 `—`：
 
-| 序号 | 输出项 | 说明 |
-| --- | --- | --- |
-| 1 | 职责概述 | 1 句话概括组件做什么 |
-| 2 | Props 清单 | 名称 / 类型 / 必填 / 默认值 |
-| 3 | Emits/Events 清单 | 事件名 / 触发条件 / 载荷 |
-| 4 | 关键事件 | 模板/JSX 中绑定的事件（如 `@click` / `onChange`） |
-| 5 | 数据流 | 调用的接口、状态管理（store / context） |
-| 6 | 状态流转 | 显著状态机用 Mermaid `stateDiagram` 表达；简单组件跳过 |
+| 序号 | 输出项            | 说明                                                   |
+| ---- | ----------------- | ------------------------------------------------------ |
+| 1    | 职责概述          | 1 句话概括组件做什么                                   |
+| 2    | Props 清单        | 名称 / 类型 / 必填 / 默认值                            |
+| 3    | Emits/Events 清单 | 事件名 / 触发条件 / 载荷                               |
+| 4    | 关键事件          | 模板/JSX 中绑定的事件（如 `@click` / `onChange`）      |
+| 5    | 数据流            | 调用的接口、状态管理（store / context）                |
+| 6    | 状态流转          | 显著状态机用 Mermaid `stateDiagram` 表达；简单组件跳过 |
 
 ## Vue2 专属规则（Options API）
 
@@ -30,10 +30,10 @@ props: {
 
 提取为：
 
-| name | type | required | default |
-| --- | --- | --- | --- |
-| `userId` | `Number` | ✅ | — |
-| `readonly` | `Boolean` | — | `false` |
+| name       | type      | required | default |
+| ---------- | --------- | -------- | ------- |
+| `userId`   | `Number`  | ✅       | —       |
+| `readonly` | `Boolean` | —        | `false` |
 
 **简写形式**（`props: ['userId', 'readonly']`）→ type/required/default 全部 `—`。
 
@@ -41,19 +41,19 @@ props: {
 
 来源：模板中 `this.$emit('xxx', ...)` 调用 + 子组件 `$emit` 调用。
 
-| name | trigger | payload |
-| --- | --- | --- |
+| name     | trigger          | payload        |
+| -------- | ---------------- | -------------- |
 | `submit` | 用户点击保存按钮 | `{ id, name }` |
-| `close` | 弹窗关闭 | — |
+| `close`  | 弹窗关闭         | —              |
 
 ### 关键事件
 
 来源：模板中 `@xxx` 绑定（排除原生 DOM 事件冒泡，聚焦业务回调）。
 
-| element | event | handler |
-| --- | --- | --- |
-| `<el-button>` | `@click` | `handleSearch` |
-| `<el-input>` | `@change` | `handleKeywordChange` |
+| element       | event     | handler               |
+| ------------- | --------- | --------------------- |
+| `<el-button>` | `@click`  | `handleSearch`        |
+| `<el-input>`  | `@change` | `handleKeywordChange` |
 
 ### 数据流
 
@@ -92,16 +92,16 @@ const props = defineProps<{
 // 或运行时声明
 const props = defineProps({
   userId: { type: Number, required: true },
-  readonly: { type: Boolean, default: false }
+  readonly: { type: Boolean, default: false },
 })
 ```
 
 提取为：
 
-| name | type | required | default |
-| --- | --- | --- | --- |
-| `userId` | `number` | ✅ | — |
-| `readonly` | `boolean` | — | `undefined` / `false` |
+| name       | type      | required | default               |
+| ---------- | --------- | -------- | --------------------- |
+| `userId`   | `number`  | ✅       | —                     |
+| `readonly` | `boolean` | —        | `undefined` / `false` |
 
 ### Emits 清单
 
@@ -148,28 +148,28 @@ function UserCard({ userId, readonly = false }) { ... }
 
 提取为：
 
-| name | type | required | default |
-| --- | --- | --- | --- |
-| `userId` | `number` | ✅ | — |
-| `readonly` | `boolean` | — | `false` |
+| name       | type      | required | default |
+| ---------- | --------- | -------- | ------- |
+| `userId`   | `number`  | ✅       | —       |
+| `readonly` | `boolean` | —        | `false` |
 
 ### Events/回调清单
 
 来源：props 中 `onXxx` 命名的回调。
 
-| name | trigger | payload |
-| --- | --- | --- |
+| name       | trigger          | payload        |
+| ---------- | ---------------- | -------------- |
 | `onSubmit` | 用户点击保存按钮 | `{ id, name }` |
-| `onClose` | 弹窗关闭 | — |
+| `onClose`  | 弹窗关闭         | —              |
 
 ### 关键事件
 
 来源：JSX 中 `onXxx` 绑定。
 
-| element | event | handler |
-| --- | --- | --- |
-| `<button>` | `onClick` | `handleSearch` |
-| `<input>` | `onChange` | `handleKeywordChange` |
+| element    | event      | handler               |
+| ---------- | ---------- | --------------------- |
+| `<button>` | `onClick`  | `handleSearch`        |
+| `<input>`  | `onChange` | `handleKeywordChange` |
 
 ### 数据流
 
@@ -192,23 +192,23 @@ stateDiagram-v2
 
 ## 异常降级
 
-| 场景 | 处理 |
-| --- | --- |
-| 组件为空文件（仅含 `<template>` 骨架） | 所有输出项标 `—`，职责概述写「空组件，待实现」 |
-| 组件超过 500 行 | 仅分析核心 6 项，跳过细节；在 PLAN.md 中标注「组件过大，详细逻辑建议人工补充」 |
-| 组件含 mixin / HOC / 自定义 Hook 嵌套 | 标注「依赖外部 mixin/Hook：<name>」，不深入分析 |
-| 组件用 `<script lang="ts">` 但无类型注解 | 视为 JS 处理，标 `type: any` 或 `—` |
-| 动态 props（`v-bind="obj"` / `{...obj}`） | Props 清单标「动态绑定，需人工补充」 |
+| 场景                                      | 处理                                                                           |
+| ----------------------------------------- | ------------------------------------------------------------------------------ |
+| 组件为空文件（仅含 `<template>` 骨架）    | 所有输出项标 `—`，职责概述写「空组件，待实现」                                 |
+| 组件超过 500 行                           | 仅分析核心 6 项，跳过细节；在 PLAN.md 中标注「组件过大，详细逻辑建议人工补充」 |
+| 组件含 mixin / HOC / 自定义 Hook 嵌套     | 标注「依赖外部 mixin/Hook：<name>」，不深入分析                                |
+| 组件用 `<script lang="ts">` 但无类型注解  | 视为 JS 处理，标 `type: any` 或 `—`                                            |
+| 动态 props（`v-bind="obj"` / `{...obj}`） | Props 清单标「动态绑定，需人工补充」                                           |
 
 ## 状态流转图判定标准
 
 仅在以下场景输出状态流转图：
 
-| 场景 | 示例 |
-| --- | --- |
-| 多步骤向导 | 表单分步提交、引导流程 |
-| 状态机显著的业务 | 审批流、订单状态、工单状态 |
-| 弹窗/抽屉嵌套 | 主弹窗 → 子弹窗 → 确认框 |
-| 加载流程 | idle → loading → success / error |
+| 场景             | 示例                             |
+| ---------------- | -------------------------------- |
+| 多步骤向导       | 表单分步提交、引导流程           |
+| 状态机显著的业务 | 审批流、订单状态、工单状态       |
+| 弹窗/抽屉嵌套    | 主弹窗 → 子弹窗 → 确认框         |
+| 加载流程         | idle → loading → success / error |
 
 **禁止滥用**：单个 `dialogVisible` 的开关不输出状态图，在「关键事件」中提及即可。

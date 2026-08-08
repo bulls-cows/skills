@@ -6,12 +6,12 @@
 
 按以下顺序判定，命中即停。一份代码可能命中多个框架特征（如 Vue3 项目里也有 `.ts` 文件），以**主导文件类型**为准。
 
-| 优先级 | 框架 | 关键特征 |
-| --- | --- | --- |
-| 1 | Vue3 | `.vue` 文件中含 `<script setup>` 或 Composition API（`ref(` / `reactive(` / `defineProps` / `defineEmits` / `onMounted`） |
-| 2 | Vue2 | `.vue` 文件中含 Options API（`export default {` + `data()` / `methods` / `computed` / `watch` 之一） |
-| 3 | React | `.jsx` / `.tsx` 文件，或导入 `from 'react'` / `from 'react-dom'` |
-| 4 | JS/TS 纯脚本 | 仅有 `.js` / `.ts` 文件，无上述框架特征 |
+| 优先级 | 框架         | 关键特征                                                                                                                  |
+| ------ | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| 1      | Vue3         | `.vue` 文件中含 `<script setup>` 或 Composition API（`ref(` / `reactive(` / `defineProps` / `defineEmits` / `onMounted`） |
+| 2      | Vue2         | `.vue` 文件中含 Options API（`export default {` + `data()` / `methods` / `computed` / `watch` 之一）                      |
+| 3      | React        | `.jsx` / `.tsx` 文件，或导入 `from 'react'` / `from 'react-dom'`                                                          |
+| 4      | JS/TS 纯脚本 | 仅有 `.js` / `.ts` 文件，无上述框架特征                                                                                   |
 
 ## 识别步骤
 
@@ -36,13 +36,13 @@ find <source> -type f \( -name "*.vue" -o -name "*.jsx" -o -name "*.tsx" -o -nam
 
 当抽样验证不确定时，参考以下辅助信号：
 
-| 信号来源 | Vue3 | Vue2 | React |
-| --- | --- | --- | --- |
-| `package.json` dependencies | `vue: ^3.x` | `vue: ^2.x` | `react: ^18.x` / `next: ^13.x` |
-| 入口文件 | `createApp(` | `new Vue(` | `createRoot(` / `ReactDOM.render(` |
-| 路由库 | `vue-router@4` | `vue-router@3` | `react-router-dom@6` |
-| 状态管理 | `pinia` / `vuex@5` | `vuex@3` | `@reduxjs/toolkit` / `zustand` |
-| 构建工具 | `vite` + `@vitejs/plugin-vue` | `vue-cli` / `vue-template-compiler` | `vite` + `@vitejs/plugin-react` |
+| 信号来源                    | Vue3                          | Vue2                                | React                              |
+| --------------------------- | ----------------------------- | ----------------------------------- | ---------------------------------- |
+| `package.json` dependencies | `vue: ^3.x`                   | `vue: ^2.x`                         | `react: ^18.x` / `next: ^13.x`     |
+| 入口文件                    | `createApp(`                  | `new Vue(`                          | `createRoot(` / `ReactDOM.render(` |
+| 路由库                      | `vue-router@4`                | `vue-router@3`                      | `react-router-dom@6`               |
+| 状态管理                    | `pinia` / `vuex@5`            | `vuex@3`                            | `@reduxjs/toolkit` / `zustand`     |
+| 构建工具                    | `vite` + `@vitejs/plugin-vue` | `vue-cli` / `vue-template-compiler` | `vite` + `@vitejs/plugin-react`    |
 
 ## 失败兜底
 
@@ -50,7 +50,7 @@ find <source> -type f \( -name "*.vue" -o -name "*.jsx" -o -name "*.tsx" -o -nam
 
 用 `question` 工具询问用户，**列出所有识别到的候选**：
 
-```
+```text
 检测到原始文件夹混合了多种框架特征：
 - Vue3 文件：X 个
 - Vue2 文件：Y 个
@@ -66,7 +66,7 @@ find <source> -type f \( -name "*.vue" -o -name "*.jsx" -o -name "*.tsx" -o -nam
 
 检测到本 skill 未覆盖的框架特征（如 `.svelte` / `.astro` / `.preact` / Alpine 指令 `x-data` 等），用 `question` 工具询问用户手动指定：
 
-```
+```text
 检测到可能的框架特征：<扩展名 / 关键字>
 本 skill 的自动骨架模板仅覆盖 Vue2 / Vue3 / React / JS-TS，请选择处理方式：
 - [推荐] JS/TS 纯脚本（按通用骨架生成，后续由用户手动调整为对应框架语法）
@@ -82,7 +82,7 @@ find <source> -type f \( -name "*.vue" -o -name "*.jsx" -o -name "*.tsx" -o -nam
 
 用 `question` 工具询问用户手动指定：
 
-```
+```text
 无法自动识别框架，请手动选择：
 - [推荐] JS/TS 纯脚本（按通用 JS/TS 骨架生成）
 - Vue3
@@ -95,12 +95,12 @@ find <source> -type f \( -name "*.vue" -o -name "*.jsx" -o -name "*.tsx" -o -nam
 
 若原始文件夹与目标文件夹分属不同项目（不同代码库或同一代码库的不同代际），常见代际差异需在 PLAN.md「待确认清单」中显式提醒：
 
-| 源端 → 目标侧 | 典型差异点 |
-| --- | --- |
-| Vue2 → Vue3 | Options API → Composition API；Vuex → Pinia；Element UI → Element Plus |
-| Vue3 → Vue2 | 反向兼容性约束（Composition API 在 Vue2 中需 `@vue/composition-api` polyfill） |
-| React 类组件 → 函数组件 | `class Component` → 函数组件 + Hooks；`this.state` → `useState` |
-| 任意代际跨越 | 别名（`@/` vs `@src/` vs `~`）、构建工具（Vite vs Webpack vs Vue CLI）、UI 库版本差异 |
+| 源端 → 目标侧           | 典型差异点                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| Vue2 → Vue3             | Options API → Composition API；Vuex → Pinia；Element UI → Element Plus                |
+| Vue3 → Vue2             | 反向兼容性约束（Composition API 在 Vue2 中需 `@vue/composition-api` polyfill）        |
+| React 类组件 → 函数组件 | `class Component` → 函数组件 + Hooks；`this.state` → `useState`                       |
+| 任意代际跨越            | 别名（`@/` vs `@src/` vs `~`）、构建工具（Vite vs Webpack vs Vue CLI）、UI 库版本差异 |
 
 **处理策略**：
 
