@@ -103,7 +103,9 @@ description: >
 
 - 代码检查优先使用已有 ESLint 配置
 - 缺少 ESLint 时，按项目语言和框架补齐最小 ESLint 配置
+- 使用 ESLint 时，`lint:code` 脚本中必须添加 `--fix` 参数以启用自动修复；不加 `--fix` 时 ESLint 仅报告错误而不自动修复
 - 格式化优先使用 Prettier
+- 使用 Prettier 时，`format` 脚本中必须添加 `--write` 参数以启用原地格式化；不加 `--write` 时 Prettier 仅输出差异而不修改文件
 - TypeScript 项目使用 `tsc -p tsconfig.json --noEmit`；Vue 项目优先使用 `vue-tsc --build`
 - JavaScript 项目只有在已有 `jsconfig.json`、`tsconfig.json` 或 `checkJs` 约定时接入类型检测
 - 测试优先复用已有 Vitest、Jest、Playwright 或 Node.js test runner
@@ -111,7 +113,8 @@ description: >
 **Python 项目**：
 
 - 代码检查优先使用 Ruff
-- 格式化优先使用 Ruff format；存在 Black 配置时可复用 Black
+- 使用 Ruff 进行代码检查时，`lint:code` 脚本中必须添加 `--fix` 参数以启用自动修复；不加 `--fix` 时 Ruff 仅报告错误而不自动修复
+- 格式化优先使用 Ruff format；存在 Black 配置时可复用 Black。使用 Ruff format 时无需额外参数，`ruff format` 默认原地格式化文件
 - 类型检测优先复用已有 mypy 或 pyright 配置；缺失时根据项目依赖和类型标注规模补齐最小 typecheck 入口
 - Python 项目中只要存在 `package.json` 文件，pyright 配置就必须排除 `node_modules`，不以目录是否已存在作为判断条件
 - 测试优先复用已有 pytest 或 unittest
@@ -120,7 +123,7 @@ description: >
 **Markdown 文件**：
 
 - 优先使用 `markdownlint-cli2`
-- 优先使用 `.markdownlint-cli2.jsonc` 配置 `globs`、`ignores`、`fix` 和 `config`，把可配置参数写入配置文件
+- 优先使用 `.markdownlint-cli2.jsonc` 配置 `globs`、`ignores`、`fix` 和 `config`，把可配置参数写入配置文件。将 `fix` 设置为 `true`，使 markdownlint-cli2 在检查时自动修复可修复的 Markdown 问题
 - 在配置中设置 `"gitignore": true`，自动排除 `.gitignore` 中的文件，无需手动维护两套忽略列表
 - `ignores` 字段仅保留 `.gitignore` 未覆盖的额外忽略项（如项目特有的非 git 忽略文件）
 - `package.json` 中的 `lint:markdown` 脚本优先保持为 `markdownlint-cli2`，避免在命令中传递 glob、忽略项或 `--fix` 等参数
