@@ -9,6 +9,7 @@
 - 已有脚本命名、包管理器和串联方式可用时优先复用，不强制改成模板命名。
 - 接入完成后不主动执行 `npm run lint`，只在输出中说明后续验证建议。
 - 没有 `package.json` 的项目可创建最小化 `package.json` 承载统一入口。
+- 新装依赖时优先安装较新的稳定版本；不清楚最新版本时，通过包管理器指定 `@latest` 安装，例如 `npm install -D packagename@latest`。
 
 ## Node.js 或 TypeScript 项目
 
