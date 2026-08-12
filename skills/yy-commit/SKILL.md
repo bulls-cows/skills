@@ -236,16 +236,20 @@ git commit -m "<title>"
 提交后立即验证 commit message 是否完整写入，发现截断立即修复。
 
 1. 运行以下命令获取实际提交的 message：
+
    ```bash
    git log -1 --format="%H%n%s%n%b"
    ```
+
 2. 将实际 message 与预期 title 和 body 逐字对比：
    - 检查 title 是否完整，未在冒号后或其他位置截断
    - 检查 body 是否完整，每行内容是否完整
 3. 若发现截断或不一致，使用 `git commit --amend` 修复：
+
    ```bash
    git commit --amend -m "<title>" -m "<body line 1>" -m "<body line 2>"
    ```
+
 4. 修复后再次运行 `git log -1 --format="%H%n%s%n%b"` 确认 message 完整
 5. 在输出结果中展示最终的 commit message
 
