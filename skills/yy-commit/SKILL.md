@@ -223,13 +223,39 @@ git commit -m "<title>"
 
 - 提交信息必须使用 `-m` 参数传递，禁止使用 heredoc（`cat <<'EOF'`）、here-string（`@'...'@`）或其他 shell 特定语法
 - 多行提交信息使用多个 `-m` 参数：`git commit -m "<title>" -m "<body line 1>" -m "<body line 2>"`，此写法在 bash、pwsh、zsh 等主流 shell 中均兼容
+- 提交信息中的引号与特殊字符处理：优先使用**单引号**包裹 `-m` 参数值（`-m '<title>'`），避免 shell 对 `$`、`` ` ``、`\` 等字符做变量展开或命令替换；若 message 包含单引号，则改用双引号包裹并对 `$`、`` ` ``、`\`、`"` 做反斜杠转义
+- **构造 `git commit` 命令后，确认命令中的每个 `-m` 参数值完整、未被截断，再执行**
 
 **禁止事项：**
 
 - 禁止添加 `Co-Authored-By:` 等署名备注
 - 禁止使用 heredoc、here-string 或其他 shell 特定语法传递提交信息，必须使用 `-m` 参数
 
-### 步骤 6. 输出结果
+### 步骤 6. 验证提交结果
+
+提交后立即验证 commit message 是否完整写入，发现截断立即修复。
+
+1. 运行以下命令获取实际提交的 message：
+   ```bash
+   git log -1 --format="%H%n%s%n%b"
+   ```
+2. 将实际 message 与预期 title 和 body 逐字对比：
+   - 检查 title 是否完整，未在冒号后或其他位置截断
+   - 检查 body 是否完整，每行内容是否完整
+3. 若发现截断或不一致，使用 `git commit --amend` 修复：
+   ```bash
+   git commit --amend -m "<title>" -m "<body line 1>" -m "<body line 2>"
+   ```
+4. 修复后再次运行 `git log -1 --format="%H%n%s%n%b"` 确认 message 完整
+5. 在输出结果中展示最终的 commit message
+
+**验证规则：**
+
+- 必须逐字对比，不能只检查长度或部分内容
+- 发现截断后必须修复，不能跳过
+- 修复后必须再次验证，直到确认完整
+
+### 步骤 7. 输出结果
 
 输出提交结果，包括：
 
@@ -281,7 +307,7 @@ git commit -m "<title>"
 **禁止主动执行：**
 
 - 跳过 hook：不使用 `--no-verify` 等标志
-- 强制操作：不使用 `--force` 或 `--amend`（除非用户明确要求）
+- 强制操作：不使用 `--force` 或 `--amend`（除非用户明确要求，或属于步骤 6 验证流程中的自动修复）
 - 添加署名：不添加 `Co-Authored-By:` 等署名备注
 
 **主分支保护：**
