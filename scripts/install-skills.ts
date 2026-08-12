@@ -22,6 +22,7 @@ const defaultAgents = [
   'qwen-code',
   'windsurf',
   'zencoder',
+  'cline',
 ]
 
 function readAgentsConfig(): string[] {
