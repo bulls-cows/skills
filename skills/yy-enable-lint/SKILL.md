@@ -65,11 +65,11 @@ description: >
 
 **推荐脚本结构**：
 
-- `lint`：串联执行 `format`、`lint:code`、`lint:markdown`、`typecheck`、`test`
-- `format`：格式化代码、配置文件和 Markdown 文件
+- `lint`：串联执行 `lint:format`、`lint:code`、`lint:markdown`、`lint:typecheck`、`test`
+- `lint:format`：格式化代码、配置文件和 Markdown 文件
 - `lint:code`：检查项目代码文件
 - `lint:markdown`：检查 Markdown 文件
-- `typecheck`：执行 TypeScript、Vue 或 Python 类型检测
+- `lint:typecheck`：执行 TypeScript、Vue 或 Python 类型检测
 - `test`：执行项目测试用例
 
 **脚本组织规则**：
@@ -80,13 +80,21 @@ description: >
 - **Python 项目只有 npm 包装入口**：保持 `package.json` 轻量，只把 Python 工具命令包装到 npm 脚本中
 - **混合项目**：将各语言检查拆成清晰子脚本，再由 `lint` 串联，避免单个长命令难以维护
 
+**配置优先级**：
+
+- 能由配置文件表达的文件范围、忽略项和规则，必须优先写入工具配置，不在 npm 脚本中堆叠 glob、文件列表、忽略项或规则参数
+- Prettier 优先使用项目根目录 `.prettierignore` 管理依赖目录、构建产物、环境文件和不应格式化的目录；`lint:format` 脚本优先保持为 `prettier --write .`
+- ESLint 优先使用现有 ESLint 配置管理规则和忽略范围；仅在工具配置无法表达时，才在脚本中保留少量必要参数，并说明原因
+- Markdown 检查优先使用 `.markdownlint-cli2.jsonc` 管理 `globs`、`ignores`、`fix` 和规则配置
+- 类型检查优先使用 `tsconfig.json`、`pyproject.toml`、mypy 或 pyright 配置管理包含范围和排除项
+
 **决策分支**：
 
 - **已有同名脚本且语义一致**：优先复用原脚本，只补齐缺失的子脚本或串联关系
 - **已有同名脚本但语义冲突**：保留原脚本，新增更具体的子脚本名称，并将 `lint` 调整为统一入口
 - **缺少 Markdown 检查**：新增 `markdownlint-cli2` 依赖、配置文件和轻量脚本入口
 - **缺少格式化**：新增 Prettier、Ruff 或项目已有格式化工具入口
-- **缺少类型检测**：按项目类型新增 `typecheck` 脚本和必要配置
+- **缺少类型检测**：按项目类型新增 `lint:typecheck` 脚本和必要配置
 - **缺少测试脚本**：按步骤 5 创建最小化测试用例和测试入口
 
 ### 步骤 4. 接入检查工具
@@ -104,6 +112,8 @@ description: >
 - 代码检查优先使用已有 ESLint 配置
 - 缺少 ESLint 时，按项目语言和框架补齐最小 ESLint 配置
 - 格式化优先使用 Prettier
+- 使用 Prettier 时，先读取已有 `.prettierignore`；缺失时新建该文件并将依赖目录、构建产物、环境文件和项目特有的生成目录写入其中
+- `package.json` 中的 `lint:format` 脚本优先保持为 `prettier --write .`，不内联维护文件列表、glob 或 `--ignore-path`；仅当项目工具限制导致无法使用 `.prettierignore` 时，才保留必要参数并说明原因
 - TypeScript 项目使用 `tsc -p tsconfig.json --noEmit`；Vue 项目优先使用 `vue-tsc --build`
 - JavaScript 项目只有在已有 `jsconfig.json`、`tsconfig.json` 或 `checkJs` 约定时接入类型检测
 - 测试优先复用已有 Vitest、Jest、Playwright 或 Node.js test runner
@@ -112,7 +122,7 @@ description: >
 
 - 代码检查优先使用 Ruff
 - 格式化优先使用 Ruff format；存在 Black 配置时可复用 Black
-- 类型检测优先复用已有 mypy 或 pyright 配置；缺失时根据项目依赖和类型标注规模补齐最小 typecheck 入口
+- 类型检测优先复用已有 mypy 或 pyright 配置；缺失时根据项目依赖和类型标注规模补齐最小 `lint:typecheck` 入口
 - Python 项目中只要存在 `package.json` 文件，pyright 配置就必须排除 `node_modules`，不以目录是否已存在作为判断条件
 - 测试优先复用已有 pytest 或 unittest
 - 通过 `package.json` 脚本调用 Python 工具，保持 `npm run lint` 作为统一入口

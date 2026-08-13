@@ -10,6 +10,19 @@
 - 接入完成后不主动执行 `npm run lint`，只在输出中说明后续验证建议。
 - 没有 `package.json` 的项目可创建最小化 `package.json` 承载统一入口。
 - 新装依赖时优先安装较新的稳定版本；不清楚最新版本时，通过包管理器指定 `@latest` 安装，例如 `npm install -D packagename@latest`。
+- 文件范围、忽略项和规则优先写入工具配置文件，npm 脚本只保留稳定、简短的入口。
+
+## Prettier 范围配置
+
+Prettier 的格式化范围优先由项目根目录 `.prettierignore` 管理，避免在 `package.json` 中维护冗长的文件列表、glob 或忽略参数。
+`lint:format` 脚本优先保持为 `prettier --write .`；新增或修改忽略规则前，必须核对项目的依赖目录、构建产物、环境文件和生成文件。
+
+```gitignore
+node_modules/
+dist/
+coverage/
+.env*
+```
 
 ## Node.js 或 TypeScript 项目
 
@@ -18,11 +31,11 @@
 ```json
 {
   "scripts": {
-    "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
-    "format": "prettier . --write",
+    "lint": "node --run lint:format && node --run lint:code && node --run lint:markdown && node --run lint:typecheck && node --run test",
+    "lint:format": "prettier --write .",
     "lint:code": "eslint . --fix",
     "lint:markdown": "markdownlint-cli2",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint:typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test test/**/*.test.ts"
   }
 }
@@ -35,11 +48,11 @@
 ```json
 {
   "scripts": {
-    "lint": "node --run format && run-s lint:* && node --run type-check && node --run test",
-    "format": "prettier --write src public",
+    "lint": "node --run lint:format && run-s lint:* && node --run lint:typecheck && node --run test",
+    "lint:format": "prettier --write .",
     "lint:eslint": "eslint . --fix --cache",
     "lint:markdown": "markdownlint-cli2",
-    "type-check": "vue-tsc --build",
+    "lint:typecheck": "vue-tsc --build",
     "test": "vitest run"
   }
 }
@@ -53,11 +66,11 @@ Python 依赖仍优先放在 `pyproject.toml`。
 ```json
 {
   "scripts": {
-    "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
-    "format": "python -m ruff format .",
+    "lint": "node --run lint:format && node --run lint:code && node --run lint:markdown && node --run lint:typecheck && node --run test",
+    "lint:format": "python -m ruff format .",
     "lint:code": "python -m ruff check . --fix",
     "lint:markdown": "markdownlint-cli2",
-    "typecheck": "python -m pyright .",
+    "lint:typecheck": "python -m pyright .",
     "test": "python -m unittest discover -s tests"
   }
 }
@@ -81,11 +94,11 @@ exclude = [".ruff_cache", "build", "dist", "node_modules"]
 ```json
 {
   "scripts": {
-    "lint": "node --run format && node --run lint:code && node --run lint:markdown && node --run typecheck && node --run test",
-    "format": "prettier . --write && python -m ruff format .",
+    "lint": "node --run lint:format && node --run lint:code && node --run lint:markdown && node --run lint:typecheck && node --run test",
+    "lint:format": "prettier --write . && python -m ruff format .",
     "lint:code": "eslint . --fix && python -m ruff check . --fix",
     "lint:markdown": "markdownlint-cli2",
-    "typecheck": "tsc -p tsconfig.json --noEmit && python -m pyright .",
+    "lint:typecheck": "tsc -p tsconfig.json --noEmit && python -m pyright .",
     "test": "node --test test/**/*.test.ts && python -m unittest discover -s tests"
   }
 }
