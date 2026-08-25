@@ -33,6 +33,18 @@
 
 [点击这里](https://github.com/bulls-cows/skills/blob/main/docs/CONFIG_RULE.md) 查看如何使用规则文件。
 
+你也可以将下面的提示词直接输入给你的 AI Agent，让他更新 `AGENTS.md` 或者其他等价的比如 `CLAUD.md` 等文件。 注意，这段提示词假定当前仓库 `skills` 仓库和你正在开发的仓库位于同层级，如果不是同层级，请自行调整路径。
+
+```text
+已知 `../skills/rules` 目录下是一些通用的规则，请更新 `AGENTS.md` 文件以便后续 AI Agent 知道读取并遵守其中的规则。
+```
+
+如果你 fork 了该仓库想维护一份个人版 skills 仓库，为方便维护，可以继续使用下面的提示词：
+
+```text
+请更新 `AGENTS.md` 文件，使得当 AI Agent 在新增、更新规则时，先判断对应规则是否是通用规则，如果是通用规则则更新到 `../skills/rules` 中，否则就直接更新到当前仓库的 `.agents/rules` 目录中。
+```
+
 - [rules/ai-agent-rules](https://github.com/bulls-cows/skills/blob/main/rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护、文本输出的行为准则
 - [rules/file-scope-limit](https://github.com/bulls-cows/skills/blob/main/rules/file-scope-limit/RULE.md)：文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
 - [rules/frontend-rules](https://github.com/bulls-cows/skills/blob/main/rules/frontend-rules/RULE.md)：速查并输出前端开发规范的结构化清单（按 通用 / Vue2 / Vue3 / React 四组技术栈分表，每条规则标注 🔴 基础 / 🟠 强烈推荐 / 🟢 风格指南 三级优先级）。当用户询问前端编码规范、命名/网络/样式/类型写法、Hooks/组件/状态管理最佳实践、性能优化，或需要确认"应该怎么写才对""有什么要求"类问题时使用——即使没说"规范"二字也应触发。不用于：代码修改/重构、代码审查、执行 lint/构建命令、生成业务文档。
