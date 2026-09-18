@@ -47,10 +47,11 @@
 
 - [rules/ai-agent-rules](https://github.com/bulls-cows/skills/blob/main/rules/ai-agent-rules/RULE.md)：AI 通用操作规范 - 问题分析、变更执行、一致性维护、文本输出的行为准则
 - [rules/file-scope-limit](https://github.com/bulls-cows/skills/blob/main/rules/file-scope-limit/RULE.md)：文件修改范围限制规范 - AI 仅允许修改用户授权的目录范围内的文件
-- [rules/frontend-rules](https://github.com/bulls-cows/skills/blob/main/rules/frontend-rules/RULE.md)：速查并输出前端开发规范的结构化清单（按 通用 / Vue2 / Vue3 / React 四组技术栈分表，每条规则标注 🔴 基础 / 🟠 强烈推荐 / 🟢 风格指南 三级优先级）。当用户询问前端编码规范、命名/网络/样式/类型写法、Hooks/组件/状态管理最佳实践、性能优化，或需要确认"应该怎么写才对""有什么要求"类问题时使用——即使没说"规范"二字也应触发。不用于：代码修改/重构、代码审查、执行 lint/构建命令、生成业务文档。
+- [rules/frontend-rules](https://github.com/bulls-cows/skills/blob/main/rules/frontend-rules/RULE.md)：速查并输出前端开发规范的结构化清单（按 通用 / Vue2 / Vue3 / React 四组技术栈分表， 每条规则标注 🔴 基础 / 🟠 强烈推荐 / 🟢 风格指南 三级优先级）。当用户询问前端编码规范、命名/网络/样式/类型写法、 Hooks/组件/状态管理最佳实践、性能优化，或需要确认"应该怎么写才对""有什么要求"类问题时使用—— 即使没说"规范"二字也应触发。不用于：代码修改/重构、代码审查、执行 lint/构建命令、生成业务文档。
 - [rules/markdown](https://github.com/bulls-cows/skills/blob/main/rules/markdown/RULE.md)：Markdown 书写规范
 - [rules/npm](https://github.com/bulls-cows/skills/blob/main/rules/npm/RULE.md)：NPM 使用规范
-- [rules/nuxt4-best-practices](https://github.com/bulls-cows/skills/blob/main/rules/nuxt4-best-practices/RULE.md)：Nuxt 4 项目最佳实践 - 禁用自动导入、显式引入等核心配置规范
+- [rules/nuxt4-best-practices](https://github.com/bulls-cows/skills/blob/main/rules/nuxt4-best-practices/RULE.md)：Nuxt 4 项目最佳实践，包含禁用自动导入、显式引入等核心配置规范
+- [rules/pwsh-command-norms](https://github.com/bulls-cows/skills/blob/main/rules/pwsh-command-norms/RULE.md)：PowerShell/pwsh 终端命令规范：规避 @ 特殊字符导致的 git 命令解析失败，使用完整引用路径
 - [rules/sass-best-practices](https://github.com/bulls-cows/skills/blob/main/rules/sass-best-practices/RULE.md)：Sass 废弃语法替代方案与现代 Sass 最佳实践
 
 ## 🛠️ Skills 技能
