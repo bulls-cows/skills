@@ -190,3 +190,44 @@ body {
 - `additionalData` 只对**当前文件**生效，对通过 `@use` 导入的子模块不生效
 - 如果子模块需要使用变量，必须在子模块中显式 `@use` 变量模块
 - 入口文件（如 `main.scss`）无需重复导入 `additionalData` 已注入的模块
+
+## 优先使用嵌套写法
+
+**问题**
+
+平铺书写选择器需要重复书写父级前缀，选择器结构与组件层级脱节，父级变更时需逐一修改多处前缀，难以维护。
+
+**替代方案**
+
+优先使用嵌套写法，让选择器结构与组件层级对应；伪类和状态类用 `&` 组合。
+
+```scss
+// ❌ 平铺
+.card { padding: var(--space-md); }
+.card-title { font-size: var(--font-size-lg); }
+.card.is-disabled { cursor: not-allowed; opacity: var(--opacity-disabled); }
+.card input:hover:not(:disabled) { border-color: var(--color-primary); }
+
+// ✅ 嵌套
+.card {
+  padding: var(--space-md);
+
+  .card-title { font-size: var(--font-size-lg); }
+
+  &.is-disabled { cursor: not-allowed; opacity: var(--opacity-disabled); }
+
+  input {
+    appearance: none;
+
+    &:hover:not(:disabled) { border-color: var(--color-primary); }
+    &:focus-visible { outline: 2px solid var(--color-primary); }
+  }
+}
+```
+
+**注意事项**
+
+- 避免超过 3 层嵌套：过深层级会编译出长选择器并提高特异性，难以覆盖
+- 伪类（`:hover`、`:focus-visible` 等）和状态类（`.is-*`）用 `&` 组合
+- **不建议** `&-title`、`&--modifier` 这类拼接部分类名的写法：源码中不存在 `&-title` 展开前的完整类名字面量，在浏览器控制台审查 DOM 时复制 class name 到代码里搜索会搜不到，影响定位问题的速度；子元素和修饰符应写完整 class 名
+- 嵌套内部若需引用变量，仍须遵循 `additionalData 对子模块不生效` 一节的变量作用域规则
