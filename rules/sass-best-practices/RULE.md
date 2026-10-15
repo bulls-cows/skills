@@ -203,24 +203,42 @@ body {
 
 ```scss
 // ❌ 平铺
-.card { padding: var(--space-md); }
-.card-title { font-size: var(--font-size-lg); }
-.card.is-disabled { cursor: not-allowed; opacity: var(--opacity-disabled); }
-.card input:hover:not(:disabled) { border-color: var(--color-primary); }
+.card {
+  padding: var(--space-md);
+}
+.card-title {
+  font-size: var(--font-size-lg);
+}
+.card.is-disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+.card input:hover:not(:disabled) {
+  border-color: var(--color-primary);
+}
 
 // ✅ 嵌套
 .card {
   padding: var(--space-md);
 
-  .card-title { font-size: var(--font-size-lg); }
+  .card-title {
+    font-size: var(--font-size-lg);
+  }
 
-  &.is-disabled { cursor: not-allowed; opacity: var(--opacity-disabled); }
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: var(--opacity-disabled);
+  }
 
   input {
     appearance: none;
 
-    &:hover:not(:disabled) { border-color: var(--color-primary); }
-    &:focus-visible { outline: 2px solid var(--color-primary); }
+    &:hover:not(:disabled) {
+      border-color: var(--color-primary);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+    }
   }
 }
 ```

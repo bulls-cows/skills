@@ -49,7 +49,7 @@ description: >
   "language": "zh-CN",
   "theme": "eink",
   "output": "output/book.epub",
-  "chapters": [{"file": "chapters/01-intro.md", "title": "第一章：介绍"}]
+  "chapters": [{ "file": "chapters/01-intro.md", "title": "第一章：介绍" }]
 }
 ```
 

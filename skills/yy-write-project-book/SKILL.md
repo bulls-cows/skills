@@ -53,7 +53,7 @@ description: >
   "language": "zh-CN",
   "theme": "eink",
   "output": "output/project-book.epub",
-  "chapters": [{"file": "chapters/01-overview.md", "title": "第一章：项目导读"}]
+  "chapters": [{ "file": "chapters/01-overview.md", "title": "第一章：项目导读" }]
 }
 ```
 
