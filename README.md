@@ -68,6 +68,7 @@
 | 技能                                                                                                                              | 说明                                                 | 安装命令                                                                   |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
 | [yy-anti-distill](https://github.com/bulls-cows/skills/blob/main/skills/yy-anti-distill/SKILL.md)                                 | 反蒸馏清洗 Skill 或知识文档                          | `npx skills add bulls-cows/skills --skill yy-anti-distill`                 |
+| [yy-build-epub](https://github.com/bulls-cows/skills/blob/main/skills/yy-build-epub/SKILL.md)                                     | 将已有书稿构建为 EPUB 与全书预览                     | `npx skills add bulls-cows/skills --skill yy-build-epub`                   |
 | [yy-comment](https://github.com/bulls-cows/skills/blob/main/skills/yy-comment/SKILL.md)                                           | 为代码补充清晰、必要的注释                           | `npx skills add bulls-cows/skills --skill yy-comment`                      |
 | [yy-commit](https://github.com/bulls-cows/skills/blob/main/skills/yy-commit/SKILL.md)                                             | 生成并执行通用规范的 Git 提交                        | `npx skills add bulls-cows/skills --skill yy-commit`                       |
 | [yy-commit-directly](https://github.com/bulls-cows/skills/blob/main/skills/yy-commit-directly/SKILL.md)                           | 免确认提交当前全部 Git 改动                          | `npx skills add bulls-cows/skills --skill yy-commit-directly`              |
@@ -110,6 +111,7 @@
 | [yy-vitepress](https://github.com/bulls-cows/skills/blob/main/skills/yy-vitepress/SKILL.md)                                       | 处理 VitePress 2 文档的特殊语法与格式约定            | `npx skills add bulls-cows/skills --skill yy-vitepress`                    |
 | [yy-wechat-to-markdown](https://github.com/bulls-cows/skills/blob/main/skills/yy-wechat-to-markdown/SKILL.md)                     | 将微信公众号文章转换为 Markdown                      | `npx skills add bulls-cows/skills --skill yy-wechat-to-markdown`           |
 | [yy-write](https://github.com/bulls-cows/skills/blob/main/skills/yy-write/SKILL.md)                                               | 撰写技术文章或经验总结类长文                         | `npx skills add bulls-cows/skills --skill yy-write`                        |
+| [yy-write-project-book](https://github.com/bulls-cows/skills/blob/main/skills/yy-write-project-book/SKILL.md)                     | 按项目源码分章节撰写可续接的书稿                     | `npx skills add bulls-cows/skills --skill yy-write-project-book`           |
 
 ### 🌐 推荐外部技能
 

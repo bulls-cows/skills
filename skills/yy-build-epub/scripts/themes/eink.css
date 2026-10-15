@@ -1,0 +1,9 @@
+body { font-family: serif; line-height: 1.7; margin: 5%; color: #111; background: #fff; }
+h1 { font-size: 1.6em; } h2 { font-size: 1.25em; } h3 { font-size: 1.1em; }
+p, li { overflow-wrap: anywhere; word-wrap: break-word; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; word-wrap: break-word; font-size: .85em; line-height: 1.5; padding: .6em; border: 1px solid #666; }
+code { font-family: monospace; overflow-wrap: anywhere; word-wrap: break-word; }
+blockquote { border-left: 3px solid #555; margin: 1em 0; padding: .2em .8em; }
+img { max-width: 100%; height: auto; } table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+td, th { border: 1px solid #555; padding: .4em; overflow-wrap: anywhere; }
+a { color: inherit; } .footnote { font-size: .9em; }

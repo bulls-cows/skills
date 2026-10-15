@@ -1,0 +1,7 @@
+body { font-family: serif; line-height: 1.8; margin: 6%; }
+h1 { font-size: 1.7em; } h2 { font-size: 1.3em; }
+p, li, td, th { overflow-wrap: anywhere; word-wrap: break-word; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85em; border: 1px solid #888; padding: .7em; }
+code { font-family: monospace; } blockquote { border-left: 3px solid #888; padding-left: 1em; }
+img { max-width: 100%; height: auto; } table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+td, th { border-bottom: 1px solid #888; padding: .5em; } .footnote { font-size: .85em; }

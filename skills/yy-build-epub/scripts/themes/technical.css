@@ -1,0 +1,7 @@
+body { font-family: sans-serif; line-height: 1.6; margin: 4%; }
+h1 { font-size: 1.6em; } h2 { font-size: 1.25em; }
+p, li, td, th { overflow-wrap: anywhere; word-wrap: break-word; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; word-wrap: break-word; font-size: .82em; line-height: 1.45; padding: .7em; border: 1px solid #666; }
+code { font-family: monospace; } blockquote { border-left: 3px solid #666; padding-left: .8em; }
+img { max-width: 100%; height: auto; } table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+td, th { border: 1px solid #777; padding: .4em; } .footnote { font-size: .9em; }
