@@ -85,11 +85,31 @@ test('非法参数在加载模型前失败', () => {
   }
 })
 
-test('未配置模型环境时明确失败，不猜测本机安装布局', () => {
-  const result = spawnSync(process.execPath, [entry, '--text=测试文本。'], {
-    encoding: 'utf8',
-    env: { ...process.env, QWEN_TTS_HOME: '', QWEN_TTS_PYTHON: '', QWEN_TTS_MODEL_DIR: '' },
-  })
-  assert.equal(result.status, 1)
-  assert.match(result.stderr, /QWEN_TTS_HOME/)
+test('隔离配置后未找到环境时明确失败，不猜测本机安装布局', async () => {
+  await mkdir(temporaryRoot, { recursive: true })
+  const directory = await mkdtemp(join(temporaryRoot, 'missing-env-'))
+  try {
+    await mkdir(join(directory, '.git'))
+    const result = spawnSync(process.execPath, [entry, '--text=测试文本。'], {
+      cwd: directory,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: '',
+        Path: '',
+        LOCALAPPDATA: directory,
+        XDG_CONFIG_HOME: directory,
+        QWEN_TTS_HOME: '',
+        QWEN_TTS_PYTHON: '',
+        QWEN_TTS_MODEL_DIR: '',
+        QWEN_TTS_FFMPEG: '',
+        QWEN_TTS_FFPROBE: '',
+      },
+    })
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, /QWEN_TTS_HOME/)
+  } finally {
+    assert.ok(directory.startsWith(temporaryRoot + sep))
+    await rm(directory, { recursive: true, force: true })
+  }
 })

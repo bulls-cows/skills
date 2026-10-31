@@ -11,8 +11,11 @@ export interface AudioInspection {
 }
 
 /** 解码与基本质量门槛；发音与听感仍需人工试听。 */
-export async function inspectAudioDetails(path: string): Promise<AudioInspection> {
-  const probe = await execute('ffprobe', [
+export async function inspectAudioDetails(
+  path: string,
+  commands: { ffmpeg?: string; ffprobe?: string } = {},
+): Promise<AudioInspection> {
+  const probe = await execute(commands.ffprobe ?? 'ffprobe', [
     '-v',
     'error',
     '-select_streams',
@@ -36,7 +39,7 @@ export async function inspectAudioDetails(path: string): Promise<AudioInspection
   )
     throw new Error('音频格式或时长不合格')
   const decoded = await execute(
-    'ffmpeg',
+    commands.ffmpeg ?? 'ffmpeg',
     [
       '-v',
       'info',

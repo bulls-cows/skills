@@ -3,6 +3,13 @@ import { access, mkdir, mkdtemp, readFile, rm, rmdir, writeFile } from 'node:fs/
 import { join, resolve } from 'node:path'
 import type { QwenRecipe } from './recipe.mts'
 import { inspectAudioDetails } from './audio-inspection.mts'
+import {
+  resolveEnvironment,
+  checkEnvironment,
+  assertEnvironmentReady,
+  persistValidatedEnvironment,
+} from './environment.mts'
+import type { Environment } from './environment.mts'
 
 /** 目标项目显式传入，技能可安装在任意位置。 */
 export const speechTempRoot = (projectRoot = process.cwd()): string =>
@@ -14,24 +21,6 @@ export interface SpeechTask {
   output: string
   qwen?: { seed?: number; sampling?: boolean }
   baseSha256?: string
-}
-
-/** 只读取明确配置的本地安装位置，不猜测开发者机器布局。 */
-export function qwenPaths(): { python: string; modelDirectory: string } {
-  const root = process.env.QWEN_TTS_HOME
-  if (!root && (!process.env.QWEN_TTS_PYTHON || !process.env.QWEN_TTS_MODEL_DIR))
-    throw new Error('请设置 QWEN_TTS_HOME，或同时设置 QWEN_TTS_PYTHON 和 QWEN_TTS_MODEL_DIR')
-  return {
-    python: resolve(
-      process.env.QWEN_TTS_PYTHON ??
-        join(
-          root ?? '',
-          '.venv',
-          process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python',
-        ),
-    ),
-    modelDirectory: resolve(process.env.QWEN_TTS_MODEL_DIR ?? join(root ?? '', 'model')),
-  }
 }
 
 async function runWorker(python: string, request: string): Promise<void> {
@@ -64,12 +53,24 @@ async function runWorker(python: string, request: string): Promise<void> {
 export async function runQwen(
   recipe: QwenRecipe,
   tasks: SpeechTask[],
-  options: { projectRoot?: string } = {},
+  options: { projectRoot?: string; environment?: Environment } = {},
 ): Promise<void> {
   if (!tasks.length) throw new Error('配音任务不能为空')
   const projectRoot = resolve(options.projectRoot ?? process.cwd())
   const temporaryRoot = speechTempRoot(projectRoot)
-  const { python, modelDirectory } = qwenPaths()
+  let environment = options.environment
+  if (!environment) {
+    const context = await resolveEnvironment()
+    const report = await checkEnvironment(context, false, undefined, recipe)
+    assertEnvironmentReady(report)
+    for (const warning of [
+      ...report.warnings,
+      ...(await persistValidatedEnvironment(context, report)),
+    ])
+      console.warn(warning)
+    environment = report.environment
+  }
+  const { python, modelDirectory, ffmpeg } = environment
   await access(python)
   await access(join(modelDirectory, 'model.safetensors'))
   const source = JSON.parse(
@@ -89,12 +90,15 @@ export async function runQwen(
     const request = join(directory, 'request.json')
     await writeFile(
       request,
-      JSON.stringify({ modelDirectory, recipe, tasks, temporaryDirectory: directory }),
+      JSON.stringify({ modelDirectory, ffmpeg, recipe, tasks, temporaryDirectory: directory }),
     )
     await runWorker(python, request)
     for (const task of tasks)
       console.log(
-        JSON.stringify({ file: task.output, quality: await inspectAudioDetails(task.output) }),
+        JSON.stringify({
+          file: task.output,
+          quality: await inspectAudioDetails(task.output, environment),
+        }),
       )
   } finally {
     await rm(join(directory, 'request.json'), { force: true })

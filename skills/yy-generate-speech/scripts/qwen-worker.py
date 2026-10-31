@@ -35,7 +35,7 @@ def trim_outer_silence(audio, sample_rate, recipe):
     return audio[start:end]
 
 
-def generate_one(model, task, recipe, temporary_root):
+def generate_one(model, task, recipe, temporary_root, ffmpeg="ffmpeg"):
     started = time.perf_counter()
     recipe = {**recipe, **task.get("qwen", {})}
     torch.manual_seed(recipe["seed"])
@@ -61,7 +61,7 @@ def generate_one(model, task, recipe, temporary_root):
     mp3 = Path(temporary.name) / "audio.mp3"
     try:
         sf.write(str(wav), audio, sr)
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav),
+        subprocess.run([ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav),
                         "-ar", "24000", "-ac", "1", "-codec:a", "libmp3lame", "-b:a", "160k", str(mp3)], check=True)
         shutil.move(str(mp3), str(output))
         with output.open("rb") as stream:
@@ -86,7 +86,7 @@ def main():
     failures = []
     for task in request["tasks"]:
         try:
-            generate_one(model, task, recipe, request["temporaryDirectory"])
+            generate_one(model, task, recipe, request["temporaryDirectory"], request.get("ffmpeg", "ffmpeg"))
         except Exception as error:
             failures.append(task["id"])
             print(f"FAILED {task['id']}: {type(error).__name__}: {error}", file=sys.stderr, flush=True)
