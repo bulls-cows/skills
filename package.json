@@ -18,7 +18,8 @@
     "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./scripts/sync-marketplace.ts",
-    "install:skills": "node ./scripts/install-skills.ts"
+    "install:skills": "node ./scripts/install-skills.ts",
+    "install:skills:yakima": "node --input-type=module -e \"import('node:fs').then(fs => fs.writeFileSync('.skillignore', '# 忽略安装特定技能，一行一个技能名\\nyy-frontend-change-log\\nyy-frontend-code-refine\\nyy-frontend-refactor-scaffold\\nyy-frontend-review\\nyy-frontend-style-bem-optimizer\\nyy-anti-distill\\n')).then(() => import('./scripts/install-skills.ts'))\""
   },
   "repository": {
     "type": "git",
