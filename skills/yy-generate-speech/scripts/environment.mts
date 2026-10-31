@@ -131,7 +131,7 @@ export async function resolveEnvironment(
   const env = options.env ?? process.env
   const context: EnvironmentContext = {
     candidates: Object.fromEntries(
-      keys.map((key) => [key, []]),
+      keys.map((key) => [key, [] as Candidate[]]),
     ) as EnvironmentContext['candidates'],
     cacheFile: options.cacheFile ?? historyFile(env),
     cacheWritable: true,
