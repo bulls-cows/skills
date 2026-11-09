@@ -80,3 +80,21 @@ npm pkg set scripts.lint="eslint . --ext .ts"
 # 删除脚本
 npm pkg delete scripts.old-script
 ```
+
+## 脚本编排规范
+
+- 项目要求的 Node.js 版本支持 `node --run`，且脚本不依赖 npm 自动执行的 `pre`、`post` 生命周期脚本或 npm 专属环境变量时，优先使用 `node --run <脚本名>` 复用已有脚本，减少 npm 启动开销；依赖这些行为时保留 `npm run <脚本名>`。
+- 在工作目录明确且 shell 支持时，使用 `&&` 串联有先后依赖的命令，确保前一步失败时停止后续步骤；仅为顺序执行已有命令，不额外创建入口脚本。
+- 命令包含较长的配置内容、文件生成逻辑或复杂转义时，将这部分内容提取为职责单一的脚本，避免在 `package.json` 中堆叠 `node -e`、动态导入和 Promise 链。
+- 多个命令共享同一流程时，通过脚本名复用该流程，避免重复维护相同的步骤。
+
+**示例**：
+
+```json
+{
+  "scripts": {
+    "install:resources": "node ./scripts/remove-resources.js && node ./scripts/install-resources.js",
+    "install:resources:custom": "node ./scripts/setup-custom.js && node --run install:resources"
+  }
+}
+```
