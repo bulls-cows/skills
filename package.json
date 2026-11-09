@@ -18,7 +18,8 @@
     "lint:lf": "node ./scripts/convert-crlf-to-lf.ts --check",
     "check:type": "tsc --noEmit",
     "sync:marketplace": "node ./scripts/sync-marketplace.ts",
-    "install:skills": "node ./scripts/remove-skills.ts && node ./scripts/install-skills.ts",
+    "remove:skills": "node ./scripts/remove-skills.ts",
+    "install:skills": "node --run remove:skills && node ./scripts/install-skills.ts",
     "install:skills:yakima": "node ./scripts/setup-yakima.ts && node --run install:skills"
   },
   "repository": {
