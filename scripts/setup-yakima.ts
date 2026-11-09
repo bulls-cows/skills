@@ -13,3 +13,5 @@ fs.writeFileSync(
   new URL('../.skillignore', import.meta.url),
   ['# 忽略安装特定技能，一行一个技能名', ...ignoredSkills, ''].join('\n'),
 )
+
+fs.writeFileSync(new URL('../.agentsconfig', import.meta.url), 'opencode\n')
